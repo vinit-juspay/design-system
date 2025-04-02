@@ -13,6 +13,10 @@ export default {
           800: "#0D47A1",
         },
       },
+      fontFamily: {
+        sans: ["Inter Display", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
     },
   },
   plugins: []
