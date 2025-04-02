@@ -27,8 +27,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const styles = getCheckboxStyles({ size, state, enabled });
 
   return (
-    <div className="flex items-center">
-      <div className="flex items-center h-5">
+    <div className={`flex ${hasSubtext ? 'items-start' : 'items-center'}`}>
+      <div className={`flex ${hasSubtext ? 'mt-1' : ''}`}>
         <CheckboxPrimitive.Root
           checked={isChecked}
           disabled={!enabled}
@@ -69,7 +69,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       </div>
       
       {(hasLabel || hasSubtext) && (
-        <div className="ml-3 text-sm">
+        <div className="ml-1.5">
           {hasLabel && labelText && (
             <label className={styles.label}>
               {labelText}

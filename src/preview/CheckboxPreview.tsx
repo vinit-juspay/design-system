@@ -47,18 +47,6 @@ const CheckboxPreview: React.FC = () => {
         <h3 className="text-lg font-semibold">States</h3>
         <div className="flex gap-8 flex-wrap items-center">
           <Checkbox 
-            state="unselected" 
-            labelText="Static Unselected" 
-          />
-          <Checkbox 
-            state="selected" 
-            labelText="Static Selected" 
-          />
-          <Checkbox 
-            state="intermediate" 
-            labelText="Static Intermediate" 
-          />
-          <Checkbox 
             state={basicState}
             labelText="Toggleable Checkbox" 
             onChange={() => toggleCheckbox(basicState, setBasicState)}
@@ -96,6 +84,7 @@ const CheckboxPreview: React.FC = () => {
         <h3 className="text-lg font-semibold">With Subtext</h3>
         <div className="flex gap-8 flex-wrap">
           <Checkbox 
+            size="md"
             state={rememberMeState}
             labelText="Remember Me" 
             hasSubtext={true}
@@ -117,6 +106,11 @@ const CheckboxPreview: React.FC = () => {
             state="selected"
             labelText="Disabled selected" 
           />
+          <Checkbox 
+            enabled={false}
+            state="intermediate"
+            labelText="Disabled intermediate" 
+          />
         </div>
       </div>
       
@@ -124,6 +118,7 @@ const CheckboxPreview: React.FC = () => {
         <h3 className="text-lg font-semibold">With Slot (Placeholder)</h3>
         <div className="flex gap-8 flex-wrap">
           <Checkbox 
+            size="md"
             labelText="With slot placeholder" 
             hasSlot={true}
             state={slotCheckboxState}

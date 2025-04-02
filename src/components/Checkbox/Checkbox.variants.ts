@@ -11,15 +11,35 @@ export const getCheckboxStyles = (props: Pick<CheckboxProps, 'size' | 'state' | 
   const sizeConfig = checkboxConfig.sizes[size];
   const stateConfig = checkboxConfig.states[state as CheckboxState];
   
+  // Get disabled styles based on state
+  const getDisabledStyles = () => {
+    if (state === "selected") {
+      return checkboxConfig.disabled.selected;
+    } else if (state === "intermediate") {
+      return checkboxConfig.disabled.intermediate;
+    }
+    return checkboxConfig.disabled.unselected;
+  };
+
   return {
     // Root styles for the checkbox
     root: cn(
-      "peer relative flex items-center justify-center rounded border",
+      "peer relative flex items-center justify-center border",
       "transition-all duration-200 ease-in-out",
+      size === "md" ? "rounded-md" : "rounded-sm",
       sizeConfig.box,
       enabled 
-        ? cn(stateConfig.background, stateConfig.border, "hover:border-primary-500") 
-        : cn(checkboxConfig.disabled.background, checkboxConfig.disabled.border),
+        ? cn(
+            stateConfig.background, 
+            stateConfig.border, 
+            "hover:border-primary-500",
+            "cursor-pointer"
+          )
+        : cn(
+            getDisabledStyles().background,
+            getDisabledStyles().border,
+            "cursor-not-allowed"
+          ),
       checkboxConfig.focus
     ),
     
@@ -38,11 +58,11 @@ export const getCheckboxStyles = (props: Pick<CheckboxProps, 'size' | 'state' | 
     // Label styles
     label: cn(
       sizeConfig.labelText,
-      "font-body",
-      enabled ? "text-gray-700" : checkboxConfig.disabled.text
+      enabled ? "" : checkboxConfig.disabled.text,
+      enabled ? "cursor-pointer" : "cursor-not-allowed"
     ),
     
     // Subtext styles
-    subtext: "text-body-sm text-gray-500 mt-1"
+    subtext: "text-body-sm text-gray-500 mt-0.5"
   };
 }; 

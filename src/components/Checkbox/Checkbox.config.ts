@@ -22,8 +22,18 @@ export interface CheckboxStateConfig {
  * Style configuration for disabled state
  */
 export interface CheckboxDisabledConfig {
-  background: string;
-  border: string;
+  unselected: {
+    background: string;
+    border: string;
+  };
+  selected: {
+    background: string;
+    border: string;
+  };
+  intermediate: {
+    background: string;
+    border: string;
+  };
   text: string;
 }
 
@@ -46,18 +56,18 @@ export const checkboxConfig: CheckboxConfig = {
     sm: {
       box: "h-4 w-4",
       icon: "h-3 w-3",
-      labelText: "text-body-sm",
+      labelText: "text-body-sm leading-18 font-500 text-gray-700 [font-feature-settings:'liga'_off,'clig'_off]",
     },
     md: {
       box: "h-5 w-5",
       icon: "h-4 w-4",
-      labelText: "text-body-md",
+      labelText: "text-body-md leading-20 font-500 text-gray-700 [font-feature-settings:'liga'_off,'clig'_off]",
     },
   },
   states: {
     selected: {
-      background: "bg-primary-500",
-      border: "border-primary-500",
+      background: "bg-gradient-to-b from-primary-600 to-primary-500",
+      border: "border-[0.5px] border-primary-700",
       indicator: "text-white",
     },
     intermediate: {
@@ -72,9 +82,19 @@ export const checkboxConfig: CheckboxConfig = {
     },
   },
   disabled: {
-    background: "bg-gray-100",
-    border: "border-gray-300",
+    unselected: {
+      background: "bg-gray-50",
+      border: "border-[0.5px] border-gray-200",
+    },
+    selected: {
+      background: "bg-gradient-to-b from-primary-300 to-primary-200",
+      border: "border-[0.5px] border-primary-300",
+    },
+    intermediate: {
+      background: "bg-gradient-to-b from-primary-300 to-primary-200",
+      border: "border-[0.5px] border-primary-300",
+    },
     text: "text-gray-500",
   },
-  focus: "focus:outline-none focus:ring-2 focus:ring-primary-200 focus:ring-offset-2",
+  focus: "focus:outline-none",
 }; 
