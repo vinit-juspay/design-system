@@ -220,6 +220,45 @@ export default {
         'expanded': '1px',     // tracking-expanded
         'extended': '2px',     // tracking-extended
       },
+
+      /**
+       * Box Shadows
+       * Usage:
+       * shadow-{size} (e.g., shadow-sm, shadow-lg)
+       * 
+       * Properties for each shadow:
+       * x: offset-x
+       * y: offset-y
+       * blur: blur radius
+       * spread: spread radius
+       * color: shadow color with alpha
+       */
+      boxShadow: {
+        'xs': '0px 1px 1px 0px rgba(5, 5, 6, 0.04)',
+        'sm': '0px 2px 3px 0px rgba(5, 5, 6, 0.05)',
+        'md': '0px 2px 8px 1px rgba(5, 5, 6, 0.07)',
+        'lg': '0px 3px 16px 3px rgba(5, 5, 6, 0.07)',
+        'xl': '0px 10px 20px 3px rgba(5, 5, 6, 0.07)',
+        '2xl': '0px 12px 24px 4px rgba(5, 5, 6, 0.07)',
+        'full': '0px 24px 48px 8px rgba(5, 5, 6, 0.07)',
+      },
+
+      /**
+       * Border Radius
+       * Usage:
+       * rounded-{size} (e.g., rounded-sm, rounded-lg)
+       * rounded-{t|r|b|l}-{size} for individual corners
+       * rounded-{tl|tr|br|bl}-{size} for specific corners
+       */
+      borderRadius: {
+        'xs': '2px',    // rounded-xs
+        'sm': '4px',    // rounded-sm
+        'md': '6px',    // rounded-md
+        'lg': '8px',    // rounded-lg
+        'xl': '10px',   // rounded-xl
+        '2xl': '12px',  // rounded-2xl
+        'full': '9999px', // rounded-full
+      },
     },
   },
   plugins: []
