@@ -16,6 +16,7 @@ const Button: React.FC<ButtonProps> = ({ type, size, children }) => {
   return (
     <RadixButton
       className={`
+        font-sans
         ${theme.transition} 
         ${theme.borderRadius} 
         ${theme.transform} 
