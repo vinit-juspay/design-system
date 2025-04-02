@@ -3,6 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      /**
+       * Colors
+       * Usage:
+       * Background: bg-{color}-{shade} (e.g., bg-gray-100, bg-primary-500)
+       * Text: text-{color}-{shade} (e.g., text-gray-900, text-primary-600)
+       * Border: border-{color}-{shade} (e.g., border-gray-200)
+       * Ring/Focus: ring-{color}-{shade} (e.g., ring-primary-500)
+       * Divide: divide-{color}-{shade} (e.g., divide-gray-200)
+       */
       colors: {
         // Gray scale colors from Figma
         gray: {
@@ -106,7 +115,111 @@ export default {
           900: "#733E0A",
           950: "#432004"
         }
-      }
+      },
+
+      /**
+       * Font Families
+       * Usage:
+       * font-heading (for Inter Display - headings)
+       * font-body (for Inter Display - body text)
+       * font-number (for JetBrains Mono - numbers/code)
+       */
+      fontFamily: {
+        heading: ['Inter Display', 'sans-serif'],
+        body: ['Inter Display', 'sans-serif'],
+        number: ['JetBrains Mono', 'monospace'],
+      },
+
+      /**
+       * Font Sizes with Line Heights
+       * Usage:
+       * Display: text-display-{size} (e.g., text-display-xl, text-display-md)
+       * Heading: text-{size} (e.g., text-2xl, text-lg)
+       * Body: text-body-{size} (e.g., text-body-lg, text-body-sm)
+       * Code: text-code-{size} (e.g., text-code-md)
+       * 
+       * Each size comes with its default line height.
+       * To override line height: leading-{size} (e.g., leading-normal)
+       */
+      fontSize: {
+        // Display sizes
+        'display-xl': ['72px', { lineHeight: '88px' }],  // text-display-xl
+        'display-lg': ['64px', { lineHeight: '80px' }],  // text-display-lg
+        'display-md': ['56px', { lineHeight: '72px' }],  // text-display-md
+        'display-sm': ['48px', { lineHeight: '64px' }],  // text-display-sm
+        // Heading sizes
+        '2xl': ['40px', { lineHeight: '56px' }],         // text-2xl
+        'xl': ['32px', { lineHeight: '48px' }],          // text-xl
+        'lg': ['24px', { lineHeight: '40px' }],          // text-lg
+        'md': ['20px', { lineHeight: '32px' }],          // text-md
+        'sm': ['18px', { lineHeight: '28px' }],          // text-sm
+        // Body sizes
+        'body-lg': ['16px', { lineHeight: '24px' }],     // text-body-lg
+        'body-md': ['14px', { lineHeight: '20px' }],     // text-body-md
+        'body-sm': ['12px', { lineHeight: '16px' }],     // text-body-sm
+        'body-xs': ['10px', { lineHeight: '14px' }],     // text-body-xs
+        // Code sizes
+        'code-lg': ['14px', { lineHeight: '20px' }],     // text-code-lg
+        'code-md': ['12px', { lineHeight: '18px' }],     // text-code-md
+        'code-sm': ['10px', { lineHeight: '16px' }],     // text-code-sm
+      },
+
+      /**
+       * Font Weights
+       * Usage:
+       * font-{weight} (e.g., font-normal, font-medium, font-bold)
+       * Numeric values: font-{100-900} (e.g., font-500)
+       */
+      fontWeight: {
+        100: '100',  // font-100 (Thin)
+        200: '200',  // font-200 (Extra Light)
+        300: '300',  // font-300 (Light)
+        400: '400',  // font-400 (Regular)
+        500: '500',  // font-500 (Medium)
+        600: '600',  // font-600 (Semi Bold)
+        700: '700',  // font-700 (Bold)
+        800: '800',  // font-800 (Extra Bold)
+        900: '900',  // font-900 (Black)
+      },
+
+      /**
+       * Line Heights
+       * Usage:
+       * leading-{size} (e.g., leading-24, leading-normal)
+       * Can be used to override default line heights from fontSize
+       */
+      lineHeight: {
+        0: '0',           // leading-0
+        14: '14px',       // leading-14
+        16: '16px',       // leading-16
+        18: '18px',       // leading-18
+        20: '20px',       // leading-20
+        22: '22px',       // leading-22
+        24: '24px',       // leading-24
+        26: '26px',       // leading-26
+        32: '32px',       // leading-32
+        38: '38px',       // leading-38
+        42: '42px',       // leading-42
+        46: '46px',       // leading-46
+        48: '48px',       // leading-48
+        56: '56px',       // leading-56
+        64: '64px',       // leading-64
+        70: '70px',       // leading-70
+      },
+
+      /**
+       * Letter Spacing
+       * Usage:
+       * tracking-{variant} (e.g., tracking-normal, tracking-expanded)
+       * Used to adjust space between letters
+       */
+      letterSpacing: {
+        'compressed': '-2px',  // tracking-compressed
+        'condensed': '-1px',   // tracking-condensed
+        'normal': '0px',       // tracking-normal
+        'expanded': '1px',     // tracking-expanded
+        'extended': '2px',     // tracking-extended
+      },
     },
   },
   plugins: []
