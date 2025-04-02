@@ -61,9 +61,9 @@ export const checkboxConfig: CheckboxConfig = {
       indicator: "text-white",
     },
     intermediate: {
-      background: "bg-primary-200",
-      border: "border-primary-400",
-      indicator: "bg-primary-600",
+      background: "bg-primary-500",
+      border: "border-primary-500",
+      indicator: "text-white",
     },
     unselected: {
       background: "bg-white",

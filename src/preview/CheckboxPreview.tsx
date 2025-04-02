@@ -9,7 +9,7 @@ import { CheckboxState } from '../components/Checkbox/Checkbox.types';
 const CheckboxPreview: React.FC = () => {
   // State for toggleable checkboxes
   const [basicState, setBasicState] = useState<CheckboxState>("unselected");
-  const [intermediateState, setIntermediateState] = useState<CheckboxState>("unselected");
+  const [intermediateState, setIntermediateState] = useState<CheckboxState>("intermediate");
   const [smallCheckboxState, setSmallCheckboxState] = useState<CheckboxState>("unselected");
   const [mediumCheckboxState, setMediumCheckboxState] = useState<CheckboxState>("unselected");
   const [rememberMeState, setRememberMeState] = useState<CheckboxState>("unselected");
@@ -32,12 +32,12 @@ const CheckboxPreview: React.FC = () => {
     currentState: CheckboxState, 
     setState: React.Dispatch<React.SetStateAction<CheckboxState>>
   ) => {
-    if (currentState === "unselected") {
-      setState("intermediate");
-    } else if (currentState === "intermediate") {
+    if (currentState === "intermediate") {
       setState("selected");
-    } else {
+    } else if (currentState === "selected") {
       setState("unselected");
+    } else {
+      setState("intermediate");
     }
   };
   

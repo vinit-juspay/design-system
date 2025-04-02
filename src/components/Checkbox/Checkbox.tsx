@@ -27,7 +27,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const styles = getCheckboxStyles({ size, state, enabled });
 
   return (
-    <div className="flex items-start">
+    <div className="flex items-center">
       <div className="flex items-center h-5">
         <CheckboxPrimitive.Root
           checked={isChecked}
@@ -51,7 +51,18 @@ const Checkbox: React.FC<CheckboxProps> = ({
               </svg>
             )}
             {state === "intermediate" && (
-              <div className={styles.indeterminateIndicator} />
+              <svg
+                className={styles.indicator}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
             )}
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
