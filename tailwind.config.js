@@ -259,6 +259,10 @@ export default {
         '2xl': '12px',  // rounded-2xl
         'full': '9999px', // rounded-full
       },
+      fontFamily: {
+        sans: ["Inter Display", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
     },
   },
   plugins: []
