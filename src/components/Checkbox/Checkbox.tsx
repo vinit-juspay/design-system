@@ -1,22 +1,14 @@
 import * as React from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { themeConfig } from "../themeConfig";
-import { cn } from "../utils/utils";
+import { CheckboxProps } from "./Checkbox.types";
+import { getCheckboxStyles } from "./Checkbox.variants";
 
-type CheckboxState = "selected" | "intermediate" | "unselected";
-
-type CheckboxProps = {
-  size?: "sm" | "md";
-  state?: CheckboxState;
-  enabled?: boolean;
-  labelText?: string;
-  hasLabel?: boolean;
-  hasSlot?: boolean;
-  hasSubtext?: boolean;
-  subtext?: string;
-  onChange?: (checked: boolean) => void;
-};
-
+/**
+ * Checkbox component
+ * 
+ * A checkbox allows users to select one or more items from a set,
+ * or to mark one or more items as true/false.
+ */
 const Checkbox: React.FC<CheckboxProps> = ({
   size = "md",
   state = "unselected",
@@ -31,10 +23,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // Map the state to the checked prop
   const isChecked = state === "selected" ? true : state === "intermediate" ? "indeterminate" : false;
   
-  // Get checkbox theme configuration
-  const checkboxTheme = themeConfig.euler.checkbox;
-  const sizeConfig = checkboxTheme.sizes[size];
-  const stateConfig = checkboxTheme.states[state];
+  // Get styles based on props
+  const styles = getCheckboxStyles({ size, state, enabled });
 
   return (
     <div className="flex items-start">
@@ -43,20 +33,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
           checked={isChecked}
           disabled={!enabled}
           onCheckedChange={onChange}
-          className={cn(
-            "peer relative flex items-center justify-center rounded border",
-            "transition-all duration-200 ease-in-out",
-            sizeConfig.box,
-            enabled 
-              ? cn(stateConfig.background, stateConfig.border, "hover:border-primary-500") 
-              : cn(checkboxTheme.disabled.background, checkboxTheme.disabled.border),
-            checkboxTheme.focus
-          )}
+          className={styles.root}
         >
           <CheckboxPrimitive.Indicator>
             {state === "selected" && (
               <svg
-                className={cn(stateConfig.indicator, sizeConfig.icon)}
+                className={styles.indicator}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -69,7 +51,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
               </svg>
             )}
             {state === "intermediate" && (
-              <div className={cn(stateConfig.indicator, "h-2 w-2 rounded-sm")} />
+              <div className={styles.indeterminateIndicator} />
             )}
           </CheckboxPrimitive.Indicator>
         </CheckboxPrimitive.Root>
@@ -78,19 +60,13 @@ const Checkbox: React.FC<CheckboxProps> = ({
       {(hasLabel || hasSubtext) && (
         <div className="ml-3 text-sm">
           {hasLabel && labelText && (
-            <label
-              className={cn(
-                sizeConfig.labelText,
-                "font-body",
-                enabled ? "text-gray-700" : checkboxTheme.disabled.text
-              )}
-            >
+            <label className={styles.label}>
               {labelText}
             </label>
           )}
           
           {hasSubtext && subtext && (
-            <p className="text-body-sm text-gray-500 mt-1">{subtext}</p>
+            <p className={styles.subtext}>{subtext}</p>
           )}
         </div>
       )}

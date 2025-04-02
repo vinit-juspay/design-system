@@ -1,9 +1,9 @@
 import Button from "./components/Button";
-import Checkbox from "./components/Checkbox";
+import Checkbox from "./components/Checkbox/Checkbox";
 
 const App = () => {
   return (
-    <div className="p-8 space-y-12">
+    <div className="p-12 space-y-12">
       <div>
         <h2 className="text-xl font-bold mb-4">Buttons</h2>
         <div className="flex gap-4 flex-wrap">
