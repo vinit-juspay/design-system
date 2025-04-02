@@ -1,54 +1,102 @@
-# React + TypeScript + Vite
+# Juspay Design System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive design system for Juspay that provides a consistent and scalable design language across all products and platforms.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This design system is built using React, TypeScript, and Vite, providing a robust foundation for creating reusable UI components and maintaining design consistency. The system includes:
 
-## Expanding the ESLint configuration
+- Design tokens (colors, typography, spacing, etc.)
+- Component library
+- Documentation
+- Development guidelines
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Structure
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+design-system/
+├── src/
+│   ├── tokens/         # Design tokens from Figma
+│   ├── components/     # Reusable UI components
+│   ├── styles/         # Global styles and theme
+│   └── utils/          # Utility functions and helpers
+├── docs/              # Documentation
+└── examples/          # Example implementations
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build the library
+npm run build
 ```
+
+## Design Tokens
+
+The design system includes tokens extracted from Figma, including:
+
+- Colors
+- Typography
+- Spacing
+- Shadows
+- Border radius
+- Breakpoints
+- And more...
+
+## Component Library
+
+Our component library includes:
+
+- Basic UI elements (buttons, inputs, etc.)
+- Complex components (forms, modals, etc.)
+- Layout components
+- Navigation components
+- Data display components
+
+## Usage
+
+```jsx
+import { Button, Input } from '@juspay/design-system';
+
+function MyComponent() {
+  return (
+    <div>
+      <Input placeholder="Enter text" />
+      <Button>Click me</Button>
+    </div>
+  );
+}
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Development Guidelines
+
+- Follow the established component patterns
+- Write tests for new components
+- Update documentation for any changes
+- Ensure accessibility compliance
+- Follow the naming conventions
+
+## License
+
+This project is proprietary and confidential. All rights reserved.

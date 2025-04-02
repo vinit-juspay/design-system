@@ -1,3 +1,5 @@
+// Component tokens
+
 type ThemeRecord = {
   [key: string]: {
     button: {
