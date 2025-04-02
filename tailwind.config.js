@@ -4,19 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Gray scale colors
+        // Gray scale colors from Figma
         gray: {
-          50: "#F8FAFC",
-          100: "#F1F5F9",
-          200: "#E2E8F0",
-          300: "#CBD5E1",
-          400: "#94A3B8",
-          500: "#64748B",
-          600: "#475569",
-          700: "#334155",
-          800: "#1E293B",
-          900: "#0F172A",
-          950: "#020617"
+          0: "#FFFFFF",
+          25: "#FCFCFD",
+          50: "#F5F7FA",
+          100: "#F2F4F8",
+          150: "#ECEFF3",
+          200: "#E1E4EA",
+          300: "#CACFD8",
+          400: "#99A0AE",
+          500: "#717784",
+          600: "#525866",
+          700: "#2B303B",
+          800: "#222530",
+          900: "#181B25",
+          950: "#0E121B",
+          1000: "#050506"
         },
         // Primary blue colors
         primary: {
