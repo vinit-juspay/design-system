@@ -68,25 +68,40 @@ const Checkbox: React.FC<CheckboxProps> = ({
         </CheckboxPrimitive.Root>
       </div>
       
-      {(hasLabel || hasSubtext) && (
-        <div className="ml-1.5">
-          {hasLabel && labelText && (
+      <div className={`ml-1.5 flex ${hasSubtext ? 'flex-col' : 'items-center'}`}>
+        {hasLabel && labelText && (
+          <div className="flex items-center">
             <label className={styles.label}>
               {labelText}
             </label>
-          )}
-          
-          {hasSubtext && subtext && (
-            <p className={styles.subtext}>{subtext}</p>
-          )}
-        </div>
-      )}
-      
-      {hasSlot && (
-        <div className="ml-auto">
-          {/* Slot content would go here */}
-        </div>
-      )}
+            
+            {hasSlot && (
+              <div className="ml-1 flex items-center">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="text-gray-400 hover:text-gray-700 transition-colors"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </div>
+            )}
+          </div>
+        )}
+        
+        {hasSubtext && subtext && (
+          <p className={styles.subtext}>{subtext}</p>
+        )}
+      </div>
     </div>
   );
 };
