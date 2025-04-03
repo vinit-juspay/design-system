@@ -50,6 +50,7 @@ export interface CheckboxConfig {
     fontSize: Record<CheckboxSize, string>;
     styles: Record<CheckboxSize, string>;
   };
+  subtext: string;
 }
 
 /**
@@ -76,8 +77,8 @@ export const checkboxConfig: CheckboxConfig = {
       indicator: "text-white",
     },
     intermediate: {
-      background: "bg-primary-500",
-      border: "border-primary-500",
+      background: "bg-gradient-to-b from-primary-600 to-primary-500",
+      border: "border-[0.5px] border-primary-700",
       indicator: "text-white",
     },
     unselected: {
@@ -101,7 +102,7 @@ export const checkboxConfig: CheckboxConfig = {
     },
     text: "text-gray-500",
   },
-  focus: "focus:outline-none",
+  focus: "",
   label: {
     fontFamily: "font-body",
     fontSize: {
@@ -112,5 +113,6 @@ export const checkboxConfig: CheckboxConfig = {
       sm: "leading-18 font-500 text-gray-700",
       md: "leading-20 font-500 text-gray-700"
     }
-  }
+  },
+  subtext: "font-body text-body-sm font-400 leading-18 text-gray-400 [font-feature-settings:'liga'_off,'clig'_off]"
 }; 

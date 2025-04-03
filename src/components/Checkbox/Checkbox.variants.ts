@@ -64,6 +64,6 @@ export const getCheckboxStyles = (props: Pick<CheckboxProps, 'size' | 'state' | 
     )}`,
     
     // Subtext styles
-    subtext: "text-body-sm text-gray-500 mt-0.5"
+    subtext: checkboxConfig.subtext
   };
 }; 
