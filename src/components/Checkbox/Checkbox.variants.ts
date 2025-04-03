@@ -56,11 +56,12 @@ export const getCheckboxStyles = (props: Pick<CheckboxProps, 'size' | 'state' | 
     ),
     
     // Label styles
-    label: cn(
+    label: `${checkboxConfig.label.fontFamily} ${checkboxConfig.label.fontSize[size]} ${cn(
+      checkboxConfig.label.styles[size],
       sizeConfig.labelText,
       enabled ? "" : checkboxConfig.disabled.text,
       enabled ? "cursor-pointer" : "cursor-not-allowed"
-    ),
+    )}`,
     
     // Subtext styles
     subtext: "text-body-sm text-gray-500 mt-0.5"

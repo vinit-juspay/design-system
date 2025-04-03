@@ -45,6 +45,11 @@ export interface CheckboxConfig {
   states: Record<CheckboxState, CheckboxStateConfig>;
   disabled: CheckboxDisabledConfig;
   focus: string;
+  label: {
+    fontFamily: string;
+    fontSize: Record<CheckboxSize, string>;
+    styles: Record<CheckboxSize, string>;
+  };
 }
 
 /**
@@ -56,12 +61,12 @@ export const checkboxConfig: CheckboxConfig = {
     sm: {
       box: "h-4 w-4",
       icon: "h-3 w-3",
-      labelText: "text-body-sm leading-18 font-500 text-gray-700 [font-feature-settings:'liga'_off,'clig'_off]",
+      labelText: "[font-feature-settings:'liga'_off,'clig'_off]",
     },
     md: {
       box: "h-5 w-5",
       icon: "h-4 w-4",
-      labelText: "text-body-md leading-20 font-500 text-gray-700 [font-feature-settings:'liga'_off,'clig'_off]",
+      labelText: "[font-feature-settings:'liga'_off,'clig'_off]",
     },
   },
   states: {
@@ -97,4 +102,15 @@ export const checkboxConfig: CheckboxConfig = {
     text: "text-gray-500",
   },
   focus: "focus:outline-none",
+  label: {
+    fontFamily: "font-body",
+    fontSize: {
+      sm: "text-body-sm",
+      md: "text-body-md"
+    },
+    styles: {
+      sm: "leading-18 font-500 text-gray-700",
+      md: "leading-20 font-500 text-gray-700"
+    }
+  }
 }; 
