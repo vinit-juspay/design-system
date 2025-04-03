@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": ["src/components", "src/lib", "src/themeConfig.ts", "src/index.ts"],
+  "exclude": ["src/App.tsx", "src/main.tsx"],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true
+  }
+} 

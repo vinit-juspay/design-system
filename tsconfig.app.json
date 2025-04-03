@@ -7,10 +7,10 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
 
@@ -18,11 +18,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
 
     "declaration": true,
-    "declarationDir": "dist",
-    "emitDeclarationOnly": true
+    "declarationDir": "./dist",
+    "emitDeclarationOnly": true,
+    "outDir": "./dist"
   },
   "include": ["src"]
 }
