@@ -7,9 +7,9 @@ type ThemeRecord = {
       borderRadius: string;
       transform: string;
       sizes: {
-        small: ButtonSize;
-        medium: ButtonSize;
-        large: ButtonSize;
+        sm: ButtonSize;
+        md: ButtonSize;
+        lg: ButtonSize;
       };
       buttonType: {
         primary: ButtonType;
@@ -66,21 +66,21 @@ export const themeConfig: ThemeRecord = {
       borderRadius: "rounded-lg",
       transform: "transform active:scale-95",
       sizes: {
-        small: {
+        sm: {
           height: "h-8",
           padding: "px-3",
           fontSize: "text-sm",
           iconSize: "w-4 h-4",
           gap: "gap-2",
         },
-        medium: {
+        md: {
           height: "h-10",
           padding: "px-4",
           fontSize: "text-base",
           iconSize: "w-5 h-5",
           gap: "gap-3",
         },
-        large: {
+        lg: {
           height: "h-12",
           padding: "px-6",
           fontSize: "text-lg",
