@@ -62,4 +62,10 @@ export interface CheckboxProps {
    * Callback for when checkbox state changes
    */
   onChange?: (checked: boolean) => void;
+
+  /**
+   * Custom content to render in the slot area
+   * If provided with hasSlot=true, this will replace the default icon
+   */
+  slotContent?: React.ReactNode;
 } 

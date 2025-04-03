@@ -19,6 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   hasSubtext = false,
   subtext = "",
   onChange,
+  slotContent,
 }) => {
   // Map the state to the checked prop
   const isChecked = state === "selected" ? true : state === "intermediate" ? "indeterminate" : false;
@@ -77,22 +78,26 @@ const Checkbox: React.FC<CheckboxProps> = ({
             
             {hasSlot && (
               <div className="ml-1 flex items-center">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="text-gray-400 hover:text-gray-700 transition-colors"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="16" x2="12" y2="12"></line>
-                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                </svg>
+                {slotContent ? (
+                  slotContent
+                ) : (
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="16" 
+                    height="16" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="text-gray-400 hover:text-gray-700 transition-colors"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                )}
               </div>
             )}
           </div>
