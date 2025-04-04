@@ -52,4 +52,23 @@ export const getButtonClassNames = (
     buttonType.borderColor,
     theme.borderRadius
   );
+};
+
+export const getIconClassNames = (size: ButtonSize): string => {
+  const theme = themeConfig.euler.button;
+  const buttonSize = theme.sizes[size];
+  
+  return cn(
+    buttonSize.iconSize,
+    'animate-spin'
+  );
+};
+
+export const getTextClassNames = (size: ButtonSize): string => {
+  const theme = themeConfig.euler.button;
+  const buttonSize = theme.sizes[size];
+  
+  return cn(
+    buttonSize.fontSize
+  );
 }; 

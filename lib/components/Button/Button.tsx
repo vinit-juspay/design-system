@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Loader2 } from 'lucide-react';
 import { ButtonProps } from './types';
 import { cn } from '../../utils';
-import { getButtonClassNames } from './utils';
+import { getButtonClassNames, getIconClassNames, getTextClassNames } from './utils';
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
@@ -19,6 +19,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props 
   }, ref) => {
     const baseClassNames = getButtonClassNames(buttonType, size, subType);
+    const iconClassNames = getIconClassNames(size);
+    const textClassNames = getTextClassNames(size);
     
     return (
       <button
@@ -28,16 +30,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading && (
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Loader2 className={iconClassNames} />
         )}
         {!isLoading && LeadingIcon && (
-          <LeadingIcon className="h-4 w-4" />
+          <LeadingIcon className={iconClassNames} />
         )}
         {(text || children) && (
-          <span>{text || children}</span>
+          <span className={textClassNames}>{text || children}</span>
         )}
         {!isLoading && TrailingIcon && (
-          <TrailingIcon className="h-4 w-4" />
+          <TrailingIcon className={iconClassNames} />
         )}
       </button>
     );
