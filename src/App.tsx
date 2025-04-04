@@ -1,4 +1,4 @@
-import Button from "./components/button/Button";
+import { Button } from '../lib/main';
 import { Search, Plus, ArrowRight, Trash2, Check } from "lucide-react";
 
 const App = () => {
