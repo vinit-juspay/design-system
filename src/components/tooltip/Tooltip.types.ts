@@ -9,7 +9,17 @@ export type TooltipSize = 'sm' | 'lg';
 /**
  * Available tooltip arrow positions
  */
-export type TooltipArrow = 'default' | 'right' | 'left' | 'bottomCenter' | 'bottomLeft' | 'bottomRight' | 'topCenter' | 'topLeft' | 'topRight' | 'none';
+export type TooltipArrow 
+  =  'default' 
+  | 'right' 
+  | 'left' 
+  | 'bottomCenter' 
+  | 'bottomLeft' 
+  | 'bottomRight' 
+  | 'topCenter' 
+  | 'topLeft' 
+  | 'topRight' 
+  | 'none';
 
 /**
  * Icon direction within the tooltip
