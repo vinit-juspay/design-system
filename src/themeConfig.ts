@@ -28,6 +28,19 @@ type ThemeRecord = {
         success: LinkColor;
       };
     };
+    tooltip: {
+      baseStyles: string;
+      sizes: {
+        sm: TooltipSize;
+        lg: TooltipSize;
+      };
+      arrow: {
+        baseStyles: string;
+      };
+      content: {
+        baseStyles: string;
+      };
+    };
   };
 };
 
@@ -95,6 +108,21 @@ type LinkColor = {
   hover: string;
   /** CSS focus color class */
   focus: string;
+};
+
+/**
+ * Configuration for tooltip sizing options
+ * @typedef {Object} TooltipSize
+ */
+type TooltipSize = {
+  /** CSS padding class */
+  padding: string;
+  /** CSS font size class */
+  fontSize: string;
+  /** CSS border radius class */
+  borderRadius: string;
+  /** CSS max width class */
+  maxWidth: string;
 };
 
 /**
@@ -221,6 +249,29 @@ export const themeConfig: ThemeRecord = {
           hover: "hover:text-green-600",
           focus: "focus-visible:outline-green-500",
         },
+      },
+    },
+    tooltip: {
+      baseStyles: "z-50 overflow-hidden bg-gray-900 text-gray-0 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      sizes: {
+        sm: {
+          padding: "px-3 py-1.5",
+          fontSize: "text-xs",
+          borderRadius: "rounded-lg",
+          maxWidth: "max-w-xs",
+        },
+        lg: {
+          padding: "px-4 py-2",
+          fontSize: "text-sm",
+          borderRadius: "rounded-lg",
+          maxWidth: "max-w-sm",
+        },
+      },
+      arrow: {
+        baseStyles: "fill-gray-900",
+      },
+      content: {
+        baseStyles: "items-center text-gray-0",
       },
     },
   },
