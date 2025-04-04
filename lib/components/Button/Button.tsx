@@ -19,7 +19,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ...props 
   }, ref) => {
     const baseClassNames = getButtonClassNames(buttonType, size, subType);
-    const iconClassNames = getIconClassNames(size);
+    const iconClassNames = getIconClassNames(size, isLoading);
     const textClassNames = getTextClassNames(size);
     
     return (

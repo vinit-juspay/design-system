@@ -13,9 +13,10 @@ export const getButtonClassNames = (
 
   const baseClasses = `
     inline-flex items-center justify-center
-    gap-2 transition-all duration-200
-    focus-visible:outline-none focus-visible:ring-2
-    disabled:opacity-50 disabled:pointer-events-none
+    transition-all duration-200
+    focus-visible:outline-primary-200 focus-visible:outline-2
+    focus:outline-primary-200 focus:outline-2
+    disabled:pointer-events-none
   `;
 
   if (subType === 'link') {
@@ -36,7 +37,9 @@ export const getButtonClassNames = (
       buttonType.backgroundColor,
       buttonType.textColor,
       buttonType.hoverBackgroundColor,
+      buttonType.activeBackgroundColor,
       buttonType.borderColor,
+      buttonType.disabledBackgroundColor,
       theme.borderRadius
     );
   }
@@ -46,21 +49,24 @@ export const getButtonClassNames = (
     buttonSize.height,
     buttonSize.padding,
     buttonSize.fontSize,
+    buttonSize.gap,
     buttonType.backgroundColor,
     buttonType.textColor,
     buttonType.hoverBackgroundColor,
+    buttonType.activeBackgroundColor,
     buttonType.borderColor,
+    buttonType.disabledBackgroundColor,
     theme.borderRadius
   );
 };
 
-export const getIconClassNames = (size: ButtonSize): string => {
+export const getIconClassNames = (size: ButtonSize, isLoading: boolean): string => {
   const theme = themeConfig.euler.button;
   const buttonSize = theme.sizes[size];
   
   return cn(
     buttonSize.iconSize,
-    'animate-spin'
+    isLoading && 'animate-spin'
   );
 };
 

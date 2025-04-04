@@ -1,32 +1,38 @@
-// Copy your existing themeConfig.ts file here
-// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {
       buttonType: {
         primary: {
-          backgroundColor: 'bg-blue-600',
+          backgroundColor: 'bg-gradient-to-b from-primary-600 to-primary-500',
           textColor: 'text-white',
-          hoverBackgroundColor: 'hover:bg-blue-700',
-          borderColor: 'border border-blue-600'
+          hoverBackgroundColor: 'hover:bg-primary-500 hover:from-primary-500 hover:to-primary-500 hover:border-primary-500',
+          activeBackgroundColor: 'active:bg-primary-600 active:from-primary-600 active:to-primary-600 active:shadow-[inset_0px_-4px_4px_0px_rgba(0,0,0,0.15)] active:border-primary-600',
+          borderColor: 'border-[1.5px] border-primary-600',
+          disabledBackgroundColor: 'disabled:bg-primary-300 disabled:from-primary-300 disabled:to-primary-300 disabled:border-primary-300 disabled:opacity-100'
         },
         secondary: {
           backgroundColor: 'bg-gray-100',
           textColor: 'text-gray-900',
-          hoverBackgroundColor: 'hover:bg-gray-200',
-          borderColor: 'border border-gray-200'
+          hoverBackgroundColor: 'hover:bg-gray-200 hover:border-gray-200',
+          activeBackgroundColor: 'active:bg-gray-300 active:shadow-[inset_0px_-4px_4px_0px_rgba(0,0,0,0.15)] active:border-gray-300',
+          borderColor: 'border-[1.5px] border-gray-200',
+          disabledBackgroundColor: 'disabled:bg-gray-100 disabled:opacity-50'
         },
         danger: {
-          backgroundColor: 'bg-red-600',
+          backgroundColor: 'bg-gradient-to-b from-red-600 to-red-500',
           textColor: 'text-white',
-          hoverBackgroundColor: 'hover:bg-red-700',
-          borderColor: 'border border-red-600'
+          hoverBackgroundColor: 'hover:bg-red-500 hover:from-red-500 hover:to-red-500 hover:border-red-500',
+          activeBackgroundColor: 'active:bg-red-600 active:from-red-600 active:to-red-600 active:shadow-[inset_0px_-4px_4px_0px_rgba(0,0,0,0.15)] active:border-red-600',
+          borderColor: 'border-[1.5px] border-red-600',
+          disabledBackgroundColor: 'disabled:bg-red-300 disabled:from-red-300 disabled:to-red-300 disabled:border-red-300 disabled:opacity-100'
         },
         success: {
-          backgroundColor: 'bg-green-600',
+          backgroundColor: 'bg-gradient-to-b from-green-600 to-green-500',
           textColor: 'text-white',
-          hoverBackgroundColor: 'hover:bg-green-700',
-          borderColor: 'border border-green-600'
+          hoverBackgroundColor: 'hover:bg-green-500 hover:from-green-500 hover:to-green-500 hover:border-green-500',
+          activeBackgroundColor: 'active:bg-green-600 active:from-green-600 active:to-green-600 active:shadow-[inset_0px_-4px_4px_0px_rgba(0,0,0,0.15)] active:border-green-600',
+          borderColor: 'border-[1.5px] border-green-600',
+          disabledBackgroundColor: 'disabled:bg-green-300 disabled:from-green-300 disabled:to-green-300 disabled:border-green-300 disabled:opacity-100'
         }
       },
       sizes: {
@@ -38,14 +44,14 @@ export const themeConfig = {
           gap: 'gap-1.5'
         },
         md: {
-          height: 'h-10',
+          height: 'h-9',
           padding: 'px-4',
           fontSize: 'text-sm',
           iconSize: 'w-5 h-5',
           gap: 'gap-2'
         },
         lg: {
-          height: 'h-12',
+          height: 'h-10',
           padding: 'px-5',
           fontSize: 'text-base',
           iconSize: 'w-5 h-5',
@@ -54,9 +60,9 @@ export const themeConfig = {
       },
       linkColors: {
         primary: {
-          text: 'text-blue-600',
-          hover: 'hover:text-blue-700',
-          focus: 'focus:text-blue-700'
+          text: 'text-primary-600',
+          hover: 'hover:text-primary-700',
+          focus: 'focus:text-primary-700'
         },
         secondary: {
           text: 'text-gray-600',
