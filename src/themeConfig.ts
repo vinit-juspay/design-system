@@ -1,5 +1,9 @@
 // Component tokens
 
+/**
+ * Main theme configuration record that holds all theme tokens and values
+ * @typedef {Object} ThemeRecord
+ */
 type ThemeRecord = {
   [key: string]: {
     button: {
@@ -27,38 +31,76 @@ type ThemeRecord = {
   };
 };
 
+/**
+ * Configuration for button sizing options
+ * @typedef {Object} ButtonSize
+ */
 type ButtonSize = {
+  /** CSS height class */
   height: string;
+  /** CSS padding class */
   padding: string;
+  /** CSS font size class */
   fontSize: string;
+  /** CSS icon size class */
   iconSize: string;
+  /** CSS gap between elements class */
   gap: string;
 };
 
+/**
+ * Configuration for button type styling
+ * @typedef {Object} ButtonType
+ */
 type ButtonType = {
+  /** CSS background color class */
   backgroundColor: string;
+  /** CSS text color class */
   textColor: string;
+  /** CSS hover background color class */
   hoverBackgroundColor: string;
+  /** CSS hover text color class */
   hoverTextColor: string;
+  /** CSS disabled background color class */
   disabledBackgroundColor: string;
+  /** CSS disabled text color class */
   disabledTextColor: string;
+  /** CSS border color class */
   borderColor: string;
+  /** CSS focus outline class */
   focusOutline: string;
+  /** CSS hover gradient class */
   hoverGradient: string;
+  /** Active state styling */
   activeState: {
+    /** CSS gradient for active state */
     gradient: string;
+    /** CSS shadow for active state */
     shadow: string;
   };
+  /** CSS border width class */
   borderWidth: string;
+  /** CSS border style class */
   borderStyle: string;
 };
 
+/**
+ * Configuration for link button styling
+ * @typedef {Object} LinkColor
+ */
 type LinkColor = {
+  /** CSS text color class */
   text: string;
+  /** CSS hover color class */
   hover: string;
+  /** CSS focus color class */
   focus: string;
 };
 
+/**
+ * Global theme configuration for the design system
+ * Contains all the design tokens and styling information
+ */
 export const themeConfig: ThemeRecord = {
   euler: {
     button: {

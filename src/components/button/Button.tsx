@@ -4,6 +4,20 @@ import { ButtonProps } from './Button.types';
 import { cn } from '../../lib/utils';
 import { getButtonClassNames } from './Button.utils';
 
+/**
+ * Button component that supports multiple variants, sizes, and states
+ * 
+ * @component
+ * @example
+ * // Basic usage
+ * <Button buttonType="primary" size="md">Click me</Button>
+ * 
+ * // With loading state
+ * <Button isLoading>Processing</Button>
+ * 
+ * // With icon
+ * <Button leadingIcon={Icon}>With icon</Button>
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ 
     buttonType = 'primary',
