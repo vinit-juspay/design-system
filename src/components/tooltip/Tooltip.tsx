@@ -14,8 +14,8 @@ import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames } f
  *   <Button>Hover me</Button>
  * </Tooltip>
  * 
- * // With custom arrow position
- * <Tooltip content="Custom tooltip" arrow="right">
+ * // With custom slot (e.g. icon)
+ * <Tooltip content="Custom tooltip" arrow="right" hasSlot slot={InfoIcon} slotDirection="left">
  *   <span>Hover for info</span>
  * </Tooltip>
  */
@@ -25,9 +25,9 @@ const Tooltip = ({
   content,
   size = 'sm',
   arrow = 'default',
-  hasIcon = false,
-  iconDirection = 'left',
-  icon: Icon,
+  hasSlot = false,
+  slotDirection = 'left',
+  slot: Slot,
   providerProps = { delayDuration: 300 },
   rootProps,
   contentProps,
@@ -51,12 +51,12 @@ const Tooltip = ({
             {...contentProps}
           >
             <div className={contentContainerClassNames}>
-              {hasIcon && iconDirection === 'left' && Icon && (
-                <Icon className="mr-2 h-4 w-4" />
+              {hasSlot && slotDirection === 'left' && Slot && (
+                <Slot className="mr-2 h-4 w-4" />
               )}
               {content}
-              {hasIcon && iconDirection === 'right' && Icon && (
-                <Icon className="ml-2 h-4 w-4" />
+              {hasSlot && slotDirection === 'right' && Slot && (
+                <Slot className="ml-2 h-4 w-4" />
               )}
             </div>
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}

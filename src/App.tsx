@@ -228,9 +228,9 @@ const App = () => {
       <div className="flex gap-6 items-center">
         <Tooltip 
           content="Information tooltip" 
-          hasIcon 
-          icon={Info}
-          iconDirection="left"
+          hasSlot 
+          slot={Info}
+          slotDirection="left"
         >
           <Button 
             buttonType="secondary" 
@@ -243,9 +243,9 @@ const App = () => {
         
         <Tooltip 
           content="Warning message" 
-          hasIcon 
-          icon={AlertCircle}
-          iconDirection="left"
+          hasSlot 
+          slot={AlertCircle}
+          slotDirection="left"
         >
           <Button 
             buttonType="secondary" 
@@ -258,9 +258,9 @@ const App = () => {
         
         <Tooltip 
           content="Help is available" 
-          hasIcon 
-          icon={HelpCircle}
-          iconDirection="right"
+          hasSlot 
+          slot={HelpCircle}
+          slotDirection="right"
         >
           <Button 
             buttonType="secondary" 

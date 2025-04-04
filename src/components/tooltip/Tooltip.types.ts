@@ -22,9 +22,9 @@ export type TooltipArrow
   | 'none';
 
 /**
- * Icon direction within the tooltip
+ * Slot direction within the tooltip
  */
-export type IconDirection = 'left' | 'right';
+export type SlotDirection = 'left' | 'right';
 
 /**
  * Props for the Tooltip component
@@ -38,12 +38,12 @@ export interface TooltipProps {
   size?: TooltipSize;
   /** Position of the arrow */
   arrow?: TooltipArrow;
-  /** Direction to place the icon */
-  iconDirection?: IconDirection;
-  /** Whether the tooltip should display an icon */
-  hasIcon?: boolean;
-  /** Custom icon component */
-  icon?: React.ElementType;
+  /** Direction to place the slot component */
+  slotDirection?: SlotDirection;
+  /** Whether the tooltip should display a slot component */
+  hasSlot?: boolean;
+  /** Custom slot component */
+  slot?: React.ElementType;
   /** Tooltip provider props from Radix UI */
   providerProps?: Omit<RadixTooltip.TooltipProviderProps, 'children'>;
   /** Additional props for the tooltip root */
