@@ -1,7 +1,7 @@
-// import * as React from 'react';
+import * as React from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { TooltipProps } from './Tooltip.types';
-import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames } from './Tooltip.utils';
+import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames, getSlotClassNames } from './Tooltip.utils';
 
 /**
  * Tooltip component built on top of Radix UI tooltip primitive
@@ -20,7 +20,10 @@ import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames } f
  * </Tooltip>
  */
 
-const Tooltip = ({
+const Tooltip = React.forwardRef<
+  React.ElementRef<typeof RadixTooltip.Content>,
+  TooltipProps
+>(({
   children,
   content,
   size = 'sm',
@@ -31,7 +34,7 @@ const Tooltip = ({
   providerProps = { delayDuration: 300 },
   rootProps,
   contentProps,
-}: TooltipProps) => {
+}, ref) => {
   const tooltipClassNames = getTooltipClassNames(size);
   const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
   const contentContainerClassNames = getContentContainerClassNames();
@@ -44,6 +47,7 @@ const Tooltip = ({
         </RadixTooltip.Trigger>
         <RadixTooltip.Portal>
           <RadixTooltip.Content
+            ref={ref}
             sideOffset={5}
             side={side as RadixTooltip.TooltipContentProps['side']}
             align={align as RadixTooltip.TooltipContentProps['align']}
@@ -52,11 +56,11 @@ const Tooltip = ({
           >
             <div className={contentContainerClassNames}>
               {hasSlot && slotDirection === 'left' && Slot && (
-                <Slot className="mr-2 h-4 w-4" />
+                <Slot className={getSlotClassNames('left')} />
               )}
               {content}
               {hasSlot && slotDirection === 'right' && Slot && (
-                <Slot className="ml-2 h-4 w-4" />
+                <Slot className={getSlotClassNames('right')} />
               )}
             </div>
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
@@ -65,7 +69,7 @@ const Tooltip = ({
       </RadixTooltip.Root>
     </RadixTooltip.Provider>
   );
-};
+});
 
 Tooltip.displayName = 'Tooltip';
 
