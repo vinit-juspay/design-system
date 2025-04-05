@@ -3,10 +3,18 @@ import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
 // Common base classes for both tag types
-const getBaseClasses = () => `
-  inline-flex w-fit items-center justify-center
-  gap-2 transition-all duration-200
-`;
+const getBaseClasses = () => "inline-flex w-fit items-center justify-center gap-2 transition-all duration-200";
+
+// Common function to get theme-based classes
+const getThemeClasses = (size: TagSize, tagStyle: TagStyle) => {
+  const theme = themeConfig.euler.tag;
+  return [
+    getBaseClasses(),
+    theme.sizes[size].height,
+    theme.sizes[size].padding,
+    theme.style[tagStyle]
+  ];
+};
 
 export const getTagClassNames = (
   variant: TagVariant,
@@ -15,24 +23,9 @@ export const getTagClassNames = (
   color: TagColor
 ): string => {
   const theme = themeConfig.euler.tag;
-  
-  // For splitTags, we'll handle this differently in the component
-  if (variant === 'splitTags') {
-    return cn(
-      getBaseClasses(),
-      theme.sizes[size].height,
-      theme.sizes[size].fontSize,
-      theme.style[tagStyle]
-    );
-  }
-
   return cn(
-    getBaseClasses(),
-    theme.sizes[size].height,
-    theme.sizes[size].padding,
-    theme.sizes[size].fontSize,
-    theme.style[tagStyle],
-    theme.variant[variant][color]
+    ...getThemeClasses(size, tagStyle),
+    theme.variant[variant]?.[color] || ''
   );
 };
 
@@ -53,10 +46,7 @@ export const getSplitTagClassNames = (
     : (isLeft ? 'rounded-l' : 'rounded-r');
   
   return cn(
-    getBaseClasses(),
-    theme.sizes[size].height,
-    theme.sizes[size].padding,
-    theme.sizes[size].fontSize,
+    ...getThemeClasses(size, tagStyle),
     borderRadius,
     theme.variant[variant][color]
   );

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 import Tag from '../../../lib/components/Tags/Tags';
 
-const meta: Meta<typeof Tag> = {
+const meta = {
   title: 'Components/Tags/Tag',
   component: Tag,
   parameters: {
@@ -46,11 +46,50 @@ const meta: Meta<typeof Tag> = {
       control: 'text',
       description: 'The text content of the tag',
     },
+    showLeadingSlot: {
+      control: 'boolean',
+      description: 'Show or hide the leading slot',
+    },
+    showTrailingSlot: {
+      control: 'boolean',
+      description: 'Show or hide the trailing slot',
+    },
+    leadingSlot: {
+      table: {
+        disable: true,
+      },
+    },
+    trailingSlot: {
+      table: {
+        disable: true,
+      },
+    },
   },
-};
+} as Meta<typeof Tag>;
 
 export default meta;
-type Story = StoryObj<typeof Tag>;
+
+// Add this type definition
+type TagStoryProps = React.ComponentProps<typeof Tag> & {
+  showLeadingSlot?: boolean;
+  showTrailingSlot?: boolean;
+};
+
+// Update the Story type
+type Story = StoryObj<typeof Tag> & { args: TagStoryProps };
+
+const TagWithSlots = (args: any) => {
+  const { showLeadingSlot, showTrailingSlot, ...tagProps } = args;
+  
+  // Explicitly set to undefined when false
+  return (
+    <Tag 
+      {...tagProps}
+      leadingSlot={showLeadingSlot === true ? <CheckCircle className="h-3.5 w-3.5" /> : undefined}
+      trailingSlot={showTrailingSlot === true ? <XCircle className="h-3.5 w-3.5" /> : undefined}
+    />
+  );
+};
 
 export const Default: Story = {
   args: {
@@ -59,109 +98,102 @@ export const Default: Story = {
     size: 'md',
     color: 'primary',
     label: 'Tag Label',
+    showLeadingSlot: false,
+    showTrailingSlot: false,
   },
+  render: TagWithSlots,
 };
 
 export const NoFill: Story = {
   args: {
+    ...Default.args,
     variant: 'noFill',
-    tagStyle: 'squarical',
-    size: 'md',
-    color: 'primary',
     label: 'No Fill',
   },
+  render: TagWithSlots,
 };
 
 export const Attentive: Story = {
   args: {
+    ...Default.args,
     variant: 'attentive',
-    tagStyle: 'squarical',
-    size: 'md',
-    color: 'primary',
     label: 'Attentive',
   },
+  render: TagWithSlots,
 };
 
 export const Subtle: Story = {
   args: {
+    ...Default.args,
     variant: 'subtle',
-    tagStyle: 'squarical',
-    size: 'md',
-    color: 'primary',
     label: 'Subtle',
   },
+  render: TagWithSlots,
 };
 
 export const Rounded: Story = {
   args: {
-    variant: 'noFill',
+    ...Default.args,
     tagStyle: 'rounded',
-    size: 'md',
-    color: 'primary',
     label: 'Rounded',
   },
+  render: TagWithSlots,
 };
 
 export const WithLeadingSlot: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'success',
     label: 'Success',
-    leadingSlot: <CheckCircle className="h-3.5 w-3.5" />,
+    showLeadingSlot: true,
   },
+  render: TagWithSlots,
 };
 
 export const WithTrailingSlot: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'error',
     label: 'Error',
-    trailingSlot: <XCircle className="h-3.5 w-3.5" />,
+    showTrailingSlot: true,
   },
+  render: TagWithSlots,
 };
 
 export const WithBothSlots: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'warning',
     label: 'Warning',
-    leadingSlot: <AlertCircle className="h-3.5 w-3.5" />,
-    trailingSlot: <XCircle className="h-3.5 w-3.5" />,
+    showLeadingSlot: true,
+    showTrailingSlot: true,
   },
+  render: TagWithSlots,
 };
 
 export const ExtraSmall: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'xs',
-    color: 'primary',
     label: 'XS Tag',
   },
+  render: TagWithSlots,
 };
 
 export const Small: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'sm',
-    color: 'primary',
     label: 'Small Tag',
   },
+  render: TagWithSlots,
 };
 
 export const Large: Story = {
   args: {
-    variant: 'noFill',
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'lg',
-    color: 'primary',
     label: 'Large Tag',
   },
+  render: TagWithSlots,
 }; 

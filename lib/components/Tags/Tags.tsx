@@ -1,75 +1,59 @@
 import * as React from 'react';
-import { TagProps, SplitTagProps } from './types';
+import { TagProps, SplitTagProps, TagSize } from './types';
 import { cn } from '../../utils';
 import { getTagClassNames, getSplitTagClassNames } from './utils';
 import { themeConfig } from '../../themeConfig';
-// Import default icons
-import { CheckCircle, XCircle, AlertCircle, InfoIcon } from 'lucide-react';
 
-// Common utility functions shared between Tag and SplitTag
-const getSlotSizes = (size: 'xs' | 'sm' | 'md' | 'lg') => ({
-  xs: "h-2.5 w-2.5",
-  sm: "h-3 w-3",
-  md: "h-3.5 w-3.5",
-  lg: "h-4 w-4"
-}[size]);
+// Simplified slot size function
+const getSlotSizes = (size: TagSize) => themeConfig.euler.tag.sizes[size].iconSize || '';
 
-const getDefaultIcon = (color: string) => {
-  switch (color) {
-    case 'success': return <CheckCircle />;
-    case 'error': return <XCircle />;
-    case 'warning': return <AlertCircle />;
-    default: return <InfoIcon />;
-  }
-};
-
-const renderSlot = (slot: React.ReactNode | undefined, size: 'xs' | 'sm' | 'md' | 'lg', color: string) => {
+// Simplified slot rendering
+const renderSlot = (slot: React.ReactNode | undefined, size: TagSize) => {
+  if (!slot) return null;
   const slotSize = getSlotSizes(size);
   return (
     <div className={cn("flex items-center justify-center", slotSize)}>
-      {slot !== undefined ? slot : getDefaultIcon(color)}
+      {slot}
     </div>
   );
 };
 
-const getFontSizeClass = (size: 'xs' | 'sm' | 'md' | 'lg') => {
-  return cn("font-body", themeConfig.euler.tag.sizes[size].fontSize.split(' ')[0]);
+// Reusable function to render a slot with its wrapper
+const renderSlotWithWrapper = (slot: React.ReactNode | undefined, size: TagSize, gap: string) => {
+  if (!slot) return null;
+  return (
+    <span className={cn("flex items-center", gap)}>
+      {renderSlot(slot, size)}
+    </span>
+  );
 };
 
 // Main Tag component
 const Tag = React.forwardRef<HTMLDivElement, TagProps>(
   ({ 
     variant = 'noFill',
-    tagStyle = 'rounded',
+    tagStyle = 'squarical',
     size = 'md',
     color = 'neutral',
     label,
     leadingSlot,
     trailingSlot,
     className,
-    children,
-    ...props 
+    ...props
   }, ref) => {
-    // Early return for splitTags variant
-    if (variant === 'splitTags') {
-      return null; // SplitTag component should be used instead
-    }
-    
-    const baseClassNames = getTagClassNames(variant, tagStyle, size, color);
+    const containerClassName = getTagClassNames(variant, tagStyle, size, color);
+    const fontSizeClass = themeConfig.euler.tag.sizes[size].fontSize;
+    const slotGap = themeConfig.euler.tag.sizes[size].gap || 'gap-1';
     
     return (
       <div
         ref={ref}
-        className={cn(baseClassNames, className)}
+        className={cn(containerClassName, className)}
         {...props}
       >
-        {renderSlot(leadingSlot, size, color)}
-        {(label || children) && (
-          <span className={getFontSizeClass(size)}>
-            {label || children}
-          </span>
-        )}
-        {renderSlot(trailingSlot, size, color)}
+        {renderSlotWithWrapper(leadingSlot, size, slotGap)}
+        {label && <span className={fontSizeClass}>{label}</span>}
+        {renderSlotWithWrapper(trailingSlot, size, slotGap)}
       </div>
     );
   }
@@ -90,6 +74,9 @@ export const SplitTag = React.forwardRef<HTMLDivElement, SplitTagProps>(
     className,
     ...props
   }, ref) => {
+    const fontSizeClass = themeConfig.euler.tag.sizes[size].fontSize;
+    const slotGap = themeConfig.euler.tag.sizes[size].gap || 'gap-1';
+    
     return (
       <div
         ref={ref}
@@ -97,20 +84,12 @@ export const SplitTag = React.forwardRef<HTMLDivElement, SplitTagProps>(
         {...props}
       >
         <div className={getSplitTagClassNames(tagStyle, size, color, true)}>
-          {renderSlot(leftSlot, size, color)}
-          {leftLabel && (
-            <span className={getFontSizeClass(size)}>
-              {leftLabel}
-            </span>
-          )}
+          {renderSlotWithWrapper(leftSlot, size, slotGap)}
+          {leftLabel && <span className={fontSizeClass}>{leftLabel}</span>}
         </div>
         <div className={getSplitTagClassNames(tagStyle, size, color, false)}>
-          {rightLabel && (
-            <span className={getFontSizeClass(size)}>
-              {rightLabel}
-            </span>
-          )}
-          {renderSlot(rightSlot, size, color)}
+          {rightLabel && <span className={fontSizeClass}>{rightLabel}</span>}
+          {renderSlotWithWrapper(rightSlot, size, slotGap)}
         </div>
       </div>
     );

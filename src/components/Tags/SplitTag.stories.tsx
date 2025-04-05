@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 import { SplitTag } from '../../../lib/components/Tags/Tags';
 
-const meta: Meta<typeof SplitTag> = {
+const meta = {
   title: 'Components/Tags/SplitTag',
   component: SplitTag,
   parameters: {
@@ -42,11 +42,50 @@ const meta: Meta<typeof SplitTag> = {
       control: 'text',
       description: 'The text content of the right side',
     },
+    showLeftSlot: {
+      control: 'boolean',
+      description: 'Show or hide the left slot',
+    },
+    showRightSlot: {
+      control: 'boolean',
+      description: 'Show or hide the right slot',
+    },
+    leftSlot: {
+      table: {
+        disable: true,
+      },
+    },
+    rightSlot: {
+      table: {
+        disable: true,
+      },
+    },
   },
-};
+} as Meta<typeof SplitTag>;
 
 export default meta;
-type Story = StoryObj<typeof SplitTag>;
+
+// Add this type definition
+type SplitTagStoryProps = React.ComponentProps<typeof SplitTag> & {
+  showLeftSlot?: boolean;
+  showRightSlot?: boolean;
+};
+
+// Update the Story type
+type Story = StoryObj<typeof SplitTag> & { args: SplitTagStoryProps };
+
+const SplitTagWithSlots = (args: any) => {
+  const { showLeftSlot, showRightSlot, ...tagProps } = args;
+  
+  // Explicitly set to undefined when false
+  return (
+    <SplitTag 
+      {...tagProps}
+      leftSlot={showLeftSlot === true ? <CheckCircle className="h-3.5 w-3.5" /> : undefined}
+      rightSlot={showRightSlot === true ? <XCircle className="h-3.5 w-3.5" /> : undefined}
+    />
+  );
+};
 
 export const Default: Story = {
   args: {
@@ -55,79 +94,80 @@ export const Default: Story = {
     color: 'primary',
     leftLabel: 'Left',
     rightLabel: 'Right',
+    showLeftSlot: false,
+    showRightSlot: false,
   },
+  render: SplitTagWithSlots,
 };
 
 export const Rounded: Story = {
   args: {
+    ...Default.args,
     tagStyle: 'rounded',
-    size: 'md',
-    color: 'primary',
-    leftLabel: 'Left',
-    rightLabel: 'Right',
   },
+  render: SplitTagWithSlots,
 };
 
 export const WithLeftSlot: Story = {
   args: {
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'success',
     leftLabel: 'Success',
     rightLabel: 'Count',
-    leftSlot: <CheckCircle className="h-3.5 w-3.5" />,
+    showLeftSlot: true,
   },
+  render: SplitTagWithSlots,
 };
 
 export const WithRightSlot: Story = {
   args: {
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'error',
     leftLabel: 'Error',
     rightLabel: '5',
-    rightSlot: <XCircle className="h-3.5 w-3.5" />,
+    showRightSlot: true,
   },
+  render: SplitTagWithSlots,
 };
 
 export const WithBothSlots: Story = {
   args: {
-    tagStyle: 'squarical',
-    size: 'md',
+    ...Default.args,
     color: 'warning',
     leftLabel: 'Warning',
     rightLabel: 'Alert',
-    leftSlot: <AlertCircle className="h-3.5 w-3.5" />,
-    rightSlot: <XCircle className="h-3.5 w-3.5" />,
+    showLeftSlot: true,
+    showRightSlot: true,
   },
+  render: SplitTagWithSlots,
 };
 
 export const ExtraSmall: Story = {
   args: {
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'xs',
-    color: 'primary',
     leftLabel: 'XS',
     rightLabel: 'Tag',
   },
+  render: SplitTagWithSlots,
 };
 
 export const Small: Story = {
   args: {
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'sm',
-    color: 'primary',
     leftLabel: 'Small',
     rightLabel: 'Tag',
   },
+  render: SplitTagWithSlots,
 };
 
 export const Large: Story = {
   args: {
-    tagStyle: 'squarical',
+    ...Default.args,
     size: 'lg',
-    color: 'primary',
     leftLabel: 'Large',
     rightLabel: 'Tag',
   },
+  render: SplitTagWithSlots,
 }; 

@@ -1,12 +1,12 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 // Use string literal union types for better type safety
-export type TagVariant = 'noFill' | 'attentive' | 'subtle' | 'splitTags';
+export type TagVariant = 'noFill' | 'attentive' | 'subtle';
 export type TagStyle = 'squarical' | 'rounded';
 export type TagSize = 'xs' | 'sm' | 'md' | 'lg';
 export type TagColor = 'neutral' | 'primary' | 'success' | 'error' | 'warning' | 'purple';
 
-// Base interface for shared props
+// Base interface for shared props (remove export keyword)
 interface BaseTagProps extends ComponentPropsWithoutRef<'div'> {
   tagStyle?: TagStyle;
   size?: TagSize;

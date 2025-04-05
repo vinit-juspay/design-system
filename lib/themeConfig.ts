@@ -105,22 +105,30 @@ export const themeConfig = {
         xs: {
           height: 'h-5',
           padding: 'px-1.5 py-0.5',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-sm font-body font-semibold',
+          iconSize: 'h-2.5 w-2.5',
+          gap: 'gap-1'
         },
         sm: {
           height: 'h-[22px]',
           padding: 'px-2 py-0.75',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-sm font-body font-semibold',
+          iconSize: 'h-3 w-3',
+          gap: 'gap-1'
         },
         md: {
           height: 'h-6',
           padding: 'px-2.5 py-1',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-md font-body font-semibold',
+          iconSize: 'h-3.5 w-3.5',
+          gap: 'gap-1.5'
         },
         lg: {
           height: 'h-7',
           padding: 'px-3 py-1.5',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-md font-body font-semibold',
+          iconSize: 'h-4 w-4',
+          gap: 'gap-2'
         }
       },
       style: {
