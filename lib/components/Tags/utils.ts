@@ -2,10 +2,20 @@ import { TagVariant, TagStyle, TagSize, TagColor } from './types';
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
-// Common base classes for both tag types
+/**
+ * Returns the base classes shared by all tag variants
+ * These classes handle the basic layout and transitions
+ */
 const getBaseClasses = () => "inline-flex w-fit items-center justify-center gap-2 transition-all duration-200";
 
-// Common function to get theme-based classes
+/**
+ * Returns common theme-based classes based on size and style
+ * Used by both standard tags and split tags
+ * 
+ * @param size - The size variant of the tag
+ * @param tagStyle - The shape style of the tag
+ * @returns Array of CSS class strings
+ */
 const getThemeClasses = (size: TagSize, tagStyle: TagStyle) => {
   const theme = themeConfig.euler.tag;
   return [
@@ -16,6 +26,15 @@ const getThemeClasses = (size: TagSize, tagStyle: TagStyle) => {
   ];
 };
 
+/**
+ * Generates the complete className string for a standard Tag component
+ * 
+ * @param variant - The visual style variant of the tag
+ * @param tagStyle - The shape style of the tag
+ * @param size - The size variant of the tag
+ * @param color - The color theme of the tag
+ * @returns Combined className string
+ */
 export const getTagClassNames = (
   variant: TagVariant,
   tagStyle: TagStyle,
@@ -29,6 +48,15 @@ export const getTagClassNames = (
   );
 };
 
+/**
+ * Generates the complete className string for one side of a SplitTag component
+ * 
+ * @param tagStyle - The shape style of the tag
+ * @param size - The size variant of the tag
+ * @param color - The color theme of the tag
+ * @param isLeft - Whether this is the left side (true) or right side (false)
+ * @returns Combined className string
+ */
 export const getSplitTagClassNames = (
   tagStyle: TagStyle,
   size: TagSize,
@@ -37,10 +65,10 @@ export const getSplitTagClassNames = (
 ): string => {
   const theme = themeConfig.euler.tag;
   
-  // Use noFill variant for left side and attentive variant for right side
+  // Left side uses noFill variant, right side uses attentive variant
   const variant = isLeft ? 'noFill' : 'attentive';
   
-  // Apply border radius based on side
+  // Apply appropriate border radius based on side and style
   const borderRadius = tagStyle === 'rounded' 
     ? (isLeft ? 'rounded-l-full' : 'rounded-r-full')
     : (isLeft ? 'rounded-l' : 'rounded-r');

@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { SplitTag } from '../../../lib/components/Tags/Tags';
 
+/**
+ * Storybook metadata configuration for the SplitTag component
+ * Defines the component, controls, and documentation settings
+ */
 const meta = {
   title: 'Components/Tags/SplitTag',
   component: SplitTag,
@@ -10,6 +14,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    // Define the shape style control (squarical, rounded)
     tagStyle: {
       control: 'radio',
       options: ['squarical', 'rounded'],
@@ -18,6 +23,7 @@ const meta = {
         defaultValue: { summary: 'squarical' },
       },
     },
+    // Define the size control (xs, sm, md, lg)
     size: {
       control: 'radio',
       options: ['xs', 'sm', 'md', 'lg'],
@@ -26,6 +32,7 @@ const meta = {
         defaultValue: { summary: 'md' },
       },
     },
+    // Define the color control
     color: {
       control: 'select',
       options: ['neutral', 'primary', 'success', 'error', 'warning', 'purple'],
@@ -34,6 +41,7 @@ const meta = {
         defaultValue: { summary: 'neutral' },
       },
     },
+    // Define the left and right label controls
     leftLabel: {
       control: 'text',
       description: 'The text content of the left side',
@@ -42,6 +50,7 @@ const meta = {
       control: 'text',
       description: 'The text content of the right side',
     },
+    // Controls for showing/hiding slots in the story
     showLeftSlot: {
       control: 'boolean',
       description: 'Show or hide the left slot',
@@ -50,6 +59,7 @@ const meta = {
       control: 'boolean',
       description: 'Show or hide the right slot',
     },
+    // Hide the actual slot props from the controls as they're handled by the wrapper
     leftSlot: {
       table: {
         disable: true,
@@ -65,19 +75,30 @@ const meta = {
 
 export default meta;
 
-// Add this type definition
+/**
+ * Extended props type for the SplitTag story
+ * Adds boolean controls for showing/hiding slots in the Storybook UI
+ */
 type SplitTagStoryProps = React.ComponentProps<typeof SplitTag> & {
   showLeftSlot?: boolean;
   showRightSlot?: boolean;
 };
 
-// Update the Story type
+/**
+ * Story type with the extended props
+ */
 type Story = StoryObj<typeof SplitTag> & { args: SplitTagStoryProps };
 
+/**
+ * Wrapper component that handles the conditional rendering of slots
+ * based on the boolean controls in the Storybook UI
+ * 
+ * @param args - The story arguments including showLeftSlot and showRightSlot
+ * @returns A SplitTag component with conditionally rendered slots
+ */
 const SplitTagWithSlots = (args: any) => {
   const { showLeftSlot, showRightSlot, ...tagProps } = args;
   
-  // Explicitly set to undefined when false
   return (
     <SplitTag 
       {...tagProps}
@@ -87,6 +108,9 @@ const SplitTagWithSlots = (args: any) => {
   );
 };
 
+/**
+ * Default story - Shows a basic split tag with primary color
+ */
 export const Default: Story = {
   args: {
     tagStyle: 'squarical',
@@ -100,6 +124,9 @@ export const Default: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Rounded style - Shows a split tag with fully rounded corners
+ */
 export const Rounded: Story = {
   args: {
     ...Default.args,
@@ -108,6 +135,9 @@ export const Rounded: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Left slot example - Shows a split tag with an icon in the left section
+ */
 export const WithLeftSlot: Story = {
   args: {
     ...Default.args,
@@ -119,6 +149,9 @@ export const WithLeftSlot: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Right slot example - Shows a split tag with an icon in the right section
+ */
 export const WithRightSlot: Story = {
   args: {
     ...Default.args,
@@ -130,6 +163,9 @@ export const WithRightSlot: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Both slots example - Shows a split tag with icons in both sections
+ */
 export const WithBothSlots: Story = {
   args: {
     ...Default.args,
@@ -142,6 +178,9 @@ export const WithBothSlots: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Extra small size example
+ */
 export const ExtraSmall: Story = {
   args: {
     ...Default.args,
@@ -152,6 +191,9 @@ export const ExtraSmall: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Small size example
+ */
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -162,6 +204,9 @@ export const Small: Story = {
   render: SplitTagWithSlots,
 };
 
+/**
+ * Large size example
+ */
 export const Large: Story = {
   args: {
     ...Default.args,

@@ -2,6 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CheckCircle, XCircle } from 'lucide-react';
 import Tag from '../../../lib/components/Tags/Tags';
 
+/**
+ * Storybook metadata configuration for the Tag component
+ * Defines the component, controls, and documentation settings
+ */
 const meta = {
   title: 'Components/Tags/Tag',
   component: Tag,
@@ -10,6 +14,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
+    // Define the variant control (noFill, attentive, subtle)
     variant: {
       control: 'select',
       options: ['noFill', 'attentive', 'subtle'],
@@ -18,6 +23,7 @@ const meta = {
         defaultValue: { summary: 'noFill' },
       },
     },
+    // Define the shape style control (squarical, rounded)
     tagStyle: {
       control: 'radio',
       options: ['squarical', 'rounded'],
@@ -26,6 +32,7 @@ const meta = {
         defaultValue: { summary: 'squarical' },
       },
     },
+    // Define the size control (xs, sm, md, lg)
     size: {
       control: 'radio',
       options: ['xs', 'sm', 'md', 'lg'],
@@ -34,6 +41,7 @@ const meta = {
         defaultValue: { summary: 'md' },
       },
     },
+    // Define the color control
     color: {
       control: 'select',
       options: ['neutral', 'primary', 'success', 'error', 'warning', 'purple'],
@@ -42,10 +50,12 @@ const meta = {
         defaultValue: { summary: 'neutral' },
       },
     },
+    // Define the label control
     label: {
       control: 'text',
       description: 'The text content of the tag',
     },
+    // Controls for showing/hiding slots in the story
     showLeadingSlot: {
       control: 'boolean',
       description: 'Show or hide the leading slot',
@@ -54,6 +64,7 @@ const meta = {
       control: 'boolean',
       description: 'Show or hide the trailing slot',
     },
+    // Hide the actual slot props from the controls as they're handled by the wrapper
     leadingSlot: {
       table: {
         disable: true,
@@ -69,19 +80,30 @@ const meta = {
 
 export default meta;
 
-// Add this type definition
+/**
+ * Extended props type for the Tag story
+ * Adds boolean controls for showing/hiding slots in the Storybook UI
+ */
 type TagStoryProps = React.ComponentProps<typeof Tag> & {
   showLeadingSlot?: boolean;
   showTrailingSlot?: boolean;
 };
 
-// Update the Story type
+/**
+ * Story type with the extended props
+ */
 type Story = StoryObj<typeof Tag> & { args: TagStoryProps };
 
+/**
+ * Wrapper component that handles the conditional rendering of slots
+ * based on the boolean controls in the Storybook UI
+ * 
+ * @param args - The story arguments including showLeadingSlot and showTrailingSlot
+ * @returns A Tag component with conditionally rendered slots
+ */
 const TagWithSlots = (args: any) => {
   const { showLeadingSlot, showTrailingSlot, ...tagProps } = args;
   
-  // Explicitly set to undefined when false
   return (
     <Tag 
       {...tagProps}
@@ -91,6 +113,9 @@ const TagWithSlots = (args: any) => {
   );
 };
 
+/**
+ * Default story - Shows a basic tag with primary color
+ */
 export const Default: Story = {
   args: {
     variant: 'noFill',
@@ -104,6 +129,9 @@ export const Default: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * NoFill variant - Shows a tag with outline style
+ */
 export const NoFill: Story = {
   args: {
     ...Default.args,
@@ -113,6 +141,9 @@ export const NoFill: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Attentive variant - Shows a tag with solid background for emphasis
+ */
 export const Attentive: Story = {
   args: {
     ...Default.args,
@@ -122,6 +153,9 @@ export const Attentive: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Subtle variant - Shows a tag with light background for less emphasis
+ */
 export const Subtle: Story = {
   args: {
     ...Default.args,
@@ -131,6 +165,9 @@ export const Subtle: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Rounded style - Shows a tag with fully rounded corners
+ */
 export const Rounded: Story = {
   args: {
     ...Default.args,
@@ -140,6 +177,9 @@ export const Rounded: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Leading slot example - Shows a tag with an icon before the label
+ */
 export const WithLeadingSlot: Story = {
   args: {
     ...Default.args,
@@ -150,6 +190,9 @@ export const WithLeadingSlot: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Trailing slot example - Shows a tag with an icon after the label
+ */
 export const WithTrailingSlot: Story = {
   args: {
     ...Default.args,
@@ -160,6 +203,9 @@ export const WithTrailingSlot: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Both slots example - Shows a tag with icons before and after the label
+ */
 export const WithBothSlots: Story = {
   args: {
     ...Default.args,
@@ -171,6 +217,9 @@ export const WithBothSlots: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Extra small size example
+ */
 export const ExtraSmall: Story = {
   args: {
     ...Default.args,
@@ -180,6 +229,9 @@ export const ExtraSmall: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Small size example
+ */
 export const Small: Story = {
   args: {
     ...Default.args,
@@ -189,6 +241,9 @@ export const Small: Story = {
   render: TagWithSlots,
 };
 
+/**
+ * Large size example
+ */
 export const Large: Story = {
   args: {
     ...Default.args,
