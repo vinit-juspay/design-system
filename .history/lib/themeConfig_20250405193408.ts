@@ -1,3 +1,5 @@
+// Copy your existing themeConfig.ts file here
+// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {
@@ -81,7 +83,7 @@ export const themeConfig = {
           primary: 'bg-gray-0 text-blue-800 border border-blue-600',
           success: 'bg-gray-0 text-green-600 border border-green-600',
           error: 'bg-gray-0 text-red-600 border border-red-600',
-          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
+          warning: 'bg-gray-0 text-amber-500 border border-orange-500',
           purple: 'bg-gray-0 text-purple-500 border border-purple-500'
         },
         attentive: {
@@ -97,7 +99,7 @@ export const themeConfig = {
           primary: 'bg-blue-50 text-blue-600 border border-blue-100',
           success: 'bg-green-50 text-green-600 border border-green-100',
           error: 'bg-red-50 text-red-600 border border-red-100',
-          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
+          warning: 'bg-orange-50 text-amber-600 border border-orange-100',
           purple: 'bg-purple-50 text-purple-600 border border-purple-100'
         }
       },

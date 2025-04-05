@@ -1,0 +1,7134 @@
+{
+    "Tags": {
+      "name": "Tags",
+      "props": {
+        "Slot 1": {
+          "id": "Slot 1#3972:1158",
+          "type": "Component swap options"
+        },
+        "Slot 2": {
+          "id": "Slot 2#3972:965",
+          "type": "Component swap options"
+        },
+        "color": {
+          "id": "color",
+          "values": [
+            "primary",
+            "success",
+            "warning",
+            "purple",
+            "error",
+            "neutral"
+          ]
+        },
+        "hasLabel": {
+          "id": "hasLabel#2073:5",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "has_slot_1": {
+          "id": "has_slot_1#3972:579",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "has_slot_2": {
+          "id": "has_slot_2#3972:0",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "size": {
+          "id": "size",
+          "values": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "style": {
+          "id": "style",
+          "values": [
+            "squarical",
+            "rounded"
+          ]
+        },
+        "text": {
+          "id": "text#2073:3",
+          "type": "TEXT"
+        },
+        "variant": {
+          "id": "variant",
+          "values": [
+            "noFill",
+            "attentive",
+            "subtle",
+            "splitTags"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=squarical, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=noFill, style=rounded, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=neutral",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=primary",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=success",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=error",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=warning",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=lg, color=purple",
+          "width": 95,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 6,
+              "right": 12,
+              "bottom": 6,
+              "left": 12
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=neutral",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=primary",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=success",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=error",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=warning",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=md, color=purple",
+          "width": 91,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 4,
+              "right": 10,
+              "bottom": 4,
+              "left": 10
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 35,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=squarical, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=attentive, style=rounded, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=neutral",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=neutral",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=primary",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=primary",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=success",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=success",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=error",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=error",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=warning",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=warning",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=squarical, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=sm, color=purple",
+          "width": 82,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 3,
+              "right": 8,
+              "bottom": 3,
+              "left": 8
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=subtle, style=rounded, size=xs, color=purple",
+          "width": 78,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 2,
+              "right": 6,
+              "bottom": 2,
+              "left": 6
+            },
+            "itemSpacing": 6,
+            "alignment": {
+              "primary": "CENTER",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            },
+            {
+              "name": "Label",
+              "width": 30,
+              "height": 16
+            },
+            {
+              "name": "Slot/Slot Block",
+              "width": 12,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=neutral",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=neutral",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=neutral",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=neutral",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=neutral",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=neutral",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=neutral",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=neutral",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=primary",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=primary",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=primary",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=primary",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=primary",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=primary",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=primary",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=primary",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=success",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=success",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=success",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=success",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=success",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=success",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=success",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=success",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=error",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=error",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=error",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=error",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=error",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=error",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=error",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=error",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=warning",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=warning",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=warning",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=warning",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=warning",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=warning",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=warning",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=warning",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=xs, color=purple",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=sm, color=purple",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=md, color=purple",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=squarical, size=lg, color=purple",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=xs, color=purple",
+          "width": 156,
+          "height": 20,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            },
+            {
+              "name": "Tags",
+              "width": 78,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=sm, color=purple",
+          "width": 164,
+          "height": 22,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            },
+            {
+              "name": "Tags",
+              "width": 82,
+              "height": 22
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=md, color=purple",
+          "width": 182,
+          "height": 24,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            },
+            {
+              "name": "Tags",
+              "width": 91,
+              "height": 24
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "variant=splitTags, style=rounded, size=lg, color=purple",
+          "width": 190,
+          "height": 28,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 0,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            },
+            {
+              "name": "Tags",
+              "width": 95,
+              "height": 28
+            }
+          ]
+        }
+      ]
+    }
+  }

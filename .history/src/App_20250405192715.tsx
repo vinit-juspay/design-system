@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
+import React, { useState } from "react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, CheckCircle, XCircle, Layers, Palette, Tag as TagIcon } from "lucide-react";
 import { Tooltip } from "./index";
 import { Button, Tag, SplitTag } from "../lib/main";
 
@@ -17,7 +17,7 @@ const App = () => {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <span className="text-lg font-bold text-gray-900">Design System</span>
+              <span className="text-xl font-bold text-gray-900">Design System</span>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <button

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
+import React, { useState } from "react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, CheckCircle, XCircle, Layers, Palette, Tag as TagIcon } from "lucide-react";
 import { Tooltip } from "./index";
 import { Button, Tag, SplitTag } from "../lib/main";
 

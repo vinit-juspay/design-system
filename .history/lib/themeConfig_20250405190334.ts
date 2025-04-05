@@ -1,3 +1,5 @@
+// Copy your existing themeConfig.ts file here
+// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {
@@ -81,7 +83,7 @@ export const themeConfig = {
           primary: 'bg-gray-0 text-blue-800 border border-blue-600',
           success: 'bg-gray-0 text-green-600 border border-green-600',
           error: 'bg-gray-0 text-red-600 border border-red-600',
-          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
+          warning: 'bg-gray-0 text-amber-500 border border-orange-500',
           purple: 'bg-gray-0 text-purple-500 border border-purple-500'
         },
         attentive: {
@@ -97,35 +99,71 @@ export const themeConfig = {
           primary: 'bg-blue-50 text-blue-600 border border-blue-100',
           success: 'bg-green-50 text-green-600 border border-green-100',
           error: 'bg-red-50 text-red-600 border border-red-100',
-          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
+          warning: 'bg-orange-50 text-amber-600 border border-orange-100',
           purple: 'bg-purple-50 text-purple-600 border border-purple-100'
+        }
+      },
+      splitTag: {
+        neutral: {
+          left: 'bg-gray-0 text-gray-950 border border-gray-950',
+          right: 'bg-gray-950 text-gray-0'
+        },
+        primary: {
+          left: 'bg-gray-0 text-blue-800 border border-blue-600',
+          right: 'bg-blue-600 text-gray-0'
+        },
+        success: {
+          left: 'bg-gray-0 text-green-600 border border-green-600',
+          right: 'bg-green-600 text-gray-0'
+        },
+        error: {
+          left: 'bg-gray-0 text-red-600 border border-red-600',
+          right: 'bg-red-600 text-gray-0'
+        },
+        warning: {
+          left: 'bg-gray-0 text-amber-500 border border-orange-500',
+          right: 'bg-orange-500 text-gray-0'
+        },
+        purple: {
+          left: 'bg-gray-0 text-purple-500 border border-purple-500',
+          right: 'bg-purple-500 text-gray-0'
         }
       },
       sizes: {
         xs: {
           height: 'h-5',
           padding: 'px-1.5 py-0.5',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-xs font-body'
         },
         sm: {
           height: 'h-[22px]',
           padding: 'px-2 py-0.75',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-sm font-body'
         },
         md: {
           height: 'h-6',
           padding: 'px-2.5 py-1',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-md font-body'
         },
         lg: {
           height: 'h-7',
           padding: 'px-3 py-1.5',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-lg font-body'
         }
       },
       style: {
         squarical: 'rounded',
         rounded: 'rounded-full'
+      },
+      splitStyle: {
+        squarical: {
+          left: 'rounded-l',
+          right: 'rounded-r'
+        },
+        rounded: {
+          left: 'rounded-l-full',
+          right: 'rounded-r-full'
+        }
       }
     }
   }

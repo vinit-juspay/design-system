@@ -1,3 +1,5 @@
+// Copy your existing themeConfig.ts file here
+// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {

@@ -1,3 +1,5 @@
+// Copy your existing themeConfig.ts file here
+// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {
@@ -73,60 +75,6 @@ export const themeConfig = {
         }
       },
       borderRadius: 'rounded-md'
-    },
-    tag: {
-      variant: {
-        noFill: {
-          neutral: 'bg-gray-0 text-gray-950 border border-gray-950',
-          primary: 'bg-gray-0 text-blue-800 border border-blue-600',
-          success: 'bg-gray-0 text-green-600 border border-green-600',
-          error: 'bg-gray-0 text-red-600 border border-red-600',
-          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
-          purple: 'bg-gray-0 text-purple-500 border border-purple-500'
-        },
-        attentive: {
-          neutral: 'bg-gray-950 text-gray-0',
-          primary: 'bg-blue-600 text-gray-0',
-          success: 'bg-green-600 text-gray-0',
-          error: 'bg-red-600 text-gray-0',
-          warning: 'bg-orange-500 text-gray-0',
-          purple: 'bg-purple-500 text-gray-0'
-        },
-        subtle: {
-          neutral: 'bg-gray-50 text-gray-950 border border-gray-200',
-          primary: 'bg-blue-50 text-blue-600 border border-blue-100',
-          success: 'bg-green-50 text-green-600 border border-green-100',
-          error: 'bg-red-50 text-red-600 border border-red-100',
-          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
-          purple: 'bg-purple-50 text-purple-600 border border-purple-100'
-        }
-      },
-      sizes: {
-        xs: {
-          height: 'h-5',
-          padding: 'px-1.5 py-0.5',
-          fontSize: 'text-body-sm font-body font-semibold'
-        },
-        sm: {
-          height: 'h-[22px]',
-          padding: 'px-2 py-0.75',
-          fontSize: 'text-body-sm font-body font-semibold'
-        },
-        md: {
-          height: 'h-6',
-          padding: 'px-2.5 py-1',
-          fontSize: 'text-body-md font-body font-semibold'
-        },
-        lg: {
-          height: 'h-7',
-          padding: 'px-3 py-1.5',
-          fontSize: 'text-body-md font-body font-semibold'
-        }
-      },
-      style: {
-        squarical: 'rounded',
-        rounded: 'rounded-full'
-      }
     }
   }
 }; 

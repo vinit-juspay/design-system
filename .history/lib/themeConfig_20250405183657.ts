@@ -1,3 +1,5 @@
+// Copy your existing themeConfig.ts file here
+// This is a placeholder - use your actual theme config
 export const themeConfig = {
   euler: {
     button: {
@@ -76,13 +78,13 @@ export const themeConfig = {
     },
     tag: {
       variant: {
-        noFill: {
-          neutral: 'bg-gray-0 text-gray-950 border border-gray-950',
-          primary: 'bg-gray-0 text-blue-800 border border-blue-600',
-          success: 'bg-gray-0 text-green-600 border border-green-600',
-          error: 'bg-gray-0 text-red-600 border border-red-600',
-          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
-          purple: 'bg-gray-0 text-purple-500 border border-purple-500'
+        default: {
+          neutral: 'bg-gray-100 text-gray-700',
+          primary: 'bg-blue-100 text-blue-700',
+          success: 'bg-green-100 text-green-700',
+          error: 'bg-red-100 text-red-700',
+          warning: 'bg-amber-100 text-amber-700',
+          purple: 'bg-purple-100 text-purple-700'
         },
         attentive: {
           neutral: 'bg-gray-950 text-gray-0',
@@ -93,39 +95,75 @@ export const themeConfig = {
           purple: 'bg-purple-500 text-gray-0'
         },
         subtle: {
-          neutral: 'bg-gray-50 text-gray-950 border border-gray-200',
-          primary: 'bg-blue-50 text-blue-600 border border-blue-100',
-          success: 'bg-green-50 text-green-600 border border-green-100',
-          error: 'bg-red-50 text-red-600 border border-red-100',
-          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
-          purple: 'bg-purple-50 text-purple-600 border border-purple-100'
+          neutral: 'bg-gray-50 text-gray-600 border border-gray-200',
+          primary: 'bg-blue-50 text-blue-600 border border-blue-200',
+          success: 'bg-green-50 text-green-600 border border-green-200',
+          error: 'bg-red-50 text-red-600 border border-red-200',
+          warning: 'bg-amber-50 text-amber-600 border border-amber-200',
+          purple: 'bg-purple-50 text-purple-600 border border-purple-200'
+        }
+      },
+      splitTag: {
+        neutral: {
+          left: 'bg-gray-200 text-gray-800',
+          right: 'bg-gray-100 text-gray-700'
+        },
+        primary: {
+          left: 'bg-blue-200 text-blue-800',
+          right: 'bg-blue-100 text-blue-700'
+        },
+        success: {
+          left: 'bg-green-200 text-green-800',
+          right: 'bg-green-100 text-green-700'
+        },
+        error: {
+          left: 'bg-red-200 text-red-800',
+          right: 'bg-red-100 text-red-700'
+        },
+        warning: {
+          left: 'bg-amber-200 text-amber-800',
+          right: 'bg-amber-100 text-amber-700'
+        },
+        purple: {
+          left: 'bg-purple-200 text-purple-800',
+          right: 'bg-purple-100 text-purple-700'
         }
       },
       sizes: {
         xs: {
           height: 'h-5',
           padding: 'px-1.5 py-0.5',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-xs'
         },
         sm: {
           height: 'h-[22px]',
           padding: 'px-2 py-0.75',
-          fontSize: 'text-body-sm font-body font-semibold'
+          fontSize: 'text-body-sm'
         },
         md: {
           height: 'h-6',
           padding: 'px-2.5 py-1',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-md'
         },
         lg: {
           height: 'h-7',
           padding: 'px-3 py-1.5',
-          fontSize: 'text-body-md font-body font-semibold'
+          fontSize: 'text-body-lg'
         }
       },
       style: {
         squarical: 'rounded',
         rounded: 'rounded-full'
+      },
+      splitStyle: {
+        squarical: {
+          left: 'rounded-l',
+          right: 'rounded-r'
+        },
+        rounded: {
+          left: 'rounded-l-full',
+          right: 'rounded-r-full'
+        }
       }
     }
   }
