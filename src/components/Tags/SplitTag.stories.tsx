@@ -3,7 +3,7 @@ import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import { SplitTag } from '../../../lib/components/Tags/Tags';
 
 const meta: Meta<typeof SplitTag> = {
-  title: 'Components/SplitTag',
+  title: 'Components/Tags/SplitTag',
   component: SplitTag,
   parameters: {
     layout: 'centered',

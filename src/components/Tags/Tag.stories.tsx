@@ -3,7 +3,7 @@ import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import Tag from '../../../lib/components/Tags/Tags';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag',
+  title: 'Components/Tags/Tag',
   component: Tag,
   parameters: {
     layout: 'centered',
