@@ -249,9 +249,55 @@ module.exports = {
         '2xl': '12px',  // rounded-2xl
         'full': '9999px', // rounded-full
       },
-      fontFamily: {
-        sans: ["Inter Display", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+
+      /**
+       * Animations for UI components
+       * Usage:
+       * animate-{name} (e.g., animate-fade-in, animate-slide-in-from-top)
+       */
+      keyframes: {
+        "fade-in": {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        "fade-out": {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
+        "slide-in-from-top": {
+          from: { transform: "translateY(-10px)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-in-from-right": {
+          from: { transform: "translateX(10px)" },
+          to: { transform: "translateX(0)" },
+        },
+        "slide-in-from-bottom": {
+          from: { transform: "translateY(10px)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-in-from-left": {
+          from: { transform: "translateX(-10px)" },
+          to: { transform: "translateX(0)" },
+        },
+        "zoom-in": {
+          from: { transform: "scale(0.95)" },
+          to: { transform: "scale(1)" },
+        },
+        "zoom-out": {
+          from: { transform: "scale(1)" },
+          to: { transform: "scale(0.95)" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "fade-out": "fade-out 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-in-from-top": "slide-in-from-top 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-in-from-right": "slide-in-from-right 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-in-from-bottom": "slide-in-from-bottom 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "slide-in-from-left": "slide-in-from-left 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "zoom-in": "zoom-in 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "zoom-out": "zoom-out 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },

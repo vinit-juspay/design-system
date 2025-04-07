@@ -2,6 +2,14 @@ import { ButtonSize, ButtonType, ButtonSubType } from './Button.types';
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../lib/utils';
 
+/**
+ * Generates the appropriate class names for a button based on its type, size, and sub-type
+ * 
+ * @param {ButtonType} type - The main button type/variant (primary, secondary, etc.)
+ * @param {ButtonSize} size - The size of the button (sm, md, lg)
+ * @param {ButtonSubType} subType - The button sub-type (default, iconOnly, link)
+ * @returns {string} Combined Tailwind CSS class names for the button
+ */
 export const getButtonClassNames = (
   type: ButtonType, 
   size: ButtonSize, 

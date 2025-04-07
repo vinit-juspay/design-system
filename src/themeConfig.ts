@@ -1,5 +1,9 @@
 // Component tokens
 
+/**
+ * Main theme configuration record that holds all theme tokens and values
+ * @typedef {Object} ThemeRecord
+ */
 type ThemeRecord = {
   [key: string]: {
     button: {
@@ -24,41 +28,107 @@ type ThemeRecord = {
         success: LinkColor;
       };
     };
+    tooltip: {
+      baseStyles: string;
+      sizes: {
+        sm: TooltipSize;
+        lg: TooltipSize;
+      };
+      arrow: {
+        baseStyles: string;
+      };
+      content: {
+        baseStyles: string;
+      };
+    };
   };
 };
 
+/**
+ * Configuration for button sizing options
+ * @typedef {Object} ButtonSize
+ */
 type ButtonSize = {
+  /** CSS height class */
   height: string;
+  /** CSS padding class */
   padding: string;
+  /** CSS font size class */
   fontSize: string;
+  /** CSS icon size class */
   iconSize: string;
+  /** CSS gap between elements class */
   gap: string;
 };
 
+/**
+ * Configuration for button type styling
+ * @typedef {Object} ButtonType
+ */
 type ButtonType = {
+  /** CSS background color class */
   backgroundColor: string;
+  /** CSS text color class */
   textColor: string;
+  /** CSS hover background color class */
   hoverBackgroundColor: string;
+  /** CSS hover text color class */
   hoverTextColor: string;
+  /** CSS disabled background color class */
   disabledBackgroundColor: string;
+  /** CSS disabled text color class */
   disabledTextColor: string;
+  /** CSS border color class */
   borderColor: string;
+  /** CSS focus outline class */
   focusOutline: string;
+  /** CSS hover gradient class */
   hoverGradient: string;
+  /** Active state styling */
   activeState: {
+    /** CSS gradient for active state */
     gradient: string;
+    /** CSS shadow for active state */
     shadow: string;
   };
+  /** CSS border width class */
   borderWidth: string;
+  /** CSS border style class */
   borderStyle: string;
 };
 
+/**
+ * Configuration for link button styling
+ * @typedef {Object} LinkColor
+ */
 type LinkColor = {
+  /** CSS text color class */
   text: string;
+  /** CSS hover color class */
   hover: string;
+  /** CSS focus color class */
   focus: string;
 };
 
+/**
+ * Configuration for tooltip sizing options
+ * @typedef {Object} TooltipSize
+ */
+type TooltipSize = {
+  /** CSS padding class */
+  padding: string;
+  /** CSS font size class */
+  fontSize: string;
+  /** CSS border radius class */
+  borderRadius: string;
+  /** CSS max width class */
+  maxWidth: string;
+};
+
+/**
+ * Global theme configuration for the design system
+ * Contains all the design tokens and styling information
+ */
 export const themeConfig: ThemeRecord = {
   euler: {
     button: {
@@ -179,6 +249,29 @@ export const themeConfig: ThemeRecord = {
           hover: "hover:text-green-600",
           focus: "focus-visible:outline-green-500",
         },
+      },
+    },
+    tooltip: {
+      baseStyles: "z-50 overflow-hidden bg-gray-900 text-gray-0 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      sizes: {
+        sm: {
+          padding: "px-3 py-1.5", // 12px left and right padding, 6px top and bottom padding
+          fontSize: "text-xs", // 10px font size
+          borderRadius: "rounded-lg", // 8px border radius
+          maxWidth: "max-w-xs", // 160px max width
+        },
+        lg: {
+          padding: "px-4 py-2", // 16px left and right padding, 8px top and bottom padding
+          fontSize: "text-sm", // 12px font size
+          borderRadius: "rounded-2xl", // 12px border radius
+          maxWidth: "max-w-sm", // 240px max width
+        },
+      },
+      arrow: {
+        baseStyles: "fill-gray-900",
+      },
+      content: {
+        baseStyles: "items-center text-gray-0",
       },
     },
   },

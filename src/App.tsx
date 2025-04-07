@@ -1,9 +1,11 @@
-import { Button } from '../lib/main';
-import { Search, Plus, ArrowRight, Trash2, Check } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
+import { Tooltip } from "./index";
+import { Button } from "../lib/main";
 
 const App = () => {
   return (
-    <div className="p-4 space-y-4 flex flex-col gap-4 justify-center items-center">
+    <div className="p-4 space-y-8 flex flex-col gap-4 justify-center items-center">
+      <h2 className="text-2xl font-semibold">Button Examples</h2>
       <div className="flex gap-4">
         <Button buttonType="primary" size="md">Primary Button</Button>
         <Button buttonType="secondary" size="md">Secondary Button</Button>
@@ -101,6 +103,189 @@ const App = () => {
           leadingIcon={Plus}
           aria-label="Add item"
         />
+      </div>
+
+      {/* Tooltip Examples */}
+      <h2 className="text-2xl font-semibold mt-8">Tooltip Examples</h2>
+      
+      {/* Basic tooltips */}
+      <div className="flex gap-8 items-center justify-center">
+        <Tooltip content="Small tooltip" size="sm">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Large tooltip with more text" size="lg">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+      </div>
+
+      {/* Different arrow positions */}
+      <div className="grid grid-cols-3 gap-8 p-12">
+        <Tooltip content="Default (top center)" arrow="default">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Top left" arrow="topLeft">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Top right" arrow="topRight">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Left" arrow="left">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="No arrow" arrow="none">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Right" arrow="right">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Bottom left" arrow="bottomLeft">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Bottom center" arrow="bottomCenter">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip content="Bottom right" arrow="bottomRight">
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+      </div>
+
+      {/* Tooltips with icons */}
+      <div className="flex gap-6 items-center">
+        <Tooltip 
+          content="Information tooltip" 
+          hasSlot 
+          slot={Info}
+          slotDirection="left"
+        >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip 
+          content="Warning message" 
+          hasSlot 
+          slot={AlertCircle}
+          slotDirection="left"
+        >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+        
+        <Tooltip 
+          content="Help is available" 
+          hasSlot 
+          slot={HelpCircle}
+          slotDirection="right"
+        >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+      </div>
+
+      {/* Tooltip with custom provider props */}
+      <div className="flex gap-4 items-center">
+        <Tooltip 
+          content="Delayed tooltip (1000ms)" 
+          providerProps={{ delayDuration: 1000 }}
+        >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
       </div>
     </div>
   );
