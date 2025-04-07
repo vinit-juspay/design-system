@@ -1,6 +1,5 @@
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
 import { Button, Tooltip } from "../lib/main";
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 const App = () => {
   return (
