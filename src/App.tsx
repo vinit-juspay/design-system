@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
 import { Tooltip } from "./index";
 import { Button, Tag, SplitTag } from "../lib/main";
+import { themeConfig } from "../lib/themeConfig";
+import { TagVariant, TagStyle, TagSize, TagColor } from "../lib/components/Tag/types";
 
 const App = () => {
-  const variants = ['noFill', 'attentive', 'subtle'] as const;
-  const styles = ['squarical', 'rounded'] as const;
-  const sizes = ['xs', 'sm', 'md', 'lg'] as const;
-  const colors = ['neutral', 'primary', 'success', 'error', 'warning', 'purple'] as const;
-  
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
+  
+  // Extract values directly from themeConfig with proper type casting
+  const variants = Object.keys(themeConfig.euler.tag.variant) as TagVariant[];
+  const styles = Object.keys(themeConfig.euler.tag.style) as TagStyle[];
+  const sizes = Object.keys(themeConfig.euler.tag.sizes) as TagSize[];
+  const colors = Object.keys(themeConfig.euler.tag.variant.noFill) as TagColor[];
   
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">

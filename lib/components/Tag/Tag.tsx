@@ -5,53 +5,25 @@ import { getTagClassNames, getSplitTagClassNames } from './utils';
 import { themeConfig } from '../../themeConfig';
 
 /**
- * Gets the appropriate icon size class based on tag size
- * 
- * @param size - The size variant of the tag
- * @returns CSS class string for icon sizing
- */
-const getSlotSizes = (size: TagSize) => themeConfig.euler.tag.sizes[size].iconSize || '';
-
-/**
- * Renders a slot (icon or custom element) with appropriate sizing
- * 
- * @param slot - The React node to render in the slot
- * @param size - The size variant of the tag
- * @returns Rendered slot or null if slot is undefined
+ * Renders a slot (icon or custom element) with appropriate styling
  */
 const renderSlot = (slot: React.ReactNode | undefined, size: TagSize) => {
   if (!slot) return null;
-  const slotSize = getSlotSizes(size);
+  
+  const tagTheme = themeConfig.euler.tag;
+  const slotSize = tagTheme.sizes[size].iconSize;
+  const slotGap = tagTheme.sizes[size].gap;
+  const slotClasses = tagTheme.layout.slot;
+  
   return (
-    <div className={cn("flex items-center justify-center", slotSize)}>
+    <span className={cn(slotClasses, slotSize, slotGap)}>
       {slot}
-    </div>
-  );
-};
-
-/**
- * Renders a slot with its wrapper for consistent spacing
- * 
- * @param slot - The React node to render in the slot
- * @param size - The size variant of the tag
- * @param gap - The gap class to apply
- * @returns Rendered slot with wrapper or null if slot is undefined
- */
-const renderSlotWithWrapper = (slot: React.ReactNode | undefined, size: TagSize, gap: string) => {
-  if (!slot) return null;
-  return (
-    <span className={cn("flex items-center", gap)}>
-      {renderSlot(slot, size)}
     </span>
   );
 };
 
 /**
- * Tag Component
- * 
- * A versatile tag component that can be used to display labels, categories,
- * statuses, or other metadata. Supports various visual styles, sizes, and colors.
- * Can include optional leading and trailing icons or custom elements.
+ * Tag Component - Displays labels, categories, statuses, or other metadata
  */
 const Tag = React.forwardRef<HTMLDivElement, TagProps>(
   ({ 
@@ -67,7 +39,6 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
   }, ref) => {
     const containerClassName = getTagClassNames(variant, tagStyle, size, color);
     const fontSizeClass = themeConfig.euler.tag.sizes[size].fontSize;
-    const slotGap = themeConfig.euler.tag.sizes[size].gap || 'gap-1';
     
     return (
       <div
@@ -75,9 +46,9 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
         className={cn(containerClassName, className)}
         {...props}
       >
-        {renderSlotWithWrapper(leadingSlot, size, slotGap)}
+        {renderSlot(leadingSlot, size)}
         {label && <span className={fontSizeClass}>{label}</span>}
-        {renderSlotWithWrapper(trailingSlot, size, slotGap)}
+        {renderSlot(trailingSlot, size)}
       </div>
     );
   }
@@ -86,11 +57,7 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
 Tag.displayName = 'Tag';
 
 /**
- * SplitTag Component
- * 
- * A specialized tag with two distinct sections (left and right).
- * Commonly used for displaying key-value pairs, counts, or status indicators.
- * The left side typically uses a lighter style, while the right side is more prominent.
+ * SplitTag Component - Tag with two distinct sections (left and right)
  */
 export const SplitTag = React.forwardRef<HTMLDivElement, SplitTagProps>(
   ({
@@ -105,23 +72,21 @@ export const SplitTag = React.forwardRef<HTMLDivElement, SplitTagProps>(
     ...props
   }, ref) => {
     const fontSizeClass = themeConfig.euler.tag.sizes[size].fontSize;
-    const slotGap = themeConfig.euler.tag.sizes[size].gap || 'gap-1';
+    const containerClasses = themeConfig.euler.tag.layout.container;
     
     return (
       <div
         ref={ref}
-        className={cn("inline-flex w-fit", className)}
+        className={cn(containerClasses, className)}
         {...props}
       >
-        {/* Left section - typically uses noFill variant */}
         <div className={getSplitTagClassNames(tagStyle, size, color, true)}>
-          {renderSlotWithWrapper(leftSlot, size, slotGap)}
+          {renderSlot(leftSlot, size)}
           {leftLabel && <span className={fontSizeClass}>{leftLabel}</span>}
         </div>
-        {/* Right section - typically uses attentive variant */}
         <div className={getSplitTagClassNames(tagStyle, size, color, false)}>
           {rightLabel && <span className={fontSizeClass}>{rightLabel}</span>}
-          {renderSlotWithWrapper(rightSlot, size, slotGap)}
+          {renderSlot(rightSlot, size)}
         </div>
       </div>
     );
