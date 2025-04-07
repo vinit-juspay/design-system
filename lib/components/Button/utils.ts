@@ -14,14 +14,26 @@ export const getButtonClassNames = (
   const baseClasses = `
     inline-flex items-center justify-center
     transition-all duration-200
-    focus-visible:outline-primary-200 focus-visible:outline-2
-    focus:outline-primary-200 focus:outline-2
     disabled:pointer-events-none
+    ${theme.fontWeight}
+    ${theme.fontFamily}
   `;
+
+  let focusClasses = '';
+  if (type === 'secondary') {
+    focusClasses = 'focus-visible:outline-gray-100 focus-visible:outline-2 focus:outline-gray-100 focus:outline-2 focus:bg-white focus:border-gray-150';
+  } else if (type === 'danger') {
+    focusClasses = 'focus-visible:outline-red-100 focus-visible:outline-2 focus:outline-red-100 focus:outline-2';
+  } else if (type === 'success') {
+    focusClasses = 'focus-visible:outline-green-200 focus-visible:outline-2 focus:outline-green-200 focus:outline-2';
+  } else {
+    focusClasses = 'focus-visible:outline-primary-200 focus-visible:outline-2 focus:outline-primary-200 focus:outline-2';
+  }
 
   if (subType === 'link') {
     return cn(
       baseClasses,
+      focusClasses,
       buttonSize.fontSize,
       theme.linkColors[type].text,
       theme.linkColors[type].hover,
@@ -32,6 +44,7 @@ export const getButtonClassNames = (
   if (subType === 'iconOnly') {
     return cn(
       baseClasses,
+      focusClasses,
       buttonSize.height,
       'aspect-square p-0',
       buttonType.backgroundColor,
@@ -46,6 +59,7 @@ export const getButtonClassNames = (
 
   return cn(
     baseClasses,
+    focusClasses,
     buttonSize.height,
     buttonSize.padding,
     buttonSize.fontSize,

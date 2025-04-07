@@ -121,19 +121,6 @@ module.exports = {
       },
 
       /**
-       * Font Families
-       * Usage:
-       * font-heading (for Inter Display - headings)
-       * font-body (for Inter Display - body text)
-       * font-number (for JetBrains Mono - numbers/code)
-       */
-      fontFamily: {
-        heading: ['Inter Display', 'sans-serif'],
-        body: ['Inter Display', 'sans-serif'],
-        number: ['JetBrains Mono', 'monospace'],
-      },
-
-      /**
        * Font Sizes with Line Heights
        * Usage:
        * Display: text-display-{size} (e.g., text-display-xl, text-display-md)
