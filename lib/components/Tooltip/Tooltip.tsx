@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
-import { TooltipProps } from './types';
-import { getTooltipClassNames, getArrowStyles, getSlotClassNames } from './utils';
+import { TooltipProps } from './Tooltip.types';
+import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames, getSlotClassNames } from './Tooltip.utils';
 
 /**
  * Tooltip component built on top of Radix UI tooltip primitive
@@ -15,7 +15,7 @@ import { getTooltipClassNames, getArrowStyles, getSlotClassNames } from './utils
  * </Tooltip>
  * 
  * // With custom slot (e.g. icon)
- * <Tooltip content="Custom tooltip" arrow="right" slot={InfoIcon} slotDirection="left">
+ * <Tooltip content="Custom tooltip" arrow="right" hasSlot slot={InfoIcon} slotDirection="left">
  *   <span>Hover for info</span>
  * </Tooltip>
  */
@@ -28,6 +28,7 @@ const Tooltip = React.forwardRef<
   content,
   size = 'sm',
   arrow = 'default',
+  hasSlot = false,
   slotDirection = 'left',
   slot: Slot,
   providerProps = { delayDuration: 300 },
@@ -36,6 +37,7 @@ const Tooltip = React.forwardRef<
 }, ref) => {
   const tooltipClassNames = getTooltipClassNames(size);
   const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
+  const contentContainerClassNames = getContentContainerClassNames();
 
   return (
     <RadixTooltip.Provider delayDuration={providerProps.delayDuration}>
@@ -52,13 +54,15 @@ const Tooltip = React.forwardRef<
             className={tooltipClassNames}
             {...contentProps}
           >
-            {Slot && slotDirection === 'left' && (
-              <Slot className={getSlotClassNames('left', size)} />
-            )}
-            {content}
-            {Slot && slotDirection === 'right' && (
-              <Slot className={getSlotClassNames('right', size)} />
-            )}
+            <div className={contentContainerClassNames}>
+              {hasSlot && slotDirection === 'left' && Slot && (
+                <Slot className={getSlotClassNames('left')} />
+              )}
+              {content}
+              {hasSlot && slotDirection === 'right' && Slot && (
+                <Slot className={getSlotClassNames('right')} />
+              )}
+            </div>
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
           </RadixTooltip.Content>
         </RadixTooltip.Portal>
