@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
-import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
+import { Tooltip } from "./index";
+import { Button, Tag, SplitTag } from "../lib/main";
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('buttons');
+  const variants = ['noFill', 'attentive', 'subtle'] as const;
+  const styles = ['squarical', 'rounded'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg'] as const;
+  const colors = ['neutral', 'primary', 'success', 'error', 'warning', 'purple'] as const;
+  
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
   
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -47,17 +53,6 @@ const App = () => {
                 <TagIcon className="mr-2 h-5 w-5" />
                 Tags
               </button>
-              <button
-                onClick={() => setActiveComponent('tabs')}
-                className={`${
-                  activeComponent === 'tabs'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Settings className="mr-2 h-5 w-5" />
-                Tabs
-              </button>
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -67,7 +62,7 @@ const App = () => {
           </div>
         </div>
       </div>
-
+      
       {/* Mobile menu */}
       <div className="sm:hidden">
         <div className="pt-2 pb-3 space-y-1">
@@ -77,7 +72,7 @@ const App = () => {
               activeComponent === 'buttons'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Layers className="mr-3 h-5 w-5" />
             Buttons
@@ -88,7 +83,7 @@ const App = () => {
               activeComponent === 'tooltips'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
             Tooltips
@@ -99,27 +94,16 @@ const App = () => {
               activeComponent === 'tags'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <TagIcon className="mr-3 h-5 w-5" />
             Tags
-          </button>
-          <button
-            onClick={() => setActiveComponent('tabs')}
-            className={`${
-              activeComponent === 'tabs'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Settings className="mr-3 h-5 w-5" />
-            Tabs
           </button>
         </div>
       </div>
     </div>
   );
-
+  
   const renderButtons = () => (
     <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
@@ -210,11 +194,11 @@ const App = () => {
       </div>
     </>
   );
-
+  
   const renderTooltips = () => (
     <>
       <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
-
+      
       {/* Basic tooltips */}
       <div className="flex gap-8 items-center justify-center">
         <Tooltip content="Small tooltip" size="sm">
@@ -378,166 +362,71 @@ const App = () => {
       </div>
     </>
   );
-
+  
   const renderTags = () => (
     <>
       <h2 className="text-2xl font-semibold">Tag Examples</h2>
-
-      {/* Basic Tag Examples */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Basic Tags</h3>
-        <div className="flex flex-wrap gap-4">
-          <Tag label="Default" />
-          <Tag variant="attentive" label="Attentive" />
-          <Tag variant="subtle" label="Subtle" />
-          <Tag color="primary" label="Primary" />
-          <Tag color="success" label="Success" />
-          <Tag color="error" label="Error" />
-          <Tag color="warning" label="Warning" />
-          <Tag color="purple" label="Purple" />
+      
+      {/* Comprehensive Tag Examples - with default icons on both sides */}
+      {variants.map(variant => (
+        <div key={variant} className="mt-6">
+          <h3 className="text-xl font-semibold capitalize mb-4">{variant} Tags</h3>
+          
+          {styles.map(style => (
+            <div key={style} className="mb-6">
+              <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
+              
+              {sizes.map(size => (
+                <div key={size} className="mb-4">
+                  <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
+                  
+                  <div className="grid grid-cols-6 gap-4 mb-3">
+                    {colors.map(color => (
+                      <Tag 
+                        key={color}
+                        variant={variant}
+                        tagStyle={style}
+                        size={size}
+                        color={color}
+                        label={color.charAt(0).toUpperCase() + color.slice(1)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Tag Sizes */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Tag Sizes</h3>
-        <div className="flex flex-wrap gap-4 items-center">
-          <Tag size="xs" label="Extra Small" />
-          <Tag size="sm" label="Small" />
-          <Tag size="md" label="Medium" />
-          <Tag size="lg" label="Large" />
-        </div>
-      </div>
-
-      {/* Tag Styles */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Tag Styles</h3>
-        <div className="flex flex-wrap gap-4">
-          <Tag tagStyle="squarical" label="Squarical" />
-          <Tag tagStyle="rounded" label="Rounded" />
-        </div>
-      </div>
-
-      {/* Tags with Icons */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Tags with Icons</h3>
-        <div className="flex flex-wrap gap-4">
-          <Tag label="Leading Icon" leadingSlot={<Info size={16} />} />
-          <Tag label="Trailing Icon" trailingSlot={<Check size={16} />} />
-          <Tag
-            label="Both Icons"
-            leadingSlot={<AlertCircle size={16} />}
-            trailingSlot={<ArrowRight size={16} />}
-          />
-        </div>
-      </div>
-
-      {/* Split Tags */}
+      ))}
+      
+      {/* Split Tags - with default icons on both sides */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Split Tags</h3>
-        <div className="flex flex-wrap gap-4">
-          <SplitTag leftLabel="2" rightLabel="New" />
-          <SplitTag leftLabel="5" rightLabel="Pending" color="warning" />
-          <SplitTag leftLabel="10" rightLabel="Completed" color="success" />
-          <SplitTag leftLabel="3" rightLabel="Failed" color="error" />
-          <SplitTag leftLabel="Key" rightLabel="Value" color="primary" tagStyle="squarical" />
-        </div>
-      </div>
-    </>
-  );
-  
-  const renderTabs = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Tabs Examples</h2>
-      
-      {/* Underline Tabs */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Underline Tabs</h3>
-        <Tabs defaultValue="account" className="w-full">
-          <TabsList variant="underline">
-            <TabsTrigger value="account" leftSlot={<User size={16} />}>Account</TabsTrigger>
-            <TabsTrigger value="password" leftSlot={<Lock size={16} />}>Password</TabsTrigger>
-            <TabsTrigger value="settings">Settings</TabsTrigger>
-          </TabsList>
-          <TabsContent value="account">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Account Settings</h3>
-              <p className="text-gray-600 mt-2">Manage your account preferences here.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="password">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Password Settings</h3>
-              <p className="text-gray-600 mt-2">Change your password and security settings.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="settings">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">General Settings</h3>
-              <p className="text-gray-600 mt-2">Configure your application preferences.</p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-      
-      {/* Boxed Tabs */}
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">Boxed Tabs</h3>
-        <Tabs defaultValue="home" variant="boxed" className="w-full">
-          <TabsList variant="boxed">
-            <TabsTrigger value="home" variant="boxed" leftSlot={<Home size={16} />}>Home</TabsTrigger>
-            <TabsTrigger value="account" variant="boxed" leftSlot={<User size={16} />}>Account</TabsTrigger>
-            <TabsTrigger value="settings" variant="boxed" rightSlot={<Settings size={16} />}>Settings</TabsTrigger>
-          </TabsList>
-          <TabsContent value="home">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Home Dashboard</h3>
-              <p className="text-gray-600 mt-2">Welcome to your dashboard.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="account">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Account Settings</h3>
-              <p className="text-gray-600 mt-2">Manage your account preferences here.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="settings">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">General Settings</h3>
-              <p className="text-gray-600 mt-2">Configure your application preferences.</p>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-      
-      {/* Floating Tabs */}
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-4">Floating Tabs</h3>
-        <Tabs defaultValue="profile" variant="floating" className="w-full">
-          <TabsList variant="floating">
-            <TabsTrigger value="profile" variant="floating" leftSlot={<User size={16} />}>Profile</TabsTrigger>
-            <TabsTrigger value="notifications" variant="floating" leftSlot={<AlertCircle size={16} />}>Notifications</TabsTrigger>
-            <TabsTrigger value="help" variant="floating" leftSlot={<HelpCircle size={16} />}>Help</TabsTrigger>
-          </TabsList>
-          <TabsContent value="profile">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">User Profile</h3>
-              <p className="text-gray-600 mt-2">View and edit your profile information.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="notifications">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Notification Settings</h3>
-              <p className="text-gray-600 mt-2">Manage your notification preferences.</p>
-            </div>
-          </TabsContent>
-          <TabsContent value="help">
-            <div className="p-4 rounded-md border border-gray-200 mt-4">
-              <h3 className="text-lg font-semibold">Help Center</h3>
-              <p className="text-gray-600 mt-2">Find answers to common questions.</p>
-            </div>
-          </TabsContent>
-        </Tabs>
+        
+        {styles.map(style => (
+          <div key={style} className="mb-6">
+            <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
+            
+            {sizes.map(size => (
+              <div key={size} className="mb-4">
+                <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
+                
+                <div className="grid grid-cols-6 gap-4 mb-3">
+                  {colors.map(color => (
+                    <SplitTag 
+                      key={color}
+                      tagStyle={style}
+                      size={size}
+                      color={color}
+                      leftLabel="Left"
+                      rightLabel="Right"
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </>
   );
@@ -550,7 +439,6 @@ const App = () => {
           {activeComponent === 'buttons' && renderButtons()}
           {activeComponent === 'tooltips' && renderTooltips()}
           {activeComponent === 'tags' && renderTags()}
-          {activeComponent === 'tabs' && renderTabs()}
         </div>
       </div>
     </div>

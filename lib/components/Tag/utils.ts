@@ -2,6 +2,37 @@ import { TagVariant, TagStyle, TagSize, TagColor } from './types';
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
+/**
+ * Returns the base classes shared by all tag variants
+ * These classes handle the basic layout and transitions
+ */
+const getBaseClasses = () => "inline-flex w-fit items-center justify-center gap-2 transition-all duration-200";
+
+/**
+ * Returns common theme-based classes based on size
+ * Used by both standard tags and split tags
+ * 
+ * @param size - The size variant of the tag
+ * @returns Array of CSS class strings
+ */
+const getThemeClasses = (size: TagSize) => {
+  const theme = themeConfig.euler.tag;
+  return [
+    getBaseClasses(),
+    theme.sizes[size].height,
+    theme.sizes[size].padding,
+  ];
+};
+
+/**
+ * Generates the complete className string for a standard Tag component
+ * 
+ * @param variant - The visual style variant of the tag
+ * @param tagStyle - The shape style of the tag
+ * @param size - The size variant of the tag
+ * @param color - The color theme of the tag
+ * @returns Combined className string
+ */
 export const getTagClassNames = (
   variant: TagVariant,
   tagStyle: TagStyle,
@@ -10,14 +41,21 @@ export const getTagClassNames = (
 ): string => {
   const theme = themeConfig.euler.tag;
   return cn(
-    theme.layout.base,
-    theme.sizes[size].height,
-    theme.sizes[size].padding,
-    theme.style[tagStyle],
+    ...getThemeClasses(size),
+    theme.style[tagStyle], // Add the global style for standard tags
     theme.variant[variant]?.[color] || ''
   );
 };
 
+/**
+ * Generates the complete className string for one side of a SplitTag component
+ * 
+ * @param tagStyle - The shape style of the tag
+ * @param size - The size variant of the tag
+ * @param color - The color theme of the tag
+ * @param isLeft - Whether this is the left side (true) or right side (false)
+ * @returns Combined className string
+ */
 export const getSplitTagClassNames = (
   tagStyle: TagStyle,
   size: TagSize,
@@ -25,36 +63,26 @@ export const getSplitTagClassNames = (
   isLeft: boolean
 ): string => {
   const theme = themeConfig.euler.tag;
-
+  
   // Left side uses noFill variant, right side uses attentive variant
   const variant = isLeft ? 'noFill' : 'attentive';
-
-  // Get border radius from theme config
-  const borderRadius = theme.splitStyle[tagStyle][isLeft ? 'left' : 'right'];
-
+  
+  // Apply border radius only to the outer corners of each section
+  // For left section: round the left corners only
+  // For right section: round the right corners only
+  const borderRadius = tagStyle === 'rounded' 
+    ? (isLeft 
+        ? 'rounded-l-full rounded-r-none' // Left section: round left corners only
+        : 'rounded-r-full rounded-l-none' // Right section: round right corners only
+      )
+    : (isLeft 
+        ? 'rounded-l rounded-r-none' // Left section: slight round on left corners only
+        : 'rounded-r rounded-l-none' // Right section: slight round on right corners only
+      );
+  
   return cn(
-    theme.layout.base,
-    theme.sizes[size].height,
-    theme.sizes[size].padding,
+    ...getThemeClasses(size),
     borderRadius,
     theme.variant[variant][color]
   );
-};
-
-/**
- * Renders a slot (icon or custom element) with appropriate styling
- */
-export const renderSlot = (slot: React.ReactNode | undefined, size: TagSize) => {
-  if (!slot) return null;
-
-  const tagTheme = themeConfig.euler.tag;
-  const slotSize: string = tagTheme.sizes[size].iconSize;
-  const slotGap: string = tagTheme.sizes[size].gap;
-  const slotClasses: string = tagTheme.layout.slot;
-
-  // Use the variables directly to ensure TypeScript recognizes their usage
-  const className = cn(slotClasses, slotSize, slotGap);
-
-  // Return the props object instead of JSX
-  return { className, children: slot };
-};
+}; 
