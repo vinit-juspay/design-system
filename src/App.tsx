@@ -1,14 +1,111 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Users, FileText, Bell, Send, Square } from "lucide-react";
-import { Button, Tooltip, Menu, Checkbox } from "../lib/main";
 import { useState } from "react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
+import { Tooltip } from "./index";
+import { Button, Tag, SplitTag } from "../lib/main";
 
 const App = () => {
-  const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
-  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-  const [marketingPreference, setMarketingPreference] = useState(false);
+  const variants = ['noFill', 'attentive', 'subtle'] as const;
+  const styles = ['squarical', 'rounded'] as const;
+  const sizes = ['xs', 'sm', 'md', 'lg'] as const;
+  const colors = ['neutral', 'primary', 'success', 'error', 'warning', 'purple'] as const;
   
-  return (
-    <div className="p-4 space-y-8 flex flex-col gap-4 justify-center items-center">
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
+  
+  const renderNavbar = () => (
+    <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <div className="flex-shrink-0 flex items-center">
+              <span className="text-lg font-bold text-gray-900">Design System</span>
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <button
+                onClick={() => setActiveComponent('buttons')}
+                className={`${
+                  activeComponent === 'buttons'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Layers className="mr-2 h-5 w-5" />
+                Buttons
+              </button>
+              <button
+                onClick={() => setActiveComponent('tooltips')}
+                className={`${
+                  activeComponent === 'tooltips'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Info className="mr-2 h-5 w-5" />
+                Tooltips
+              </button>
+              <button
+                onClick={() => setActiveComponent('tags')}
+                className={`${
+                  activeComponent === 'tags'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <TagIcon className="mr-2 h-5 w-5" />
+                Tags
+              </button>
+            </div>
+          </div>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+              v1.0.0
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Mobile menu */}
+      <div className="sm:hidden">
+        <div className="pt-2 pb-3 space-y-1">
+          <button
+            onClick={() => setActiveComponent('buttons')}
+            className={`${
+              activeComponent === 'buttons'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Layers className="mr-3 h-5 w-5" />
+            Buttons
+          </button>
+          <button
+            onClick={() => setActiveComponent('tooltips')}
+            className={`${
+              activeComponent === 'tooltips'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Info className="mr-3 h-5 w-5" />
+            Tooltips
+          </button>
+          <button
+            onClick={() => setActiveComponent('tags')}
+            className={`${
+              activeComponent === 'tags'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } block pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <TagIcon className="mr-3 h-5 w-5" />
+            Tags
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+  
+  const renderButtons = () => (
+    <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
       <div className="flex gap-4">
         <Button buttonType="primary" size="md">Primary Button</Button>
@@ -108,9 +205,12 @@ const App = () => {
           aria-label="Add item"
         />
       </div>
-
-      {/* Tooltip Examples */}
-      <h2 className="text-2xl font-semibold mt-8">Tooltip Examples</h2>
+    </>
+  );
+  
+  const renderTooltips = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
       
       {/* Basic tooltips */}
       <div className="flex gap-8 items-center justify-center">
@@ -288,591 +388,87 @@ const App = () => {
           />
         </Tooltip>
       </div>
+    </>
+  );
+  
+  const renderTags = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Tag Examples</h2>
       
-      <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
-          <Button 
-            buttonType="secondary" 
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+      {/* Comprehensive Tag Examples - with default icons on both sides */}
+      {variants.map(variant => (
+        <div key={variant} className="mt-6">
+          <h3 className="text-xl font-semibold capitalize mb-4">{variant} Tags</h3>
+          
+          {styles.map(style => (
+            <div key={style} className="mb-6">
+              <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
+              
+              {sizes.map(size => (
+                <div key={size} className="mb-4">
+                  <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
+                  
+                  <div className="grid grid-cols-6 gap-4 mb-3">
+                    {colors.map(color => (
+                      <Tag 
+                        key={color}
+                        variant={variant}
+                        tagStyle={style}
+                        size={size}
+                        color={color}
+                        label={color.charAt(0).toUpperCase() + color.slice(1)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ))}
       
-      {/* Adding small tooltip with info icon */}
-      <Tooltip 
-        content="Small tooltip with icon" 
-        size="sm" 
-        rootProps={{ open: true }}
-        slot={Info}
-        slotDirection="left"
-      >
-          <Button 
-            buttonType="secondary" 
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-      </Tooltip>
-
-      <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
-          <Button 
-            buttonType="secondary" 
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+      {/* Split Tags - with default icons on both sides */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Split Tags</h3>
         
-      {/* Adding large tooltip with help icon */}
-      <Tooltip 
-        content="Large tooltip with icon" 
-        size="lg" 
-        rootProps={{ open: true }}
-        slot={HelpCircle}
-        slotDirection="right"
-      >
-          <Button 
-            buttonType="secondary" 
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-      </Tooltip>
-
-      {/* Menu Examples */}
-      <h2 className="text-2xl font-semibold mt-8">Menu Examples</h2>
-      
-      {/* Basic menu - without icons and with icons */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Edit this into a long text for testing purposes', onSelect: () => console.log('Edit') },
-            { content: 'Duplicate', onSelect: () => console.log('Duplicate') },
-            { content: 'Delete', onSelect: () => console.log('Delete'), disabled: true }
-          ]}
-        >
-          <Button buttonType="secondary" size="md">Actions without icons</Button>
-        </Menu>
-
-        <Menu 
-          items={[
-            { content: 'Edit', icon: Pencil, onSelect: () => console.log('Edit') },
-            { content: 'Duplicate', icon: Copy, onSelect: () => console.log('Duplicate') },
-            { content: 'Delete', icon: Trash2, onSelect: () => console.log('Delete'), disabled: true }
-          ]}
-        >
-          <Button buttonType="secondary" size="md">Actions with icons which is a long text for testing purposes</Button>
-
-        </Menu>
+        {styles.map(style => (
+          <div key={style} className="mb-6">
+            <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
+            
+            {sizes.map(size => (
+              <div key={size} className="mb-4">
+                <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
+                
+                <div className="grid grid-cols-6 gap-4 mb-3">
+                  {colors.map(color => (
+                    <SplitTag 
+                      key={color}
+                      tagStyle={style}
+                      size={size}
+                      color={color}
+                      leftLabel="Left"
+                      rightLabel="Right"
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-
-      {/* Custom variations of checkbox placement with icons */}
-      <div className="flex gap-8 items-center justify-center">
-        {/* Variation 1: Checkbox on left, icon on right as emoji shortcut */}
-        <Menu 
-          items={[
-            { content: 'Checkbox Left, Icon Right', isLabel: true },
-            { 
-              content: 'Push Notifications',
-              leftSlot: { 
-                content: <Checkbox checked={selectedNotifications.includes('push_custom')} size="md" />
-              },
-              rightSlots: [
-                { content: <Bell className="h-4 w-4 text-gray-400" /> },
-              ],
-              onSelect: () => {
-                const newValues = selectedNotifications.includes('push_custom') 
-                  ? selectedNotifications.filter(v => v !== 'push_custom')
-                  : [...selectedNotifications, 'push_custom'];
-                setSelectedNotifications(newValues);
-              }
-            },
-            { 
-              content: 'Email Notifications',
-              leftSlot: { 
-                content: <Checkbox checked={selectedNotifications.includes('email_custom')} size="md" />
-              },
-              rightSlots: [
-                { content: <Mail className="h-4 w-4 text-gray-400" /> },
-              ],
-              onSelect: () => {
-                const newValues = selectedNotifications.includes('email_custom') 
-                  ? selectedNotifications.filter(v => v !== 'email_custom')
-                  : [...selectedNotifications, 'email_custom'];
-                setSelectedNotifications(newValues);
-              }
-            },
-            { 
-              content: 'SMS Notifications',
-              leftSlot: { 
-                content: <Checkbox checked={selectedNotifications.includes('sms_custom')} size="md" />
-              },
-              rightSlots: [
-                { content: <Send className="h-4 w-4 text-gray-400" /> },
-              ],
-              onSelect: () => {
-                const newValues = selectedNotifications.includes('sms_custom') 
-                  ? selectedNotifications.filter(v => v !== 'sms_custom')
-                  : [...selectedNotifications, 'sms_custom'];
-                setSelectedNotifications(newValues);
-              }
-            },
-          ]}
-          multiSelect={{
-            enabled: true,
-            selectedValues: selectedNotifications,
-            onSelectionChange: (values) => setSelectedNotifications(values)
-          }}
-          checkboxPosition="left"
-        >
-          <Button buttonType="secondary" size="md">
-            Checkbox Left, Icon Right
-          </Button>
-        </Menu>
-
-        {/* Variation 2: Checkbox on right, icon on left (standard) */}
-        <Menu 
-          items={[
-            { content: 'Checkbox Right, Icon Left', isLabel: true },
-            { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push_right_icon_left', icon: Bell },
-            { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email_right_icon_left', icon: Mail },
-            { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms_right_icon_left', icon: Send },
-          ]}
-          multiSelect={{
-            enabled: true,
-            selectedValues: selectedNotifications,
-            onSelectionChange: (values) => setSelectedNotifications(values)
-          }}
-          checkboxPosition="right"
-        >
-          <Button buttonType="secondary" size="md">
-            Checkbox Right, Icon Left ({selectedNotifications.length})
-          </Button>
-        </Menu>
-      </div>
-
-      {/* Menu with submenu */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
-            { 
-              content: 'More Options', 
-              icon: MoreHorizontal, 
-              hasSubmenu: true,
-              submenuItems: [
-                { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
-                { content: 'Help', icon: HelpCircle, onSelect: () => console.log('Help') }
-              ]
-            },
-            { isSeparator: true },
-            { content: 'Log out', icon: LogOut, onSelect: () => console.log('Log out') }
-          ]}
-        >
-          <Button buttonType="secondary" size="md">Menu with Submenu</Button>
-        </Menu>
-      </div>
-
-      {/* Menu with sections */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Account', isLabel: true },
-            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
-            { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
-            { isSeparator: true },
-            { content: 'Actions', isLabel: true },
-            { content: 'New message', icon: Mail, onSelect: () => console.log('New message') },
-            { content: 'Invite user', icon: UserPlus, onSelect: () => console.log('Invite user') }
-          ]}
-        >
-          <Button buttonType="secondary" size="md">Sectioned Menu</Button>
-        </Menu>
-      </div>
-
-
-      {/* Menu with Agent Widgets header and shortcuts */}
-      <div className="flex gap-8 items-center justify-center mt-4">
-        <Menu 
-          items={[
-            { 
-              content: 'Agent Widgets',
-              isLabel: true
-            },
-            { 
-              content: 'Union', 
-              icon: Square,
-              subtext: 'Combine two elements together',
-              shortcut: '⌘ U',
-              onSelect: () => console.log('Union') 
-            },
-            { 
-              content: 'Copy JSON', 
-              icon: Copy,
-              subtext: 'Generate code & use in your editor',
-              shortcut: '⌘ C',
-              onSelect: () => console.log('Copy JSON') 
-            },
-            { isSeparator: true },
-            { 
-              content: 'Delete File', 
-              icon: Trash2, 
-              color: 'danger',
-              shortcut: '⌘ Del',
-              onSelect: () => console.log('Delete File') 
-            }
-          ]}
-        >
-          <Button buttonType="secondary" size="md">
-            Agent Widgets Menu with a long text
-          </Button>
-        </Menu>
-      </div>
-
-      {/* NEW: Menu with new Slot System */}
-      <div className="flex gap-8 items-center justify-center mt-2">
-        {/* Standard menu item with slots - showcasing various combinations */}
-        <Menu 
-          items={[
-            { content: 'Standard Menu Item Slots', isLabel: true },
-            { 
-              content: 'Left & Right Slots', 
-              leftSlot: { content: <User className="h-4 w-4" /> },
-              rightSlots: [
-                { content: <span className="text-xs text-gray-400">⌘E</span> }
-              ],
-              onSelect: () => console.log('Left & Right')
-            },
-            { 
-              content: 'Left Slot Only', 
-              leftSlot: { content: <Copy className="h-4 w-4" /> },
-              onSelect: () => console.log('Left Only')
-            },
-            { 
-              content: 'Multiple Right Slots',
-              rightSlots: [
-                { content: <Settings className="h-4 w-4 text-gray-400" /> },
-                { content: <Bell className="h-4 w-4 text-gray-400" /> },
-                { content: <span className="text-xs text-gray-400">⌘B</span> }
-              ],
-              onSelect: () => console.log('Right Only')
-            },
-            {
-              content: 'Warning with Badge',
-              leftSlot: { content: <AlertCircle className="h-4 w-4" /> },
-              rightSlots: [
-                { content: <span className="rounded-full px-1.5 py-0.5 bg-amber-100 text-[10px] text-amber-600">Warning</span> }
-              ],
-              color: 'warning',
-              onSelect: () => console.log('Warning')
-            },
-            {
-              content: 'Delete Item',
-              leftSlot: { content: <Trash2 className="h-4 w-4 text-red-500" /> },
-              rightSlots: [
-                { content: <span className="rounded-full px-1.5 py-0.5 bg-red-100 text-[10px] text-red-600">Danger</span> }
-              ],
-              color: 'danger',
-              onSelect: () => console.log('Delete')
-            }
-          ]}
-        >
-          <Button buttonType="secondary" size="md" className="w-60">Standard Menu Item Slots</Button>
-        </Menu>
-
-        {/* Checkbox menu item with slots */}
-        <Menu 
-          items={[
-            { content: 'Checkbox Menu Item Slots', isLabel: true },
-            { 
-              content: 'Left Slot + 2 Right Slots', 
-              isCheckbox: true,
-              isCheckboxListItem: true,
-              value: 'push',
-              leftSlot: { content: <Bell className="h-4 w-4" /> },
-              rightSlots: [
-                { content: <Settings className="h-4 w-4 text-gray-400" /> },
-                { content: <span className="rounded-full px-1.5 py-0.5 bg-gray-100 text-[10px] text-gray-500">New</span> }
-              ]
-            },
-            { 
-              content: 'Left Slot Only', 
-              isCheckbox: true,
-              isCheckboxListItem: true,
-              value: 'email',
-              leftSlot: { content: <Mail className="h-4 w-4" /> }
-            },
-            { 
-              content: 'Right Slots Only', 
-              isCheckbox: true, 
-              isCheckboxListItem: true,
-              value: 'sms',
-              rightSlots: [
-                { content: <span className="rounded-full px-1.5 py-0.5 bg-red-100 text-[10px] text-red-500">Off</span> },
-                { content: <AlertCircle className="h-4 w-4 text-red-400" /> }
-              ]
-            },
-            {
-              content: 'No Additional Slots',
-              isCheckbox: true,
-              isCheckboxListItem: true,
-              value: 'none'
-            }
-          ]}
-          multiSelect={{
-            enabled: true,
-            selectedValues: selectedNotifications,
-            onSelectionChange: (values) => setSelectedNotifications(values)
-          }}
-          checkboxPosition="right"
-        >
-          <Button buttonType="secondary" size="md" className="w-60">
-            Checkbox Menu Item Slots
-          </Button>
-        </Menu>
-      </div>
-
-      {/* Menu with icon only trigger */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Copy', icon: Copy, onSelect: () => console.log('Copy') },
-            { content: 'Paste', icon: Clipboard, onSelect: () => console.log('Paste') },
-            { isSeparator: true },
-            { content: 'Edit', icon: Pencil, onSelect: () => console.log('Edit') }
-          ]}
-        >
-          <Button 
-            buttonType="secondary" 
-            size="md"
-            subType="iconOnly"
-            leadingIcon={MoreHorizontal}
-            aria-label="More options"
-          />
-        </Menu>
-      </div>
-
-      {/* Menu with search functionality */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Account', isLabel: true },
-            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
-            { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
-            { content: 'Billing', icon: CreditCard, onSelect: () => console.log('Billing') },
-            { isSeparator: true },
-            { content: 'Team', isLabel: true },
-            { content: 'Invite Members', icon: UserPlus, onSelect: () => console.log('Invite Members') },
-            { content: 'Team Settings', icon: Users, onSelect: () => console.log('Team Settings') },
-            { isSeparator: true },
-            { content: 'Help', isLabel: true },
-            { content: 'Documentation', icon: FileText, onSelect: () => console.log('Documentation') },
-            { content: 'Help Center', icon: HelpCircle, onSelect: () => console.log('Help Center') },
-            { isSeparator: true },
-            { content: 'Sign out', icon: LogOut, onSelect: () => console.log('Sign out') }
-          ]}
-          search={{
-            enabled: true,
-            placeholder: "Search menu..."
-          }}
-        >
-          <Button buttonType="secondary" size="md">Searchable Menu with a long text for testing purposes</Button>
-        </Menu>
-      </div>
-
-      {/* Checkbox Examples */}
-      <h2 className="text-2xl font-semibold mt-8">Checkbox Examples</h2>
-      
-      {/* Basic checkbox */}
-      <div className="flex flex-col gap-4 p-4">
-        <div className="flex gap-8">
-          <Checkbox
-            checked={isTermsAccepted}
-            onCheckedChange={setIsTermsAccepted}
-          >
-            I accept the terms and conditions
-          </Checkbox>
-
-          <Checkbox
-            checked={marketingPreference}
-            onCheckedChange={setMarketingPreference}
-          >
-            Receive marketing emails
-          </Checkbox>
-        </div>
-        
-        {/* Indeterminate state */}
-        <div className="flex gap-8 mt-4">
-          <Checkbox checked="indeterminate">
-            Indeterminate state
-          </Checkbox>
-        </div>
-        
-        {/* Different sizes */}
-        <div className="flex gap-8 mt-4">
-          <Checkbox size="sm">Small checkbox</Checkbox>
-          <Checkbox size="md">Medium checkbox</Checkbox>
-        </div>
-        
-        {/* Different positions */}
-        <div className="flex gap-8 mt-4">
-          <Checkbox position="left">Checkbox on left (default)</Checkbox>
-          <Checkbox position="right">Checkbox on right</Checkbox>
-        </div>
-        
-        {/* Disabled state */}
-        <div className="flex gap-8 mt-4">
-          <Checkbox disabled>Disabled unchecked</Checkbox>
-          <Checkbox disabled checked={true}>Disabled checked</Checkbox>
-          <Checkbox disabled checked="indeterminate">Disabled indeterminate</Checkbox>
-        </div>
-        
-        {/* Checkbox without label */}
-        <div className="flex gap-8 mt-4">
-          <Checkbox checked={isTermsAccepted} onCheckedChange={setIsTermsAccepted} />
-          <span className="text-sm text-gray-600">
-            Standalone checkbox is {isTermsAccepted ? 'checked' : 'unchecked'}
-          </span>
+    </>
+  );
+  
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {renderNavbar()}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white shadow rounded-lg p-6">
+          {activeComponent === 'buttons' && renderButtons()}
+          {activeComponent === 'tooltips' && renderTooltips()}
+          {activeComponent === 'tags' && renderTags()}
         </div>
       </div>
-
-      {/* Add examples of position control for Menu */}
-      <div className="flex flex-col gap-4 mt-8">
-        <h3 className="text-xl font-semibold">Checkbox Position in Menu</h3>
-        <div className="flex gap-8 items-center justify-center">
-          {/* Menu with checkbox list positioned on the left */}
-          <Menu 
-            items={[
-              { content: 'Left Position (Default)', isLabel: true },
-              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
-              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
-            ]}
-            multiSelect={{
-              enabled: true,
-              selectedValues: selectedNotifications,
-              onSelectionChange: (values) => setSelectedNotifications(values)
-            }}
-            checkboxPosition="left"
-          >
-            <Button buttonType="secondary" size="md">
-              Checkboxes Left
-            </Button>
-          </Menu>
-
-          {/* Menu with checkbox list positioned on the right */}
-          <Menu 
-            items={[
-              { content: 'Right Position', isLabel: true },
-              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
-              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
-            ]}
-            multiSelect={{
-              enabled: true,
-              selectedValues: selectedNotifications,
-              onSelectionChange: (values) => setSelectedNotifications(values)
-            }}
-            checkboxPosition="right"
-          >
-            <Button buttonType="secondary" size="md">
-              Checkboxes Right
-            </Button>
-          </Menu>
-        </div>
-
-        {/* Custom variations of checkbox placement with icons */}
-        <h3 className="text-xl font-semibold mt-4">Custom Icon Placement in Checkbox Menu</h3>
-        <div className="flex gap-8 items-center justify-center">
-          {/* Variation 1: Checkbox on left, icon on right as emoji shortcut */}
-          <Menu 
-            items={[
-              { content: 'Checkbox Left, Icon Right', isLabel: true },
-              { 
-                content: 'Push Notifications',
-                leftSlot: { 
-                  content: <Checkbox checked={selectedNotifications.includes('push_custom')} size="md" />
-                },
-                rightSlots: [
-                  { content: <Bell className="h-4 w-4 text-gray-400" /> },
-                  { content: <span className="text-xs text-gray-400">Daily</span> }
-                ],
-                onSelect: () => {
-                  const newValues = selectedNotifications.includes('push_custom') 
-                    ? selectedNotifications.filter(v => v !== 'push_custom')
-                    : [...selectedNotifications, 'push_custom'];
-                  setSelectedNotifications(newValues);
-                }
-              },
-              { 
-                content: 'Email Notifications',
-                leftSlot: { 
-                  content: <Checkbox checked={selectedNotifications.includes('email_custom')} size="md" />
-                },
-                rightSlots: [
-                  { content: <Mail className="h-4 w-4 text-gray-400" /> },
-                  { content: <span className="text-xs text-gray-400">Weekly</span> }
-                ],
-                onSelect: () => {
-                  const newValues = selectedNotifications.includes('email_custom') 
-                    ? selectedNotifications.filter(v => v !== 'email_custom')
-                    : [...selectedNotifications, 'email_custom'];
-                  setSelectedNotifications(newValues);
-                }
-              },
-              { 
-                content: 'SMS Notifications',
-                leftSlot: { 
-                  content: <Checkbox checked={selectedNotifications.includes('sms_custom')} size="md" />
-                },
-                rightSlots: [
-                  { content: <span className="text-lg">📨</span> },
-                  { content: <span className="text-xs text-gray-400">Monthly</span> }
-                ],
-                onSelect: () => {
-                  const newValues = selectedNotifications.includes('sms_custom') 
-                    ? selectedNotifications.filter(v => v !== 'sms_custom')
-                    : [...selectedNotifications, 'sms_custom'];
-                  setSelectedNotifications(newValues);
-                }
-              },
-            ]}
-          >
-            <Button buttonType="secondary" size="md">
-              Checkbox Left, Icon Right
-            </Button>
-          </Menu>
-
-          {/* Variation 2: Checkbox on right, icon on left (standard) */}
-          <Menu 
-            items={[
-              { content: 'Checkbox Right, Icon Left', isLabel: true },
-              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push_right_icon_left', icon: Bell },
-              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email_right_icon_left', icon: Mail },
-              { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms_right_icon_left', icon: Send },
-            ]}
-            multiSelect={{
-              enabled: true,
-              selectedValues: selectedNotifications,
-              onSelectionChange: (values) => setSelectedNotifications(values)
-            }}
-            checkboxPosition="right"
-          >
-            <Button buttonType="secondary" size="md">
-              Checkbox Right, Icon Left ({selectedNotifications.length})
-            </Button>
-          </Menu>
-        </div>
-      </div>
-
-      {/* Add a placeholder for the new Select component we'll build */}
-      <h2 className="text-2xl font-semibold mt-8">Select Component (Coming Soon)</h2>
-      <div className="bg-gray-100 p-4 rounded-md w-80 text-center">
-        <p>Select component will be rebuilt from scratch</p>
-      </div>
-
     </div>
   );
 };
