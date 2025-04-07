@@ -36,8 +36,8 @@ const Tooltip = React.forwardRef<
   contentProps,
 }, ref) => {
   const tooltipClassNames = getTooltipClassNames(size);
-  const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
   const contentContainerClassNames = getContentContainerClassNames(size);
+  const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
 
   console.log({contentContainerClassNames, tooltipClassNames});
   
