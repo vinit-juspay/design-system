@@ -25,6 +25,21 @@ export const getTooltipClassNames = (size: TooltipSize): string => {
   );
 };
 
+
+/**
+ * Generates the appropriate class names for the content container of the tooltip
+ * 
+ * @returns {string} Combined Tailwind CSS class names for the tooltip content
+ */
+
+export const getContentContainerClassNames = (size: TooltipSize): string => {
+  const theme = themeConfig.euler.tooltip;
+  const tooltipSize = theme.sizes[size];
+
+  return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
+  
+};
+
 /**
  * Generates the appropriate class names for the slot based on its direction and tooltip size
  * 
