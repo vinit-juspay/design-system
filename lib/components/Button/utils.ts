@@ -13,14 +13,18 @@ export const getButtonClassNames = (
 
   const baseClasses = `
     inline-flex items-center justify-center
-    gap-2 transition-all duration-200
-    focus-visible:outline-none focus-visible:ring-2
-    disabled:opacity-50 disabled:pointer-events-none
+    transition-all duration-200
+    disabled:pointer-events-none
+    ${theme.fontWeight}
+    ${theme.fontFamily}
   `;
+
+  const focusClasses = buttonType.focusClasses || '';
 
   if (subType === 'link') {
     return cn(
       baseClasses,
+      focusClasses,
       buttonSize.fontSize,
       theme.linkColors[type].text,
       theme.linkColors[type].hover,
@@ -31,25 +35,51 @@ export const getButtonClassNames = (
   if (subType === 'iconOnly') {
     return cn(
       baseClasses,
+      focusClasses,
       buttonSize.height,
       'aspect-square p-0',
       buttonType.backgroundColor,
       buttonType.textColor,
       buttonType.hoverBackgroundColor,
+      buttonType.activeBackgroundColor,
       buttonType.borderColor,
+      buttonType.disabledBackgroundColor,
       theme.borderRadius
     );
   }
 
   return cn(
     baseClasses,
+    focusClasses,
     buttonSize.height,
     buttonSize.padding,
     buttonSize.fontSize,
+    buttonSize.gap,
     buttonType.backgroundColor,
     buttonType.textColor,
     buttonType.hoverBackgroundColor,
+    buttonType.activeBackgroundColor,
     buttonType.borderColor,
+    buttonType.disabledBackgroundColor,
     theme.borderRadius
+  );
+};
+
+export const getIconClassNames = (size: ButtonSize, isLoading: boolean): string => {
+  const theme = themeConfig.euler.button;
+  const buttonSize = theme.sizes[size];
+  
+  return cn(
+    buttonSize.iconSize,
+    isLoading && 'animate-spin'
+  );
+};
+
+export const getTextClassNames = (size: ButtonSize): string => {
+  const theme = themeConfig.euler.button;
+  const buttonSize = theme.sizes[size];
+  
+  return cn(
+    buttonSize.fontSize
   );
 }; 
