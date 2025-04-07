@@ -5,26 +5,12 @@ import { themeConfig } from '../../../src/themeConfig';
 
 /**
  * Generates the appropriate class names for a tooltip based on its size
+ * These classes will be applied to the main tooltip container
  * 
  * @param {TooltipSize} size - The size of the tooltip (sm or lg)
  * @returns {string} Combined Tailwind CSS class names for the tooltip
  */
 export const getTooltipClassNames = (size: TooltipSize): string => {
-  const theme = themeConfig.euler.tooltip;
-  const tooltipSize = theme.sizes[size];
-
-  return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
-  
-};
-
-
-/**
- * Generates the appropriate class names for the content container of the tooltip
- * 
- * @returns {string} Combined Tailwind CSS class names for the tooltip content
- */
-
-export const getContentContainerClassNames = (size: TooltipSize): string => {
   const theme = themeConfig.euler.tooltip;
   const tooltipSize = theme.sizes[size];
 
