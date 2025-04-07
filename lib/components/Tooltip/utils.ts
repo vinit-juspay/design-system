@@ -13,13 +13,8 @@ export const getTooltipClassNames = (size: TooltipSize): string => {
   const theme = themeConfig.euler.tooltip;
   const tooltipSize = theme.sizes[size];
 
-  return cn(
-    theme.baseStyles,
-    tooltipSize.padding,
-    tooltipSize.fontSize,
-    tooltipSize.borderRadius,
-    tooltipSize.maxWidth
-  );
+  return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
+  
 };
 
 /**
@@ -118,6 +113,6 @@ export const getContentContainerClassNames = (size: TooltipSize): string => {
     const theme = themeConfig.euler.tooltip;
     const tooltipSize = theme.sizes[size];
   
-    return  `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
+    return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
     
   };

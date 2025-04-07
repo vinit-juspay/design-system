@@ -256,14 +256,14 @@ export const themeConfig: ThemeRecord = {
       sizes: {
         sm: {
           padding: "px-3 py-1.5", // 12px left and right padding, 6px top and bottom padding
-          fontSize: "text-xs", // 10px font size
-          borderRadius: "rounded-lg", // 8px border radius
+          fontSize: "text-body-xs", // 10px font size
+          borderRadius: "rounded-md", // 8px border radius
           maxWidth: "max-w-xs", // 160px max width
         },
         lg: {
           padding: "px-4 py-2", // 16px left and right padding, 8px top and bottom padding
-          fontSize: "text-sm", // 12px font size
-          borderRadius: "rounded-2xl", // 12px border radius
+          fontSize: "text-body-sm", // 12px font size
+          borderRadius: "rounded-lg", // 12px border radius
           maxWidth: "max-w-sm", // 240px max width
         },
       },
