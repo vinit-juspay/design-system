@@ -54,11 +54,11 @@ const Tooltip = React.forwardRef<
             {...contentProps}
           >
             {hasSlot && slotDirection === 'left' && Slot && (
-              <Slot className={getSlotClassNames('left')} />
+              <Slot className={getSlotClassNames('left', size)} />
             )}
             {content}
             {hasSlot && slotDirection === 'right' && Slot && (
-              <Slot className={getSlotClassNames('right')} />
+              <Slot className={getSlotClassNames('right', size)} />
             )}
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
           </RadixTooltip.Content>

@@ -295,6 +295,25 @@ const App = () => {
             aria-label="Add item"
           />
         </Tooltip>
+      
+      {/* Adding small tooltip with info icon */}
+      <Tooltip 
+        content="Small tooltip with icon" 
+        size="sm" 
+        rootProps={{ open: true }}
+        hasSlot
+        slot={Info}
+        slotDirection="left"
+      >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+      </Tooltip>
+
       <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
           <Button 
             buttonType="secondary" 
@@ -304,6 +323,24 @@ const App = () => {
             aria-label="Add item"
           />
         </Tooltip>
+        
+      {/* Adding large tooltip with help icon */}
+      <Tooltip 
+        content="Large tooltip with icon" 
+        size="lg" 
+        rootProps={{ open: true }}
+        hasSlot
+        slot={HelpCircle}
+        slotDirection="right"
+      >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+      </Tooltip>
     </div>
   );
 };

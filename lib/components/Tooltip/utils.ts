@@ -14,20 +14,31 @@ export const getTooltipClassNames = (size: TooltipSize): string => {
   const theme = themeConfig.euler.tooltip;
   const tooltipSize = theme.sizes[size];
 
-  return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
-  
+  // return `flex ${theme.baseStyles} ${tooltipSize.padding} ${tooltipSize.fontSize} ${tooltipSize.borderRadius} ${tooltipSize.maxWidth}`
+
+  return cn(
+    theme.baseStyles,
+    tooltipSize.padding,
+    tooltipSize.fontSize,
+    tooltipSize.borderRadius,
+    tooltipSize.maxWidth
+  );
 };
 
 /**
- * Generates the appropriate class names for the slot based on its direction
+ * Generates the appropriate class names for the slot based on its direction and tooltip size
  * 
  * @param {string} direction - The direction of the slot ('left' or 'right')
+ * @param {TooltipSize} size - The size of the tooltip ('sm' or 'lg')
  * @returns {string} Combined Tailwind CSS class names for the slot
  */
-export const getSlotClassNames = (direction: 'left' | 'right'): string => {
+export const getSlotClassNames = (direction: 'left' | 'right', size: TooltipSize = 'sm'): string => {
+  const theme = themeConfig.euler.tooltip;
+  const tooltipSize = theme.sizes[size];
+  
   return cn(
-    'h-4 w-4',
-    direction === 'left' ? 'mr-2' : 'ml-2'
+    tooltipSize.slotSize,
+    direction === 'left' ? 'mr-1.5' : 'ml-1.5'
   );
 };
 
