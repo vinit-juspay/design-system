@@ -255,13 +255,13 @@ export const themeConfig: ThemeRecord = {
       baseStyles: "z-50 overflow-hidden bg-gray-900 text-gray-0 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       sizes: {
         sm: {
-          padding: "px-3 py-1.5", // 12px left and right padding, 6px top and bottom padding
+          padding: "px-1.5 py-0.5", // 6px left and right padding, 4px top and bottom padding
           fontSize: "text-body-xs", // 10px font size
           borderRadius: "rounded-md", // 8px border radius
           maxWidth: "max-w-xs", // 160px max width
         },
         lg: {
-          padding: "px-4 py-2", // 16px left and right padding, 8px top and bottom padding
+          padding: "px-2 py-1.5", // 8px left and right padding, 6px top and bottom padding
           fontSize: "text-body-sm", // 12px font size
           borderRadius: "rounded-lg", // 12px border radius
           maxWidth: "max-w-sm", // 240px max width

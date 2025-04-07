@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { TooltipProps } from './types';
-import { getTooltipClassNames, getArrowStyles, getContentContainerClassNames, getSlotClassNames } from './utils';
+import { getTooltipClassNames, getArrowStyles, getSlotClassNames } from './utils';
 
 /**
  * Tooltip component built on top of Radix UI tooltip primitive
@@ -36,11 +36,7 @@ const Tooltip = React.forwardRef<
   contentProps,
 }, ref) => {
   const tooltipClassNames = getTooltipClassNames(size);
-  const contentContainerClassNames = getContentContainerClassNames(size);
   const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
-
-  console.log({contentContainerClassNames, tooltipClassNames});
-  
 
   return (
     <RadixTooltip.Provider delayDuration={providerProps.delayDuration}>
@@ -57,15 +53,13 @@ const Tooltip = React.forwardRef<
             className={tooltipClassNames}
             {...contentProps}
           >
-            <div className={contentContainerClassNames}>
-              {hasSlot && slotDirection === 'left' && Slot && (
-                <Slot className={getSlotClassNames('left')} />
-              )}
-              {content}
-              {hasSlot && slotDirection === 'right' && Slot && (
-                <Slot className={getSlotClassNames('right')} />
-              )}
-            </div>
+            {hasSlot && slotDirection === 'left' && Slot && (
+              <Slot className={getSlotClassNames('left')} />
+            )}
+            {content}
+            {hasSlot && slotDirection === 'right' && Slot && (
+              <Slot className={getSlotClassNames('right')} />
+            )}
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
           </RadixTooltip.Content>
         </RadixTooltip.Portal>
