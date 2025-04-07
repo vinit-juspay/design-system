@@ -1,5 +1,6 @@
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
 import { Button, Tooltip } from "../lib/main";
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 const App = () => {
   return (
@@ -286,6 +287,76 @@ const App = () => {
           />
         </Tooltip>
       </div>
+
+      {/* Always visible tooltips for inspection */}
+      {/* <div className="gap-8 items-center mt-8">
+        <div className="flex gap-4 items-center">
+          <TooltipPrimitive.Provider delayDuration={0}>
+            <TooltipPrimitive.Root open={true}>
+              <TooltipPrimitive.Trigger asChild>
+                <Button 
+                  buttonType="secondary" 
+                  size="md"
+                  subType="iconOnly"
+                  leadingIcon={Plus}
+                  aria-label="Add item"
+                />
+              </TooltipPrimitive.Trigger>
+              <TooltipPrimitive.Content
+                className="bg-slate-900 text-slate-50 px-4 py-2 rounded-md"
+                sideOffset={5}
+              >
+                  Large tooltip
+                <TooltipPrimitive.Arrow className="fill-slate-900" />
+              </TooltipPrimitive.Content>
+            </TooltipPrimitive.Root>
+          </TooltipPrimitive.Provider>
+        </div>
+
+        <div className="flex gap-4 items-center">
+          <TooltipPrimitive.Provider delayDuration={0}>
+            <TooltipPrimitive.Root open={true}>
+              <TooltipPrimitive.Trigger asChild>
+                <Button 
+                  buttonType="secondary" 
+                  size="md"
+                  subType="iconOnly"
+                  leadingIcon={Plus}
+                  aria-label="Add item"
+                />
+              </TooltipPrimitive.Trigger>
+              <TooltipPrimitive.Content
+                className="bg-slate-900 text-slate-50 px-3 py-1.5 rounded-md"
+                sideOffset={5}
+              >
+                <div className="flex items-center gap-2">
+                  <Info className="h-3 w-3" />
+                  <span>Small tooltip</span>
+                </div>
+                <TooltipPrimitive.Arrow className="fill-slate-900" />
+              </TooltipPrimitive.Content>
+            </TooltipPrimitive.Root>
+          </TooltipPrimitive.Provider>
+        </div>
+      </div> */}
+      <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
+      <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+        </Tooltip>
     </div>
   );
 };
