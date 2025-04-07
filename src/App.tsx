@@ -1,6 +1,5 @@
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
-import { Tooltip } from "./index";
-import { Button } from "../lib/main";
+import { Button, Tooltip } from "../lib/main";
 
 const App = () => {
   return (
