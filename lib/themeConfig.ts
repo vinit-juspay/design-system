@@ -148,6 +148,21 @@ export const themeConfig = {
       style: {
         squarical: 'rounded',
         rounded: 'rounded-full'
+      },
+      splitStyle: {
+        rounded: {
+          left: 'rounded-l-full rounded-r-none',
+          right: 'rounded-r-full rounded-l-none'
+        },
+        squarical: {
+          left: 'rounded-l rounded-r-none',
+          right: 'rounded-r rounded-l-none'
+        }
+      },
+      layout: {
+        slot: 'flex items-center justify-center',
+        container: 'inline-flex w-fit',
+        base: 'inline-flex w-fit items-center justify-center gap-2 transition-all duration-200'
       }
     }
   }
