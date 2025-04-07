@@ -19,16 +19,7 @@ export const getButtonClassNames = (
     ${theme.fontFamily}
   `;
 
-  let focusClasses = '';
-  if (type === 'secondary') {
-    focusClasses = 'focus-visible:outline-gray-100 focus-visible:outline-2 focus:outline-gray-100 focus:outline-2 focus:bg-white focus:border-gray-150';
-  } else if (type === 'danger') {
-    focusClasses = 'focus-visible:outline-red-100 focus-visible:outline-2 focus:outline-red-100 focus:outline-2';
-  } else if (type === 'success') {
-    focusClasses = 'focus-visible:outline-green-200 focus-visible:outline-2 focus:outline-green-200 focus:outline-2';
-  } else {
-    focusClasses = 'focus-visible:outline-primary-200 focus-visible:outline-2 focus:outline-primary-200 focus:outline-2';
-  }
+  const focusClasses = buttonType.focusClasses || '';
 
   if (subType === 'link') {
     return cn(
