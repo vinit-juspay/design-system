@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { HelpCircle, Search } from 'lucide-react';
+import { Tooltip } from "../../main";
+
 import { TextInputProps } from './types';
 import {
   getInputBaseClasses,
@@ -13,7 +15,7 @@ import { themeConfig } from '../../themeConfig';
 
 const textInputTheme = themeConfig.euler.textInput;
 
-const TextInput: React.FC<TextInputProps> = ({
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   hintText = "This is a hint text to help user.",
   label = "Your Label",
   leftSlot = <Search className="text-gray-400 w-4 h-4" />,
@@ -28,7 +30,8 @@ const TextInput: React.FC<TextInputProps> = ({
   size = 'md',
   state = 'default',
   sublabel = "(optional)",
-}) => {
+  ...props
+}, ref) => {
   return (
     <div className="flex flex-col space-y-2">
       {/* Label */}
@@ -47,7 +50,11 @@ const TextInput: React.FC<TextInputProps> = ({
               <span className="text-red-500">*</span>
             )}
           </div>
-          <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+          <Tooltip size='lg' content="Additional information about this field">
+            <button type="button" aria-label="More information" className="focus:outline-none">
+              <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+            </button>
+          </Tooltip>
         </div>
       )}
 
@@ -62,10 +69,12 @@ const TextInput: React.FC<TextInputProps> = ({
 
         {/* Input */}
         <input
+          ref={ref}
           type="text"
           className={getInputClasses()}
           placeholder={placeholder}
           disabled={state === 'disabled'}
+          {...props}
         />
 
         {/* Right Slot */}
@@ -84,6 +93,8 @@ const TextInput: React.FC<TextInputProps> = ({
       )}
     </div>
   );
-};
+});
+
+TextInput.displayName = 'TextInput';
 
 export default TextInput; 
