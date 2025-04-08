@@ -1,5 +1,5 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
-import { Button, Tooltip } from "../lib/main";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard } from "lucide-react";
+import { Button, Tooltip, Menu } from "../lib/main";
 
 const App = () => {
   return (
@@ -337,6 +337,98 @@ const App = () => {
             aria-label="Add item"
           />
       </Tooltip>
+
+      {/* Menu Examples */}
+      <h2 className="text-2xl font-semibold mt-8">Menu Examples</h2>
+      
+      {/* Basic menu */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Edit', icon: Pencil, onSelect: () => console.log('Edit') },
+            { content: 'Duplicate', icon: Copy, onSelect: () => console.log('Duplicate') },
+            { content: 'Delete', icon: Trash2, onSelect: () => console.log('Delete'), disabled: true }
+          ]}
+        >
+          <Button buttonType="secondary" size="md">Actions</Button>
+        </Menu>
+      </div>
+
+      {/* Menu with submenu */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
+            { 
+              content: 'More Options', 
+              icon: MoreHorizontal, 
+              hasSubmenu: true,
+              submenuItems: [
+                { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
+                { content: 'Help', icon: HelpCircle, onSelect: () => console.log('Help') }
+              ]
+            },
+            { isSeparator: true },
+            { content: 'Log out', icon: LogOut, onSelect: () => console.log('Log out') }
+          ]}
+        >
+          <Button buttonType="secondary" size="md">Menu with Submenu</Button>
+        </Menu>
+      </div>
+
+      {/* Menu with sections */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Account', isLabel: true },
+            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
+            { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
+            { isSeparator: true },
+            { content: 'Actions', isLabel: true },
+            { content: 'New message', icon: Mail, onSelect: () => console.log('New message') },
+            { content: 'Invite user', icon: UserPlus, onSelect: () => console.log('Invite user') }
+          ]}
+        >
+          <Button buttonType="secondary" size="md">Sectioned Menu</Button>
+        </Menu>
+      </div>
+
+      {/* Menu with checkboxes and radios */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Show notifications', isCheckbox: true, checked: true, onSelect: () => console.log('Toggle notifications') },
+            { content: 'Show activity', isCheckbox: true, checked: false, onSelect: () => console.log('Toggle activity') },
+            { isSeparator: true },
+            { content: 'Message Type', isLabel: true },
+            { content: 'Direct Message', isRadio: true, value: 'direct', checked: true },
+            { content: 'Group Message', isRadio: true, value: 'group' },
+            { content: 'All Messages', isRadio: true, value: 'all' }
+          ]}
+        >
+          <Button buttonType="secondary" size="md">Checkbox Menu</Button>
+        </Menu>
+      </div>
+
+      {/* Menu with icon only trigger */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Copy', icon: Copy, onSelect: () => console.log('Copy') },
+            { content: 'Paste', icon: Clipboard, onSelect: () => console.log('Paste') },
+            { isSeparator: true },
+            { content: 'Edit', icon: Pencil, onSelect: () => console.log('Edit') }
+          ]}
+        >
+          <Button 
+            buttonType="secondary" 
+            size="md"
+            subType="iconOnly"
+            leadingIcon={MoreHorizontal}
+            aria-label="More options"
+          />
+        </Menu>
+      </div>
     </div>
   );
 };

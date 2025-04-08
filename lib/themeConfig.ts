@@ -113,5 +113,33 @@ export const themeConfig = {
         baseStyles: "items-center text-gray-0",
       },
     },
+    menu: {
+      baseStyles: "z-50 min-w-[8rem] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      sizes: {
+        sm: {
+          fontSize: "text-body-sm",
+          borderRadius: "rounded-md",
+          minWidth: "min-w-[8rem]",
+          itemPadding: "py-1.5 px-2",
+          labelPadding: "px-2 py-1",
+          checkPadding: "px-1.5 py-1",
+          iconSize: "h-4 w-4"
+        }
+      },
+      item: {
+        baseStyles: "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[highlighted]:mx-1 data-[highlighted]:px-1",
+        disabled: "text-gray-300 pointer-events-none"
+      },
+      label: {
+        baseStyles: "text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded"
+      },
+      separator: {
+        baseStyles: "h-px my-1 bg-gray-200"
+      },
+      checkbox: {
+        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[highlighted]:mx-1 data-[highlighted]:px-1",
+        checked: "before:absolute before:left-2 before:h-3.5 before:w-3.5 before:content-[''] before:bg-primary-500 before:rounded-[3px]"
+      }
+    }
   }
 }; 
