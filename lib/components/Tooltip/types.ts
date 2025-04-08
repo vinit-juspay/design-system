@@ -40,8 +40,6 @@ export interface TooltipProps {
   arrow?: TooltipArrow;
   /** Direction to place the slot component */
   slotDirection?: SlotDirection;
-  /** Whether the tooltip should display a slot component */
-  hasSlot?: boolean;
   /** Custom slot component */
   slot?: React.ElementType;
   /** Tooltip provider props from Radix UI */
