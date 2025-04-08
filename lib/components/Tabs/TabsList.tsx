@@ -2,25 +2,22 @@ import React from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { cn } from '../../utils';
 import { TabsListProps } from './types';
-import { getTabsStyles, getSizeStyles, getBaseStyles, getExpandedStyles } from './utils';
+import { themeConfig } from '../../themeConfig';
 
 const TabsList = React.forwardRef<
   HTMLDivElement,
   TabsListProps
->(({ className, variant = "underline", size = "md", expanded = false, ...props }, ref) => {
-  const styles = getTabsStyles(variant);
-  const sizeStyles = getSizeStyles(size);
-  const baseStyles = getBaseStyles();
-  const expandedStyles = getExpandedStyles(expanded);
+>(({ className, variant = "underline", size = "md", ...props }, ref) => {
+  const styles = themeConfig.euler.tabs.variant[variant];
+  const sizeStyles = themeConfig.euler.tabs.sizes[size];
   
   return (
     <TabsPrimitive.List
       ref={ref}
       className={cn(
-        baseStyles,
+        "flex w-full items-center",
         styles.list,
-        sizeStyles,
-        expanded && expandedStyles,
+        sizeStyles.height,
         className
       )}
       {...props}

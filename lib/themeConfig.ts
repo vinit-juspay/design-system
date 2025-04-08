@@ -418,11 +418,48 @@ export const themeConfig = {
           underlineOffset: '-mb-2'
         },
         lg: {
-          height: 'h-12',
-          underlineOffset: '-mb-3'
+          padding: "px-2 py-1.5",
+          fontSize: "text-body-sm",
+          borderRadius: "rounded-lg",
+          maxWidth: "max-w-sm",
+          slotSize: "h-[18px] w-[18px]",
+        },
+      },
+      arrow: {
+        baseStyles: "fill-gray-900",
+      },
+      content: {
+        baseStyles: "items-center text-gray-0",
+      },
+    },
+    tabs: {
+      variant: {
+        boxed: {
+          list: 'bg-gray-50 p-1 rounded-lg',
+          trigger: 'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm'
+        },
+        floating: {
+          list: 'gap-2',
+          trigger: 'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700'
+        },
+        underline: {
+          list: 'border-b border-gray-200',
+          trigger: 'border-b-2 border-transparent text-gray-500 data-[state=active]:border-gray-700 data-[state=active]:text-gray-700'
         }
       },
-      content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
+      sizes: {
+        md: {
+          height: 'h-11'
+        },
+        lg: {
+          height: 'h-12'
+        }
+      },
+      base: {
+        trigger: 'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-500 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:font-600',
+        content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
+        root: 'w-full'
+      }
     }
-  },
-};
+  }
+}; 
