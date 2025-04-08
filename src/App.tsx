@@ -1,6 +1,6 @@
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle } from "lucide-react";
 import { Tooltip } from "./index";
-import { Button } from "../lib/main";
+import { Button, TextInput } from "../lib/main";
 
 const App = () => {
   return (
@@ -287,6 +287,12 @@ const App = () => {
           />
         </Tooltip>
       </div>
+
+
+      {/* Input Field Examples */}
+      <h2 className="text-2xl font-semibold mt-8">Input Field Examples</h2>
+      <TextInput label="Search" size="md" />
+      <TextInput label="Search" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
     </div>
   );
 };

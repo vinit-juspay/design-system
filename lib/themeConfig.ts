@@ -87,6 +87,52 @@ export const themeConfig = {
         }
       },
       borderRadius: 'rounded-xl'
+    },
+    textInput: {
+      label: {
+        base: 'text-body-md font-medium tracking-normal',
+        color: 'text-gray-700',
+        wrapper: 'flex items-center gap-2',
+        group: 'flex items-center gap-1',
+      },
+      sublabel: {
+        base: 'text-body-md font-medium tracking-normal',
+        color: 'text-gray-400',
+      },
+      hint: {
+        base: 'text-body-md font-medium tracking-normal',
+        color: 'text-gray-500',
+        error: 'text-red-500',
+      },
+      inputBase: {
+        base: 'w-full flex flex-row justify-between items-center relative rounded-lg border-[1px] bg-white transition-all',
+        sizes: {
+          md: 'h-9',
+          lg: 'h-10',
+        },
+        slots: {
+          left: '',
+          right: '',
+        },
+        states: {
+          default: 'border-gray-300',
+          hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
+          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          filled: 'border-gray-300 bg-gray-50',
+          error: 'border-red-500 ring-red-100',
+          disabled: 'border-gray-200 bg-gray-50 cursor-not-allowed',
+        },
+      },
+      input: {
+        base: 'w-full bg-transparent text-body-md outline-none disabled:cursor-not-allowed pl-9 pr-9',
+      },
+      slot: {
+        base: '',
+        positions: {
+          left: 'absolute left-3',
+          right: 'absolute right-3',
+        },
+      },
     }
   }
 }; 
