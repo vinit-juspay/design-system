@@ -2,11 +2,6 @@ import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 /**
- * Available menu sizes
- */
-export type MenuSize = 'sm';
-
-/**
  * Available menu alignments
  */
 export type MenuAlignment = 'start' | 'center' | 'end';
@@ -68,8 +63,6 @@ export interface MenuProps {
   children: ReactNode;
   /** The menu items to be displayed */
   items: MenuItemWithSeparatorProps[];
-  /** Size of the menu */
-  size?: MenuSize;
   /** Alignment of the menu */
   align?: MenuAlignment;
   /** Side where the menu appears */

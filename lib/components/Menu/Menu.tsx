@@ -25,13 +25,12 @@ const Menu = React.forwardRef<
 >(({
   children,
   items,
-  size = 'sm',
   align = 'center',
   side = 'bottom',
   rootProps,
   contentProps,
 }, ref) => {
-  const menuClassNames = getMenuClassNames(size);
+  const menuClassNames = getMenuClassNames();
 
   // Render a menu item based on its type
   const renderMenuItem = (item: MenuItemWithSeparatorProps, index: number) => {
@@ -41,7 +40,7 @@ const Menu = React.forwardRef<
 
     if ('isLabel' in item && item.isLabel) {
       return (
-        <DropdownMenu.Label key={`label-${index}`} className={getLabelClassNames(size)}>
+        <DropdownMenu.Label key={`label-${index}`} className={getLabelClassNames()}>
           {item.content}
         </DropdownMenu.Label>
       );
@@ -54,9 +53,9 @@ const Menu = React.forwardRef<
           checked={item.checked}
           onCheckedChange={item.onSelect as unknown as (checked: boolean) => void}
           disabled={item.disabled}
-          className={getCheckClassNames(item.checked, size)}
+          className={getCheckClassNames(item.checked)}
         >
-          {item.icon && <item.icon className={getIconClassNames(size)} />}
+          {item.icon && <item.icon className={getIconClassNames()} />}
           {item.content}
         </DropdownMenu.CheckboxItem>
       );
@@ -68,9 +67,9 @@ const Menu = React.forwardRef<
           key={`radio-${index}`}
           value={item.value}
           disabled={item.disabled}
-          className={getCheckClassNames(item.checked, size)}
+          className={getCheckClassNames(item.checked)}
         >
-          {item.icon && <item.icon className={getIconClassNames(size)} />}
+          {item.icon && <item.icon className={getIconClassNames()} />}
           {item.content}
         </DropdownMenu.RadioItem>
       );
@@ -79,8 +78,8 @@ const Menu = React.forwardRef<
     if ('hasSubmenu' in item && item.hasSubmenu && item.submenuItems) {
       return (
         <DropdownMenu.Sub key={`sub-${index}`}>
-          <DropdownMenu.SubTrigger className={getMenuItemClassNames(item.disabled, size)}>
-            {item.icon && <item.icon className={getIconClassNames(size)} />}
+          <DropdownMenu.SubTrigger className={getMenuItemClassNames(item.disabled)}>
+            {item.icon && <item.icon className={getIconClassNames()} />}
             {item.content}
           </DropdownMenu.SubTrigger>
           <DropdownMenu.Portal>
@@ -101,9 +100,9 @@ const Menu = React.forwardRef<
         key={`item-${index}`}
         onSelect={standardItem.onSelect}
         disabled={standardItem.disabled}
-        className={getMenuItemClassNames(standardItem.disabled, size)}
+        className={getMenuItemClassNames(standardItem.disabled)}
       >
-        {standardItem.icon && <standardItem.icon className={getIconClassNames(size)} />}
+        {standardItem.icon && <standardItem.icon className={getIconClassNames()} />}
         {standardItem.content}
       </DropdownMenu.Item>
     );
