@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { Check } from 'lucide-react';
 import { MenuProps, MenuItemProps, MenuItemWithSeparatorProps } from './types';
 import { getMenuClassNames, getMenuItemClassNames, getLabelClassNames, getSeparatorClassNames, getCheckClassNames, getIconClassNames } from './utils';
+import { themeConfig } from '../../themeConfig';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
@@ -53,8 +55,11 @@ const Menu = React.forwardRef<
           checked={item.checked}
           onCheckedChange={item.onSelect as unknown as (checked: boolean) => void}
           disabled={item.disabled}
-          className={getCheckClassNames(item.checked)}
+          className={getCheckClassNames()}
         >
+          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkbox.indicator}>
+            <Check className={themeConfig.euler.menu.checkbox.icon} />
+          </DropdownMenu.ItemIndicator>
           {item.icon && <item.icon className={getIconClassNames()} />}
           {item.content}
         </DropdownMenu.CheckboxItem>
@@ -67,8 +72,11 @@ const Menu = React.forwardRef<
           key={`radio-${index}`}
           value={item.value}
           disabled={item.disabled}
-          className={getCheckClassNames(item.checked)}
+          className={getCheckClassNames()}
         >
+          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkbox.indicator}>
+            <Check className={themeConfig.euler.menu.checkbox.icon} />
+          </DropdownMenu.ItemIndicator>
           {item.icon && <item.icon className={getIconClassNames()} />}
           {item.content}
         </DropdownMenu.RadioItem>

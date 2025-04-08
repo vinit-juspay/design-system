@@ -49,16 +49,11 @@ export const getSeparatorClassNames = (): string => {
 /**
  * Generates the appropriate class names for checkbox and radio items
  * 
- * @param {boolean} checked - Whether the item is checked
  * @returns {string} Combined Tailwind CSS class names for the item
  */
-export const getCheckClassNames = (checked: boolean = false): string => {
+export const getCheckClassNames = (): string => {
   const theme = themeConfig.euler.menu;
-  
-  return cn(
-    theme.checkbox.baseStyles,
-    checked ? theme.checkbox.checked : ''
-  );
+  return theme.checkbox.baseStyles;
 };
 
 /**

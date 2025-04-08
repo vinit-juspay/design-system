@@ -116,7 +116,7 @@ export const themeConfig = {
     menu: {
       baseStyles: "z-50 min-w-[8rem] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
       item: {
-        baseStyles: "relative text-body-sm font-500 flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[highlighted]:mx-1 data-[highlighted]:px-1 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
+        baseStyles: "relative text-body-sm font-500 flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
         icon: "h-4 w-4 mr-2"
       },
       label: {
@@ -126,8 +126,9 @@ export const themeConfig = {
         baseStyles: "h-px my-1 bg-gray-200"
       },
       checkbox: {
-        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[highlighted]:mx-1 data-[highlighted]:px-1 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
-        checked: "before:absolute before:left-2 before:h-3.5 before:w-3.5 before:content-[''] before:bg-primary-500 before:rounded-[3px]"
+        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
+        indicator: "absolute right-2 inline-flex h-4 w-4 items-center justify-center",
+        icon: "h-4 w-4 text-primary-500"
       }
     }
   }
