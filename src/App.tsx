@@ -2,17 +2,9 @@ import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
 import { Tooltip } from "./index";
 import { Button, Tag, SplitTag } from "../lib/main";
-import { themeConfig } from "../lib/themeConfig";
-import { TagVariant, TagStyle, TagSize, TagColor } from "../lib/components/Tag/types";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
-  
-  // Extract values directly from themeConfig with proper type casting
-  const variants = Object.keys(themeConfig.euler.tag.variant) as TagVariant[];
-  const styles = Object.keys(themeConfig.euler.tag.style) as TagStyle[];
-  const sizes = Object.keys(themeConfig.euler.tag.sizes) as TagSize[];
-  const colors = Object.keys(themeConfig.euler.tag.variant.noFill) as TagColor[];
   
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -398,66 +390,88 @@ const App = () => {
     <>
       <h2 className="text-2xl font-semibold">Tag Examples</h2>
       
-      {/* Comprehensive Tag Examples - with default icons on both sides */}
-      {variants.map(variant => (
-        <div key={variant} className="mt-6">
-          <h3 className="text-xl font-semibold capitalize mb-4">{variant} Tags</h3>
-          
-          {styles.map(style => (
-            <div key={style} className="mb-6">
-              <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
-              
-              {sizes.map(size => (
-                <div key={size} className="mb-4">
-                  <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
-                  
-                  <div className="grid grid-cols-6 gap-4 mb-3">
-                    {colors.map(color => (
-                      <Tag 
-                        key={color}
-                        variant={variant}
-                        tagStyle={style}
-                        size={size}
-                        color={color}
-                        label={color.charAt(0).toUpperCase() + color.slice(1)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
+      {/* Basic Tag Examples */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Basic Tags</h3>
+        <div className="flex flex-wrap gap-4">
+          <Tag label="Default" />
+          <Tag variant="attentive" label="Attentive" />
+          <Tag variant="subtle" label="Subtle" />
+          <Tag color="primary" label="Primary" />
+          <Tag color="success" label="Success" />
+          <Tag color="error" label="Error" />
+          <Tag color="warning" label="Warning" />
+          <Tag color="purple" label="Purple" />
         </div>
-      ))}
+      </div>
       
-      {/* Split Tags - with default icons on both sides */}
+      {/* Tag Sizes */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Tag Sizes</h3>
+        <div className="flex flex-wrap gap-4 items-center">
+          <Tag size="xs" label="Extra Small" />
+          <Tag size="sm" label="Small" />
+          <Tag size="md" label="Medium" />
+          <Tag size="lg" label="Large" />
+        </div>
+      </div>
+      
+      {/* Tag Styles */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Tag Styles</h3>
+        <div className="flex flex-wrap gap-4">
+          <Tag tagStyle="squarical" label="Squarical" />
+          <Tag tagStyle="rounded" label="Rounded" />
+        </div>
+      </div>
+      
+      {/* Tags with Icons */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Tags with Icons</h3>
+        <div className="flex flex-wrap gap-4">
+          <Tag 
+            label="Leading Icon" 
+            leadingSlot={<Info size={16} />} 
+          />
+          <Tag 
+            label="Trailing Icon" 
+            trailingSlot={<Check size={16} />} 
+          />
+          <Tag 
+            label="Both Icons" 
+            leadingSlot={<AlertCircle size={16} />}
+            trailingSlot={<ArrowRight size={16} />}
+          />
+        </div>
+      </div>
+      
+      {/* Split Tags */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Split Tags</h3>
-        
-        {styles.map(style => (
-          <div key={style} className="mb-6">
-            <h4 className="text-lg font-medium capitalize mb-3">{style} Style</h4>
-            
-            {sizes.map(size => (
-              <div key={size} className="mb-4">
-                <h5 className="text-md font-medium capitalize mb-2">{size} Size</h5>
-                
-                <div className="grid grid-cols-6 gap-4 mb-3">
-                  {colors.map(color => (
-                    <SplitTag 
-                      key={color}
-                      tagStyle={style}
-                      size={size}
-                      color={color}
-                      leftLabel="Left"
-                      rightLabel="Right"
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
+        <div className="flex flex-wrap gap-4">
+          <SplitTag leftLabel="2" rightLabel="New" />
+          <SplitTag 
+            leftLabel="5" 
+            rightLabel="Pending" 
+            color="warning"
+          />
+          <SplitTag 
+            leftLabel="10" 
+            rightLabel="Completed" 
+            color="success"
+          />
+          <SplitTag 
+            leftLabel="3" 
+            rightLabel="Failed" 
+            color="error"
+          />
+          <SplitTag 
+            leftLabel="Key" 
+            rightLabel="Value" 
+            color="primary"
+            tagStyle="squarical"
+          />
+        </div>
       </div>
     </>
   );
