@@ -1,7 +1,12 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard } from "lucide-react";
-import { Button, Tooltip, Menu } from "../lib/main";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock } from "lucide-react";
+import { Button, Tooltip, Menu, Select } from "../lib/main";
+import { useState } from "react";
 
 const App = () => {
+  const [fruitValue, setFruitValue] = useState("apple");
+  const [sizeValue, setSizeValue] = useState("md");
+  const [paymentValue, setPaymentValue] = useState("");
+  
   return (
     <div className="p-4 space-y-8 flex flex-col gap-4 justify-center items-center">
       <h2 className="text-2xl font-semibold">Button Examples</h2>
@@ -428,6 +433,180 @@ const App = () => {
             aria-label="More options"
           />
         </Menu>
+      </div>
+
+      {/* Select Examples */}
+      <h2 className="text-2xl font-semibold mt-8">Select Examples</h2>
+      
+      {/* Basic select */}
+      <div className="flex flex-col gap-8 w-64">
+        <Select 
+          placeholder="Select a fruit"
+          value={fruitValue}
+          onValueChange={setFruitValue}
+          items={[
+            { value: "apple", text: "Apple", icon: Apple },
+            { value: "banana", text: "Banana", icon: Banana },
+            { value: "orange", text: "Orange" },
+            { value: "grape", text: "Grape" },
+            { value: "strawberry", text: "Strawberry" }
+          ]}
+        />
+      </div>
+
+      {/* Different sizes */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Different Sizes</p>
+        <Select 
+          placeholder="Small size"
+          size="sm"
+          items={[
+            { value: "option1", text: "Option 1" },
+            { value: "option2", text: "Option 2" },
+            { value: "option3", text: "Option 3" }
+          ]}
+        />
+        
+        <Select 
+          placeholder="Medium size"
+          size="md"
+          items={[
+            { value: "option1", text: "Option 1" },
+            { value: "option2", text: "Option 2" },
+            { value: "option3", text: "Option 3" }
+          ]}
+        />
+        
+        <Select 
+          placeholder="Large size"
+          size="lg"
+          items={[
+            { value: "option1", text: "Option 1" },
+            { value: "option2", text: "Option 2" },
+            { value: "option3", text: "Option 3" }
+          ]}
+        />
+      </div>
+
+      {/* With groups */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Grouped Items</p>
+        <Select 
+          placeholder="Select a vegetable"
+          items={[
+            { 
+              label: "Fruits", 
+              items: [
+                { value: "apple", text: "Apple", icon: Apple },
+                { value: "banana", text: "Banana", icon: Banana }
+              ] 
+            },
+            { isSeparator: true },
+            { 
+              label: "Vegetables", 
+              items: [
+                { value: "carrot", text: "Carrot", icon: Carrot },
+                { value: "lettuce", text: "Lettuce", icon: Leaf },
+                { value: "spinach", text: "Spinach" }
+              ] 
+            }
+          ]}
+        />
+      </div>
+
+      {/* Disabled state */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Disabled Select</p>
+        <Select 
+          placeholder="Disabled select"
+          disabled
+          items={[
+            { value: "option1", text: "Option 1" },
+            { value: "option2", text: "Option 2" }
+          ]}
+        />
+      </div>
+
+      {/* Controlled example */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Controlled Select with Radio Buttons</p>
+        <div className="flex gap-2 items-center">
+          <label className="text-sm text-gray-600">Selected: </label>
+          <div className="flex gap-2">
+            <button 
+              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'sm' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
+              onClick={() => setSizeValue('sm')}
+            >
+              Small
+            </button>
+            <button 
+              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'md' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
+              onClick={() => setSizeValue('md')}
+            >
+              Medium
+            </button>
+            <button 
+              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'lg' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
+              onClick={() => setSizeValue('lg')}
+            >
+              Large
+            </button>
+          </div>
+        </div>
+        <Select 
+          placeholder="Select a size"
+          value={sizeValue}
+          onValueChange={setSizeValue}
+          size={sizeValue as 'sm' | 'md' | 'lg'}
+          items={[
+            { value: "sm", text: "Small" },
+            { value: "md", text: "Medium" },
+            { value: "lg", text: "Large" }
+          ]}
+        />
+      </div>
+
+      {/* With custom trigger content */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Custom Trigger</p>
+        <Select 
+          placeholder="Payment Method"
+          value={paymentValue}
+          onValueChange={setPaymentValue}
+          triggerContent={
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-4 w-4 text-gray-500" />
+                <span className={paymentValue ? 'text-gray-700' : 'text-gray-400'}>
+                  {paymentValue ? 
+                    paymentValue === 'card' ? 'Credit Card' : 
+                    paymentValue === 'cash' ? 'Cash' : 
+                    'Bank Transfer' 
+                    : 'Payment Method'}
+                </span>
+              </div>
+              <ChevronDown className="h-4 w-4 text-gray-500" />
+            </div>
+          }
+          items={[
+            { value: "card", text: "Credit Card", icon: CreditCard },
+            { value: "cash", text: "Cash", icon: DollarSign },
+            { value: "bank", text: "Bank Transfer", icon: ShoppingBag }
+          ]}
+        />
+      </div>
+
+      {/* With disabled options */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">With Disabled Options</p>
+        <Select 
+          placeholder="Delivery Time"
+          items={[
+            { value: "now", text: "Deliver Now", icon: Clock },
+            { value: "scheduled", text: "Schedule Delivery", disabled: true },
+            { value: "pickup", text: "Pick Up Later" }
+          ]}
+        />
       </div>
     </div>
   );
