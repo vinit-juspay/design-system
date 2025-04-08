@@ -1,6 +1,6 @@
 import { TooltipSize, TooltipArrow } from './types';
 import { cn } from '../../utils';
-import { themeConfig } from '../../../src/themeConfig';
+import { themeConfig } from '../../themeConfig';
 
 
 /**
