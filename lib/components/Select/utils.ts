@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { 
   getMenuItemClassNames,
   getLabelClassNames, 
-  getSeparatorClassNames,
+  getSeparatorClassNames as getMenuSeparatorClassNames,
   getIconClassNames
 } from '../Menu/utils';
 
@@ -23,6 +23,15 @@ export const getSelectTriggerClassNames = (size: 'sm' | 'md' | 'lg' = 'md', disa
     sizeClasses.padding,
     disabled && 'disabled:cursor-not-allowed disabled:opacity-50'
   );
+};
+
+/**
+ * Get class names for the Select chevron icon
+ * This is specifically for the dropdown indicator chevron
+ * @returns - Class names string
+ */
+export const getSelectChevronClassNames = () => {
+  return cn("h-[16px] w-[16px] text-gray-600");
 };
 
 /**
@@ -92,12 +101,16 @@ export const getSelectLabelClassNames = () => {
 };
 
 /**
- * Get class names for the Select separator, reusing Menu separator styles
+ * Get class names for the Select separator, extending the Menu separator styles
+ * to ensure it spans edge-to-edge even with the padding in the viewport
  * @returns - Class names string
  */
 export const getSelectSeparatorClassNames = () => {
-  // Reuse the Menu separator styles
-  return getSeparatorClassNames();
+  return cn(
+    getMenuSeparatorClassNames(),
+    // Negative margin to compensate for the viewport padding
+    "-mx-1"
+  );
 };
 
 /**

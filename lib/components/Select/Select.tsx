@@ -12,7 +12,8 @@ import {
   getSelectItemIconClassNames,
   getSelectLabelClassNames,
   getSelectSeparatorClassNames,
-  getSelectScrollButtonClassNames
+  getSelectScrollButtonClassNames,
+  getSelectChevronClassNames
 } from './utils';
 
 /**
@@ -47,7 +48,6 @@ const Select = React.forwardRef<
   contentProps,
   triggerProps,
   size = 'md',
-  className
 }, ref) => {
   // Find the selected item to display its icon in the trigger
   const selectedItem = React.useMemo(() => {
@@ -100,7 +100,7 @@ const Select = React.forwardRef<
               textValue={groupItem.textValue}
               className={getSelectItemClassNames(groupItem.disabled)}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center">
                 {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
                 <SelectPrimitive.ItemText>
                   {groupItem.text}
@@ -125,7 +125,7 @@ const Select = React.forwardRef<
         textValue={standardItem.textValue}
         className={getSelectItemClassNames(standardItem.disabled)}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
           <SelectPrimitive.ItemText>
             {standardItem.text}
@@ -154,12 +154,12 @@ const Select = React.forwardRef<
           triggerContent
         ) : (
           <>
-            <div className="flex items-center gap-2 flex-1 truncate">
+            <div className="flex items-center flex-1 truncate">
               {selectedItem?.icon && <selectedItem.icon className={getSelectItemIconClassNames()} />}
               <SelectPrimitive.Value placeholder={placeholder} />
             </div>
             <SelectPrimitive.Icon className={getSelectIconClassNames(size)}>
-              <ChevronDown />
+              <ChevronDown className={getSelectChevronClassNames()} strokeWidth={2} />
             </SelectPrimitive.Icon>
           </>
         )}
@@ -174,7 +174,7 @@ const Select = React.forwardRef<
           {...contentProps}
         >
           <SelectPrimitive.ScrollUpButton className={getSelectScrollButtonClassNames()}>
-            <ChevronUp className={getSelectIconClassNames(size)} />
+            <ChevronUp className={getSelectChevronClassNames()} strokeWidth={2} />
           </SelectPrimitive.ScrollUpButton>
           
           <SelectPrimitive.Viewport className={getSelectViewportClassNames()}>
@@ -182,7 +182,7 @@ const Select = React.forwardRef<
           </SelectPrimitive.Viewport>
           
           <SelectPrimitive.ScrollDownButton className={getSelectScrollButtonClassNames()}>
-            <ChevronDown className={getSelectIconClassNames(size)} />
+            <ChevronDown className={getSelectChevronClassNames()} strokeWidth={2} />
           </SelectPrimitive.ScrollDownButton>
         </SelectPrimitive.Content>
       </SelectPrimitive.Portal>
