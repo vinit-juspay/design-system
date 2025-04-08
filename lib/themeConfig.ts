@@ -86,7 +86,84 @@ export const themeConfig = {
           focus: 'focus:text-green-700'
         }
       },
-      borderRadius: 'rounded-xl'
+      borderRadius: 'rounded-md'
+    },
+    tag: {
+      variant: {
+        noFill: {
+          neutral: 'bg-gray-0 text-gray-950 border border-gray-950',
+          primary: 'bg-gray-0 text-blue-800 border border-blue-600',
+          success: 'bg-gray-0 text-green-600 border border-green-600',
+          error: 'bg-gray-0 text-red-600 border border-red-600',
+          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
+          purple: 'bg-gray-0 text-purple-500 border border-purple-500'
+        },
+        attentive: {
+          neutral: 'bg-gray-950 text-gray-0',
+          primary: 'bg-blue-600 text-gray-0',
+          success: 'bg-green-600 text-gray-0',
+          error: 'bg-red-600 text-gray-0',
+          warning: 'bg-orange-500 text-gray-0',
+          purple: 'bg-purple-500 text-gray-0'
+        },
+        subtle: {
+          neutral: 'bg-gray-50 text-gray-950 border border-gray-200',
+          primary: 'bg-blue-50 text-blue-600 border border-blue-100',
+          success: 'bg-green-50 text-green-600 border border-green-100',
+          error: 'bg-red-50 text-red-600 border border-red-100',
+          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
+          purple: 'bg-purple-50 text-purple-600 border border-purple-100'
+        }
+      },
+      sizes: {
+        xs: {
+          height: 'h-5',
+          padding: 'px-1.5 py-0.5',
+          fontSize: 'text-body-sm font-body font-semibold',
+          iconSize: 'h-2.5 w-2.5',
+          gap: 'gap-1'
+        },
+        sm: {
+          height: 'h-[22px]',
+          padding: 'px-2 py-0.75',
+          fontSize: 'text-body-sm font-body font-semibold',
+          iconSize: 'h-3 w-3',
+          gap: 'gap-1'
+        },
+        md: {
+          height: 'h-6',
+          padding: 'px-2.5 py-1',
+          fontSize: 'text-body-md font-body font-semibold',
+          iconSize: 'h-3.5 w-3.5',
+          gap: 'gap-1.5'
+        },
+        lg: {
+          height: 'h-7',
+          padding: 'px-3 py-1.5',
+          fontSize: 'text-body-md font-body font-semibold',
+          iconSize: 'h-4 w-4',
+          gap: 'gap-2'
+        }
+      },
+      style: {
+        squarical: 'rounded',
+        rounded: 'rounded-full'
+      },
+      splitStyle: {
+        rounded: {
+          left: 'rounded-l-full rounded-r-none',
+          right: 'rounded-r-full rounded-l-none'
+        },
+        squarical: {
+          left: 'rounded-l rounded-r-none',
+          right: 'rounded-r rounded-l-none'
+        }
+      },
+      layout: {
+        slot: 'flex items-center justify-center',
+        container: 'inline-flex w-fit',
+        base: 'inline-flex w-fit items-center justify-center gap-2 transition-all duration-200'
+      }
     },
     tooltip: {
       baseStyles: "flex z-50 items-center overflow-hidden bg-gray-900 text-gray-0 font-500 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
