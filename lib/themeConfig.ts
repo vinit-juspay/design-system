@@ -87,6 +87,31 @@ export const themeConfig = {
         }
       },
       borderRadius: 'rounded-xl'
-    }
+    },
+    tooltip: {
+      baseStyles: "flex z-50 items-center overflow-hidden bg-gray-900 text-gray-0 font-500 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      sizes: {
+        sm: {
+          padding: "px-1.5 py-0.5",
+          fontSize: "text-body-xs",
+          borderRadius: "rounded-md",
+          maxWidth: "max-w-xs",
+          slotSize: "h-3.5 w-3.5",
+        },
+        lg: {
+          padding: "px-2 py-1.5",
+          fontSize: "text-body-sm",
+          borderRadius: "rounded-lg",
+          maxWidth: "max-w-sm",
+          slotSize: "h-[18px] w-[18px]",
+        },
+      },
+      arrow: {
+        baseStyles: "fill-gray-900",
+      },
+      content: {
+        baseStyles: "items-center text-gray-0",
+      },
+    },
   }
 }; 
