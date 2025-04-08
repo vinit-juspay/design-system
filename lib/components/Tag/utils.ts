@@ -40,3 +40,21 @@ export const getSplitTagClassNames = (
     theme.variant[variant][color]
   );
 };
+
+/**
+ * Renders a slot (icon or custom element) with appropriate styling
+ */
+export const renderSlot = (slot: React.ReactNode | undefined, size: TagSize) => {
+  if (!slot) return null;
+  
+  const tagTheme = themeConfig.euler.tag;
+  const slotSize: string = tagTheme.sizes[size].iconSize;
+  const slotGap: string = tagTheme.sizes[size].gap;
+  const slotClasses: string = tagTheme.layout.slot;
+  
+  // Use the variables directly to ensure TypeScript recognizes their usage
+  const className = cn(slotClasses, slotSize, slotGap);
+  
+  // Return the props object instead of JSX
+  return { className, children: slot };
+};
