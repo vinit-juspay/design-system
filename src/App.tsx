@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon } from "lucide-react";
-import { Tooltip } from "./index";
-import { Button, Tag, SplitTag } from "../lib/main";
+import { Button, Tag, SplitTag, Tooltip } from "../lib/main";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
