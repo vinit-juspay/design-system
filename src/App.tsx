@@ -227,7 +227,6 @@ const App = () => {
       <div className="flex gap-6 items-center">
         <Tooltip 
           content="Information tooltip" 
-          hasSlot 
           slot={Info}
           slotDirection="left"
         >
@@ -242,7 +241,6 @@ const App = () => {
         
         <Tooltip 
           content="Warning message" 
-          hasSlot 
           slot={AlertCircle}
           slotDirection="left"
         >
@@ -257,7 +255,6 @@ const App = () => {
         
         <Tooltip 
           content="Help is available" 
-          hasSlot 
           slot={HelpCircle}
           slotDirection="right"
         >
@@ -286,6 +283,7 @@ const App = () => {
           />
         </Tooltip>
       </div>
+      
       <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
           <Button 
             buttonType="secondary" 
@@ -301,7 +299,6 @@ const App = () => {
         content="Small tooltip with icon" 
         size="sm" 
         rootProps={{ open: true }}
-        hasSlot
         slot={Info}
         slotDirection="left"
       >
@@ -329,7 +326,6 @@ const App = () => {
         content="Large tooltip with icon" 
         size="lg" 
         rootProps={{ open: true }}
-        hasSlot
         slot={HelpCircle}
         slotDirection="right"
       >

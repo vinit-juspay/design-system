@@ -15,7 +15,7 @@ import { getTooltipClassNames, getArrowStyles, getSlotClassNames } from './utils
  * </Tooltip>
  * 
  * // With custom slot (e.g. icon)
- * <Tooltip content="Custom tooltip" arrow="right" hasSlot slot={InfoIcon} slotDirection="left">
+ * <Tooltip content="Custom tooltip" arrow="right" slot={InfoIcon} slotDirection="left">
  *   <span>Hover for info</span>
  * </Tooltip>
  */
@@ -28,7 +28,6 @@ const Tooltip = React.forwardRef<
   content,
   size = 'sm',
   arrow = 'default',
-  hasSlot = false,
   slotDirection = 'left',
   slot: Slot,
   providerProps = { delayDuration: 300 },
@@ -53,11 +52,11 @@ const Tooltip = React.forwardRef<
             className={tooltipClassNames}
             {...contentProps}
           >
-            {hasSlot && slotDirection === 'left' && Slot && (
+            {Slot && slotDirection === 'left' && (
               <Slot className={getSlotClassNames('left', size)} />
             )}
             {content}
-            {hasSlot && slotDirection === 'right' && Slot && (
+            {Slot && slotDirection === 'right' && (
               <Slot className={getSlotClassNames('right', size)} />
             )}
             {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
