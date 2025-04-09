@@ -10,6 +10,7 @@ const TabsTrigger = React.forwardRef<
 >(({ className, value, variant = "underline", size = "md", children, leftSlot, rightSlot, ...props }, ref) => {
 
   const styles = themeConfig.euler.tabs.variant[variant];
+  const sizeStyles = themeConfig.euler.tabs.sizes[size];
   
   return (
     <TabsPrimitive.Trigger
@@ -18,6 +19,7 @@ const TabsTrigger = React.forwardRef<
       className={cn(
         themeConfig.euler.tabs.base.trigger,
         styles.trigger,
+        variant === 'underline' ? sizeStyles.underlineOffset : '',
         className
       )}
       {...props}
