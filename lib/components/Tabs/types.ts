@@ -12,6 +12,7 @@ export interface TabsProps extends ComponentPropsWithoutRef<typeof TabsPrimitive
 export interface TabsListProps extends ComponentPropsWithoutRef<typeof TabsPrimitive.List> {
   variant?: TabsVariant;
   size?: TabsSize;
+  expanded?: boolean;
 }
 
 export interface TabsTriggerProps extends ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> {

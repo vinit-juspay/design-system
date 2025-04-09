@@ -10,4 +10,16 @@ export const getTabsStyles = (variant: TabsVariant): TabsStyles => {
 
 export const getSizeStyles = (size: TabsSize): string => {
   return themeConfig.euler.tabs.sizes[size].height;
+};
+
+export const getBaseStyles = (): string => {
+  return themeConfig.euler.tabs.base.list;
+};
+
+export const getExpandedStyles = (expanded: boolean): string => {
+  return expanded ? themeConfig.euler.tabs.expanded : "";
+};
+
+export const getUnderlineOffset = (size: TabsSize): string => {
+  return themeConfig.euler.tabs.sizes[size].underlineOffset || "";
 }; 
