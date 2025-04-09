@@ -20,6 +20,7 @@ export interface TabsTriggerProps extends ComponentPropsWithoutRef<typeof TabsPr
   size?: TabsSize;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
+  children: string | number;
 }
 
 export interface TabsContentProps extends ComponentPropsWithoutRef<typeof TabsPrimitive.Content> {}
