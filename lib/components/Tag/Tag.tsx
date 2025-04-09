@@ -29,9 +29,9 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
         className={cn(containerClassName, className)}
         {...props}
       >
-        {leadingSlot && <span {...renderSlot(leadingSlot, size)} />}
+        {leadingSlot && renderSlot(leadingSlot, size) && <span {...renderSlot(leadingSlot, size)} />}
         {label && <span className={fontSizeClass}>{label}</span>}
-        {trailingSlot && <span {...renderSlot(trailingSlot, size)} />}
+        {trailingSlot && renderSlot(trailingSlot, size) && <span {...renderSlot(trailingSlot, size)} />}
       </div>
     );
   }
