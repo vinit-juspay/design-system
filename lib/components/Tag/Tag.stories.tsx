@@ -1,8 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { StoryObj } from "@storybook/react";
 import Tag from "./Tag";
 import SplitTag from "./SplitTag";
 import { Check, X, Info, Bell } from "lucide-react";
-import * as React from "react";
 
 // Default icons to use when slots are enabled
 const DEFAULT_LEADING_ICON = <Info size={16} />;
