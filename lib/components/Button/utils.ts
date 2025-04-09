@@ -15,6 +15,7 @@ export const getButtonClassNames = (
     inline-flex items-center justify-center
     transition-all duration-200
     disabled:pointer-events-none
+    hover:underline
     ${theme.fontWeight}
     ${theme.fontFamily}
   `;
@@ -28,7 +29,8 @@ export const getButtonClassNames = (
       buttonSize.fontSize,
       theme.linkColors[type].text,
       theme.linkColors[type].hover,
-      theme.linkColors[type].focus
+      theme.linkColors[type].focus,
+      theme.linkColors[type].disabled,
     );
   }
 
