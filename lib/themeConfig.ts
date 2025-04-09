@@ -82,22 +82,26 @@ export const themeConfig = {
         primary: {
           text: 'text-primary-600',
           hover: 'hover:text-primary-700',
-          focus: 'focus:text-primary-700'
+          focus: 'focus:text-primary-700',
+          disabled: 'disabled:text-primary-300'
         },
         secondary: {
           text: 'text-gray-600',
           hover: 'hover:text-gray-700',
-          focus: 'focus:text-gray-700'
+          focus: 'focus:text-gray-700',
+          disabled: 'disabled:text-gray-400',
         },
         danger: {
           text: 'text-red-600',
           hover: 'hover:text-red-700',
-          focus: 'focus:text-red-700'
+          focus: 'focus:text-red-700',
+          disabled: 'disabled:text-red-300' 
         },
         success: {
           text: 'text-green-600',
           hover: 'hover:text-green-700',
-          focus: 'focus:text-green-700'
+          focus: 'focus:text-green-700',
+          disabled: 'disabled:text-green-300'
         }
       },
       borderRadius: 'rounded-xl'
