@@ -384,6 +384,12 @@ export const themeConfig = {
       },
     },
     tabs: {
+      base: {
+        root: "w-full",
+        list: "flex w-full items-center",
+        trigger: "inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-600 ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      },
+      expanded: "justify-between [&>*]:flex-1 [&>*]:text-center",
       variant: {
         boxed: {
           list: 'bg-gray-50 p-1 rounded-lg',
@@ -408,11 +414,7 @@ export const themeConfig = {
           underlineOffset: '-mb-3'
         }
       },
-      base: {
-        trigger: 'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
-        content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0',
-        root: 'w-full'
-      }
+      content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
     }
   }
 }; 
