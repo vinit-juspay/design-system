@@ -8,6 +8,7 @@ const TabsTrigger = React.forwardRef<
   HTMLButtonElement,
   TabsTriggerProps
 >(({ className, value, variant = "underline", size = "md", children, leftSlot, rightSlot, ...props }, ref) => {
+
   const styles = themeConfig.euler.tabs.variant[variant];
   
   return (
