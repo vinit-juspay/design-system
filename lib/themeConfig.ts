@@ -391,19 +391,21 @@ export const themeConfig = {
         },
         underline: {
           list: 'border-b border-gray-200',
-          trigger: 'border-b-2 border-transparent text-gray-500 relative -mb-2 data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10'
+          trigger: 'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10'
         }
       },
       sizes: {
         md: {
-          height: 'h-11'
+          height: 'h-11',
+          underlineOffset: '-mb-2'
         },
         lg: {
-          height: 'h-12'
+          height: 'h-12',
+          underlineOffset: '-mb-3'
         }
       },
       base: {
-        trigger: 'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-500 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:font-600',
+        trigger: 'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
         content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0',
         root: 'w-full'
       }
