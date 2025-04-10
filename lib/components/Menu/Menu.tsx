@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Check, Search } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { MenuProps, MenuItemWithSeparatorProps, MenuStandardProps } from './types';
 import { 
   getMenuClassNames, 
@@ -9,11 +9,9 @@ import {
   getSeparatorClassNames, 
   getCheckClassNames, 
   getIconClassNames,
-  getSearchContainerClassNames,
-  getSearchInputClassNames,
-  filterMenuItems
 } from './utils';
 import { themeConfig } from '../../themeConfig';
+import Search, { filterItems } from '../common/search';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
@@ -59,12 +57,12 @@ const Menu = React.forwardRef<
     if (!search?.enabled || !searchQuery) {
       return items;
     }
-    return filterMenuItems(items, searchQuery);
+    return filterItems(items, searchQuery);
   }, [items, searchQuery, search?.enabled]);
 
   // Handle search input changes
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
   };
 
   // Render a menu item based on its type
@@ -149,16 +147,6 @@ const Menu = React.forwardRef<
     );
   };
 
-  // Prevent keyboard events from propagating up
-  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-  };
-
-  // Prevent clicks from closing the menu
-  const handleSearchInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-  };
-
   return (
     <DropdownMenu.Root 
       {...rootProps} 
@@ -176,25 +164,15 @@ const Menu = React.forwardRef<
           className={menuClassNames}
           {...contentProps}
         >
-          {search?.enabled && (
-            <div className={getSearchContainerClassNames()}>
-              <div className={themeConfig.euler.menu.search.container}>
-                <Search className={themeConfig.euler.menu.search.icon} />
-                <input
-                  type="text"
-                  placeholder={search.placeholder || "Search..."}
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  onClick={handleSearchInputClick}
-                  onKeyDown={handleSearchKeyDown}
-                  className={getSearchInputClassNames()}
-                />
-              </div>
-            </div>
-          )}
+          <Search
+            enabled={search?.enabled}
+            placeholder={search?.placeholder}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+          />
           
           {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => 
+            filteredItems.map((item: any, index: number) => 
               renderMenuItem(item as MenuItemWithSeparatorProps, index)
             )
           ) : (

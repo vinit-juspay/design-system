@@ -119,20 +119,4 @@ export const getSelectSeparatorClassNames = () => {
  */
 export const getSelectScrollButtonClassNames = () => {
   return cn(themeConfig.euler.select.scrollButton.baseStyles);
-};
-
-export const getSelectSearchContainerClassNames = () => {
-  return themeConfig.euler.menu.search.baseStyles;
-};
-
-export const getSelectSearchInnerContainerClassNames = () => {
-  return themeConfig.euler.menu.search.container;
-};
-
-export const getSelectSearchIconClassNames = () => {
-  return themeConfig.euler.menu.search.icon;
-};
-
-export const getSelectSearchInputClassNames = () => {
-  return themeConfig.euler.menu.search.input;
 }; 

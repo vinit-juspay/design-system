@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp, Search } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { SelectProps, SelectItemProps, SelectGroupProps, SelectItemWithSeparatorProps, SeparatorItem } from './types';
 import {
   getSelectTriggerClassNames,
@@ -14,12 +14,8 @@ import {
   getSelectSeparatorClassNames,
   getSelectScrollButtonClassNames,
   getSelectChevronClassNames,
-  getSelectSearchContainerClassNames,
-  getSelectSearchInnerContainerClassNames,
-  getSelectSearchIconClassNames,
-  getSelectSearchInputClassNames
 } from './utils';
-import { filterSelectItems } from '../Menu/utils';
+import Search, { filterItems } from '../common/search';
 
 /**
  * Select component built on top of Radix UI's select primitive
@@ -71,22 +67,12 @@ const Select = React.forwardRef<
       return items;
     }
     
-    return filterSelectItems(items, searchQuery);
+    return filterItems(items, searchQuery);
   }, [items, searchQuery, search?.enabled]);
 
   // Handle search input changes
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  // Prevent keyboard events from propagating up
-  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    e.stopPropagation();
-  };
-
-  // Prevent clicks from closing the menu
-  const handleSearchInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    e.stopPropagation();
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
   };
 
   // Find the selected item to display its icon in the trigger
@@ -218,22 +204,12 @@ const Select = React.forwardRef<
             <ChevronUp className={getSelectChevronClassNames()} strokeWidth={2} />
           </SelectPrimitive.ScrollUpButton>
           
-          {search?.enabled && (
-            <div className={getSelectSearchContainerClassNames()}>
-              <div className={getSelectSearchInnerContainerClassNames()}>
-                <Search className={getSelectSearchIconClassNames()} />
-                <input
-                  type="text"
-                  placeholder={search.placeholder || "Search..."}
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  onClick={handleSearchInputClick}
-                  onKeyDown={handleSearchKeyDown}
-                  className={getSelectSearchInputClassNames()}
-                />
-              </div>
-            </div>
-          )}
+          <Search
+            enabled={search?.enabled}
+            placeholder={search?.placeholder}
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+          />
           
           <SelectPrimitive.Viewport className={getSelectViewportClassNames()}>
             {filteredItems.length > 0 ? (
