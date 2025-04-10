@@ -278,101 +278,6 @@ export const themeConfig = {
         },
       },
     },
-    input: {
-      label: {
-        base: 'text-body-md font-medium tracking-normal',
-        color: 'text-gray-700',
-        mandatory: 'text-red-500 text-body-md font-normal -top-0.5',
-      },
-      sublabel: {
-        base: 'text-body-md font-normal tracking-normal',
-        color: 'text-gray-400',
-      },
-      hint: {
-        base: 'text-body-md font-normal tracking-normal',
-        color: 'text-gray-500',
-        error: 'text-red-500',
-        success: 'text-green-600',
-      },
-      inputBase: {
-        base: 'w-full flex flex-row justify-between items-center relative border-[1px] transition-all',
-        sizes: {
-          md: 'h-9 rounded-xl',
-          lg: 'h-10 rounded-2xl',
-        },
-        slots: {
-          left: '',
-          right: '',
-        },
-        states: {
-          default: 'border-gray-300 bg-white',
-          hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
-          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
-          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
-          disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
-        },
-      },
-      input: {
-        base: 'w-full text-body-md font-medium placeholder:font-normal outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
-        padding: {
-          default: 'px-3',
-          withLeftSlot: 'pl-9 pr-3',
-          withRightSlot: 'pl-3 pr-9',
-          withBothSlots: 'pl-9 pr-9',
-        },
-        states: {
-          default: ' text-gray-800 placeholder:text-gray-400',
-          disabled: 'text-gray-400 placeholder:text-gray-300',
-        },
-      },
-      slot: {
-        base: '',
-        positions: {
-          left: 'absolute left-3',
-          right: 'absolute right-3',
-        },
-      },
-    },
-    textInput: {
-      // TextInput specific styles (if any)
-    },
-    numberInput: {
-      stepper: {
-        base: 'flex flex-col border-l border-gray-200',
-        button: {
-          base: 'flex items-center justify-center w-8 h-[18px] disabled:bg-gray-50 disabled:cursor-not-allowed',
-          states: {
-            default: 'text-gray-500',
-            hover: 'hover:bg-gray-50',
-            active: 'active:bg-gray-100',
-          },
-          sizes: {
-            md: 'h-[18px]',
-            lg: 'h-[20px]',
-          },
-          divider: 'border-t border-gray-200',
-          icon: 'w-2.5 h-2.5 fill-gray-800',
-        },
-      },
-      input: {
-        base: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
-      },
-      slot: {
-        rightWithStepper: 'absolute right-11',
-      },
-    },
-    unitInput: {
-      unit: {
-        base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
-        positions: {
-          prefix: 'border-r border-gray-300 px-3',
-          suffix: 'border-l border-gray-300 px-3',
-        },
-        states: {
-          disabled: 'text-gray-300',
-        },
-      },
-    },
     tooltip: {
       baseStyles:
         'flex z-50 items-center overflow-hidden bg-gray-900 text-gray-0 font-500 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
@@ -431,7 +336,7 @@ export const themeConfig = {
         }
       },
       content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
-    }
+    },
     otpInput: {
       container: {
         base: 'flex flex-col space-y-2',
