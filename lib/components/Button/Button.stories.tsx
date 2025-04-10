@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Button from "./Button";
-import { Search, Plus, ArrowRight } from "lucide-react";
+import type { Meta, StoryObj } from '@storybook/react';
+import Button from './Button';
+import { Search, Plus, ArrowRight } from 'lucide-react';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
@@ -10,55 +10,55 @@ type ExtendedButtonArgs = ButtonProps & {
 };
 
 const meta: Meta<ExtendedButtonArgs> = {
-  title: "Components/Button",
+  title: 'Components/Button',
   component: Button,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     buttonType: {
-      control: "select",
-      options: ["primary", "secondary", "danger", "success"],
-      description: "The visual style of the button",
+      control: 'select',
+      options: ['primary', 'secondary', 'danger', 'success'],
+      description: 'The visual style of the button',
       table: {
-        defaultValue: { summary: "primary" },
+        defaultValue: { summary: 'primary' },
       },
     },
     size: {
-      control: "select",
-      options: ["sm", "md", "lg"],
-      description: "The size of the button",
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+      description: 'The size of the button',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     subType: {
-      control: "select",
-      options: ["default", "iconOnly", "link"],
-      description: "The sub-type of the button",
+      control: 'select',
+      options: ['default', 'iconOnly', 'link'],
+      description: 'The sub-type of the button',
       table: {
-        defaultValue: { summary: "default" },
+        defaultValue: { summary: 'default' },
       },
     },
     isLoading: {
-      control: "boolean",
-      description: "Whether the button is in a loading state",
+      control: 'boolean',
+      description: 'Whether the button is in a loading state',
     },
     isDisabled: {
-      control: "boolean",
-      description: "Whether the button is disabled",
+      control: 'boolean',
+      description: 'Whether the button is disabled',
     },
 
     showLeadingIcon: {
-      control: "boolean",
-      description: "Show leading icon",
-      table: { category: "Icons" },
+      control: 'boolean',
+      description: 'Show leading icon',
+      table: { category: 'Icons' },
     },
     showTrailingIcon: {
-      control: "boolean",
-      description: "Show trailing icon",
-      table: { category: "Icons" },
+      control: 'boolean',
+      description: 'Show trailing icon',
+      table: { category: 'Icons' },
     },
 
     leadingIcon: { control: false, table: { disable: true } },
@@ -71,12 +71,12 @@ type Story = StoryObj<ExtendedButtonArgs>;
 
 export const Primary: Story = {
   args: {
-    buttonType: "primary",
-    children: "Primary Button",
+    buttonType: 'primary',
+    children: 'Primary Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
-  render: (args) => {
+  render: args => {
     const { showLeadingIcon, showTrailingIcon, ...buttonArgs } = args;
     return (
       <Button
@@ -90,12 +90,12 @@ export const Primary: Story = {
 
 export const WithIcons: Story = {
   args: {
-    buttonType: "primary",
-    children: "Search & Go",
+    buttonType: 'primary',
+    children: 'Search & Go',
     showLeadingIcon: true,
     showTrailingIcon: true,
   },
-  render: (args) => (
+  render: args => (
     <Button
       {...args}
       leadingIcon={args.showLeadingIcon ? Search : undefined}
@@ -106,28 +106,23 @@ export const WithIcons: Story = {
 
 export const IconOnly: Story = {
   args: {
-    buttonType: "primary",
-    subType: "iconOnly",
-    "aria-label": "Add item",
+    buttonType: 'primary',
+    subType: 'iconOnly',
+    'aria-label': 'Add item',
     showLeadingIcon: true,
   },
-  render: (args) => (
-    <Button
-      {...args}
-      leadingIcon={args.showLeadingIcon ? Plus : undefined}
-    />
-  ),
+  render: args => <Button {...args} leadingIcon={args.showLeadingIcon ? Plus : undefined} />,
 };
 
 export const Link: Story = {
   args: {
-    buttonType: "primary",
-    subType: "link",
-    children: "Link Button",
+    buttonType: 'primary',
+    subType: 'link',
+    children: 'Link Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
-  render: (args) => (
+  render: args => (
     <Button
       {...args}
       leadingIcon={args.showLeadingIcon ? Search : undefined}
@@ -138,8 +133,8 @@ export const Link: Story = {
 
 export const Loading: Story = {
   args: {
-    buttonType: "primary",
-    children: "Loading",
+    buttonType: 'primary',
+    children: 'Loading',
     isLoading: true,
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -148,8 +143,8 @@ export const Loading: Story = {
 
 export const Disabled: Story = {
   args: {
-    buttonType: "primary",
-    children: "Disabled",
+    buttonType: 'primary',
+    children: 'Disabled',
     isDisabled: true,
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -158,9 +153,9 @@ export const Disabled: Story = {
 
 export const Small: Story = {
   args: {
-    buttonType: "primary",
-    size: "sm",
-    children: "Small Button",
+    buttonType: 'primary',
+    size: 'sm',
+    children: 'Small Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
@@ -168,9 +163,9 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    buttonType: "primary",
-    size: "md",
-    children: "Medium Button",
+    buttonType: 'primary',
+    size: 'md',
+    children: 'Medium Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
@@ -178,9 +173,9 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    buttonType: "primary",
-    size: "lg",
-    children: "Large Button",
+    buttonType: 'primary',
+    size: 'lg',
+    children: 'Large Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
@@ -188,8 +183,8 @@ export const Large: Story = {
 
 export const Secondary: Story = {
   args: {
-    buttonType: "secondary",
-    children: "Secondary Button",
+    buttonType: 'secondary',
+    children: 'Secondary Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
@@ -197,8 +192,8 @@ export const Secondary: Story = {
 
 export const Danger: Story = {
   args: {
-    buttonType: "danger",
-    children: "Danger Button",
+    buttonType: 'danger',
+    children: 'Danger Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },
@@ -206,8 +201,8 @@ export const Danger: Story = {
 
 export const Success: Story = {
   args: {
-    buttonType: "success",
-    children: "Success Button",
+    buttonType: 'success',
+    children: 'Success Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
   },

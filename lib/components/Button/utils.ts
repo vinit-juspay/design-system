@@ -3,8 +3,8 @@ import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
 export const getButtonClassNames = (
-  type: ButtonType, 
-  size: ButtonSize, 
+  type: ButtonType,
+  size: ButtonSize,
   subType: ButtonSubType
 ): string => {
   const theme = themeConfig.euler.button;
@@ -30,7 +30,7 @@ export const getButtonClassNames = (
       theme.linkColors[type].text,
       theme.linkColors[type].hover,
       theme.linkColors[type].focus,
-      theme.linkColors[type].disabled,
+      theme.linkColors[type].disabled
     );
   }
 
@@ -70,18 +70,13 @@ export const getButtonClassNames = (
 export const getIconClassNames = (size: ButtonSize, isLoading: boolean): string => {
   const theme = themeConfig.euler.button;
   const buttonSize = theme.sizes[size];
-  
-  return cn(
-    buttonSize.iconSize,
-    isLoading && 'animate-spin'
-  );
+
+  return cn(buttonSize.iconSize, isLoading && 'animate-spin');
 };
 
 export const getTextClassNames = (size: ButtonSize): string => {
   const theme = themeConfig.euler.button;
   const buttonSize = theme.sizes[size];
-  
-  return cn(
-    buttonSize.fontSize
-  );
-}; 
+
+  return cn(buttonSize.fontSize);
+};
