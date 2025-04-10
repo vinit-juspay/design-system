@@ -165,7 +165,7 @@ export const themeConfig = {
         base: 'inline-flex w-fit items-center justify-center gap-2 transition-all duration-200'
       }
     },
-    textInput: {
+    input: {
       label: {
         base: 'text-body-md font-medium tracking-normal',
         color: 'text-gray-700',
@@ -200,7 +200,13 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full bg-transparent text-body-md font-medium placeholder:font-normal text-gray-800 outline-none pl-9 pr-9 disabled:cursor-not-allowed',
+        base: 'w-full bg-transparent text-body-md font-medium placeholder:font-normal text-gray-800 outline-none disabled:cursor-not-allowed',
+        padding: {
+          default: 'px-3',
+          withLeftSlot: 'pl-9 pr-3',
+          withRightSlot: 'pl-3 pr-9',
+          withBothSlots: 'pl-9 pr-9',
+        },
         states: {
           default: 'placeholder:text-gray-400',
           disabled: 'placeholder:text-gray-300',
@@ -214,6 +220,9 @@ export const themeConfig = {
         },
       },
     },
+    textInput: {
+      // TextInput specific styles (if any)
+    },
     numberInput: {
       stepper: {
         base: 'flex flex-col border-l border-gray-200',
@@ -224,12 +233,31 @@ export const themeConfig = {
             hover: 'hover:bg-gray-50',
             active: 'active:bg-gray-100',
           },
+          sizes: {
+            md: 'h-[18px]',
+            lg: 'h-[20px]',
+          },
           divider: 'border-t border-gray-200',
           icon: 'w-2.5 h-2.5 fill-gray-800',
         },
       },
       input: {
         base: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+      },
+      slot: {
+        rightWithStepper: 'absolute right-11',
+      },
+    },
+    unitInput: {
+      unit: {
+        base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
+        positions: {
+          prefix: 'border-r border-gray-300 px-3',
+          suffix: 'border-l border-gray-300 px-3',
+        },
+        states: {
+          disabled: 'text-gray-300',
+        },
       },
     },
     tooltip: {
@@ -255,6 +283,29 @@ export const themeConfig = {
       },
       content: {
         baseStyles: "items-center text-gray-0",
+      },
+    },
+    otpInput: {
+      container: {
+        base: 'flex flex-col space-y-2',
+      },
+      inputsContainer: {
+        base: 'flex justify-between',
+        digits: {
+          '4': 'w-[204px]',
+          '6': 'w-[312px]',
+        },
+      },
+      digit: {
+        base: 'w-10 h-12 text-center text-body-lg font-medium rounded-xl border-[1px] transition-all focus:outline-none',
+        states: {
+          default: 'border-gray-300 bg-white',
+          hover: 'hover:border-gray-400',
+          focused: 'border-primary-500 ring-2 ring-primary-100',
+          filled: 'border-gray-300 bg-white',
+          error: 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed',
+        },
       },
     },
   }

@@ -2,32 +2,35 @@ import React, { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
 
-import { TextInputProps } from './types';
+import { UnitInputProps } from './types';
 import {
   getInputBaseClasses,
   getInputClasses,
   getLabelClasses,
   getSublabelClasses,
   getHintClasses,
-  getSlotClasses,
+} from '../TextInput/utils';
+import {
+  getUnitClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
-const inputTheme = themeConfig.euler.input;
+const { input: inputTheme } = themeConfig.euler;
 
-const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
+const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
   hintText = "This is a hint text to help user.",
   label = "Your Label",
-  leftSlot,
   mandatory = false,
-  placeholder = "Enter your email",
-  rightSlot,
+  placeholder = "Enter value",
   size = 'md',
   state = 'default',
   sublabel = "(optional)",
   value,
   infoTooltip,
   successMessage,
+  unitText = "kg",
+  unitPosition = "suffix",
+  showUnit = true,
   ...props
 }, ref) => {
   return (
@@ -56,29 +59,32 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
       )}
 
       {/* Input Base */}
-      <div className={getInputBaseClasses(size, state)}>
-        {/* Left Slot */}
-        {leftSlot && (
-          <div className={getSlotClasses('left')}>
-            {leftSlot}
+      <div className={`${getInputBaseClasses(size, state)} overflow-hidden`}>
+        {/* Prefix Unit */}
+        {showUnit && unitPosition === 'prefix' && (
+          <div className={getUnitClasses('prefix', state)}>
+            {unitText}
           </div>
         )}
 
         {/* Input */}
         <input
           ref={ref}
-          type="text"
-          className={getInputClasses(state, leftSlot, rightSlot)}
+          className={getInputClasses(
+            state,
+            showUnit && unitPosition === 'prefix' ? <div>unit</div> : undefined,
+            showUnit && unitPosition === 'suffix' ? <div>unit</div> : undefined
+          )}
           placeholder={placeholder}
           disabled={state === 'disabled'}
           defaultValue={value}
           {...props}
         />
 
-        {/* Right Slot */}
-        {rightSlot && (
-          <div className={getSlotClasses('right')}>
-            {rightSlot}
+        {/* Suffix Unit */}
+        {showUnit && unitPosition === 'suffix' && (
+          <div className={getUnitClasses('suffix', state)}>
+            {unitText}
           </div>
         )}
       </div>
@@ -98,6 +104,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   );
 });
 
-TextInput.displayName = 'TextInput';
+UnitInput.displayName = 'UnitInput';
 
-export default TextInput; 
+export default UnitInput; 

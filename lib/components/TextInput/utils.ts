@@ -2,7 +2,7 @@ import { TextInputSize, TextInputState } from './types';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 
-const textInputTheme = themeConfig.euler.textInput;
+const inputTheme = themeConfig.euler.input;
 
 export const getInputBaseClasses = (
   size: TextInputSize = 'md',
@@ -12,10 +12,10 @@ export const getInputBaseClasses = (
 ) => {
   const hasLeftSlot = !!leftSlot;
   const hasRightSlot = !!rightSlot;
-  const states = textInputTheme.inputBase.states;  
+  const states = inputTheme.inputBase.states;  
   return cn(
-    textInputTheme.inputBase.base,
-    textInputTheme.inputBase.sizes[size],
+    inputTheme.inputBase.base,
+    inputTheme.inputBase.sizes[size],
     // Apply default state and its hover
     state === 'default' && [
       states.default,
@@ -29,17 +29,34 @@ export const getInputBaseClasses = (
       states.disabled,
     ],
     // Apply other states directly
-    hasLeftSlot && textInputTheme.inputBase.slots.left,
-    hasRightSlot && textInputTheme.inputBase.slots.right,
+    hasLeftSlot && inputTheme.inputBase.slots.left,
+    hasRightSlot && inputTheme.inputBase.slots.right,
   );
   
   
 };
 
-export const getInputClasses = (state: TextInputState = 'default') => {
-  const states = textInputTheme.input.states;  
+export const getInputClasses = (
+  state: TextInputState = 'default',
+  leftSlot?: React.ReactNode,
+  rightSlot?: React.ReactNode
+) => {
+  const hasLeftSlot = !!leftSlot;
+  const hasRightSlot = !!rightSlot;
+  const states = inputTheme.input.states;
+  
+  let paddingClass = inputTheme.input.padding.default;
+  if (hasLeftSlot && hasRightSlot) {
+    paddingClass = inputTheme.input.padding.withBothSlots;
+  } else if (hasLeftSlot) {
+    paddingClass = inputTheme.input.padding.withLeftSlot;
+  } else if (hasRightSlot) {
+    paddingClass = inputTheme.input.padding.withRightSlot;
+  }
+  
   return cn(
-    textInputTheme.input.base,
+    inputTheme.input.base,
+    paddingClass,
     state === 'default' && [
       states.default,
     ],
@@ -51,8 +68,8 @@ export const getInputClasses = (state: TextInputState = 'default') => {
 
 export const getLabelClasses = (mandatory: boolean = false) => {
   return cn(
-    textInputTheme.label.base,
-    textInputTheme.label.color,
+    inputTheme.label.base,
+    inputTheme.label.color,
     {
       'after:content-["*"] after:ml-0.5 after:text-red-500': mandatory,
     }
@@ -61,21 +78,21 @@ export const getLabelClasses = (mandatory: boolean = false) => {
 
 export const getSublabelClasses = () => {
   return cn(
-    textInputTheme.sublabel.base,
-    textInputTheme.sublabel.color
+    inputTheme.sublabel.base,
+    inputTheme.sublabel.color
   );
 };
 
 export const getHintClasses = (state: TextInputState = 'default') => {
   return cn(
-    textInputTheme.hint.base,
-    state === 'error' ? textInputTheme.hint.error : state === 'success' ? textInputTheme.hint.success : textInputTheme.hint.color
+    inputTheme.hint.base,
+    state === 'error' ? inputTheme.hint.error : state === 'success' ? inputTheme.hint.success : inputTheme.hint.color
   );
 };
 
 export const getSlotClasses = (position: 'left' | 'right') => {
   return cn(
-    textInputTheme.slot.base,
-    textInputTheme.slot.positions[position]
+    inputTheme.slot.base,
+    inputTheme.slot.positions[position]
   );
 }; 

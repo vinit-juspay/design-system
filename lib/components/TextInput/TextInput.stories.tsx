@@ -5,7 +5,7 @@ import { Mail, ArrowRight } from "lucide-react";
 
 
 const meta: Meta<typeof TextInput> = {
-  title: "Components/TextInput",
+  title: "Components/Input/TextInput",
   component: TextInput,
   parameters: {
     layout: "centered",
@@ -102,5 +102,14 @@ export const Filled: Story = {
     ...Default.args,
     state: "filled",
     value: "test@test.com",
+  },
+};
+
+export const WithoutSlot: Story = {
+  args: {
+    ...Default.args,
+    leftSlot: undefined,
+    rightSlot: undefined,
+    hintText: 'TextInput without any slots',
   },
 };

@@ -1,5 +1,5 @@
 import React, { forwardRef, useCallback, useState, useEffect } from 'react';
-import { HelpCircle, DollarSign } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
 import { ChevronIcon } from './ChevronIcon';
 
@@ -17,15 +17,16 @@ import {
   getStepperButtonClasses,
   getStepperIconClasses,
   getNumberInputClasses,
+  getRightSlotWithStepperClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
-const { textInput: inputTheme } = themeConfig.euler;
+const { input: inputTheme } = themeConfig.euler;
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
   hintText = "This is a hint text to help user.",
   label = "Your Label",
-  leftSlot = <DollarSign className="text-gray-400 w-4 h-4" />,
+  leftSlot,
   mandatory = false,
   placeholder = "Add your number",
   rightSlot,
@@ -118,7 +119,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
         <input
           ref={ref}
           type="number"
-          className={`${getInputClasses(state)} ${getNumberInputClasses()}`}
+          className={`${getInputClasses(state, leftSlot, showStepper || rightSlot ? true : undefined)} ${getNumberInputClasses()}`}
           placeholder={placeholder}
           disabled={state === 'disabled'}
           value={inputValue}
@@ -132,7 +133,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
         {/* Right Slot with Stepper */}
         <div className="flex items-center">
           {rightSlot && (
-            <div className={getSlotClasses('right')}>
+            <div className={showStepper ? getRightSlotWithStepperClasses() : getSlotClasses('right')}>
               {rightSlot}
             </div>
           )}
@@ -140,7 +141,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
             <div className={getStepperClasses()}>
               <button
                 type="button"
-                className={getStepperButtonClasses()}
+                className={getStepperButtonClasses(false, size)}
                 onClick={() => handleStepperClick('up')}
                 disabled={
                   state === 'disabled' || 

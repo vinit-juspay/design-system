@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Mail } from 'lucide-react';
+import { DollarSign, Mail } from 'lucide-react';
 import { NumberInput } from '../../main';
 
 const meta = {
-  title: 'Components/NumberInput',
+  title: 'Components/Input/NumberInput',
   component: NumberInput,
   parameters: {
     layout: 'centered',
@@ -58,13 +58,12 @@ export const Default: Story = {
     label: 'Amount',
     sublabel: '(optional)',
     placeholder: 'Enter amount',
-    hintText: 'Enter a number between 0 and 100',
+    hintText: 'Enter the amount in USD',
     showStepper: true,
     size: 'md',
     state: 'default',
-    min: 0,
-    max: 100,
-    step: 1,
+    rightSlot: <DollarSign className="text-gray-400 w-4 h-4" />,
+    leftSlot: <DollarSign className="text-gray-400 w-4 h-4" />,
   },
 };
 
