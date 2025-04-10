@@ -15,7 +15,7 @@ const meta = {
     },
     state: {
       control: 'select',
-      options: ['default', 'hover', 'focused', 'filled', 'error', 'disabled'],
+      options: ['default', 'error', 'disabled'],
     },
     label: {
       control: 'text',

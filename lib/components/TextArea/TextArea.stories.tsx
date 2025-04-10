@@ -1,41 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import OTPInput from './OTPInput';
+import TextArea from './TextArea';
 
 const meta = {
-  title: 'Components/Input/OTPInput',
-  component: OTPInput,
+  title: 'Components/Input/TextArea',
+  component: TextArea,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
-    digits: {
-      control: 'select',
-      options: ['4', '6'],
-      description: 'Number of OTP digit inputs',
-      table: {
-        defaultValue: { summary: '6' },
-      },
-    },
     state: {
       control: 'select',
       options: ['default', 'error', 'disabled'],
-      description: 'The state of the OTP inputs',
+      description: 'The state of the textarea',
       table: {
         defaultValue: { summary: 'default' },
       },
     },
     label: {
       control: 'text',
-      description: 'The label text for the OTP input',
+      description: 'The label text for the textarea',
     },
     sublabel: {
       control: 'text',
       description: 'Additional helper text below the label',
     },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text for the textarea',
+    },
     hintText: {
       control: 'text',
-      description: 'Hint text displayed below the inputs',
+      description: 'Hint text displayed below the textarea',
     },
     showLabel: {
       control: 'boolean',
@@ -55,35 +51,43 @@ const meta = {
     },
     mandatory: {
       control: 'boolean',
-      description: 'Whether the input is required',
+      description: 'Whether the textarea is required',
+    },
+    rows: {
+      control: 'number',
+      description: 'Number of rows to display',
+    },
+    maxLength: {
+      control: 'number',
+      description: 'Maximum number of characters allowed',
     },
   },
-} satisfies Meta<typeof OTPInput>;
+} satisfies Meta<typeof TextArea>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'Verification Code',
-    sublabel: '(required)',
-    hintText: 'Enter the verification code sent to your device',
-    digits: '6',
-    state: 'default',
+    label: 'Your Feedback',
+    sublabel: '(optional)',
+    placeholder: 'Enter your feedback here',
+    hintText: 'Please provide any comments or suggestions',
     showLabel: true,
     showSublabel: true,
     showHint: true,
     showInfo: false,
-    mandatory: true,
+    mandatory: false,
+    rows: 4,
     onChange: fn(),
   },
 };
 
-export const FourDigits: Story = {
+export const Mandatory: Story = {
   args: {
     ...Default.args,
-    digits: '4',
-    sublabel: '4-digit code',
+    mandatory: true,
+    sublabel: '',
   },
 };
 
@@ -91,31 +95,7 @@ export const WithInfo: Story = {
   args: {
     ...Default.args,
     showInfo: true,
-    infoTooltip: 'The verification code was sent to your email or phone',
-  },
-};
-
-export const Focused: Story = {
-  args: {
-    ...Default.args,
-    state: 'focused',
-  },
-};
-
-export const Filled: Story = {
-  args: {
-    ...Default.args,
-    state: 'filled',
-    value: '123456',
-  },
-};
-
-export const FourDigitsFilled: Story = {
-  args: {
-    ...Default.args,
-    digits: '4',
-    state: 'filled',
-    value: '1234',
+    infoTooltip: 'Your feedback helps us improve our service',
   },
 };
 
@@ -123,7 +103,7 @@ export const Error: Story = {
   args: {
     ...Default.args,
     state: 'error',
-    hintText: 'Invalid verification code',
+    hintText: 'Please enter at least 10 characters',
   },
 };
 
@@ -131,6 +111,5 @@ export const Disabled: Story = {
   args: {
     ...Default.args,
     state: 'disabled',
-    hintText: 'You cannot edit this field',
   },
-}; 
+};

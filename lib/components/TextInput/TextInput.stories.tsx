@@ -22,7 +22,7 @@ const meta: Meta<typeof TextInput> = {
     },
     state: {
       control: "select",
-      options: ["default", "hover", "focused", "filled", "error", "disabled", "success"],
+      options: ["default", "error", "disabled", "success"],
       description: "The state of the input field",
       table: {
         defaultValue: { summary: "default" },
@@ -94,14 +94,6 @@ export const Disabled: Story = {
   args: {
     ...Default.args,
     state: "disabled",
-  },
-};
-
-export const Filled: Story = {
-  args: {
-    ...Default.args,
-    state: "filled",
-    value: "test@test.com",
   },
 };
 

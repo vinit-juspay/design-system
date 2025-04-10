@@ -8,3 +8,4 @@ export { default as TextInput } from './components/TextInput/TextInput';
 export { default as NumberInput } from './components/NumberInput/NumberInput';
 export { default as UnitInput } from './components/UnitInput/UnitInput';
 export { default as OTPInput } from './components/OTPInput/OTPInput';
+export { default as TextArea } from './components/TextArea/TextArea';

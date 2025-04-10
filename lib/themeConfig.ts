@@ -200,7 +200,7 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full bg-transparent text-body-md font-medium placeholder:font-normal text-gray-800 outline-none disabled:cursor-not-allowed',
+        base: 'w-full text-body-md font-medium placeholder:font-normal outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
         padding: {
           default: 'px-3',
           withLeftSlot: 'pl-9 pr-3',
@@ -208,8 +208,8 @@ export const themeConfig = {
           withBothSlots: 'pl-9 pr-9',
         },
         states: {
-          default: 'placeholder:text-gray-400',
-          disabled: 'placeholder:text-gray-300',
+          default: ' text-gray-800 placeholder:text-gray-400',
+          disabled: 'text-gray-400 placeholder:text-gray-300',
         },
       },
       slot: {
@@ -305,6 +305,22 @@ export const themeConfig = {
           filled: 'border-gray-300 bg-white',
           error: 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100',
           disabled: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed',
+        },
+      },
+    },
+    textArea: {
+      container: {
+        base: 'flex flex-col space-y-2',
+      },
+      textarea: {
+        base: 'w-full h-[100px] text-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border-[1px] transition-all placeholder:text-gray-400',
+        states: {
+          default: 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400',
+          hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
+          focused: 'border-primary-500 ring-2 ring-primary-100',
+          filled: 'border-gray-300 bg-white',
+          error: 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed placeholder:text-gray-300',
         },
       },
     },
