@@ -194,5 +194,141 @@ export const themeConfig = {
         baseStyles: "items-center text-gray-0",
       },
     },
+    alert: {
+      layout: {
+        container: "relative flex w-full rounded-md overflow-hidden",
+        heightWithBottomActions: "min-h-[135px]",
+        heightWithRightActions: "min-h-[97px]",
+        content: "flex items-start gap-3 p-4",
+        contentWithBottomActions: "flex-col",
+        contentWithRightActions: "flex-row",
+        actions: "flex gap-2",
+        bottomActions: "mt-2 ml-7",
+        rightActions: "items-center",
+      },
+      typography: {
+        title: "font-medium text-base mb-1",
+        description: "text-sm",
+      },
+      icon: {
+        size: "w-5 h-5",
+      },
+      closeButton: {
+        base: "absolute top-4 right-4 p-0.5 rounded-sm hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
+      },
+      styles: {
+        fill: {
+          primary: {
+            background: "bg-blue-500",
+            border: "border border-blue-600",
+            iconColor: "text-white",
+          },
+          success: {
+            background: "bg-green-500",
+            border: "border border-green-600",
+            iconColor: "text-white",
+          },
+          purple: {
+            background: "bg-purple-500",
+            border: "border border-purple-600",
+            iconColor: "text-white",
+          },
+          warning: {
+            background: "bg-yellow-500",
+            border: "border border-yellow-600",
+            iconColor: "text-white",
+          },
+          neutral: {
+            background: "bg-gray-500",
+            border: "border border-gray-600",
+            iconColor: "text-white",
+          },
+          error: {
+            background: "bg-red-500",
+            border: "border border-red-600",
+            iconColor: "text-white",
+          },
+          orange: {
+            background: "bg-orange-500",
+            border: "border border-orange-600",
+            iconColor: "text-white",
+          },
+        },
+        subtle: {
+          primary: {
+            background: "bg-blue-100",
+            border: "border border-blue-200",
+            iconColor: "text-blue-600",
+          },
+          success: {
+            background: "bg-green-100",
+            border: "border border-green-200",
+            iconColor: "text-green-600",
+          },
+          purple: {
+            background: "bg-purple-100",
+            border: "border border-purple-200",
+            iconColor: "text-purple-600",
+          },
+          warning: {
+            background: "bg-yellow-100",
+            border: "border border-yellow-200",
+            iconColor: "text-yellow-600",
+          },
+          neutral: {
+            background: "bg-gray-100",
+            border: "border border-gray-200",
+            iconColor: "text-gray-600",
+          },
+          error: {
+            background: "bg-red-100",
+            border: "border border-red-200",
+            iconColor: "text-red-600",
+          },
+          orange: {
+            background: "bg-orange-100",
+            border: "border border-orange-200",
+            iconColor: "text-orange-600",
+          },
+        },
+        noFill: {
+          primary: {
+            background: "bg-transparent",
+            border: "border border-blue-300",
+            iconColor: "text-blue-600",
+          },
+          success: {
+            background: "bg-transparent",
+            border: "border border-green-300",
+            iconColor: "text-green-600",
+          },
+          purple: {
+            background: "bg-transparent",
+            border: "border border-purple-300",
+            iconColor: "text-purple-600",
+          },
+          warning: {
+            background: "bg-transparent",
+            border: "border border-yellow-300",
+            iconColor: "text-yellow-600",
+          },
+          neutral: {
+            background: "bg-transparent",
+            border: "border border-gray-300",
+            iconColor: "text-gray-600",
+          },
+          error: {
+            background: "bg-transparent",
+            border: "border border-red-300",
+            iconColor: "text-red-600",
+          },
+          orange: {
+            background: "bg-transparent",
+            border: "border border-orange-300",
+            iconColor: "text-orange-600",
+          },
+        },
+      },
+    },
   }
 }; 
