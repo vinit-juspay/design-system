@@ -132,6 +132,10 @@ export interface MenuProps {
    */
   multiSelect?: MenuMultiSelectProps;
   /**
+   * Position of checkboxes relative to text
+   */
+  checkboxPosition?: 'left' | 'right';
+  /**
    * Additional props for the dropdown menu root
    */
   rootProps?: Omit<DropdownMenu.DropdownMenuProps, 'children'>;

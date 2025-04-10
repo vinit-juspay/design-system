@@ -173,34 +173,28 @@ export const themeConfig = {
       }
     },
     checkbox: {
-      baseStyles: "flex items-center justify-center rounded border border-primary-500 bg-white",
+      baseStyles: "flex items-center justify-center rounded border border-primary-500 bg-white focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1",
       indicator: {
         baseStyles: "flex items-center justify-center",
-        icon: "text-primary-500"
+        icon: "text-white"
       },
       sizes: {
         sm: {
-          root: "h-3.5 w-3.5",
+          root: "h-3.5 w-3.5 rounded",
           indicator: "h-3.5 w-3.5",
           checkIcon: "h-2.5 w-2.5",
           fontSize: "text-body-sm",
         },
         md: {
-          root: "h-4 w-4",
+          root: "h-4 w-4 rounded",
           indicator: "h-4 w-4",
           checkIcon: "h-3 w-3",
           fontSize: "text-body-md",
-        },
-        lg: {
-          root: "h-5 w-5",
-          indicator: "h-5 w-5",
-          checkIcon: "h-4 w-4",
-          fontSize: "text-body-lg",
-        },
+        }
       },
       states: {
-        disabled: "opacity-50 cursor-not-allowed",
-        enabled: "cursor-pointer",
+        disabled: "opacity-50 cursor-not-allowed bg-gray-100 border-gray-300",
+        enabled: "cursor-pointer data-[state=checked]:bg-primary-500 data-[state=checked]:border-primary-500 data-[state=indeterminate]:bg-primary-500 data-[state=indeterminate]:border-primary-500 hover:border-primary-600 hover:data-[state=checked]:bg-primary-600 hover:data-[state=indeterminate]:bg-primary-600 transition-colors duration-150",
         labelDisabled: "text-gray-400 cursor-not-allowed",
         labelEnabled: "text-gray-700 cursor-pointer"
       }

@@ -56,6 +56,11 @@ export interface SelectProps extends React.ComponentPropsWithoutRef<typeof Selec
   multiSelect?: boolean;
   
   /**
+   * Position of checkboxes relative to text (for multiSelect mode)
+   */
+  checkboxPosition?: 'left' | 'right';
+  
+  /**
    * Placeholder text when no value is selected
    */
   placeholder?: string;

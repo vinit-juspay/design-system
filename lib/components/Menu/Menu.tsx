@@ -40,6 +40,7 @@ const Menu = React.forwardRef<
   side = 'bottom',
   search,
   multiSelect,
+  checkboxPosition = 'left',
   rootProps,
   contentProps,
 }, ref) => {
@@ -113,17 +114,36 @@ const Menu = React.forwardRef<
             disabled={item.disabled}
             className={getCheckClassNames()}
           >
-            <div className="flex items-center gap-2">
-              <Checkbox 
-                checked={isChecked}
-                disabled={item.disabled}
-                size="sm"
-                // We're controlling this from the parent, so no need for direct change handling
-                onCheckedChange={() => {}}
-              />
-              {item.icon && <item.icon className={getIconClassNames()} />}
-              {item.content}
-            </div>
+            {checkboxPosition === 'left' ? (
+              <div className="flex items-center w-full justify-between">
+                <Checkbox 
+                  checked={isChecked}
+                  disabled={item.disabled}
+                  size="sm"
+                  position="left"
+                  onCheckedChange={() => {}}
+                >
+                  <div className="flex items-center">
+                    {item.icon && <item.icon className={getIconClassNames()} />}
+                    {item.content}
+                  </div>
+                </Checkbox>
+              </div>
+            ) : (
+              <div className="flex items-center w-full justify-between">
+                <div className="flex items-center">
+                  {item.icon && <item.icon className={getIconClassNames()} />}
+                  {item.content}
+                </div>
+                <Checkbox 
+                  checked={isChecked}
+                  disabled={item.disabled}
+                  size="sm"
+                  onCheckedChange={() => {}}
+                  className="ml-4"
+                />
+              </div>
+            )}
           </DropdownMenu.CheckboxItem>
         );
       }
@@ -136,17 +156,36 @@ const Menu = React.forwardRef<
           disabled={item.disabled}
           className={getCheckClassNames()}
         >
-          <div className="flex items-center gap-2">
-            <Checkbox 
-              checked={item.checked}
-              disabled={item.disabled}
-              size="sm"
-              // We're controlling this from the parent, so no need for direct change handling
-              onCheckedChange={() => {}}
-            />
-            {item.icon && <item.icon className={getIconClassNames()} />}
-            {item.content}
-          </div>
+          {checkboxPosition === 'left' ? (
+            <div className="flex items-center w-full justify-between">
+              <Checkbox 
+                checked={item.checked}
+                disabled={item.disabled}
+                size="sm"
+                position="left"
+                onCheckedChange={() => {}}
+              >
+                <div className="flex items-center">
+                  {item.icon && <item.icon className={getIconClassNames()} />}
+                  {item.content}
+                </div>
+              </Checkbox>
+            </div>
+          ) : (
+            <div className="flex items-center w-full justify-between">
+              <div className="flex items-center">
+                {item.icon && <item.icon className={getIconClassNames()} />}
+                {item.content}
+              </div>
+              <Checkbox 
+                checked={item.checked}
+                disabled={item.disabled}
+                size="sm"
+                onCheckedChange={() => {}}
+                className="ml-4"
+              />
+            </div>
+          )}
         </DropdownMenu.CheckboxItem>
       );
     }

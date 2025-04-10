@@ -52,6 +52,7 @@ const Select = React.forwardRef<
   size = 'md',
   search,
   multiSelect = false,
+  checkboxPosition = 'left',
 }, ref) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
@@ -165,17 +166,37 @@ const Select = React.forwardRef<
                 className={getSelectItemClassNames(groupItem.disabled)}
                 onClick={() => !groupItem.disabled && handleMultiSelectChange(groupItem.value)}
               >
-                <div className="flex items-center">
-                  <Checkbox 
-                    checked={isSelected}
-                    disabled={groupItem.disabled}
-                    size="sm"
-                    onCheckedChange={() => {}}
-                    className="mr-2"
-                  />
-                  {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
-                  <span>{groupItem.text}</span>
-                </div>
+                {checkboxPosition === 'left' ? (
+                  <div className="flex items-center w-full justify-between">
+                    <Checkbox 
+                      checked={isSelected}
+                      disabled={groupItem.disabled}
+                      size="sm"
+                      position="left"
+                      onCheckedChange={() => {}}
+                      className="mr-2"
+                    >
+                      <div className="flex items-center">
+                        {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
+                        <span>{groupItem.text}</span>
+                      </div>
+                    </Checkbox>
+                  </div>
+                ) : (
+                  <div className="flex items-center w-full justify-between">
+                    <div className="flex items-center">
+                      {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
+                      <span>{groupItem.text}</span>
+                    </div>
+                    <Checkbox 
+                      checked={isSelected}
+                      disabled={groupItem.disabled}
+                      size="sm"
+                      onCheckedChange={() => {}}
+                      className="ml-4"
+                    />
+                  </div>
+                )}
               </div>
             ) : (
               <SelectPrimitive.Item
@@ -215,17 +236,37 @@ const Select = React.forwardRef<
         className={getSelectItemClassNames(standardItem.disabled)}
         onClick={() => !standardItem.disabled && handleMultiSelectChange(standardItem.value)}
       >
-        <div className="flex items-center">
-          <Checkbox 
-            checked={isSelected}
-            disabled={standardItem.disabled}
-            size="sm"
-            onCheckedChange={() => {}}
-            className="mr-2"
-          />
-          {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
-          <span>{standardItem.text}</span>
-        </div>
+        {checkboxPosition === 'left' ? (
+          <div className="flex items-center w-full justify-between">
+            <Checkbox 
+              checked={isSelected}
+              disabled={standardItem.disabled}
+              size="sm"
+              position="left"
+              onCheckedChange={() => {}}
+              className="mr-2"
+            >
+              <div className="flex items-center">
+                {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
+                <span>{standardItem.text}</span>
+              </div>
+            </Checkbox>
+          </div>
+        ) : (
+          <div className="flex items-center w-full justify-between">
+            <div className="flex items-center">
+              {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
+              <span>{standardItem.text}</span>
+            </div>
+            <Checkbox 
+              checked={isSelected}
+              disabled={standardItem.disabled}
+              size="sm"
+              onCheckedChange={() => {}}
+              className="ml-4"
+            />
+          </div>
+        )}
       </div>
     ) : (
       <SelectPrimitive.Item

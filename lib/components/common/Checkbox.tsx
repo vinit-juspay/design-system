@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { Check } from 'lucide-react';
+import { Check, Minus } from 'lucide-react';
 import { themeConfig } from '../../themeConfig';
 
 export interface CheckboxProps {
   /**
-   * Whether the checkbox is checked or not
+   * Whether the checkbox is checked, unchecked, or indeterminate
    */
-  checked?: boolean;
+  checked?: boolean | 'indeterminate';
   /**
    * Called when the checked state changes
    */
@@ -39,11 +39,15 @@ export interface CheckboxProps {
   /**
    * Size variant for the checkbox
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md';
   /**
    * Children to render next to the checkbox (like a label)
    */
   children?: React.ReactNode;
+  /**
+   * Position of the checkbox relative to children/label
+   */
+  position?: 'left' | 'right';
 }
 
 /**
@@ -74,6 +78,7 @@ const Checkbox = React.forwardRef<
   checkIconClassName = '',
   size = 'md',
   children,
+  position = 'left',
 }, ref) => {
   // Get styles from theme config
   const { baseStyles, indicator, sizes, states } = themeConfig.euler.checkbox;
@@ -85,26 +90,50 @@ const Checkbox = React.forwardRef<
   const checkClassName = `${indicator.icon} ${sizeClasses.checkIcon} ${checkIconClassName}`;
   const labelClassName = `${sizeClasses.fontSize} ${disabled ? states.labelDisabled : states.labelEnabled}`;
 
-  return (
-    <div className="flex items-center space-x-2">
-      <CheckboxPrimitive.Root
-        ref={ref}
-        checked={checked}
-        onCheckedChange={onCheckedChange}
-        disabled={disabled}
-        required={required}
-        value={value}
-        className={rootClassName}
+  // Determine the appropriate indicator based on checked state
+  const renderIndicator = () => {
+    if (!checked) return null;
+    
+    if (checked === 'indeterminate') {
+      return <Minus className={checkClassName} />;
+    }
+    
+    return <Check className={checkClassName} />;
+  };
+
+  // Checkbox element
+  const checkboxElement = (
+    <CheckboxPrimitive.Root
+      ref={ref}
+      checked={checked === 'indeterminate' ? false : checked}
+      onCheckedChange={onCheckedChange}
+      disabled={disabled}
+      required={required}
+      value={value}
+      className={rootClassName}
+      data-state={checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
+    >
+      <CheckboxPrimitive.Indicator 
+        className={indicatorContainerClassName}
+        forceMount={checked === 'indeterminate' ? true : undefined}
       >
-        <CheckboxPrimitive.Indicator className={indicatorContainerClassName}>
-          <Check className={checkClassName} />
-        </CheckboxPrimitive.Indicator>
-      </CheckboxPrimitive.Root>
-      {children && (
-        <label className={labelClassName}>
-          {children}
-        </label>
-      )}
+        {renderIndicator()}
+      </CheckboxPrimitive.Indicator>
+    </CheckboxPrimitive.Root>
+  );
+
+  // Label element if children exist
+  const labelElement = children && (
+    <label className={labelClassName}>
+      {children}
+    </label>
+  );
+
+  // Render based on position
+  return (
+    <div className={`flex items-center ${position === 'left' ? 'space-x-2' : 'space-x-reverse space-x-2 flex-row-reverse'}`}>
+      {checkboxElement}
+      {labelElement}
     </div>
   );
 });

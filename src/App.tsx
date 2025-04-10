@@ -809,17 +809,30 @@ const App = () => {
           </Checkbox>
         </div>
         
+        {/* Indeterminate state */}
+        <div className="flex gap-8 mt-4">
+          <Checkbox checked="indeterminate">
+            Indeterminate state
+          </Checkbox>
+        </div>
+        
         {/* Different sizes */}
         <div className="flex gap-8 mt-4">
           <Checkbox size="sm">Small checkbox</Checkbox>
           <Checkbox size="md">Medium checkbox</Checkbox>
-          <Checkbox size="lg">Large checkbox</Checkbox>
+        </div>
+        
+        {/* Different positions */}
+        <div className="flex gap-8 mt-4">
+          <Checkbox position="left">Checkbox on left (default)</Checkbox>
+          <Checkbox position="right">Checkbox on right</Checkbox>
         </div>
         
         {/* Disabled state */}
         <div className="flex gap-8 mt-4">
           <Checkbox disabled>Disabled unchecked</Checkbox>
           <Checkbox disabled checked={true}>Disabled checked</Checkbox>
+          <Checkbox disabled checked="indeterminate">Disabled indeterminate</Checkbox>
         </div>
         
         {/* Checkbox without label */}
@@ -828,6 +841,95 @@ const App = () => {
           <span className="text-sm text-gray-600">
             Standalone checkbox is {isTermsAccepted ? 'checked' : 'unchecked'}
           </span>
+        </div>
+      </div>
+
+      {/* Add examples of position control for Menu and Select multi-select */}
+      <div className="flex flex-col gap-4 mt-8">
+        <h3 className="text-xl font-semibold">Checkbox Position in Menu</h3>
+        <div className="flex gap-8 items-center justify-center">
+          {/* Menu with checkbox list positioned on the left */}
+          <Menu 
+            items={[
+              { content: 'Left Position (Default)', isLabel: true },
+              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
+              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
+            ]}
+            multiSelect={{
+              enabled: true,
+              selectedValues: selectedNotifications,
+              onSelectionChange: (values) => setSelectedNotifications(values)
+            }}
+            checkboxPosition="left"
+          >
+            <Button buttonType="secondary" size="md">
+              Checkboxes Left
+            </Button>
+          </Menu>
+
+          {/* Menu with checkbox list positioned on the right */}
+          <Menu 
+            items={[
+              { content: 'Right Position', isLabel: true },
+              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
+              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
+            ]}
+            multiSelect={{
+              enabled: true,
+              selectedValues: selectedNotifications,
+              onSelectionChange: (values) => setSelectedNotifications(values)
+            }}
+            checkboxPosition="right"
+          >
+            <Button buttonType="secondary" size="md">
+              Checkboxes Right
+            </Button>
+          </Menu>
+        </div>
+
+        <h3 className="text-xl font-semibold mt-6">Checkbox Position in Select</h3>
+        <div className="flex gap-8">
+          {/* Select with checkboxes on the left */}
+          <div className="w-64">
+            <p className="font-medium text-gray-700 mb-2">Left Position (Default)</p>
+            <Select 
+              placeholder="Select skills"
+              value={selectedSkills}
+              onValueChange={(value) => {
+                if (Array.isArray(value)) {
+                  setSelectedSkills(value);
+                }
+              }}
+              multiSelect
+              checkboxPosition="left"
+              items={[
+                { value: "javascript", text: "JavaScript", icon: Tag },
+                { value: "typescript", text: "TypeScript", icon: Tag },
+                { value: "python", text: "Python", icon: Tag },
+              ]}
+            />
+          </div>
+
+          {/* Select with checkboxes on the right */}
+          <div className="w-64">
+            <p className="font-medium text-gray-700 mb-2">Right Position</p>
+            <Select 
+              placeholder="Select skills"
+              value={selectedSkills}
+              onValueChange={(value) => {
+                if (Array.isArray(value)) {
+                  setSelectedSkills(value);
+                }
+              }}
+              multiSelect
+              checkboxPosition="right"
+              items={[
+                { value: "javascript", text: "JavaScript", icon: Tag },
+                { value: "typescript", text: "TypeScript", icon: Tag },
+                { value: "python", text: "Python", icon: Tag },
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>
