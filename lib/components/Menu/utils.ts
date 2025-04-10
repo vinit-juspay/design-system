@@ -134,4 +134,61 @@ export const filterMenuItems = (
     const itemText = String(item.content).toLowerCase();
     return itemText.includes(lowerCaseQuery);
   });
+};
+
+/**
+ * Filter select items based on search query
+ * This is a utility function for the Select component to use the Menu search functionality
+ * 
+ * @param items - Select items to filter
+ * @param query - Search query
+ * @returns Filtered select items
+ */
+export const filterSelectItems = (
+  items: any[],
+  query: string
+): any[] => {
+  if (!query) return items;
+  
+  const lowerCaseQuery = query.toLowerCase();
+  
+  const filteredItems = items.filter(item => {
+    // Keep separators
+    if ('isSeparator' in item && item.isSeparator) {
+      return false; // Hide separators when searching
+    }
+    
+    // Handle group items
+    if ('label' in item && 'items' in item) {
+      // Filter the items in the group
+      const filteredGroupItems = filterSelectItems(item.items, query);
+      
+      // If there are filtered items, keep the group
+      if (filteredGroupItems.length > 0) {
+        // Store the filtered items for later use
+        item._filteredItems = filteredGroupItems;
+        return true;
+      }
+      
+      // If the group label matches, keep the group with all items
+      const labelText = String(item.label).toLowerCase();
+      return labelText.includes(lowerCaseQuery);
+    }
+    
+    // For standard select items
+    const itemText = String(item.text || item.value).toLowerCase();
+    return itemText.includes(lowerCaseQuery);
+  });
+  
+  // Process the filtered items to replace group items with their filtered versions
+  return filteredItems.map(item => {
+    if ('label' in item && 'items' in item && item._filteredItems) {
+      return {
+        ...item,
+        items: item._filteredItems,
+        _filteredItems: undefined
+      };
+    }
+    return item;
+  });
 }; 

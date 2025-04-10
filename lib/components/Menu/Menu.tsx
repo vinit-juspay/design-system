@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Check, Search } from 'lucide-react';
-import { MenuProps, MenuItemProps, MenuItemWithSeparatorProps, MenuStandardProps } from './types';
+import { MenuProps, MenuItemWithSeparatorProps, MenuStandardProps } from './types';
 import { 
   getMenuClassNames, 
   getMenuItemClassNames, 
@@ -14,7 +14,6 @@ import {
   filterMenuItems
 } from './utils';
 import { themeConfig } from '../../themeConfig';
-import { cn } from '../../utils';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive

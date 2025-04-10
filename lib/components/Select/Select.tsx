@@ -19,6 +19,7 @@ import {
   getSelectSearchIconClassNames,
   getSelectSearchInputClassNames
 } from './utils';
+import { filterSelectItems } from '../Menu/utils';
 
 /**
  * Select component built on top of Radix UI's select primitive
@@ -70,24 +71,7 @@ const Select = React.forwardRef<
       return items;
     }
     
-    const filterItem = (item: SelectItemProps | SelectGroupProps | SeparatorItem): boolean => {
-      if ('isSeparator' in item && item.isSeparator) {
-        return false;
-      }
-      
-      if ('label' in item && 'items' in item) {
-        // It's a group, check if any item in the group matches
-        const groupItems = item.items.filter(filterItem);
-        return groupItems.length > 0;
-      }
-      
-      // It's a regular item
-      const standardItem = item as SelectItemProps;
-      const searchText = String(standardItem.text || standardItem.value).toLowerCase();
-      return searchText.includes(searchQuery.toLowerCase());
-    };
-    
-    return items.filter(filterItem);
+    return filterSelectItems(items, searchQuery);
   }, [items, searchQuery, search?.enabled]);
 
   // Handle search input changes
