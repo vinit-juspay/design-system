@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
 

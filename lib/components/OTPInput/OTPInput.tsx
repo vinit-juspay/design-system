@@ -148,7 +148,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
       {/* Label */}
       {showLabel && label && (
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+          <div className="flex gap-1">
             <label className={getLabelClasses()}>
               {label} {mandatory && (
               <sup className={inputTheme.label.mandatory}>*</sup>
