@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { SelectProps, SelectItemProps, SelectGroupProps, SelectItemWithSeparatorProps, SeparatorItem } from './types';
 import {
   getSelectTriggerClassNames,
@@ -13,7 +13,11 @@ import {
   getSelectLabelClassNames,
   getSelectSeparatorClassNames,
   getSelectScrollButtonClassNames,
-  getSelectChevronClassNames
+  getSelectChevronClassNames,
+  getSelectSearchContainerClassNames,
+  getSelectSearchInnerContainerClassNames,
+  getSelectSearchIconClassNames,
+  getSelectSearchInputClassNames
 } from './utils';
 
 /**
@@ -48,7 +52,59 @@ const Select = React.forwardRef<
   contentProps,
   triggerProps,
   size = 'md',
+  search,
 }, ref) => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [isOpen, setIsOpen] = React.useState(false);
+  
+  // Reset search query when dropdown is closed
+  React.useEffect(() => {
+    if (!isOpen) {
+      setSearchQuery('');
+    }
+  }, [isOpen]);
+
+  // Filter items based on search query
+  const filteredItems = React.useMemo(() => {
+    if (!search?.enabled || !searchQuery) {
+      return items;
+    }
+    
+    const filterItem = (item: SelectItemProps | SelectGroupProps | SeparatorItem): boolean => {
+      if ('isSeparator' in item && item.isSeparator) {
+        return false;
+      }
+      
+      if ('label' in item && 'items' in item) {
+        // It's a group, check if any item in the group matches
+        const groupItems = item.items.filter(filterItem);
+        return groupItems.length > 0;
+      }
+      
+      // It's a regular item
+      const standardItem = item as SelectItemProps;
+      const searchText = String(standardItem.text || standardItem.value).toLowerCase();
+      return searchText.includes(searchQuery.toLowerCase());
+    };
+    
+    return items.filter(filterItem);
+  }, [items, searchQuery, search?.enabled]);
+
+  // Handle search input changes
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // Prevent keyboard events from propagating up
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  };
+
+  // Prevent clicks from closing the menu
+  const handleSearchInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  };
+
   // Find the selected item to display its icon in the trigger
   const selectedItem = React.useMemo(() => {
     const findItemInArray = (items: Array<SelectItemProps | SelectGroupProps | SeparatorItem>): SelectItemProps | undefined => {
@@ -144,6 +200,7 @@ const Select = React.forwardRef<
       defaultValue={defaultValue}
       onValueChange={onValueChange}
       disabled={disabled}
+      onOpenChange={setIsOpen}
       {...rootProps}
     >
       <SelectPrimitive.Trigger 
@@ -177,8 +234,29 @@ const Select = React.forwardRef<
             <ChevronUp className={getSelectChevronClassNames()} strokeWidth={2} />
           </SelectPrimitive.ScrollUpButton>
           
+          {search?.enabled && (
+            <div className={getSelectSearchContainerClassNames()}>
+              <div className={getSelectSearchInnerContainerClassNames()}>
+                <Search className={getSelectSearchIconClassNames()} />
+                <input
+                  type="text"
+                  placeholder={search.placeholder || "Search..."}
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  onClick={handleSearchInputClick}
+                  onKeyDown={handleSearchKeyDown}
+                  className={getSelectSearchInputClassNames()}
+                />
+              </div>
+            </div>
+          )}
+          
           <SelectPrimitive.Viewport className={getSelectViewportClassNames()}>
-            {items.map((item, index) => renderSelectItem(item, index))}
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item, index) => renderSelectItem(item, index))
+            ) : (
+              <div className="py-2 px-2 text-sm text-gray-500">No results found</div>
+            )}
           </SelectPrimitive.Viewport>
           
           <SelectPrimitive.ScrollDownButton className={getSelectScrollButtonClassNames()}>

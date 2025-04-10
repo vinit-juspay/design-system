@@ -50,6 +50,7 @@ This project is a design system intended to provide reusable UI components forJu
 - Use environment variables for configuration (e.g., `.env` files).
 
 ## Design System Best Practices
+- Please explain each step what you are doing
 - Ensure components are reusable and composable.
 - Prioritize accessibility by following WCAG guidelines.
 - Write unit tests for components using Jest or Vitest.

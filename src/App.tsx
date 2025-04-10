@@ -1,4 +1,4 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell } from "lucide-react";
 import { Button, Tooltip, Menu, Select } from "../lib/main";
 import { useState } from "react";
 
@@ -435,6 +435,43 @@ const App = () => {
         </Menu>
       </div>
 
+      {/* Menu with search functionality */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Account', isLabel: true },
+            { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
+            { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
+            { content: 'Billing', icon: CreditCard, onSelect: () => console.log('Billing') },
+            { content: 'Subscription', icon: Calendar, onSelect: () => console.log('Subscription') },
+            { isSeparator: true },
+            { content: 'Team', isLabel: true },
+            { content: 'Invite Members', icon: UserPlus, onSelect: () => console.log('Invite Members') },
+            { content: 'Add Organization', icon: Building, onSelect: () => console.log('Add Organization') },
+            { content: 'Team Settings', icon: Users, onSelect: () => console.log('Team Settings') },
+            { isSeparator: true },
+            { content: 'Resources', isLabel: true },
+            { content: 'Documentation', icon: FileText, onSelect: () => console.log('Documentation') },
+            { content: 'Guides', icon: BookOpen, onSelect: () => console.log('Guides') },
+            { content: 'Help Center', icon: HelpCircle, onSelect: () => console.log('Help Center') },
+            { content: 'Community Forums', icon: MessageSquare, onSelect: () => console.log('Community Forums') },
+            { isSeparator: true },
+            { content: 'Preferences', isLabel: true },
+            { content: 'Appearance', icon: Eye, onSelect: () => console.log('Appearance') },
+            { content: 'Notifications', icon: Bell, onSelect: () => console.log('Notifications') },
+            { content: 'Language', icon: Globe, onSelect: () => console.log('Language') },
+            { isSeparator: true },
+            { content: 'Sign out', icon: LogOut, onSelect: () => console.log('Sign out') }
+          ]}
+          search={{
+            enabled: true,
+            placeholder: "Search menu..."
+          }}
+        >
+          <Button buttonType="secondary" size="md">Searchable Menu</Button>
+        </Menu>
+      </div>
+
       {/* Select Examples */}
       <h2 className="text-2xl font-semibold mt-8">Select Examples</h2>
       
@@ -605,6 +642,38 @@ const App = () => {
             { value: "now", text: "Deliver Now", icon: Clock },
             { value: "scheduled", text: "Schedule Delivery", disabled: true },
             { value: "pickup", text: "Pick Up Later" }
+          ]}
+        />
+      </div>
+
+      {/* With Search Feature */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">With Search Feature</p>
+        <Select 
+          placeholder="Search payment gateways..."
+          search={{
+            enabled: true,
+            placeholder: "Search payment gateways..."
+          }}
+          items={[
+            { 
+              label: "Currently Available", 
+              items: [
+                { value: "razorpay", text: "Razorpay", icon: CreditCard },
+                { value: "adyen", text: "Adyen", icon: CreditCard },
+                { value: "cfp", text: "CFP", icon: CreditCard },
+                { value: "stripe", text: "Stripe", icon: CreditCard }
+              ] 
+            },
+            { isSeparator: true },
+            { 
+              label: "Unavailable", 
+              items: [
+                { value: "paytm", text: "Paytm", icon: CreditCard, disabled: true },
+                { value: "braintree", text: "Braintree", icon: CreditCard, disabled: true },
+                { value: "coinbase", text: "Coinbase", icon: CreditCard, disabled: true }
+              ] 
+            }
           ]}
         />
       </div>

@@ -27,11 +27,11 @@ export interface SeparatorItem {
 export type SelectItemWithSeparatorProps = SelectItemProps | SeparatorItem | SelectGroupProps;
 
 // Main props for Select component
-export interface SelectProps {
+export interface SelectProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {
   /**
    * Items to be displayed in the select menu
    */
-  items: (SelectItemProps | SelectGroupProps | SeparatorItem)[];
+  items: Array<SelectItemProps | SelectGroupProps | SeparatorItem>;
   
   /**
    * Current selected value
@@ -66,17 +66,17 @@ export interface SelectProps {
   /**
    * Optional props for Radix Select.Root
    */
-  rootProps?: Omit<React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'defaultValue' | 'value' | 'onValueChange'>;
+  rootProps?: SelectPrimitive.SelectProps;
   
   /**
    * Optional props for Radix Select.Content
    */
-  contentProps?: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>;
+  contentProps?: Omit<SelectPrimitive.SelectContentProps, 'ref'>;
   
   /**
    * Optional props for Radix Select.Trigger
    */
-  triggerProps?: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>;
+  triggerProps?: SelectPrimitive.SelectTriggerProps;
   
   /**
    * Size variant for the select
@@ -87,4 +87,12 @@ export interface SelectProps {
    * Optional additional className for the component
    */
   className?: string;
+  
+  /**
+   * Search functionality
+   */
+  search?: {
+    enabled: boolean;
+    placeholder?: string;
+  };
 } 

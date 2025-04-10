@@ -114,9 +114,9 @@ export const themeConfig = {
       },
     },
     menu: {
-      baseStyles: "z-50 min-w-[8rem] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      baseStyles: "z-50 min-w-[128px] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
       item: {
-        baseStyles: "relative text-body-sm font-500 flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
+        baseStyles: "relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
         icon: "h-4 w-4 mr-2"
       },
       label: {
@@ -125,9 +125,15 @@ export const themeConfig = {
       separator: {
         baseStyles: "h-px my-1 bg-gray-200"
       },
+      search: {
+        baseStyles: "px-2 py-0 border-b border-gray-200",
+        container: "flex items-center bg-white",
+        icon: "h-4 w-4 text-gray-400",
+        input: "w-full px-2 py-1.5 text-body-md font-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 border-0 focus:ring-0 bg-transparent"
+      },
       checkbox: {
         baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
-        indicator: "absolute right-2 inline-flex h-4 w-4 items-center justify-center",
+        indicator: "absolute right-2 h-4 w-4 items-center justify-center",
         icon: "h-4 w-4 text-primary-500"
       }
     },
@@ -137,7 +143,7 @@ export const themeConfig = {
         baseStyles: "flex items-center justify-center",
       },
       content: {
-        baseStyles: "relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-gray-200 bg-white text-gray-600 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        baseStyles: "relative z-50 min-w-[128px] overflow-hidden rounded-md border border-gray-200 bg-white text-gray-600 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       },
       viewport: {
         baseStyles: "p-1",

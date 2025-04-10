@@ -1,9 +1,20 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Check } from 'lucide-react';
-import { MenuProps, MenuItemProps, MenuItemWithSeparatorProps } from './types';
-import { getMenuClassNames, getMenuItemClassNames, getLabelClassNames, getSeparatorClassNames, getCheckClassNames, getIconClassNames } from './utils';
+import { Check, Search } from 'lucide-react';
+import { MenuProps, MenuItemProps, MenuItemWithSeparatorProps, MenuStandardProps } from './types';
+import { 
+  getMenuClassNames, 
+  getMenuItemClassNames, 
+  getLabelClassNames, 
+  getSeparatorClassNames, 
+  getCheckClassNames, 
+  getIconClassNames,
+  getSearchContainerClassNames,
+  getSearchInputClassNames,
+  filterMenuItems
+} from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
@@ -29,10 +40,33 @@ const Menu = React.forwardRef<
   items,
   align = 'center',
   side = 'bottom',
+  search,
   rootProps,
   contentProps,
 }, ref) => {
   const menuClassNames = getMenuClassNames();
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [isOpen, setIsOpen] = React.useState(false);
+  
+  // Reset search query when menu is closed
+  React.useEffect(() => {
+    if (!isOpen) {
+      setSearchQuery('');
+    }
+  }, [isOpen]);
+
+  // Filter items based on search query
+  const filteredItems = React.useMemo(() => {
+    if (!search?.enabled || !searchQuery) {
+      return items;
+    }
+    return filterMenuItems(items, searchQuery);
+  }, [items, searchQuery, search?.enabled]);
+
+  // Handle search input changes
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   // Render a menu item based on its type
   const renderMenuItem = (item: MenuItemWithSeparatorProps, index: number) => {
@@ -101,8 +135,8 @@ const Menu = React.forwardRef<
       );
     }
 
-    // For standard menu items (guaranteed to have content property by type)
-    const standardItem = item as Omit<MenuItemProps, 'isSeparator'>;
+    // For standard menu items
+    const standardItem = item as MenuStandardProps;
     return (
       <DropdownMenu.Item
         key={`item-${index}`}
@@ -116,8 +150,21 @@ const Menu = React.forwardRef<
     );
   };
 
+  // Prevent keyboard events from propagating up
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  };
+
+  // Prevent clicks from closing the menu
+  const handleSearchInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  };
+
   return (
-    <DropdownMenu.Root {...rootProps}>
+    <DropdownMenu.Root 
+      {...rootProps} 
+      onOpenChange={setIsOpen}
+    >
       <DropdownMenu.Trigger asChild>
         {children}
       </DropdownMenu.Trigger>
@@ -130,8 +177,31 @@ const Menu = React.forwardRef<
           className={menuClassNames}
           {...contentProps}
         >
-          {items.map((item, index) => 
-            renderMenuItem(item as MenuItemWithSeparatorProps, index)
+          {search?.enabled && (
+            <div className={getSearchContainerClassNames()}>
+              <div className={themeConfig.euler.menu.search.container}>
+                <Search className={themeConfig.euler.menu.search.icon} />
+                <input
+                  type="text"
+                  placeholder={search.placeholder || "Search..."}
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  onClick={handleSearchInputClick}
+                  onKeyDown={handleSearchKeyDown}
+                  className={getSearchInputClassNames()}
+                />
+              </div>
+            </div>
+          )}
+          
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item, index) => 
+              renderMenuItem(item as MenuItemWithSeparatorProps, index)
+            )
+          ) : (
+            <DropdownMenu.Item disabled className={getMenuItemClassNames(true)}>
+              No results found
+            </DropdownMenu.Item>
           )}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
