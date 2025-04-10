@@ -1,11 +1,15 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell } from "lucide-react";
-import { Button, Tooltip, Menu, Select } from "../lib/main";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Tag, Share, Upload, Download, Send, Save } from "lucide-react";
+import { Button, Tooltip, Menu, Select, Checkbox } from "../lib/main";
 import { useState } from "react";
 
 const App = () => {
   const [fruitValue, setFruitValue] = useState("apple");
   const [sizeValue, setSizeValue] = useState("md");
   const [paymentValue, setPaymentValue] = useState("");
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [selectedNotifications, setSelectedNotifications] = useState<string[]>(['push', 'email']);
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const [marketingPreference, setMarketingPreference] = useState(false);
   
   return (
     <div className="p-4 space-y-8 flex flex-col gap-4 justify-center items-center">
@@ -359,6 +363,33 @@ const App = () => {
         </Menu>
       </div>
 
+      {/* Menu with checkbox list for multiple selection */}
+      <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Notification Settings', isLabel: true },
+            { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
+            { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
+            { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms', icon: Send },
+            { content: 'Desktop Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'desktop', icon: Globe },
+            { isSeparator: true },
+            { content: 'Apply Changes', icon: Save, onSelect: () => console.log('Settings saved') }
+          ]}
+          multiSelect={{
+            enabled: true,
+            selectedValues: selectedNotifications,
+            onSelectionChange: (values) => {
+              setSelectedNotifications(values);
+              console.log('Selected notification settings:', values);
+            }
+          }}
+        >
+          <Button buttonType="secondary" size="md">
+            Notification Preferences ({selectedNotifications.length})
+          </Button>
+        </Menu>
+      </div>
+
       {/* Menu with submenu */}
       <div className="flex gap-8 items-center justify-center">
         <Menu 
@@ -480,7 +511,11 @@ const App = () => {
         <Select 
           placeholder="Select a fruit"
           value={fruitValue}
-          onValueChange={setFruitValue}
+          onValueChange={(value) => {
+            if (typeof value === 'string') {
+              setFruitValue(value);
+            }
+          }}
           items={[
             { value: "apple", text: "Apple", icon: Apple },
             { value: "banana", text: "Banana", icon: Banana },
@@ -489,6 +524,73 @@ const App = () => {
             { value: "strawberry", text: "Strawberry" }
           ]}
         />
+      </div>
+
+      {/* Multi-select example */}
+      <div className="flex flex-col gap-4 w-64">
+        <p className="font-medium text-gray-700">Multi-select Skills</p>
+        <Select 
+          placeholder="Select skills"
+          value={selectedSkills}
+          onValueChange={(value) => {
+            if (Array.isArray(value)) {
+              setSelectedSkills(value);
+              console.log('Selected skills:', value);
+            }
+          }}
+          multiSelect
+          items={[
+            { 
+              label: "Programming", 
+              items: [
+                { value: "javascript", text: "JavaScript", icon: Tag },
+                { value: "typescript", text: "TypeScript", icon: Tag },
+                { value: "python", text: "Python", icon: Tag },
+                { value: "java", text: "Java", icon: Tag }
+              ] 
+            },
+            { isSeparator: true },
+            { 
+              label: "Design", 
+              items: [
+                { value: "ui", text: "UI Design", icon: Eye },
+                { value: "ux", text: "UX Design", icon: Users },
+                { value: "graphic", text: "Graphic Design", icon: Pencil }
+              ] 
+            },
+            { isSeparator: true },
+            { 
+              label: "Other", 
+              items: [
+                { value: "project", text: "Project Management", icon: Calendar },
+                { value: "content", text: "Content Writing", icon: FileText },
+                { value: "marketing", text: "Marketing", icon: Share }
+              ] 
+            }
+          ]}
+        />
+        {selectedSkills.length > 0 && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-700">Selected skills:</p>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {selectedSkills.map(skill => (
+                <span 
+                  key={skill} 
+                  className="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded-md flex items-center gap-1"
+                >
+                  {skill}
+                  <button 
+                    className="hover:text-primary-800"
+                    onClick={() => setSelectedSkills(selectedSkills.filter(s => s !== skill))}
+                  >
+                    <span className="sr-only">Remove {skill}</span>
+                    <span aria-hidden>×</span>
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Different sizes */}
@@ -593,7 +695,11 @@ const App = () => {
         <Select 
           placeholder="Select a size"
           value={sizeValue}
-          onValueChange={setSizeValue}
+          onValueChange={(value) => {
+            if (typeof value === 'string') {
+              setSizeValue(value);
+            }
+          }}
           size={sizeValue as 'sm' | 'md' | 'lg'}
           items={[
             { value: "sm", text: "Small" },
@@ -609,7 +715,11 @@ const App = () => {
         <Select 
           placeholder="Payment Method"
           value={paymentValue}
-          onValueChange={setPaymentValue}
+          onValueChange={(value) => {
+            if (typeof value === 'string') {
+              setPaymentValue(value);
+            }
+          }}
           triggerContent={
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
@@ -676,6 +786,49 @@ const App = () => {
             }
           ]}
         />
+      </div>
+
+      {/* Checkbox Examples */}
+      <h2 className="text-2xl font-semibold mt-8">Checkbox Examples</h2>
+      
+      {/* Basic checkbox */}
+      <div className="flex flex-col gap-4 p-4">
+        <div className="flex gap-8">
+          <Checkbox
+            checked={isTermsAccepted}
+            onCheckedChange={setIsTermsAccepted}
+          >
+            I accept the terms and conditions
+          </Checkbox>
+
+          <Checkbox
+            checked={marketingPreference}
+            onCheckedChange={setMarketingPreference}
+          >
+            Receive marketing emails
+          </Checkbox>
+        </div>
+        
+        {/* Different sizes */}
+        <div className="flex gap-8 mt-4">
+          <Checkbox size="sm">Small checkbox</Checkbox>
+          <Checkbox size="md">Medium checkbox</Checkbox>
+          <Checkbox size="lg">Large checkbox</Checkbox>
+        </div>
+        
+        {/* Disabled state */}
+        <div className="flex gap-8 mt-4">
+          <Checkbox disabled>Disabled unchecked</Checkbox>
+          <Checkbox disabled checked={true}>Disabled checked</Checkbox>
+        </div>
+        
+        {/* Checkbox without label */}
+        <div className="flex gap-8 mt-4">
+          <Checkbox checked={isTermsAccepted} onCheckedChange={setIsTermsAccepted} />
+          <span className="text-sm text-gray-600">
+            Standalone checkbox is {isTermsAccepted ? 'checked' : 'unchecked'}
+          </span>
+        </div>
       </div>
     </div>
   );

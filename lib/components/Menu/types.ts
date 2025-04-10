@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
@@ -26,6 +25,14 @@ export interface MenuCheckboxProps {
   onSelect?: (checked: boolean) => void;
   disabled?: boolean;
   icon?: LucideIcon;
+  /**
+   * When true, this checkbox is part of a multi-select checkboxes list
+   */
+  isCheckboxListItem?: boolean;
+  /**
+   * Value for the checkbox in a checkbox list
+   */
+  value?: string;
 }
 
 // Type for menu item with radio properties
@@ -80,6 +87,22 @@ export interface MenuSearchProps {
   placeholder?: string;
 }
 
+// New type for multi-select in menu
+export interface MenuMultiSelectProps {
+  /**
+   * Enable multiple selection in menu
+   */
+  enabled: boolean;
+  /**
+   * Array of selected values
+   */
+  selectedValues?: string[];
+  /**
+   * Callback for when selected values change
+   */
+  onSelectionChange?: (values: string[]) => void;
+}
+
 /**
  * Props for Menu component
  */
@@ -104,6 +127,10 @@ export interface MenuProps {
    * Search configuration for the menu
    */
   search?: MenuSearchProps;
+  /**
+   * Multi-select configuration for checkboxes
+   */
+  multiSelect?: MenuMultiSelectProps;
   /**
    * Additional props for the dropdown menu root
    */

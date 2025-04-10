@@ -16,6 +16,7 @@ import {
   getSelectChevronClassNames,
 } from './utils';
 import Search, { filterItems } from '../common/search';
+import Checkbox from '../common/Checkbox';
 
 /**
  * Select component built on top of Radix UI's select primitive
@@ -50,6 +51,7 @@ const Select = React.forwardRef<
   triggerProps,
   size = 'md',
   search,
+  multiSelect = false,
 }, ref) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
@@ -75,9 +77,38 @@ const Select = React.forwardRef<
     setSearchQuery(value);
   };
 
+  // Handle multiple selection changes
+  const handleMultiSelectChange = (itemValue: string) => {
+    if (!value && !defaultValue) {
+      // If no values selected yet, initialize array with this value
+      if (onValueChange) onValueChange([itemValue]);
+      return;
+    }
+
+    const currentValues = Array.isArray(value) ? [...value] : value ? [value] : 
+                          Array.isArray(defaultValue) ? [...defaultValue] : defaultValue ? [defaultValue] : [];
+    
+    if (currentValues.includes(itemValue)) {
+      // Remove the value if already selected
+      const newValues = currentValues.filter(v => v !== itemValue);
+      if (onValueChange) onValueChange(newValues.length ? newValues : []);
+    } else {
+      // Add the value if not already selected
+      const newValues = [...currentValues, itemValue];
+      if (onValueChange) onValueChange(newValues);
+    }
+  };
+
   // Find the selected item to display its icon in the trigger
-  const selectedItem = React.useMemo(() => {
-    const findItemInArray = (items: Array<SelectItemProps | SelectGroupProps | SeparatorItem>): SelectItemProps | undefined => {
+  const selectedItems = React.useMemo(() => {
+    if (!value && !defaultValue) return [];
+    
+    const values = Array.isArray(value) ? value : value ? [value] : 
+                  Array.isArray(defaultValue) ? defaultValue : defaultValue ? [defaultValue] : [];
+    
+    const findItemsInArray = (items: Array<SelectItemProps | SelectGroupProps | SeparatorItem>): SelectItemProps[] => {
+      const result: SelectItemProps[] = [];
+      
       for (const item of items) {
         if ('isSeparator' in item && item.isSeparator) {
           continue;
@@ -85,19 +116,22 @@ const Select = React.forwardRef<
         
         if ('label' in item && 'items' in item) {
           // It's a group, search within it
-          const foundInGroup = findItemInArray(item.items);
-          if (foundInGroup) return foundInGroup;
-        } else if ('value' in item && (item.value === value || item.value === defaultValue)) {
-          // Found the selected item
-          return item as SelectItemProps;
+          const foundInGroup = findItemsInArray(item.items);
+          result.push(...foundInGroup);
+        } else if ('value' in item && values.includes(item.value)) {
+          // Found a selected item
+          result.push(item as SelectItemProps);
         }
       }
       
-      return undefined;
+      return result;
     };
     
-    return findItemInArray(items);
+    return findItemsInArray(items);
   }, [items, value, defaultValue]);
+
+  // Selected item for single select
+  const selectedItem = !multiSelect && selectedItems.length > 0 ? selectedItems[0] : undefined;
 
   // Function to render items, groups, or separators
   const renderSelectItem = (item: SelectItemWithSeparatorProps, index: number) => {
@@ -118,32 +152,82 @@ const Select = React.forwardRef<
           <SelectPrimitive.Label className={getSelectLabelClassNames()}>
             {group.label}
           </SelectPrimitive.Label>
-          {group.items.map((groupItem, groupItemIndex) => (
-            <SelectPrimitive.Item
-              key={`item-${groupItem.value}-${groupItemIndex}`}
-              value={groupItem.value}
-              disabled={groupItem.disabled}
-              textValue={groupItem.textValue}
-              className={getSelectItemClassNames(groupItem.disabled)}
-            >
-              <div className="flex items-center">
-                {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
-                <SelectPrimitive.ItemText>
-                  {groupItem.text}
-                </SelectPrimitive.ItemText>
+          {group.items.map((groupItem, groupItemIndex) => {
+            const isSelected = multiSelect && Array.isArray(value) 
+              ? value.includes(groupItem.value)
+              : multiSelect && Array.isArray(defaultValue)
+              ? defaultValue.includes(groupItem.value)
+              : false;
+              
+            return multiSelect ? (
+              <div
+                key={`multi-item-${groupItem.value}-${groupItemIndex}`}
+                className={getSelectItemClassNames(groupItem.disabled)}
+                onClick={() => !groupItem.disabled && handleMultiSelectChange(groupItem.value)}
+              >
+                <div className="flex items-center">
+                  <Checkbox 
+                    checked={isSelected}
+                    disabled={groupItem.disabled}
+                    size="sm"
+                    onCheckedChange={() => {}}
+                    className="mr-2"
+                  />
+                  {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
+                  <span>{groupItem.text}</span>
+                </div>
               </div>
-              <SelectPrimitive.ItemIndicator className={getSelectItemIndicatorClassNames()}>
-                <Check className="h-4 w-4 text-primary-500" />
-              </SelectPrimitive.ItemIndicator>
-            </SelectPrimitive.Item>
-          ))}
+            ) : (
+              <SelectPrimitive.Item
+                key={`item-${groupItem.value}-${groupItemIndex}`}
+                value={groupItem.value}
+                disabled={groupItem.disabled}
+                textValue={groupItem.textValue}
+                className={getSelectItemClassNames(groupItem.disabled)}
+              >
+                <div className="flex items-center">
+                  {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
+                  <SelectPrimitive.ItemText>
+                    {groupItem.text}
+                  </SelectPrimitive.ItemText>
+                </div>
+                <SelectPrimitive.ItemIndicator className={getSelectItemIndicatorClassNames()}>
+                  <Check className="h-4 w-4 text-primary-500" />
+                </SelectPrimitive.ItemIndicator>
+              </SelectPrimitive.Item>
+            );
+          })}
         </SelectPrimitive.Group>
       );
     }
 
     // It's a regular item
     const standardItem = item as SelectItemProps;
-    return (
+    const isSelected = multiSelect && Array.isArray(value) 
+      ? value.includes(standardItem.value)
+      : multiSelect && Array.isArray(defaultValue)
+      ? defaultValue.includes(standardItem.value)
+      : false;
+      
+    return multiSelect ? (
+      <div
+        key={`multi-item-${standardItem.value}-${index}`}
+        className={getSelectItemClassNames(standardItem.disabled)}
+        onClick={() => !standardItem.disabled && handleMultiSelectChange(standardItem.value)}
+      >
+        <div className="flex items-center">
+          <Checkbox 
+            checked={isSelected}
+            disabled={standardItem.disabled}
+            size="sm"
+            onCheckedChange={() => {}}
+            className="mr-2"
+          />
+          {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
+          <span>{standardItem.text}</span>
+        </div>
+      </div>
+    ) : (
       <SelectPrimitive.Item
         key={`item-${standardItem.value}-${index}`}
         value={standardItem.value}
@@ -166,9 +250,9 @@ const Select = React.forwardRef<
 
   return (
     <SelectPrimitive.Root
-      value={value}
-      defaultValue={defaultValue}
-      onValueChange={onValueChange}
+      value={multiSelect ? undefined : value as string}
+      defaultValue={multiSelect ? undefined : defaultValue as string}
+      onValueChange={multiSelect ? undefined : onValueChange as (value: string) => void}
       disabled={disabled}
       onOpenChange={setIsOpen}
       {...rootProps}
@@ -182,8 +266,22 @@ const Select = React.forwardRef<
         ) : (
           <>
             <div className="flex items-center flex-1 truncate">
-              {selectedItem?.icon && <selectedItem.icon className={getSelectItemIconClassNames()} />}
-              <SelectPrimitive.Value placeholder={placeholder} />
+              {!multiSelect && selectedItem?.icon && (
+                <selectedItem.icon className={getSelectItemIconClassNames()} />
+              )}
+              {multiSelect ? (
+                <div className="flex-1 truncate">
+                  {selectedItems.length > 0 ? (
+                    <span className="text-gray-700">
+                      {selectedItems.length} selected
+                    </span>
+                  ) : (
+                    <span className="text-gray-400">{placeholder}</span>
+                  )}
+                </div>
+              ) : (
+                <SelectPrimitive.Value placeholder={placeholder} />
+              )}
             </div>
             <SelectPrimitive.Icon className={getSelectIconClassNames(size)}>
               <ChevronDown className={getSelectChevronClassNames()} strokeWidth={2} />

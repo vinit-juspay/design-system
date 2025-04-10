@@ -12,6 +12,7 @@ import {
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 import Search, { filterItems } from '../common/search';
+import Checkbox from '../common/Checkbox';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
@@ -38,12 +39,14 @@ const Menu = React.forwardRef<
   align = 'center',
   side = 'bottom',
   search,
+  multiSelect,
   rootProps,
   contentProps,
 }, ref) => {
   const menuClassNames = getMenuClassNames();
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
+  const [selectedValues, setSelectedValues] = React.useState<string[]>(multiSelect?.selectedValues || []);
   
   // Reset search query when menu is closed
   React.useEffect(() => {
@@ -51,6 +54,13 @@ const Menu = React.forwardRef<
       setSearchQuery('');
     }
   }, [isOpen]);
+
+  // Update selectedValues if the prop changes
+  React.useEffect(() => {
+    if (multiSelect?.selectedValues) {
+      setSelectedValues(multiSelect.selectedValues);
+    }
+  }, [multiSelect?.selectedValues]);
 
   // Filter items based on search query
   const filteredItems = React.useMemo(() => {
@@ -63,6 +73,19 @@ const Menu = React.forwardRef<
   // Handle search input changes
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
+  };
+
+  // Handle multi-select checkbox changes
+  const handleCheckboxListChange = (value: string, checked: boolean) => {
+    const newValues = checked 
+      ? [...selectedValues, value]
+      : selectedValues.filter(v => v !== value);
+    
+    setSelectedValues(newValues);
+    
+    if (multiSelect?.onSelectionChange) {
+      multiSelect.onSelectionChange(newValues);
+    }
   };
 
   // Render a menu item based on its type
@@ -80,6 +103,31 @@ const Menu = React.forwardRef<
     }
 
     if ('isCheckbox' in item && item.isCheckbox) {
+      if (item.isCheckboxListItem && item.value && multiSelect?.enabled) {
+        const isChecked = selectedValues.includes(item.value);
+        return (
+          <DropdownMenu.CheckboxItem
+            key={`checkbox-list-${index}`}
+            checked={isChecked}
+            onCheckedChange={(checked) => handleCheckboxListChange(item.value!, checked)}
+            disabled={item.disabled}
+            className={getCheckClassNames()}
+          >
+            <div className="flex items-center gap-2">
+              <Checkbox 
+                checked={isChecked}
+                disabled={item.disabled}
+                size="sm"
+                // We're controlling this from the parent, so no need for direct change handling
+                onCheckedChange={() => {}}
+              />
+              {item.icon && <item.icon className={getIconClassNames()} />}
+              {item.content}
+            </div>
+          </DropdownMenu.CheckboxItem>
+        );
+      }
+      
       return (
         <DropdownMenu.CheckboxItem
           key={`checkbox-${index}`}
@@ -88,11 +136,17 @@ const Menu = React.forwardRef<
           disabled={item.disabled}
           className={getCheckClassNames()}
         >
-          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkbox.indicator}>
-            <Check className={themeConfig.euler.menu.checkbox.icon} />
-          </DropdownMenu.ItemIndicator>
-          {item.icon && <item.icon className={getIconClassNames()} />}
-          {item.content}
+          <div className="flex items-center gap-2">
+            <Checkbox 
+              checked={item.checked}
+              disabled={item.disabled}
+              size="sm"
+              // We're controlling this from the parent, so no need for direct change handling
+              onCheckedChange={() => {}}
+            />
+            {item.icon && <item.icon className={getIconClassNames()} />}
+            {item.content}
+          </div>
         </DropdownMenu.CheckboxItem>
       );
     }

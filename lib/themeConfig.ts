@@ -171,6 +171,39 @@ export const themeConfig = {
       scrollButton: {
         baseStyles: "flex cursor-default items-center justify-center py-1"
       }
+    },
+    checkbox: {
+      baseStyles: "flex items-center justify-center rounded border border-primary-500 bg-white",
+      indicator: {
+        baseStyles: "flex items-center justify-center",
+        icon: "text-primary-500"
+      },
+      sizes: {
+        sm: {
+          root: "h-3.5 w-3.5",
+          indicator: "h-3.5 w-3.5",
+          checkIcon: "h-2.5 w-2.5",
+          fontSize: "text-body-sm",
+        },
+        md: {
+          root: "h-4 w-4",
+          indicator: "h-4 w-4",
+          checkIcon: "h-3 w-3",
+          fontSize: "text-body-md",
+        },
+        lg: {
+          root: "h-5 w-5",
+          indicator: "h-5 w-5",
+          checkIcon: "h-4 w-4",
+          fontSize: "text-body-lg",
+        },
+      },
+      states: {
+        disabled: "opacity-50 cursor-not-allowed",
+        enabled: "cursor-pointer",
+        labelDisabled: "text-gray-400 cursor-not-allowed",
+        labelEnabled: "text-gray-700 cursor-pointer"
+      }
     }
   }
 }; 

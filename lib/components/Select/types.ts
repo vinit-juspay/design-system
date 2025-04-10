@@ -34,19 +34,26 @@ export interface SelectProps extends React.ComponentPropsWithoutRef<typeof Selec
   items: Array<SelectItemProps | SelectGroupProps | SeparatorItem>;
   
   /**
-   * Current selected value
+   * Current selected value(s)
+   * Can be a single string or array of strings when multiSelect is true
    */
-  value?: string;
+  value?: string | string[];
   
   /**
    * Default value when uncontrolled
+   * Can be a single string or array of strings when multiSelect is true
    */
-  defaultValue?: string;
+  defaultValue?: string | string[];
   
   /**
    * Called when value changes
    */
-  onValueChange?: (value: string) => void;
+  onValueChange?: (value: string | string[]) => void;
+  
+  /**
+   * Enable multiple selection mode
+   */
+  multiSelect?: boolean;
   
   /**
    * Placeholder text when no value is selected
