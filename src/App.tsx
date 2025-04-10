@@ -67,7 +67,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile menu */}
       <div className="sm:hidden">
         <div className="pt-2 pb-3 space-y-1">
@@ -119,52 +119,47 @@ const App = () => {
       </div>
     </div>
   );
-  
+
   const renderButtons = () => (
     <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
       <div className="flex gap-4">
-        <Button buttonType="primary" size="md">Primary Button</Button>
-        <Button buttonType="secondary" size="md">Secondary Button</Button>
-        <Button buttonType="danger" size="md">Danger Button</Button>
-        <Button buttonType="success" size="md">Success Button</Button>
+        <Button buttonType="primary" size="md">
+          Primary Button
+        </Button>
+        <Button buttonType="secondary" size="md">
+          Secondary Button
+        </Button>
+        <Button buttonType="danger" size="md">
+          Danger Button
+        </Button>
+        <Button buttonType="success" size="md">
+          Success Button
+        </Button>
       </div>
 
       <div className="flex gap-4">
-        <Button 
-          buttonType="primary" 
-          size="md"
-          leadingIcon={Search}
-          trailingIcon={ArrowRight}
-        >
+        <Button buttonType="primary" size="md" leadingIcon={Search} trailingIcon={ArrowRight}>
           Search
         </Button>
-        <Button 
-          buttonType="danger" 
-          size="md"
-          leadingIcon={Trash2}
-        >
+        <Button buttonType="danger" size="md" leadingIcon={Trash2}>
           Delete
         </Button>
-        <Button 
-          buttonType="success" 
-          size="md"
-          leadingIcon={Check}
-        >
+        <Button buttonType="success" size="md" leadingIcon={Check}>
           Confirm
         </Button>
       </div>
 
       <div className="flex gap-4">
-        <Button 
-          buttonType="primary" 
+        <Button
+          buttonType="primary"
           size="md"
           subType="iconOnly"
           leadingIcon={Plus}
           aria-label="Add item"
         />
-        <Button 
-          buttonType="secondary" 
+        <Button
+          buttonType="secondary"
           size="md"
           subType="iconOnly"
           leadingIcon={Search}
@@ -173,47 +168,39 @@ const App = () => {
       </div>
 
       <div className="flex gap-4">
-        <Button 
-          buttonType="primary" 
-          size="md"
-          subType="link"
-        >
+        <Button buttonType="primary" size="md" subType="link">
           Learn more
         </Button>
-        <Button 
-          buttonType="secondary" 
-          size="md"
-          subType="link"
-        >
+        <Button buttonType="secondary" size="md" subType="link">
           View details
         </Button>
       </div>
 
       <div className="flex gap-4 items-center">
-        <Button buttonType="primary" size="sm">Small</Button>
-        <Button buttonType="primary" size="md">Medium</Button>
-        <Button buttonType="primary" size="lg">Large</Button>
+        <Button buttonType="primary" size="sm">
+          Small
+        </Button>
+        <Button buttonType="primary" size="md">
+          Medium
+        </Button>
+        <Button buttonType="primary" size="lg">
+          Large
+        </Button>
       </div>
 
       <div className="flex gap-4">
         <Button buttonType="primary" size="md" isLoading>
           Loading
         </Button>
-        <Button 
-          buttonType="primary" 
-          size="md"
-          subType="iconOnly"
-          isLoading
-          aria-label="Loading"
-        />
+        <Button buttonType="primary" size="md" subType="iconOnly" isLoading aria-label="Loading" />
       </div>
 
       <div className="flex gap-4">
         <Button buttonType="primary" size="md" isDisabled>
           Disabled
         </Button>
-        <Button 
-          buttonType="primary" 
+        <Button
+          buttonType="primary"
           size="md"
           subType="iconOnly"
           isDisabled
@@ -223,26 +210,26 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTooltips = () => (
     <>
       <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
-      
+
       {/* Basic tooltips */}
       <div className="flex gap-8 items-center justify-center">
         <Tooltip content="Small tooltip" size="sm">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Large tooltip with more text" size="lg">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
@@ -254,88 +241,88 @@ const App = () => {
       {/* Different arrow positions */}
       <div className="grid grid-cols-3 gap-8 p-12">
         <Tooltip content="Default (top center)" arrow="default">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Top left" arrow="topLeft">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Top right" arrow="topRight">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Left" arrow="left">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="No arrow" arrow="none">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Right" arrow="right">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Bottom left" arrow="bottomLeft">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Bottom center" arrow="bottomCenter">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
+
         <Tooltip content="Bottom right" arrow="bottomRight">
-          <Button 
-            buttonType="secondary" 
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
@@ -346,41 +333,29 @@ const App = () => {
 
       {/* Tooltips with icons */}
       <div className="flex gap-6 items-center">
-        <Tooltip 
-          content="Information tooltip" 
-          slot={Info}
-          slotDirection="left"
-        >
-          <Button 
-            buttonType="secondary" 
+        <Tooltip content="Information tooltip" slot={Info} slotDirection="left">
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
-        <Tooltip 
-          content="Warning message" 
-          slot={AlertCircle}
-          slotDirection="left"
-        >
-          <Button 
-            buttonType="secondary" 
+
+        <Tooltip content="Warning message" slot={AlertCircle} slotDirection="left">
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
             aria-label="Add item"
           />
         </Tooltip>
-        
-        <Tooltip 
-          content="Help is available" 
-          slot={HelpCircle}
-          slotDirection="right"
-        >
-          <Button 
-            buttonType="secondary" 
+
+        <Tooltip content="Help is available" slot={HelpCircle} slotDirection="right">
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
@@ -391,12 +366,9 @@ const App = () => {
 
       {/* Tooltip with custom provider props */}
       <div className="flex gap-4 items-center">
-        <Tooltip 
-          content="Delayed tooltip (1000ms)" 
-          providerProps={{ delayDuration: 1000 }}
-        >
-          <Button 
-            buttonType="secondary" 
+        <Tooltip content="Delayed tooltip (1000ms)" providerProps={{ delayDuration: 1000 }}>
+          <Button
+            buttonType="secondary"
             size="md"
             subType="iconOnly"
             leadingIcon={Plus}
@@ -406,11 +378,11 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTags = () => (
     <>
       <h2 className="text-2xl font-semibold">Tag Examples</h2>
-      
+
       {/* Basic Tag Examples */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Basic Tags</h3>
@@ -425,7 +397,7 @@ const App = () => {
           <Tag color="purple" label="Purple" />
         </div>
       </div>
-      
+
       {/* Tag Sizes */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tag Sizes</h3>
@@ -436,7 +408,7 @@ const App = () => {
           <Tag size="lg" label="Large" />
         </div>
       </div>
-      
+
       {/* Tag Styles */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tag Styles</h3>
@@ -445,53 +417,30 @@ const App = () => {
           <Tag tagStyle="rounded" label="Rounded" />
         </div>
       </div>
-      
+
       {/* Tags with Icons */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tags with Icons</h3>
         <div className="flex flex-wrap gap-4">
-          <Tag 
-            label="Leading Icon" 
-            leadingSlot={<Info size={16} />} 
-          />
-          <Tag 
-            label="Trailing Icon" 
-            trailingSlot={<Check size={16} />} 
-          />
-          <Tag 
-            label="Both Icons" 
+          <Tag label="Leading Icon" leadingSlot={<Info size={16} />} />
+          <Tag label="Trailing Icon" trailingSlot={<Check size={16} />} />
+          <Tag
+            label="Both Icons"
             leadingSlot={<AlertCircle size={16} />}
             trailingSlot={<ArrowRight size={16} />}
           />
         </div>
       </div>
-      
+
       {/* Split Tags */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Split Tags</h3>
         <div className="flex flex-wrap gap-4">
           <SplitTag leftLabel="2" rightLabel="New" />
-          <SplitTag 
-            leftLabel="5" 
-            rightLabel="Pending" 
-            color="warning"
-          />
-          <SplitTag 
-            leftLabel="10" 
-            rightLabel="Completed" 
-            color="success"
-          />
-          <SplitTag 
-            leftLabel="3" 
-            rightLabel="Failed" 
-            color="error"
-          />
-          <SplitTag 
-            leftLabel="Key" 
-            rightLabel="Value" 
-            color="primary"
-            tagStyle="squarical"
-          />
+          <SplitTag leftLabel="5" rightLabel="Pending" color="warning" />
+          <SplitTag leftLabel="10" rightLabel="Completed" color="success" />
+          <SplitTag leftLabel="3" rightLabel="Failed" color="error" />
+          <SplitTag leftLabel="Key" rightLabel="Value" color="primary" tagStyle="squarical" />
         </div>
       </div>
     </>
