@@ -169,39 +169,42 @@ export const themeConfig = {
       label: {
         base: 'text-body-md font-medium tracking-normal',
         color: 'text-gray-700',
-        wrapper: 'flex items-center gap-2',
-        group: 'flex items-center gap-1',
+        mandatory: 'text-red-500 text-body-md font-normal -top-0.5',
       },
       sublabel: {
-        base: 'text-body-md font-medium tracking-normal',
+        base: 'text-body-md font-normal tracking-normal',
         color: 'text-gray-400',
       },
       hint: {
-        base: 'text-body-md font-medium tracking-normal',
+        base: 'text-body-md font-normal tracking-normal',
         color: 'text-gray-500',
         error: 'text-red-500',
+        success: 'text-green-600',
       },
       inputBase: {
-        base: 'w-full flex flex-row justify-between items-center relative rounded-lg border-[1px] bg-white transition-all',
+        base: 'w-full flex flex-row justify-between items-center relative border-[1px] transition-all',
         sizes: {
-          md: 'h-9',
-          lg: 'h-10',
+          md: 'h-9 rounded-xl',
+          lg: 'h-10 rounded-2xl',
         },
         slots: {
           left: '',
           right: '',
         },
         states: {
-          default: 'border-gray-300',
+          default: 'border-gray-300 bg-white',
           hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
           focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
-          filled: 'border-gray-300 bg-gray-50',
-          error: 'border-red-500 ring-red-100',
-          disabled: 'border-gray-200 bg-gray-50 cursor-not-allowed',
+          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
         },
       },
       input: {
-        base: 'w-full bg-transparent text-body-md outline-none disabled:cursor-not-allowed pl-9 pr-9',
+        base: 'w-full bg-transparent text-body-md font-medium placeholder:font-normal text-gray-800 outline-none pl-9 pr-9 disabled:cursor-not-allowed',
+        states: {
+          default: 'placeholder:text-gray-400',
+          disabled: 'placeholder:text-gray-300',
+        },
       },
       slot: {
         base: '',
@@ -209,6 +212,24 @@ export const themeConfig = {
           left: 'absolute left-3',
           right: 'absolute right-3',
         },
+      },
+    },
+    numberInput: {
+      stepper: {
+        base: 'flex flex-col border-l border-gray-200',
+        button: {
+          base: 'flex items-center justify-center w-8 h-[18px] disabled:bg-gray-50 disabled:cursor-not-allowed',
+          states: {
+            default: 'text-gray-500',
+            hover: 'hover:bg-gray-50',
+            active: 'active:bg-gray-100',
+          },
+          divider: 'border-t border-gray-200',
+          icon: 'w-2.5 h-2.5 fill-gray-800',
+        },
+      },
+      input: {
+        base: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
       },
     },
     tooltip: {

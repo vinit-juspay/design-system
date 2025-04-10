@@ -11,3 +11,7 @@
 body {
   font-family: 'Inter Display', sans-serif;
 }
+
+.debug {
+  outline: 1px solid red;
+}   

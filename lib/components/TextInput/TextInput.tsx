@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { HelpCircle, Search } from 'lucide-react';
+import { HelpCircle, ArrowRight, Mail } from 'lucide-react';
 import { Tooltip } from "../../main";
 
 import { TextInputProps } from './types';
@@ -13,55 +13,52 @@ import {
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
-const textInputTheme = themeConfig.euler.textInput;
+const inputTheme = themeConfig.euler.textInput;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   hintText = "This is a hint text to help user.",
   label = "Your Label",
-  leftSlot = <Search className="text-gray-400 w-4 h-4" />,
+  leftSlot = <Mail className="text-gray-400 w-4 h-4" />,
   mandatory = false,
-  placeholder = "Search",
-  rightSlot = <Search className="text-gray-400 w-4 h-4" />,
-  showHint = true,
-  showLabel = true,
-  showLeftSlot = true,
-  showRightSlot = true,
-  showSublabel = false,
+  placeholder = "Enter your email",
+  rightSlot = <ArrowRight className="text-gray-400 w-4 h-4" />,
   size = 'md',
   state = 'default',
   sublabel = "(optional)",
+  value,
+  infoTooltip,
+  successMessage,
   ...props
 }, ref) => {
   return (
     <div className="flex flex-col space-y-2">
       {/* Label */}
-      {showLabel && (
-        <div className={textInputTheme.label.wrapper}>
-          <div className={textInputTheme.label.group}>
-            <label className={getLabelClasses(mandatory)}>
-              {label}
-            </label>
-            {showSublabel && (
-              <span className={getSublabelClasses()}>
-                {sublabel}
-              </span>
+      {label && (
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <label className={getLabelClasses()}>
+              {label} {mandatory && (
+              <sup className={inputTheme.label.mandatory}>*</sup>
             )}
-            {mandatory && (
-              <span className="text-red-500">*</span>
+            </label>
+            {sublabel && (
+              <small className={getSublabelClasses()}>
+                {sublabel}
+              </small>
             )}
           </div>
-          <Tooltip size='lg' content="Additional information about this field">
+          {infoTooltip && <Tooltip size='lg' content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
-          </Tooltip>
+          </Tooltip>}
         </div>
       )}
 
       {/* Input Base */}
-      <div className={getInputBaseClasses(size, state, showLeftSlot, showRightSlot)}>
+      <div className={getInputBaseClasses(size, state)}>
         {/* Left Slot */}
-        {showLeftSlot && leftSlot && (
+        {leftSlot && (
           <div className={getSlotClasses('left')}>
             {leftSlot}
           </div>
@@ -71,14 +68,15 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         <input
           ref={ref}
           type="text"
-          className={getInputClasses()}
+          className={getInputClasses(state)}
           placeholder={placeholder}
           disabled={state === 'disabled'}
+          defaultValue={value}
           {...props}
         />
 
         {/* Right Slot */}
-        {showRightSlot && rightSlot && (
+        {rightSlot && (
           <div className={getSlotClasses('right')}>
             {rightSlot}
           </div>
@@ -86,7 +84,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
       </div>
 
       {/* Hint Text */}
-      {showHint && hintText && (
+      {successMessage && (
+        <span className={getHintClasses(state)}>
+          {successMessage}
+        </span>
+      )}
+      {hintText && !successMessage && (
         <span className={getHintClasses(state)}>
           {hintText}
         </span>

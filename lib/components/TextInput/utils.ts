@@ -7,9 +7,11 @@ const textInputTheme = themeConfig.euler.textInput;
 export const getInputBaseClasses = (
   size: TextInputSize = 'md',
   state: TextInputState = 'default',
-  showLeftSlot: boolean = false,
-  showRightSlot: boolean = false
+  leftSlot?: React.ReactNode,
+  rightSlot?: React.ReactNode
 ) => {
+  const hasLeftSlot = !!leftSlot;
+  const hasRightSlot = !!rightSlot;
   const states = textInputTheme.inputBase.states;  
   return cn(
     textInputTheme.inputBase.base,
@@ -20,17 +22,30 @@ export const getInputBaseClasses = (
       states.hover,
       states.focused,
     ],
+    state === 'error' && [
+      states.error,
+    ],
+    state === 'disabled' && [
+      states.disabled,
+    ],
     // Apply other states directly
-    showLeftSlot && textInputTheme.inputBase.slots.left,
-    showRightSlot && textInputTheme.inputBase.slots.right,
+    hasLeftSlot && textInputTheme.inputBase.slots.left,
+    hasRightSlot && textInputTheme.inputBase.slots.right,
   );
   
   
 };
 
-export const getInputClasses = () => {
+export const getInputClasses = (state: TextInputState = 'default') => {
+  const states = textInputTheme.input.states;  
   return cn(
-    textInputTheme.input.base
+    textInputTheme.input.base,
+    state === 'default' && [
+      states.default,
+    ],
+    state === 'disabled' && [
+      states.disabled,
+    ],
   );
 };
 
@@ -54,7 +69,7 @@ export const getSublabelClasses = () => {
 export const getHintClasses = (state: TextInputState = 'default') => {
   return cn(
     textInputTheme.hint.base,
-    state === 'error' ? textInputTheme.hint.error : textInputTheme.hint.color
+    state === 'error' ? textInputTheme.hint.error : state === 'success' ? textInputTheme.hint.success : textInputTheme.hint.color
   );
 };
 

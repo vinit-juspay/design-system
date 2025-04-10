@@ -3,7 +3,7 @@ import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle,
 import { Button, Tag, SplitTag, TextInput, Tooltip } from "../lib/main";
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags'>('buttons');
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'textInput'>('buttons');
   
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -47,6 +47,18 @@ const App = () => {
                 <TagIcon className="mr-2 h-5 w-5" />
                 Tags
               </button>
+              <button
+                onClick={() => setActiveComponent('textInput')}
+                className={`${
+                  activeComponent === 'textInput'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'  
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Search className="mr-2 h-5 w-5" />
+                Input Field
+              </button>
+              
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -528,6 +540,20 @@ const App = () => {
       </div>
     </>
   );
+
+  const renderTextInput = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Input Field Examples</h2>
+
+
+      <div className="gap-4 mt-12 align-top">
+        <TextInput label="Search" size="md" mandatory/>
+        <TextInput label="Search" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
+        <TextInput label="Search" state="error" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
+        <TextInput label="Search" state="filled" value="test@test.com" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
+      </div>
+    </>
+  );
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -537,14 +563,9 @@ const App = () => {
           {activeComponent === 'buttons' && renderButtons()}
           {activeComponent === 'tooltips' && renderTooltips()}
           {activeComponent === 'tags' && renderTags()}
+          {activeComponent === 'textInput' && renderTextInput()}
         </div>
       </div>
-
-
-      {/* Input Field Examples */}
-      <h2 className="text-2xl font-semibold mt-8">Input Field Examples</h2>
-      <TextInput label="Search" size="md" />
-      <TextInput label="Search" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
     </div>
   );
 };
