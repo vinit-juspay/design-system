@@ -135,6 +135,12 @@ export const themeConfig = {
         baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
         indicator: "absolute right-2 h-4 w-4 items-center justify-center",
         icon: "h-4 w-4 text-primary-500"
+      },
+      layout: {
+        container: "flex items-center w-full justify-between",
+        content: "flex items-center",
+        checkboxRight: "ml-4",
+        checkboxLeft: "mr-2"
       }
     },
     select: {
@@ -170,6 +176,12 @@ export const themeConfig = {
       },
       scrollButton: {
         baseStyles: "flex cursor-default items-center justify-center py-1"
+      },
+      layout: {
+        container: "flex items-center w-full justify-between",
+        content: "flex items-center",
+        checkboxRight: "ml-4",
+        checkboxLeft: "mr-2"
       }
     },
     checkbox: {
@@ -197,6 +209,11 @@ export const themeConfig = {
         enabled: "cursor-pointer data-[state=checked]:bg-primary-500 data-[state=checked]:border-primary-500 data-[state=indeterminate]:bg-primary-500 data-[state=indeterminate]:border-primary-500 hover:border-primary-600 hover:data-[state=checked]:bg-primary-600 hover:data-[state=indeterminate]:bg-primary-600 transition-colors duration-150",
         labelDisabled: "text-gray-400 cursor-not-allowed",
         labelEnabled: "text-gray-700 cursor-pointer"
+      },
+      position: {
+        wrapper: "flex items-center",
+        left: "space-x-2",
+        right: "space-x-reverse space-x-2 flex-row-reverse"
       }
     }
   }

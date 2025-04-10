@@ -17,6 +17,7 @@ import {
 } from './utils';
 import Search, { filterItems } from '../common/search';
 import Checkbox from '../common/Checkbox';
+import { themeConfig } from '../../themeConfig';
 
 /**
  * Select component built on top of Radix UI's select primitive
@@ -167,24 +168,24 @@ const Select = React.forwardRef<
                 onClick={() => !groupItem.disabled && handleMultiSelectChange(groupItem.value)}
               >
                 {checkboxPosition === 'left' ? (
-                  <div className="flex items-center w-full justify-between">
+                  <div className={themeConfig.euler.select.layout.container}>
                     <Checkbox 
                       checked={isSelected}
                       disabled={groupItem.disabled}
                       size="sm"
                       position="left"
                       onCheckedChange={() => {}}
-                      className="mr-2"
+                      className={themeConfig.euler.select.layout.checkboxLeft}
                     >
-                      <div className="flex items-center">
+                      <div className={themeConfig.euler.select.layout.content}>
                         {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
                         <span>{groupItem.text}</span>
                       </div>
                     </Checkbox>
                   </div>
                 ) : (
-                  <div className="flex items-center w-full justify-between">
-                    <div className="flex items-center">
+                  <div className={themeConfig.euler.select.layout.container}>
+                    <div className={themeConfig.euler.select.layout.content}>
                       {groupItem.icon && <groupItem.icon className={getSelectItemIconClassNames()} />}
                       <span>{groupItem.text}</span>
                     </div>
@@ -193,7 +194,7 @@ const Select = React.forwardRef<
                       disabled={groupItem.disabled}
                       size="sm"
                       onCheckedChange={() => {}}
-                      className="ml-4"
+                      className={themeConfig.euler.select.layout.checkboxRight}
                     />
                   </div>
                 )}
@@ -237,24 +238,24 @@ const Select = React.forwardRef<
         onClick={() => !standardItem.disabled && handleMultiSelectChange(standardItem.value)}
       >
         {checkboxPosition === 'left' ? (
-          <div className="flex items-center w-full justify-between">
+          <div className={themeConfig.euler.select.layout.container}>
             <Checkbox 
               checked={isSelected}
               disabled={standardItem.disabled}
               size="sm"
               position="left"
               onCheckedChange={() => {}}
-              className="mr-2"
+              className={themeConfig.euler.select.layout.checkboxLeft}
             >
-              <div className="flex items-center">
+              <div className={themeConfig.euler.select.layout.content}>
                 {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
                 <span>{standardItem.text}</span>
               </div>
             </Checkbox>
           </div>
         ) : (
-          <div className="flex items-center w-full justify-between">
-            <div className="flex items-center">
+          <div className={themeConfig.euler.select.layout.container}>
+            <div className={themeConfig.euler.select.layout.content}>
               {standardItem.icon && <standardItem.icon className={getSelectItemIconClassNames()} />}
               <span>{standardItem.text}</span>
             </div>
@@ -263,7 +264,7 @@ const Select = React.forwardRef<
               disabled={standardItem.disabled}
               size="sm"
               onCheckedChange={() => {}}
-              className="ml-4"
+              className={themeConfig.euler.select.layout.checkboxRight}
             />
           </div>
         )}

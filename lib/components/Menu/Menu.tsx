@@ -115,7 +115,7 @@ const Menu = React.forwardRef<
             className={getCheckClassNames()}
           >
             {checkboxPosition === 'left' ? (
-              <div className="flex items-center w-full justify-between">
+              <div className={themeConfig.euler.menu.layout.container}>
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
@@ -123,15 +123,15 @@ const Menu = React.forwardRef<
                   position="left"
                   onCheckedChange={() => {}}
                 >
-                  <div className="flex items-center">
+                  <div className={themeConfig.euler.menu.layout.content}>
                     {item.icon && <item.icon className={getIconClassNames()} />}
                     {item.content}
                   </div>
                 </Checkbox>
               </div>
             ) : (
-              <div className="flex items-center w-full justify-between">
-                <div className="flex items-center">
+              <div className={themeConfig.euler.menu.layout.container}>
+                <div className={themeConfig.euler.menu.layout.content}>
                   {item.icon && <item.icon className={getIconClassNames()} />}
                   {item.content}
                 </div>
@@ -140,7 +140,7 @@ const Menu = React.forwardRef<
                   disabled={item.disabled}
                   size="sm"
                   onCheckedChange={() => {}}
-                  className="ml-4"
+                  className={themeConfig.euler.menu.layout.checkboxRight}
                 />
               </div>
             )}
@@ -157,7 +157,7 @@ const Menu = React.forwardRef<
           className={getCheckClassNames()}
         >
           {checkboxPosition === 'left' ? (
-            <div className="flex items-center w-full justify-between">
+            <div className={themeConfig.euler.menu.layout.container}>
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
@@ -165,15 +165,15 @@ const Menu = React.forwardRef<
                 position="left"
                 onCheckedChange={() => {}}
               >
-                <div className="flex items-center">
+                <div className={themeConfig.euler.menu.layout.content}>
                   {item.icon && <item.icon className={getIconClassNames()} />}
                   {item.content}
                 </div>
               </Checkbox>
             </div>
           ) : (
-            <div className="flex items-center w-full justify-between">
-              <div className="flex items-center">
+            <div className={themeConfig.euler.menu.layout.container}>
+              <div className={themeConfig.euler.menu.layout.content}>
                 {item.icon && <item.icon className={getIconClassNames()} />}
                 {item.content}
               </div>
@@ -182,7 +182,7 @@ const Menu = React.forwardRef<
                 disabled={item.disabled}
                 size="sm"
                 onCheckedChange={() => {}}
-                className="ml-4"
+                className={themeConfig.euler.menu.layout.checkboxRight}
               />
             </div>
           )}

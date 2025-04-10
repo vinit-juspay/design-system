@@ -64,6 +64,7 @@ export interface CheckboxProps {
  *   Accept terms and conditions
  * </Checkbox>
  */
+
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
@@ -81,7 +82,7 @@ const Checkbox = React.forwardRef<
   position = 'left',
 }, ref) => {
   // Get styles from theme config
-  const { baseStyles, indicator, sizes, states } = themeConfig.euler.checkbox;
+  const { baseStyles, indicator, sizes, states, position: positionStyles } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
   
   // Combine styles based on theme config and component props
@@ -131,7 +132,7 @@ const Checkbox = React.forwardRef<
 
   // Render based on position
   return (
-    <div className={`flex items-center ${position === 'left' ? 'space-x-2' : 'space-x-reverse space-x-2 flex-row-reverse'}`}>
+    <div className={`${positionStyles.wrapper} ${position === 'left' ? positionStyles.left : positionStyles.right}`}>
       {checkboxElement}
       {labelElement}
     </div>
