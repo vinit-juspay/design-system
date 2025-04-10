@@ -67,7 +67,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile menu */}
       <div className="sm:hidden">
         <div className="pt-2 pb-3 space-y-1">
@@ -119,7 +119,7 @@ const App = () => {
       </div>
     </div>
   );
-  
+
   const renderButtons = () => (
     <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
@@ -210,11 +210,11 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTooltips = () => (
     <>
       <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
-      
+
       {/* Basic tooltips */}
       <div className="flex gap-8 items-center justify-center">
         <Tooltip content="Small tooltip" size="sm">
@@ -378,11 +378,11 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTags = () => (
     <>
       <h2 className="text-2xl font-semibold">Tag Examples</h2>
-      
+
       {/* Basic Tag Examples */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Basic Tags</h3>
@@ -397,7 +397,7 @@ const App = () => {
           <Tag color="purple" label="Purple" />
         </div>
       </div>
-      
+
       {/* Tag Sizes */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tag Sizes</h3>
@@ -408,7 +408,7 @@ const App = () => {
           <Tag size="lg" label="Large" />
         </div>
       </div>
-      
+
       {/* Tag Styles */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tag Styles</h3>
@@ -417,53 +417,30 @@ const App = () => {
           <Tag tagStyle="rounded" label="Rounded" />
         </div>
       </div>
-      
+
       {/* Tags with Icons */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tags with Icons</h3>
         <div className="flex flex-wrap gap-4">
-          <Tag 
-            label="Leading Icon" 
-            leadingSlot={<Info size={16} />} 
-          />
-          <Tag 
-            label="Trailing Icon" 
-            trailingSlot={<Check size={16} />} 
-          />
-          <Tag 
-            label="Both Icons" 
+          <Tag label="Leading Icon" leadingSlot={<Info size={16} />} />
+          <Tag label="Trailing Icon" trailingSlot={<Check size={16} />} />
+          <Tag
+            label="Both Icons"
             leadingSlot={<AlertCircle size={16} />}
             trailingSlot={<ArrowRight size={16} />}
           />
         </div>
       </div>
-      
+
       {/* Split Tags */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Split Tags</h3>
         <div className="flex flex-wrap gap-4">
           <SplitTag leftLabel="2" rightLabel="New" />
-          <SplitTag 
-            leftLabel="5" 
-            rightLabel="Pending" 
-            color="warning"
-          />
-          <SplitTag 
-            leftLabel="10" 
-            rightLabel="Completed" 
-            color="success"
-          />
-          <SplitTag 
-            leftLabel="3" 
-            rightLabel="Failed" 
-            color="error"
-          />
-          <SplitTag 
-            leftLabel="Key" 
-            rightLabel="Value" 
-            color="primary"
-            tagStyle="squarical"
-          />
+          <SplitTag leftLabel="5" rightLabel="Pending" color="warning" />
+          <SplitTag leftLabel="10" rightLabel="Completed" color="success" />
+          <SplitTag leftLabel="3" rightLabel="Failed" color="error" />
+          <SplitTag leftLabel="Key" rightLabel="Value" color="primary" tagStyle="squarical" />
         </div>
       </div>
     </>

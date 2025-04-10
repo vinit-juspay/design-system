@@ -418,18 +418,18 @@ export const themeConfig = {
           underlineOffset: '-mb-2'
         },
         lg: {
-          padding: "px-2 py-1.5",
-          fontSize: "text-body-sm",
-          borderRadius: "rounded-lg",
-          maxWidth: "max-w-sm",
-          slotSize: "h-[18px] w-[18px]",
+          padding: 'px-2 py-1.5',
+          fontSize: 'text-body-sm',
+          borderRadius: 'rounded-lg',
+          maxWidth: 'max-w-sm',
+          slotSize: 'h-[18px] w-[18px]',
         },
       },
       arrow: {
-        baseStyles: "fill-gray-900",
+        baseStyles: 'fill-gray-900',
       },
       content: {
-        baseStyles: "items-center text-gray-0",
+        baseStyles: 'items-center text-gray-0',
       },
     },
     tabs: {
