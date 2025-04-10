@@ -13,4 +13,4 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   trailingIcon?: ElementType;
   isLoading?: boolean;
   isDisabled?: boolean;
-} 
+}
