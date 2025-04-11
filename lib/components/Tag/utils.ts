@@ -25,13 +25,13 @@ export const getSplitTagClassNames = (
   isLeft: boolean
 ): string => {
   const theme = themeConfig.euler.tag;
-  
+
   // Left side uses noFill variant, right side uses attentive variant
   const variant = isLeft ? 'noFill' : 'attentive';
-  
+
   // Get border radius from theme config
   const borderRadius = theme.splitStyle[tagStyle][isLeft ? 'left' : 'right'];
-  
+
   return cn(
     theme.layout.base,
     theme.sizes[size].height,
@@ -46,15 +46,15 @@ export const getSplitTagClassNames = (
  */
 export const renderSlot = (slot: React.ReactNode | undefined, size: TagSize) => {
   if (!slot) return null;
-  
+
   const tagTheme = themeConfig.euler.tag;
   const slotSize: string = tagTheme.sizes[size].iconSize;
   const slotGap: string = tagTheme.sizes[size].gap;
   const slotClasses: string = tagTheme.layout.slot;
-  
+
   // Use the variables directly to ensure TypeScript recognizes their usage
   const className = cn(slotClasses, slotSize, slotGap);
-  
+
   // Return the props object instead of JSX
   return { className, children: slot };
 };
