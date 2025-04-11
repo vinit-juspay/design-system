@@ -534,7 +534,6 @@ const App = () => {
       </div>
 
       {/* NEW: Menu with new Slot System */}
-      <h3 className="text-xl font-semibold mt-4">New Slot System Examples</h3>
       <div className="flex gap-8 items-center justify-center mt-2">
         {/* Standard menu item with slots - showcasing various combinations */}
         <Menu 
@@ -631,7 +630,7 @@ const App = () => {
           }}
           checkboxPosition="right"
         >
-          <Button buttonType="primary" size="md" className="w-60">
+          <Button buttonType="secondary" size="md" className="w-60">
             Checkbox Menu Item Slots
           </Button>
         </Menu>
