@@ -9,16 +9,16 @@ export type TooltipSize = 'sm' | 'lg';
 /**
  * Available tooltip arrow positions
  */
-export type TooltipArrow =
-  | 'default'
-  | 'right'
-  | 'left'
-  | 'bottomCenter'
-  | 'bottomLeft'
-  | 'bottomRight'
-  | 'topCenter'
-  | 'topLeft'
-  | 'topRight'
+export type TooltipArrow 
+  =  'default' 
+  | 'right' 
+  | 'left' 
+  | 'bottomCenter' 
+  | 'bottomLeft' 
+  | 'bottomRight' 
+  | 'topCenter' 
+  | 'topLeft' 
+  | 'topRight' 
   | 'none';
 
 /**
@@ -48,4 +48,4 @@ export interface TooltipProps {
   rootProps?: Omit<RadixTooltip.TooltipProps, 'children'>;
   /** Additional props for the tooltip content */
   contentProps?: Omit<ComponentPropsWithoutRef<typeof RadixTooltip.Content>, 'children'>;
-}
+} 

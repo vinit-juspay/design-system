@@ -2,10 +2,11 @@ import { TooltipSize, TooltipArrow } from './types';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 
+
 /**
  * Generates the appropriate class names for a tooltip based on its size
  * These classes will be applied to the main tooltip container
- *
+ * 
  * @param {TooltipSize} size - The size of the tooltip (sm or lg)
  * @returns {string} Combined Tailwind CSS class names for the tooltip
  */
@@ -26,35 +27,35 @@ export const getTooltipClassNames = (size: TooltipSize): string => {
 
 /**
  * Generates the appropriate class names for the slot based on its direction and tooltip size
- *
+ * 
  * @param {string} direction - The direction of the slot ('left' or 'right')
  * @param {TooltipSize} size - The size of the tooltip ('sm' or 'lg')
  * @returns {string} Combined Tailwind CSS class names for the slot
  */
-export const getSlotClassNames = (
-  direction: 'left' | 'right',
-  size: TooltipSize = 'sm'
-): string => {
+export const getSlotClassNames = (direction: 'left' | 'right', size: TooltipSize = 'sm'): string => {
   const theme = themeConfig.euler.tooltip;
   const tooltipSize = theme.sizes[size];
-
-  return cn(tooltipSize.slotSize, direction === 'left' ? 'mr-1.5' : 'ml-1.5');
+  
+  return cn(
+    tooltipSize.slotSize,
+    direction === 'left' ? 'mr-1.5' : 'ml-1.5'
+  );
 };
 
 /**
  * Generates the appropriate class names for a tooltip arrow based on its position
- *
+ * 
  * @param {TooltipArrow} arrow - The position of the arrow
  * @returns {object} Object containing arrow classes and side/align props for Radix UI
  */
 export const getArrowStyles = (arrow: TooltipArrow) => {
   const theme = themeConfig.euler.tooltip;
-
+  
   // Default positioning (top arrow)
   let side = 'top';
   let align = 'center';
   let showArrow = true;
-
+  
   switch (arrow) {
     case 'right':
       side = 'left';
@@ -100,6 +101,6 @@ export const getArrowStyles = (arrow: TooltipArrow) => {
     arrowClassName: cn(theme.arrow.baseStyles),
     side,
     align,
-    showArrow,
+    showArrow
   };
 };
