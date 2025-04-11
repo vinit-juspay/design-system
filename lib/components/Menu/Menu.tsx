@@ -9,10 +9,17 @@ import {
   getSeparatorClassNames, 
   getCheckClassNames, 
   getIconClassNames,
+  getSubtextClassNames,
+  getColorClassNames,
+  getShortcutClassNames,
+  getThreeColumnLayoutClassNames,
+  getColumnContentClassNames,
+  getFlexColumnClassNames
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 import Search, { filterItems } from '../common/Search';
 import Checkbox from '../common/Checkbox';
+import { cn } from '../../utils';
 
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
@@ -232,10 +239,32 @@ const Menu = React.forwardRef<
         key={`item-${index}`}
         onSelect={standardItem.onSelect}
         disabled={standardItem.disabled}
-        className={getMenuItemClassNames(standardItem.disabled)}
+        className={cn(
+          getMenuItemClassNames(standardItem.disabled), 
+          getColorClassNames(standardItem.color)
+        )}
       >
-        {standardItem.icon && <standardItem.icon className={getIconClassNames()} />}
-        {standardItem.content}
+        <div className={getThreeColumnLayoutClassNames()}>
+          {/* Column 1: Icon */}
+          {standardItem.icon && <standardItem.icon className={getIconClassNames()} />}
+          
+          {/* Column 2: Content (main text + subtext) */}
+          <div className={getColumnContentClassNames()}>
+            {standardItem.subtext ? (
+              <div className={getFlexColumnClassNames()}>
+                <div>{standardItem.content}</div>
+                <div className={getSubtextClassNames()}>{standardItem.subtext}</div>
+              </div>
+            ) : (
+              standardItem.content
+            )}
+          </div>
+          
+          {/* Column 3: Shortcut */}
+          {standardItem.shortcut && (
+            <div className={getShortcutClassNames()}>{standardItem.shortcut}</div>
+          )}
+        </div>
       </DropdownMenu.Item>
     );
   };

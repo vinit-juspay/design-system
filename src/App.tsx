@@ -1,4 +1,4 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Tag, Share, Upload, Download, Send, Save } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Tag, Share, Send, Save, Square } from "lucide-react";
 import { Button, Tooltip, Menu, Select, Checkbox } from "../lib/main";
 import { useState } from "react";
 
@@ -429,20 +429,42 @@ const App = () => {
         </Menu>
       </div>
 
-      {/* Menu with checkboxes and radios */}
-      <div className="flex gap-8 items-center justify-center">
+
+      {/* Menu with Agent Widgets header and shortcuts */}
+      <div className="flex gap-8 items-center justify-center mt-4">
         <Menu 
           items={[
-            { content: 'Show notifications', isCheckbox: true, checked: true, onSelect: () => console.log('Toggle notifications') },
-            { content: 'Show activity', isCheckbox: true, checked: false, onSelect: () => console.log('Toggle activity') },
+            { 
+              content: 'AGENT WIDGETS',
+              isLabel: true
+            },
+            { 
+              content: 'Union', 
+              icon: Square,
+              subtext: 'Combine two elements together',
+              shortcut: '⌘ U',
+              onSelect: () => console.log('Union') 
+            },
+            { 
+              content: 'Copy JSON', 
+              icon: Copy,
+              subtext: 'Generate code & use in your editor',
+              shortcut: '⌘ C',
+              onSelect: () => console.log('Copy JSON') 
+            },
             { isSeparator: true },
-            { content: 'Message Type', isLabel: true },
-            { content: 'Direct Message', isRadio: true, value: 'direct', checked: true },
-            { content: 'Group Message', isRadio: true, value: 'group' },
-            { content: 'All Messages', isRadio: true, value: 'all' }
+            { 
+              content: 'Delete File', 
+              icon: Trash2, 
+              color: 'danger',
+              shortcut: '⌘ Del',
+              onSelect: () => console.log('Delete File') 
+            }
           ]}
         >
-          <Button buttonType="secondary" size="md">Checkbox Menu</Button>
+          <Button buttonType="secondary" size="md">
+            Agent Widgets Menu
+          </Button>
         </Menu>
       </div>
 

@@ -54,11 +54,24 @@ export interface MenuLabelProps {
 // Type for standard menu item
 export interface MenuStandardProps {
   content: ReactNode;
+  /**
+   * Optional secondary text to display below the main content
+   */
+  subtext?: ReactNode;
   onSelect?: () => void;
   disabled?: boolean;
   icon?: LucideIcon;
   hasSubmenu?: boolean;
   submenuItems?: MenuItemWithSeparatorProps[];
+  /**
+   * Optional color variant for the menu item
+   * Custom colors should be defined in themeConfig
+   */
+  color?: 'danger' | 'success' | 'warning' | string;
+  /**
+   * Optional keyboard shortcut to display on the right side
+   */
+  shortcut?: string;
 }
 
 // Type for menu separator

@@ -2,62 +2,7 @@
 
 You are an expert AI assistant specializing in building design systems with React, TypeScript, Vite, Radix UI, and Tailwind CSS. Your goal is to produce clear, readable, maintainable, and accessible code that adheres to best practices for coding standards and performance.
 
-## Project Context
-This project is a design system intended to provide reusable UI components forJuspay. It uses the following technologies:
-- React
-- TypeScript
-- Vite
-- Radix UI
-- Tailwind CSS
-
-## Coding Standards
-- Use functional components.
-- Use TypeScript interfaces for props and state.
-- Avoid using 'any' type; always specify types.
-- Use descriptive variable names (e.g., `isLoading`, `hasError`).
-- Follow ESLint rules as configured in the project.
-
-## Naming Conventions
-- Component names: PascalCase (e.g., `Button`, `Input`)
-- File names: kebab-case (e.g., `button.tsx`, `input.tsx`)
-- Directories: kebab-case (e.g., `components/button`)
-
-## TypeScript Rules
-- Prefer interfaces over types for object shapes.
-- Use type aliases for utility types.
-- Avoid enums; use string literals or unions instead.
-
-## React Rules
-- Use hooks for state and side effects.
-- Avoid class components.
-- Use the `key` prop when rendering lists.
-- Use `React.memo` for performance optimization when necessary.
-
-## Styling with Tailwind CSS
-- Use utility classes from Tailwind CSS.
-- Define custom classes in `tailwind.config.js` if needed.
-- Ensure responsive design using Tailwind's responsive prefixes (e.g., `sm:`, `md:`).
-- Avoid overusing utility classes in a way that makes the code hard to read; prefer component-level styles where appropriate.
-
-## Radix UI Components
-- Use Radix UI components for accessibility and customization.
-- Always provide necessary props for accessibility (e.g., `aria-label`, `aria-expanded`).
-- Follow Radix UI's documentation for proper usage of each component.
-
-## Vite Configuration
-- Use Vite for fast development and production builds.
-- Configure aliases in `vite.config.ts` for easier imports (e.g., `@/components`).
-- Use environment variables for configuration (e.g., `.env` files).
-
-## Design System Best Practices
-- Please explain each step what you are doing
-- Ensure components are reusable and composable.
-- Prioritize accessibility by following WCAG guidelines.
-- Write unit tests for components using Jest or Vitest.
-- Optimize bundle size by tree-shaking and code splitting.
-- Define design tokens (e.g., colors, spacing) in a centralized file (e.g., `tokens.ts`).
-
-## Additional Instructions
-- Always consider performance implications when writing code (e.g., minimize unnecessary re-renders).
-- Keep components simple and focused on single responsibilities.
-- Use Tailwind's utility-first approach but group related styles into component-level classes when needed for maintainability.
+## General Guidelines to follow
+- Please add all css files taken from tailwind.config.css to themeConfig.ts file only
+- Keep all logic related things in the other component files lile Comp.tsx, util.ts, types.ts
+- Use DRY (Dont repeat yourself) principle to code. Avoid creating unnecessary duplicates

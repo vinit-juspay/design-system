@@ -114,33 +114,57 @@ export const themeConfig = {
       },
     },
     menu: {
+      /* Main container of the dropdown menu */
       baseStyles: "z-50 min-w-[128px] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      
+      /* Individual menu items */
       item: {
         baseStyles: "relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
-        icon: "h-4 w-4 mr-2"
+        icon: "h-4 w-4 mr-2",
+        subtext: "text-body-sm font-500 text-gray-400 mt-0.5",
+        shortcut: "ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right",
+        colors: {
+          danger: "text-red-500 data-[highlighted]:text-red-600",
+          success: "text-green-500 data-[highlighted]:text-green-600",
+          warning: "text-amber-500 data-[highlighted]:text-amber-600"
+        }
       },
+      
+      /* Label items (category headers) */
       label: {
         baseStyles: "text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded"
       },
+      
+      /* Separator lines */
       separator: {
         baseStyles: "h-px my-1 bg-gray-200"
       },
+      
+      /* Search feature */
       search: {
         baseStyles: "px-2 py-0 border-b border-gray-200",
         container: "flex items-center bg-white",
         icon: "h-4 w-4 text-gray-400",
         input: "w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0"
       },
+      
+      /* Checkbox items */
       checkbox: {
         baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
         indicator: "absolute right-2 h-4 w-4 items-center justify-center",
         icon: "h-4 w-4 text-primary-500"
       },
+      
+      /* Layout helpers */
       layout: {
         container: "flex items-center w-full justify-between",
         content: "flex items-center",
         checkboxRight: "ml-4",
-        checkboxLeft: "mr-2"
+        checkboxLeft: "mr-2",
+        /* 3-column layout for standard menu items */
+        threeColumn: "flex items-start w-full",
+        columnContent: "flex-1 min-w-0",
+        flexColumn: "flex flex-col"
       }
     },
     select: {

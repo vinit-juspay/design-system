@@ -84,4 +84,67 @@ export const getSearchContainerClassNames = (): string => {
 export const getSearchInputClassNames = (): string => {
   const theme = themeConfig.euler.menu;
   return theme.search.input;
+};
+
+/**
+ * Generates the appropriate class names for menu item subtext
+ * 
+ * @returns {string} Combined Tailwind CSS class names for the subtext
+ */
+export const getSubtextClassNames = (): string => {
+  const theme = themeConfig.euler.menu;
+  return theme.item.subtext;
+};
+
+/**
+ * Generates the appropriate class names for a menu item shortcut
+ * 
+ * @returns {string} Combined Tailwind CSS class names for the shortcut
+ */
+export const getShortcutClassNames = (): string => {
+  const theme = themeConfig.euler.menu;
+  return theme.item.shortcut;
+};
+
+/**
+ * Generates the appropriate class names for a menu item with a specific color
+ * 
+ * @param {string | undefined} color - The color variant to apply
+ * @returns {string} Combined Tailwind CSS class names for the colored menu item
+ */
+export const getColorClassNames = (color?: string): string => {
+  if (!color) return '';
+  
+  const theme = themeConfig.euler.menu;
+  return theme.item.colors[color as keyof typeof theme.item.colors] || '';
+};
+
+/**
+ * Generates the appropriate class names for the 3-column layout container
+ * 
+ * @returns {string} Combined Tailwind CSS class names for the 3-column layout
+ */
+export const getThreeColumnLayoutClassNames = (): string => {
+  const theme = themeConfig.euler.menu;
+  return theme.layout.threeColumn;
+};
+
+/**
+ * Generates the appropriate class names for the content column
+ * 
+ * @returns {string} Combined Tailwind CSS class names for the content column
+ */
+export const getColumnContentClassNames = (): string => {
+  const theme = themeConfig.euler.menu;
+  return theme.layout.columnContent;
+};
+
+/**
+ * Generates the appropriate class names for flex column layout
+ * 
+ * @returns {string} Combined Tailwind CSS class names for flex column layout
+ */
+export const getFlexColumnClassNames = (): string => {
+  const theme = themeConfig.euler.menu;
+  return theme.layout.flexColumn;
 }; 
