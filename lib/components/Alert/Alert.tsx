@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import { X, AlertCircle, CheckCircle, Info, AlertTriangle } from 'lucide-react';
 import { AlertProps, AlertType } from './types';
+import { ButtonType } from '../Button/types';
 import { themeConfig } from '../../themeConfig';
 import { 
   getAlertContainerClassNames,
@@ -13,7 +14,7 @@ import {
 } from './utils';
 import Button from '../Button/Button';
 
-// Icon mapping directly in this file
+// Map alert types to their appropriate icons
 const iconMap: Record<AlertType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   primary: Info,
   success: CheckCircle,
@@ -22,6 +23,21 @@ const iconMap: Record<AlertType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   purple: Info,
   neutral: Info,
   orange: AlertTriangle
+};
+
+// Map alert types to button types for consistent styling
+const mapAlertTypeToButtonType = (alertType: AlertType): ButtonType => {
+  const typeMap: Record<AlertType, ButtonType> = {
+    primary: 'primary',
+    success: 'success',
+    warning: 'secondary',
+    error: 'danger',
+    purple: 'primary',
+    neutral: 'secondary',
+    orange: 'secondary'
+  };
+  
+  return typeMap[alertType];
 };
 
 /**
@@ -61,9 +77,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     // Render the icon based on type or custom icon
     const renderIcon = () => {
       const IconToRender = icon || iconMap[type];
-      return (
-        <IconToRender className={iconClassNames} />
-      );
+      return <IconToRender className={iconClassNames} />;
     };
 
     // Render action buttons based on the count
@@ -74,8 +88,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         buttons.push(
           <Button 
             key="primary-action"
+            buttonType={mapAlertTypeToButtonType(type)}
             subType="link"
             onClick={onPrimaryAction}
+            className={type}
           >
             {primaryActionText}
           </Button>
@@ -86,8 +102,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         buttons.push(
           <Button 
             key="secondary-action" 
+            buttonType={mapAlertTypeToButtonType(type)}
             subType="link"
             onClick={onSecondaryAction}
+            className={type}
           >
             {secondaryActionText}
           </Button>
@@ -104,7 +122,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={containerClassNames}
         {...props}
       >
-        {/* Main horizontal autolayout container */}
+        {/* Main horizontal layout container */}
         <div className={themeConfig.euler.alert.layout.mainContainer}>
           {/* Content container */}
           <div className={contentContainerClassNames}>

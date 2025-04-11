@@ -216,6 +216,20 @@ export const themeConfig = {
       closeButton: {
         base: "absolute top-3 right-3 p-0.5 rounded-sm hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
       },
+      actionButton: {
+        base: "inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-medium text-sm",
+        link: "hover:underline focus-visible:outline-2 focus:outline-2",
+        button: "px-3 py-2 rounded-md bg-white border border-gray-300 hover:bg-gray-50",
+        linkColors: {
+          primary: "text-primary-700 hover:text-primary-800",
+          warning: "text-yellow-700 hover:text-yellow-800",
+          success: "text-green-700 hover:text-green-800",
+          purple: "text-purple-700 hover:text-purple-800", 
+          neutral: "text-gray-700 hover:text-gray-800",
+          error: "text-red-700 hover:text-red-800",
+          orange: "text-orange-700 hover:text-orange-800"
+        }
+      },
       styles: {
         fill: {
           primary: {
@@ -328,6 +342,9 @@ export const themeConfig = {
             iconColor: "text-orange-600",
           },
         },
+      },
+      border: {
+        default: "border-[2px]"
       },
     },
   }
