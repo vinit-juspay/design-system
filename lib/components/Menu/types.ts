@@ -3,7 +3,21 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
 
 // Menu positioning options
+/**
+ * Defines the horizontal alignment options for the menu relative to its trigger
+ * - 'start': Aligns the menu to the start of the trigger
+ * - 'center': Centers the menu relative to the trigger
+ * - 'end': Aligns the menu to the end of the trigger
+ */
 export type MenuAlignment = 'start' | 'center' | 'end';
+
+/**
+ * Defines which side of the trigger the menu appears on
+ * - 'top': Menu appears above the trigger
+ * - 'right': Menu appears to the right of the trigger
+ * - 'bottom': Menu appears below the trigger
+ * - 'left': Menu appears to the left of the trigger
+ */
 export type MenuSide = 'top' | 'right' | 'bottom' | 'left';
 export type SlotDirection = 'left' | 'right';
 
@@ -63,25 +77,87 @@ export interface MenuSeparatorProps {
 export type MenuItemProps = MenuStandardProps | MenuCheckboxProps | MenuRadioProps | MenuLabelProps;
 export type MenuItemWithSeparatorProps = MenuItemProps | MenuSeparatorProps;
 
+/**
+ * Configuration options for the menu search functionality
+ */
 export interface MenuSearchProps {
+  /**
+   * Enable or disable search functionality
+   */
   enabled: boolean;
+  
+  /**
+   * Placeholder text for the search input
+   */
   placeholder?: string;
 }
 
+/**
+ * Configuration options for multi-select functionality in the menu
+ */
 export interface MenuMultiSelectProps {
+  /**
+   * Enable or disable multi-select functionality
+   */
   enabled: boolean;
+  
+  /**
+   * Array of values that are currently selected
+   */
   selectedValues?: string[];
+  
+  /**
+   * Callback function triggered when selection changes
+   * @param values Array of currently selected values
+   */
   onSelectionChange?: (values: string[]) => void;
 }
 
 export interface MenuProps {
+  /**
+   * The trigger element that opens the menu (typically a button)
+   */
   children: ReactNode;
+  
+  /**
+   * Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators
+   */
   items: MenuItemWithSeparatorProps[];
+  
+  /**
+   * Controls the horizontal alignment of the menu relative to the trigger element
+   * @default 'start'
+   */
   align?: MenuAlignment;
+  
+  /**
+   * Determines which side the menu appears on relative to the trigger
+   * @default 'bottom'
+   */
   side?: MenuSide;
+  
+  /**
+   * Configuration for enabling search functionality within the menu, includes options like placeholder text
+   */
   search?: MenuSearchProps;
+  
+  /**
+   * Configuration for multi-select functionality, allows selecting multiple menu items with checkboxes
+   */
   multiSelect?: MenuMultiSelectProps;
+  
+  /**
+   * Controls the position of checkboxes within menu items
+   */
   checkboxPosition?: 'left' | 'right';
+  
+  /**
+   * Additional props to pass to the root element of the menu component
+   */
   rootProps?: Omit<DropdownMenu.DropdownMenuProps, 'children'>;
+  
+  /**
+   * Additional props to pass to the content container of the menu component
+   */
   contentProps?: Omit<ComponentPropsWithoutRef<typeof DropdownMenu.Content>, 'children'>;
 } 

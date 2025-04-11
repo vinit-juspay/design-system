@@ -10,6 +10,43 @@ const meta: Meta<typeof Menu> = {
   parameters: {
     layout: 'centered',
   },
+  argTypes: {
+    children: {
+      description: 'The trigger element that opens the menu (typically a button)'
+    },
+    items: {
+      description: 'Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators'
+    },
+    align: {
+      description: 'Controls the horizontal alignment of the menu relative to the trigger element',
+      defaultValue: 'start',
+      control: { type: 'select' },
+      options: ['start', 'center', 'end']
+    },
+    side: {
+      description: 'Determines which side the menu appears on relative to the trigger',
+      defaultValue: 'bottom',
+      control: { type: 'select' },
+      options: ['top', 'right', 'bottom', 'left']
+    },
+    search: {
+      description: 'Configuration for enabling search functionality within the menu, includes options like placeholder text'
+    },
+    multiSelect: {
+      description: 'Configuration for multi-select functionality, allows selecting multiple menu items with checkboxes'
+    },
+    checkboxPosition: {
+      description: 'Controls the position of checkboxes within menu items',
+      control: { type: 'select' },
+      options: ['left', 'right']
+    },
+    rootProps: {
+      description: 'Additional props to pass to the root element of the menu component'
+    },
+    contentProps: {
+      description: 'Additional props to pass to the content container of the menu component'
+    }
+  },
   tags: ['autodocs'],
 };
 
