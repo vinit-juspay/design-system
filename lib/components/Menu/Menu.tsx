@@ -27,19 +27,8 @@ import { cn } from '../../utils';
 /**
  * Menu component built on top of Radix UI's dropdown menu primitive
  * Provides contextual dropdown menus for navigation and actions
- * 
- * @component
- * @example
- * // Basic usage
- * <Menu 
- *   items={[
- *     { content: 'Edit', icon: PencilIcon, onSelect: () => console.log('Edit') },
- *     { content: 'Duplicate', icon: CopyIcon, onSelect: () => console.log('Duplicate') }
- *   ]}
- * >
- *   <Button>Actions</Button>
- * </Menu>
- */
+ **/
+
 const Menu = React.forwardRef<
   React.ElementRef<typeof DropdownMenu.Content>,
   MenuProps
