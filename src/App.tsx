@@ -3,7 +3,7 @@ import { Button, Tooltip, Menu, Checkbox } from "../lib/main";
 import { useState } from "react";
 
 const App = () => {
-  const [selectedNotifications, setSelectedNotifications] = useState<string[]>(['push', 'email']);
+  const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [marketingPreference, setMarketingPreference] = useState(false);
   

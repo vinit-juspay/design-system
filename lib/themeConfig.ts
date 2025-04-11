@@ -115,7 +115,7 @@ export const themeConfig = {
     },
     menu: {
       /* Main container of the dropdown menu */
-      baseStyles: "z-50 min-w-[calc(100vw/10)] py-1 overflow-hidden rounded-md border border-gray-200 bg-gray-0 shadow-md",
+      baseStyles: "z-50 min-w-[calc(100vw/10)] py-1 overflow-hidden rounded-lg border border-gray-200 bg-gray-0 shadow-md",
       
       /* Individual menu items */
       item: {
@@ -150,7 +150,7 @@ export const themeConfig = {
       
       /* Checkbox items */
       checkbox: {
-        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
+        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-body-md font-500 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
         indicator: "absolute right-2 h-4 w-4 items-center justify-center",
         icon: "h-4 w-4 text-primary-500"
       },
@@ -178,7 +178,7 @@ export const themeConfig = {
           root: "h-3.5 w-3.5 rounded",
           indicator: "h-3.5 w-3.5",
           checkIcon: "h-2.5 w-2.5",
-          fontSize: "text-body-sm",
+          fontSize: "text-body-md",
         },
         md: {
           root: "h-4 w-4 rounded",
@@ -191,7 +191,7 @@ export const themeConfig = {
         disabled: "opacity-50 cursor-not-allowed bg-gray-100 border-gray-300",
         enabled: "cursor-pointer data-[state=checked]:bg-primary-500 data-[state=checked]:border-primary-500 data-[state=indeterminate]:bg-primary-500 data-[state=indeterminate]:border-primary-500 hover:border-primary-600 hover:data-[state=checked]:bg-primary-600 hover:data-[state=indeterminate]:bg-primary-600 transition-colors duration-150",
         labelDisabled: "text-gray-400 cursor-not-allowed",
-        labelEnabled: "text-gray-700 cursor-pointer"
+        labelEnabled: "text-gray-600 font-500 cursor-pointer"
       },
       position: {
         wrapper: "flex items-center",
