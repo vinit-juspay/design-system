@@ -120,6 +120,7 @@ const Menu = React.forwardRef<
             onCheckedChange={(checked) => handleCheckboxListChange(item.value!, checked)}
             disabled={item.disabled}
             className={getCheckClassNames()}
+            onSelect={(event) => event.preventDefault()}
           >
             {checkboxPosition === 'left' ? (
               <div className={themeConfig.euler.menu.layout.container}>
@@ -162,6 +163,7 @@ const Menu = React.forwardRef<
           onCheckedChange={item.onSelect as unknown as (checked: boolean) => void}
           disabled={item.disabled}
           className={getCheckClassNames()}
+          onSelect={(event) => event.preventDefault()}
         >
           {checkboxPosition === 'left' ? (
             <div className={themeConfig.euler.menu.layout.container}>
