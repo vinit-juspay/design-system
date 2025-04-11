@@ -197,7 +197,6 @@ export const themeConfig = {
     alert: {
       layout: {
         container: "relative flex w-full p-4 items-start gap-2 rounded-xl",
-        content: "flex items-start gap-2 flex-1",
         mainContainer: "flex flex-start w-full items-start gap-2.5",
         
         // Bottom placement specifics
@@ -220,13 +219,6 @@ export const themeConfig = {
         // Common elements
         iconWrapper: "py-0.5",
         closeButton: "p-0.5 rounded-sm text-gray-400 hover:text-gray-600 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
-        
-        // Existing properties
-        contentWithBottomActions: "flex-col",
-        contentWithRightActions: "flex-row",
-        titleDescription: "flex flex-col gap-2",
-        actions: "flex gap-5",
-        rightActions: "items-center",
       },
       typography: {
         title: "font-600 text-body-md text-gray-700 tracking-normal",
@@ -235,13 +227,9 @@ export const themeConfig = {
       icon: {
         size: "w-4 h-4 mt-0.5",
       },
-      closeButton: {
-        base: "absolute top-3 right-3 p-0.5 rounded-sm hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
-      },
       actionButton: {
         base: "inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-medium text-sm",
         link: "hover:underline focus-visible:outline-2 focus:outline-2",
-        button: "px-3 py-2 rounded-md bg-white border border-gray-300 hover:bg-gray-50",
         linkColors: {
           primary: "text-primary-700 hover:text-primary-800",
           success: "text-green-700 hover:text-green-800",

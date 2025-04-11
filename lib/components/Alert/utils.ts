@@ -27,7 +27,7 @@ export const getAlertContainerClassNames = (
  * Retrieves content container class names
  */
 export const getContentContainerClassNames = (): string => {
-  return themeConfig.euler.alert.layout.content;
+  return themeConfig.euler.alert.layout.mainContainer;
 };
 
 /**
