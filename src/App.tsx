@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
 import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
+import { Snackbar } from "../lib/components/Snackbar";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('buttons');
@@ -592,6 +593,17 @@ const App = () => {
             </div>
           </TabsContent>
         </Tabs>
+
+
+        <Snackbar
+  type="success"
+  heading="Success!"
+  message="Your changes have been saved"
+  alertMessage="You can now proceed with the next step"
+  position="topRight"
+  autoClose={false}
+  onClose={() => console.log('Closed')}
+/>
       </div>
     </>
   );
