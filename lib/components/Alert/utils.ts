@@ -52,11 +52,9 @@ export const getActionsContainerClassNames = (
 ): string => {
   const theme = themeConfig.euler.alert;
   
-  const placementClass = actionPlacement === 'bottom' 
-    ? theme.layout.bottomActions
-    : theme.layout.rightActions;
-  
-  return cn(theme.layout.actions, placementClass);
+  return actionPlacement === 'bottom' 
+    ? theme.layout.bottomLayout.actionButtonsWrapper
+    : theme.layout.rightLayout.actionButtonsWrapper;
 };
 
 /**
@@ -78,27 +76,23 @@ export const getIconClassNames = (
  * Retrieves close button class names
  */
 export const getCloseButtonClassNames = (): string => {
-  return themeConfig.euler.alert.closeButton.base;
+  return themeConfig.euler.alert.layout.closeButton;
 };
 
 /**
- * Retrieves action button class names based on alert type and subtype
+ * Retrieves action button class names based on alert type
  */
 export const getActionButtonClassNames = (
-  type: AlertType,
-  subType: 'button' | 'link' = 'button'
+  type: AlertType
 ): string => {
   const theme = themeConfig.euler.alert;
   
   const baseClasses = theme.actionButton.base;
   
-  if (subType === 'link') {
-    return cn(
-      baseClasses,
-      theme.actionButton.link,
-      theme.actionButton.linkColors[type] || theme.actionButton.linkColors.neutral
-    );
-  }
-  
-  return cn(baseClasses, theme.actionButton.button);
+  // Always use link style
+  return cn(
+    baseClasses,
+    theme.actionButton.link,
+    theme.actionButton.linkColors[type] || theme.actionButton.linkColors.neutral
+  );
 };

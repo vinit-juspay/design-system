@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 import { X, AlertCircle, CheckCircle, Info, AlertTriangle } from 'lucide-react';
 import { AlertProps, AlertType } from './types';
 import { ButtonType } from '../Button/types';
-import { themeConfig } from '../../themeConfig';
 import { 
   getAlertContainerClassNames,
   getContentContainerClassNames,
@@ -13,9 +12,10 @@ import {
   getCloseButtonClassNames
 } from './utils';
 import Button from '../Button/Button';
+import { themeConfig } from '../../themeConfig';
 
 // Map alert types to their appropriate icons
-const iconMap: Record<AlertType, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const ICON_MAP: Record<AlertType, React.FC<React.SVGProps<SVGSVGElement>>> = {
   primary: Info,
   success: CheckCircle,
   warning: AlertTriangle,
@@ -26,18 +26,14 @@ const iconMap: Record<AlertType, React.FC<React.SVGProps<SVGSVGElement>>> = {
 };
 
 // Map alert types to button types for consistent styling
-const mapAlertTypeToButtonType = (alertType: AlertType): ButtonType => {
-  const typeMap: Record<AlertType, ButtonType> = {
-    primary: 'primary',
-    success: 'success',
-    warning: 'secondary',
-    error: 'danger',
-    purple: 'primary',
-    neutral: 'secondary',
-    orange: 'secondary'
-  };
-  
-  return typeMap[alertType];
+const ALERT_TO_BUTTON_TYPE_MAP: Record<AlertType, ButtonType> = {
+  primary: 'primary',
+  success: 'success',
+  warning: 'secondary',
+  error: 'danger',
+  purple: 'secondary',
+  neutral: 'secondary',
+  orange: 'secondary'
 };
 
 /**
@@ -56,7 +52,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       secondaryActionText = 'Secondary Action',
       onPrimaryAction,
       onSecondaryAction,
-      buttonSubType = 'default',
       onClose,
       isDismissible = true,
       icon,
@@ -65,7 +60,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     },
     ref
   ) => {
-    // Get all the class names using the utility functions
+    const theme = themeConfig.euler.alert;
+    
+    // Computed class names
     const containerClassNames = getAlertContainerClassNames(type, alertStyle);
     const contentContainerClassNames = getContentContainerClassNames();
     const titleClassNames = getTitleClassNames();
@@ -74,24 +71,33 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const iconClassNames = getIconClassNames(type, alertStyle);
     const closeButtonClassNames = getCloseButtonClassNames();
 
-    // Render the icon based on type or custom icon
-    const renderIcon = () => {
-      const IconToRender = icon || iconMap[type];
-      return <IconToRender className={iconClassNames} />;
+    // Helper functions
+    const getColorClassForType = (alertType: AlertType): string => {
+      switch(alertType) {
+        case 'purple': return 'text-purple-700 hover:text-purple-800';
+        case 'orange': return 'text-orange-700 hover:text-orange-800';
+        case 'warning': return 'text-yellow-700 hover:text-yellow-800';
+        default: return '';
+      }
     };
 
-    // Render action buttons based on the count
-    const renderActionButtons = () => {
-      const buttons = [];
+    const renderIcon = (): React.ReactElement => {
+      const IconComponent = icon || ICON_MAP[type];
+      return <IconComponent className={iconClassNames} aria-hidden="true" />;
+    };
+
+    const renderActionButtons = (): React.ReactElement[] => {
+      const buttons: React.ReactElement[] = [];
+      const colorClass = getColorClassForType(type);
       
       if (actionButtons >= 1) {
         buttons.push(
           <Button 
             key="primary-action"
-            buttonType={mapAlertTypeToButtonType(type)}
+            buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
             subType="link"
             onClick={onPrimaryAction}
-            className={type}
+            className={colorClass || undefined}
           >
             {primaryActionText}
           </Button>
@@ -102,10 +108,10 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         buttons.push(
           <Button 
             key="secondary-action" 
-            buttonType={mapAlertTypeToButtonType(type)}
+            buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
             subType="link"
             onClick={onSecondaryAction}
-            className={type}
+            className={colorClass || undefined}
           >
             {secondaryActionText}
           </Button>
@@ -115,6 +121,51 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       return buttons;
     };
 
+    // Render pattern for bottom action placement
+    if (actionPlacement === 'bottom') {
+      return (
+        <div
+          ref={ref}
+          role="alert"
+          className={containerClassNames}
+          {...props}
+        >
+          <div className={theme.layout.bottomLayout.wrapper}>
+            <div className={contentContainerClassNames}>
+              <div className={theme.layout.iconWrapper}>
+                {renderIcon()}
+              </div>
+              
+              <div className={theme.layout.bottomLayout.contentWrapper}>
+                <div className={theme.layout.bottomLayout.titleDescriptionWrapper}>
+                  {title && <h4 className={titleClassNames}>{title}</h4>}
+                  {description && <p className={descriptionClassNames}>{description}</p>}
+                </div>
+                
+                {actionButtons > 0 && (
+                  <div className={actionsContainerClassNames}>
+                    {renderActionButtons()}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {isDismissible && (
+              <button 
+                type="button"
+                className={closeButtonClassNames}
+                onClick={onClose}
+                aria-label="Close alert"
+              >
+                <X size={20} aria-hidden="true" />
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    }
+    
+    // Render pattern for right action placement
     return (
       <div
         ref={ref}
@@ -122,34 +173,28 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className={containerClassNames}
         {...props}
       >
-        {/* Main horizontal layout container */}
-        <div className={themeConfig.euler.alert.layout.mainContainer}>
-          {/* Content container */}
-          <div className={contentContainerClassNames}>
-            {renderIcon()}
+        <div className={theme.layout.rightLayout.wrapper}>
+          <div className={theme.layout.rightLayout.contentWrapper}>
+            <div className={theme.layout.iconWrapper}>
+              {renderIcon()}
+            </div>
             
-            <div className="flex flex-col gap-5">
-              <div className={themeConfig.euler.alert.layout.titleDescription}>
-                {title && <h4 className={titleClassNames}>{title}</h4>}
-                {description && <p className={descriptionClassNames}>{description}</p>}
-              </div>
-              
-              {actionButtons > 0 && actionPlacement === 'bottom' && (
-                <div className={actionsContainerClassNames}>
-                  {renderActionButtons()}
-                </div>
-              )}
+            <div className={theme.layout.rightLayout.titleDescriptionWrapper}>
+              {title && <h4 className={titleClassNames}>{title}</h4>}
+              {description && <p className={descriptionClassNames}>{description}</p>}
             </div>
           </div>
           
-          {/* Action buttons for right placement */}
-          {actionButtons > 0 && actionPlacement === 'right' && (
+          {actionButtons > 0 && (
             <div className={actionsContainerClassNames}>
               {renderActionButtons()}
             </div>
           )}
           
-          {/* Close button */}
+          {actionButtons > 0 && isDismissible && (
+            <div className={theme.layout.rightLayout.divider} />
+          )}
+          
           {isDismissible && (
             <button 
               type="button"
@@ -157,7 +202,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
               onClick={onClose}
               aria-label="Close alert"
             >
-              <X size={20} />
+              <X size={20} aria-hidden="true" />
             </button>
           )}
         </div>

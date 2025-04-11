@@ -7,6 +7,11 @@ const meta: Meta<typeof Alert> = {
   component: Alert,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: "The Alert component displays important messages to users. It can be configured with different styles, types, and actions."
+      }
+    }
   },
   tags: ["autodocs"],
   argTypes: {
@@ -16,6 +21,7 @@ const meta: Meta<typeof Alert> = {
       description: "The type/color variant of the alert",
       table: {
         defaultValue: { summary: "primary" },
+        category: "Appearance",
       },
     },
     alertStyle: {
@@ -24,6 +30,7 @@ const meta: Meta<typeof Alert> = {
       description: "The visual style of the alert",
       table: {
         defaultValue: { summary: "fill" },
+        category: "Appearance",
       },
     },
     actionButtons: {
@@ -32,6 +39,7 @@ const meta: Meta<typeof Alert> = {
       description: "Number of action buttons to display",
       table: {
         defaultValue: { summary: "0" },
+        category: "Actions",
       },
     },
     actionPlacement: {
@@ -40,6 +48,7 @@ const meta: Meta<typeof Alert> = {
       description: "Placement of action buttons",
       table: {
         defaultValue: { summary: "bottom" },
+        category: "Layout",
       },
     },
     isDismissible: {
@@ -47,14 +56,71 @@ const meta: Meta<typeof Alert> = {
       description: "Whether the alert is dismissible",
       table: {
         defaultValue: { summary: "true" },
+        category: "Behavior",
       },
     },
+    title: {
+      control: "text",
+      description: "The title of the alert",
+      table: {
+        category: "Content",
+      },
+    },
+    description: {
+      control: "text",
+      description: "The description/content of the alert",
+      table: {
+        category: "Content",
+      },
+    },
+    primaryActionText: {
+      control: "text",
+      description: "Text for the primary action button",
+      table: {
+        defaultValue: { summary: "Primary Action" },
+        category: "Actions",
+      },
+    },
+    secondaryActionText: {
+      control: "text",
+      description: "Text for the secondary action button",
+      table: {
+        defaultValue: { summary: "Secondary Action" },
+        category: "Actions", 
+      },
+    },
+    onPrimaryAction: {
+      table: {
+        disable: true
+      }
+    },
+    onSecondaryAction: {
+      table: {
+        disable: true
+      }
+    },
+    onClose: {
+      table: {
+        disable: true
+      }
+    },
+    icon: {
+      table: {
+        disable: true
+      }
+    },
+    children: {
+      table: {
+        disable: true
+      }
+    }
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Alert>;
 
+// Base Stories
 export const Primary: Story = {
   args: {
     type: "primary",
@@ -95,7 +161,29 @@ export const Warning: Story = {
   },
 };
 
-export const WithActions: Story = {
+// Style Variations
+export const Subtle: Story = {
+  args: {
+    type: "warning",
+    alertStyle: "subtle",
+    title: "Subtle Warning",
+    description: "This is a subtle warning alert with less visual emphasis.",
+    isDismissible: true,
+  },
+};
+
+export const NoFill: Story = {
+  args: {
+    type: "error",
+    alertStyle: "noFill",
+    title: "No Fill Error",
+    description: "This is an error alert with no background fill.",
+    isDismissible: true,
+  },
+};
+
+// Action Button Variations
+export const WithBottomActions: Story = {
   args: {
     type: "primary",
     alertStyle: "fill",
@@ -122,26 +210,7 @@ export const WithRightActions: Story = {
   },
 };
 
-export const Subtle: Story = {
-  args: {
-    type: "warning",
-    alertStyle: "subtle",
-    title: "Subtle Warning",
-    description: "This is a subtle warning alert with less visual emphasis.",
-    isDismissible: true,
-  },
-};
-
-export const NoFill: Story = {
-  args: {
-    type: "error",
-    alertStyle: "noFill",
-    title: "No Fill Error",
-    description: "This is an error alert with no background fill.",
-    isDismissible: true,
-  },
-};
-
+// Customization Examples
 export const CustomIcon: Story = {
   args: {
     type: "primary",

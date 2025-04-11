@@ -1,14 +1,24 @@
 import { ComponentPropsWithoutRef, ReactNode, ElementType } from 'react';
 
 /**
- * Alert component type variants
+ * Alert component type/color variants
  */
-export type AlertType = 'primary' | 'success' | 'purple' | 'warning' | 'neutral' | 'error' | 'orange';
+export type AlertType = 
+  | 'primary'  // Blue theme (default)
+  | 'success'  // Green theme
+  | 'purple'   // Purple theme
+  | 'warning'  // Yellow theme
+  | 'neutral'  // Gray theme
+  | 'error'    // Red theme
+  | 'orange';  // Orange theme
 
 /**
  * Alert visual style variants
  */
-export type AlertStyle = 'fill' | 'subtle' | 'noFill';
+export type AlertStyle = 
+  | 'fill'     // Colored background
+  | 'subtle'   // Lighter colored background 
+  | 'noFill';  // Transparent background with border
 
 /**
  * Number of action buttons to display
@@ -19,11 +29,6 @@ export type ActionButtonsCount = 0 | 1 | 2;
  * Placement options for action buttons
  */
 export type ActionPlacement = 'bottom' | 'right';
-
-/**
- * Button style variant options
- */
-export type ButtonSubType = 'default' | 'link';
 
 /**
  * Props for the Alert component
@@ -70,7 +75,4 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
   
   /** Custom content to render instead of title/description */
   children?: ReactNode;
-  
-  /** Button subType for action buttons @default 'default' */
-  buttonSubType?: ButtonSubType;
 }
