@@ -33,12 +33,12 @@ export type ActionPlacement = 'bottom' | 'right';
 /**
  * Props for the Alert component
  */
-export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
+export interface AlertProps extends Omit<ComponentPropsWithoutRef<'div'>, 'style'> {
   /** The type/color variant of the alert @default 'primary' */
   type?: AlertType;
   
   /** The visual style of the alert @default 'fill' */
-  alertStyle?: AlertStyle;
+  style?: AlertStyle;
   
   /** Number of action buttons to display @default 0 */
   actionButtons?: ActionButtonsCount;
@@ -67,8 +67,8 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
   /** Handler for close button click */
   onClose?: () => void;
   
-  /** Whether the alert is dismissible @default true */
-  isDismissible?: boolean;
+  /** Whether the alert has a close icon @default true */
+  hasCloseIcon?: boolean;
   
   /** Custom icon to display */
   icon?: ElementType;
@@ -76,6 +76,6 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
   /** Custom content to render instead of title/description */
   children?: ReactNode;
   
-  /** Whether to show the alert icon @default true */
-  showIcon?: boolean;
+  /** Whether to show the alert main icon @default true */
+  hasMainIcon?: boolean;
 }

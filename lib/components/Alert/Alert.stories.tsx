@@ -16,13 +16,13 @@ const meta: Meta<typeof Alert> = {
   tags: ["autodocs"],
   args: {
     type: "primary",
-    alertStyle: "fill",
+    style: "fill",
     actionButtons: 0,
     actionPlacement: "bottom",
-    isDismissible: true,
+    hasCloseIcon: true,
     primaryActionText: "Primary Action",
     secondaryActionText: "Secondary Action",
-    showIcon: true
+    hasMainIcon: true
   },
   argTypes: {
     type: {
@@ -34,7 +34,7 @@ const meta: Meta<typeof Alert> = {
         category: "Appearance",
       },
     },
-    alertStyle: {
+    style: {
       control: "select",
       options: ["fill", "subtle", "noFill"],
       description: "The visual style of the alert",
@@ -43,9 +43,9 @@ const meta: Meta<typeof Alert> = {
         category: "Appearance",
       },
     },
-    showIcon: {
+    hasMainIcon: {
       control: "boolean",
-      description: "Whether to show the alert icon",
+      description: "Whether to show the alert main icon",
       table: {
         defaultValue: { summary: "true" },
         category: "Appearance",
@@ -69,9 +69,9 @@ const meta: Meta<typeof Alert> = {
         category: "Layout",
       },
     },
-    isDismissible: {
+    hasCloseIcon: {
       control: "boolean",
-      description: "Whether the alert is dismissible",
+      description: "Whether the alert has a close icon",
       table: {
         defaultValue: { summary: "true" },
         category: "Behavior",
@@ -142,40 +142,40 @@ type Story = StoryObj<typeof Alert>;
 export const Primary: Story = {
   args: {
     type: "primary",
-    alertStyle: "fill",
+    style: "fill",
     title: "Information Alert",
     description: "This is an informational alert that provides important details to the user.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const Success: Story = {
   args: {
     type: "success",
-    alertStyle: "fill",
+    style: "fill",
     title: "Success Alert",
     description: "The operation was completed successfully.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const Error: Story = {
   args: {
     type: "error",
-    alertStyle: "fill",
+    style: "fill",
     title: "Error Alert",
     description: "An error occurred while processing your request.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const Warning: Story = {
   args: {
     type: "warning",
-    alertStyle: "fill",
+    style: "fill",
     title: "Warning Alert",
     description: "This action might have consequences. Please proceed with caution.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
@@ -183,20 +183,20 @@ export const Warning: Story = {
 export const Subtle: Story = {
   args: {
     type: "warning",
-    alertStyle: "subtle",
+    style: "subtle",
     title: "Subtle Warning",
     description: "This is a subtle warning alert with less visual emphasis.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const NoFill: Story = {
   args: {
     type: "error",
-    alertStyle: "noFill",
+    style: "noFill",
     title: "No Fill Error",
     description: "This is an error alert with no background fill.",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
@@ -204,27 +204,27 @@ export const NoFill: Story = {
 export const WithBottomActions: Story = {
   args: {
     type: "primary",
-    alertStyle: "fill",
+    style: "fill",
     title: "Action Required",
     description: "Please take action on this alert by clicking one of the buttons below.",
     actionButtons: 2,
     actionPlacement: "bottom",
     primaryActionText: "Accept",
     secondaryActionText: "Decline",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const WithRightActions: Story = {
   args: {
     type: "success",
-    alertStyle: "fill",
+    style: "fill",
     title: "Action Required",
     description: "Please take action on this alert by clicking the button.",
     actionButtons: 1,
     actionPlacement: "right",
     primaryActionText: "Confirm",
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
@@ -232,21 +232,21 @@ export const WithRightActions: Story = {
 export const CustomIcon: Story = {
   args: {
     type: "primary",
-    alertStyle: "fill",
+    style: "fill",
     title: "Custom Icon Alert",
     description: "This alert uses a custom icon instead of the default one.",
     icon: Bell,
-    isDismissible: true,
+    hasCloseIcon: true,
   },
 };
 
 export const NonDismissible: Story = {
   args: {
     type: "error",
-    alertStyle: "fill",
+    style: "fill",
     title: "Important Error",
     description: "This alert cannot be dismissed and will remain visible.",
-    isDismissible: false,
+    hasCloseIcon: false,
   },
 };
 
@@ -254,10 +254,10 @@ export const NonDismissible: Story = {
 export const NoIcon: Story = {
   args: {
     type: "primary",
-    alertStyle: "fill",
+    style: "fill",
     title: "No Icon Alert",
     description: "This alert doesn't display an icon.",
-    showIcon: false,
-    isDismissible: true,
+    hasMainIcon: false,
+    hasCloseIcon: true,
   },
 };

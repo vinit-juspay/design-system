@@ -43,7 +43,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       type = 'primary',
-      alertStyle = 'fill',
+      style = 'fill',
       title,
       description,
       actionButtons = 0,
@@ -53,9 +53,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       onPrimaryAction,
       onSecondaryAction,
       onClose,
-      isDismissible = true,
+      hasCloseIcon = true,
       icon,
-      showIcon = true,
+      hasMainIcon = true,
       children,
       ...props
     },
@@ -64,12 +64,12 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     const theme = themeConfig.euler.alert;
     
     // Computed class names
-    const containerClassNames = getAlertContainerClassNames(type, alertStyle);
+    const containerClassNames = getAlertContainerClassNames(type, style);
     const contentContainerClassNames = getContentContainerClassNames();
     const titleClassNames = getTitleClassNames();
     const descriptionClassNames = getDescriptionClassNames();
     const actionsContainerClassNames = getActionsContainerClassNames(actionPlacement);
-    const iconClassNames = getIconClassNames(type, alertStyle);
+    const iconClassNames = getIconClassNames(type, style);
     const closeButtonClassNames = getCloseButtonClassNames();
 
     // Helper functions
@@ -128,7 +128,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         >
           <div className={theme.layout.bottomLayout.wrapper}>
             <div className={contentContainerClassNames}>
-              {showIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
+              {hasMainIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
               
               <div className={theme.layout.bottomLayout.contentWrapper}>
                 <div className={theme.layout.bottomLayout.titleDescriptionWrapper}>
@@ -144,7 +144,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
               </div>
             </div>
             
-            {isDismissible && (
+            {hasCloseIcon && (
               <button 
                 type="button"
                 className={closeButtonClassNames}
@@ -169,7 +169,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       >
         <div className={theme.layout.rightLayout.wrapper}>
           <div className={theme.layout.rightLayout.contentWrapper}>
-            {showIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
+            {hasMainIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
             
             <div className={theme.layout.rightLayout.titleDescriptionWrapper}>
               {title && <h4 className={titleClassNames}>{title}</h4>}
@@ -183,11 +183,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             </div>
           )}
           
-          {actionButtons > 0 && isDismissible && (
+          {actionButtons > 0 && hasCloseIcon && (
             <div className={theme.layout.rightLayout.divider} />
           )}
           
-          {isDismissible && (
+          {hasCloseIcon && (
             <button 
               type="button"
               className={closeButtonClassNames}
