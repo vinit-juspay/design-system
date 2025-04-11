@@ -141,7 +141,7 @@ export const themeConfig = {
      */
     menu: {
       /** Base container styles for the dropdown menu */
-      baseStyles: "z-50 min-w-[calc(100vw/10)] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      baseStyles: "z-50 min-w-[200px] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
       
       /** Layout helper classes for menu structure */
       layout: {

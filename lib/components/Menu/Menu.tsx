@@ -43,7 +43,7 @@ const Menu = React.forwardRef<
 >(({
   children,
   items,
-  align = 'center',
+  align = 'start',
   side = 'bottom',
   search,
   multiSelect,
@@ -56,6 +56,7 @@ const Menu = React.forwardRef<
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>(multiSelect?.selectedValues || []);
   const [triggerWidth, setTriggerWidth] = React.useState<number | null>(null);
+  const [dynamicAlign, setDynamicAlign] = React.useState(align);
   const triggerRef = React.useRef<HTMLElement | null>(null);
   
   // Get checkbox size from theme config with fallback to "md"
@@ -75,13 +76,32 @@ const Menu = React.forwardRef<
     }
   }, [multiSelect?.selectedValues]);
 
-  // Measure the trigger width when menu opens
+  // Measure the trigger width when menu opens and adjust alignment if needed
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
     
     if (open && triggerRef.current) {
-      const width = triggerRef.current.getBoundingClientRect().width;
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const width = triggerRect.width;
       setTriggerWidth(width);
+      
+      // Determine if the menu would go off-screen and adjust alignment
+      const windowWidth = window.innerWidth;
+      const spaceToRight = windowWidth - triggerRect.right;
+      const spaceToLeft = triggerRect.left;
+      
+      // If there's not enough space on the right, align to end
+      if (spaceToRight < 200 && spaceToLeft > spaceToRight) {
+        setDynamicAlign('end');
+      }
+      // If there's not enough space on the left, align to start
+      else if (spaceToLeft < 200 && spaceToRight > spaceToLeft) {
+        setDynamicAlign('start');
+      }
+      // Otherwise use the provided alignment or default
+      else {
+        setDynamicAlign(align);
+      }
     }
     
     if (rootProps?.onOpenChange) {
@@ -303,7 +323,7 @@ const Menu = React.forwardRef<
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           ref={ref}
-          align={align}
+          align={dynamicAlign}
           side={side}
           sideOffset={5}
           className={menuClassNames}
