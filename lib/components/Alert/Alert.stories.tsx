@@ -14,6 +14,16 @@ const meta: Meta<typeof Alert> = {
     }
   },
   tags: ["autodocs"],
+  args: {
+    type: "primary",
+    alertStyle: "fill",
+    actionButtons: 0,
+    actionPlacement: "bottom",
+    isDismissible: true,
+    primaryActionText: "Primary Action",
+    secondaryActionText: "Secondary Action",
+    showIcon: true
+  },
   argTypes: {
     type: {
       control: "select",
@@ -30,6 +40,14 @@ const meta: Meta<typeof Alert> = {
       description: "The visual style of the alert",
       table: {
         defaultValue: { summary: "fill" },
+        category: "Appearance",
+      },
+    },
+    showIcon: {
+      control: "boolean",
+      description: "Whether to show the alert icon",
+      table: {
+        defaultValue: { summary: "true" },
         category: "Appearance",
       },
     },
@@ -229,5 +247,17 @@ export const NonDismissible: Story = {
     title: "Important Error",
     description: "This alert cannot be dismissed and will remain visible.",
     isDismissible: false,
+  },
+};
+
+// Add a story with no icon
+export const NoIcon: Story = {
+  args: {
+    type: "primary",
+    alertStyle: "fill",
+    title: "No Icon Alert",
+    description: "This alert doesn't display an icon.",
+    showIcon: false,
+    isDismissible: true,
   },
 };

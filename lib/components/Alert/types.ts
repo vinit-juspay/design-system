@@ -75,4 +75,7 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
   
   /** Custom content to render instead of title/description */
   children?: ReactNode;
+  
+  /** Whether to show the alert icon @default true */
+  showIcon?: boolean;
 }

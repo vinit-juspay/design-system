@@ -55,6 +55,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       onClose,
       isDismissible = true,
       icon,
+      showIcon = true,
       children,
       ...props
     },
@@ -127,9 +128,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         >
           <div className={theme.layout.bottomLayout.wrapper}>
             <div className={contentContainerClassNames}>
-              <div className={theme.layout.iconWrapper}>
-                {renderIcon()}
-              </div>
+              {showIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
               
               <div className={theme.layout.bottomLayout.contentWrapper}>
                 <div className={theme.layout.bottomLayout.titleDescriptionWrapper}>
@@ -170,9 +169,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       >
         <div className={theme.layout.rightLayout.wrapper}>
           <div className={theme.layout.rightLayout.contentWrapper}>
-            <div className={theme.layout.iconWrapper}>
-              {renderIcon()}
-            </div>
+            {showIcon && <div className={theme.layout.iconWrapper}>{renderIcon()}</div>}
             
             <div className={theme.layout.rightLayout.titleDescriptionWrapper}>
               {title && <h4 className={titleClassNames}>{title}</h4>}
