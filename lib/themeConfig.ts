@@ -241,7 +241,7 @@ export const themeConfig = {
         }
       },
       content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
-    }
+    },
     alert: {
       layout: {
         container: "relative flex w-full p-4 items-start gap-2 rounded-xl",
