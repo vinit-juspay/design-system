@@ -381,21 +381,18 @@ const App = () => {
               isCheckbox: true, 
               isCheckboxListItem: true, 
               value: 'push_left_icon_right', 
-              shortcut: '📱'
             },
             { 
               content: 'Email Notifications', 
               isCheckbox: true, 
               isCheckboxListItem: true, 
               value: 'email_left_icon_right', 
-              shortcut: '📧'
             },
             { 
               content: 'SMS Notifications', 
               isCheckbox: true, 
               isCheckboxListItem: true, 
               value: 'sms_left_icon_right', 
-              shortcut: '📨'
             },
           ]}
           multiSelect={{
@@ -405,7 +402,7 @@ const App = () => {
           }}
           checkboxPosition="left"
         >
-          <Button buttonType="secondary" size="md">
+          <Button buttonType="secondary" size="md" className="rounded-xl">
             Checkbox Left, Icon Right
           </Button>
         </Menu>

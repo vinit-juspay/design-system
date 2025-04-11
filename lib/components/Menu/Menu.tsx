@@ -143,7 +143,7 @@ const Menu = React.forwardRef<
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
-                  size="sm"
+                  size="md"
                   position="left"
                   onCheckedChange={() => {}}
                 >
@@ -162,7 +162,7 @@ const Menu = React.forwardRef<
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
-                  size="sm"
+                  size="md"
                   onCheckedChange={() => {}}
                   className={themeConfig.euler.menu.layout.checkboxRight}
                 />
@@ -186,7 +186,7 @@ const Menu = React.forwardRef<
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
-                size="sm"
+                size="md"
                 position="left"
                 onCheckedChange={() => {}}
               >
@@ -205,7 +205,7 @@ const Menu = React.forwardRef<
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
-                size="sm"
+                size="md"
                 onCheckedChange={() => {}}
                 className={themeConfig.euler.menu.layout.checkboxRight}
               />
