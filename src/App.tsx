@@ -1,12 +1,8 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, Apple, Banana, Leaf, Carrot, ChevronDown, DollarSign, ShoppingBag, CreditCard, Clock, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Tag, Share, Send, Save, Square } from "lucide-react";
-import { Button, Tooltip, Menu, Select, Checkbox } from "../lib/main";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Send, Save, Square } from "lucide-react";
+import { Button, Tooltip, Menu, Checkbox } from "../lib/main";
 import { useState } from "react";
 
 const App = () => {
-  const [fruitValue, setFruitValue] = useState("apple");
-  const [sizeValue, setSizeValue] = useState("md");
-  const [paymentValue, setPaymentValue] = useState("");
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [selectedNotifications, setSelectedNotifications] = useState<string[]>(['push', 'email']);
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
   const [marketingPreference, setMarketingPreference] = useState(false);
@@ -350,8 +346,18 @@ const App = () => {
       {/* Menu Examples */}
       <h2 className="text-2xl font-semibold mt-8">Menu Examples</h2>
       
-      {/* Basic menu */}
+      {/* Basic menu - without icons and with icons */}
       <div className="flex gap-8 items-center justify-center">
+        <Menu 
+          items={[
+            { content: 'Edit', onSelect: () => console.log('Edit') },
+            { content: 'Duplicate', onSelect: () => console.log('Duplicate') },
+            { content: 'Delete', onSelect: () => console.log('Delete'), disabled: true }
+          ]}
+        >
+          <Button buttonType="secondary" size="md">Actions without icons</Button>
+        </Menu>
+
         <Menu 
           items={[
             { content: 'Edit', icon: Pencil, onSelect: () => console.log('Edit') },
@@ -359,7 +365,7 @@ const App = () => {
             { content: 'Delete', icon: Trash2, onSelect: () => console.log('Delete'), disabled: true }
           ]}
         >
-          <Button buttonType="secondary" size="md">Actions</Button>
+          <Button buttonType="secondary" size="md">Actions with icons</Button>
         </Menu>
       </div>
 
@@ -525,291 +531,6 @@ const App = () => {
         </Menu>
       </div>
 
-      {/* Select Examples */}
-      <h2 className="text-2xl font-semibold mt-8">Select Examples</h2>
-      
-      {/* Basic select */}
-      <div className="flex flex-col gap-8 w-64">
-        <Select 
-          placeholder="Select a fruit"
-          value={fruitValue}
-          onValueChange={(value) => {
-            if (typeof value === 'string') {
-              setFruitValue(value);
-            }
-          }}
-          items={[
-            { value: "apple", text: "Apple", icon: Apple },
-            { value: "banana", text: "Banana", icon: Banana },
-            { value: "orange", text: "Orange" },
-            { value: "grape", text: "Grape" },
-            { value: "strawberry", text: "Strawberry" }
-          ]}
-        />
-      </div>
-
-      {/* Multi-select example */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Multi-select Skills</p>
-        <Select 
-          placeholder="Select skills"
-          value={selectedSkills}
-          onValueChange={(value) => {
-            if (Array.isArray(value)) {
-              setSelectedSkills(value);
-              console.log('Selected skills:', value);
-            }
-          }}
-          multiSelect
-          items={[
-            { 
-              label: "Programming", 
-              items: [
-                { value: "javascript", text: "JavaScript", icon: Tag },
-                { value: "typescript", text: "TypeScript", icon: Tag },
-                { value: "python", text: "Python", icon: Tag },
-                { value: "java", text: "Java", icon: Tag }
-              ] 
-            },
-            { isSeparator: true },
-            { 
-              label: "Design", 
-              items: [
-                { value: "ui", text: "UI Design", icon: Eye },
-                { value: "ux", text: "UX Design", icon: Users },
-                { value: "graphic", text: "Graphic Design", icon: Pencil }
-              ] 
-            },
-            { isSeparator: true },
-            { 
-              label: "Other", 
-              items: [
-                { value: "project", text: "Project Management", icon: Calendar },
-                { value: "content", text: "Content Writing", icon: FileText },
-                { value: "marketing", text: "Marketing", icon: Share }
-              ] 
-            }
-          ]}
-        />
-        {selectedSkills.length > 0 && (
-          <div className="mt-2">
-            <p className="text-sm text-gray-700">Selected skills:</p>
-            <div className="flex flex-wrap gap-2 mt-1">
-              {selectedSkills.map(skill => (
-                <span 
-                  key={skill} 
-                  className="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded-md flex items-center gap-1"
-                >
-                  {skill}
-                  <button 
-                    className="hover:text-primary-800"
-                    onClick={() => setSelectedSkills(selectedSkills.filter(s => s !== skill))}
-                  >
-                    <span className="sr-only">Remove {skill}</span>
-                    <span aria-hidden>×</span>
-                  </button>
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Different sizes */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Different Sizes</p>
-        <Select 
-          placeholder="Small size"
-          size="sm"
-          items={[
-            { value: "option1", text: "Option 1" },
-            { value: "option2", text: "Option 2" },
-            { value: "option3", text: "Option 3" }
-          ]}
-        />
-        
-        <Select 
-          placeholder="Medium size"
-          size="md"
-          items={[
-            { value: "option1", text: "Option 1" },
-            { value: "option2", text: "Option 2" },
-            { value: "option3", text: "Option 3" }
-          ]}
-        />
-        
-        <Select 
-          placeholder="Large size"
-          size="lg"
-          items={[
-            { value: "option1", text: "Option 1" },
-            { value: "option2", text: "Option 2" },
-            { value: "option3", text: "Option 3" }
-          ]}
-        />
-      </div>
-
-      {/* With groups */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Grouped Items</p>
-        <Select 
-          placeholder="Select a vegetable"
-          items={[
-            { 
-              label: "Fruits", 
-              items: [
-                { value: "apple", text: "Apple", icon: Apple },
-                { value: "banana", text: "Banana", icon: Banana }
-              ] 
-            },
-            { isSeparator: true },
-            { 
-              label: "Vegetables", 
-              items: [
-                { value: "carrot", text: "Carrot", icon: Carrot },
-                { value: "lettuce", text: "Lettuce", icon: Leaf },
-                { value: "spinach", text: "Spinach" }
-              ] 
-            }
-          ]}
-        />
-      </div>
-
-      {/* Disabled state */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Disabled Select</p>
-        <Select 
-          placeholder="Disabled select"
-          disabled
-          items={[
-            { value: "option1", text: "Option 1" },
-            { value: "option2", text: "Option 2" }
-          ]}
-        />
-      </div>
-
-      {/* Controlled example */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Controlled Select with Radio Buttons</p>
-        <div className="flex gap-2 items-center">
-          <label className="text-sm text-gray-600">Selected: </label>
-          <div className="flex gap-2">
-            <button 
-              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'sm' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
-              onClick={() => setSizeValue('sm')}
-            >
-              Small
-            </button>
-            <button 
-              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'md' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
-              onClick={() => setSizeValue('md')}
-            >
-              Medium
-            </button>
-            <button 
-              className={`px-2 py-1 text-sm rounded-md ${sizeValue === 'lg' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100'}`}
-              onClick={() => setSizeValue('lg')}
-            >
-              Large
-            </button>
-          </div>
-        </div>
-        <Select 
-          placeholder="Select a size"
-          value={sizeValue}
-          onValueChange={(value) => {
-            if (typeof value === 'string') {
-              setSizeValue(value);
-            }
-          }}
-          size={sizeValue as 'sm' | 'md' | 'lg'}
-          items={[
-            { value: "sm", text: "Small" },
-            { value: "md", text: "Medium" },
-            { value: "lg", text: "Large" }
-          ]}
-        />
-      </div>
-
-      {/* With custom trigger content */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">Custom Trigger</p>
-        <Select 
-          placeholder="Payment Method"
-          value={paymentValue}
-          onValueChange={(value) => {
-            if (typeof value === 'string') {
-              setPaymentValue(value);
-            }
-          }}
-          triggerContent={
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-gray-500" />
-                <span className={paymentValue ? 'text-gray-700' : 'text-gray-400'}>
-                  {paymentValue ? 
-                    paymentValue === 'card' ? 'Credit Card' : 
-                    paymentValue === 'cash' ? 'Cash' : 
-                    'Bank Transfer' 
-                    : 'Payment Method'}
-                </span>
-              </div>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
-            </div>
-          }
-          items={[
-            { value: "card", text: "Credit Card", icon: CreditCard },
-            { value: "cash", text: "Cash", icon: DollarSign },
-            { value: "bank", text: "Bank Transfer", icon: ShoppingBag }
-          ]}
-        />
-      </div>
-
-      {/* With disabled options */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">With Disabled Options</p>
-        <Select 
-          placeholder="Delivery Time"
-          items={[
-            { value: "now", text: "Deliver Now", icon: Clock },
-            { value: "scheduled", text: "Schedule Delivery", disabled: true },
-            { value: "pickup", text: "Pick Up Later" }
-          ]}
-        />
-      </div>
-
-      {/* With Search Feature */}
-      <div className="flex flex-col gap-4 w-64">
-        <p className="font-medium text-gray-700">With Search Feature</p>
-        <Select 
-          placeholder="Search payment gateways..."
-          search={{
-            enabled: true,
-            placeholder: "Search payment gateways..."
-          }}
-          items={[
-            { 
-              label: "Currently Available", 
-              items: [
-                { value: "razorpay", text: "Razorpay", icon: CreditCard },
-                { value: "adyen", text: "Adyen", icon: CreditCard },
-                { value: "cfp", text: "CFP", icon: CreditCard },
-                { value: "stripe", text: "Stripe", icon: CreditCard }
-              ] 
-            },
-            { isSeparator: true },
-            { 
-              label: "Unavailable", 
-              items: [
-                { value: "paytm", text: "Paytm", icon: CreditCard, disabled: true },
-                { value: "braintree", text: "Braintree", icon: CreditCard, disabled: true },
-                { value: "coinbase", text: "Coinbase", icon: CreditCard, disabled: true }
-              ] 
-            }
-          ]}
-        />
-      </div>
-
       {/* Checkbox Examples */}
       <h2 className="text-2xl font-semibold mt-8">Checkbox Examples</h2>
       
@@ -866,7 +587,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* Add examples of position control for Menu and Select multi-select */}
+      {/* Add examples of position control for Menu */}
       <div className="flex flex-col gap-4 mt-8">
         <h3 className="text-xl font-semibold">Checkbox Position in Menu</h3>
         <div className="flex gap-8 items-center justify-center">
@@ -908,52 +629,14 @@ const App = () => {
             </Button>
           </Menu>
         </div>
-
-        <h3 className="text-xl font-semibold mt-6">Checkbox Position in Select</h3>
-        <div className="flex gap-8">
-          {/* Select with checkboxes on the left */}
-          <div className="w-64">
-            <p className="font-medium text-gray-700 mb-2">Left Position (Default)</p>
-            <Select 
-              placeholder="Select skills"
-              value={selectedSkills}
-              onValueChange={(value) => {
-                if (Array.isArray(value)) {
-                  setSelectedSkills(value);
-                }
-              }}
-              multiSelect
-              checkboxPosition="left"
-              items={[
-                { value: "javascript", text: "JavaScript", icon: Tag },
-                { value: "typescript", text: "TypeScript", icon: Tag },
-                { value: "python", text: "Python", icon: Tag },
-              ]}
-            />
-          </div>
-
-          {/* Select with checkboxes on the right */}
-          <div className="w-64">
-            <p className="font-medium text-gray-700 mb-2">Right Position</p>
-            <Select 
-              placeholder="Select skills"
-              value={selectedSkills}
-              onValueChange={(value) => {
-                if (Array.isArray(value)) {
-                  setSelectedSkills(value);
-                }
-              }}
-              multiSelect
-              checkboxPosition="right"
-              items={[
-                { value: "javascript", text: "JavaScript", icon: Tag },
-                { value: "typescript", text: "TypeScript", icon: Tag },
-                { value: "python", text: "Python", icon: Tag },
-              ]}
-            />
-          </div>
-        </div>
       </div>
+
+      {/* Add a placeholder for the new Select component we'll build */}
+      <h2 className="text-2xl font-semibold mt-8">Select Component (Coming Soon)</h2>
+      <div className="bg-gray-100 p-4 rounded-md w-80 text-center">
+        <p>Select component will be rebuilt from scratch</p>
+      </div>
+
     </div>
   );
 };
