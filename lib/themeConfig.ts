@@ -167,47 +167,6 @@ export const themeConfig = {
         flexColumn: "flex flex-col"
       }
     },
-    select: {
-      baseStyles: "relative flex h-10 w-full items-center justify-between rounded-md border border-gray-200 bg-white px-3 text-body-md text-gray-600 shadow-sm ring-offset-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-      icon: {
-        baseStyles: "flex items-center justify-center",
-      },
-      content: {
-        baseStyles: "relative z-50 min-w-[128px] overflow-hidden rounded-md border border-gray-200 bg-white text-gray-600 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      },
-      viewport: {
-        baseStyles: "p-1",
-      },
-      sizes: {
-        sm: {
-          height: "h-8",
-          fontSize: "text-body-sm",
-          padding: "px-2.5",
-          iconSize: "h-4 w-4",
-        },
-        md: {
-          height: "h-9",
-          fontSize: "text-body-md",
-          padding: "px-3",
-          iconSize: "h-4 w-4",
-        },
-        lg: {
-          height: "h-10",
-          fontSize: "text-body-md",
-          padding: "px-3.5",
-          iconSize: "h-5 w-5",
-        }
-      },
-      scrollButton: {
-        baseStyles: "flex cursor-default items-center justify-center py-1"
-      },
-      layout: {
-        container: "flex items-center w-full justify-between",
-        content: "flex items-center",
-        checkboxRight: "ml-4",
-        checkboxLeft: "mr-2"
-      }
-    },
     checkbox: {
       baseStyles: "flex items-center justify-center rounded border border-primary-500 bg-white focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1",
       indicator: {
