@@ -147,7 +147,7 @@ export const themeConfig = {
       layout: {
         container: "flex items-start w-full justify-between",
         content: "flex items-start",
-        checkboxRight: "ml-4",
+        checkboxRight: "ml-0",
         checkboxLeft: "mr-2",
         threeColumn: "flex items-start w-full",
         columnContent: "flex-1 min-w-0",

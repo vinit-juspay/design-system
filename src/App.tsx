@@ -377,22 +377,49 @@ const App = () => {
           items={[
             { content: 'Checkbox Left, Icon Right', isLabel: true },
             { 
-              content: 'Push Notifications', 
-              isCheckbox: true, 
-              isCheckboxListItem: true, 
-              value: 'push_left_icon_right', 
+              content: 'Push Notifications',
+              leftSlot: { 
+                content: <Checkbox checked={selectedNotifications.includes('push_custom')} size="md" />
+              },
+              rightSlots: [
+                { content: <Bell className="h-4 w-4 text-gray-400" /> },
+              ],
+              onSelect: () => {
+                const newValues = selectedNotifications.includes('push_custom') 
+                  ? selectedNotifications.filter(v => v !== 'push_custom')
+                  : [...selectedNotifications, 'push_custom'];
+                setSelectedNotifications(newValues);
+              }
             },
             { 
-              content: 'Email Notifications', 
-              isCheckbox: true, 
-              isCheckboxListItem: true, 
-              value: 'email_left_icon_right', 
+              content: 'Email Notifications',
+              leftSlot: { 
+                content: <Checkbox checked={selectedNotifications.includes('email_custom')} size="md" />
+              },
+              rightSlots: [
+                { content: <Mail className="h-4 w-4 text-gray-400" /> },
+              ],
+              onSelect: () => {
+                const newValues = selectedNotifications.includes('email_custom') 
+                  ? selectedNotifications.filter(v => v !== 'email_custom')
+                  : [...selectedNotifications, 'email_custom'];
+                setSelectedNotifications(newValues);
+              }
             },
             { 
-              content: 'SMS Notifications', 
-              isCheckbox: true, 
-              isCheckboxListItem: true, 
-              value: 'sms_left_icon_right', 
+              content: 'SMS Notifications',
+              leftSlot: { 
+                content: <Checkbox checked={selectedNotifications.includes('sms_custom')} size="md" />
+              },
+              rightSlots: [
+                { content: <Send className="h-4 w-4 text-gray-400" /> },
+              ],
+              onSelect: () => {
+                const newValues = selectedNotifications.includes('sms_custom') 
+                  ? selectedNotifications.filter(v => v !== 'sms_custom')
+                  : [...selectedNotifications, 'sms_custom'];
+                setSelectedNotifications(newValues);
+              }
             },
           ]}
           multiSelect={{
@@ -402,7 +429,7 @@ const App = () => {
           }}
           checkboxPosition="left"
         >
-          <Button buttonType="secondary" size="md" className="rounded-xl">
+          <Button buttonType="secondary" size="md">
             Checkbox Left, Icon Right
           </Button>
         </Menu>
@@ -765,33 +792,54 @@ const App = () => {
             items={[
               { content: 'Checkbox Left, Icon Right', isLabel: true },
               { 
-                content: 'Push Notifications', 
-                isCheckbox: true, 
-                isCheckboxListItem: true, 
-                value: 'push_left_icon_right', 
-                shortcut: '📱'
+                content: 'Push Notifications',
+                leftSlot: { 
+                  content: <Checkbox checked={selectedNotifications.includes('push_custom')} size="md" />
+                },
+                rightSlots: [
+                  { content: <Bell className="h-4 w-4 text-gray-400" /> },
+                  { content: <span className="text-xs text-gray-400">Daily</span> }
+                ],
+                onSelect: () => {
+                  const newValues = selectedNotifications.includes('push_custom') 
+                    ? selectedNotifications.filter(v => v !== 'push_custom')
+                    : [...selectedNotifications, 'push_custom'];
+                  setSelectedNotifications(newValues);
+                }
               },
               { 
-                content: 'Email Notifications', 
-                isCheckbox: true, 
-                isCheckboxListItem: true, 
-                value: 'email_left_icon_right', 
-                shortcut: '📧'
+                content: 'Email Notifications',
+                leftSlot: { 
+                  content: <Checkbox checked={selectedNotifications.includes('email_custom')} size="md" />
+                },
+                rightSlots: [
+                  { content: <Mail className="h-4 w-4 text-gray-400" /> },
+                  { content: <span className="text-xs text-gray-400">Weekly</span> }
+                ],
+                onSelect: () => {
+                  const newValues = selectedNotifications.includes('email_custom') 
+                    ? selectedNotifications.filter(v => v !== 'email_custom')
+                    : [...selectedNotifications, 'email_custom'];
+                  setSelectedNotifications(newValues);
+                }
               },
               { 
-                content: 'SMS Notifications', 
-                isCheckbox: true, 
-                isCheckboxListItem: true, 
-                value: 'sms_left_icon_right', 
-                shortcut: '📨'
+                content: 'SMS Notifications',
+                leftSlot: { 
+                  content: <Checkbox checked={selectedNotifications.includes('sms_custom')} size="md" />
+                },
+                rightSlots: [
+                  { content: <span className="text-lg">📨</span> },
+                  { content: <span className="text-xs text-gray-400">Monthly</span> }
+                ],
+                onSelect: () => {
+                  const newValues = selectedNotifications.includes('sms_custom') 
+                    ? selectedNotifications.filter(v => v !== 'sms_custom')
+                    : [...selectedNotifications, 'sms_custom'];
+                  setSelectedNotifications(newValues);
+                }
               },
             ]}
-            multiSelect={{
-              enabled: true,
-              selectedValues: selectedNotifications,
-              onSelectionChange: (values) => setSelectedNotifications(values)
-            }}
-            checkboxPosition="left"
           >
             <Button buttonType="secondary" size="md">
               Checkbox Left, Icon Right
@@ -814,7 +862,7 @@ const App = () => {
             checkboxPosition="right"
           >
             <Button buttonType="secondary" size="md">
-              Checkbox Right, Icon Left jnbjfnasjnfjnajlfnsaljnfsan
+              Checkbox Right, Icon Left ({selectedNotifications.length})
             </Button>
           </Menu>
         </div>
