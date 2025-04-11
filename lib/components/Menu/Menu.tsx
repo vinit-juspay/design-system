@@ -55,6 +55,8 @@ const Menu = React.forwardRef<
   const [searchQuery, setSearchQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>(multiSelect?.selectedValues || []);
+  const [triggerWidth, setTriggerWidth] = React.useState<number | null>(null);
+  const triggerRef = React.useRef<HTMLElement | null>(null);
   
   // Reset search query when menu is closed
   React.useEffect(() => {
@@ -69,6 +71,20 @@ const Menu = React.forwardRef<
       setSelectedValues(multiSelect.selectedValues);
     }
   }, [multiSelect?.selectedValues]);
+
+  // Measure the trigger width when menu opens
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    
+    if (open && triggerRef.current) {
+      const width = triggerRef.current.getBoundingClientRect().width;
+      setTriggerWidth(width);
+    }
+    
+    if (rootProps?.onOpenChange) {
+      rootProps.onOpenChange(open);
+    }
+  };
 
   // Filter items based on search query
   const filteredItems = React.useMemo(() => {
@@ -273,11 +289,13 @@ const Menu = React.forwardRef<
 
   return (
     <DropdownMenu.Root 
-      {...rootProps} 
-      onOpenChange={setIsOpen}
+      {...rootProps}
+      onOpenChange={handleOpenChange}
     >
       <DropdownMenu.Trigger asChild>
-        {children}
+        <span ref={triggerRef as React.RefObject<HTMLSpanElement>}>
+          {children}
+        </span>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
@@ -286,6 +304,7 @@ const Menu = React.forwardRef<
           side={side}
           sideOffset={5}
           className={menuClassNames}
+          style={triggerWidth ? { width: `${triggerWidth}px` } : undefined}
           {...contentProps}
         >
           <Search

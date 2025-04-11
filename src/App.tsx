@@ -350,7 +350,7 @@ const App = () => {
       <div className="flex gap-8 items-center justify-center">
         <Menu 
           items={[
-            { content: 'Edit', onSelect: () => console.log('Edit') },
+            { content: 'Edit this into a long text for testing purposes', onSelect: () => console.log('Edit') },
             { content: 'Duplicate', onSelect: () => console.log('Duplicate') },
             { content: 'Delete', onSelect: () => console.log('Delete'), disabled: true }
           ]}
@@ -365,7 +365,8 @@ const App = () => {
             { content: 'Delete', icon: Trash2, onSelect: () => console.log('Delete'), disabled: true }
           ]}
         >
-          <Button buttonType="secondary" size="md">Actions with icons</Button>
+          <Button buttonType="secondary" size="md">Actions with icons which is a long text for testing purposes</Button>
+
         </Menu>
       </div>
 
