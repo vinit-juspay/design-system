@@ -124,6 +124,7 @@ export const themeConfig = {
         subtext: "text-body-sm font-500 text-gray-400 mt-0.5",
         shortcut: "ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right",
         colors: {
+          primary: "text-primary-600 data-[highlighted]:text-primary-700",
           danger: "text-red-500 data-[highlighted]:text-red-600",
           success: "text-green-500 data-[highlighted]:text-green-600",
           warning: "text-amber-500 data-[highlighted]:text-amber-600"
@@ -150,15 +151,14 @@ export const themeConfig = {
       
       /* Checkbox items */
       checkbox: {
-        baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-body-md font-500 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",
         indicator: "absolute right-2 h-4 w-4 items-center justify-center",
         icon: "h-4 w-4 text-primary-500"
       },
       
       /* Layout helpers */
       layout: {
-        container: "flex items-center w-full justify-between",
-        content: "flex items-center",
+        container: "flex items-start w-full justify-between",
+        content: "flex items-start",
         checkboxRight: "ml-4",
         checkboxLeft: "mr-2",
         /* 3-column layout for standard menu items */

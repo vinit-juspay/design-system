@@ -51,9 +51,10 @@ export const getSeparatorClassNames = (): string => {
  * 
  * @returns {string} Combined Tailwind CSS class names for the item
  */
-export const getCheckClassNames = (): string => {
+export const getCheckClassNames = (disabled: boolean = false): string => {
   const theme = themeConfig.euler.menu;
-  return theme.checkbox.baseStyles;
+  // Reuse the standard menu item classes to maintain consistency
+  return getMenuItemClassNames(disabled);
 };
 
 /**

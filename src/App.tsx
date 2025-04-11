@@ -370,6 +370,67 @@ const App = () => {
         </Menu>
       </div>
 
+      {/* Custom variations of checkbox placement with icons */}
+      <div className="flex gap-8 items-center justify-center">
+        {/* Variation 1: Checkbox on left, icon on right as emoji shortcut */}
+        <Menu 
+          items={[
+            { content: 'Checkbox Left, Icon Right', isLabel: true },
+            { 
+              content: 'Push Notifications', 
+              isCheckbox: true, 
+              isCheckboxListItem: true, 
+              value: 'push_left_icon_right', 
+              shortcut: '📱'
+            },
+            { 
+              content: 'Email Notifications', 
+              isCheckbox: true, 
+              isCheckboxListItem: true, 
+              value: 'email_left_icon_right', 
+              shortcut: '📧'
+            },
+            { 
+              content: 'SMS Notifications', 
+              isCheckbox: true, 
+              isCheckboxListItem: true, 
+              value: 'sms_left_icon_right', 
+              shortcut: '📨'
+            },
+          ]}
+          multiSelect={{
+            enabled: true,
+            selectedValues: selectedNotifications,
+            onSelectionChange: (values) => setSelectedNotifications(values)
+          }}
+          checkboxPosition="left"
+        >
+          <Button buttonType="secondary" size="md">
+            Checkbox Left, Icon Right
+          </Button>
+        </Menu>
+
+        {/* Variation 2: Checkbox on right, icon on left (standard) */}
+        <Menu 
+          items={[
+            { content: 'Checkbox Right, Icon Left', isLabel: true },
+            { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push_right_icon_left', icon: Bell },
+            { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email_right_icon_left', icon: Mail },
+            { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms_right_icon_left', icon: Send },
+          ]}
+          multiSelect={{
+            enabled: true,
+            selectedValues: selectedNotifications,
+            onSelectionChange: (values) => setSelectedNotifications(values)
+          }}
+          checkboxPosition="right"
+        >
+          <Button buttonType="secondary" size="md">
+            Checkbox Right, Icon Left
+          </Button>
+        </Menu>
+      </div>
+
       {/* Menu with checkbox list for multiple selection */}
       <div className="flex gap-8 items-center justify-center">
         <Menu 
@@ -380,7 +441,7 @@ const App = () => {
             { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms', icon: Send },
             { content: 'Desktop Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'desktop', icon: Globe },
             { isSeparator: true },
-            { content: 'Apply Changes', icon: Save, onSelect: () => console.log('Settings saved') }
+            { content: 'Apply Changes', color: 'primary', onSelect: () => console.log('Settings saved') }
           ]}
           multiSelect={{
             enabled: true,
@@ -618,6 +679,68 @@ const App = () => {
           >
             <Button buttonType="secondary" size="md">
               Checkboxes Right
+            </Button>
+          </Menu>
+        </div>
+
+        {/* Custom variations of checkbox placement with icons */}
+        <h3 className="text-xl font-semibold mt-4">Custom Icon Placement in Checkbox Menu</h3>
+        <div className="flex gap-8 items-center justify-center">
+          {/* Variation 1: Checkbox on left, icon on right as emoji shortcut */}
+          <Menu 
+            items={[
+              { content: 'Checkbox Left, Icon Right', isLabel: true },
+              { 
+                content: 'Push Notifications', 
+                isCheckbox: true, 
+                isCheckboxListItem: true, 
+                value: 'push_left_icon_right', 
+                shortcut: '📱'
+              },
+              { 
+                content: 'Email Notifications', 
+                isCheckbox: true, 
+                isCheckboxListItem: true, 
+                value: 'email_left_icon_right', 
+                shortcut: '📧'
+              },
+              { 
+                content: 'SMS Notifications', 
+                isCheckbox: true, 
+                isCheckboxListItem: true, 
+                value: 'sms_left_icon_right', 
+                shortcut: '📨'
+              },
+            ]}
+            multiSelect={{
+              enabled: true,
+              selectedValues: selectedNotifications,
+              onSelectionChange: (values) => setSelectedNotifications(values)
+            }}
+            checkboxPosition="left"
+          >
+            <Button buttonType="secondary" size="md">
+              Checkbox Left, Icon Right
+            </Button>
+          </Menu>
+
+          {/* Variation 2: Checkbox on right, icon on left (standard) */}
+          <Menu 
+            items={[
+              { content: 'Checkbox Right, Icon Left', isLabel: true },
+              { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push_right_icon_left', icon: Bell },
+              { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email_right_icon_left', icon: Mail },
+              { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms_right_icon_left', icon: Send },
+            ]}
+            multiSelect={{
+              enabled: true,
+              selectedValues: selectedNotifications,
+              onSelectionChange: (values) => setSelectedNotifications(values)
+            }}
+            checkboxPosition="right"
+          >
+            <Button buttonType="secondary" size="md">
+              Checkbox Right, Icon Left jnbjfnasjnfjnajlfnsaljnfsan
             </Button>
           </Menu>
         </div>

@@ -135,7 +135,7 @@ const Menu = React.forwardRef<
             checked={isChecked}
             onCheckedChange={(checked) => handleCheckboxListChange(item.value!, checked)}
             disabled={item.disabled}
-            className={getCheckClassNames()}
+            className={getCheckClassNames(item.disabled)}
             onSelect={(event) => event.preventDefault()}
           >
             {checkboxPosition === 'left' ? (
@@ -178,7 +178,7 @@ const Menu = React.forwardRef<
           checked={item.checked}
           onCheckedChange={item.onSelect as unknown as (checked: boolean) => void}
           disabled={item.disabled}
-          className={getCheckClassNames()}
+          className={getCheckClassNames(item.disabled)}
           onSelect={(event) => event.preventDefault()}
         >
           {checkboxPosition === 'left' ? (
@@ -221,7 +221,7 @@ const Menu = React.forwardRef<
           key={`radio-${index}`}
           value={item.value}
           disabled={item.disabled}
-          className={getCheckClassNames()}
+          className={getCheckClassNames(item.disabled)}
         >
           <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkbox.indicator}>
             <Check className={themeConfig.euler.menu.checkbox.icon} />
