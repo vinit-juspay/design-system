@@ -473,7 +473,7 @@ const App = () => {
         <Menu 
           items={[
             { 
-              content: 'AGENT WIDGETS',
+              content: 'Agent Widgets',
               isLabel: true
             },
             { 
@@ -501,7 +501,7 @@ const App = () => {
           ]}
         >
           <Button buttonType="secondary" size="md">
-            Agent Widgets Menu
+            Agent Widgets Menu with a long text
           </Button>
         </Menu>
       </div>

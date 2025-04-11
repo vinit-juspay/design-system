@@ -186,7 +186,7 @@ export const themeConfig = {
        */
       checkboxMenuItem: {
         /** Checkbox indicator container - uses md checkbox size */
-        // useCheckboxSize: "md",
+        useCheckboxSize: "md",
         /** Position styling */
         indicator: "absolute right-2 items-center justify-center",
         /** Additional color styling */

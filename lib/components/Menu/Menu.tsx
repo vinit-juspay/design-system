@@ -58,6 +58,9 @@ const Menu = React.forwardRef<
   const [triggerWidth, setTriggerWidth] = React.useState<number | null>(null);
   const triggerRef = React.useRef<HTMLElement | null>(null);
   
+  // Get checkbox size from theme config with fallback to "md"
+  const checkboxSize = (themeConfig.euler.menu.checkboxMenuItem.useCheckboxSize) as 'sm' | 'md';
+  
   // Reset search query when menu is closed
   React.useEffect(() => {
     if (!isOpen) {
@@ -143,7 +146,7 @@ const Menu = React.forwardRef<
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
-                  size="md"
+                  size={checkboxSize}
                   position="left"
                   onCheckedChange={() => {}}
                 >
@@ -162,7 +165,7 @@ const Menu = React.forwardRef<
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
-                  size="md"
+                  size={checkboxSize}
                   onCheckedChange={() => {}}
                   className={themeConfig.euler.menu.layout.checkboxRight}
                 />
@@ -186,7 +189,7 @@ const Menu = React.forwardRef<
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
-                size="md"
+                size={checkboxSize}
                 position="left"
                 onCheckedChange={() => {}}
               >
@@ -205,7 +208,7 @@ const Menu = React.forwardRef<
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
-                size="md"
+                size={checkboxSize}
                 onCheckedChange={() => {}}
                 className={themeConfig.euler.menu.layout.checkboxRight}
               />
