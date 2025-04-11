@@ -26,15 +26,19 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
     const containerClassName = getTagClassNames(variant, tagStyle, size, color);
     const fontSizeClass = themeConfig.euler.tag.sizes[size].fontSize;
 
+    // Pre-calculate slot properties to avoid calling renderSlot twice
+    const leadingSlotProps = leadingSlot ? renderSlot(leadingSlot, size) : null;
+    const trailingSlotProps = trailingSlot ? renderSlot(trailingSlot, size) : null;
+
     return (
       <div
         ref={ref}
         className={cn(containerClassName, className)}
         {...props}
       >
-        {leadingSlot && renderSlot(leadingSlot, size) && <span {...renderSlot(leadingSlot, size)} />}
+        {leadingSlot && leadingSlotProps && <span {...leadingSlotProps} />}
         {label && <span className={fontSizeClass}>{label}</span>}
-        {trailingSlot && renderSlot(trailingSlot, size) && <span {...renderSlot(trailingSlot, size)} />}
+        {trailingSlot && trailingSlotProps && <span {...trailingSlotProps} />}
       </div>
     );
   }
