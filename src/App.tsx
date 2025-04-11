@@ -519,7 +519,7 @@ const App = () => {
             placeholder: "Search menu..."
           }}
         >
-          <Button buttonType="secondary" size="md">Searchable Menu</Button>
+          <Button buttonType="secondary" size="md">Searchable Menu with a long text for testing purposes</Button>
         </Menu>
       </div>
 
