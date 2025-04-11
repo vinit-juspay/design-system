@@ -73,12 +73,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
 
     // Helper functions
     const getColorClassForType = (alertType: AlertType): string => {
-      switch(alertType) {
-        case 'purple': return 'text-purple-700 hover:text-purple-800';
-        case 'orange': return 'text-orange-700 hover:text-orange-800';
-        case 'warning': return 'text-yellow-700 hover:text-yellow-800';
-        default: return '';
-      }
+      return theme.actionButton.linkColors[alertType] || '';
     };
 
     const renderIcon = (): React.ReactElement => {
