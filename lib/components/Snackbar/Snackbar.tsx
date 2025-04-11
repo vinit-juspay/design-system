@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '../../utils';
 import { SnackbarProps } from './types';
-import { getSnackbarStyles, getPositionStyles, getBaseStyles } from './utils';
-import { AlertCircle, CheckCircle, Info, X, XCircle } from 'lucide-react';
+import { getSnackbarStyles, getPositionStyles, getBaseStyles, getIconComponentType } from './utils';
+import { X } from 'lucide-react';
 
 const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
   (
@@ -16,37 +16,36 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       position = 'topRight',
       onClose,
       className,
-      children,
     },
     ref
   ) => {
+    const [visible, setVisible] = useState(true);
     const styles = getSnackbarStyles(type);
     const positionStyles = getPositionStyles(position);
     const baseStyles = getBaseStyles();
 
+    const handleClose = () => {
+      setVisible(false);
+      if (onClose) {
+        onClose();
+      }
+    };
+
     useEffect(() => {
-      if (autoClose && onClose) {
+      if (autoClose) {
         const timer = setTimeout(() => {
-          onClose();
+          handleClose();
         }, 5000);
         return () => clearTimeout(timer);
       }
-    }, [autoClose, onClose]);
+    }, [autoClose, handleClose]);
 
-    const getIcon = () => {
-      switch (type) {
-        case 'info':
-          return <Info className="h-5 w-5" />;
-        case 'warning':
-          return <AlertCircle className="h-5 w-5" />;
-        case 'error':
-          return <XCircle className="h-5 w-5" />;
-        case 'success':
-          return <CheckCircle className="h-5 w-5" />;
-        default:
-          return null;
-      }
-    };
+    const IconComponent = getIconComponentType(type);
+    const iconElement = IconComponent ? <IconComponent className="h-5 w-5" /> : null;
+
+    if (!visible) {
+      return null;
+    }
 
     return (
       <div
@@ -54,29 +53,37 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
         className={cn(
           baseStyles.container,
           styles.backgroundColor,
-          styles.textColor,
           positionStyles,
           className
         )}
+        role="alert"
+        aria-live="assertive"
       >
-        {showIcon && (
-          <div className={cn(baseStyles.icon, styles.iconColor)}>
-            {getIcon()}
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center gap-2">
+            {showIcon && iconElement && (
+              <div className={cn(baseStyles.icon, styles.iconColor)}>
+                {iconElement}
+              </div>
+            )}
+            {heading && <h3 className={cn("text-body-lg font-600", styles.textColor)}>{heading}</h3>}
           </div>
-        )}
-        <div className={baseStyles.content}>
-          {heading && <h3 className="font-semibold">{heading}</h3>}
-          {message && <p>{message}</p>}
-          {alertMessage && <p className="text-sm opacity-80">{alertMessage}</p>}
-          {children}
+          {!autoClose && (
+            <button
+              onClick={handleClose}
+              className={cn(baseStyles.closeButton, styles.textColor)}
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
-        {!autoClose && onClose && (
-          <button
-            onClick={onClose}
-            className={cn(baseStyles.closeButton, styles.textColor)}
-          >
-            <X className="h-4 w-4" />
-          </button>
+        
+        {(message || alertMessage) && (
+          <div className="mt-1 pl-7 flex flex-col gap-1">
+            {message && <p className={cn("text-body-md font-500 break-words", styles.textColor)}>{message}</p>}
+            {alertMessage && <p className={cn("text-body-md font-600", styles.textColor)}>{alertMessage}</p>}
+          </div>
         )}
       </div>
     );
@@ -85,4 +92,4 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
 
 Snackbar.displayName = 'Snackbar';
 
-export default Snackbar; 
+export default Snackbar;

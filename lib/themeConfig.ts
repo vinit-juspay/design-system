@@ -244,7 +244,7 @@ export const themeConfig = {
     },
     snackbar: {
       base: {
-        container: "fixed z-50 flex items-center p-4 rounded-lg shadow-lg",
+        container: "fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md",
         content: "flex flex-col gap-1",
         icon: "flex-shrink-0",
         closeButton: "ml-4 flex-shrink-0 hover:opacity-80",

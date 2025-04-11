@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 export type SnackbarType = 'info' | 'warning' | 'error' | 'success';
 
 export type SnackbarPosition = 'topRight' | 'topLeft' | 'bottomRight' | 'bottomLeft';
@@ -14,5 +12,4 @@ export interface SnackbarProps {
   position?: SnackbarPosition;
   onClose?: () => void;
   className?: string;
-  children?: ReactNode;
-} 
+}
