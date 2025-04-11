@@ -7,46 +7,42 @@ import { cn } from '../../utils';
  */
 export const getAlertContainerClassNames = (
   type: AlertType,
-  style: AlertStyle,
-  actionPlacement: ActionPlacement
+  style: AlertStyle
 ): string => {
   const theme = themeConfig.euler.alert;
   
   // Base layout classes
   const baseClasses = theme.layout.container;
   
-  // Height based on action placement
-  const heightClass = actionPlacement === 'bottom' 
-    ? theme.layout.heightWithBottomActions 
-    : theme.layout.heightWithRightActions;
-  
   // Background color based on type and style
   const backgroundClass = theme.styles[style]?.[type]?.background || '';
   
-  // Border color based on type and style
-  const borderClass = theme.styles[style]?.[type]?.border || '';
+  // Border handling based on style
+  let borderClass = '';
+  
+  if (style !== 'fill') {
+    // For noFill and subtle, use 1.5px border
+    const borderColorClass = theme.styles[style]?.[type]?.border || '';
+    borderClass = `border-[2px] ${borderColorClass}`;
+  }
   
   return cn(
     baseClasses,
-    heightClass,
     backgroundClass,
     borderClass
   );
 };
 
 /**
- * Gets the content container class names
+ * Gets the content container class names for the alert
  */
-export const getContentContainerClassNames = (
-  actionPlacement: ActionPlacement
-): string => {
+export const getContentContainerClassNames = (): string => {
   const theme = themeConfig.euler.alert;
   
+  // Match Figma specs exactly
   return cn(
-    theme.layout.content,
-    actionPlacement === 'bottom' 
-      ? theme.layout.contentWithBottomActions 
-      : theme.layout.contentWithRightActions
+    "flex flex-row items-start gap-2 flex-1 self-stretch",
+    theme.layout.content
   );
 };
 
@@ -79,12 +75,16 @@ export const getActionsContainerClassNames = (
   actionPlacement: ActionPlacement
 ): string => {
   const theme = themeConfig.euler.alert;
+  const baseClasses = "flex gap-5"; // 20px gap between buttons
+  
+  // Different classes based on action placement
+  const placementClass = actionPlacement === 'bottom' 
+    ? "" // No margin needed, parent has gap
+    : theme.layout.rightActions;
   
   return cn(
-    theme.layout.actions,
-    actionPlacement === 'bottom' 
-      ? theme.layout.bottomActions 
-      : theme.layout.rightActions
+    baseClasses,
+    placementClass
   );
 };
 
@@ -111,8 +111,8 @@ export const getIconClassNames = (
  */
 export const getCloseButtonClassNames = (): string => {
   const theme = themeConfig.euler.alert;
-  
   return cn(
+    "p-0.5 rounded-sm text-gray-400 hover:text-gray-600 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
     theme.closeButton.base
   );
 };

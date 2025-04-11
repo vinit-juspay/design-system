@@ -80,4 +80,9 @@ export interface AlertProps extends ComponentPropsWithoutRef<'div'> {
    * Custom content to render instead of title/description
    */
   children?: ReactNode;
+  
+  /**
+   * Button subType for action buttons
+   */
+  buttonSubType?: 'default' | 'link';
 }
