@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Check } from 'lucide-react';
-import { MenuProps, MenuItemWithSeparatorProps, MenuStandardProps } from './types';
+import { Check, LucideIcon } from 'lucide-react';
+import { MenuProps, MenuItemWithSeparatorProps, MenuStandardProps, MenuRadioProps } from './types';
 import { 
   getMenuClassNames, 
   getMenuItemClassNames, 
@@ -14,7 +14,10 @@ import {
   getShortcutClassNames,
   getThreeColumnLayoutClassNames,
   getColumnContentClassNames,
-  getFlexColumnClassNames
+  getFlexColumnClassNames,
+  getLeftSlotClassNames,
+  getRightSlotsContainerClassNames,
+  getMenuItemRightContainerClassNames
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 import Search, { filterItems } from '../common/Search';
@@ -47,7 +50,6 @@ const Menu = React.forwardRef<
   side = 'bottom',
   search,
   multiSelect,
-  checkboxPosition = 'left',
   rootProps,
   contentProps,
 }, ref) => {
@@ -161,27 +163,37 @@ const Menu = React.forwardRef<
             className={getCheckClassNames(item.disabled)}
             onSelect={(event) => event.preventDefault()}
           >
-            {checkboxPosition === 'left' ? (
-              <div className={themeConfig.euler.menu.layout.container}>
-                <Checkbox 
-                  checked={isChecked}
-                  disabled={item.disabled}
-                  size={checkboxSize}
-                  position="left"
-                  onCheckedChange={() => {}}
-                >
-                  <div className={themeConfig.euler.menu.layout.content}>
-                    {item.icon && <item.icon className={getIconClassNames()} />}
-                    {item.content}
-                  </div>
-                </Checkbox>
-              </div>
-            ) : (
-              <div className={themeConfig.euler.menu.layout.container}>
-                <div className={themeConfig.euler.menu.layout.content}>
-                  {item.icon && <item.icon className={getIconClassNames()} />}
-                  {item.content}
+            <div className={getThreeColumnLayoutClassNames()}>
+              {/* Left Slot */}
+              {item.leftSlot && (
+                <div className={getLeftSlotClassNames()}>
+                  {item.leftSlot.content}
                 </div>
+              )}
+              {/* Legacy icon support */}
+              {!item.leftSlot && item.icon && (
+                <div className={getLeftSlotClassNames()}>
+                  <item.icon className={getIconClassNames()} />
+                </div>
+              )}
+              
+              {/* Middle Column: Content */}
+              <div className={getColumnContentClassNames()}>
+                {item.content}
+              </div>
+              
+              {/* Right Column: Right Slots + Checkbox */}
+              <div className={getMenuItemRightContainerClassNames()}>
+                {/* Right Slots */}
+                {item.rightSlots && item.rightSlots.length > 0 && (
+                  <div className={getRightSlotsContainerClassNames()}>
+                    {item.rightSlots.slice(0, 2).map((slot, slotIndex) => (
+                      <div key={`right-slot-${slotIndex}`}>{slot.content}</div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Checkbox */}
                 <Checkbox 
                   checked={isChecked}
                   disabled={item.disabled}
@@ -190,7 +202,7 @@ const Menu = React.forwardRef<
                   className={themeConfig.euler.menu.layout.checkboxRight}
                 />
               </div>
-            )}
+            </div>
           </DropdownMenu.CheckboxItem>
         );
       }
@@ -204,27 +216,37 @@ const Menu = React.forwardRef<
           className={getCheckClassNames(item.disabled)}
           onSelect={(event) => event.preventDefault()}
         >
-          {checkboxPosition === 'left' ? (
-            <div className={themeConfig.euler.menu.layout.container}>
-              <Checkbox 
-                checked={item.checked}
-                disabled={item.disabled}
-                size={checkboxSize}
-                position="left"
-                onCheckedChange={() => {}}
-              >
-                <div className={themeConfig.euler.menu.layout.content}>
-                  {item.icon && <item.icon className={getIconClassNames()} />}
-                  {item.content}
-                </div>
-              </Checkbox>
-            </div>
-          ) : (
-            <div className={themeConfig.euler.menu.layout.container}>
-              <div className={themeConfig.euler.menu.layout.content}>
-                {item.icon && <item.icon className={getIconClassNames()} />}
-                {item.content}
+          <div className={getThreeColumnLayoutClassNames()}>
+            {/* Left Slot */}
+            {item.leftSlot && (
+              <div className={getLeftSlotClassNames()}>
+                {item.leftSlot.content}
               </div>
+            )}
+            {/* Legacy icon support */}
+            {!item.leftSlot && item.icon && (
+              <div className={getLeftSlotClassNames()}>
+                <item.icon className={getIconClassNames()} />
+              </div>
+            )}
+            
+            {/* Middle Column: Content */}
+            <div className={getColumnContentClassNames()}>
+              {item.content}
+            </div>
+            
+            {/* Right Column: Right Slots + Checkbox */}
+            <div className={getMenuItemRightContainerClassNames()}>
+              {/* Right Slots */}
+              {item.rightSlots && item.rightSlots.length > 0 && (
+                <div className={getRightSlotsContainerClassNames()}>
+                  {item.rightSlots.slice(0, 2).map((slot, slotIndex) => (
+                    <div key={`right-slot-${slotIndex}`}>{slot.content}</div>
+                  ))}
+                </div>
+              )}
+              
+              {/* Checkbox */}
               <Checkbox 
                 checked={item.checked}
                 disabled={item.disabled}
@@ -233,38 +255,81 @@ const Menu = React.forwardRef<
                 className={themeConfig.euler.menu.layout.checkboxRight}
               />
             </div>
-          )}
+          </div>
         </DropdownMenu.CheckboxItem>
       );
     }
 
     if ('isRadio' in item && item.isRadio && item.value) {
+      const radioItem = item as MenuRadioProps;
       return (
         <DropdownMenu.RadioItem
           key={`radio-${index}`}
-          value={item.value}
-          disabled={item.disabled}
-          className={getCheckClassNames(item.disabled)}
+          value={radioItem.value}
+          disabled={radioItem.disabled}
+          className={getCheckClassNames(radioItem.disabled)}
         >
-          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkboxMenuItem.indicator}>
-            <Check className={themeConfig.euler.menu.checkboxMenuItem.icon} />
-          </DropdownMenu.ItemIndicator>
-          {item.icon && <item.icon className={getIconClassNames()} />}
-          {item.content}
+          <div className={getThreeColumnLayoutClassNames()}>
+            {/* Left Slot */}
+            {radioItem.leftSlot && (
+              <div className={getLeftSlotClassNames()}>
+                {radioItem.leftSlot.content}
+              </div>
+            )}
+            {/* Legacy icon support */}
+            {!radioItem.leftSlot && radioItem.icon && (
+              <div className={getLeftSlotClassNames()}>
+                <radioItem.icon className={getIconClassNames()} />
+              </div>
+            )}
+            
+            {/* Middle Column: Content */}
+            <div className={getColumnContentClassNames()}>
+              {radioItem.content}
+            </div>
+            
+            {/* Right Column: Radio Indicator */}
+            <div className={getMenuItemRightContainerClassNames()}>
+              <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkboxMenuItem.indicator}>
+                <Check className={themeConfig.euler.menu.checkboxMenuItem.icon} />
+              </DropdownMenu.ItemIndicator>
+            </div>
+          </div>
         </DropdownMenu.RadioItem>
       );
     }
 
     if ('hasSubmenu' in item && item.hasSubmenu && item.submenuItems) {
+      const submenuItem = item as MenuStandardProps & { 
+        submenuItems: MenuItemWithSeparatorProps[];
+        icon?: LucideIcon; // Allow access to deprecated icon property 
+      };
       return (
         <DropdownMenu.Sub key={`sub-${index}`}>
-          <DropdownMenu.SubTrigger className={getMenuItemClassNames(item.disabled)}>
-            {item.icon && <item.icon className={getIconClassNames()} />}
-            {item.content}
+          <DropdownMenu.SubTrigger className={getMenuItemClassNames(submenuItem.disabled)}>
+            <div className={getThreeColumnLayoutClassNames()}>
+              {/* Left Slot */}
+              {submenuItem.leftSlot && (
+                <div className={getLeftSlotClassNames()}>
+                  {submenuItem.leftSlot.content}
+                </div>
+              )}
+              {/* Legacy icon support */}
+              {!submenuItem.leftSlot && submenuItem.icon && (
+                <div className={getLeftSlotClassNames()}>
+                  <submenuItem.icon className={getIconClassNames()} />
+                </div>
+              )}
+              
+              {/* Middle Column: Content */}
+              <div className={getColumnContentClassNames()}>
+                {submenuItem.content}
+              </div>
+            </div>
           </DropdownMenu.SubTrigger>
           <DropdownMenu.Portal>
             <DropdownMenu.SubContent className={menuClassNames}>
-              {item.submenuItems.map((subItem, subIndex) => 
+              {submenuItem.submenuItems.map((subItem, subIndex) => 
                 renderMenuItem(subItem as MenuItemWithSeparatorProps, subIndex)
               )}
             </DropdownMenu.SubContent>
@@ -274,7 +339,7 @@ const Menu = React.forwardRef<
     }
 
     // For standard menu items
-    const standardItem = item as MenuStandardProps;
+    const standardItem = item as MenuStandardProps & { icon?: LucideIcon }; // Allow access to deprecated icon property
     return (
       <DropdownMenu.Item
         key={`item-${index}`}
@@ -286,10 +351,20 @@ const Menu = React.forwardRef<
         )}
       >
         <div className={getThreeColumnLayoutClassNames()}>
-          {/* Column 1: Icon */}
-          {standardItem.icon && <standardItem.icon className={getIconClassNames()} />}
+          {/* Left Slot */}
+          {standardItem.leftSlot && (
+            <div className={getLeftSlotClassNames()}>
+              {standardItem.leftSlot.content}
+            </div>
+          )}
+          {/* Legacy icon support */}
+          {!standardItem.leftSlot && standardItem.icon && (
+            <div className={getLeftSlotClassNames()}>
+              <standardItem.icon className={getIconClassNames()} />
+            </div>
+          )}
           
-          {/* Column 2: Content (main text + subtext) */}
+          {/* Middle Column: Content (main text + subtext) */}
           <div className={getColumnContentClassNames()}>
             {standardItem.subtext ? (
               <div className={getFlexColumnClassNames()}>
@@ -301,10 +376,21 @@ const Menu = React.forwardRef<
             )}
           </div>
           
-          {/* Column 3: Shortcut */}
-          {standardItem.shortcut && (
-            <div className={getShortcutClassNames()}>{standardItem.shortcut}</div>
-          )}
+          {/* Right Column: Right Slots */}
+          <div className={getMenuItemRightContainerClassNames()}>
+            {standardItem.rightSlots && standardItem.rightSlots.length > 0 ? (
+              <div className={getRightSlotsContainerClassNames()}>
+                {standardItem.rightSlots.slice(0, 3).map((slot, slotIndex) => (
+                  <div key={`right-slot-${slotIndex}`}>{slot.content}</div>
+                ))}
+              </div>
+            ) : (
+              /* Legacy shortcut support */
+              standardItem.shortcut && (
+                <div className={getShortcutClassNames()}>{standardItem.shortcut}</div>
+              )
+            )}
+          </div>
         </div>
       </DropdownMenu.Item>
     );

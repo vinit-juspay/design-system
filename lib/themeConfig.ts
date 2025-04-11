@@ -145,17 +145,16 @@ export const themeConfig = {
       
       /** Layout helper classes for menu structure */
       layout: {
-        /** Main container layout */
         container: "flex items-start w-full justify-between",
-        /** Content area layout */
         content: "flex items-start",
-        /** Checkbox positioning variants */
         checkboxRight: "ml-4",
         checkboxLeft: "mr-2",
-        /** Three-column layout structure */
         threeColumn: "flex items-start w-full",
         columnContent: "flex-1 min-w-0",
-        flexColumn: "flex flex-col"
+        flexColumn: "flex flex-col",
+        leftSlot: "mr-2 flex-shrink-0",
+        rightSlotsContainer: "flex items-center justify-end ml-2 space-x-2 flex-shrink-0",
+        menuItemRightContainer: "flex items-center ml-auto space-x-2"
       },
       
       /** 

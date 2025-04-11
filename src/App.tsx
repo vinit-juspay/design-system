@@ -506,6 +506,110 @@ const App = () => {
         </Menu>
       </div>
 
+      {/* NEW: Menu with new Slot System */}
+      <h3 className="text-xl font-semibold mt-4">New Slot System Examples</h3>
+      <div className="flex gap-8 items-center justify-center mt-2">
+        {/* Standard menu item with slots - showcasing various combinations */}
+        <Menu 
+          items={[
+            { content: 'Standard Menu Item Slots', isLabel: true },
+            { 
+              content: 'Left & Right Slots', 
+              leftSlot: { content: <User className="h-4 w-4" /> },
+              rightSlots: [
+                { content: <span className="text-xs text-gray-400">⌘E</span> }
+              ],
+              onSelect: () => console.log('Left & Right')
+            },
+            { 
+              content: 'Left Slot Only', 
+              leftSlot: { content: <Copy className="h-4 w-4" /> },
+              onSelect: () => console.log('Left Only')
+            },
+            { 
+              content: 'Multiple Right Slots',
+              rightSlots: [
+                { content: <Settings className="h-4 w-4 text-gray-400" /> },
+                { content: <Bell className="h-4 w-4 text-gray-400" /> },
+                { content: <span className="text-xs text-gray-400">⌘B</span> }
+              ],
+              onSelect: () => console.log('Right Only')
+            },
+            {
+              content: 'Warning with Badge',
+              leftSlot: { content: <AlertCircle className="h-4 w-4" /> },
+              rightSlots: [
+                { content: <span className="rounded-full px-1.5 py-0.5 bg-amber-100 text-[10px] text-amber-600">Warning</span> }
+              ],
+              color: 'warning',
+              onSelect: () => console.log('Warning')
+            },
+            {
+              content: 'Delete Item',
+              leftSlot: { content: <Trash2 className="h-4 w-4 text-red-500" /> },
+              rightSlots: [
+                { content: <span className="rounded-full px-1.5 py-0.5 bg-red-100 text-[10px] text-red-600">Danger</span> }
+              ],
+              color: 'danger',
+              onSelect: () => console.log('Delete')
+            }
+          ]}
+        >
+          <Button buttonType="secondary" size="md" className="w-60">Standard Menu Item Slots</Button>
+        </Menu>
+
+        {/* Checkbox menu item with slots */}
+        <Menu 
+          items={[
+            { content: 'Checkbox Menu Item Slots', isLabel: true },
+            { 
+              content: 'Left Slot + 2 Right Slots', 
+              isCheckbox: true,
+              isCheckboxListItem: true,
+              value: 'push',
+              leftSlot: { content: <Bell className="h-4 w-4" /> },
+              rightSlots: [
+                { content: <Settings className="h-4 w-4 text-gray-400" /> },
+                { content: <span className="rounded-full px-1.5 py-0.5 bg-gray-100 text-[10px] text-gray-500">New</span> }
+              ]
+            },
+            { 
+              content: 'Left Slot Only', 
+              isCheckbox: true,
+              isCheckboxListItem: true,
+              value: 'email',
+              leftSlot: { content: <Mail className="h-4 w-4" /> }
+            },
+            { 
+              content: 'Right Slots Only', 
+              isCheckbox: true, 
+              isCheckboxListItem: true,
+              value: 'sms',
+              rightSlots: [
+                { content: <span className="rounded-full px-1.5 py-0.5 bg-red-100 text-[10px] text-red-500">Off</span> },
+                { content: <AlertCircle className="h-4 w-4 text-red-400" /> }
+              ]
+            },
+            {
+              content: 'No Additional Slots',
+              isCheckbox: true,
+              isCheckboxListItem: true,
+              value: 'none'
+            }
+          ]}
+          multiSelect={{
+            enabled: true,
+            selectedValues: selectedNotifications,
+            onSelectionChange: (values) => setSelectedNotifications(values)
+          }}
+          checkboxPosition="right"
+        >
+          <Button buttonType="primary" size="md" className="w-60">
+            Checkbox Menu Item Slots
+          </Button>
+        </Menu>
+      </div>
+
       {/* Menu with icon only trigger */}
       <div className="flex gap-8 items-center justify-center">
         <Menu 
