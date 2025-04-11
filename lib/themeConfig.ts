@@ -129,7 +129,7 @@ export const themeConfig = {
         baseStyles: "px-2 py-0 border-b border-gray-200",
         container: "flex items-center bg-white",
         icon: "h-4 w-4 text-gray-400",
-        input: "w-full px-2 py-1.5 text-body-md font-500 border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-primary-500 border-0 focus:ring-0 bg-transparent"
+        input: "w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0"
       },
       checkbox: {
         baseStyles: "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-gray-700 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:bg-gray-100 data-[highlighted]:text-gray-900 data-[disabled]:text-gray-300 data-[disabled]:cursor-not-allowed",

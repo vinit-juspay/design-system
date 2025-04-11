@@ -15,7 +15,7 @@ import {
   getSelectScrollButtonClassNames,
   getSelectChevronClassNames,
 } from './utils';
-import Search, { filterItems } from '../common/search';
+import Search, { filterItems } from '../common/Search';
 import Checkbox from '../common/Checkbox';
 import { themeConfig } from '../../themeConfig';
 

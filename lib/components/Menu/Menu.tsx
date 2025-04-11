@@ -11,7 +11,7 @@ import {
   getIconClassNames,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
-import Search, { filterItems } from '../common/search';
+import Search, { filterItems } from '../common/Search';
 import Checkbox from '../common/Checkbox';
 
 /**
