@@ -223,8 +223,8 @@ const Menu = React.forwardRef<
           disabled={item.disabled}
           className={getCheckClassNames(item.disabled)}
         >
-          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkbox.indicator}>
-            <Check className={themeConfig.euler.menu.checkbox.icon} />
+          <DropdownMenu.ItemIndicator className={themeConfig.euler.menu.checkboxMenuItem.indicator}>
+            <Check className={themeConfig.euler.menu.checkboxMenuItem.icon} />
           </DropdownMenu.ItemIndicator>
           {item.icon && <item.icon className={getIconClassNames()} />}
           {item.content}

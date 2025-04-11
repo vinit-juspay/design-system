@@ -21,7 +21,7 @@ export const getMenuClassNames = (): string => {
 export const getMenuItemClassNames = (disabled: boolean = false): string => {
   const theme = themeConfig.euler.menu;
   
-  return cn(theme.item.baseStyles, {
+  return cn(theme.menuItem.baseStyles, {
     'data-[disabled]': disabled
   });
 };
@@ -64,7 +64,7 @@ export const getCheckClassNames = (disabled: boolean = false): string => {
  */
 export const getIconClassNames = (): string => {
   const theme = themeConfig.euler.menu;
-  return theme.item.icon;
+  return theme.menuItem.icon;
 };
 
 /**
@@ -94,7 +94,7 @@ export const getSearchInputClassNames = (): string => {
  */
 export const getSubtextClassNames = (): string => {
   const theme = themeConfig.euler.menu;
-  return theme.item.subtext;
+  return theme.menuItem.subtext;
 };
 
 /**
@@ -104,7 +104,7 @@ export const getSubtextClassNames = (): string => {
  */
 export const getShortcutClassNames = (): string => {
   const theme = themeConfig.euler.menu;
-  return theme.item.shortcut;
+  return theme.menuItem.shortcut;
 };
 
 /**
@@ -117,7 +117,7 @@ export const getColorClassNames = (color?: string): string => {
   if (!color) return '';
   
   const theme = themeConfig.euler.menu;
-  return theme.item.colors[color as keyof typeof theme.item.colors] || '';
+  return theme.menuItem.colors[color as keyof typeof theme.menuItem.colors] || '';
 };
 
 /**

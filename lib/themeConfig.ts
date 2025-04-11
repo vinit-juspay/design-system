@@ -115,10 +115,22 @@ export const themeConfig = {
     },
     menu: {
       /* Main container of the dropdown menu */
-      baseStyles: "z-50 min-w-[calc(100vw/10)] py-1 overflow-hidden rounded-lg border border-gray-200 bg-gray-0 shadow-md",
+      baseStyles: "z-50 min-w-[calc(100vw/10)] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      
+      /* Layout helpers */
+      layout: {
+        container: "flex items-start w-full justify-between",
+        content: "flex items-start",
+        checkboxRight: "ml-4",
+        checkboxLeft: "mr-2",
+        /* 3-column layout for standard menu items */
+        threeColumn: "flex items-start w-full",
+        columnContent: "flex-1 min-w-0",
+        flexColumn: "flex flex-col"
+      },
       
       /* Individual menu items */
-      item: {
+      menuItem: {
         baseStyles: "relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
         icon: "h-4 w-4 mr-2",
         subtext: "text-body-sm font-500 text-gray-400 mt-0.5",
@@ -129,6 +141,12 @@ export const themeConfig = {
           success: "text-green-500 data-[highlighted]:text-green-600",
           warning: "text-amber-500 data-[highlighted]:text-amber-600"
         }
+      },
+      
+      /* Checkbox items */
+      checkboxMenuItem: {
+        indicator: "absolute right-2 h-4 w-4 items-center justify-center",
+        icon: "h-4 w-4 text-primary-500"
       },
       
       /* Label items (category headers) */
@@ -147,24 +165,6 @@ export const themeConfig = {
         container: "flex items-center bg-white",
         icon: "h-4 w-4 text-gray-400",
         input: "w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0"
-      },
-      
-      /* Checkbox items */
-      checkbox: {
-        indicator: "absolute right-2 h-4 w-4 items-center justify-center",
-        icon: "h-4 w-4 text-primary-500"
-      },
-      
-      /* Layout helpers */
-      layout: {
-        container: "flex items-start w-full justify-between",
-        content: "flex items-start",
-        checkboxRight: "ml-4",
-        checkboxLeft: "mr-2",
-        /* 3-column layout for standard menu items */
-        threeColumn: "flex items-start w-full",
-        columnContent: "flex-1 min-w-0",
-        flexColumn: "flex flex-col"
       }
     },
     checkbox: {

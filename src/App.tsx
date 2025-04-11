@@ -1,4 +1,4 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Users, FileText, Globe, Bell, Send, Save, Square } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Users, FileText, Bell, Send, Square } from "lucide-react";
 import { Button, Tooltip, Menu, Checkbox } from "../lib/main";
 import { useState } from "react";
 
@@ -426,34 +426,7 @@ const App = () => {
           checkboxPosition="right"
         >
           <Button buttonType="secondary" size="md">
-            Checkbox Right, Icon Left
-          </Button>
-        </Menu>
-      </div>
-
-      {/* Menu with checkbox list for multiple selection */}
-      <div className="flex gap-8 items-center justify-center">
-        <Menu 
-          items={[
-            { content: 'Notification Settings', isLabel: true },
-            { content: 'Push Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'push', icon: Bell },
-            { content: 'Email Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'email', icon: Mail },
-            { content: 'SMS Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'sms', icon: Send },
-            { content: 'Desktop Notifications', isCheckbox: true, isCheckboxListItem: true, value: 'desktop', icon: Globe },
-            { isSeparator: true },
-            { content: 'Apply Changes', color: 'primary', onSelect: () => console.log('Settings saved') }
-          ]}
-          multiSelect={{
-            enabled: true,
-            selectedValues: selectedNotifications,
-            onSelectionChange: (values) => {
-              setSelectedNotifications(values);
-              console.log('Selected notification settings:', values);
-            }
-          }}
-        >
-          <Button buttonType="secondary" size="md">
-            Notification Preferences ({selectedNotifications.length})
+            Checkbox Right, Icon Left ({selectedNotifications.length})
           </Button>
         </Menu>
       </div>
