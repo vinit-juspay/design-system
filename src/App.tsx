@@ -1,4 +1,4 @@
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Calendar, Building, Users, FileText, BookOpen, MessageSquare, Eye, Globe, Bell, Send, Save, Square } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Copy, Settings, User, LogOut, UserPlus, Mail, MoreHorizontal, Pencil, Clipboard, CreditCard, Users, FileText, Globe, Bell, Send, Save, Square } from "lucide-react";
 import { Button, Tooltip, Menu, Checkbox } from "../lib/main";
 import { useState } from "react";
 
@@ -502,23 +502,14 @@ const App = () => {
             { content: 'Profile', icon: User, onSelect: () => console.log('Profile') },
             { content: 'Settings', icon: Settings, onSelect: () => console.log('Settings') },
             { content: 'Billing', icon: CreditCard, onSelect: () => console.log('Billing') },
-            { content: 'Subscription', icon: Calendar, onSelect: () => console.log('Subscription') },
             { isSeparator: true },
             { content: 'Team', isLabel: true },
             { content: 'Invite Members', icon: UserPlus, onSelect: () => console.log('Invite Members') },
-            { content: 'Add Organization', icon: Building, onSelect: () => console.log('Add Organization') },
             { content: 'Team Settings', icon: Users, onSelect: () => console.log('Team Settings') },
             { isSeparator: true },
-            { content: 'Resources', isLabel: true },
+            { content: 'Help', isLabel: true },
             { content: 'Documentation', icon: FileText, onSelect: () => console.log('Documentation') },
-            { content: 'Guides', icon: BookOpen, onSelect: () => console.log('Guides') },
             { content: 'Help Center', icon: HelpCircle, onSelect: () => console.log('Help Center') },
-            { content: 'Community Forums', icon: MessageSquare, onSelect: () => console.log('Community Forums') },
-            { isSeparator: true },
-            { content: 'Preferences', isLabel: true },
-            { content: 'Appearance', icon: Eye, onSelect: () => console.log('Appearance') },
-            { content: 'Notifications', icon: Bell, onSelect: () => console.log('Notifications') },
-            { content: 'Language', icon: Globe, onSelect: () => console.log('Language') },
             { isSeparator: true },
             { content: 'Sign out', icon: LogOut, onSelect: () => console.log('Sign out') }
           ]}
