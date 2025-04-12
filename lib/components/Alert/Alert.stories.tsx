@@ -17,11 +17,10 @@ const meta: Meta<typeof Alert> = {
   args: {
     type: "primary",
     style: "fill",
-    actionButtons: 0,
     actionPlacement: "bottom",
     hasCloseIcon: true,
-    primaryActionText: "Primary Action",
-    secondaryActionText: "Secondary Action",
+    primaryActionText: "",
+    secondaryActionText: "",
     hasMainIcon: true
   },
   argTypes: {
@@ -49,15 +48,6 @@ const meta: Meta<typeof Alert> = {
       table: {
         defaultValue: { summary: "true" },
         category: "Appearance",
-      },
-    },
-    actionButtons: {
-      control: "select",
-      options: [0, 1, 2],
-      description: "Number of action buttons to display",
-      table: {
-        defaultValue: { summary: "0" },
-        category: "Actions",
       },
     },
     actionPlacement: {
@@ -93,17 +83,15 @@ const meta: Meta<typeof Alert> = {
     },
     primaryActionText: {
       control: "text",
-      description: "Text for the primary action button",
+      description: "Text for the primary action button (shows button when provided)",
       table: {
-        defaultValue: { summary: "Primary Action" },
         category: "Actions",
       },
     },
     secondaryActionText: {
       control: "text",
-      description: "Text for the secondary action button",
+      description: "Text for the secondary action button (shows button when provided)",
       table: {
-        defaultValue: { summary: "Secondary Action" },
         category: "Actions", 
       },
     },
@@ -207,7 +195,6 @@ export const WithBottomActions: Story = {
     style: "fill",
     title: "Action Required",
     description: "Please take action on this alert by clicking one of the buttons below.",
-    actionButtons: 2,
     actionPlacement: "bottom",
     primaryActionText: "Accept",
     secondaryActionText: "Decline",
@@ -221,7 +208,6 @@ export const WithRightActions: Story = {
     style: "fill",
     title: "Action Required",
     description: "Please take action on this alert by clicking the button.",
-    actionButtons: 1,
     actionPlacement: "right",
     primaryActionText: "Confirm",
     hasCloseIcon: true,

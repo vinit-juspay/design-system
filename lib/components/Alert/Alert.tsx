@@ -46,16 +46,15 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       style = 'fill',
       title,
       description,
-      actionButtons = 0,
       actionPlacement = 'bottom',
-      primaryActionText = 'Primary Action',
-      secondaryActionText = 'Secondary Action',
+      primaryActionText,
+      secondaryActionText,
       onPrimaryAction,
       onSecondaryAction,
       onClose,
       hasCloseIcon = true,
-      icon,
       hasMainIcon = true,
+      icon,
       children,
       ...props
     },
@@ -82,41 +81,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       return <IconComponent className={iconClassNames} aria-hidden="true" />;
     };
 
-    const renderActionButtons = (): React.ReactElement[] => {
-      const buttons: React.ReactElement[] = [];
-      const colorClass = getColorClassForType(type);
-      
-      if (actionButtons >= 1) {
-        buttons.push(
-          <Button 
-            key="primary-action"
-            buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
-            subType="link"
-            onClick={onPrimaryAction}
-            className={colorClass || undefined}
-          >
-            {primaryActionText}
-          </Button>
-        );
-      }
-      
-      if (actionButtons >= 2) {
-        buttons.push(
-          <Button 
-            key="secondary-action" 
-            buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
-            subType="link"
-            onClick={onSecondaryAction}
-            className={colorClass || undefined}
-          >
-            {secondaryActionText}
-          </Button>
-        );
-      }
-      
-      return buttons;
-    };
-
+    // Determine if we should show action buttons based on text props
+    const showPrimaryAction = !!primaryActionText;
+    const showSecondaryAction = !!secondaryActionText;
+    const hasActions = showPrimaryAction || showSecondaryAction;
+    
     // Render pattern for bottom action placement
     if (actionPlacement === 'bottom') {
       return (
@@ -136,9 +105,31 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
                   {description && <p className={descriptionClassNames}>{description}</p>}
                 </div>
                 
-                {actionButtons > 0 && (
+                {hasActions && (
                   <div className={actionsContainerClassNames}>
-                    {renderActionButtons()}
+                    {showPrimaryAction && (
+                      <Button 
+                        key="primary-action"
+                        buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
+                        subType="link"
+                        onClick={onPrimaryAction}
+                        className={getColorClassForType(type) || undefined}
+                      >
+                        {primaryActionText}
+                      </Button>
+                    )}
+                    
+                    {showSecondaryAction && (
+                      <Button 
+                        key="secondary-action" 
+                        buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
+                        subType="link"
+                        onClick={onSecondaryAction}
+                        className={getColorClassForType(type) || undefined}
+                      >
+                        {secondaryActionText}
+                      </Button>
+                    )}
                   </div>
                 )}
               </div>
@@ -177,13 +168,35 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             </div>
           </div>
           
-          {actionButtons > 0 && (
+          {hasActions && (
             <div className={actionsContainerClassNames}>
-              {renderActionButtons()}
+              {showPrimaryAction && (
+                <Button 
+                  key="primary-action"
+                  buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
+                  subType="link"
+                  onClick={onPrimaryAction}
+                  className={getColorClassForType(type) || undefined}
+                >
+                  {primaryActionText}
+                </Button>
+              )}
+              
+              {showSecondaryAction && (
+                <Button 
+                  key="secondary-action" 
+                  buttonType={ALERT_TO_BUTTON_TYPE_MAP[type]}
+                  subType="link"
+                  onClick={onSecondaryAction}
+                  className={getColorClassForType(type) || undefined}
+                >
+                  {secondaryActionText}
+                </Button>
+              )}
             </div>
           )}
           
-          {actionButtons > 0 && hasCloseIcon && (
+          {hasActions && hasCloseIcon && (
             <div className={theme.layout.rightLayout.divider} />
           )}
           

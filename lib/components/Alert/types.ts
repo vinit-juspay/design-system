@@ -40,9 +40,6 @@ export interface AlertProps extends Omit<ComponentPropsWithoutRef<'div'>, 'style
   /** The visual style of the alert @default 'fill' */
   style?: AlertStyle;
   
-  /** Number of action buttons to display @default 0 */
-  actionButtons?: ActionButtonsCount;
-  
   /** Placement of action buttons @default 'bottom' */
   actionPlacement?: ActionPlacement;
   
@@ -52,10 +49,10 @@ export interface AlertProps extends Omit<ComponentPropsWithoutRef<'div'>, 'style
   /** The description/content of the alert */
   description?: string;
   
-  /** Primary action button text @default 'Primary Action' */
+  /** Primary action button text */
   primaryActionText?: string;
   
-  /** Secondary action button text @default 'Secondary Action' */
+  /** Secondary action button text */
   secondaryActionText?: string;
   
   /** Handler for primary action button click */
@@ -70,12 +67,12 @@ export interface AlertProps extends Omit<ComponentPropsWithoutRef<'div'>, 'style
   /** Whether the alert has a close icon @default true */
   hasCloseIcon?: boolean;
   
+  /** Whether to show the alert main icon @default true */
+  hasMainIcon?: boolean;
+  
   /** Custom icon to display */
   icon?: ElementType;
   
   /** Custom content to render instead of title/description */
   children?: ReactNode;
-  
-  /** Whether to show the alert main icon @default true */
-  hasMainIcon?: boolean;
 }
