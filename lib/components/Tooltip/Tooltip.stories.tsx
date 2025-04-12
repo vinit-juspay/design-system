@@ -10,6 +10,10 @@ const meta: Meta<typeof Tooltip> = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    content: "Tooltip content",
+    slot: undefined, // No slot icon by default
+  },
   argTypes: {
     size: {
       control: "select",
@@ -46,7 +50,46 @@ const meta: Meta<typeof Tooltip> = {
         defaultValue: { summary: "left" },
       },
     },
+    slot: {
+      control: "boolean",
+      description: "Whether to show the slot icon",
+      table: {
+        defaultValue: { summary: "undefined" },
+        category: "Appearance",
+      },
+      mapping: {
+        true: Info,
+        false: undefined,
+      },
+    },
+    children: {
+      table: {
+        disable: true
+      }
+    },
+    providerProps: {
+      table: {
+        disable: true
+      }
+    },
+    rootProps: {
+      table: {
+        disable: true
+      }
+    },
+    contentProps: {
+      table: {
+        disable: true
+      }
+    },
   },
+  decorators: [
+    (Story) => (
+      <div className="p-12">
+        <Story />
+      </div>
+    )
+  ]
 };
 
 export default meta;
@@ -54,8 +97,8 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
   args: {
-    content: "This is a tooltip",
-    children: <Button>Hover me</Button>,
+    content: "Tooltip content",
+    children: <Button size="sm">Hover me</Button>,
   },
 };
 
