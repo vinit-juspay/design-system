@@ -11,92 +11,137 @@ const triggerComponents = {
   'Search': <Search enabled={true} placeholder="Search..." searchQuery="" onSearchChange={() => {}} />,
 };
 
-// Component metadata configuration
+/**
+ * The Menu component provides a dropdown menu that can be triggered from various elements.
+ * It supports items with icons, separators, submenus, and various interactive elements like checkboxes.
+ * 
+ * Features:
+ * - Customizable trigger element
+ * - Multiple item types (standard, checkbox, radio, labels, separators)
+ * - Search functionality
+ * - Multi-select capability
+ * - Support for submenus
+ * - Flexible positioning
+ */
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   component: Menu,
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: 'A dropdown menu component with rich functionality including search, multi-select, submenu support and various item types.'
+      }
+    }
   },
   args: {
+    // Set default values for the component
     children: 'Button',
+    align: 'start',
+    side: 'bottom',
+    items: [
+      { content: 'Edit', leftSlot: { content: <Edit size={16} /> }, onSelect: () => console.log('Edit') },
+      { content: 'Duplicate', leftSlot: { content: <Copy size={16} /> }, onSelect: () => console.log('Duplicate') },
+      { content: 'Share', leftSlot: { content: <Share size={16} /> }, onSelect: () => console.log('Share') },
+      { isSeparator: true },
+      { content: 'Delete', leftSlot: { content: <Trash size={16} /> }, color: 'danger', onSelect: () => console.log('Delete') },
+    ]
   },
   argTypes: {
     // Trigger element configuration
     children: {
-      description: 'The trigger element that opens the menu (typically a button)',
+      description: 'The trigger element that opens the menu',
       options: Object.keys(triggerComponents),
       control: { type: 'select' },
       mapping: triggerComponents,
       table: {
         type: { summary: 'ReactNode' },
-        defaultValue: { summary: 'Button' }
+        defaultValue: { summary: 'Button' },
+        category: 'Core'
       }
     },
-    // Menu items configuration
-    items: {
-      description: 'Array of menu items with properties like content, icons, color, and optional separators',
-      control: 'object',
-      table: {
-        type: { summary: 'MenuItemProps[]' }
-      }
-    },
-    // Positioning options
+    
+    // Positioning options in their own category
     align: {
-      description: 'Controls the horizontal alignment of the menu relative to the trigger element',
+      description: 'Horizontal alignment relative to the trigger',
       control: { 
-        type: 'select',
+        type: 'radio',
         options: ['start', 'center', 'end']
       },
       table: {
-        defaultValue: { summary: 'start' }
+        defaultValue: { summary: 'start' },
+        category: 'Positioning'
       }
     },
     side: {
-      description: 'Determines which side the menu appears on relative to the trigger',
+      description: 'Which side the menu appears on',
       control: { 
-        type: 'select',
+        type: 'radio',
         options: ['top', 'right', 'bottom', 'left']
       },
       table: {
-        defaultValue: { summary: 'bottom' }
+        defaultValue: { summary: 'bottom' },
+        category: 'Positioning'
       }
     },
-    // Feature configurations
+    
+    // Items configuration
+    items: {
+      description: 'Array of menu items with properties like content, leftSlot, rightSlots, etc.',
+      control: 'object',
+      table: {
+        type: { summary: 'MenuItemWithSeparatorProps[]' },
+        category: 'Core'
+      }
+    },
+    
+    // Search functionality
     search: {
-      description: 'Configuration for enabling search functionality within the menu, includes options like placeholder text',
+      description: 'Search configuration object',
       control: 'object',
       table: {
-        type: { summary: 'MenuSearchProps' }
+        type: { summary: '{ enabled: boolean, placeholder?: string }' },
+        category: 'Features'
       }
     },
+    
+    // Multi-select functionality
     multiSelect: {
-      description: 'Configuration for multi-select functionality, allows selecting multiple menu items with checkboxes',
+      description: 'Multi-select configuration object',
       control: 'object',
       table: {
-        type: { summary: 'MenuMultiSelectProps' }
+        type: { summary: '{ enabled: boolean, selectedValues?: string[], onSelectionChange?: (values: string[]) => void }' },
+        category: 'Features'
       }
     },
+    
+    // Checkbox position
     checkboxPosition: {
-      description: 'Controls the position of checkboxes within menu items',
+      description: 'Controls the position of checkboxes',
       control: { 
-        type: 'select',
+        type: 'radio',
         options: ['left', 'right']
+      },
+      table: {
+        category: 'Features'
       }
     },
+    
     // Advanced props
     rootProps: {
-      description: 'Additional props to pass to the root element of the menu component',
+      description: 'Additional props for the root element',
       control: 'object',
       table: {
-        type: { summary: 'Omit<DropdownMenuProps, "children">' }
+        type: { summary: 'DropdownMenuProps' },
+        category: 'Advanced'
       }
     },
     contentProps: {
-      description: 'Additional props to pass to the content container of the menu component',
+      description: 'Additional props for the content container',
       control: 'object',
       table: {
-        type: { summary: 'Omit<ContentProps, "children">' }
+        type: { summary: 'ContentProps' },
+        category: 'Advanced'
       }
     }
   },
@@ -106,40 +151,23 @@ const meta: Meta<typeof Menu> = {
 export default meta;
 type Story = StoryObj<typeof Menu>;
 
-// ==================== STORY EXAMPLES ====================
+/**
+ * Default Menu example with standard items.
+ */
+export const Default: Story = {};
 
-// Basic Menu with configurable trigger
-export const Basic: Story = {
-  args: {
-    children: 'Button',
-    items: [
-      { content: 'Edit', leftSlot: { content: <Edit size={16} /> }, onSelect: () => console.log('Edit') },
-      { content: 'Duplicate', leftSlot: { content: <Copy size={16} /> }, onSelect: () => console.log('Duplicate') },
-      { content: 'Share', leftSlot: { content: <Share size={16} /> }, onSelect: () => console.log('Share') },
-      { isSeparator: true },
-      { content: 'Delete', leftSlot: { content: <Trash size={16} /> }, color: 'danger', onSelect: () => console.log('Delete') },
-    ],
-  },
-};
-
-// Menu with search functionality
+/**
+ * Menu with search functionality enabled.
+ */
 export const WithSearch: Story = {
   args: {
-    children: 'Button',
-    items: [
-      { content: 'Profile', leftSlot: { content: <Users size={16} /> }, onSelect: () => console.log('Profile') },
-      { content: 'Settings', leftSlot: { content: <Settings size={16} /> }, onSelect: () => console.log('Settings') },
-      { content: 'New File', leftSlot: { content: <FilePlus size={16} /> }, onSelect: () => console.log('New File') },
-      { content: 'Documents', leftSlot: { content: <FileText size={16} /> }, onSelect: () => console.log('Documents') },
-      { content: 'Download', leftSlot: { content: <Download size={16} /> }, onSelect: () => console.log('Download') },
-      { isSeparator: true },
-      { content: 'Log out', leftSlot: { content: <LogOut size={16} /> }, color: 'danger', onSelect: () => console.log('Log out') },
-    ],
     search: { enabled: true, placeholder: 'Search...' },
   },
 };
 
-// Menu with checkboxes
+/**
+ * Menu with checkboxes for toggling options.
+ */
 export const WithCheckboxes: Story = {
   render: (args) => {
     const [checkedStates, setCheckedStates] = useState({
@@ -179,12 +207,11 @@ export const WithCheckboxes: Story = {
       />
     );
   },
-  args: {
-    children: 'Button',
-  },
 };
 
-// Menu with multi-select
+/**
+ * Menu with multi-select functionality for selecting multiple options.
+ */
 export const WithMultiSelect: Story = {
   render: (args) => {
     const [selectedValues, setSelectedValues] = useState<string[]>(['option2']);
@@ -221,15 +248,13 @@ export const WithMultiSelect: Story = {
       />
     );
   },
-  args: {
-    children: 'Button',
-  },
 };
 
-// Menu with submenu
+/**
+ * Menu with nested submenu options.
+ */
 export const WithSubmenu: Story = {
   args: {
-    children: 'Button',
     items: [
       { content: 'View', onSelect: () => console.log('View') },
       { 
@@ -247,10 +272,11 @@ export const WithSubmenu: Story = {
   },
 };
 
-// Menu with right slots
+/**
+ * Menu with keyboard shortcuts and other right-aligned content.
+ */
 export const WithRightSlots: Story = {
   args: {
-    children: 'Button',
     items: [
       { 
         content: 'Cut', 
@@ -284,10 +310,11 @@ export const WithRightSlots: Story = {
   },
 };
 
-// Menu with subtext
+/**
+ * Menu with descriptive subtext for each option.
+ */
 export const WithSubtext: Story = {
   args: {
-    children: 'Button',
     items: [
       { 
         content: 'Option 1', 
