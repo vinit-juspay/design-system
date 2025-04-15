@@ -84,7 +84,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     // Determine if we should show action buttons based on text props
     const showPrimaryAction = !!primaryActionText;
     const showSecondaryAction = !!secondaryActionText;
-    const hasActions = showPrimaryAction || showSecondaryAction;
     
     // Render pattern for bottom action placement
     if (actionPlacement === 'bottom') {
@@ -105,7 +104,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
                   {description && <p className={descriptionClassNames}>{description}</p>}
                 </div>
                 
-                {hasActions && (
+                {(showPrimaryAction || showSecondaryAction) && (
                   <div className={actionsContainerClassNames}>
                     {showPrimaryAction && (
                       <Button 
@@ -168,7 +167,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             </div>
           </div>
           
-          {hasActions && (
+          {(showPrimaryAction || showSecondaryAction) && (
             <div className={actionsContainerClassNames}>
               {showPrimaryAction && (
                 <Button 
@@ -196,7 +195,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             </div>
           )}
           
-          {hasActions && hasCloseIcon && (
+          {(showPrimaryAction || showSecondaryAction) && hasCloseIcon && (
             <div className={theme.layout.rightLayout.divider} />
           )}
           
