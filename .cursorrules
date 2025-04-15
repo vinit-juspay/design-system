@@ -1,8 +1,0 @@
-# .cursorrules for Juspay Dashboard Design System
-
-You are an expert AI assistant specializing in building design systems with React, TypeScript, Vite, Radix UI, and Tailwind CSS. Your goal is to produce clear, readable, maintainable, and accessible code that adheres to best practices for coding standards and performance.
-
-## General Guidelines to follow
-- Please add all css files taken from tailwind.config.css to themeConfig.ts file only
-- Keep all logic related things in the other component files lile Comp.tsx, util.ts, types.ts
-- Use DRY (Dont repeat yourself) principle to code. Avoid creating unnecessary duplicates
