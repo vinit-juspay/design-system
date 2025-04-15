@@ -159,7 +159,7 @@ export const themeConfig = {
      */
     menu: {
       /** Base container styles for the dropdown menu */
-      baseStyles: "z-50 min-w-[200px] py-1 overflow-hidden rounded-md border border-gray-200 bg-white shadow-md",
+      baseStyles: "z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md",
       
       /** Layout helper classes for menu structure */
       layout: {
@@ -173,6 +173,24 @@ export const themeConfig = {
         leftSlot: "mr-2 flex-shrink-0",
         rightSlotsContainer: "flex items-center justify-end ml-2 space-x-2 flex-shrink-0",
         menuItemRightContainer: "flex items-center ml-auto space-x-2"
+      },
+      
+      /** Position and alignment configuration */
+      positioning: {
+        /** Offset from the side of the trigger element */
+        sideOffset: {
+          top: 8,
+          right: 0,
+          bottom: 8,
+          left: 0
+        },
+        /** Offset along the alignment axis */
+        alignOffset: {
+          top: 0,
+          right: -8,
+          bottom: 0,
+          left: -8
+        }
       },
       
       /** 

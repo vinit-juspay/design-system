@@ -400,7 +400,8 @@ const Menu = React.forwardRef<
           ref={ref}
           align={dynamicAlign}
           side={side}
-          sideOffset={5}
+          sideOffset={themeConfig.euler.menu.positioning.sideOffset[side]}
+          alignOffset={themeConfig.euler.menu.positioning.alignOffset[side]}
           className={menuClassNames}
           style={triggerWidth ? { width: `${triggerWidth}px` } : undefined}
           {...contentProps}

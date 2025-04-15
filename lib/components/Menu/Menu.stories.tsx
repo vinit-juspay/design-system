@@ -35,10 +35,10 @@ const meta: Meta<typeof Menu> = {
     },
     // Menu items configuration
     items: {
-      description: 'Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators',
+      description: 'Array of menu items with properties like content, icons, color, and optional separators',
       control: 'object',
       table: {
-        type: { summary: 'MenuItemWithSeparatorProps[]' }
+        type: { summary: 'MenuItemProps[]' }
       }
     },
     // Positioning options
