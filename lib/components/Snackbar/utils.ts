@@ -15,6 +15,10 @@ export const getBaseStyles = () => {
   return themeConfig.euler.snackbar.base;
 };
 
+export const getLayoutStyles = () => {
+  return themeConfig.euler.snackbar.layout;
+};
+
 export const getIconComponentType = (type: SnackbarType) => {
   switch (type) {
     case 'info':
@@ -30,8 +34,9 @@ export const getIconComponentType = (type: SnackbarType) => {
   }
 };
 
-export const useSnackbarLogic = (autoClose: boolean, onClose?: () => void) => {
+export const useSnackbarLogic = (position: SnackbarPosition, autoClose: boolean, onClose?: () => void) => {
   const [visible, setVisible] = useState(true);
+  const positionStyles = getPositionStyles(position);
 
   const handleClose = () => {
     setVisible(false);
@@ -47,7 +52,7 @@ export const useSnackbarLogic = (autoClose: boolean, onClose?: () => void) => {
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [autoClose, handleClose]);
+  }, [autoClose]);
 
-  return { visible, handleClose };
-}; 
+  return { visible, handleClose, positionStyles };
+};

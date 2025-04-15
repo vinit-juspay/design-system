@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { cn } from '../../utils';
 import { SnackbarProps } from './types';
-import { getSnackbarStyles, getPositionStyles, getBaseStyles, getIconComponentType } from './utils';
+import { 
+  getSnackbarStyles, 
+  getPositionStyles, 
+  getBaseStyles, 
+  getLayoutStyles,
+  getIconComponentType,
+  useSnackbarLogic
+} from './utils';
 import { X } from 'lucide-react';
 
 const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
@@ -19,26 +26,16 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
     },
     ref
   ) => {
-    const [visible, setVisible] = useState(true);
+    const { visible, handleClose } = useSnackbarLogic(
+      position,
+      autoClose,
+      onClose
+    );
+    
     const styles = getSnackbarStyles(type);
     const positionStyles = getPositionStyles(position);
     const baseStyles = getBaseStyles();
-
-    const handleClose = () => {
-      setVisible(false);
-      if (onClose) {
-        onClose();
-      }
-    };
-
-    useEffect(() => {
-      if (autoClose) {
-        const timer = setTimeout(() => {
-          handleClose();
-        }, 5000);
-        return () => clearTimeout(timer);
-      }
-    }, [autoClose, handleClose]);
+    const layoutStyles = getLayoutStyles();
 
     const IconComponent = getIconComponentType(type);
     const iconElement = IconComponent ? <IconComponent className="h-5 w-5" /> : null;
@@ -59,14 +56,14 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
         role="alert"
         aria-live="assertive"
       >
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className={layoutStyles.headerContainer}>
+          <div className={layoutStyles.headerContent}>
             {showIcon && iconElement && (
               <div className={cn(baseStyles.icon, styles.iconColor)}>
                 {iconElement}
               </div>
             )}
-            {heading && <h3 className={cn("text-body-lg font-600", styles.textColor)}>{heading}</h3>}
+            {heading && <h3 className={cn(layoutStyles.heading, styles.textColor)}>{heading}</h3>}
           </div>
           {!autoClose && (
             <button
@@ -80,9 +77,9 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
         </div>
         
         {(message || alertMessage) && (
-          <div className="mt-1 pl-7 flex flex-col gap-1">
-            {message && <p className={cn("text-body-md font-500 break-words", styles.textColor)}>{message}</p>}
-            {alertMessage && <p className={cn("text-body-md font-600", styles.textColor)}>{alertMessage}</p>}
+          <div className={layoutStyles.messageContainer}>
+            {message && <p className={cn(layoutStyles.message, styles.textColor)}>{message}</p>}
+            {alertMessage && <p className={cn(layoutStyles.alertMessage, styles.textColor)}>{alertMessage}</p>}
           </div>
         )}
       </div>
