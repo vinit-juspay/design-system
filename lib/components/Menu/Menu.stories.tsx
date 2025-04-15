@@ -11,6 +11,7 @@ const triggerComponents = {
   'Search': <Search enabled={true} placeholder="Search..." searchQuery="" onSearchChange={() => {}} />,
 };
 
+// Component metadata configuration
 const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   component: Menu,
@@ -21,6 +22,7 @@ const meta: Meta<typeof Menu> = {
     children: 'Button',
   },
   argTypes: {
+    // Trigger element configuration
     children: {
       description: 'The trigger element that opens the menu (typically a button)',
       options: Object.keys(triggerComponents),
@@ -31,6 +33,7 @@ const meta: Meta<typeof Menu> = {
         defaultValue: { summary: 'Button' }
       }
     },
+    // Menu items configuration
     items: {
       description: 'Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators',
       control: 'object',
@@ -38,6 +41,7 @@ const meta: Meta<typeof Menu> = {
         type: { summary: 'MenuItemWithSeparatorProps[]' }
       }
     },
+    // Positioning options
     align: {
       description: 'Controls the horizontal alignment of the menu relative to the trigger element',
       control: { 
@@ -58,6 +62,7 @@ const meta: Meta<typeof Menu> = {
         defaultValue: { summary: 'bottom' }
       }
     },
+    // Feature configurations
     search: {
       description: 'Configuration for enabling search functionality within the menu, includes options like placeholder text',
       control: 'object',
@@ -79,6 +84,7 @@ const meta: Meta<typeof Menu> = {
         options: ['left', 'right']
       }
     },
+    // Advanced props
     rootProps: {
       description: 'Additional props to pass to the root element of the menu component',
       control: 'object',
@@ -99,6 +105,8 @@ const meta: Meta<typeof Menu> = {
 
 export default meta;
 type Story = StoryObj<typeof Menu>;
+
+// ==================== STORY EXAMPLES ====================
 
 // Basic Menu with configurable trigger
 export const Basic: Story = {
