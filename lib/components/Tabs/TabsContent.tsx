@@ -11,7 +11,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      themeConfig.euler.tabs.base.content,
+      themeConfig.euler.tabs.content,
       className
     )}
     {...props}

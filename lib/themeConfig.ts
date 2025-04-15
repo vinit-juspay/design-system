@@ -506,6 +506,50 @@ export const themeConfig = {
         }
       },
       content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
-    }
+    },
+    snackbar: {
+      base: {
+        container: "fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200",
+        content: "flex flex-col gap-1",
+        icon: "flex-shrink-0",
+        closeButton: "ml-4 flex-shrink-0 hover:opacity-80",
+      },
+      layout: {
+        headerContainer: "flex w-full items-center justify-between",
+        headerContent: "flex items-center gap-2",
+        messageContainer: "mt-1 pl-7 flex flex-col gap-1",
+        heading: "text-body-lg font-600",
+        message: "text-body-md font-500 break-words",
+        alertMessage: "text-body-md font-600",
+      },
+      type: {
+        info: {
+          backgroundColor: "bg-gray-800",
+          textColor: "text-gray-300",
+          iconColor: "text-blue-400",
+        },
+        warning: {
+          backgroundColor: "bg-gray-800",
+          textColor: "text-gray-300",
+          iconColor: "text-yellow-400",
+        },
+        error: {
+          backgroundColor: "bg-gray-800",
+          textColor: "text-gray-300",
+          iconColor: "text-red-400",
+        },
+        success: {
+          backgroundColor: "bg-gray-800",
+          textColor: "text-gray-300",
+          iconColor: "text-green-400",
+        },
+      },
+      position: {
+        topRight: "top-4 right-4",
+        topLeft: "top-4 left-4",
+        bottomRight: "bottom-4 right-4",
+        bottomLeft: "bottom-4 left-4",
+      },
+    },
   }
 }; 
