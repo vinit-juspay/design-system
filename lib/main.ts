@@ -6,3 +6,4 @@ export { default as Tag } from './components/Tag/Tag';
 export { default as SplitTag } from './components/Tag/SplitTag';
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './components/Tabs';
 export {default as Snackbar} from './components/Snackbar/Snackbar';
+export { default as Alert } from './components/Alert/Alert';

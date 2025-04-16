@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "include": [
+      "src/code-connect/**/*.{tsx,jsx}",
+      "lib/components/**/*.{tsx,jsx}"
+    ],
+    "label": "React",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/fHb0XUhWXZErq97C6N9uG3/-BETA--Dashboard-Design-System?node-id=3509-5136&p=f&t=K0nbCnKrHeA6LW94-11"
+  }
+}
