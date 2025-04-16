@@ -6,5 +6,5 @@ export interface NumberInputProps extends Omit<TextInputProps, 'type' | 'value'>
   max?: number;
   step?: number;
   value?: number;
-  onChange?: (value: number) => void;
+  onChange?: (value: number | undefined) => void;
 } 

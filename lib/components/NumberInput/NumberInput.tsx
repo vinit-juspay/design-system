@@ -99,9 +99,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
             )}
           </div>
           {infoTooltip && <Tooltip size='lg' content={infoTooltip}>
-            <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
-            </button>
           </Tooltip>}
         </div>
       )}
@@ -119,7 +117,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
         <input
           ref={ref}
           type="number"
-          className={`${getInputClasses(state, leftSlot, showStepper || rightSlot ? true : undefined)} ${getNumberInputClasses()}`}
+          className={`${getInputClasses(state, leftSlot, showStepper || rightSlot ? <div /> : undefined)} ${getNumberInputClasses()}`}
           placeholder={placeholder}
           disabled={state === 'disabled'}
           value={inputValue}
