@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
 import { Button, Tag, SplitTag, TextInput, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
+import { Snackbar } from "../lib/components/Snackbar";
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs' | 'textInput'>('buttons');
-  
+
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,44 +17,40 @@ const App = () => {
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <button
                 onClick={() => setActiveComponent('buttons')}
-                className={`${
-                  activeComponent === 'buttons'
+                className={`${activeComponent === 'buttons'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Layers className="mr-2 h-5 w-5" />
                 Buttons
               </button>
               <button
                 onClick={() => setActiveComponent('tooltips')}
-                className={`${
-                  activeComponent === 'tooltips'
+                className={`${activeComponent === 'tooltips'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Info className="mr-2 h-5 w-5" />
                 Tooltips
               </button>
               <button
                 onClick={() => setActiveComponent('tags')}
-                className={`${
-                  activeComponent === 'tags'
+                className={`${activeComponent === 'tags'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <TagIcon className="mr-2 h-5 w-5" />
                 Tags
               </button>
               <button
                 onClick={() => setActiveComponent('tabs')}
-                className={`${
-                  activeComponent === 'tabs'
+                className={`${activeComponent === 'tabs'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Tabs
@@ -85,44 +82,40 @@ const App = () => {
         <div className="pt-2 pb-3 space-y-1">
           <button
             onClick={() => setActiveComponent('buttons')}
-            className={`${
-              activeComponent === 'buttons'
+            className={`${activeComponent === 'buttons'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Layers className="mr-3 h-5 w-5" />
             Buttons
           </button>
           <button
             onClick={() => setActiveComponent('tooltips')}
-            className={`${
-              activeComponent === 'tooltips'
+            className={`${activeComponent === 'tooltips'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
             Tooltips
           </button>
           <button
             onClick={() => setActiveComponent('tags')}
-            className={`${
-              activeComponent === 'tags'
+            className={`${activeComponent === 'tags'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <TagIcon className="mr-3 h-5 w-5" />
             Tags
           </button>
           <button
             onClick={() => setActiveComponent('tabs')}
-            className={`${
-              activeComponent === 'tabs'
+            className={`${activeComponent === 'tabs'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Settings className="mr-3 h-5 w-5" />
             Tabs
@@ -511,11 +504,11 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTabs = () => (
     <>
       <h2 className="text-2xl font-semibold">Tabs Examples</h2>
-      
+
       {/* Underline Tabs */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Underline Tabs</h3>
@@ -545,7 +538,7 @@ const App = () => {
           </TabsContent>
         </Tabs>
       </div>
-      
+
       {/* Boxed Tabs */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Boxed Tabs</h3>
@@ -575,7 +568,7 @@ const App = () => {
           </TabsContent>
         </Tabs>
       </div>
-      
+
       {/* Floating Tabs */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Floating Tabs</h3>
@@ -604,6 +597,32 @@ const App = () => {
             </div>
           </TabsContent>
         </Tabs>
+
+
+        <Snackbar
+          type="success"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="topRight"
+          autoClose={false}
+        />
+        <Snackbar
+          type="success"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="topRight"
+          autoClose={false}
+        />
+        <Snackbar
+          type="error"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="bottomRight"
+          autoClose={true}
+        />
       </div>
     </>
   );
@@ -621,7 +640,7 @@ const App = () => {
       </div>
     </>
   );
-  
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}

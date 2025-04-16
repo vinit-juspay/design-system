@@ -109,12 +109,12 @@ export const themeConfig = {
     tag: {
       variant: {
         noFill: {
-          neutral: 'bg-gray-0 text-gray-950 border border-gray-950',
-          primary: 'bg-gray-0 text-blue-800 border border-blue-600',
-          success: 'bg-gray-0 text-green-600 border border-green-600',
-          error: 'bg-gray-0 text-red-600 border border-red-600',
-          warning: 'bg-gray-0 text-orange-500 border border-orange-500',
-          purple: 'bg-gray-0 text-purple-500 border border-purple-500',
+          neutral: 'bg-gray-0 text-gray-950 border-[1.5px] border-gray-950',
+          primary: 'bg-gray-0 text-blue-800 border-[1.5px] border-blue-600',
+          success: 'bg-gray-0 text-green-600 border-[1.5px] border-green-600',
+          error: 'bg-gray-0 text-red-600 border-[1.5px] border-red-600',
+          warning: 'bg-gray-0 text-orange-500 border-[1.5px] border-orange-500',
+          purple: 'bg-gray-0 text-purple-500 border-[1.5px] border-purple-500',
         },
         attentive: {
           neutral: 'bg-gray-950 text-gray-0',
@@ -125,12 +125,12 @@ export const themeConfig = {
           purple: 'bg-purple-500 text-gray-0',
         },
         subtle: {
-          neutral: 'bg-gray-50 text-gray-950 border border-gray-200',
-          primary: 'bg-blue-50 text-blue-600 border border-blue-100',
-          success: 'bg-green-50 text-green-600 border border-green-100',
-          error: 'bg-red-50 text-red-600 border border-red-100',
-          warning: 'bg-orange-50 text-orange-600 border border-orange-100',
-          purple: 'bg-purple-50 text-purple-600 border border-purple-100',
+          neutral: 'bg-gray-50 text-gray-950 border-[1.5px] border-gray-200',
+          primary: 'bg-blue-50 text-blue-600 border-[1.5px] border-blue-100',
+          success: 'bg-green-50 text-green-600 border-[1.5px] border-green-100',
+          error: 'bg-red-50 text-red-600 border-[1.5px] border-red-100',
+          warning: 'bg-orange-50 text-orange-600 border-[1.5px] border-orange-100',
+          purple: 'bg-purple-50 text-purple-600 border-[1.5px] border-purple-100',
         },
       },
       sizes: {
