@@ -29,9 +29,19 @@ const Tooltip = React.forwardRef<React.ElementRef<typeof RadixTooltip.Content>, 
       arrow = 'default',
       slotDirection = 'left',
       slot: Slot,
-      providerProps = { delayDuration: 300 },
+      providerProps = { delayDuration: 300 }, // 
       rootProps,
       contentProps,
+      
+
+      /*
+      {
+        open: true,
+        delayDuration: 300,
+        disableHoverableContent: true,
+        skipDelayDuration: 0,
+      }
+      */
     },
     ref
   ) => {

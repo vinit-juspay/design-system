@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home, BarChart } from "lucide-react";
 import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
+import { Chart, ChartType } from "../lib/components/Charts/Charts";
+
+
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('buttons');
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs' | 'charts'>('charts');
   
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -57,6 +60,17 @@ const App = () => {
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Tabs
+              </button>
+              <button
+                onClick={() => setActiveComponent('charts')}
+                className={`${
+                  activeComponent === 'charts'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <BarChart className="mr-2 h-5 w-5" />
+                Charts
               </button>
             </div>
           </div>
@@ -320,7 +334,7 @@ const App = () => {
           />
         </Tooltip>
 
-        <Tooltip content="Bottom right" arrow="bottomRight">
+        <Tooltip content="Bottom right" arrow="bottomRight" rootProps={{ open: true }} >
           <Button
             buttonType="secondary"
             size="md"
@@ -595,7 +609,149 @@ const App = () => {
       </div>
     </>
   );
-  
+
+  const renderCharts = () => {
+    const lineData = [
+      { name: 'Jan', Amazon: 2450, Walmart: 1890, Target: 1230, BestBuy: 980 },
+      { name: 'Feb', Amazon: 2780, Walmart: 2100, Target: 1450, BestBuy: 1120 },
+      { name: 'Mar', Amazon: 2340, Walmart: 1950, Target: 1380, BestBuy: 890 },
+      { name: 'Apr', Amazon: 3120, Walmart: 2340, Target: 1670, BestBuy: 1230 },
+      { name: 'May', Amazon: 2890, Walmart: 2180, Target: 1590, BestBuy: 1180 },
+      { name: 'Jun', Amazon: 3450, Walmart: 2560, Target: 1890, BestBuy: 1340 },
+      { name: 'Jul', Amazon: 3780, Walmart: 2890, Target: 2100, BestBuy: 1560 },
+      { name: 'Aug', Amazon: 3230, Walmart: 2450, Target: 1780, BestBuy: 1290 },
+      { name: 'Sep', Amazon: 2980, Walmart: 2230, Target: 1670, BestBuy: 1180 },
+      { name: 'Oct', Amazon: 3560, Walmart: 2670, Target: 1890, BestBuy: 1450 },
+      { name: 'Nov', Amazon: 4120, Walmart: 3100, Target: 2230, BestBuy: 1780 },
+      { name: 'Dec', Amazon: 4890, Walmart: 3670, Target: 2670, BestBuy: 2100 }
+    ];
+    
+    const pieData = [
+      { name: 'Desktop', Sales: 4800 },
+      { name: 'Mobile', Sales: 3200 },
+      { name: 'Tablet', Sales: 1800 },
+      { name: 'Other', Sales: 800 }
+    ];
+    
+    
+
+    const sampleData = [
+      {
+        name: "Jan", 
+        Amazon: { 
+          primary: {name: "Success Rate", val: 75}, 
+          aux: [
+            {name: "Conversion Rate", val: 12.5}, 
+            {name: "Click Rate", val: 45.2}
+          ]
+        },
+        Google: {
+          primary: {name: "Success Rate", val: 68},
+          aux: [
+            {name: "Conversion Rate", val: 15.3},
+            {name: "Click Rate", val: 40.8}
+          ]
+        },
+        Microsoft: {
+          primary: {name: "Success Rate", val: 82},
+          aux: [
+            {name: "Conversion Rate", val: 14.7},
+            {name: "Click Rate", val: 38.5}
+          ]
+        }
+      },
+      {
+        name: "Feb", 
+        Amazon: { 
+          primary: {name: "Success Rate", val: 78}, 
+          aux: [
+            {name: "Conversion Rate", val: 14.2}, 
+            {name: "Click Rate", val: 48.3}
+          ]
+        },
+        Google: {
+          primary: {name: "Success Rate", val: 72},
+          aux: [
+            {name: "Conversion Rate", val: 16.8},
+            {name: "Click Rate", val: 43.5}
+          ]
+        },
+        Microsoft: {
+          primary: {name: "Success Rate", val: 85},
+          aux: [
+            {name: "Conversion Rate", val: 15.9},
+            {name: "Click Rate", val: 41.2}
+          ]
+        }
+      },
+      {
+        name: "Mar", 
+        Amazon: { 
+          primary: {name: "Success Rate", val: 82}, 
+          aux: [
+            {name: "Conversion Rate", val: 15.7}, 
+            {name: "Click Rate", val: 52.1}
+          ]
+        },
+        Google: {
+          primary: {name: "Success Rate", val: 76},
+          aux: [
+            {name: "Conversion Rate", val: 17.5},
+            {name: "Click Rate", val: 47.2}
+          ]
+        },
+        Microsoft: {
+          primary: {name: "Success Rate", val: 88},
+          aux: [
+            {name: "Conversion Rate", val: 16.8},
+            {name: "Click Rate", val: 43.7}
+          ]
+        }
+      }
+    ];
+
+
+    return (
+      <div className="">
+        <div className="p-4">
+          {/* <Chart 
+            type={ChartType.BAR} 
+            data={lineData} 
+            dataKeys={['Amazon', 'Walmart', 'Target', 'BestBuy']} 
+            metrics={['Amazon', 'Walmart', 'Target', 'BestBuy']}
+            xAxisLabel="Month"
+          />   */}
+           <Chart 
+          type={ChartType.LINE}
+          data={sampleData}
+          xAxisLabel="Month"
+          yAxisLabel="Value (%)"
+          height={400}
+          metrics={["Monthly Performance"]}
+        />
+        </div>
+        <div className="p-4">
+          <Chart 
+            type={ChartType.LINE} 
+            data={lineData} 
+            dataKeys={['Amazon', 'Walmart', 'Target', 'BestBuy']} 
+            metrics={['Amazon', 'Walmart', 'Target', 'BestBuy']}
+            xAxisLabel="Month"
+          />
+        </div>
+        <div className="p-4">
+          <Chart 
+            type={ChartType.PIE} 
+            data={pieData}  
+            dataKeys={['Sales']} 
+            metrics={['Sales']}
+            height={400}
+          />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -605,6 +761,7 @@ const App = () => {
           {activeComponent === 'tooltips' && renderTooltips()}
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
+          {activeComponent === 'charts' && renderCharts()}
         </div>
       </div>
     </div>
