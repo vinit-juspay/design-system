@@ -1,6 +1,7 @@
 ---
 description: Cursor Rules for new components
-globs: *.tsx, *ts, src/lib/components/**/*.tsx
+globs: *.tsx,lib/components/**/*.tsx,.ts
+alwaysApply: false
 ---
 # Cursor IDE Prompt Rules for Component Library
 
