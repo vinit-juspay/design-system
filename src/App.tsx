@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
 import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
 import { Snackbar } from "../lib/components/Snackbar";
+import TooltipDemo from "./Demos/TooltipDemos/TooltipDemo";
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('buttons');
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('tooltips');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -204,227 +205,161 @@ const App = () => {
     </>
   );
 
-  const renderTooltips = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
+  // const renderTooltips = () => (
+  //   <>
+  //     <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
 
-      {/* Basic tooltips */}
-      <div className="flex gap-8 items-center justify-center">
-        <Tooltip content="Small tooltip" size="sm">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+  //     {/* Basic Tooltip Examples */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Basic Tooltips</h3>
+  //       <div className="flex flex-wrap gap-4">
+  //         <Tooltip content="This is a default tooltip">
+  //           <Button size="sm">Default Tooltip</Button>
+  //         </Tooltip>
+  //         <Tooltip content="This is a large tooltip with more text" size={TooltipSize.LARGE}>
+  //           <Button size="sm">Large Tooltip</Button>
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-        <Tooltip content="Large tooltip with more text" size="lg">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
+  //     {/* Tooltip Positions */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Tooltip Positions</h3>
+  //       <div className="grid grid-cols-3 gap-4 max-w-xl">
+  //         <Tooltip content="Top tooltip" side={TooltipSide.TOP}>
+  //           <Button size="md">Top</Button>
+  //         </Tooltip>
+  //         <Tooltip content="Right tooltip" side={TooltipSide.RIGHT}>
+  //           <Button size="md">Right</Button>
+  //         </Tooltip>
+  //         <Tooltip content="Bottom tooltip" side={TooltipSide.BOTTOM}>
+  //           <Button size="md">Bottom</Button>
+  //         </Tooltip>
+  //         <Tooltip content="Left tooltip" side={TooltipSide.LEFT}>
+  //           <Button size="md">Left</Button>
+  //         </Tooltip>
+  //         <Tooltip 
+  //           content="Top Start tooltip" 
+  //           side={TooltipSide.TOP} 
+  //           align={TooltipAlign.START}
+  //         >
+  //           <Button size="md">Top Start</Button>
+  //         </Tooltip>
+  //         <Tooltip 
+  //           content="Top End tooltip" 
+  //           side={TooltipSide.TOP} 
+  //           align={TooltipAlign.END}
+  //         >
+  //           <Button size="md">Top End</Button>
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-      {/* Different arrow positions */}
-      <div className="grid grid-cols-3 gap-8 p-12">
-        <Tooltip content="Default (top center)" arrow="default">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+  //     {/* Tooltips with Icons */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Tooltips with Icons</h3>
+  //       <div className="flex flex-wrap gap-4">
+  //         <Tooltip 
+  //           content="Information tooltip" 
+  //           slot={<Info size={16} />}
+  //           slotDirection={TooltipSlotDirection.LEFT}
+  //         >
+  //           <Button size="md">Left Icon</Button>
+  //         </Tooltip>
+  //         <Tooltip 
+  //           content="Warning tooltip" 
+  //           slot={<AlertCircle size={16} />}
+  //           slotDirection={TooltipSlotDirection.RIGHT}
+  //         >
+  //           <Button size="md">Right Icon</Button>
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-        <Tooltip content="Top left" arrow="topLeft">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+  //     {/* Tooltips without Arrow */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Tooltips without Arrow</h3>
+  //       <div className="flex flex-wrap gap-4">
+  //         <Tooltip 
+  //           content="No arrow tooltip" 
+  //           showArrow={false}
+  //         >
+  //           <Button size="md">No Arrow</Button>
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-        <Tooltip content="Top right" arrow="topRight">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+  //     {/* Tooltips on Different Elements */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Tooltips on Different Elements</h3>
+  //       <div className="flex flex-wrap gap-4 items-center">
+  //         <Tooltip content="Tooltip on text">
+  //           <span className="cursor-help underline text-blue-600">Hover over this text</span>
+  //         </Tooltip>
+  //         <Tooltip content="Tooltip on icon">
+  //           <HelpCircle className="h-5 w-5 text-gray-500 cursor-help" />
+  //         </Tooltip>
+  //         <Tooltip content="Tooltip on tag">
+  //           <Tag label="Hover me" color="primary" />
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-        <Tooltip content="Left" arrow="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
+  //     {/* Rich Content Tooltips */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Rich Content Tooltips</h3>
+  //       <div className="flex flex-wrap gap-4">
+  //         <Tooltip 
+  //           content={
+  //             <div>
+  //               <h4 className="font-bold mb-1">Rich Content</h4>
+  //               <p>Tooltips can contain rich HTML content</p>
+  //               <ul className="list-disc pl-4 mt-1">
+  //                 <li>Including lists</li>
+  //                 <li>And other elements</li>
+  //               </ul>
+  //             </div>
+  //           }
+  //           size={TooltipSize.LARGE}
+  //         >
+  //           <Button size="md">Rich Content</Button>
+  //         </Tooltip>
+  //       </div>
+  //     </div>
 
-        <Tooltip content="No arrow" arrow="none">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Right" arrow="right">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom left" arrow="bottomLeft">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom center" arrow="bottomCenter">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom right" arrow="bottomRight">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltips with icons */}
-      <div className="flex gap-6 items-center">
-        <Tooltip content="Information tooltip" slot={Info} slotDirection="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Warning message" slot={AlertCircle} slotDirection="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Help is available" slot={HelpCircle} slotDirection="right">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltip with custom provider props */}
-      <div className="flex gap-4 items-center">
-        <Tooltip content="Delayed tooltip (1000ms)" providerProps={{ delayDuration: 1000 }}>
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding small tooltip with info icon */}
-      <Tooltip
-        content="Small tooltip with icon"
-        size="sm"
-        rootProps={{ open: true }}
-        slot={Info}
-        slotDirection="left"
-      >
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding large tooltip with help icon */}
-      <Tooltip
-        content="Large tooltip with icon"
-        size="lg"
-        rootProps={{ open: true }}
-        slot={HelpCircle}
-        slotDirection="right"
-      >
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-    </>
-  );
+  //     {/* Interactive Example */}
+  //     <div className="mt-6">
+  //       <h3 className="text-xl font-semibold mb-4">Interactive Example</h3>
+  //       <div className="p-4 border border-gray-200 rounded-md">
+  //         <p className="mb-2">
+  //           This is a paragraph with a{' '}
+  //           <Tooltip content="This is a tooltip on an inline element">
+  //             <span className="text-blue-600 underline cursor-help">tooltip</span>
+  //           </Tooltip>{' '}
+  //           on a specific word. You can also have tooltips on{' '}
+  //           <Tooltip 
+  //             content="Tooltips can provide additional context"
+  //             slot={<Info size={14} />}
+  //             slotDirection={TooltipSlotDirection.LEFT}
+  //             size={TooltipSize.LARGE}
+  //           >
+  //             <span className="text-blue-600 underline cursor-help flex items-center">
+  //               important information
+  //             </span>
+  //           </Tooltip>.
+  //         </p>
+  //         <div className="flex gap-2 mt-4">
+  //           <Tooltip content="Save your changes">
+  //             <Button buttonType="primary" size="sm">Save</Button>
+  //           </Tooltip>
+  //           <Tooltip content="Discard all changes">
+  //             <Button buttonType="danger" size="sm">Cancel</Button>
+  //           </Tooltip>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </>
+  // );
 
   const renderTags = () => (
     <>
@@ -616,17 +551,18 @@ const App = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {renderNavbar()}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white shadow rounded-lg p-6">
-          {activeComponent === 'buttons' && renderButtons()}
-          {activeComponent === 'tooltips' && renderTooltips()}
-          {activeComponent === 'tags' && renderTags()}
-          {activeComponent === 'tabs' && renderTabs()}
+
+      <div className="min-h-screen bg-gray-50">
+        {renderNavbar()}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="bg-white shadow rounded-lg p-6">
+            {activeComponent === 'buttons' && renderButtons()}
+            {activeComponent === 'tooltips' && <TooltipDemo />}
+            {activeComponent === 'tags' && renderTags()}
+            {activeComponent === 'tabs' && renderTabs()}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

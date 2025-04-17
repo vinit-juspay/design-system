@@ -1,51 +1,38 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import * as RadixTooltip from '@radix-ui/react-tooltip';
+import { ReactNode } from "react";
 
-/**
- * Available tooltip sizes
- */
-export type TooltipSize = 'sm' | 'lg';
+export enum TooltipSlotDirection {
+    LEFT = "left",
+    RIGHT = "right",
+}
 
-/**
- * Available tooltip arrow positions
- */
-export type TooltipArrow =
-  | 'default'
-  | 'right'
-  | 'left'
-  | 'bottomCenter'
-  | 'bottomLeft'
-  | 'bottomRight'
-  | 'topCenter'
-  | 'topLeft'
-  | 'topRight'
-  | 'none';
+export enum TooltipSide {
+    TOP = "top",
+    RIGHT = "right",
+    LEFT = "left",
+    BOTTOM = "bottom",
+}
 
-/**
- * Slot direction within the tooltip
- */
-export type SlotDirection = 'left' | 'right';
+export enum TooltipAlign {
+    START = "start",
+    END = "end",
+    CENTER = "center",
+}
 
-/**
- * Props for the Tooltip component
- */
+export enum TooltipSize {
+    SMALL = "sm",
+    LARGE = "lg",
+}
+
 export interface TooltipProps {
-  /** The element that will trigger the tooltip */
-  children: ReactNode;
-  /** Content to be displayed inside the tooltip */
-  content: ReactNode;
-  /** Size of the tooltip */
-  size?: TooltipSize;
-  /** Position of the arrow */
-  arrow?: TooltipArrow;
-  /** Direction to place the slot component */
-  slotDirection?: SlotDirection;
-  /** Custom slot component */
-  slot?: React.ElementType;
-  /** Tooltip provider props from Radix UI */
-  providerProps?: Omit<RadixTooltip.TooltipProviderProps, 'children'>;
-  /** Additional props for the tooltip root */
-  rootProps?: Omit<RadixTooltip.TooltipProps, 'children'>;
-  /** Additional props for the tooltip content */
-  contentProps?: Omit<ComponentPropsWithoutRef<typeof RadixTooltip.Content>, 'children'>;
+    children: ReactNode;
+    content: ReactNode | string;
+    open?: boolean;
+    side?: TooltipSide;
+    align?: TooltipAlign;
+    showArrow?: boolean;
+    size?: TooltipSize;
+    slot?: ReactNode;
+    slotDirection?: TooltipSlotDirection;
+    delayDuration?: number;
+    offset?: number;
 }
