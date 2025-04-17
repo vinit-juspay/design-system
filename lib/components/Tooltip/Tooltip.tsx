@@ -1,6 +1,6 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { getArrowClassNames, getSlotClassNames, getTooltipClassNames } from "./utils";
-import { TooltipProps, TooltipSize, TooltipSlotDirection } from "./types";
+import { TooltipProps, TooltipSide, TooltipSize, TooltipSlotDirection } from "./types";
 import { forwardRef } from "react";
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
@@ -29,11 +29,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
           {children}
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
-          ref={ref}
+          ref={ref} 
           side={side} align={align}
           className={tooltipClassName}
           sideOffset={offset}
-          arrowPadding={6}
+          arrowPadding={side === TooltipSide.LEFT || side === TooltipSide.RIGHT ? 8 : 6}
         >
           {slot && slotDirection === TooltipSlotDirection.LEFT && (
             <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
