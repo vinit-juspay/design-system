@@ -289,7 +289,7 @@ export const themeConfig = {
     alert: {
       layout: {
         container: "relative flex w-full p-4 items-start gap-2 rounded-xl",
-        mainContainer: "flex flex-start w-full items-start gap-2.5",
+        mainContainer: "flex justify-start w-full items-start gap-2.5",
         
         // Bottom placement specifics
         bottomLayout: {
