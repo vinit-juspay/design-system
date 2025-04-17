@@ -286,5 +286,168 @@ export const themeConfig = {
         bottomLeft: "bottom-4 left-4",
       },
     },
+    alert: {
+      layout: {
+        container: "relative flex w-full p-4 items-start gap-2 rounded-xl",
+        mainContainer: "flex flex-start w-full items-start gap-2.5",
+        
+        // Bottom placement specifics
+        bottomLayout: {
+          wrapper: "flex flex-row items-start gap-2.5",
+          contentWrapper: "flex flex-col gap-5",
+          titleDescriptionWrapper: "flex flex-col gap-2",
+          actionButtonsWrapper: "flex gap-5",
+        },
+        
+        // Right placement specifics
+        rightLayout: {
+          wrapper: "flex flex-row items-center gap-7",
+          contentWrapper: "flex flex-row gap-2 items-start flex-grow",
+          titleDescriptionWrapper: "flex flex-col gap-2",
+          actionButtonsWrapper: "flex gap-5 items-center",
+          divider: "h-6 w-0.5 bg-gray-300",
+        },
+        
+        // Common elements
+        iconWrapper: "py-0.5",
+        closeButton: "p-0.5 rounded-sm text-gray-400 hover:text-gray-600 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
+      },
+      typography: {
+        title: "font-600 text-body-md text-gray-700 tracking-normal",
+        description: "font-400 text-body-md text-gray-600 tracking-normal",
+      },
+      icon: {
+        size: "w-4 h-4 mt-0.5",
+      },
+      actionButton: {
+        base: "inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-medium text-sm",
+        link: "hover:underline focus-visible:outline-2 focus:outline-2",
+        linkColors: {
+          primary: "text-primary-700 hover:text-primary-800",
+          success: "text-green-700 hover:text-green-800",
+          warning: "text-yellow-700 hover:text-yellow-800",
+          error: "text-red-700 hover:text-red-800",
+          purple: "text-purple-700 hover:text-purple-800",
+          neutral: "text-gray-700 hover:text-gray-800",
+          orange: "text-orange-700 hover:text-orange-800"
+        }
+      },
+      styles: {
+        fill: {
+          primary: {
+            background: "bg-blue-50",
+            border: "border-[1px] border-blue-100",
+            iconColor: "text-blue-600",
+          },
+          success: {
+            background: "bg-green-50",
+            border: "border-[1px] border-green-100",
+            iconColor: "text-green-600",
+          },
+          purple: {
+            background: "bg-purple-50",
+            border: "border-[1px] border-purple-100",
+            iconColor: "text-purple-600",
+          },
+          warning: {
+            background: "bg-yellow-50",
+            border: "border-[1px] border-yellow-100",
+            iconColor: "text-yellow-600",
+          },
+          neutral: {
+            background: "bg-gray-50",
+            border: "border-[1px] border-gray-100",
+            iconColor: "text-gray-600",
+          },
+          error: {
+            background: "bg-red-50",
+            border: "border-[1px] border-red-100",
+            iconColor: "text-red-600",
+          },
+          orange: {
+            background: "bg-orange-50",
+            border: "border-[1px] border-orange-100",
+            iconColor: "text-orange-600",
+          },
+        },
+        subtle: {
+          primary: {
+            background: "bg-blue-50/50",
+            border: "border-[1px] border-blue-500",
+            iconColor: "text-blue-600",
+          },
+          success: {
+            background: "bg-green-50/50",
+            border: "border-[1px] border-green-500",
+            iconColor: "text-green-600",
+          },
+          purple: {
+            background: "bg-purple-50/50",
+            border: "border-[1px] border-purple-500",
+            iconColor: "text-purple-600",
+          },
+          warning: {
+            background: "bg-yellow-50/50",
+            border: "border-[1px] border-yellow-500",
+            iconColor: "text-yellow-600",
+          },
+          neutral: {
+            background: "bg-gray-50/50",
+            border: "border-[1px] border-gray-500",
+            iconColor: "text-gray-600",
+          },
+          error: {
+            background: "bg-red-50/50",
+            border: "border-[1px] border-red-500",
+            iconColor: "text-red-600",
+          },
+          orange: {
+            background: "bg-orange-50/50",
+            border: "border-[1px] border-orange-500",
+            iconColor: "text-orange-600",
+          },
+        },
+        noFill: {
+          primary: {
+            background: "bg-transparent",
+            border: "border-[1px] border-blue-500",
+            iconColor: "text-blue-600",
+          },
+          success: {
+            background: "bg-transparent",
+            border: "border-[1px] border-green-500",
+            iconColor: "text-green-600",
+          },
+          purple: {
+            background: "bg-transparent",
+            border: "border-[1px] border-purple-500",
+            iconColor: "text-purple-600",
+          },
+          warning: {
+            background: "bg-transparent",
+            border: "border-[1px] border-yellow-500",
+            iconColor: "text-yellow-600",
+          },
+          neutral: {
+            background: "bg-transparent",
+            border: "border-[1px] border-gray-500",
+            iconColor: "text-gray-600",
+          },
+          error: {
+            background: "bg-transparent",
+            border: "border-[1px] border-red-500",
+            iconColor: "text-red-600",
+          },
+          orange: {
+            background: "bg-transparent",
+            border: "border-[1px] border-orange-500",
+            iconColor: "text-orange-600",
+          },
+        },
+      },
+      border: {
+        default: "border-[2px]"
+      },
+    },
   }
 }; 
