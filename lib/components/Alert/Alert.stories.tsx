@@ -1,249 +1,194 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Alert from "./Alert";
-import { Bell } from "lucide-react";
+import { AlertStyle, AlertVariant, AlertActionPlacement } from "./types";
+import { Bell, Info, AlertTriangle, CheckCircle, XCircle, Sparkles, Flame } from "lucide-react";
 
-const meta: Meta<typeof Alert> = {
+const meta = {
   title: "Components/Alert",
   component: Alert,
   parameters: {
     layout: "centered",
-    docs: {
-      description: {
-        component: "The Alert component displays important messages to users. It can be configured with different styles, types, and actions."
-      }
-    }
   },
   tags: ["autodocs"],
-  args: {
-    type: "primary",
-    style: "fill",
-    actionPlacement: "bottom",
-    hasCloseIcon: true,
-    primaryActionText: "",
-    secondaryActionText: "",
-    hasMainIcon: true
-  },
   argTypes: {
-    type: {
+    variant: {
       control: "select",
-      options: ["primary", "success", "purple", "warning", "neutral", "error", "orange"],
-      description: "The type/color variant of the alert",
+      options: Object.values(AlertVariant),
+      description: "The visual style variant of the alert",
       table: {
-        defaultValue: { summary: "primary" },
-        category: "Appearance",
+        defaultValue: { summary: AlertVariant.PRIMARY },
       },
     },
     style: {
       control: "select",
-      options: ["fill", "subtle", "noFill"],
-      description: "The visual style of the alert",
+      options: Object.values(AlertStyle),
+      description: "The fill style of the alert",
       table: {
-        defaultValue: { summary: "fill" },
-        category: "Appearance",
-      },
-    },
-    hasMainIcon: {
-      control: "boolean",
-      description: "Whether to show the alert main icon",
-      table: {
-        defaultValue: { summary: "true" },
-        category: "Appearance",
+        defaultValue: { summary: AlertStyle.FILL },
       },
     },
     actionPlacement: {
       control: "select",
-      options: ["bottom", "right"],
-      description: "Placement of action buttons",
+      options: Object.values(AlertActionPlacement),
+      description: "The placement of action buttons",
       table: {
-        defaultValue: { summary: "bottom" },
-        category: "Layout",
+        defaultValue: { summary: AlertActionPlacement.BOTTOM },
       },
     },
-    hasCloseIcon: {
-      control: "boolean",
-      description: "Whether the alert has a close icon",
-      table: {
-        defaultValue: { summary: "true" },
-        category: "Behavior",
-      },
-    },
-    title: {
+    heading: {
       control: "text",
-      description: "The title of the alert",
-      table: {
-        category: "Content",
-      },
+      description: "The heading text of the alert",
     },
     description: {
       control: "text",
-      description: "The description/content of the alert",
-      table: {
-        category: "Content",
-      },
+      description: "The description text of the alert",
     },
-    primaryActionText: {
-      control: "text",
-      description: "Text for the primary action button (shows button when provided)",
-      table: {
-        category: "Actions",
-      },
+    showPrimaryAction: {
+      control: "boolean",
+      description: "Show primary action button",
     },
-    secondaryActionText: {
-      control: "text",
-      description: "Text for the secondary action button (shows button when provided)",
-      table: {
-        category: "Actions", 
-      },
+    showSecondaryAction: {
+      control: "boolean",
+      description: "Show secondary action button",
     },
-    onPrimaryAction: {
-      table: {
-        disable: true
-      }
+    showCloseButton: {
+      control: "boolean",
+      description: "Show close button",
     },
-    onSecondaryAction: {
-      table: {
-        disable: true
-      }
+    showCustomIcon: {
+      control: "boolean",
+      description: "Show custom icon instead of default",
     },
-    onClose: {
-      table: {
-        disable: true
-      }
-    },
-    icon: {
-      table: {
-        disable: true
-      }
-    },
-    children: {
-      table: {
-        disable: true
-      }
-    }
   },
-};
+} as Meta<typeof Alert>;
 
 export default meta;
 type Story = StoryObj<typeof Alert>;
 
-// Base Stories
-export const Primary: Story = {
+const getIconForVariant = (variant: AlertVariant) => {
+  switch (variant) {
+    case AlertVariant.SUCCESS:
+      return <CheckCircle size={16} />;
+    case AlertVariant.WARNING:
+      return <AlertTriangle size={16} />;
+    case AlertVariant.ERROR:
+      return <XCircle size={16} />;
+    case AlertVariant.PURPLE:
+      return <Sparkles size={16} />;
+    case AlertVariant.ORANGE:
+      return <Flame size={16} />;
+    case AlertVariant.NEUTRAL:
+      return <Bell size={16} />;
+    default:
+      return <Info size={16} />;
+  }
+};
+
+export const Default: Story = {
+  render: (args) => {
+    const {
+      showPrimaryAction,
+      showSecondaryAction,
+      showCloseButton,
+      showCustomIcon,
+      ...alertProps
+    } = args as any;
+
+    return (
+        <div className="max-w-[700px] overflow-x-auto">
+          <Alert
+            {...alertProps}
+          primaryAction={
+            showPrimaryAction
+              ? {
+                  label: "Primary Action",
+                  onClick: () => alert("Primary action clicked"),
+                }
+              : undefined
+          }
+          secondaryAction={
+            showSecondaryAction
+              ? {
+                  label: "Secondary Action",
+                  onClick: () => alert("Secondary action clicked"),
+                }
+              : undefined
+          }
+          onClose={showCloseButton ? () => alert("Close clicked") : undefined}
+          icon={showCustomIcon ? getIconForVariant(args.variant as AlertVariant) : undefined}
+        />
+        </div>
+    );
+  },
   args: {
-    type: "primary",
-    style: "fill",
-    title: "Information Alert",
-    description: "This is an informational alert that provides important details to the user.",
-    hasCloseIcon: true,
+    heading: "Alert Heading",
+    description: "This is a description of the alert message with more details.",
+    variant: AlertVariant.PRIMARY,
+    style: AlertStyle.FILL,
+    actionPlacement: AlertActionPlacement.BOTTOM,
+    primaryAction: { label: "Primary Action", onClick: () => alert("Primary action clicked") },
+    secondaryAction: { label: "Secondary Action", onClick: () => alert("Secondary action clicked") },
+    onClose: () => alert("Close clicked"),
+    icon: getIconForVariant(AlertVariant.PRIMARY),
   },
 };
 
 export const Success: Story = {
+  ...Default,
   args: {
-    type: "success",
-    style: "fill",
-    title: "Success Alert",
-    description: "The operation was completed successfully.",
-    hasCloseIcon: true,
-  },
-};
-
-export const Error: Story = {
-  args: {
-    type: "error",
-    style: "fill",
-    title: "Error Alert",
-    description: "An error occurred while processing your request.",
-    hasCloseIcon: true,
+    ...Default.args,
+    variant: AlertVariant.SUCCESS,
+    heading: "Success Alert",
+    description: "Operation completed successfully!",
   },
 };
 
 export const Warning: Story = {
+  ...Default,
   args: {
-    type: "warning",
-    style: "fill",
-    title: "Warning Alert",
-    description: "This action might have consequences. Please proceed with caution.",
-    hasCloseIcon: true,
+    ...Default.args,
+    variant: AlertVariant.WARNING,
+    heading: "Warning Alert",
+    description: "Please review the changes before proceeding.",
   },
 };
 
-// Style Variations
-export const Subtle: Story = {
+export const Error: Story = {
+  ...Default,
   args: {
-    type: "warning",
-    style: "subtle",
-    title: "Subtle Warning",
-    description: "This is a subtle warning alert with less visual emphasis.",
-    hasCloseIcon: true,
+    ...Default.args,
+    variant: AlertVariant.ERROR,
+    heading: "Error Alert",
+    description: "An error occurred while processing your request.",
+  },
+};
+
+export const Subtle: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    style: AlertStyle.SUBTLE,
+    heading: "Subtle Alert",
+    description: "This is a subtle variant of the alert component.",
   },
 };
 
 export const NoFill: Story = {
+  ...Default,
   args: {
-    type: "error",
-    style: "noFill",
-    title: "No Fill Error",
-    description: "This is an error alert with no background fill.",
-    hasCloseIcon: true,
+    ...Default.args,
+    style: AlertStyle.NO_FILL,
+    heading: "No Fill Alert",
+    description: "This is a no-fill variant of the alert component.",
   },
 };
 
-// Action Button Variations
-export const WithBottomActions: Story = {
+export const RightActions: Story = {
+  ...Default,
   args: {
-    type: "primary",
-    style: "fill",
-    title: "Action Required",
-    description: "Please take action on this alert by clicking one of the buttons below.",
-    actionPlacement: "bottom",
-    primaryActionText: "Accept",
-    secondaryActionText: "Decline",
-    hasCloseIcon: true,
+    ...Default.args,
+    actionPlacement: AlertActionPlacement.RIGHT,
+    heading: "Right-aligned Actions",
+    description: "This alert has right-aligned action buttons.",
   },
-};
-
-export const WithRightActions: Story = {
-  args: {
-    type: "success",
-    style: "fill",
-    title: "Action Required",
-    description: "Please take action on this alert by clicking the button.",
-    actionPlacement: "right",
-    primaryActionText: "Confirm",
-    hasCloseIcon: true,
-  },
-};
-
-// Customization Examples
-export const CustomIcon: Story = {
-  args: {
-    type: "primary",
-    style: "fill",
-    title: "Custom Icon Alert",
-    description: "This alert uses a custom icon instead of the default one.",
-    icon: Bell,
-    hasCloseIcon: true,
-  },
-};
-
-export const NonDismissible: Story = {
-  args: {
-    type: "error",
-    style: "fill",
-    title: "Important Error",
-    description: "This alert cannot be dismissed and will remain visible.",
-    hasCloseIcon: false,
-  },
-};
-
-// Add a story with no icon
-export const NoIcon: Story = {
-  args: {
-    type: "primary",
-    style: "fill",
-    title: "No Icon Alert",
-    description: "This alert doesn't display an icon.",
-    hasMainIcon: false,
-    hasCloseIcon: true,
-  },
-};
+}; 

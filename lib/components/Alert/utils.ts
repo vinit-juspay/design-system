@@ -1,98 +1,101 @@
-import { AlertType, AlertStyle, ActionPlacement } from './types';
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
+import { ButtonType } from '../Button/types';
+import { AlertActionPlacement, AlertStyle, AlertVariant } from './types';
 
-/**
- * Retrieves container class names based on alert type and style
- */
-export const getAlertContainerClassNames = (
-  type: AlertType,
-  style: AlertStyle
-): string => {
-  const theme = themeConfig.euler.alert;
-  
-  const baseClasses = theme.layout.container;
-  const backgroundClass = theme.styles[style]?.[type]?.background || '';
-  
-  let borderClass = '';
-  if (style !== 'fill') {
-    const borderColorClass = theme.styles[style]?.[type]?.border || '';
-    borderClass = theme.border.default + ' ' + borderColorClass;
+const getThemeKey = (variant: AlertVariant): keyof typeof themeConfig.euler.alert.styles.fill => {
+  switch (variant) {
+    case AlertVariant.PRIMARY:
+      return 'primary';
+    case AlertVariant.SUCCESS:
+      return 'success';
+    case AlertVariant.ERROR:
+      return 'error';
+    case AlertVariant.WARNING:
+      return 'warning';
+    case AlertVariant.NEUTRAL:
+      return 'neutral';
+    case AlertVariant.PURPLE:
+      return 'purple';
+    case AlertVariant.ORANGE:
+      return 'orange';
   }
-  
-  return cn(baseClasses, backgroundClass, borderClass);
 };
 
-/**
- * Retrieves content container class names
- */
-export const getContentContainerClassNames = (): string => {
-  return themeConfig.euler.alert.layout.mainContainer;
+export const getButtonTypeFromAlert = (variant: AlertVariant): ButtonType => {
+	switch (variant) {
+		case AlertVariant.PRIMARY:
+			return 'primary';
+		case AlertVariant.SUCCESS:
+			return 'success';
+		case AlertVariant.ERROR:
+			return 'danger';
+		default:
+			return 'secondary';
+	}
 };
 
-/**
- * Retrieves title class names
- */
-export const getTitleClassNames = (): string => {
+const getActionPlacementKey = (placement: AlertActionPlacement): keyof typeof themeConfig.euler.alert.alertActionPlacement => {
+  switch (placement) {
+    case AlertActionPlacement.BOTTOM:
+      return 'default';
+    case AlertActionPlacement.RIGHT:
+      return 'actionsRight';
+  }
+};
+
+export const getAlertContainerStyles = (variant: AlertVariant, style: AlertStyle) => {
+  const baseStyles = themeConfig.euler.alert.base.alertContainer;
+  const themeKey = getThemeKey(variant);
+  const variantStyles = themeConfig.euler.alert.styles[style][themeKey];
+
+  return cn(
+    baseStyles,
+     variantStyles.background,
+     style !== AlertStyle.FILL &&variantStyles.border,
+  );
+};
+
+export const getAlertBodyContainerStyles = () => {
+  return themeConfig.euler.alert.actionButton.container;
+};
+
+export const getAlertDividerStyles = () => {
+  return themeConfig.euler.alert.base.divider;
+};
+
+export const getAlertHeaderContainerStyles = () => {
+  return themeConfig.euler.alert.base.headerContainer;
+};
+
+export const getAlertIconStyles = () => {
+  return cn(themeConfig.euler.alert.icon.container, themeConfig.euler.alert.icon.size);
+};
+
+export const getHeaderClassNames = () => {
   return themeConfig.euler.alert.typography.title;
 };
 
-/**
- * Retrieves description class names
- */
-export const getDescriptionClassNames = (): string => {
+export const getBodyClassNames = (actionPlacement: AlertActionPlacement) => {
+  const actionPlacementKey = getActionPlacementKey(actionPlacement);
+
+  return themeConfig.euler.alert.alertActionPlacement[actionPlacementKey];
+};
+
+export const getDescriptionClassNames = () => {
   return themeConfig.euler.alert.typography.description;
 };
 
-/**
- * Retrieves action container class names based on placement
- */
-export const getActionsContainerClassNames = (
-  actionPlacement: ActionPlacement
-): string => {
-  const theme = themeConfig.euler.alert;
-  
-  return actionPlacement === 'bottom' 
-    ? theme.layout.bottomLayout.actionButtonsWrapper
-    : theme.layout.rightLayout.actionButtonsWrapper;
-};
-
-/**
- * Retrieves icon class names based on alert type and style
- */
-export const getIconClassNames = (
-  type: AlertType,
-  style: AlertStyle
-): string => {
-  const theme = themeConfig.euler.alert;
-  
-  const sizeClass = theme.icon.size;
-  const colorClass = theme.styles[style]?.[type]?.iconColor || '';
-  
-  return cn(sizeClass, colorClass);
-};
-
-/**
- * Retrieves close button class names
- */
-export const getCloseButtonClassNames = (): string => {
-  return themeConfig.euler.alert.layout.closeButton;
-};
-
-/**
- * Retrieves action button class names based on alert type
- */
-export const getActionButtonClassNames = (
-  type: AlertType
-): string => {
-  const theme = themeConfig.euler.alert;
-  
-  const baseClasses = theme.actionButton.base;
-  
-  // Always use link style
+export const getActionButtonStyles = (variant: AlertVariant) => {
   return cn(
-    baseClasses,
-    theme.actionButton.link,
-    theme.actionButton.linkColors[type] || theme.actionButton.linkColors.neutral
-  );
+    themeConfig.euler.alert.actionButton.base,
+    themeConfig.euler.alert.actionButton.colors[variant]
+  )
+
 };
+
+export const getCloseButtonClassNames = () => {
+  return cn(
+    themeConfig.euler.alert.base.closeButton,
+  )
+}; 

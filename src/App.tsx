@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home } from "lucide-react";
+import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home, Bell } from "lucide-react";
 import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
 import { Snackbar } from "../lib/components/Snackbar";
+import Alert, { AlertActionPlacement, AlertStyle, AlertVariant } from "../lib/components/Alert";
+import AlertDemo from "./Demos/AlertDemo/AlertDemo";
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>('buttons');
+  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'>('alerts');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -54,6 +56,16 @@ const App = () => {
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Tabs
+              </button>
+              <button
+                onClick={() => setActiveComponent('alerts')}
+                className={`${activeComponent === 'alerts'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Bell className="mr-2 h-5 w-5" />
+                Alerts
               </button>
             </div>
           </div>
@@ -107,6 +119,16 @@ const App = () => {
           >
             <Settings className="mr-3 h-5 w-5" />
             Tabs
+          </button>
+          <button
+            onClick={() => setActiveComponent('alerts')}
+            className={`${activeComponent === 'alerts'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Bell className="mr-3 h-5 w-5" />
+            Alerts
           </button>
         </div>
       </div>
@@ -615,6 +637,8 @@ const App = () => {
     </>
   );
 
+  const renderAlerts = () => <AlertDemo />;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -624,6 +648,7 @@ const App = () => {
           {activeComponent === 'tooltips' && renderTooltips()}
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
+          {activeComponent === 'alerts' && renderAlerts()}
         </div>
       </div>
     </div>

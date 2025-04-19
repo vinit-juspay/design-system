@@ -287,42 +287,29 @@ export const themeConfig = {
       },
     },
     alert: {
-      layout: {
-        container: "relative flex w-full p-4 items-start gap-2 rounded-xl",
-        mainContainer: "flex justify-start w-full items-start gap-2.5",
-        
-        // Bottom placement specifics
-        bottomLayout: {
-          wrapper: "flex flex-row items-start gap-2.5",
-          contentWrapper: "flex flex-col gap-5",
-          titleDescriptionWrapper: "flex flex-col gap-2",
-          actionButtonsWrapper: "flex gap-5",
-        },
-        
-        // Right placement specifics
-        rightLayout: {
-          wrapper: "flex flex-row items-center gap-7",
-          contentWrapper: "flex flex-row gap-2 items-start flex-grow",
-          titleDescriptionWrapper: "flex flex-col gap-2",
-          actionButtonsWrapper: "flex gap-5 items-center",
-          divider: "h-6 w-0.5 bg-gray-300",
-        },
-        
-        // Common elements
-        iconWrapper: "py-0.5",
-        closeButton: "p-0.5 rounded-sm text-gray-400 hover:text-gray-600 hover:bg-black/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/30",
+      base: {
+        alertContainer: 'rounded-lg p-4 relative space-y-2',
+        header: 'flex items-center gap-2 text-blue-800 font-600 text-body-md',
+        closeButton: 'text-gray-400 hover:text-gray-600 h-5 w-5 flex items-center justify-center',
+        headerContainer: 'flex items-center justify-between gap-2',
+        divider: "relative w-[1px] h-5 bg-gray-300"
+      },
+      alertActionPlacement: {
+        default: "flex items-start flex-col pl-6 gap-2",
+        actionsRight: "flex items-start gap-7 pl-6",
       },
       typography: {
         title: "font-600 text-body-md text-gray-700 tracking-normal",
         description: "font-400 text-body-md text-gray-600 tracking-normal",
       },
       icon: {
-        size: "w-4 h-4 mt-0.5",
+        size: "w-4 h-4",
+        container: "flex items-center gap-2"
       },
       actionButton: {
-        base: "inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-medium text-sm",
-        link: "hover:underline focus-visible:outline-2 focus:outline-2",
-        linkColors: {
+        container: "flex items-center gap-5",
+        base: "flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-body-md",
+        colors: {
           primary: "text-primary-700 hover:text-primary-800",
           success: "text-green-700 hover:text-green-800",
           warning: "text-yellow-700 hover:text-yellow-800",
@@ -335,7 +322,7 @@ export const themeConfig = {
       styles: {
         fill: {
           primary: {
-            background: "bg-blue-50",
+            background: "bg-blue-50/50",
             border: "border-[1px] border-blue-100",
             iconColor: "text-blue-600",
           },
@@ -372,37 +359,37 @@ export const themeConfig = {
         },
         subtle: {
           primary: {
-            background: "bg-blue-50/50",
+            background: "bg-blue-50",
             border: "border-[1px] border-blue-500",
             iconColor: "text-blue-600",
           },
           success: {
-            background: "bg-green-50/50",
+            background: "bg-green-50",
             border: "border-[1px] border-green-500",
             iconColor: "text-green-600",
           },
           purple: {
-            background: "bg-purple-50/50",
+            background: "bg-purple-50",
             border: "border-[1px] border-purple-500",
             iconColor: "text-purple-600",
           },
           warning: {
-            background: "bg-yellow-50/50",
+            background: "bg-yellow-50",
             border: "border-[1px] border-yellow-500",
             iconColor: "text-yellow-600",
           },
           neutral: {
-            background: "bg-gray-50/50",
+            background: "bg-gray-50",
             border: "border-[1px] border-gray-500",
             iconColor: "text-gray-600",
           },
           error: {
-            background: "bg-red-50/50",
+            background: "bg-red-50",
             border: "border-[1px] border-red-500",
             iconColor: "text-red-600",
           },
           orange: {
-            background: "bg-orange-50/50",
+            background: "bg-orange-50",
             border: "border-[1px] border-orange-500",
             iconColor: "text-orange-600",
           },
