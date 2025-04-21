@@ -4,7 +4,7 @@ import Alert, {
   AlertStyle,
   AlertVariant,
 } from '../../../lib/components/Alert';
-import {  FileWarning } from "lucide-react";
+import { FileWarning } from 'lucide-react';
 
 const AlertDemo = () => {
   const [variant, setVariant] = useState<AlertVariant>(AlertVariant.PRIMARY);

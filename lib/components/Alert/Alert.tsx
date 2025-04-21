@@ -16,6 +16,7 @@ import {
 
 import { Info, X } from 'lucide-react';
 import Button from '../Button/Button';
+import { ButtonSubType } from '../Button/types';
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
@@ -64,7 +65,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
                       key="primary-action"
                       buttonType={getButtonTypeFromAlert(variant)}
                       onClick={primaryAction.onClick}
-                      subType="link"
+                      subType={ButtonSubType.LINK}
                       className={getActionButtonStyles(variant)}
                     >
                       {primaryAction.label}
@@ -76,7 +77,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
                       key="secondary-action"
                       buttonType={getButtonTypeFromAlert(variant)}
                       onClick={secondaryAction.onClick}
-                      subType="link"
+                      subType={ButtonSubType.LINK}
                       className={getActionButtonStyles(variant)}
                     >
                       {secondaryAction.label}

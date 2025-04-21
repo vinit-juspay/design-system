@@ -25,13 +25,13 @@ const getThemeKey = (variant: AlertVariant): keyof typeof themeConfig.euler.aler
 export const getButtonTypeFromAlert = (variant: AlertVariant): ButtonType => {
   switch (variant) {
     case AlertVariant.PRIMARY:
-      return 'primary';
+      return ButtonType.PRIMARY;
     case AlertVariant.SUCCESS:
-      return 'success';
+      return ButtonType.SUCCESS;
     case AlertVariant.ERROR:
-      return 'danger';
+      return ButtonType.DANGER;
     default:
-      return 'secondary';
+      return ButtonType.SECONDARY;
   }
 };
 
