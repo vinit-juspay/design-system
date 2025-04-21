@@ -14,6 +14,7 @@ import {
   User,
   Lock,
   Home,
+  Menu,
 } from 'lucide-react';
 import {
   Button,
@@ -176,6 +177,9 @@ const App = () => {
           <Button buttonType={ButtonType.PRIMARY} size={ButtonSize.LARGE}>
             Large Button
           </Button>
+          <Button buttonType={ButtonType.PRIMARY} onClick={() => console.log('Button clicked!')}>
+            Click Me
+          </Button>
         </div>
       </div>
 
@@ -254,6 +258,39 @@ const App = () => {
           </Button>
           <Button buttonType={ButtonType.PRIMARY} isDisabled={true}>
             Disabled
+          </Button>
+        </div>
+      </div>
+
+      {/* Accessibility Examples */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Accessibility Examples</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            buttonType={ButtonType.SECONDARY}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Menu}
+            ariaLabel="Open menu"
+            ariaExpanded={false}
+            ariaControls="main-menu"
+            ariaHasPopup="menu"
+          />
+
+          <Button buttonType={ButtonType.PRIMARY} ariaPressed={true}>
+            Selected Option
+          </Button>
+
+          <Button buttonType={ButtonType.PRIMARY} ariaPressed={false}>
+            Unselected Option
+          </Button>
+
+          <Button
+            buttonType={ButtonType.SECONDARY}
+            leadingIcon={Settings}
+            ariaControls="settings-panel"
+            ariaExpanded={false}
+          >
+            Settings
           </Button>
         </div>
       </div>

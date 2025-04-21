@@ -28,4 +28,9 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   trailingIcon?: ElementType;
   isLoading?: boolean;
   isDisabled?: boolean;
+  ariaLabel?: string;
+  ariaExpanded?: boolean;
+  ariaControls?: string;
+  ariaPressed?: boolean | 'mixed';
+  ariaHasPopup?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
 }

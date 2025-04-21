@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from './Button';
-import { Search, Plus, ArrowRight } from 'lucide-react';
+import { Search, Plus, ArrowRight, Menu } from 'lucide-react';
 import { ButtonType, ButtonSize, ButtonSubType } from './types';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
@@ -50,7 +50,32 @@ const meta: Meta<ExtendedButtonArgs> = {
       control: 'boolean',
       description: 'Whether the button is disabled',
     },
-
+    ariaLabel: {
+      control: 'text',
+      description: 'Accessible label for screen readers',
+      table: { category: 'Accessibility' },
+    },
+    ariaExpanded: {
+      control: 'boolean',
+      description: 'Indicates if the button controls an expandable element',
+      table: { category: 'Accessibility' },
+    },
+    ariaControls: {
+      control: 'text',
+      description: 'ID of the element controlled by the button',
+      table: { category: 'Accessibility' },
+    },
+    ariaPressed: {
+      control: 'boolean',
+      description: 'Indicates if the button is currently pressed',
+      table: { category: 'Accessibility' },
+    },
+    ariaHasPopup: {
+      control: 'select',
+      options: [true, false, 'menu', 'dialog', 'listbox', 'tree', 'grid'],
+      description: 'Indicates if the button has a popup',
+      table: { category: 'Accessibility' },
+    },
     showLeadingIcon: {
       control: 'boolean',
       description: 'Show leading icon',
@@ -61,9 +86,13 @@ const meta: Meta<ExtendedButtonArgs> = {
       description: 'Show trailing icon',
       table: { category: 'Icons' },
     },
-
     leadingIcon: { control: false, table: { disable: true } },
     trailingIcon: { control: false, table: { disable: true } },
+    onClick: {
+      action: 'clicked',
+      description: 'Function called when button is clicked',
+      table: { category: 'Events' },
+    },
   },
 };
 
@@ -207,5 +236,40 @@ export const Success: Story = {
     children: 'Success Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
+  },
+};
+
+export const MenuButton: Story = {
+  args: {
+    buttonType: ButtonType.SECONDARY,
+    subType: ButtonSubType.ICON_ONLY,
+    leadingIcon: Menu,
+    ariaLabel: 'Open menu',
+    ariaExpanded: false,
+    ariaControls: 'main-menu',
+    ariaHasPopup: 'menu',
+  },
+};
+
+export const ToggleButton: Story = {
+  args: {
+    buttonType: ButtonType.PRIMARY,
+    children: 'Toggle Feature',
+    ariaPressed: false,
+  },
+};
+
+export const WithOnClick: Story = {
+  args: {
+    buttonType: ButtonType.PRIMARY,
+    children: 'Click Me',
+    onClick: () => alert('Button clicked!'),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This button demonstrates the use of the onClick handler. In Storybook, the action will be logged in the Actions panel.',
+      },
+    },
   },
 };
