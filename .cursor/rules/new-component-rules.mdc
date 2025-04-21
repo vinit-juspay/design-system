@@ -1,0 +1,137 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Cursor Rules for new components
+globs: *.tsx,lib/components/**/*.tsx,.ts
+alwaysApply: false
+---
+# Cursor IDE Prompt Rules for Component Library
+
+## Component Structure Rules
+- Always use React forwardRef for all components
+- Keep component props in a separate types.ts file
+- Export enums for component variants/options
+- Include displayName assignment for components
+- Implement default props in function parameter destructuring
+- Create and export utility functions for class name generation in a separate utils.ts file
+
+## Naming Conventions
+- Use PascalCase for component names and enum types
+- Use UPPER_SNAKE_CASE for enum values
+- Use camelCase for props, functions, and variables
+- Use descriptive prop names that reflect purpose (e.g., slotDirection over position)
+- Prefix boolean props with "is", "has", or "show" (e.g., showArrow)
+
+## Props and Types Structure
+- Define an interface for component props ending with "Props" (e.g., TooltipProps)
+- Group related props in enums or nested objects
+- Use specific types instead of any
+- Define sensible defaults for optional props
+- Document special props behavior with comments
+
+## Theme Configuration
+- All styles should reference themeConfig values
+- Use the cn utility function for conditional class name concatenation
+- Create helper functions to extract theme values (e.g., getTooltipClassNames)
+- Follow tailwind class grouping: layout → sizing → spacing → typography → visual
+
+## Component Implementation
+- Use composition pattern with sub-components where appropriate
+- Extract complex logic to hooks or utility functions
+- Add role and aria attributes for accessibility
+- Support forwarded refs properly
+- Implement consistent event handling patterns
+
+## Component Template Example
+
+```typescript
+// ComponentName/types.ts
+import { ReactNode } from "react";
+
+export enum ComponentNameVariant {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+}
+
+export enum ComponentNameSize {
+  SMALL = "sm",
+  MEDIUM = "md",
+  LARGE = "lg",
+}
+
+export interface ComponentNameProps {
+  children: ReactNode;
+  variant?: ComponentNameVariant;
+  size?: ComponentNameSize;
+  className?: string;
+  // Add other props here
+}
+```
+
+```typescript
+// ComponentName/utils.ts
+import { themeConfig } from "../../themeConfig";
+import { cn } from "../../utils";
+import { ComponentNameSize, ComponentNameVariant } from "./types";
+
+export const getComponentNameClassNames = (
+  variant: ComponentNameVariant,
+  size: ComponentNameSize
+): string => {
+  const theme = themeConfig.euler.componentName;
+  const variantClasses = theme.variant[variant];
+  const sizeClasses = theme.sizes[size];
+
+  return cn(
+    theme.baseStyles,
+    variantClasses,
+    sizeClasses
+  );
+};
+```
+
+```typescript
+// ComponentName/index.tsx
+import { forwardRef } from "react";
+import { getComponentNameClassNames } from "./utils";
+import { ComponentNameProps, ComponentNameSize, ComponentNameVariant } from "./types";
+
+const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(({
+  children,
+  variant = ComponentNameVariant.PRIMARY,
+  size = ComponentNameSize.MEDIUM,
+  className,
+  // Destructure other props with defaults
+}, ref) => {
+  const componentClassName = getComponentNameClassNames(variant, size);
+
+  return (
+    <div 
+      ref={ref}
+      className={cn(componentClassName, className)}
+    >
+      {children}
+    </div>
+  );
+});
+
+ComponentName.displayName = "ComponentName";
+
+export default ComponentName;
+```
+
+## Code Review Checklist
+
+1. Component uses forwardRef
+2. Props are properly typed in separate file
+3. Variants and options use enums
+4. Component has displayName
+5. Default props are specified
+6. Classes are derived from themeConfig
+7. Utility functions extract theme values
+8. Naming conventions are followed
+9. Conditional classes use cn utility
+10. Basic accessibility support is implemented

@@ -300,5 +300,155 @@ export const themeConfig = {
         bottomLeft: 'bottom-4 left-4',
       },
     },
+    alert: {
+      base: {
+        alertContainer: 'rounded-lg p-4 relative space-y-2',
+        header: 'flex items-center gap-2 text-blue-800 font-600 text-body-md',
+        closeButton: 'text-gray-400 hover:text-gray-600 h-5 w-5 flex items-center justify-center',
+        headerContainer: 'flex items-center justify-between gap-2',
+        divider: 'relative w-[1px] h-5 bg-gray-300',
+      },
+      alertActionPlacement: {
+        default: 'flex items-start flex-col pl-6 gap-2',
+        actionsRight: 'flex items-start gap-7 pl-6',
+      },
+      typography: {
+        title: 'font-600 text-body-md text-gray-700 tracking-normal',
+        description: 'font-400 text-body-md text-gray-600 tracking-normal',
+      },
+      icon: {
+        size: 'w-4 h-4',
+        container: 'flex items-center gap-2',
+      },
+      actionButton: {
+        container: 'flex items-center gap-5',
+        base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-body-md',
+        colors: {
+          primary: 'text-primary-700 hover:text-primary-800',
+          success: 'text-green-700 hover:text-green-800',
+          warning: 'text-yellow-700 hover:text-yellow-800',
+          error: 'text-red-700 hover:text-red-800',
+          purple: 'text-purple-700 hover:text-purple-800',
+          neutral: 'text-gray-700 hover:text-gray-800',
+          orange: 'text-orange-700 hover:text-orange-800',
+        },
+      },
+      styles: {
+        fill: {
+          primary: {
+            background: 'bg-blue-50/50',
+            border: 'border-[1px] border-blue-100',
+            iconColor: 'text-blue-600',
+          },
+          success: {
+            background: 'bg-green-50',
+            border: 'border-[1px] border-green-100',
+            iconColor: 'text-green-600',
+          },
+          purple: {
+            background: 'bg-purple-50',
+            border: 'border-[1px] border-purple-100',
+            iconColor: 'text-purple-600',
+          },
+          warning: {
+            background: 'bg-yellow-50',
+            border: 'border-[1px] border-yellow-100',
+            iconColor: 'text-yellow-600',
+          },
+          neutral: {
+            background: 'bg-gray-50',
+            border: 'border-[1px] border-gray-100',
+            iconColor: 'text-gray-600',
+          },
+          error: {
+            background: 'bg-red-50',
+            border: 'border-[1px] border-red-100',
+            iconColor: 'text-red-600',
+          },
+          orange: {
+            background: 'bg-orange-50',
+            border: 'border-[1px] border-orange-100',
+            iconColor: 'text-orange-600',
+          },
+        },
+        subtle: {
+          primary: {
+            background: 'bg-blue-50',
+            border: 'border-[1px] border-blue-500',
+            iconColor: 'text-blue-600',
+          },
+          success: {
+            background: 'bg-green-50',
+            border: 'border-[1px] border-green-500',
+            iconColor: 'text-green-600',
+          },
+          purple: {
+            background: 'bg-purple-50',
+            border: 'border-[1px] border-purple-500',
+            iconColor: 'text-purple-600',
+          },
+          warning: {
+            background: 'bg-yellow-50',
+            border: 'border-[1px] border-yellow-500',
+            iconColor: 'text-yellow-600',
+          },
+          neutral: {
+            background: 'bg-gray-50',
+            border: 'border-[1px] border-gray-500',
+            iconColor: 'text-gray-600',
+          },
+          error: {
+            background: 'bg-red-50',
+            border: 'border-[1px] border-red-500',
+            iconColor: 'text-red-600',
+          },
+          orange: {
+            background: 'bg-orange-50',
+            border: 'border-[1px] border-orange-500',
+            iconColor: 'text-orange-600',
+          },
+        },
+        noFill: {
+          primary: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-blue-500',
+            iconColor: 'text-blue-600',
+          },
+          success: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-green-500',
+            iconColor: 'text-green-600',
+          },
+          purple: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-purple-500',
+            iconColor: 'text-purple-600',
+          },
+          warning: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-yellow-500',
+            iconColor: 'text-yellow-600',
+          },
+          neutral: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-gray-500',
+            iconColor: 'text-gray-600',
+          },
+          error: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-red-500',
+            iconColor: 'text-red-600',
+          },
+          orange: {
+            background: 'bg-transparent',
+            border: 'border-[1px] border-orange-500',
+            iconColor: 'text-orange-600',
+          },
+        },
+      },
+      border: {
+        default: 'border-[2px]',
+      },
+    },
   },
 };
