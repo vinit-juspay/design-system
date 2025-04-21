@@ -1,13 +1,13 @@
 import React from 'react';
 import { cn } from '../../utils';
 import { SnackbarProps } from './types';
-import { 
-  getSnackbarStyles, 
-  getPositionStyles, 
-  getBaseStyles, 
+import {
+  getSnackbarStyles,
+  getPositionStyles,
+  getBaseStyles,
   getLayoutStyles,
   getIconComponentType,
-  useSnackbarLogic
+  useSnackbarLogic,
 } from './utils';
 import { X } from 'lucide-react';
 
@@ -26,12 +26,8 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
     },
     ref
   ) => {
-    const { visible, handleClose } = useSnackbarLogic(
-      position,
-      autoClose,
-      onClose
-    );
-    
+    const { visible, handleClose } = useSnackbarLogic(position, autoClose, onClose);
+
     const styles = getSnackbarStyles(type);
     const positionStyles = getPositionStyles(position);
     const baseStyles = getBaseStyles();
@@ -47,21 +43,14 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          baseStyles.container,
-          styles.backgroundColor,
-          positionStyles,
-          className
-        )}
+        className={cn(baseStyles.container, styles.backgroundColor, positionStyles, className)}
         role="alert"
         aria-live="assertive"
       >
         <div className={layoutStyles.headerContainer}>
           <div className={layoutStyles.headerContent}>
             {showIcon && iconElement && (
-              <div className={cn(baseStyles.icon, styles.iconColor)}>
-                {iconElement}
-              </div>
+              <div className={cn(baseStyles.icon, styles.iconColor)}>{iconElement}</div>
             )}
             {heading && <h3 className={cn(layoutStyles.heading, styles.textColor)}>{heading}</h3>}
           </div>
@@ -75,11 +64,13 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
             </button>
           )}
         </div>
-        
+
         {(message || alertMessage) && (
           <div className={layoutStyles.messageContainer}>
             {message && <p className={cn(layoutStyles.message, styles.textColor)}>{message}</p>}
-            {alertMessage && <p className={cn(layoutStyles.alertMessage, styles.textColor)}>{alertMessage}</p>}
+            {alertMessage && (
+              <p className={cn(layoutStyles.alertMessage, styles.textColor)}>{alertMessage}</p>
+            )}
           </div>
         )}
       </div>

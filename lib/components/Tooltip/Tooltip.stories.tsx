@@ -1,61 +1,61 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Tooltip from "./Tooltip";
-import Button from "../Button/Button";
-import { Info, HelpCircle, AlertCircle } from "lucide-react";
+import type { Meta, StoryObj } from '@storybook/react';
+import Tooltip from './Tooltip';
+import Button from '../Button/Button';
+import { Info, HelpCircle, AlertCircle } from 'lucide-react';
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components/Tooltip",
+  title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   args: {
-    content: "Tooltip content",
+    content: 'Tooltip content',
     slot: undefined, // No slot icon by default
   },
   argTypes: {
     size: {
-      control: "select",
-      options: ["sm", "lg"],
-      description: "The size of the tooltip",
+      control: 'select',
+      options: ['sm', 'lg'],
+      description: 'The size of the tooltip',
       table: {
-        defaultValue: { summary: "sm" },
+        defaultValue: { summary: 'sm' },
       },
     },
     arrow: {
-      control: "select",
+      control: 'select',
       options: [
-        "default",
-        "right",
-        "left",
-        "bottomCenter",
-        "bottomLeft",
-        "bottomRight",
-        "topCenter",
-        "topLeft",
-        "topRight",
-        "none",
+        'default',
+        'right',
+        'left',
+        'bottomCenter',
+        'bottomLeft',
+        'bottomRight',
+        'topCenter',
+        'topLeft',
+        'topRight',
+        'none',
       ],
-      description: "The position of the tooltip arrow",
+      description: 'The position of the tooltip arrow',
       table: {
-        defaultValue: { summary: "default" },
+        defaultValue: { summary: 'default' },
       },
     },
     slotDirection: {
-      control: "select",
-      options: ["left", "right"],
-      description: "The direction of the slot icon",
+      control: 'select',
+      options: ['left', 'right'],
+      description: 'The direction of the slot icon',
       table: {
-        defaultValue: { summary: "left" },
+        defaultValue: { summary: 'left' },
       },
     },
     slot: {
-      control: "boolean",
-      description: "Whether to show the slot icon",
+      control: 'boolean',
+      description: 'Whether to show the slot icon',
       table: {
-        defaultValue: { summary: "undefined" },
-        category: "Appearance",
+        defaultValue: { summary: 'undefined' },
+        category: 'Appearance',
       },
       mapping: {
         true: Info,
@@ -64,32 +64,32 @@ const meta: Meta<typeof Tooltip> = {
     },
     children: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     providerProps: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     rootProps: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     contentProps: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <div className="p-12">
         <Story />
       </div>
-    )
-  ]
+    ),
+  ],
 };
 
 export default meta;
@@ -97,7 +97,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
   args: {
-    content: "Tooltip content",
+    content: 'Tooltip content',
     children: <Button size="sm">Hover me</Button>,
   },
 };
@@ -127,7 +127,7 @@ export const WithArrowPositions: Story = {
       <Tooltip content="Top Right" arrow="topRight">
         <Button>Top Right</Button>
       </Tooltip>
-      
+
       <Tooltip content="Left" arrow="left">
         <Button>Left</Button>
       </Tooltip>
@@ -137,7 +137,7 @@ export const WithArrowPositions: Story = {
       <Tooltip content="Right" arrow="right">
         <Button>Right</Button>
       </Tooltip>
-      
+
       <Tooltip content="Bottom Left" arrow="bottomLeft">
         <Button>Bottom Left</Button>
       </Tooltip>
@@ -153,7 +153,7 @@ export const WithArrowPositions: Story = {
 
 export const WithSlot: Story = {
   args: {
-    content: "Information tooltip",
+    content: 'Information tooltip',
     slot: Info,
     children: <Button>With Icon</Button>,
   },
@@ -162,18 +162,10 @@ export const WithSlot: Story = {
 export const WithSlotDirections: Story = {
   render: () => (
     <div className="flex gap-4">
-      <Tooltip 
-        content="Left slot tooltip" 
-        slot={HelpCircle} 
-        slotDirection="left"
-      >
+      <Tooltip content="Left slot tooltip" slot={HelpCircle} slotDirection="left">
         <Button>Left Icon</Button>
       </Tooltip>
-      <Tooltip 
-        content="Right slot tooltip" 
-        slot={AlertCircle} 
-        slotDirection="right"
-      >
+      <Tooltip content="Right slot tooltip" slot={AlertCircle} slotDirection="right">
         <Button>Right Icon</Button>
       </Tooltip>
     </div>
@@ -200,7 +192,7 @@ export const WithRichContent: Story = {
         </ul>
       </div>
     ),
-    size: "lg",
+    size: 'lg',
     children: <Button>Rich Content</Button>,
   },
-}; 
+};

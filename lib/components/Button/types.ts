@@ -1,8 +1,23 @@
 import { ComponentPropsWithoutRef, ElementType } from 'react';
 
-export type ButtonType = 'primary' | 'secondary' | 'danger' | 'success';
-export type ButtonSize = 'sm' | 'md' | 'lg';
-export type ButtonSubType = 'default' | 'iconOnly' | 'link';
+export enum ButtonType {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  DANGER = 'danger',
+  SUCCESS = 'success',
+}
+
+export enum ButtonSize {
+  SMALL = 'sm',
+  MEDIUM = 'md',
+  LARGE = 'lg',
+}
+
+export enum ButtonSubType {
+  DEFAULT = 'default',
+  ICON_ONLY = 'iconOnly',
+  LINK = 'link',
+}
 
 export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   buttonType?: ButtonType;
@@ -13,4 +28,9 @@ export interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   trailingIcon?: ElementType;
   isLoading?: boolean;
   isDisabled?: boolean;
+  ariaLabel?: string;
+  ariaExpanded?: boolean;
+  ariaControls?: string;
+  ariaPressed?: boolean | 'mixed';
+  ariaHasPopup?: boolean | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
 }
