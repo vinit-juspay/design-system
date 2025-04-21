@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Loader2 } from 'lucide-react';
-import { ButtonProps } from './types';
+import { ButtonProps, ButtonType, ButtonSize, ButtonSubType } from './types';
 import { cn } from '../../utils';
 import { getButtonClassNames, getIconClassNames, getTextClassNames } from './utils';
 
@@ -21,9 +21,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseClassNames = getButtonClassNames(buttonType, size, subType);
-    const iconClassNames = getIconClassNames(size, isLoading);
-    const textClassNames = getTextClassNames(size);
+    const baseClassNames = getButtonClassNames(
+      buttonType as ButtonType,
+      size as ButtonSize,
+      subType as ButtonSubType
+    );
+    const iconClassNames = getIconClassNames(size as ButtonSize, isLoading);
+    const textClassNames = getTextClassNames(size as ButtonSize);
 
     return (
       <button

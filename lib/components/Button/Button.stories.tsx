@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Button from './Button';
 import { Search, Plus, ArrowRight } from 'lucide-react';
+import { ButtonType, ButtonSize, ButtonSubType } from './types';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
@@ -19,26 +20,26 @@ const meta: Meta<ExtendedButtonArgs> = {
   argTypes: {
     buttonType: {
       control: 'select',
-      options: ['primary', 'secondary', 'danger', 'success'],
+      options: Object.values(ButtonType),
       description: 'The visual style of the button',
       table: {
-        defaultValue: { summary: 'primary' },
+        defaultValue: { summary: ButtonType.PRIMARY },
       },
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: Object.values(ButtonSize),
       description: 'The size of the button',
       table: {
-        defaultValue: { summary: 'md' },
+        defaultValue: { summary: ButtonSize.MEDIUM },
       },
     },
     subType: {
       control: 'select',
-      options: ['default', 'iconOnly', 'link'],
+      options: Object.values(ButtonSubType),
       description: 'The sub-type of the button',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: { summary: ButtonSubType.DEFAULT },
       },
     },
     isLoading: {
@@ -71,7 +72,7 @@ type Story = StoryObj<ExtendedButtonArgs>;
 
 export const Primary: Story = {
   args: {
-    buttonType: 'primary',
+    buttonType: ButtonType.PRIMARY,
     children: 'Primary Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -90,7 +91,7 @@ export const Primary: Story = {
 
 export const WithIcons: Story = {
   args: {
-    buttonType: 'primary',
+    buttonType: ButtonType.PRIMARY,
     children: 'Search & Go',
     showLeadingIcon: true,
     showTrailingIcon: true,
@@ -106,18 +107,19 @@ export const WithIcons: Story = {
 
 export const IconOnly: Story = {
   args: {
-    buttonType: 'primary',
-    subType: 'iconOnly',
-    'aria-label': 'Add item',
+    buttonType: ButtonType.PRIMARY,
+    subType: ButtonSubType.ICON_ONLY,
     showLeadingIcon: true,
+    showTrailingIcon: false,
+    'aria-label': 'Add item',
   },
   render: args => <Button {...args} leadingIcon={args.showLeadingIcon ? Plus : undefined} />,
 };
 
 export const Link: Story = {
   args: {
-    buttonType: 'primary',
-    subType: 'link',
+    buttonType: ButtonType.PRIMARY,
+    subType: ButtonSubType.LINK,
     children: 'Link Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -133,7 +135,7 @@ export const Link: Story = {
 
 export const Loading: Story = {
   args: {
-    buttonType: 'primary',
+    buttonType: ButtonType.PRIMARY,
     children: 'Loading',
     isLoading: true,
     showLeadingIcon: false,
@@ -143,7 +145,7 @@ export const Loading: Story = {
 
 export const Disabled: Story = {
   args: {
-    buttonType: 'primary',
+    buttonType: ButtonType.PRIMARY,
     children: 'Disabled',
     isDisabled: true,
     showLeadingIcon: false,
@@ -153,8 +155,8 @@ export const Disabled: Story = {
 
 export const Small: Story = {
   args: {
-    buttonType: 'primary',
-    size: 'sm',
+    buttonType: ButtonType.PRIMARY,
+    size: ButtonSize.SMALL,
     children: 'Small Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -163,8 +165,8 @@ export const Small: Story = {
 
 export const Medium: Story = {
   args: {
-    buttonType: 'primary',
-    size: 'md',
+    buttonType: ButtonType.PRIMARY,
+    size: ButtonSize.MEDIUM,
     children: 'Medium Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -173,8 +175,8 @@ export const Medium: Story = {
 
 export const Large: Story = {
   args: {
-    buttonType: 'primary',
-    size: 'lg',
+    buttonType: ButtonType.PRIMARY,
+    size: ButtonSize.LARGE,
     children: 'Large Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -183,7 +185,7 @@ export const Large: Story = {
 
 export const Secondary: Story = {
   args: {
-    buttonType: 'secondary',
+    buttonType: ButtonType.SECONDARY,
     children: 'Secondary Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -192,7 +194,7 @@ export const Secondary: Story = {
 
 export const Danger: Story = {
   args: {
-    buttonType: 'danger',
+    buttonType: ButtonType.DANGER,
     children: 'Danger Button',
     showLeadingIcon: false,
     showTrailingIcon: false,
@@ -201,7 +203,7 @@ export const Danger: Story = {
 
 export const Success: Story = {
   args: {
-    buttonType: 'success',
+    buttonType: ButtonType.SUCCESS,
     children: 'Success Button',
     showLeadingIcon: false,
     showTrailingIcon: false,

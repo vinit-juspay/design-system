@@ -1,6 +1,14 @@
 export const themeConfig = {
   euler: {
     button: {
+      base: {
+        container:
+          'inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-600 font-sans',
+        focus: 'focus-visible:outline-2 focus:outline-2',
+        icon: 'flex-shrink-0',
+        text: 'truncate',
+        loading: 'animate-spin',
+      },
       buttonType: {
         primary: {
           backgroundColor: 'bg-gradient-to-b from-primary-600 to-primary-500',
@@ -76,35 +84,35 @@ export const themeConfig = {
           gap: 'gap-2',
         },
       },
+      borderRadius: 'rounded-lg',
       fontWeight: 'font-600',
       fontFamily: 'font-sans',
       linkColors: {
         primary: {
           text: 'text-primary-600',
-          hover: 'hover:text-primary-700',
+          hover: 'hover:text-primary-700 hover:underline',
           focus: 'focus:text-primary-700',
           disabled: 'disabled:text-primary-300',
         },
         secondary: {
           text: 'text-gray-600',
-          hover: 'hover:text-gray-700',
+          hover: 'hover:text-gray-700 hover:underline',
           focus: 'focus:text-gray-700',
           disabled: 'disabled:text-gray-400',
         },
         danger: {
           text: 'text-red-600',
-          hover: 'hover:text-red-700',
+          hover: 'hover:text-red-700 hover:underline',
           focus: 'focus:text-red-700',
           disabled: 'disabled:text-red-300',
         },
         success: {
           text: 'text-green-600',
-          hover: 'hover:text-green-700',
+          hover: 'hover:text-green-700 hover:underline',
           focus: 'focus:text-green-700',
           disabled: 'disabled:text-green-300',
         },
       },
-      borderRadius: 'rounded-md',
     },
     tag: {
       variant: {
@@ -211,80 +219,86 @@ export const themeConfig = {
     },
     tabs: {
       base: {
-        root: "w-full",
-        list: "flex w-full items-center",
-        trigger: "inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-600 ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        root: 'w-full',
+        list: 'flex w-full items-center',
+        trigger:
+          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-600 ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
       },
-      expanded: "justify-between [&>*]:flex-1 [&>*]:text-center",
+      expanded: 'justify-between [&>*]:flex-1 [&>*]:text-center',
       variant: {
         boxed: {
           list: 'bg-gray-50 p-1 rounded-lg',
-          trigger: 'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm'
+          trigger:
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm',
         },
         floating: {
           list: 'gap-2',
-          trigger: 'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700'
+          trigger:
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700',
         },
         underline: {
           list: 'border-b border-gray-200',
-          trigger: 'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10'
-        }
+          trigger:
+            'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10',
+        },
       },
       sizes: {
         md: {
           height: 'h-11',
-          underlineOffset: '-mb-2'
+          underlineOffset: '-mb-2',
         },
         lg: {
           height: 'h-12',
-          underlineOffset: '-mb-3'
-        }
+          underlineOffset: '-mb-3',
+        },
       },
-      content: 'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0'
+      content:
+        'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0',
     },
     snackbar: {
       base: {
-        container: "fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200",
-        content: "flex flex-col gap-1",
-        icon: "flex-shrink-0",
-        closeButton: "ml-4 flex-shrink-0 hover:opacity-80",
+        container:
+          'fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200',
+        content: 'flex flex-col gap-1',
+        icon: 'flex-shrink-0',
+        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80',
       },
       layout: {
-        headerContainer: "flex w-full items-center justify-between",
-        headerContent: "flex items-center gap-2",
-        messageContainer: "mt-1 pl-7 flex flex-col gap-1",
-        heading: "text-body-lg font-600",
-        message: "text-body-md font-500 break-words",
-        alertMessage: "text-body-md font-600",
+        headerContainer: 'flex w-full items-center justify-between',
+        headerContent: 'flex items-center gap-2',
+        messageContainer: 'mt-1 pl-7 flex flex-col gap-1',
+        heading: 'text-body-lg font-600',
+        message: 'text-body-md font-500 break-words',
+        alertMessage: 'text-body-md font-600',
       },
       type: {
         info: {
-          backgroundColor: "bg-gray-800",
-          textColor: "text-gray-300",
-          iconColor: "text-blue-400",
+          backgroundColor: 'bg-gray-800',
+          textColor: 'text-gray-300',
+          iconColor: 'text-blue-400',
         },
         warning: {
-          backgroundColor: "bg-gray-800",
-          textColor: "text-gray-300",
-          iconColor: "text-yellow-400",
+          backgroundColor: 'bg-gray-800',
+          textColor: 'text-gray-300',
+          iconColor: 'text-yellow-400',
         },
         error: {
-          backgroundColor: "bg-gray-800",
-          textColor: "text-gray-300",
-          iconColor: "text-red-400",
+          backgroundColor: 'bg-gray-800',
+          textColor: 'text-gray-300',
+          iconColor: 'text-red-400',
         },
         success: {
-          backgroundColor: "bg-gray-800",
-          textColor: "text-gray-300",
-          iconColor: "text-green-400",
+          backgroundColor: 'bg-gray-800',
+          textColor: 'text-gray-300',
+          iconColor: 'text-green-400',
         },
       },
       position: {
-        topRight: "top-4 right-4",
-        topLeft: "top-4 left-4",
-        bottomRight: "bottom-4 right-4",
-        bottomLeft: "bottom-4 left-4",
+        topRight: 'top-4 right-4',
+        topLeft: 'top-4 left-4',
+        bottomRight: 'bottom-4 right-4',
+        bottomLeft: 'bottom-4 left-4',
       },
     },
-  }
-}; 
+  },
+};
