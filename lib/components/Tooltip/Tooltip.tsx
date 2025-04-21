@@ -1,68 +1,58 @@
-import * as React from 'react';
-import * as RadixTooltip from '@radix-ui/react-tooltip';
-import { TooltipProps } from './types';
-import { getTooltipClassNames, getArrowStyles, getSlotClassNames } from './utils';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { getArrowClassNames, getSlotClassNames, getTooltipClassNames } from './utils';
+import { TooltipProps, TooltipSide, TooltipSize, TooltipSlotDirection } from './types';
+import { forwardRef } from 'react';
 
-/**
- * Tooltip component built on top of Radix UI tooltip primitive
- * Provides contextual information when hovering over elements
- *
- * @component
- * @example
- * // Basic usage
- * <Tooltip content="This is a tooltip">
- *   <Button>Hover me</Button>
- * </Tooltip>
- *
- * // With custom slot (e.g. icon)
- * <Tooltip content="Custom tooltip" arrow="right" slot={InfoIcon} slotDirection="left">
- *   <span>Hover for info</span>
- * </Tooltip>
- */
-
-const Tooltip = React.forwardRef<React.ElementRef<typeof RadixTooltip.Content>, TooltipProps>(
+const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       children,
       content,
-      size = 'sm',
-      arrow = 'default',
-      slotDirection = 'left',
-      slot: Slot,
-      providerProps = { delayDuration: 300 },
-      rootProps,
-      contentProps,
+      open,
+      side,
+      align,
+      showArrow = true,
+      size = TooltipSize.SMALL,
+      slot,
+      slotDirection = TooltipSlotDirection.LEFT,
+      delayDuration = 300,
+      offset = 4,
     },
     ref
   ) => {
-    const tooltipClassNames = getTooltipClassNames(size);
-    const { arrowClassName, side, align, showArrow } = getArrowStyles(arrow);
+    const tooltipClassName = getTooltipClassNames(size);
+    const arrowWidth = size === TooltipSize.SMALL ? 8 : 12;
+    const arrowHeight = size === TooltipSize.SMALL ? 4 : 6;
 
     return (
-      <RadixTooltip.Provider delayDuration={providerProps.delayDuration}>
-        <RadixTooltip.Root {...rootProps}>
-          <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
-          <RadixTooltip.Portal>
-            <RadixTooltip.Content
-              ref={ref}
-              sideOffset={5}
-              side={side as RadixTooltip.TooltipContentProps['side']}
-              align={align as RadixTooltip.TooltipContentProps['align']}
-              className={tooltipClassNames}
-              {...contentProps}
-            >
-              {Slot && slotDirection === 'left' && (
-                <Slot className={getSlotClassNames('left', size)} />
-              )}
-              {content}
-              {Slot && slotDirection === 'right' && (
-                <Slot className={getSlotClassNames('right', size)} />
-              )}
-              {showArrow && <RadixTooltip.Arrow className={arrowClassName} />}
-            </RadixTooltip.Content>
-          </RadixTooltip.Portal>
-        </RadixTooltip.Root>
-      </RadixTooltip.Provider>
+      <TooltipPrimitive.Provider delayDuration={delayDuration}>
+        <TooltipPrimitive.Root open={open}>
+          <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+          <TooltipPrimitive.Content
+            ref={ref}
+            side={side}
+            align={align}
+            className={tooltipClassName}
+            sideOffset={offset}
+            arrowPadding={side === TooltipSide.LEFT || side === TooltipSide.RIGHT ? 8 : 6}
+          >
+            {slot && slotDirection === TooltipSlotDirection.LEFT && (
+              <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
+            )}
+            {content}
+            {slot && slotDirection === TooltipSlotDirection.RIGHT && (
+              <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
+            )}
+            {showArrow && (
+              <TooltipPrimitive.Arrow
+                width={arrowWidth}
+                height={arrowHeight}
+                className={getArrowClassNames()}
+              />
+            )}
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Root>
+      </TooltipPrimitive.Provider>
     );
   }
 );

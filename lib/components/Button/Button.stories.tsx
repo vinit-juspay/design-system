@@ -268,7 +268,8 @@ export const WithOnClick: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'This button demonstrates the use of the onClick handler. In Storybook, the action will be logged in the Actions panel.',
+        story:
+          'This button demonstrates the use of the onClick handler. In Storybook, the action will be logged in the Actions panel.',
       },
     },
   },

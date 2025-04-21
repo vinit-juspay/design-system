@@ -16,18 +16,10 @@ import {
   Home,
   Menu,
 } from 'lucide-react';
-import {
-  Button,
-  Tag,
-  SplitTag,
-  Tooltip,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '../lib/main';
+import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
+import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs'>(
@@ -297,228 +289,6 @@ const App = () => {
     </>
   );
 
-  const renderTooltips = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
-
-      {/* Basic tooltips */}
-      <div className="flex gap-8 items-center justify-center">
-        <Tooltip content="Small tooltip" size="sm">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Large tooltip with more text" size="lg">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Different arrow positions */}
-      <div className="grid grid-cols-3 gap-8 p-12">
-        <Tooltip content="Default (top center)" arrow="default">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Top left" arrow="topLeft">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Top right" arrow="topRight">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Left" arrow="left">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="No arrow" arrow="none">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Right" arrow="right">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom left" arrow="bottomLeft">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom center" arrow="bottomCenter">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom right" arrow="bottomRight">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltips with icons */}
-      <div className="flex gap-6 items-center">
-        <Tooltip content="Information tooltip" slot={Info} slotDirection="left">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Warning message" slot={AlertCircle} slotDirection="left">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Help is available" slot={HelpCircle} slotDirection="right">
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltip with custom provider props */}
-      <div className="flex gap-4 items-center">
-        <Tooltip content="Delayed tooltip (1000ms)" providerProps={{ delayDuration: 1000 }}>
-          <Button
-            buttonType={ButtonType.SECONDARY}
-            size={ButtonSize.MEDIUM}
-            subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
-        <Button
-          buttonType={ButtonType.SECONDARY}
-          size={ButtonSize.MEDIUM}
-          subType={ButtonSubType.ICON_ONLY}
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding small tooltip with info icon */}
-      <Tooltip
-        content="Small tooltip with icon"
-        size="sm"
-        rootProps={{ open: true }}
-        slot={Info}
-        slotDirection="left"
-      >
-        <Button
-          buttonType={ButtonType.SECONDARY}
-          size={ButtonSize.MEDIUM}
-          subType={ButtonSubType.ICON_ONLY}
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
-        <Button
-          buttonType={ButtonType.SECONDARY}
-          size={ButtonSize.MEDIUM}
-          subType={ButtonSubType.ICON_ONLY}
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding large tooltip with help icon */}
-      <Tooltip
-        content="Large tooltip with icon"
-        size="lg"
-        rootProps={{ open: true }}
-        slot={HelpCircle}
-        slotDirection="right"
-      >
-        <Button
-          buttonType={ButtonType.SECONDARY}
-          size={ButtonSize.MEDIUM}
-          subType={ButtonSubType.ICON_ONLY}
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-    </>
-  );
-
   const renderTags = () => (
     <>
       <h2 className="text-2xl font-semibold">Tag Examples</h2>
@@ -733,7 +503,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white shadow rounded-lg p-6">
           {activeComponent === 'buttons' && renderButtons()}
-          {activeComponent === 'tooltips' && renderTooltips()}
+          {activeComponent === 'tooltips' && <TooltipDemo />}
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
         </div>
