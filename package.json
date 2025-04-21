@@ -1,6 +1,6 @@
 {
   "name": "@vinitjuspay/design-system",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "type": "module",
   "main": "./dist/main.js",
   "module": "./dist/main.js",
@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --p ./tsconfig-build.json && vite build",
+    "build:vercel": "vite build --config vite.config.vercel.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "npx prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",

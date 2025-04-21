@@ -1,95 +1,55 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Tooltip from "./Tooltip";
-import Button from "../Button/Button";
-import { Info, HelpCircle, AlertCircle } from "lucide-react";
+import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
+import Tooltip from './Tooltip';
+import { TooltipAlign, TooltipSide, TooltipSize, TooltipSlotDirection } from './types';
+import { Button } from '../../main';
+import { ButtonType } from '../Button/types';
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components/Tooltip",
+  title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
-  args: {
-    content: "Tooltip content",
-    slot: undefined, // No slot icon by default
-  },
+  tags: ['autodocs'],
   argTypes: {
-    size: {
-      control: "select",
-      options: ["sm", "lg"],
-      description: "The size of the tooltip",
-      table: {
-        defaultValue: { summary: "sm" },
-      },
+    content: {
+      control: 'text',
+      description: 'Content to display inside the tooltip',
     },
-    arrow: {
-      control: "select",
-      options: [
-        "default",
-        "right",
-        "left",
-        "bottomCenter",
-        "bottomLeft",
-        "bottomRight",
-        "topCenter",
-        "topLeft",
-        "topRight",
-        "none",
-      ],
-      description: "The position of the tooltip arrow",
-      table: {
-        defaultValue: { summary: "default" },
-      },
+    side: {
+      control: 'select',
+      options: Object.values(TooltipSide),
+      description: 'Position of the tooltip relative to the trigger',
+    },
+    align: {
+      control: 'select',
+      options: Object.values(TooltipAlign),
+      description: 'Alignment of the tooltip',
+    },
+    size: {
+      control: 'select',
+      options: Object.values(TooltipSize),
+      description: 'Size of the tooltip',
+    },
+    showArrow: {
+      control: 'boolean',
+      description: 'Whether to show the arrow pointer',
     },
     slotDirection: {
-      control: "select",
-      options: ["left", "right"],
-      description: "The direction of the slot icon",
-      table: {
-        defaultValue: { summary: "left" },
-      },
+      control: 'select',
+      options: Object.values(TooltipSlotDirection),
+      description: 'Direction of the slot content',
     },
-    slot: {
-      control: "boolean",
-      description: "Whether to show the slot icon",
-      table: {
-        defaultValue: { summary: "undefined" },
-        category: "Appearance",
-      },
-      mapping: {
-        true: Info,
-        false: undefined,
-      },
+    delayDuration: {
+      control: 'number',
+      description: 'Delay before showing the tooltip (in ms)',
     },
-    children: {
-      table: {
-        disable: true
-      }
-    },
-    providerProps: {
-      table: {
-        disable: true
-      }
-    },
-    rootProps: {
-      table: {
-        disable: true
-      }
-    },
-    contentProps: {
-      table: {
-        disable: true
-      }
+    offset: {
+      control: 'number',
+      description: 'Offset from the trigger element (in px)',
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="p-12">
-        <Story />
-      </div>
-    )
-  ]
 };
 
 export default meta;
@@ -97,110 +57,126 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Default: Story = {
   args: {
-    content: "Tooltip content",
-    children: <Button size="sm">Hover me</Button>,
+    content: 'This is a tooltip',
+    children: <Button>Hover me</Button>,
   },
 };
 
-export const WithSizes: Story = {
+export const Sizes: Story = {
   render: () => (
     <div className="flex gap-4">
-      <Tooltip content="Small tooltip" size="sm">
+      <Tooltip content="Small tooltip" size={TooltipSize.SMALL}>
         <Button>Small</Button>
       </Tooltip>
-      <Tooltip content="Large tooltip with more text for demonstration" size="lg">
+      <Tooltip
+        content="Large tooltip with more content that wraps to multiple lines"
+        size={TooltipSize.LARGE}
+      >
         <Button>Large</Button>
       </Tooltip>
     </div>
   ),
 };
 
-export const WithArrowPositions: Story = {
+export const Positions: Story = {
   render: () => (
-    <div className="grid grid-cols-3 gap-4">
-      <Tooltip content="Top Left" arrow="topLeft">
-        <Button>Top Left</Button>
+    <div className="grid grid-cols-2 gap-8 p-10">
+      <Tooltip content="Top tooltip" side={TooltipSide.TOP}>
+        <Button>Top</Button>
       </Tooltip>
-      <Tooltip content="Top Center" arrow="topCenter">
-        <Button>Top Center</Button>
-      </Tooltip>
-      <Tooltip content="Top Right" arrow="topRight">
-        <Button>Top Right</Button>
-      </Tooltip>
-      
-      <Tooltip content="Left" arrow="left">
-        <Button>Left</Button>
-      </Tooltip>
-      <Tooltip content="No Arrow" arrow="none">
-        <Button>No Arrow</Button>
-      </Tooltip>
-      <Tooltip content="Right" arrow="right">
+      <Tooltip content="Right tooltip" side={TooltipSide.RIGHT}>
         <Button>Right</Button>
       </Tooltip>
-      
-      <Tooltip content="Bottom Left" arrow="bottomLeft">
-        <Button>Bottom Left</Button>
+      <Tooltip content="Bottom tooltip" side={TooltipSide.BOTTOM}>
+        <Button>Bottom</Button>
       </Tooltip>
-      <Tooltip content="Bottom Center" arrow="bottomCenter">
-        <Button>Bottom Center</Button>
-      </Tooltip>
-      <Tooltip content="Bottom Right" arrow="bottomRight">
-        <Button>Bottom Right</Button>
+      <Tooltip content="Left tooltip" side={TooltipSide.LEFT}>
+        <Button>Left</Button>
       </Tooltip>
     </div>
   ),
+};
+
+export const Alignment: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Tooltip content="Start aligned" side={TooltipSide.TOP} align={TooltipAlign.START}>
+          <Button>Start</Button>
+        </Tooltip>
+        <Tooltip content="Center aligned" side={TooltipSide.TOP} align={TooltipAlign.CENTER}>
+          <Button>Center</Button>
+        </Tooltip>
+        <Tooltip content="End aligned" side={TooltipSide.TOP} align={TooltipAlign.END}>
+          <Button>End</Button>
+        </Tooltip>
+      </div>
+    </div>
+  ),
+};
+
+export const WithoutArrow: Story = {
+  args: {
+    content: 'Tooltip without arrow',
+    children: <Button>No Arrow</Button>,
+    showArrow: false,
+  },
 };
 
 export const WithSlot: Story = {
-  args: {
-    content: "Information tooltip",
-    slot: Info,
-    children: <Button>With Icon</Button>,
-  },
-};
-
-export const WithSlotDirections: Story = {
   render: () => (
     <div className="flex gap-4">
-      <Tooltip 
-        content="Left slot tooltip" 
-        slot={HelpCircle} 
-        slotDirection="left"
+      <Tooltip
+        content="Tooltip with left slot"
+        slot={<span className="text-blue-500">ℹ️</span>}
+        slotDirection={TooltipSlotDirection.LEFT}
       >
-        <Button>Left Icon</Button>
+        <Button>Left Slot</Button>
       </Tooltip>
-      <Tooltip 
-        content="Right slot tooltip" 
-        slot={AlertCircle} 
-        slotDirection="right"
+      <Tooltip
+        content="Tooltip with right slot"
+        slot={<span className="text-blue-500">ℹ️</span>}
+        slotDirection={TooltipSlotDirection.RIGHT}
       >
-        <Button>Right Icon</Button>
+        <Button>Right Slot</Button>
       </Tooltip>
     </div>
   ),
 };
 
-export const WithCustomTrigger: Story = {
-  render: () => (
-    <Tooltip content="Tooltip on text">
-      <span className="cursor-help underline">Hover over this text</span>
-    </Tooltip>
-  ),
+export const CustomDelay: Story = {
+  args: {
+    content: 'Tooltip with 1000ms delay',
+    children: <Button>Long Delay</Button>,
+    delayDuration: 1000,
+  },
 };
 
-export const WithRichContent: Story = {
+export const CustomOffset: Story = {
   args: {
-    content: (
-      <div>
-        <h3 className="font-bold mb-1">Rich Content</h3>
-        <p>Tooltips can contain rich HTML content</p>
-        <ul className="list-disc pl-4 mt-1">
-          <li>Including lists</li>
-          <li>And other elements</li>
-        </ul>
-      </div>
-    ),
-    size: "lg",
-    children: <Button>Rich Content</Button>,
+    content: 'Tooltip with 20px offset',
+    children: <Button>Large Offset</Button>,
+    offset: 20,
   },
-}; 
+};
+
+const ControlledTooltipDemo = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div className="flex flex-col gap-4 items-center">
+      <Button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? 'Close Tooltip' : 'Open Tooltip'}
+      </Button>
+      <div className="mt-4">
+        <Tooltip content="Controlled tooltip" open={isOpen}>
+          <Button buttonType={ButtonType.SECONDARY}>Hover me (controlled)</Button>
+        </Tooltip>
+      </div>
+    </div>
+  );
+};
+
+export const ControlledTooltip: Story = {
+  render: () => <ControlledTooltipDemo />,
+};

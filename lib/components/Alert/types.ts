@@ -36,4 +36,4 @@ export interface AlertProps {
   onClose?: () => void;
   icon?: ReactNode;
   actionPlacement?: AlertActionPlacement;
-} 
+}

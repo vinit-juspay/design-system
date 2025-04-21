@@ -10,19 +10,10 @@ export const getButtonClassNames = (
   const theme = themeConfig.euler.button;
   const buttonType = theme.buttonType[type];
   const buttonSize = theme.sizes[size];
-
-  const baseClasses = `
-    inline-flex items-center justify-center
-    transition-all duration-200
-    disabled:pointer-events-none
-    hover:underline
-    ${theme.fontWeight}
-    ${theme.fontFamily}
-  `;
-
+  const baseClasses = theme.base.container;
   const focusClasses = buttonType.focusClasses || '';
 
-  if (subType === 'link') {
+  if (subType === ButtonSubType.LINK) {
     return cn(
       baseClasses,
       focusClasses,
@@ -34,7 +25,7 @@ export const getButtonClassNames = (
     );
   }
 
-  if (subType === 'iconOnly') {
+  if (subType === ButtonSubType.ICON_ONLY) {
     return cn(
       baseClasses,
       focusClasses,
@@ -71,12 +62,12 @@ export const getIconClassNames = (size: ButtonSize, isLoading: boolean): string 
   const theme = themeConfig.euler.button;
   const buttonSize = theme.sizes[size];
 
-  return cn(buttonSize.iconSize, isLoading && 'animate-spin');
+  return cn(buttonSize.iconSize, isLoading && theme.base.loading);
 };
 
 export const getTextClassNames = (size: ButtonSize): string => {
   const theme = themeConfig.euler.button;
   const buttonSize = theme.sizes[size];
 
-  return cn(buttonSize.fontSize);
+  return cn(buttonSize.fontSize, theme.base.text);
 };

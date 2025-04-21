@@ -23,19 +23,21 @@ const getThemeKey = (variant: AlertVariant): keyof typeof themeConfig.euler.aler
 };
 
 export const getButtonTypeFromAlert = (variant: AlertVariant): ButtonType => {
-	switch (variant) {
-		case AlertVariant.PRIMARY:
-			return 'primary';
-		case AlertVariant.SUCCESS:
-			return 'success';
-		case AlertVariant.ERROR:
-			return 'danger';
-		default:
-			return 'secondary';
-	}
+  switch (variant) {
+    case AlertVariant.PRIMARY:
+      return 'primary';
+    case AlertVariant.SUCCESS:
+      return 'success';
+    case AlertVariant.ERROR:
+      return 'danger';
+    default:
+      return 'secondary';
+  }
 };
 
-const getActionPlacementKey = (placement: AlertActionPlacement): keyof typeof themeConfig.euler.alert.alertActionPlacement => {
+const getActionPlacementKey = (
+  placement: AlertActionPlacement
+): keyof typeof themeConfig.euler.alert.alertActionPlacement => {
   switch (placement) {
     case AlertActionPlacement.BOTTOM:
       return 'default';
@@ -51,8 +53,8 @@ export const getAlertContainerStyles = (variant: AlertVariant, style: AlertStyle
 
   return cn(
     baseStyles,
-     variantStyles.background,
-     style !== AlertStyle.FILL &&variantStyles.border,
+    variantStyles.background,
+    style !== AlertStyle.FILL && variantStyles.border
   );
 };
 
@@ -90,12 +92,9 @@ export const getActionButtonStyles = (variant: AlertVariant) => {
   return cn(
     themeConfig.euler.alert.actionButton.base,
     themeConfig.euler.alert.actionButton.colors[variant]
-  )
-
+  );
 };
 
 export const getCloseButtonClassNames = () => {
-  return cn(
-    themeConfig.euler.alert.base.closeButton,
-  )
-}; 
+  return cn(themeConfig.euler.alert.base.closeButton);
+};
