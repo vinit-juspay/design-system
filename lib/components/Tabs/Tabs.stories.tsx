@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./index";
-import { User, Settings, Lock } from "lucide-react";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from './index';
+import { User, Settings, Lock } from 'lucide-react';
 
 interface TabsStoryControls {
   expanded?: boolean;
@@ -9,45 +9,45 @@ interface TabsStoryControls {
 }
 
 const meta = {
-  title: "Components/Tabs",
+  title: 'Components/Tabs',
   component: Tabs,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
-      control: "select",
-      options: ["boxed", "floating", "underline"],
-      description: "The visual style of the tabs",
+      control: 'select',
+      options: ['boxed', 'floating', 'underline'],
+      description: 'The visual style of the tabs',
       table: {
-        defaultValue: { summary: "underline" },
+        defaultValue: { summary: 'underline' },
       },
     },
     size: {
-      control: "select",
-      options: ["md", "lg"],
-      description: "The size of the tabs",
+      control: 'select',
+      options: ['md', 'lg'],
+      description: 'The size of the tabs',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     expanded: {
-      control: "boolean",
-      description: "Whether tabs should expand to fill the container width",
+      control: 'boolean',
+      description: 'Whether tabs should expand to fill the container width',
       table: {
         defaultValue: { summary: false },
       },
     },
     showLeftSlot: {
-      control: "boolean",
-      description: "Show left slot icon",
-      table: { category: "Icons" },
+      control: 'boolean',
+      description: 'Show left slot icon',
+      table: { category: 'Icons' },
     },
     showRightSlot: {
-      control: "boolean",
-      description: "Show right slot icon",
-      table: { category: "Icons" },
+      control: 'boolean',
+      description: 'Show right slot icon',
+      table: { category: 'Icons' },
     },
     leftSlot: { control: false, table: { disable: true } },
     rightSlot: { control: false, table: { disable: true } },
@@ -58,30 +58,31 @@ export default meta;
 type Story = StoryObj<typeof Tabs & TabsStoryControls>;
 
 export const Default: Story = {
-  render: (args) => {
-    const { expanded, showLeftSlot, showRightSlot, ...tabsProps } = args as TabsStoryControls & typeof args;
-    
+  render: args => {
+    const { expanded, showLeftSlot, showRightSlot, ...tabsProps } = args as TabsStoryControls &
+      typeof args;
+
     return (
       <Tabs defaultValue="tab1" className="w-[400px]" {...tabsProps}>
         <TabsList variant={args.variant} size={args.size} expanded={expanded}>
-          <TabsTrigger 
-            value="tab1" 
+          <TabsTrigger
+            value="tab1"
             variant={args.variant}
             leftSlot={showLeftSlot ? <User size={16} /> : undefined}
             rightSlot={showRightSlot ? <Settings size={16} /> : undefined}
           >
             Account
           </TabsTrigger>
-          <TabsTrigger 
-            value="tab2" 
+          <TabsTrigger
+            value="tab2"
             variant={args.variant}
             leftSlot={showLeftSlot ? <Lock size={16} /> : undefined}
             rightSlot={showRightSlot ? <Settings size={16} /> : undefined}
           >
             Password
           </TabsTrigger>
-          <TabsTrigger 
-            value="tab3" 
+          <TabsTrigger
+            value="tab3"
             variant={args.variant}
             leftSlot={showLeftSlot ? <Settings size={16} /> : undefined}
             rightSlot={showRightSlot ? <Settings size={16} /> : undefined}
@@ -111,8 +112,8 @@ export const Default: Story = {
     );
   },
   args: {
-    variant: "underline",
-    size: "md",
+    variant: 'underline',
+    size: 'md',
     expanded: false,
     showLeftSlot: true,
     showRightSlot: true,
@@ -124,7 +125,7 @@ export const Expanded: Story = {
   args: {
     ...Default.args,
     expanded: true,
-    variant: "boxed",
+    variant: 'boxed',
   } as any,
 };
 
@@ -132,7 +133,7 @@ export const Boxed: Story = {
   ...Default,
   args: {
     ...Default.args,
-    variant: "boxed",
+    variant: 'boxed',
   },
 };
 
@@ -140,7 +141,7 @@ export const Floating: Story = {
   ...Default,
   args: {
     ...Default.args,
-    variant: "floating",
+    variant: 'floating',
   },
 };
 
@@ -148,7 +149,7 @@ export const Large: Story = {
   ...Default,
   args: {
     ...Default.args,
-    variant: "underline",
-    size: "lg",
+    variant: 'underline',
+    size: 'lg',
   },
-}; 
+};

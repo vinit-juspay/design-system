@@ -4,7 +4,7 @@ import { themeConfig } from '../../themeConfig';
 export const getTabsStyles = (variant: TabsVariant): TabsStyles => {
   return {
     list: themeConfig.euler.tabs.variant[variant].list,
-    trigger: themeConfig.euler.tabs.variant[variant].trigger
+    trigger: themeConfig.euler.tabs.variant[variant].trigger,
   };
 };
 
@@ -17,9 +17,9 @@ export const getBaseStyles = (): string => {
 };
 
 export const getExpandedStyles = (expanded: boolean): string => {
-  return expanded ? themeConfig.euler.tabs.expanded : "";
+  return expanded ? themeConfig.euler.tabs.expanded : '';
 };
 
 export const getUnderlineOffset = (size: TabsSize): string => {
-  return themeConfig.euler.tabs.sizes[size].underlineOffset || "";
-}; 
+  return themeConfig.euler.tabs.sizes[size].underlineOffset || '';
+};

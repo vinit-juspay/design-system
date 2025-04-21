@@ -3,6 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import Tooltip from './Tooltip';
 import { TooltipAlign, TooltipSide, TooltipSize, TooltipSlotDirection } from './types';
 import { Button } from '../../main';
+import { ButtonType } from '../Button/types';
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
@@ -67,7 +68,10 @@ export const Sizes: Story = {
       <Tooltip content="Small tooltip" size={TooltipSize.SMALL}>
         <Button>Small</Button>
       </Tooltip>
-      <Tooltip content="Large tooltip with more content that wraps to multiple lines" size={TooltipSize.LARGE}>
+      <Tooltip
+        content="Large tooltip with more content that wraps to multiple lines"
+        size={TooltipSize.LARGE}
+      >
         <Button>Large</Button>
       </Tooltip>
     </div>
@@ -122,15 +126,15 @@ export const WithoutArrow: Story = {
 export const WithSlot: Story = {
   render: () => (
     <div className="flex gap-4">
-      <Tooltip 
-        content="Tooltip with left slot" 
+      <Tooltip
+        content="Tooltip with left slot"
         slot={<span className="text-blue-500">ℹ️</span>}
         slotDirection={TooltipSlotDirection.LEFT}
       >
         <Button>Left Slot</Button>
       </Tooltip>
-      <Tooltip 
-        content="Tooltip with right slot" 
+      <Tooltip
+        content="Tooltip with right slot"
         slot={<span className="text-blue-500">ℹ️</span>}
         slotDirection={TooltipSlotDirection.RIGHT}
       >
@@ -156,22 +160,23 @@ export const CustomOffset: Story = {
   },
 };
 
-export const ControlledTooltip: Story = {
-  render: () => {
-    // Using React.useState in a render function for demonstration
-    const [isOpen, setIsOpen] = React.useState(false);
-    
-    return (
-      <div className="flex flex-col gap-4 items-center">
-        <Button onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? 'Close Tooltip' : 'Open Tooltip'}
-        </Button>
-        <div className="mt-4">
-          <Tooltip content="Controlled tooltip" open={isOpen}>
-            <Button buttonType="secondary">Hover me (controlled)</Button>
-          </Tooltip>
-        </div>
+const ControlledTooltipDemo = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div className="flex flex-col gap-4 items-center">
+      <Button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? 'Close Tooltip' : 'Open Tooltip'}
+      </Button>
+      <div className="mt-4">
+        <Tooltip content="Controlled tooltip" open={isOpen}>
+          <Button buttonType={ButtonType.SECONDARY}>Hover me (controlled)</Button>
+        </Tooltip>
       </div>
-    );
-  },
+    </div>
+  );
+};
+
+export const ControlledTooltip: Story = {
+  render: () => <ControlledTooltipDemo />,
 };
