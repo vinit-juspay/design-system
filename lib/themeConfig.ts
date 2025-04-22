@@ -450,5 +450,31 @@ export const themeConfig = {
         default: 'border-[2px]',
       },
     },
+    breadcrumb: {
+      base: {
+        container: 'flex items-center flex-wrap',
+        divider: 'mx-2 text-gray-400',
+      },
+      item: {
+        default: 'inline-flex items-center text-gray-400 font-medium cursor-pointer',
+        hover: 'hover:text-gray-1000',
+        active: 'text-gray-700 font-semibold cursor-default',
+      },
+      sizes: {
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg',
+      },
+      moreButton: {
+        base: 'inline-flex items-center justify-center text-gray-400 font-medium p-2 gap-1.5 rounded-lg w-8 h-8 transition-all duration-200',
+        default: 'border border-transparent',
+        hover: 'hover:text-gray-1000 hover:border-gray-150',
+        active: 'border border-gray-150 bg-gray-50 text-gray-1000',
+      },
+      dropdown: {
+        container: 'absolute top-full left-0 mt-1 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48',
+        item: 'px-4 py-2 hover:bg-gray-50',
+      }
+    }
   },
 };

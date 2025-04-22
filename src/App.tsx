@@ -16,17 +16,19 @@ import {
   Home,
   Bell,
   Menu,
+  ChevronRight,
 } from 'lucide-react';
-import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
+import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, Breadcrumb } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
+import { BreadcrumbVariant } from '../lib/components/breadcrumb/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'
-  >('alerts');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'breadcrumbs'
+  >('breadcrumbs');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -91,6 +93,17 @@ const App = () => {
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
+              </button>
+              <button
+                onClick={() => setActiveComponent('breadcrumbs')}
+                className={`${
+                  activeComponent === 'breadcrumbs'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <ChevronRight className="mr-2 h-5 w-5" />
+                Breadcrumbs
               </button>
             </div>
           </div>
@@ -159,6 +172,17 @@ const App = () => {
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
+          </button>
+          <button
+            onClick={() => setActiveComponent('breadcrumbs')}
+            className={`${
+              activeComponent === 'breadcrumbs'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <ChevronRight className="mr-3 h-5 w-5" />
+            Breadcrumbs
           </button>
         </div>
       </div>
@@ -523,6 +547,79 @@ const App = () => {
 
   const renderAlerts = () => <AlertDemo />;
 
+  const renderBreadcrumbs = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Breadcrumb Examples</h2>
+
+      {/* Single Breadcrumb */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Single Breadcrumb</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb items={[{ label: 'Home', isCurrentPage: true }]} />
+        </div>
+      </div>
+
+      {/* Two-Level Breadcrumb */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Two-Level Breadcrumb</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '#' },
+              { label: 'Products', isCurrentPage: true },
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* Three-Level Breadcrumb */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Three-Level Breadcrumb</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '#' },
+              { label: 'Products', href: '#' },
+              { label: 'Categories', isCurrentPage: true },
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* Four-Level Breadcrumb */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Four-Level Breadcrumb</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '#' },
+              { label: 'Products', href: '#' },
+              { label: 'Categories', href: '#' },
+              { label: 'Electronics', isCurrentPage: true },
+            ]}
+          />
+        </div>
+      </div>
+
+      {/* Multiple Breadcrumb with Truncation */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Multiple Breadcrumb with Truncation</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb
+            variant={BreadcrumbVariant.TRUNCATED}
+            items={[
+              { label: 'Home', href: '#' },
+              { label: 'Products', href: '#' },
+              { label: 'Categories', href: '#' },
+              { label: 'Electronics', href: '#' },
+              { label: 'Computers', isCurrentPage: true },
+            ]}
+          />
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -533,6 +630,7 @@ const App = () => {
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
           {activeComponent === 'alerts' && renderAlerts()}
+          {activeComponent === 'breadcrumbs' && renderBreadcrumbs()}
         </div>
       </div>
     </div>
