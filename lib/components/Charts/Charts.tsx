@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import {
     LineChart,
     Line,
@@ -16,6 +16,7 @@ import {
 } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import Dropdown from '../Dropdown/Dropdown';
+import { RotateCcw } from 'lucide-react';
 
 export enum ChartType {
     LINE = 'line',
@@ -23,16 +24,15 @@ export enum ChartType {
     PIE = 'pie'
 }
 
-// Define interfaces for the nested data structure
 export interface NestedDataPoint {
     name: string;
-    [key: string]: any; // Allow any nested structure
+    [key: string]: any;
 }
 
 export interface ChartProps {
     type: ChartType;
     data: NestedDataPoint[];
-    dataKeys?: string[]; // Optional - will extract from data if not provided
+    dataKeys?: string[];
     width?: string | number;
     height?: string | number;
     colors?: string[];
@@ -44,30 +44,60 @@ export interface ChartProps {
     slot3?: ReactNode;
 }
 
-// Helper function to transform the nested data for charts
+// Format number to use K for thousands and M for millions
+const formatNumber = (value: number | string): string => {
+    if (typeof value === 'string') {
+        const parsedValue = parseFloat(value);
+        if (isNaN(parsedValue)) return value;
+        value = parsedValue;
+    }
+    
+    if (value >= 1000000) {
+        return (value / 1000000).toFixed(1) + 'M';
+    } else if (value >= 1000) {
+        return (value / 1000).toFixed(1) + 'K';
+    }
+    return value.toString();
+};
+
+// Transform camelCase to Capitalized Text
+const formatLegendText = (text: string): string => {
+    // Handle empty or null cases
+    if (!text) return '';
+
+    // Split by capital letters but keep acronyms together
+    const words = text.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);
+    
+    // Capitalize first letter of each word and handle special cases
+    return words.map((word, index) => {
+        // If it's an acronym (all uppercase), keep it as is
+        if (word.toUpperCase() === word && word.length > 1) {
+            return word;
+        }
+        // For normal words, capitalize first letter
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+};
+
 const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
     return data.map(point => {
         const transformed: any = { name: point.name };
-        
+
         keys.forEach(key => {
             const nestedData = point[key];
             if (nestedData && nestedData.primary && nestedData.primary.val !== undefined) {
                 transformed[key] = nestedData.primary.val;
             }
         });
-        
+
         return transformed;
     });
 };
 
-/**
- * Chart component that renders either a Line, Bar or Pie chart based on the type prop
- * with support for nested data structure
- */
 export const Chart: React.FC<ChartProps> = ({
     type,
     data,
-    dataKeys,
+    // dataKeys,
     width = '100%',
     height = 400,
     colors = ['#2B7FFF', '#00D492', '#C27AFF', '#FB2C36', '#0088FE'],
@@ -78,12 +108,11 @@ export const Chart: React.FC<ChartProps> = ({
     slot2,
     slot3
 }) => {
-    // If dataKeys not provided, extract them from the first data point
-    const keys = dataKeys || 
-        (data && data.length > 0 
-            ? Object.keys(data[0]).filter(key => 
-                key !== 'name' && 
-                typeof data[0][key] === 'object' && 
+    const keys =
+        (data && data.length > 0
+            ? Object.keys(data[0]).filter(key =>
+                key !== 'name' &&
+                typeof data[0][key] === 'object' &&
                 data[0][key] !== null &&
                 data[0][key].primary !== undefined)
             : []);
@@ -92,31 +121,31 @@ export const Chart: React.FC<ChartProps> = ({
     const [selectedMetric, setSelectedMetric] = useState<string>(metrics.length > 0 ? metrics[0] : '');
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
-    // Transform the nested data for the charts
     const transformedData = transformData(data, keys);
 
-    // Define CustomTooltip to handle the nested structure
+
+    useEffect(() => {
+        console.log(selectedKeys)
+    }, [selectedKeys])
+
     const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
         if (!active || !payload || payload.length === 0) {
             return null;
         }
-    
-        // Get the key name from the first payload item
+
         const keyName = payload[0].dataKey as string;
-        
-        // Find the original data point for the current label (month)
-        const dataPoint = data.find(point => point.name === label);
+
+        const dataPoint = data.find(point => point.name === label)
         if (!dataPoint) return null;
-        
-        // Get the nested data from the data point
+
         const nestedData = dataPoint[keyName];
         if (!nestedData || !nestedData.primary) return null;
-        
+
         return (
             <div className="bg-gray-0 shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 w-[260px]">
                 <div className='pl-2 relative'>
-                    <div 
-                        className='absolute top-0.5 left-0 w-1 h-4 rounded-full' 
+                    <div
+                        className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
                         style={{ backgroundColor: payload[0].color }}
                     ></div>
                     <div className='flex flex-col'>
@@ -128,7 +157,11 @@ export const Chart: React.FC<ChartProps> = ({
                 {/* Primary Value */}
                 <div className='pl-2 flex flex-col'>
                     <label className='text-body-sm font-500 text-gray-400'>{nestedData.primary.name}</label>
-                    <h3 className='text-sm font-600 text-gray-900'>{nestedData.primary.val}</h3>
+                    <h3 className='text-sm font-600 text-gray-900'>
+                        {typeof nestedData.primary.val === 'number' 
+                            ? formatNumber(nestedData.primary.val) 
+                            : nestedData.primary.val}
+                    </h3>
                 </div>
 
                 {/* Auxiliary Values */}
@@ -137,7 +170,9 @@ export const Chart: React.FC<ChartProps> = ({
                         {nestedData.aux.map((auxItem: any, index: number) => (
                             <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
                                 <span className="text-body-xs text-gray-400 truncate">{auxItem.name}</span>
-                                <span className="text-body-sm font-600 text-gray-700">{auxItem.val}</span>
+                                <span className="text-body-sm font-600 text-gray-700">
+                                    {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
+                                </span>
                             </div>
                         ))}
                     </div>
@@ -146,16 +181,13 @@ export const Chart: React.FC<ChartProps> = ({
         );
     };
 
-    // Determine which keys are active (selected)
     const activeKeys = selectedKeys.length > 0 ? selectedKeys : null;
 
     const handleLegendClick = (dataKey: string) => {
         setSelectedKeys(prevSelected => {
             if (prevSelected.includes(dataKey)) {
-                // If clicking an already selected item, remove it from selection
                 return prevSelected.filter(key => key !== dataKey);
             } else {
-                // Otherwise, add the clicked item to selection
                 return [...prevSelected, dataKey];
             }
         });
@@ -174,14 +206,26 @@ export const Chart: React.FC<ChartProps> = ({
                         margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
                         onMouseLeave={() => setHoveredKey(null)}
                     >
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid vertical={false} stroke="#ECEFF3" />
                         <XAxis
                             dataKey="name"
+                            axisLine={false}
+                            tickLine={false}
+                            dy={10}
                             label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15 } : undefined}
                         />
                         <YAxis
                             width={50}
-                            label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'left', offset: 10 } : undefined}
+                            axisLine={false}
+                            tickLine={false}
+                            tickFormatter={(value) => formatNumber(value)}
+                            label={yAxisLabel ? {
+                                value: yAxisLabel,
+                                angle: -90,
+                                position: 'insideLeft',
+                                style: { textAnchor: 'middle' },
+                                offset: -15
+                            } : undefined}
                         />
                         <Tooltip content={CustomTooltip} />
                         {keys.map((dataKey, index) => (
@@ -191,9 +235,11 @@ export const Chart: React.FC<ChartProps> = ({
                                 dataKey={dataKey}
                                 stroke={colors[index % colors.length]}
                                 strokeWidth={1.5}
+                                dot={false}
+                                activeDot={{ r: 4 }}
                                 opacity={
-                                    hoveredKey ? (hoveredKey === dataKey ? 1 : 0.3) : 
-                                    (activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1)
+                                    hoveredKey ? (hoveredKey === dataKey ? 1 : 0.3) :
+                                        (activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1)
                                 }
                                 onMouseOver={() => setHoveredKey(dataKey)}
                             />
@@ -213,6 +259,7 @@ export const Chart: React.FC<ChartProps> = ({
                         />
                         <YAxis
                             width={50}
+                            tickFormatter={(value) => formatNumber(value)}
                             label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'left', offset: 10 } : undefined}
                         />
                         <Tooltip content={CustomTooltip} cursor={{ fill: 'transparent' }} />
@@ -241,19 +288,19 @@ export const Chart: React.FC<ChartProps> = ({
                         }
                     }
                 }
-                
+
                 return (
                     <PieChart margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                         <Tooltip content={({ active, payload }) => {
                             if (!active || !payload || payload.length === 0) return null;
-                            
+
                             const data = payload[0].payload;
-                            
+
                             return (
                                 <div className="bg-gray-0 shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 w-[260px]">
                                     <div className='pl-2 relative'>
-                                        <div 
-                                            className='absolute top-0.5 left-0 w-1 h-4 rounded-full' 
+                                        <div
+                                            className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
                                             style={{ backgroundColor: payload[0].color }}
                                         ></div>
                                         <div className='flex flex-col'>
@@ -265,7 +312,9 @@ export const Chart: React.FC<ChartProps> = ({
                                     {/* Primary Value */}
                                     <div className='pl-2 flex flex-col'>
                                         <label className='text-body-sm font-500 text-gray-400'>{data.originalData.primary.name}</label>
-                                        <h3 className='text-sm font-600 text-gray-900'>{data.value}</h3>
+                                        <h3 className='text-sm font-600 text-gray-900'>
+                                            {typeof data.value === 'number' ? formatNumber(data.value) : data.value}
+                                        </h3>
                                     </div>
 
                                     {/* Auxiliary Values */}
@@ -274,7 +323,9 @@ export const Chart: React.FC<ChartProps> = ({
                                             {data.originalData.aux.map((auxItem: any, index: number) => (
                                                 <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
                                                     <span className="text-body-xs text-gray-400 truncate">{auxItem.name}</span>
-                                                    <span className="text-body-sm font-600 text-gray-700">{auxItem.val}</span>
+                                                    <span className="text-body-sm font-600 text-gray-700">
+                                                        {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
+                                                    </span>
                                                 </div>
                                             ))}
                                         </div>
@@ -296,9 +347,9 @@ export const Chart: React.FC<ChartProps> = ({
                             {pieData.map((entry, index) => {
                                 const keyIndex = keys.indexOf(entry.dataKey);
                                 return (
-                                    <Cell 
-                                        key={`cell-${index}`} 
-                                        fill={colors[keyIndex % colors.length]} 
+                                    <Cell
+                                        key={`cell-${index}`}
+                                        fill={colors[keyIndex % colors.length]}
                                         opacity={activeKeys && !activeKeys.includes(entry.dataKey) ? 0.3 : 1}
                                     />
                                 );
@@ -332,57 +383,69 @@ export const Chart: React.FC<ChartProps> = ({
                 </div>
             </div>
             <div className='py-5 px-4 flex flex-col gap-6'>
-                <div className="flex flex-wrap items-center gap-8">
-                    {type === ChartType.PIE ? 
-                        keys.map((dataKey, index) => (
-                            <div
-                                key={dataKey}
-                                className="flex items-center gap-3 pl-1 cursor-pointer"
-                                onClick={() => handleLegendClick(dataKey)}
-                            >
-                                <div
-                                    className="w-3 h-3 rounded-xs"
-                                    style={{
-                                        backgroundColor: colors[index % colors.length],
-                                    }}
-                                />
-                                <span
-                                    className="text-[14px] font-medium"
-                                    style={{
-                                        color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
-                                        opacity: activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1
-                                    }}
-                                >
-                                    {dataKey}
-                                </span>
-                            </div>
-                        )) :
-                        keys.map((dataKey, index) => (
-                            <div
-                                key={dataKey}
-                                className="flex items-center gap-3 pl-1 cursor-pointer"
-                                onClick={() => handleLegendClick(dataKey)}
-                            >
-                                <div
-                                    className="w-3 h-3 rounded-xs"
-                                    style={{
-                                        backgroundColor: colors[index % colors.length],
-                                    }}
-                                />
-                                <span
-                                    className="text-[14px] font-medium"
-                                    style={{
-                                        color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
-                                    }}
-                                >
-                                    {dataKey}
-                                </span>
-                            </div>
-                        ))
-                    }
+                <div className="h-4 flex items-center gap-4 justify-between">
+                    <div className="h-4 flex items-center gap-4 overflow-hidden">
+                        <div className="flex items-center gap-4 overflow-hidden whitespace-nowrap">
+                            {type === ChartType.PIE ?
+                                keys.map((dataKey, index) => (
+                                    <div
+                                        key={dataKey}
+                                        className="flex items-center gap-3 pl-1 cursor-pointer shrink-0"
+                                        onClick={() => handleLegendClick(dataKey)}
+                                    >
+                                        <div
+                                            className="w-3 h-3 rounded-sm"
+                                            style={{
+                                                backgroundColor: colors[index % colors.length],
+                                            }}
+                                        />
+                                        <span
+                                            className="text-[14px] font-medium"
+                                            style={{
+                                                color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
+                                                opacity: activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1
+                                            }}
+                                        >
+                                            {formatLegendText(dataKey)}
+                                        </span>
+                                    </div>
+                                )) :
+                                keys.map((dataKey, index) => (
+                                    <div
+                                        key={dataKey}
+                                        className="h-4 flex items-center gap-3 cursor-pointer shrink-0"
+                                        onClick={() => handleLegendClick(dataKey)}
+                                    >
+                                        <div
+                                            className="w-3 h-3 rounded-sm"
+                                            style={{
+                                                backgroundColor: colors[index % colors.length],
+                                            }}
+                                        />
+                                        <span
+                                            className="text-[14px] font-medium"
+                                            style={{
+                                                color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
+                                            }}
+                                        >
+                                            {formatLegendText(dataKey)}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    {activeKeys && activeKeys.length < keys.length && (
+                        <button
+                            className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
+                            onClick={() => {setSelectedKeys([]); console.log(activeKeys)}}
+                        >
+                            <RotateCcw className='w-3 h-3' />
+                        </button>
+                    )}
                 </div>
                 <div>
-                    <ResponsiveContainer width={width} height={height} >
+                    <ResponsiveContainer width={width} height={height}>
                         {renderChart()}
                     </ResponsiveContainer>
                 </div>

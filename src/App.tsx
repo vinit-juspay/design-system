@@ -16,17 +16,19 @@ import {
   Home,
   Bell,
   Menu,
+  BarChart2,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
+import ChartDemo from './Demos/ChartDemo/ChartDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'
-  >('alerts');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts'
+  >('charts');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -91,6 +93,17 @@ const App = () => {
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
+              </button>
+              <button
+                onClick={() => setActiveComponent('charts')}
+                className={`${
+                  activeComponent === 'charts'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <BarChart2 className="mr-2 h-5 w-5" />
+                Charts
               </button>
             </div>
           </div>
@@ -159,6 +172,17 @@ const App = () => {
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
+          </button>
+          <button
+            onClick={() => setActiveComponent('charts')}
+            className={`${
+              activeComponent === 'charts'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <BarChart2 className="mr-3 h-5 w-5" />
+            Charts
           </button>
         </div>
       </div>
@@ -533,6 +557,7 @@ const App = () => {
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
           {activeComponent === 'alerts' && renderAlerts()}
+          {activeComponent === 'charts' && <ChartDemo />}
         </div>
       </div>
     </div>
