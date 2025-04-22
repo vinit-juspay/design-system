@@ -211,20 +211,25 @@ export const Chart: React.FC<ChartProps> = ({
                             dataKey="name"
                             axisLine={false}
                             tickLine={false}
+                            tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
                             dy={10}
-                            label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15 } : undefined}
+                            label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15, fill: '#99A0AE', fontSize: 14, fontWeight: 500 } : undefined}
                         />
                         <YAxis
                             width={50}
                             axisLine={false}
                             tickLine={false}
                             tickFormatter={(value) => formatNumber(value)}
+                            tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
                             label={yAxisLabel ? {
                                 value: yAxisLabel,
                                 angle: -90,
                                 position: 'insideLeft',
                                 style: { textAnchor: 'middle' },
-                                offset: -15
+                                offset: -15,
+                                fill: '#99A0AE',
+                                fontSize: 14,
+                                fontWeight: 500
                             } : undefined}
                         />
                         <Tooltip content={CustomTooltip} />
@@ -234,9 +239,9 @@ export const Chart: React.FC<ChartProps> = ({
                                 type="linear"
                                 dataKey={dataKey}
                                 stroke={colors[index % colors.length]}
-                                strokeWidth={1.5}
+                                strokeWidth={2}
                                 dot={false}
-                                activeDot={{ r: 4 }}
+                                activeDot={{ r: hoveredKey === dataKey ? 4 : 0 }}
                                 opacity={
                                     hoveredKey ? (hoveredKey === dataKey ? 1 : 0.3) :
                                         (activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1)
@@ -255,12 +260,14 @@ export const Chart: React.FC<ChartProps> = ({
                         <CartesianGrid vertical={false} />
                         <XAxis
                             dataKey="name"
-                            label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15 } : undefined}
+                            tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+                            label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15, fill: '#99A0AE', fontSize: 14, fontWeight: 500 } : undefined}
                         />
                         <YAxis
                             width={50}
                             tickFormatter={(value) => formatNumber(value)}
-                            label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'left', offset: 10 } : undefined}
+                            tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+                            label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'left', offset: 10, fill: '#99A0AE', fontSize: 14, fontWeight: 500 } : undefined}
                         />
                         <Tooltip content={CustomTooltip} cursor={{ fill: 'transparent' }} />
                         {keys.map((dataKey, index) => (
