@@ -1,13 +1,33 @@
-import { useState } from "react";
-import { Search, Plus, ArrowRight, Trash2, Check, Info, AlertCircle, HelpCircle, Layers, Tag as TagIcon, Settings, User, Lock, Home, BarChart } from "lucide-react";
-import { Button, Tag, SplitTag, Tooltip, Tabs, TabsList, TabsTrigger, TabsContent } from "../lib/main";
-import { Chart, ChartType } from "../lib/components/Charts/Charts";
-
-
+import { useState } from 'react';
+import {
+  Search,
+  Plus,
+  ArrowRight,
+  Trash2,
+  Check,
+  Info,
+  AlertCircle,
+  HelpCircle,
+  Layers,
+  Tag as TagIcon,
+  Settings,
+  User,
+  Lock,
+  Home,
+  Bell,
+  Menu,
+} from 'lucide-react';
+import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
+import { Snackbar } from '../lib/components/Snackbar';
+import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
+import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
+import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
 const App = () => {
-  const [activeComponent, setActiveComponent] = useState<'buttons' | 'tooltips' | 'tags' | 'tabs' | 'charts'>('charts');
-  
+  const [activeComponent, setActiveComponent] = useState<
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'
+  >('alerts');
+
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,15 +82,15 @@ const App = () => {
                 Tabs
               </button>
               <button
-                onClick={() => setActiveComponent('charts')}
+                onClick={() => setActiveComponent('alerts')}
                 className={`${
-                  activeComponent === 'charts'
+                  activeComponent === 'alerts'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                 } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
-                <BarChart className="mr-2 h-5 w-5" />
-                Charts
+                <Bell className="mr-2 h-5 w-5" />
+                Alerts
               </button>
             </div>
           </div>
@@ -129,6 +149,17 @@ const App = () => {
             <Settings className="mr-3 h-5 w-5" />
             Tabs
           </button>
+          <button
+            onClick={() => setActiveComponent('alerts')}
+            className={`${
+              activeComponent === 'alerts'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Bell className="mr-3 h-5 w-5" />
+            Alerts
+          </button>
         </div>
       </div>
     </div>
@@ -137,313 +168,148 @@ const App = () => {
   const renderButtons = () => (
     <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
-      <div className="flex gap-4">
-        <Button buttonType="primary" size="md">
-          Primary Button
-        </Button>
-        <Button buttonType="secondary" size="md">
-          Secondary Button
-        </Button>
-        <Button buttonType="danger" size="md">
-          Danger Button
-        </Button>
-        <Button buttonType="success" size="md">
-          Success Button
-        </Button>
+
+      {/* Button Types */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Button Types</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button buttonType={ButtonType.PRIMARY}>Primary Button</Button>
+          <Button buttonType={ButtonType.SECONDARY}>Secondary Button</Button>
+          <Button buttonType={ButtonType.DANGER}>Danger Button</Button>
+          <Button buttonType={ButtonType.SUCCESS}>Success Button</Button>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button buttonType="primary" size="md" leadingIcon={Search} trailingIcon={ArrowRight}>
-          Search
-        </Button>
-        <Button buttonType="danger" size="md" leadingIcon={Trash2}>
-          Delete
-        </Button>
-        <Button buttonType="success" size="md" leadingIcon={Check}>
-          Confirm
-        </Button>
+      {/* Button Sizes */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Button Sizes</h3>
+        <div className="flex flex-wrap gap-4 items-center">
+          <Button buttonType={ButtonType.PRIMARY} size={ButtonSize.SMALL}>
+            Small Button
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} size={ButtonSize.MEDIUM}>
+            Medium Button
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} size={ButtonSize.LARGE}>
+            Large Button
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} onClick={() => console.log('Button clicked!')}>
+            Click Me
+          </Button>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button
-          buttonType="primary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Search}
-          aria-label="Search"
-        />
+      {/* Buttons with Icons */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Buttons with Icons</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button buttonType={ButtonType.PRIMARY} leadingIcon={Search}>
+            Search
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} trailingIcon={ArrowRight}>
+            Next
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} leadingIcon={Search} trailingIcon={ArrowRight}>
+            Search & Go
+          </Button>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button buttonType="primary" size="md" subType="link">
-          Learn more
-        </Button>
-        <Button buttonType="secondary" size="md" subType="link">
-          View details
-        </Button>
+      {/* Icon Only Buttons */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Icon Only Buttons</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            buttonType={ButtonType.PRIMARY}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Plus}
+            aria-label="Add item"
+          />
+          <Button
+            buttonType={ButtonType.SECONDARY}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Search}
+            aria-label="Search"
+          />
+          <Button
+            buttonType={ButtonType.DANGER}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Trash2}
+            aria-label="Delete"
+          />
+          <Button
+            buttonType={ButtonType.SUCCESS}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Check}
+            aria-label="Approve"
+          />
+        </div>
       </div>
 
-      <div className="flex gap-4 items-center">
-        <Button buttonType="primary" size="sm">
-          Small
-        </Button>
-        <Button buttonType="primary" size="md">
-          Medium
-        </Button>
-        <Button buttonType="primary" size="lg">
-          Large
-        </Button>
+      {/* Link Buttons */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Link Buttons</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button buttonType={ButtonType.PRIMARY} subType={ButtonSubType.LINK}>
+            Primary Link
+          </Button>
+          <Button buttonType={ButtonType.SECONDARY} subType={ButtonSubType.LINK}>
+            Secondary Link
+          </Button>
+          <Button buttonType={ButtonType.DANGER} subType={ButtonSubType.LINK}>
+            Danger Link
+          </Button>
+          <Button buttonType={ButtonType.SUCCESS} subType={ButtonSubType.LINK}>
+            Success Link
+          </Button>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button buttonType="primary" size="md" isLoading>
-          Loading
-        </Button>
-        <Button buttonType="primary" size="md" subType="iconOnly" isLoading aria-label="Loading" />
+      {/* Button States */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Button States</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button buttonType={ButtonType.PRIMARY} isLoading={true}>
+            Loading
+          </Button>
+          <Button buttonType={ButtonType.PRIMARY} isDisabled={true}>
+            Disabled
+          </Button>
+        </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button buttonType="primary" size="md" isDisabled>
-          Disabled
-        </Button>
-        <Button
-          buttonType="primary"
-          size="md"
-          subType="iconOnly"
-          isDisabled
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
+      {/* Accessibility Examples */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Accessibility Examples</h3>
+        <div className="flex flex-wrap gap-4">
+          <Button
+            buttonType={ButtonType.SECONDARY}
+            subType={ButtonSubType.ICON_ONLY}
+            leadingIcon={Menu}
+            ariaLabel="Open menu"
+            ariaExpanded={false}
+            ariaControls="main-menu"
+            ariaHasPopup="menu"
+          />
+
+          <Button buttonType={ButtonType.PRIMARY} ariaPressed={true}>
+            Selected Option
+          </Button>
+
+          <Button buttonType={ButtonType.PRIMARY} ariaPressed={false}>
+            Unselected Option
+          </Button>
+
+          <Button
+            buttonType={ButtonType.SECONDARY}
+            leadingIcon={Settings}
+            ariaControls="settings-panel"
+            ariaExpanded={false}
+          >
+            Settings
+          </Button>
+        </div>
       </div>
-    </>
-  );
-
-  const renderTooltips = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Tooltip Examples</h2>
-
-      {/* Basic tooltips */}
-      <div className="flex gap-8 items-center justify-center">
-        <Tooltip content="Small tooltip" size="sm">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Large tooltip with more text" size="lg">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Different arrow positions */}
-      <div className="grid grid-cols-3 gap-8 p-12">
-        <Tooltip content="Default (top center)" arrow="default">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Top left" arrow="topLeft">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Top right" arrow="topRight">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Left" arrow="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="No arrow" arrow="none">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Right" arrow="right">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom left" arrow="bottomLeft">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom center" arrow="bottomCenter">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Bottom right" arrow="bottomRight" rootProps={{ open: true }} >
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltips with icons */}
-      <div className="flex gap-6 items-center">
-        <Tooltip content="Information tooltip" slot={Info} slotDirection="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Warning message" slot={AlertCircle} slotDirection="left">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-
-        <Tooltip content="Help is available" slot={HelpCircle} slotDirection="right">
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      {/* Tooltip with custom provider props */}
-      <div className="flex gap-4 items-center">
-        <Tooltip content="Delayed tooltip (1000ms)" providerProps={{ delayDuration: 1000 }}>
-          <Button
-            buttonType="secondary"
-            size="md"
-            subType="iconOnly"
-            leadingIcon={Plus}
-            aria-label="Add item"
-          />
-        </Tooltip>
-      </div>
-
-      <Tooltip content="Small tooltip" size="sm" rootProps={{ open: true }}>
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding small tooltip with info icon */}
-      <Tooltip
-        content="Small tooltip with icon"
-        size="sm"
-        rootProps={{ open: true }}
-        slot={Info}
-        slotDirection="left"
-      >
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      <Tooltip content="Large tooltip" size="lg" rootProps={{ open: true }}>
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
-
-      {/* Adding large tooltip with help icon */}
-      <Tooltip
-        content="Large tooltip with icon"
-        size="lg"
-        rootProps={{ open: true }}
-        slot={HelpCircle}
-        slotDirection="right"
-      >
-        <Button
-          buttonType="secondary"
-          size="md"
-          subType="iconOnly"
-          leadingIcon={Plus}
-          aria-label="Add item"
-        />
-      </Tooltip>
     </>
   );
 
@@ -513,18 +379,22 @@ const App = () => {
       </div>
     </>
   );
-  
+
   const renderTabs = () => (
     <>
       <h2 className="text-2xl font-semibold">Tabs Examples</h2>
-      
+
       {/* Underline Tabs */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Underline Tabs</h3>
         <Tabs defaultValue="account" className="w-full">
           <TabsList variant="underline">
-            <TabsTrigger value="account" leftSlot={<User size={16} />}>Account</TabsTrigger>
-            <TabsTrigger value="password" leftSlot={<Lock size={16} />}>Password</TabsTrigger>
+            <TabsTrigger value="account" leftSlot={<User size={16} />}>
+              Account
+            </TabsTrigger>
+            <TabsTrigger value="password" leftSlot={<Lock size={16} />}>
+              Password
+            </TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
           <TabsContent value="account">
@@ -547,15 +417,21 @@ const App = () => {
           </TabsContent>
         </Tabs>
       </div>
-      
+
       {/* Boxed Tabs */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Boxed Tabs</h3>
         <Tabs defaultValue="home" variant="boxed" className="w-full">
           <TabsList variant="boxed">
-            <TabsTrigger value="home" variant="boxed" leftSlot={<Home size={16} />}>Home</TabsTrigger>
-            <TabsTrigger value="account" variant="boxed" leftSlot={<User size={16} />}>Account</TabsTrigger>
-            <TabsTrigger value="settings" variant="boxed" rightSlot={<Settings size={16} />}>Settings</TabsTrigger>
+            <TabsTrigger value="home" variant="boxed" leftSlot={<Home size={16} />}>
+              Home
+            </TabsTrigger>
+            <TabsTrigger value="account" variant="boxed" leftSlot={<User size={16} />}>
+              Account
+            </TabsTrigger>
+            <TabsTrigger value="settings" variant="boxed" rightSlot={<Settings size={16} />}>
+              Settings
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="home">
             <div className="p-4 rounded-md border border-gray-200 mt-4">
@@ -577,15 +453,25 @@ const App = () => {
           </TabsContent>
         </Tabs>
       </div>
-      
+
       {/* Floating Tabs */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Floating Tabs</h3>
         <Tabs defaultValue="profile" variant="floating" className="w-full">
           <TabsList variant="floating">
-            <TabsTrigger value="profile" variant="floating" leftSlot={<User size={16} />}>Profile</TabsTrigger>
-            <TabsTrigger value="notifications" variant="floating" leftSlot={<AlertCircle size={16} />}>Notifications</TabsTrigger>
-            <TabsTrigger value="help" variant="floating" leftSlot={<HelpCircle size={16} />}>Help</TabsTrigger>
+            <TabsTrigger value="profile" variant="floating" leftSlot={<User size={16} />}>
+              Profile
+            </TabsTrigger>
+            <TabsTrigger
+              value="notifications"
+              variant="floating"
+              leftSlot={<AlertCircle size={16} />}
+            >
+              Notifications
+            </TabsTrigger>
+            <TabsTrigger value="help" variant="floating" leftSlot={<HelpCircle size={16} />}>
+              Help
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="profile">
             <div className="p-4 rounded-md border border-gray-200 mt-4">
@@ -606,151 +492,36 @@ const App = () => {
             </div>
           </TabsContent>
         </Tabs>
+
+        <Snackbar
+          type="success"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="topRight"
+          autoClose={false}
+        />
+        <Snackbar
+          type="success"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="topRight"
+          autoClose={false}
+        />
+        <Snackbar
+          type="error"
+          heading="Info Heading"
+          message="This is body message of the information bar. This text is going to a run a bit longer."
+          alertMessage="Alert Message "
+          position="bottomRight"
+          autoClose={true}
+        />
       </div>
     </>
   );
 
-  const renderCharts = () => {
-    const lineData = [
-      { name: 'Jan', Amazon: 2450, Walmart: 1890, Target: 1230, BestBuy: 980 },
-      { name: 'Feb', Amazon: 2780, Walmart: 2100, Target: 1450, BestBuy: 1120 },
-      { name: 'Mar', Amazon: 2340, Walmart: 1950, Target: 1380, BestBuy: 890 },
-      { name: 'Apr', Amazon: 3120, Walmart: 2340, Target: 1670, BestBuy: 1230 },
-      { name: 'May', Amazon: 2890, Walmart: 2180, Target: 1590, BestBuy: 1180 },
-      { name: 'Jun', Amazon: 3450, Walmart: 2560, Target: 1890, BestBuy: 1340 },
-      { name: 'Jul', Amazon: 3780, Walmart: 2890, Target: 2100, BestBuy: 1560 },
-      { name: 'Aug', Amazon: 3230, Walmart: 2450, Target: 1780, BestBuy: 1290 },
-      { name: 'Sep', Amazon: 2980, Walmart: 2230, Target: 1670, BestBuy: 1180 },
-      { name: 'Oct', Amazon: 3560, Walmart: 2670, Target: 1890, BestBuy: 1450 },
-      { name: 'Nov', Amazon: 4120, Walmart: 3100, Target: 2230, BestBuy: 1780 },
-      { name: 'Dec', Amazon: 4890, Walmart: 3670, Target: 2670, BestBuy: 2100 }
-    ];
-    
-    const pieData = [
-      { name: 'Desktop', Sales: 4800 },
-      { name: 'Mobile', Sales: 3200 },
-      { name: 'Tablet', Sales: 1800 },
-      { name: 'Other', Sales: 800 }
-    ];
-    
-    
-
-    const sampleData = [
-      {
-        name: "Jan", 
-        Amazon: { 
-          primary: {name: "Success Rate", val: 75}, 
-          aux: [
-            {name: "Conversion Rate", val: 12.5}, 
-            {name: "Click Rate", val: 45.2}
-          ]
-        },
-        Google: {
-          primary: {name: "Success Rate", val: 68},
-          aux: [
-            {name: "Conversion Rate", val: 15.3},
-            {name: "Click Rate", val: 40.8}
-          ]
-        },
-        Microsoft: {
-          primary: {name: "Success Rate", val: 82},
-          aux: [
-            {name: "Conversion Rate", val: 14.7},
-            {name: "Click Rate", val: 38.5}
-          ]
-        }
-      },
-      {
-        name: "Feb", 
-        Amazon: { 
-          primary: {name: "Success Rate", val: 78}, 
-          aux: [
-            {name: "Conversion Rate", val: 14.2}, 
-            {name: "Click Rate", val: 48.3}
-          ]
-        },
-        Google: {
-          primary: {name: "Success Rate", val: 72},
-          aux: [
-            {name: "Conversion Rate", val: 16.8},
-            {name: "Click Rate", val: 43.5}
-          ]
-        },
-        Microsoft: {
-          primary: {name: "Success Rate", val: 85},
-          aux: [
-            {name: "Conversion Rate", val: 15.9},
-            {name: "Click Rate", val: 41.2}
-          ]
-        }
-      },
-      {
-        name: "Mar", 
-        Amazon: { 
-          primary: {name: "Success Rate", val: 82}, 
-          aux: [
-            {name: "Conversion Rate", val: 15.7}, 
-            {name: "Click Rate", val: 52.1}
-          ]
-        },
-        Google: {
-          primary: {name: "Success Rate", val: 76},
-          aux: [
-            {name: "Conversion Rate", val: 17.5},
-            {name: "Click Rate", val: 47.2}
-          ]
-        },
-        Microsoft: {
-          primary: {name: "Success Rate", val: 88},
-          aux: [
-            {name: "Conversion Rate", val: 16.8},
-            {name: "Click Rate", val: 43.7}
-          ]
-        }
-      }
-    ];
-
-
-    return (
-      <div className="">
-        <div className="p-4">
-          {/* <Chart 
-            type={ChartType.BAR} 
-            data={lineData} 
-            dataKeys={['Amazon', 'Walmart', 'Target', 'BestBuy']} 
-            metrics={['Amazon', 'Walmart', 'Target', 'BestBuy']}
-            xAxisLabel="Month"
-          />   */}
-           <Chart 
-          type={ChartType.LINE}
-          data={sampleData}
-          xAxisLabel="Month"
-          yAxisLabel="Value (%)"
-          height={400}
-          metrics={["Monthly Performance"]}
-        />
-        </div>
-        <div className="p-4">
-          <Chart 
-            type={ChartType.LINE} 
-            data={lineData} 
-            dataKeys={['Amazon', 'Walmart', 'Target', 'BestBuy']} 
-            metrics={['Amazon', 'Walmart', 'Target', 'BestBuy']}
-            xAxisLabel="Month"
-          />
-        </div>
-        <div className="p-4">
-          <Chart 
-            type={ChartType.PIE} 
-            data={pieData}  
-            dataKeys={['Sales']} 
-            metrics={['Sales']}
-            height={400}
-          />
-        </div>
-      </div>
-    );
-  };
+  const renderAlerts = () => <AlertDemo />;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -758,10 +529,10 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white shadow rounded-lg p-6">
           {activeComponent === 'buttons' && renderButtons()}
-          {activeComponent === 'tooltips' && renderTooltips()}
+          {activeComponent === 'tooltips' && <TooltipDemo />}
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
-          {activeComponent === 'charts' && renderCharts()}
+          {activeComponent === 'alerts' && renderAlerts()}
         </div>
       </div>
     </div>

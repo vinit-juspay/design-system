@@ -4,4 +4,4 @@ import TabsTrigger from './TabsTrigger';
 import TabsContent from './TabsContent';
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
-export * from './types'; 
+export * from './types';

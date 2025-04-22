@@ -4,10 +4,7 @@ import { cn } from '../../utils';
 import { TabsProps } from './types';
 import { themeConfig } from '../../themeConfig';
 
-const Tabs = React.forwardRef<
-  HTMLDivElement,
-  TabsProps
->(({ className, variant = "underline", size = "md", ...props }, ref) => (
+const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(({ className, ...props }, ref) => (
   <TabsPrimitive.Root
     className={cn(themeConfig.euler.tabs.base.root, className)}
     {...props}
@@ -16,4 +13,4 @@ const Tabs = React.forwardRef<
 ));
 Tabs.displayName = 'Tabs';
 
-export default Tabs; 
+export default Tabs;
