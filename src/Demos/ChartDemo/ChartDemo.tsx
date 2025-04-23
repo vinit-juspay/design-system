@@ -18,10 +18,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 2400 },
         aux: [{ name: 'Margin', val: '24%' }]
       },
-      // traffic: {
-      //   primary: { name: 'Website Traffic', val: 15000 },
-      //   aux: [{ name: 'Change', val: '+8%' }]
-      // }
+      traffic: {
+        primary: { name: 'Website Traffic', val: 15000 },
+        aux: [{ name: 'Change', val: '+8%' }]
+      }
     },
     {
       name: 'Feb',
@@ -33,10 +33,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 1398 },
         aux: [{ name: 'Margin', val: '19%' }]
       },
-      // traffic: {
-      //   primary: { name: 'Website Traffic', val: 13000 },
-      //   aux: [{ name: 'Change', val: '-13%' }]
-      // }
+      traffic: {
+        primary: { name: 'Website Traffic', val: 13000 },
+        aux: [{ name: 'Change', val: '-13%' }]
+      }
     },
     {
       name: 'Mar',
@@ -48,10 +48,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 9800 },
         aux: [{ name: 'Margin', val: '32%' }]
       },
-      // traffic: {
-      //   primary: { name: 'Website Traffic', val: 17000 },
-      //   aux: [{ name: 'Change', val: '+30%' }]
-      // }
+      traffic: {
+        primary: { name: 'Website Traffic', val: 17000 },
+        aux: [{ name: 'Change', val: '+30%' }]
+      }
     }
   ];
   
@@ -307,7 +307,7 @@ const ChartDemo = () => {
         <Chart
           type={ChartType.LINE}
           data={lineChartData}
-          dataKeys={['revenue', 'profit']}
+          // dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"
           yAxisLabel="Amount ($)"
@@ -345,11 +345,11 @@ const ChartDemo = () => {
         />
       </div>
 
-      <div className='w-full'>
+      <div className='w-full mt-7'>
         <Chart
           type={ChartType.BAR}
           data={condensedLineChartData}
-          dataKeys={['revenue', 'profit']}
+          // dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"
           yAxisLabel="Amount ($)"
@@ -385,14 +385,15 @@ const ChartDemo = () => {
             </Button>
           }
         />
-
-        <Chart
-          type={ChartType.PIE}
-          data={pieChartData}
-          dataKeys={['mobile', 'web', 'desktop']}
-          height={400}
-          metrics={metrics}
-        />  
+        <div className='w-full mt-7'>
+          <Chart
+            type={ChartType.PIE}
+            data={pieChartData}
+            // dataKeys={['mobile', 'web', 'desktop']}
+            height={400}
+            metrics={metrics}
+          />
+        </div>
       </div>
     </div>
   );

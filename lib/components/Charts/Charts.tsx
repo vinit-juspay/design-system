@@ -114,7 +114,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500,
                             } : undefined}
                         />
-                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys })} />
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -174,7 +174,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys })} />
+                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })}/>
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
@@ -204,7 +204,7 @@ export const Chart: React.FC<ChartProps> = ({
 
                 return (
                     <PieChart margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-                        <Tooltip content={({ active, payload }) => {
+                        <Tooltip active={true} content={({ active, payload }) => {
                             if (!active || !payload || payload.length === 0) return null;
 
                             const data = payload[0].payload;
@@ -222,7 +222,6 @@ export const Chart: React.FC<ChartProps> = ({
                                         </div>
                                     </div>
 
-                                    {/* Primary Value */}
                                     <div className='pl-2 flex flex-col'>
                                         <label className='text-body-sm font-500 text-gray-400'>{data.originalData.primary.name}</label>
                                         <h3 className='text-sm font-600 text-gray-900'>
@@ -230,7 +229,6 @@ export const Chart: React.FC<ChartProps> = ({
                                         </h3>
                                     </div>
 
-                                    {/* Auxiliary Values */}
                                     {data.originalData.aux && data.originalData.aux.length > 0 && (
                                         <div className='flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150'>
                                             {data.originalData.aux.map((auxItem: any, index: number) => (
@@ -246,6 +244,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 </div>
                             );
                         }} />
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })}/>
                         <Pie
                             data={pieData}
                             dataKey="value"
@@ -253,7 +252,7 @@ export const Chart: React.FC<ChartProps> = ({
                             cx="50%"
                             cy="50%"
                             outerRadius={150}
-                            innerRadius={60}
+                            innerRadius={100}
                             paddingAngle={5}
                             label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >

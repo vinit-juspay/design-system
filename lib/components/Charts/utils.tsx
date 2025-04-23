@@ -14,7 +14,6 @@ export interface NestedDataPoint {
 export interface ChartProps {
     type: ChartType;
     data: NestedDataPoint[];
-    // dataKeys?: string[];
     width?: string | number;
     height?: string | number;
     colors?: string[];
