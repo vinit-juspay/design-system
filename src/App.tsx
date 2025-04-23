@@ -16,17 +16,29 @@ import {
   Home,
   Bell,
   Menu,
+  Calendar as CalendarIcon,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
+import {DateRangePicker } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'datePicker'
   >('alerts');
+
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+
+  const handleDateRangeChange = (newRange: any) => {
+    console.log('Selected Date Range:', newRange);
+    setSelectedDateRange(newRange);
+  };
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -91,6 +103,17 @@ const App = () => {
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
+              </button>
+              <button
+                onClick={() => setActiveComponent('datePicker')}
+                className={`${
+                  activeComponent === 'datePicker'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <CalendarIcon className="mr-2 h-5 w-5" />
+                Date Picker
               </button>
             </div>
           </div>
@@ -159,6 +182,17 @@ const App = () => {
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
+          </button>
+          <button
+            onClick={() => setActiveComponent('datePicker')}
+            className={`${
+              activeComponent === 'datePicker'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <CalendarIcon className="mr-3 h-5 w-5" />
+            Date Picker
           </button>
         </div>
       </div>
@@ -523,6 +557,21 @@ const App = () => {
 
   const renderAlerts = () => <AlertDemo />;
 
+  const renderDatePicker = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Date Range Picker</h2>
+      <div className="mt-6">
+        <DateRangePicker
+          value={selectedDateRange}
+          onChange={handleDateRangeChange}
+          placeholder="Select a date range"
+          showTimePicker={true}
+          showPresets={true}
+        />
+      </div>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -533,6 +582,7 @@ const App = () => {
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
           {activeComponent === 'alerts' && renderAlerts()}
+          {activeComponent === 'datePicker' && renderDatePicker()}
         </div>
       </div>
     </div>

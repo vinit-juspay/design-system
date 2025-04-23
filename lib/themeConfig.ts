@@ -450,5 +450,43 @@ export const themeConfig = {
         default: 'border-[2px]',
       },
     },
+    dateRangePicker: {
+      base: {
+        container: "relative inline-flex w-full",
+        input: "flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer",
+      },
+      variant: {
+        primary: "text-gray-900",
+        secondary: "text-gray-700 bg-gray-50",
+      },
+      sizes: {
+        sm: "h-8 text-xs",
+        md: "h-10 text-sm",
+        lg: "h-12 text-base",
+      },
+      input: {
+        primary: "border-gray-300",
+        secondary: "border-gray-200 bg-gray-50",
+        sizes: {
+          sm: "text-xs py-1",
+          md: "text-sm py-2",
+          lg: "text-base py-2.5",
+        },
+      },
+      states: {
+        disabled: "opacity-50 cursor-not-allowed pointer-events-none",
+      },
+      calendar: {
+        container: "absolute z-10 mt-1 w-auto min-w-[320px] bg-white border border-gray-200 rounded-md shadow-lg",
+      },
+      presets: {
+        button: "px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500",
+        activeButton: "bg-primary-50 border-primary-500 text-primary-700",
+      },
+      timePicker: {
+        container: "p-4 border-t border-gray-200",
+        input: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500",
+      },
+    },
   },
 };
