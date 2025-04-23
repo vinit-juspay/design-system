@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './index';
-import { BreadcrumbItemProps, BreadcrumbVariant } from './types';
 import { Home, User, Lock, AlertCircle, ChevronRight } from 'lucide-react';
 
 // Create a wrapper component that uses text inputs instead of object controls
