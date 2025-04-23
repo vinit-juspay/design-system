@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Search as SearchIcon } from 'lucide-react';
-import { themeConfig } from '../../../themeConfig';
+import { themeConfig } from '../../themeConfig';
 import { SearchProps } from './types';
 
 /**

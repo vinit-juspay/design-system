@@ -1,5 +1,5 @@
-import { themeConfig } from '../../../themeConfig';
-import { cn } from '../../../utils';
+import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 import { CheckboxSize, CheckboxPosition } from './types';
 
 export const getCheckboxClassNames = (

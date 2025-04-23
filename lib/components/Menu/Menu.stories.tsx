@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Menu from './Menu';
 import Button from '../Button/Button';
-import { Search } from '../common/Search';
+import { Search } from '../Search';
 import { Settings, Copy, Trash, Edit, Share, FileText, ChevronRight, AlertTriangle } from 'lucide-react';
 import { ButtonType } from '../Button/types';
 import { MenuSide, MenuAlignment } from './types';

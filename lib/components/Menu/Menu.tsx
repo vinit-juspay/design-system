@@ -27,8 +27,8 @@ import {
   getMenuItemRightContainerClassNames
 } from './utils';
 import { themeConfig } from '../../themeConfig';
-import { Search, filterItems } from '../common/Search';
-import Checkbox, { CheckboxSize } from '../common/Checkbox';
+import { Search, filterItems } from '../Search';
+import Checkbox, { CheckboxSize } from '../Checkbox';
 import { cn } from '../../utils';
 
 /**
