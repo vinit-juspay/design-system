@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 import { Search } from '../Search';
 import { Settings, Copy, Trash, Edit, Share, FileText, ChevronRight, AlertTriangle } from 'lucide-react';
 import { ButtonType } from '../Button/types';
-import { MenuSide, MenuAlignment } from './types';
+import { MenuSide, MenuAlignment, CheckboxPosition } from './types';
 
 // Create mapping of possible trigger components
 const triggerComponents = {
@@ -66,10 +66,8 @@ const meta: Meta<typeof Menu> = {
     // Positioning options in their own category
     align: {
       description: 'Horizontal alignment relative to the trigger',
-      control: { 
-        type: 'radio',
-        options: ['start', 'center', 'end']
-      },
+      control: 'select',
+      options: Object.values(MenuAlignment),
       table: {
         defaultValue: { summary: 'start' },
         category: 'Positioning'
@@ -77,10 +75,8 @@ const meta: Meta<typeof Menu> = {
     },
     side: {
       description: 'Which side the menu appears on',
-      control: { 
-        type: 'radio',
-        options: ['top', 'right', 'bottom', 'left']
-      },
+      control: 'select',
+      options: Object.values(MenuSide),
       table: {
         defaultValue: { summary: 'bottom' },
         category: 'Positioning'
@@ -120,10 +116,8 @@ const meta: Meta<typeof Menu> = {
     // Checkbox position
     checkboxPosition: {
       description: 'Controls the position of checkboxes',
-      control: { 
-        type: 'radio',
-        options: ['left', 'right']
-      },
+      control: 'select',
+      options: Object.values(CheckboxPosition),
       table: {
         category: 'Features'
       }
