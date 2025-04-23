@@ -60,10 +60,12 @@ export const Chart: React.FC<ChartProps> = ({
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const [selectedMetric, setSelectedMetric] = useState<string>(metrics.length > 0 ? metrics[0] : '');
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+    const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
 
     const transformedData = transformData(data, keys);
 
-    const CustomTooltip = ({ active, payload, label, hoveredKey }: TooltipProps<ValueType, NameType> & { hoveredKey: string | null }) => {
+
+    const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKey }: TooltipProps<ValueType, NameType> & { hoveredKey: string | null, setHoveredKey: (key: string | null) => void }) => {
         if (!active || !payload || payload.length === 0) {
             return null;
         }
@@ -71,12 +73,15 @@ export const Chart: React.FC<ChartProps> = ({
         if(hoveredKey === null) {
             const fallbackKey = keys[0];
             hoveredKey = fallbackKey;
+            setHoveredKey(fallbackKey);
         }
+
+        console.log(hoveredKey, "hoveredKey");
 
         const xAxisValue = payload[0].payload.name;
         // const xAxisDataPoint = data.find(point => point.name === xAxisValue);
 
-        console.log(hoveredKey, "hoveredKey");
+        // console.log(hoveredKey, "hoveredKey");
         
         const keyName = payload[0].dataKey as string;
         
@@ -97,7 +102,7 @@ export const Chart: React.FC<ChartProps> = ({
                         style={{ backgroundColor: payload[0].color }}
                     ></div>
                     <div className='flex flex-col'>
-                        <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(keyName)}</h3>
+                        <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(hoveredKey)}</h3>
                         <label className='font-500 text-body-sm text-gray-400'>{capitaliseCamelCase(xAxisValue)}</label>
                     </div>
                 </div>
@@ -139,6 +144,7 @@ export const Chart: React.FC<ChartProps> = ({
         });
     };
 
+    console.log(hoveredXValue, "hoveredXValue");
     const handleMetricChange = (metric: string) => {
         setSelectedMetric(metric);
     };
@@ -150,7 +156,7 @@ export const Chart: React.FC<ChartProps> = ({
                     <LineChart
                         data={transformedData}
                         margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
-                        onMouseLeave={() => setHoveredKey(null)}
+                        onMouseLeave={() => { setHoveredKey(null); console.log("Mouse left the chart area"); }}
                     >
                         <CartesianGrid vertical={false} stroke="#ECEFF3" />
                         <XAxis
@@ -178,7 +184,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500,
                             } : undefined}
                         />
-                            <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey })} active={true}/>
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey })}/>
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -202,6 +208,15 @@ export const Chart: React.FC<ChartProps> = ({
                     <BarChart
                         data={transformedData}
                         margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
+                        onMouseMove={(e) => {
+                            if (e.activeLabel) {
+                                setHoveredXValue(e.activeLabel.toString());
+                            }
+                        }}
+                        onMouseLeave={() => {
+                            setHoveredKey(null);
+                            setHoveredXValue(null);
+                        }}
                     >
                         <CartesianGrid vertical={false} stroke="#ECEFF3" />
                         <XAxis
@@ -229,13 +244,14 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey })}/>
+                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey })}/>
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
                                 dataKey={dataKey}
                                 fill={colors[index % colors.length]}
                                 opacity={activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1}
+                                onMouseOver={() => setHoveredKey(dataKey)}
                             />
                         ))}
                     </BarChart>

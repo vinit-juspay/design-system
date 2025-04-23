@@ -385,95 +385,16 @@ const ChartDemo = () => {
             </Button>
           }
         />
+
+        <Chart
+          type={ChartType.PIE}
+          data={pieChartData}
+          dataKeys={['mobile', 'web', 'desktop']}
+          height={400}
+          metrics={metrics}
+        />  
       </div>
     </div>
-    // <div className="flex gap-2">
-
-    //   {/* Line Chart */}
-
-
-    //     <Chart
-    //       type={ChartType.LINE}
-    //       data={lineChartData}
-    //       dataKeys={['revenue', 'profit']}
-    //       height={400}
-    //       xAxisLabel="Month"
-    //       yAxisLabel="Amount ($)"
-    //       metrics={metrics}
-    //       slot1={
-    //         <Button
-    //           buttonType={ButtonType.SECONDARY}
-    //           leadingIcon={Calendar}
-    //           size={ButtonSize.SMALL}
-    //           onClick={() => {
-    //             console.log('Calendar clicked');
-    //           }}
-    //         >
-    //           Last 6 months
-    //         </Button>
-    //       }
-    //       slot2={
-    //         <Button
-    //           buttonType={ButtonType.SECONDARY}
-    //           leadingIcon={Filter}
-    //           size={ButtonSize.SMALL}
-    //         >
-    //           Filters
-    //         </Button>
-    //       }
-    //       slot3={
-    //         <Button
-    //           buttonType={ButtonType.SECONDARY}
-    //           leadingIcon={Download}
-    //           size={ButtonSize.SMALL}
-    //         >
-    //           Export
-    //         </Button>
-    //       }
-    //     />
-
-    //   {/* Bar Chart */}
-    //   {/* <div className="space-y-4"> */}
-    //     <Chart
-    //       type={ChartType.BAR}
-    //       data={lineChartData}
-    //       dataKeys={['revenue', 'profit']}
-    //       height={400}
-    //       xAxisLabel="Month"
-    //       yAxisLabel="Amount ($)"
-    //       metrics={metrics}
-    //       slot1={
-    //         <Button
-    //           buttonType={ButtonType.SECONDARY}
-    //           leadingIcon={Calendar}
-    //           size={ButtonSize.SMALL}
-    //         >
-    //           Last 6 months
-    //         </Button>
-    //       }
-    //     />
-    //   {/* </div> */}
-
-    //   {/* Pie Chart */}
-    //   {/* <div className="space-y-4">
-    //     <Chart
-    //       type={ChartType.PIE}
-    //       data={pieChartData}
-    //       dataKeys={['mobile', 'web', 'desktop']}
-    //       height={400}
-    //       metrics={metrics}
-    //       slot1={
-    //         <Button
-    //           buttonType={ButtonType.SECONDARY}
-    //           leadingIcon={Download}
-    //           size={ButtonSize.SMALL}
-    //         >
-    //           Export
-    //         </Button>
-    //       }
-    //     />
-    //   </div> */}
-    // </div>
   );
 };
 
