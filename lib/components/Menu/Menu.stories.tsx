@@ -2,9 +2,10 @@ import  { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Menu from './Menu';
 import Button from '../Button/Button';
-import Search from '../common/Search';
+import { Search } from '../common/Search';
 import { Settings, Copy, Trash, Edit, Share, FileText, ChevronRight, AlertTriangle } from 'lucide-react';
 import { ButtonType } from '../Button/types';
+import { MenuSide, MenuAlignment } from './types';
 
 // Create mapping of possible trigger components
 const triggerComponents = {
@@ -38,8 +39,8 @@ const meta: Meta<typeof Menu> = {
   args: {
     // Set default values for the component
     children: 'Button',
-    align: 'start',
-    side: 'bottom',
+    align: MenuAlignment.START,
+    side: MenuSide.BOTTOM,
     items: [
       { content: 'Edit', leftSlot: { content: <Edit size={16} /> }, onSelect: () => console.log('Edit') },
       { content: 'Duplicate', leftSlot: { content: <Copy size={16} /> }, onSelect: () => console.log('Duplicate') },

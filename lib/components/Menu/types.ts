@@ -3,23 +3,23 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { LucideIcon } from 'lucide-react';
 
 // Menu positioning options
-/**
- * Defines the horizontal alignment options for the menu relative to its trigger
- * - 'start': Aligns the menu to the start of the trigger
- * - 'center': Centers the menu relative to the trigger
- * - 'end': Aligns the menu to the end of the trigger
- */
-export type MenuAlignment = 'start' | 'center' | 'end';
+export enum MenuAlignment {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end'
+}
 
-/**
- * Defines which side of the trigger the menu appears on
- * - 'top': Menu appears above the trigger
- * - 'right': Menu appears to the right of the trigger
- * - 'bottom': Menu appears below the trigger
- * - 'left': Menu appears to the left of the trigger
- */
-export type MenuSide = 'top' | 'right' | 'bottom' | 'left';
-export type SlotDirection = 'left' | 'right';
+export enum MenuSide {
+  TOP = 'top',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+  LEFT = 'left'
+}
+
+export enum SlotDirection {
+  LEFT = 'left',
+  RIGHT = 'right'
+}
 
 // Slot for menu items
 export interface MenuItemSlot {
@@ -113,6 +113,11 @@ export interface MenuMultiSelectProps {
   onSelectionChange?: (values: string[]) => void;
 }
 
+export enum CheckboxPosition {
+  LEFT = 'left',
+  RIGHT = 'right'
+}
+
 export interface MenuProps {
   /**
    * The trigger element that opens the menu (typically a button)
@@ -126,13 +131,13 @@ export interface MenuProps {
   
   /**
    * Controls the horizontal alignment of the menu relative to the trigger element
-   * @default 'start'
+   * @default MenuAlignment.START
    */
   align?: MenuAlignment;
   
   /**
    * Determines which side the menu appears on relative to the trigger
-   * @default 'bottom'
+   * @default MenuSide.BOTTOM
    */
   side?: MenuSide;
   
@@ -149,7 +154,7 @@ export interface MenuProps {
   /**
    * Controls the position of checkboxes within menu items
    */
-  checkboxPosition?: 'left' | 'right';
+  checkboxPosition?: CheckboxPosition;
   
   /**
    * Additional props to pass to the root element of the menu component
