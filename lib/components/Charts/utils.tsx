@@ -14,7 +14,7 @@ export interface NestedDataPoint {
 export interface ChartProps {
     type: ChartType;
     data: NestedDataPoint[];
-    dataKeys?: string[];
+    // dataKeys?: string[];
     width?: string | number;
     height?: string | number;
     colors?: string[];
@@ -25,6 +25,30 @@ export interface ChartProps {
     slot2?: ReactNode;
     slot3?: ReactNode;
 }
+
+
+export type ChartLegendsProps = {
+    keys: string[];
+    activeKeys: string[] | null;
+    handleLegendClick: (dataKey: string) => void;
+    colors: string[];
+    type: ChartType;
+    setSelectedKeys: (keys: string[]) => void;
+}
+
+
+
+
+
+export type ChartHeaderProps = {
+    metrics: string[];
+    selectedMetric: string;
+    handleMetricChange: (metric: string) => void;
+    slot1: React.ReactNode;
+    slot2: React.ReactNode;
+    slot3: React.ReactNode;
+}
+
 
 
 export const formatNumber = (value: number | string): string => {

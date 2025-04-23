@@ -1,0 +1,66 @@
+import { formatNumber } from "./utils";
+import { TooltipProps } from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+import { capitaliseCamelCase } from './utils';
+
+
+export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKey, data, keys }: TooltipProps<ValueType, NameType> & { hoveredKey: string | null, setHoveredKey: (key: string | null) => void, data: any[], keys: string[] }) => {
+  if (!active || !payload || payload.length === 0) {
+      return null;
+  }
+
+  if(hoveredKey === null) {
+      const fallbackKey = keys[0];
+      hoveredKey = fallbackKey;
+      setHoveredKey(fallbackKey);
+  }
+
+  const xAxisValue = payload[0].payload.name;
+  
+  const keyName = payload[0].dataKey as string;
+  
+  const dataPoint = data.find(point => point.name === label)
+  if (!dataPoint) return null;
+  
+  
+  const relevantData = dataPoint[hoveredKey];
+  const nestedData = dataPoint[keyName];
+  if (!nestedData || !nestedData.primary) return null;
+
+  return (
+      <div  className="bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[180px] !max-w-[200px]">
+          <div className='pl-2 relative'>
+              <div
+                  className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
+                  style={{ backgroundColor: payload[0].color }}
+              ></div>
+              <div className='flex flex-col'>
+                  <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(hoveredKey)}</h3>
+                  <label className='font-500 text-body-sm text-gray-400'>{capitaliseCamelCase(xAxisValue)}</label>
+              </div>
+          </div>
+
+          {/* Primary Value for the line that is hovered over */}
+          <div className='pl-2 flex flex-col'>
+              <label className='text-body-sm font-500 text-gray-400'>{relevantData.primary.name}</label>
+              <h3 className='text-sm font-600 text-gray-900 overflow-clip whitespace-nowrap overflow-ellipsis'>
+                      {relevantData.primary.val}
+              </h3>
+          </div>
+
+          {/* Auxiliary Values */}
+          {relevantData.aux && relevantData.aux.length > 0 && (
+              <div className='flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150'>
+                  {relevantData.aux.map((auxItem: any, index: number) => (
+                      <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
+                          <span className="text-body-sm text-gray-500 truncate overflow-clip overflow-ellipsis">{auxItem.name}</span>
+                          <span className="text-body-sm font-500 text-gray-700">
+                              {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
+                          </span>
+                      </div>
+                  ))}
+              </div>
+          )}
+      </div>
+  );
+};

@@ -9,15 +9,15 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    TooltipProps,
     PieChart,
     Pie,
     Cell
 } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
-import Dropdown from '../Dropdown/Dropdown';
-import { RotateCcw } from 'lucide-react';
-import { capitaliseCamelCase, ChartType, ChartProps, formatNumber, NestedDataPoint } from './utils';
+
+import { ChartType, ChartProps, formatNumber, NestedDataPoint } from './utils';
+import { CustomTooltip } from './ChartTooltip';
+import { ChartHeader } from './ChartHeader';
+import { ChartLegends } from './ChartLegends';
 
 const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
     return data.map(point => {
@@ -37,7 +37,6 @@ const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
 export const Chart: React.FC<ChartProps> = ({
     type,
     data,
-    // dataKeys,
     width = '100%',
     height = 400,
     colors = ['#2B7FFF', '#00D492', '#C27AFF', '#FB2C36', '#0088FE'],
@@ -64,74 +63,6 @@ export const Chart: React.FC<ChartProps> = ({
 
     const transformedData = transformData(data, keys);
 
-
-    const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKey }: TooltipProps<ValueType, NameType> & { hoveredKey: string | null, setHoveredKey: (key: string | null) => void }) => {
-        if (!active || !payload || payload.length === 0) {
-            return null;
-        }
-
-        if(hoveredKey === null) {
-            const fallbackKey = keys[0];
-            hoveredKey = fallbackKey;
-            setHoveredKey(fallbackKey);
-        }
-
-        console.log(hoveredKey, "hoveredKey");
-
-        const xAxisValue = payload[0].payload.name;
-        // const xAxisDataPoint = data.find(point => point.name === xAxisValue);
-
-        // console.log(hoveredKey, "hoveredKey");
-        
-        const keyName = payload[0].dataKey as string;
-        
-        const dataPoint = data.find(point => point.name === label)
-        if (!dataPoint) return null;
-        
-        
-        const relevantData = dataPoint[hoveredKey];
-        // console.log(hoveredKey, "hoveredKey", relevantData, "relevantData", relevantData.primary.name);
-        const nestedData = dataPoint[keyName];
-        if (!nestedData || !nestedData.primary) return null;
-
-        return (
-            <div  className="bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[180px] !max-w-[200px]">
-                <div className='pl-2 relative'>
-                    <div
-                        className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
-                        style={{ backgroundColor: payload[0].color }}
-                    ></div>
-                    <div className='flex flex-col'>
-                        <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(hoveredKey)}</h3>
-                        <label className='font-500 text-body-sm text-gray-400'>{capitaliseCamelCase(xAxisValue)}</label>
-                    </div>
-                </div>
-
-                {/* Primary Value for the line that is hovered over */}
-                <div className='pl-2 flex flex-col'>
-                    <label className='text-body-sm font-500 text-gray-400'>{relevantData.primary.name}</label>
-                    <h3 className='text-sm font-600 text-gray-900 overflow-clip whitespace-nowrap overflow-ellipsis'>
-                            {relevantData.primary.val}
-                    </h3>
-                </div>
-
-                {/* Auxiliary Values */}
-                {relevantData.aux && relevantData.aux.length > 0 && (
-                    <div className='flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150'>
-                        {relevantData.aux.map((auxItem: any, index: number) => (
-                            <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
-                                <span className="text-body-sm text-gray-500 truncate overflow-clip overflow-ellipsis">{auxItem.name}</span>
-                                <span className="text-body-sm font-500 text-gray-700">
-                                    {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        );
-    };
-
     const activeKeys = selectedKeys.length > 0 ? selectedKeys : null;
 
     const handleLegendClick = (dataKey: string) => {
@@ -144,7 +75,6 @@ export const Chart: React.FC<ChartProps> = ({
         });
     };
 
-    console.log(hoveredXValue, "hoveredXValue");
     const handleMetricChange = (metric: string) => {
         setSelectedMetric(metric);
     };
@@ -156,7 +86,7 @@ export const Chart: React.FC<ChartProps> = ({
                     <LineChart
                         data={transformedData}
                         margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
-                        onMouseLeave={() => { setHoveredKey(null); console.log("Mouse left the chart area"); }}
+                        onMouseLeave={() => setHoveredKey(null)}
                     >
                         <CartesianGrid vertical={false} stroke="#ECEFF3" />
                         <XAxis
@@ -184,7 +114,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500,
                             } : undefined}
                         />
-                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey })}/>
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys })} />
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -244,7 +174,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey })}/>
+                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys })} />
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
@@ -347,86 +277,23 @@ export const Chart: React.FC<ChartProps> = ({
 
     return (
         <div className='w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white'>
-            <div className="flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]">
-                <div>
-                    {metrics.length > 0 ? (
-                        <Dropdown
-                            options={metrics}
-                            selectedOption={selectedMetric}
-                            onSelect={handleMetricChange}
-                        />
-                    ) : (
-                        <h3 className="text-base font-semibold text-[#525866]">{selectedMetric}</h3>
-                    )}
-                </div>
-                <div className='flex items-center gap-2'>
-                    {slot1}
-                    {slot2}
-                    {slot3}
-                </div>
-            </div>
+            <ChartHeader
+                metrics={metrics}
+                selectedMetric={selectedMetric}
+                handleMetricChange={handleMetricChange}
+                slot1={slot1}
+                slot2={slot2}
+                slot3={slot3}
+            />
             <div className='py-5 px-4 flex flex-col gap-6'>
-                <div className="h-4 flex items-center gap-4 justify-between">
-                    <div className="h-4 flex items-center gap-4 overflow-hidden">
-                        <div className="flex items-center gap-4 overflow-hidden whitespace-nowrap">
-                            {type === ChartType.PIE ?
-                                keys.map((dataKey, index) => (
-                                    <div
-                                        key={dataKey}
-                                        className="flex items-center gap-2 pl-1 cursor-pointer shrink-0"
-                                        onClick={() => handleLegendClick(dataKey)}
-                                    >
-                                        <div
-                                            className="w-3 h-3 rounded-sm"
-                                            style={{
-                                                backgroundColor: colors[index % colors.length],
-                                            }}
-                                        />
-                                        <span
-                                            className="text-[14px] font-medium"
-                                            style={{
-                                                color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
-                                                opacity: activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1
-                                            }}
-                                        >
-                                            {capitaliseCamelCase(dataKey)}
-                                        </span>
-                                    </div>
-                                )) :
-                                keys.map((dataKey, index) => (
-                                    <div
-                                        key={dataKey}
-                                        className="h-4 flex items-center gap-2 cursor-pointer shrink-0"
-                                        onClick={() => handleLegendClick(dataKey)}
-                                    >
-                                        <div
-                                            className="w-3 h-3 rounded-sm"
-                                            style={{
-                                                backgroundColor: colors[index % colors.length],
-                                            }}
-                                        />
-                                        <span
-                                            className="text-[14px] font-medium"
-                                            style={{
-                                                color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
-                                            }}
-                                        >
-                                            {capitaliseCamelCase(dataKey)}
-                                        </span>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                    {activeKeys && activeKeys.length < keys.length && (
-                        <button
-                            className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
-                            onClick={() => setSelectedKeys([])}
-                        >
-                            <RotateCcw className='w-3 h-3' />
-                        </button>
-                    )}
-                </div>
+                <ChartLegends
+                    keys={keys}
+                    activeKeys={activeKeys}
+                    handleLegendClick={handleLegendClick}
+                    colors={colors}
+                    type={type}
+                    setSelectedKeys={setSelectedKeys}
+                />
                 <div>
                     <ResponsiveContainer width={width} height={height}>
                         {renderChart()}
@@ -436,5 +303,6 @@ export const Chart: React.FC<ChartProps> = ({
         </div>
     );
 };
+
 
 export default Chart;
