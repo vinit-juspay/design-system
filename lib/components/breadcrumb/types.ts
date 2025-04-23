@@ -16,6 +16,14 @@ export interface BreadcrumbItemProps {
   className?: string;
 }
 
+/**
+ * Internal props used by the BreadcrumbItem component
+ * Extends the public BreadcrumbItemProps with additional internal properties
+ */
+export interface BreadcrumbItemInternalProps extends BreadcrumbItemProps {
+  isLast?: boolean;
+}
+
 export interface BreadcrumbProps {
   items: BreadcrumbItemProps[];
   variant?: BreadcrumbVariant;
