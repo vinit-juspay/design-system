@@ -3,11 +3,12 @@ import { Meta, StoryObj } from '@storybook/react';
 import Menu from './Menu';
 import Button from '../Button/Button';
 import Search from '../common/Search';
-import { Users, Settings, LogOut, Copy, Trash, Edit, FilePlus, Share, Download, FileText, ChevronRight, AlertTriangle } from 'lucide-react';
+import { Settings, Copy, Trash, Edit, Share, FileText, ChevronRight, AlertTriangle } from 'lucide-react';
+import { ButtonType } from '../Button/types';
 
 // Create mapping of possible trigger components
 const triggerComponents = {
-  'Button': <Button buttonType="secondary">Actions</Button>,
+  'Button': <Button buttonType={ButtonType.SECONDARY}>Actions</Button>,
   'Search': <Search enabled={true} placeholder="Search..." searchQuery="" onSearchChange={() => {}} />,
 };
 
