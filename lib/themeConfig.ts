@@ -474,6 +474,10 @@ export const themeConfig = {
       dropdown: {
         container: 'absolute top-full left-0 mt-1 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48',
         item: 'px-4 py-2 hover:bg-gray-50',
+      },
+      iconSlot: {
+        left: 'inline-flex items-center justify-center w-4.5 h-4.5 mr-1.5',
+        right: 'inline-flex items-center justify-center w-4.5 h-4.5 ml-1.5'
       }
     }
   },

@@ -1,8 +1,4 @@
-export enum BreadcrumbSize {
-  SMALL = 'sm',
-  MEDIUM = 'md',
-  LARGE = 'lg',
-}
+import { ReactNode } from 'react';
 
 export enum BreadcrumbVariant {
   DEFAULT = 'default',
@@ -12,8 +8,11 @@ export enum BreadcrumbVariant {
 export interface BreadcrumbItemProps {
   label: string;
   href?: string;
-  isCurrentPage?: boolean;
   onClick?: () => void;
+  leftSlot?: ReactNode;
+  rightSlot?: ReactNode;
+  showLeftSlot?: boolean;
+  showRightSlot?: boolean;
   className?: string;
 }
 

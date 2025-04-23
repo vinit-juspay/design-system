@@ -2,13 +2,13 @@ import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
 export const getBreadcrumbItemClassNames = (
-  isCurrentPage: boolean
+  isLast: boolean
 ): string => {
   const breadcrumbTheme = themeConfig.euler.breadcrumb;
   
   return cn(
     breadcrumbTheme.item.default,
-    isCurrentPage 
+    isLast 
       ? breadcrumbTheme.item.active
       : breadcrumbTheme.item.hover,
     breadcrumbTheme.sizes.md
@@ -41,3 +41,16 @@ export const getMoreButtonClassNames = (isActive: boolean = false): string => {
       : cn(breadcrumbTheme.moreButton.default, breadcrumbTheme.moreButton.hover)
   );
 };
+
+export function getDropdownClassNames() {
+  const breadcrumbTheme = themeConfig.euler.breadcrumb;
+  
+  return {
+    container: breadcrumbTheme.dropdown.container,
+    item: breadcrumbTheme.dropdown.item,
+  };
+}
+
+export function getIconSlotClassNames(position: 'left' | 'right') {
+  return themeConfig.euler.breadcrumb.iconSlot[position];
+}

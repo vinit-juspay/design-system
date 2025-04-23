@@ -555,7 +555,7 @@ const App = () => {
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Single Breadcrumb</h3>
         <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb items={[{ label: 'Home', isCurrentPage: true }]} />
+          <Breadcrumb variant={BreadcrumbVariant.DEFAULT} items={[{ label: 'Home' }]} />
         </div>
       </div>
 
@@ -564,9 +564,10 @@ const App = () => {
         <h3 className="text-xl font-semibold mb-4">Two-Level Breadcrumb</h3>
         <div className="p-4 border border-gray-200 rounded-md">
           <Breadcrumb
+            variant={BreadcrumbVariant.DEFAULT}
             items={[
               { label: 'Home', href: '#' },
-              { label: 'Products', isCurrentPage: true },
+              { label: 'Products' },
             ]}
           />
         </div>
@@ -577,10 +578,11 @@ const App = () => {
         <h3 className="text-xl font-semibold mb-4">Three-Level Breadcrumb</h3>
         <div className="p-4 border border-gray-200 rounded-md">
           <Breadcrumb
+            variant={BreadcrumbVariant.DEFAULT}
             items={[
               { label: 'Home', href: '#' },
               { label: 'Products', href: '#' },
-              { label: 'Categories', isCurrentPage: true },
+              { label: 'Categories' },
             ]}
           />
         </div>
@@ -591,11 +593,12 @@ const App = () => {
         <h3 className="text-xl font-semibold mb-4">Four-Level Breadcrumb</h3>
         <div className="p-4 border border-gray-200 rounded-md">
           <Breadcrumb
+            variant={BreadcrumbVariant.DEFAULT}
             items={[
               { label: 'Home', href: '#' },
               { label: 'Products', href: '#' },
               { label: 'Categories', href: '#' },
-              { label: 'Electronics', isCurrentPage: true },
+              { label: 'Electronics' },
             ]}
           />
         </div>
@@ -608,11 +611,28 @@ const App = () => {
           <Breadcrumb
             variant={BreadcrumbVariant.TRUNCATED}
             items={[
-              { label: 'Home', href: '#' },
+              { label: 'Home', href: '#', leftSlot: <Home size={18} /> },
               { label: 'Products', href: '#' },
               { label: 'Categories', href: '#' },
               { label: 'Electronics', href: '#' },
-              { label: 'Computers', isCurrentPage: true },
+              { label: 'Devices', href: '#' },
+              { label: 'Laptops', href: '#', rightSlot: <Settings size={18} /> },
+              { label: 'Computers', leftSlot: <Layers size={18} /> },
+            ]}
+          />
+        </div>
+      </div>
+      
+      {/* Breadcrumb with Icon Slots */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Breadcrumb with Icon Slots</h3>
+        <div className="p-4 border border-gray-200 rounded-md">
+          <Breadcrumb
+            variant={BreadcrumbVariant.DEFAULT}
+            items={[
+              { label: 'Home', href: '#', leftSlot: <Home size={18} /> },
+              { label: 'User Settings', href: '#', leftSlot: <User size={18} /> },
+              { label: 'Security', leftSlot: <Lock size={18} />, rightSlot: <AlertCircle size={18} /> },
             ]}
           />
         </div>

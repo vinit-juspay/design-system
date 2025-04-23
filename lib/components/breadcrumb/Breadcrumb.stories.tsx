@@ -1,26 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './index';
 import { BreadcrumbItemProps } from './types';
+import { Home, User, Lock, AlertCircle, ChevronRight } from 'lucide-react';
 
 // Create a wrapper component that uses text inputs instead of object controls
 interface TextInputBreadcrumbProps {
   path?: string;
-  currentPage?: string;
+  hrefs?: string;
+  showLeftSlots?: boolean;
+  showRightSlots?: boolean;
 }
 
-const TextInputBreadcrumb = ({ path = 'Home / Products', currentPage = 'Categories' }: TextInputBreadcrumbProps) => {
+const TextInputBreadcrumb = ({ 
+  path = 'Home / Products / Categories', 
+  hrefs = '/ /products',
+  showLeftSlots = true,
+  showRightSlots = true
+}: TextInputBreadcrumbProps) => {
   // Split the path into segments
   const pathSegments = path.split('/').map(segment => segment.trim());
   
+  // Split the hrefs into segments (by space instead of slash)
+  const hrefSegments = hrefs.split(' ').map(segment => segment.trim()).filter(Boolean);
+  
   // Create items array for the Breadcrumb component
-  const items = [
-    ...pathSegments.map(segment => ({
+  const items = pathSegments.map((segment, index) => {
+    // Add icons based on position
+    let leftSlot, rightSlot;
+    
+    if (index === 0) {
+      leftSlot = <Home size={18} />;
+      rightSlot = <ChevronRight size={18} />;
+    } else if (index === 1) {
+      leftSlot = <User size={18} />;
+      rightSlot = <ChevronRight size={18} />;
+    } else if (index === pathSegments.length - 1) {
+      leftSlot = <Lock size={18} />;
+      rightSlot = <AlertCircle size={18} />;
+    } else {
+      // For any other items, add a default right icon
+      rightSlot = <ChevronRight size={18} />;
+    }
+    
+    return {
       label: segment,
-      href: '#',
-    })),
-    { label: currentPage, isCurrentPage: true }
-  ];
+      href: index < pathSegments.length - 1 && index < hrefSegments.length ? hrefSegments[index] : undefined,
+      ...(leftSlot && { leftSlot, showLeftSlot: showLeftSlots }),
+      ...(rightSlot && { rightSlot, showRightSlot: showRightSlots }),
+    };
+  });
   
   return <Breadcrumb items={items} />;
 };
@@ -35,7 +64,7 @@ const meta: Meta<typeof TextInputBreadcrumb> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Breadcrumb navigation component that automatically truncates paths longer than 4 items and shows a dropdown menu for the hidden items.'
+        component: 'Breadcrumb navigation component that automatically truncates paths longer than 4 items and shows a dropdown menu for the hidden items. The last item is always the current page.'
       }
     }
   },
@@ -43,11 +72,21 @@ const meta: Meta<typeof TextInputBreadcrumb> = {
   argTypes: {
     path: {
       control: 'text',
-      description: 'Path segments separated by / character',
+      description: 'All path segments (including current page) separated by / character',
     },
-    currentPage: {
+    hrefs: {
       control: 'text',
-      description: 'Current page (last breadcrumb item)',
+      description: 'Full URLs for each path segment (except the last one), separated by spaces',
+    },
+    showLeftSlots: {
+      control: 'boolean',
+      name: 'Show Left Icons',
+      description: 'Toggle visibility of left icon slots'
+    },
+    showRightSlots: {
+      control: 'boolean',
+      name: 'Show Right Icons',
+      description: 'Toggle visibility of right icon slots'
     }
   },
 };
@@ -56,41 +95,15 @@ export default meta;
 
 export const Default: TextInputStory = {
   args: {
-    path: 'Home',
-    currentPage: 'Products',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Default breadcrumb with two levels. Add more levels by separating path segments with / character.'
-      }
-    }
-  }
-};
-
-export const ThreeLevels: TextInputStory = {
-  args: {
-    path: 'Home / Products',
-    currentPage: 'Categories',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Three-level breadcrumb navigation.'
-      }
-    }
-  }
-};
-
-export const FourLevels: TextInputStory = {
-  args: {
     path: 'Home / Products / Categories',
-    currentPage: 'Electronics',
+    hrefs: '/ /products',
+    showLeftSlots: true,
+    showRightSlots: true
   },
   parameters: {
     docs: {
       description: {
-        story: 'Four-level breadcrumb navigation - the maximum number of items shown without truncation.'
+        story: 'Default breadcrumb with customizable paths and URLs. Last segment is automatically the current page.'
       }
     }
   }
@@ -98,42 +111,49 @@ export const FourLevels: TextInputStory = {
 
 export const Truncated: TextInputStory = {
   args: {
-    path: 'Home / Products / Categories / Electronics',
-    currentPage: 'Computers',
+    path: 'Home / Products / Categories / Electronics / Devices / Laptops / MacBooks',
+    hrefs: '/ /products /categories /electronics /devices /laptops',
+    showLeftSlots: true,
+    showRightSlots: true
   },
   parameters: {
     docs: {
       description: {
-        story: 'Breadcrumb with more than 4 items is automatically truncated. Middle items are accessible via the dropdown menu.'
+        story: 'Breadcrumb with more than 4 levels automatically showing truncation with dropdown. You will see the first item, ellipsis menu, and last three items.'
       }
     }
   }
 };
 
-export const LongPath: TextInputStory = {
-  args: {
-    path: 'Home / Products / Categories / Electronics / Computers',
-    currentPage: 'Laptops',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Long breadcrumb path with six levels. Only the first, last two items, and the dropdown menu button are shown.'
-      }
-    }
-  }
+// Direct component stories for more complex examples
+export const WithIcons = () => {
+  return (
+    <Breadcrumb
+      items={[
+        { 
+          label: 'Home', 
+          href: '#', 
+          leftSlot: <Home size={18} /> 
+        },
+        { 
+          label: 'User Settings', 
+          href: '#', 
+          leftSlot: <User size={18} /> 
+        },
+        { 
+          label: 'Security', 
+          leftSlot: <Lock size={18} />, 
+          rightSlot: <AlertCircle size={18} /> 
+        },
+      ]}
+    />
+  );
 };
 
-export const WithLongLabels: TextInputStory = {
-  args: {
-    path: 'Home / Category with a very long name that should wrap or truncate / Subcategory with long name',
-    currentPage: 'Product with an extremely long title that demonstrates how the component handles long text',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Breadcrumb with very long item labels to test text wrapping and truncation behavior.'
-      }
+WithIcons.parameters = {
+  docs: {
+    description: {
+      story: 'Breadcrumb items with left and right icon slots for additional visual information.'
     }
   }
 }; 

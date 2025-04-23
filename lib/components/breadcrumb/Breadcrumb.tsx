@@ -1,33 +1,53 @@
 import { forwardRef, useState, useRef, useEffect } from 'react';
 import { BreadcrumbItemProps, BreadcrumbProps, BreadcrumbVariant } from './types';
-import { getBreadcrumbContainerClassNames, getBreadcrumbItemClassNames, getDividerClassNames, getMoreButtonClassNames } from './utils';
+import { getBreadcrumbContainerClassNames, getBreadcrumbItemClassNames, getDividerClassNames, getMoreButtonClassNames, getIconSlotClassNames } from './utils';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 
 const BreadcrumbItem = ({
   label,
   href,
-  isCurrentPage = false,
   onClick,
+  leftSlot,
+  rightSlot,
+  showLeftSlot = true,
+  showRightSlot = true,
   className,
-}: BreadcrumbItemProps) => {
-  const itemClasses = getBreadcrumbItemClassNames(isCurrentPage);
+  isLast = false,
+}: BreadcrumbItemProps & { isLast?: boolean }) => {
+  const itemClasses = getBreadcrumbItemClassNames(isLast);
   
-  if (isCurrentPage) {
-    return <span className={cn(itemClasses, className)} aria-current="page">{label}</span>;
+  const content = (
+    <div className="flex items-center">
+      {leftSlot && showLeftSlot && (
+        <span className={getIconSlotClassNames('left')}>
+          {leftSlot}
+        </span>
+      )}
+      <span className="flex-shrink-0">{label}</span>
+      {rightSlot && showRightSlot && (
+        <span className={getIconSlotClassNames('right')}>
+          {rightSlot}
+        </span>
+      )}
+    </div>
+  );
+  
+  if (isLast) {
+    return <span className={cn(itemClasses, className)} aria-current="page">{content}</span>;
   }
   
   if (href) {
     return (
       <a href={href} className={cn(itemClasses, className)}>
-        {label}
+        {content}
       </a>
     );
   }
   
   return (
     <button onClick={onClick} className={cn(itemClasses, className)}>
-      {label}
+      {content}
     </button>
   );
 };
@@ -36,8 +56,8 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   (
     {
       items,
-      variant = BreadcrumbVariant.DEFAULT,
       className,
+      variant = BreadcrumbVariant.DEFAULT,
     },
     ref
   ) => {
@@ -47,6 +67,12 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     const containerClassName = getBreadcrumbContainerClassNames();
     const breadcrumbTheme = themeConfig.euler.breadcrumb;
     const MAX_ITEMS = 4; // Fixed constant instead of a prop
+    
+    // Process items to ensure last item has no href
+    const processedItems = items.map((item, index) => ({
+      ...item,
+      href: index === items.length - 1 ? undefined : item.href
+    }));
     
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -66,15 +92,15 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       };
     }, []);
     
-    // Show all items if variant is DEFAULT or if items count is less than or equal to MAX_ITEMS
-    if (variant === BreadcrumbVariant.DEFAULT || items.length <= MAX_ITEMS) {
+    // Show all items if variant is DEFAULT or if items count is less than or equal to MAX_ITEMS and variant is TRUNCATED
+    if (variant === BreadcrumbVariant.DEFAULT || (processedItems.length <= MAX_ITEMS && variant === BreadcrumbVariant.TRUNCATED)) {
       return (
         <nav aria-label="Breadcrumb" ref={ref} className={cn(containerClassName, className)}>
           <ol className="flex items-center">
-            {items.map((item, index) => (
+            {processedItems.map((item, index) => (
               <li key={index} className="flex items-center">
-                <BreadcrumbItem {...item} />
-                {index < items.length - 1 && (
+                <BreadcrumbItem {...item} isLast={index === processedItems.length - 1} />
+                {index < processedItems.length - 1 && (
                   <span className={getDividerClassNames()}>/</span>
                 )}
               </li>
@@ -84,22 +110,22 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       );
     }
     
-    // Show truncated view for TRUNCATED variant with more than MAX_ITEMS
-    const firstItems = items.slice(0, 1);
-    const lastItems = items.slice(-2);
-    const moreItems = items.slice(1, -2);
+    // Show truncated view for more than MAX_ITEMS
+    const firstItems = processedItems.slice(0, 1);
+    const lastItems = processedItems.slice(-3);
+    const moreItems = processedItems.slice(1, -3);
     
     return (
       <nav aria-label="Breadcrumb" ref={ref} className={cn(containerClassName, className)}>
         <ol className="flex items-center">
           {/* First item */}
-          <li className="flex items-center">
-            <BreadcrumbItem {...firstItems[0]} />
+          <li key="first" className="flex items-center">
+            <BreadcrumbItem {...firstItems[0]} isLast={false} />
             <span className={getDividerClassNames()}>/</span>
           </li>
           
           {/* More button with dropdown */}
-          <li className="flex items-center relative">
+          <li key="dropdown" className="flex items-center relative">
             <button 
               ref={buttonRef}
               className={getMoreButtonClassNames(showDropdown)} 
@@ -122,6 +148,7 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
                   <div key={index} className={breadcrumbTheme.dropdown.item}>
                     <BreadcrumbItem 
                       {...item} 
+                      isLast={false}
                       onClick={() => {
                         if (item.onClick) item.onClick();
                         setShowDropdown(false);
@@ -137,8 +164,11 @@ const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
           
           {/* Last items */}
           {lastItems.map((item, index) => (
-            <li key={index} className="flex items-center">
-              <BreadcrumbItem {...item} />
+            <li key={`last-${index}`} className="flex items-center">
+              <BreadcrumbItem 
+                {...item} 
+                isLast={index === lastItems.length - 1} 
+              />
               {index < lastItems.length - 1 && (
                 <span className={getDividerClassNames()}>/</span>
               )}
