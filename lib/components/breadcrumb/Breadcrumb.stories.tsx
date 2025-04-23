@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './index';
-import { BreadcrumbItemProps } from './types';
+import { BreadcrumbItemProps, BreadcrumbVariant } from './types';
 import { Home, User, Lock, AlertCircle, ChevronRight } from 'lucide-react';
 
 // Create a wrapper component that uses text inputs instead of object controls
@@ -16,7 +16,7 @@ const TextInputBreadcrumb = ({
   path = 'Home / Products / Categories', 
   hrefs = '/ /products',
   showLeftSlots = true,
-  showRightSlots = true
+  showRightSlots = true,
 }: TextInputBreadcrumbProps) => {
   // Split the path into segments
   const pathSegments = path.split('/').map(segment => segment.trim());
@@ -51,6 +51,7 @@ const TextInputBreadcrumb = ({
     };
   });
   
+  // Truncation is now automatic based on item count
   return <Breadcrumb items={items} />;
 };
 
