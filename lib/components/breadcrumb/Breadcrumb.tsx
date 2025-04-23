@@ -14,7 +14,7 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     {
       items,
       className,
-      variant = BreadcrumbVariant.DEFAULT,
+      variant,
     },
     ref
   ) => {
@@ -143,13 +143,17 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       );
     };
     
-    // Show all items if variant is DEFAULT or if items count is less than or equal to MAX_ITEMS and variant is TRUNCATED
-    if (variant === BreadcrumbVariant.DEFAULT || (processedItems.length <= MAX_ITEMS && variant === BreadcrumbVariant.TRUNCATED)) {
-      return renderFullBreadcrumb();
-    }
+    // Determine if we should truncate based on:
+    // 1. Explicit variant setting (if provided)
+    // 2. Item count (automatically truncate if more than MAX_ITEMS and variant not explicitly set to DEFAULT)
+    const shouldTruncate = 
+      variant === BreadcrumbVariant.TRUNCATED || 
+      (processedItems.length > MAX_ITEMS && variant !== BreadcrumbVariant.DEFAULT);
     
-    // Show truncated view for more than MAX_ITEMS
-    return renderTruncatedBreadcrumb();
+    // Show truncated view if shouldTruncate is true AND there are more than MAX_ITEMS
+    return (processedItems.length > MAX_ITEMS && shouldTruncate) 
+      ? renderTruncatedBreadcrumb() 
+      : renderFullBreadcrumb();
   }
 );
 
