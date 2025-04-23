@@ -4,6 +4,56 @@ import { Button } from '../../../lib/components/Button';
 import { ButtonType, ButtonSize } from '../../../lib/components/Button/types';
 
 const ChartDemo = () => {
+
+
+  const condensedLineChartData = [
+    {
+      name: 'Jan',
+      revenue: {
+        primary: { name: 'Total Revenue', val: 4000 },
+        aux: [{ name: 'Growth', val: '+12%' }]
+      },
+      profit: {
+        primary: { name: 'Net Profit', val: 2400 },
+        aux: [{ name: 'Margin', val: '24%' }]
+      },
+      traffic: {
+        primary: { name: 'Website Traffic', val: 15000 },
+        aux: [{ name: 'Change', val: '+8%' }]
+      }
+    },
+    {
+      name: 'Feb',
+      revenue: {
+        primary: { name: 'Total Revenue', val: 3000 },
+        aux: [{ name: 'Growth', val: '-25%' }]
+      },
+      profit: {
+        primary: { name: 'Net Profit', val: 1398 },
+        aux: [{ name: 'Margin', val: '19%' }]
+      },
+      traffic: {
+        primary: { name: 'Website Traffic', val: 13000 },
+        aux: [{ name: 'Change', val: '-13%' }]
+      }
+    },
+    {
+      name: 'Mar',
+      revenue: {
+        primary: { name: 'Total Revenue', val: 2000 },
+        aux: [{ name: 'Growth', val: '-33%' }]
+      },
+      profit: {
+        primary: { name: 'Net Profit', val: 9800 },
+        aux: [{ name: 'Margin', val: '32%' }]
+      },
+      traffic: {
+        primary: { name: 'Website Traffic', val: 17000 },
+        aux: [{ name: 'Change', val: '+30%' }]
+      }
+    }
+  ];
+  
   const lineChartData = [
     {
       name: 'Jan',
@@ -216,7 +266,7 @@ const ChartDemo = () => {
       }
     }
   ];
-  
+
 
   const pieChartData = [
     {
@@ -248,14 +298,14 @@ const ChartDemo = () => {
   const metrics = ['Revenue Analysis', 'Profit Overview', 'Platform Distribution'];
 
   return (
-    <div className="space-y-8">
 
-      {/* Line Chart */}
-      <div className="space-y-4">
+    <div className='flex flex-col gap-2'>
+
+      <div className='w-full'>
 
         <Chart
           type={ChartType.LINE}
-          data={lineChartData}
+          data={condensedLineChartData}
           dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"
@@ -294,11 +344,10 @@ const ChartDemo = () => {
         />
       </div>
 
-      {/* Bar Chart */}
-      <div className="space-y-4">
+      <div className='w-full'>
         <Chart
           type={ChartType.BAR}
-          data={lineChartData}
+          data={condensedLineChartData}
           dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"
@@ -309,22 +358,23 @@ const ChartDemo = () => {
               buttonType={ButtonType.SECONDARY}
               leadingIcon={Calendar}
               size={ButtonSize.SMALL}
+              onClick={() => {
+                console.log('Calendar clicked');
+              }}
             >
               Last 6 months
             </Button>
           }
-        />
-      </div>
-
-      {/* Pie Chart */}
-      <div className="space-y-4">
-        <Chart
-          type={ChartType.PIE}
-          data={pieChartData}
-          dataKeys={['mobile', 'web', 'desktop']}
-          height={400}
-          metrics={metrics}
-          slot1={
+          slot2={
+            <Button
+              buttonType={ButtonType.SECONDARY}
+              leadingIcon={Filter}
+              size={ButtonSize.SMALL}
+            >
+              Filters
+            </Button>
+          }
+          slot3={
             <Button
               buttonType={ButtonType.SECONDARY}
               leadingIcon={Download}
@@ -336,6 +386,93 @@ const ChartDemo = () => {
         />
       </div>
     </div>
+    // <div className="flex gap-2">
+
+    //   {/* Line Chart */}
+
+
+    //     <Chart
+    //       type={ChartType.LINE}
+    //       data={lineChartData}
+    //       dataKeys={['revenue', 'profit']}
+    //       height={400}
+    //       xAxisLabel="Month"
+    //       yAxisLabel="Amount ($)"
+    //       metrics={metrics}
+    //       slot1={
+    //         <Button
+    //           buttonType={ButtonType.SECONDARY}
+    //           leadingIcon={Calendar}
+    //           size={ButtonSize.SMALL}
+    //           onClick={() => {
+    //             console.log('Calendar clicked');
+    //           }}
+    //         >
+    //           Last 6 months
+    //         </Button>
+    //       }
+    //       slot2={
+    //         <Button
+    //           buttonType={ButtonType.SECONDARY}
+    //           leadingIcon={Filter}
+    //           size={ButtonSize.SMALL}
+    //         >
+    //           Filters
+    //         </Button>
+    //       }
+    //       slot3={
+    //         <Button
+    //           buttonType={ButtonType.SECONDARY}
+    //           leadingIcon={Download}
+    //           size={ButtonSize.SMALL}
+    //         >
+    //           Export
+    //         </Button>
+    //       }
+    //     />
+
+    //   {/* Bar Chart */}
+    //   {/* <div className="space-y-4"> */}
+    //     <Chart
+    //       type={ChartType.BAR}
+    //       data={lineChartData}
+    //       dataKeys={['revenue', 'profit']}
+    //       height={400}
+    //       xAxisLabel="Month"
+    //       yAxisLabel="Amount ($)"
+    //       metrics={metrics}
+    //       slot1={
+    //         <Button
+    //           buttonType={ButtonType.SECONDARY}
+    //           leadingIcon={Calendar}
+    //           size={ButtonSize.SMALL}
+    //         >
+    //           Last 6 months
+    //         </Button>
+    //       }
+    //     />
+    //   {/* </div> */}
+
+    //   {/* Pie Chart */}
+    //   {/* <div className="space-y-4">
+    //     <Chart
+    //       type={ChartType.PIE}
+    //       data={pieChartData}
+    //       dataKeys={['mobile', 'web', 'desktop']}
+    //       height={400}
+    //       metrics={metrics}
+    //       slot1={
+    //         <Button
+    //           buttonType={ButtonType.SECONDARY}
+    //           leadingIcon={Download}
+    //           size={ButtonSize.SMALL}
+    //         >
+    //           Export
+    //         </Button>
+    //       }
+    //     />
+    //   </div> */}
+    // </div>
   );
 };
 

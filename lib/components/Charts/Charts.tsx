@@ -61,7 +61,7 @@ const formatNumber = (value: number | string): string => {
 };
 
 // Transform camelCase to Capitalized Text
-const formatLegendText = (text: string): string => {
+const capitaliseCamelCase = (text: string): string => {
     // Handle empty or null cases
     if (!text) return '';
 
@@ -123,11 +123,6 @@ export const Chart: React.FC<ChartProps> = ({
 
     const transformedData = transformData(data, keys);
 
-
-    useEffect(() => {
-        console.log(selectedKeys)
-    }, [selectedKeys])
-
     const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
         if (!active || !payload || payload.length === 0) {
             return null;
@@ -142,19 +137,19 @@ export const Chart: React.FC<ChartProps> = ({
         if (!nestedData || !nestedData.primary) return null;
 
         return (
-            <div className="bg-gray-0 shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 w-[260px]">
+            <div className="bg-gray-0 shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[180px] max-w-[400px]">
                 <div className='pl-2 relative'>
                     <div
                         className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
                         style={{ backgroundColor: payload[0].color }}
                     ></div>
                     <div className='flex flex-col'>
-                        <h3 className='text-body-md font-600 text-gray-900'>{keyName}</h3>
+                        <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(keyName)}</h3>
                         <label className='font-500 text-body-xs text-gray-400'>{label}</label>
                     </div>
                 </div>
 
-                {/* Primary Value */}
+                {/* Primary Value for the line that is hovered over */}
                 <div className='pl-2 flex flex-col'>
                     <label className='text-body-sm font-500 text-gray-400'>{nestedData.primary.name}</label>
                     <h3 className='text-sm font-600 text-gray-900'>
@@ -169,7 +164,7 @@ export const Chart: React.FC<ChartProps> = ({
                     <div className='flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150'>
                         {nestedData.aux.map((auxItem: any, index: number) => (
                             <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
-                                <span className="text-body-xs text-gray-400 truncate">{auxItem.name}</span>
+                                <span className="atext-body-xs text-gray-400 truncate">{auxItem.name}</span>
                                 <span className="text-body-sm font-600 text-gray-700">
                                     {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
                                 </span>
@@ -232,7 +227,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip content={CustomTooltip} />
+                        <Tooltip content={CustomTooltip} isAnimationActive={false} active={true} />
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -257,17 +252,31 @@ export const Chart: React.FC<ChartProps> = ({
                         data={transformedData}
                         margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
                     >
-                        <CartesianGrid vertical={false} />
+                        <CartesianGrid vertical={false} stroke="#ECEFF3" />
                         <XAxis
                             dataKey="name"
+                            axisLine={false}
+                            tickLine={false}
                             tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+                            dy={10}
                             label={xAxisLabel ? { value: xAxisLabel, position: 'bottom', offset: 15, fill: '#99A0AE', fontSize: 14, fontWeight: 500 } : undefined}
                         />
                         <YAxis
                             width={50}
+                            axisLine={false}
+                            tickLine={false}
                             tickFormatter={(value) => formatNumber(value)}
                             tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
-                            label={yAxisLabel ? { value: yAxisLabel, angle: -90, position: 'left', offset: 10, fill: '#99A0AE', fontSize: 14, fontWeight: 500 } : undefined}
+                            label={yAxisLabel ? {
+                                value: yAxisLabel,
+                                angle: -90,
+                                position: 'insideLeft',
+                                style: { textAnchor: 'middle' },
+                                offset: -15,
+                                fill: '#99A0AE',
+                                fontSize: 14,
+                                fontWeight: 500
+                            } : undefined}
                         />
                         <Tooltip content={CustomTooltip} cursor={{ fill: 'transparent' }} />
                         {keys.map((dataKey, index) => (
@@ -413,7 +422,7 @@ export const Chart: React.FC<ChartProps> = ({
                                                 opacity: activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1
                                             }}
                                         >
-                                            {formatLegendText(dataKey)}
+                                            {capitaliseCamelCase(dataKey)}
                                         </span>
                                     </div>
                                 )) :
@@ -435,7 +444,7 @@ export const Chart: React.FC<ChartProps> = ({
                                                 color: activeKeys && activeKeys.includes(dataKey) ? '#333' : '#717784',
                                             }}
                                         >
-                                            {formatLegendText(dataKey)}
+                                            {capitaliseCamelCase(dataKey)}
                                         </span>
                                     </div>
                                 ))
@@ -445,7 +454,7 @@ export const Chart: React.FC<ChartProps> = ({
                     {activeKeys && activeKeys.length < keys.length && (
                         <button
                             className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
-                            onClick={() => {setSelectedKeys([]); console.log(activeKeys)}}
+                            onClick={() => setSelectedKeys([])}
                         >
                             <RotateCcw className='w-3 h-3' />
                         </button>
