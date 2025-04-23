@@ -1,7 +1,8 @@
-import { Chart, ChartType } from '../../../lib/components/Charts/Charts';
+import { Chart } from '../../../lib/components/Charts/Charts';
 import { Calendar, Download, Filter } from 'lucide-react';
 import { Button } from '../../../lib/components/Button';
 import { ButtonType, ButtonSize } from '../../../lib/components/Button/types';
+import { ChartType } from '../../../lib/components/Charts/utils';
 
 const ChartDemo = () => {
 
@@ -17,10 +18,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 2400 },
         aux: [{ name: 'Margin', val: '24%' }]
       },
-      traffic: {
-        primary: { name: 'Website Traffic', val: 15000 },
-        aux: [{ name: 'Change', val: '+8%' }]
-      }
+      // traffic: {
+      //   primary: { name: 'Website Traffic', val: 15000 },
+      //   aux: [{ name: 'Change', val: '+8%' }]
+      // }
     },
     {
       name: 'Feb',
@@ -32,10 +33,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 1398 },
         aux: [{ name: 'Margin', val: '19%' }]
       },
-      traffic: {
-        primary: { name: 'Website Traffic', val: 13000 },
-        aux: [{ name: 'Change', val: '-13%' }]
-      }
+      // traffic: {
+      //   primary: { name: 'Website Traffic', val: 13000 },
+      //   aux: [{ name: 'Change', val: '-13%' }]
+      // }
     },
     {
       name: 'Mar',
@@ -47,10 +48,10 @@ const ChartDemo = () => {
         primary: { name: 'Net Profit', val: 9800 },
         aux: [{ name: 'Margin', val: '32%' }]
       },
-      traffic: {
-        primary: { name: 'Website Traffic', val: 17000 },
-        aux: [{ name: 'Change', val: '+30%' }]
-      }
+      // traffic: {
+      //   primary: { name: 'Website Traffic', val: 17000 },
+      //   aux: [{ name: 'Change', val: '+30%' }]
+      // }
     }
   ];
   
@@ -305,7 +306,7 @@ const ChartDemo = () => {
 
         <Chart
           type={ChartType.LINE}
-          data={condensedLineChartData}
+          data={lineChartData}
           dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"

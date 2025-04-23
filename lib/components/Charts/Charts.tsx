@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     LineChart,
     Line,
@@ -17,67 +17,7 @@ import {
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import Dropdown from '../Dropdown/Dropdown';
 import { RotateCcw } from 'lucide-react';
-
-export enum ChartType {
-    LINE = 'line',
-    BAR = 'bar',
-    PIE = 'pie'
-}
-
-export interface NestedDataPoint {
-    name: string;
-    [key: string]: any;
-}
-
-export interface ChartProps {
-    type: ChartType;
-    data: NestedDataPoint[];
-    dataKeys?: string[];
-    width?: string | number;
-    height?: string | number;
-    colors?: string[];
-    xAxisLabel?: string;
-    yAxisLabel?: string;
-    metrics?: string[];
-    slot1?: ReactNode;
-    slot2?: ReactNode;
-    slot3?: ReactNode;
-}
-
-// Format number to use K for thousands and M for millions
-const formatNumber = (value: number | string): string => {
-    if (typeof value === 'string') {
-        const parsedValue = parseFloat(value);
-        if (isNaN(parsedValue)) return value;
-        value = parsedValue;
-    }
-    
-    if (value >= 1000000) {
-        return (value / 1000000).toFixed(1) + 'M';
-    } else if (value >= 1000) {
-        return (value / 1000).toFixed(1) + 'K';
-    }
-    return value.toString();
-};
-
-// Transform camelCase to Capitalized Text
-const capitaliseCamelCase = (text: string): string => {
-    // Handle empty or null cases
-    if (!text) return '';
-
-    // Split by capital letters but keep acronyms together
-    const words = text.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);
-    
-    // Capitalize first letter of each word and handle special cases
-    return words.map((word, index) => {
-        // If it's an acronym (all uppercase), keep it as is
-        if (word.toUpperCase() === word && word.length > 1) {
-            return word;
-        }
-        // For normal words, capitalize first letter
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }).join(' ');
-};
+import { capitaliseCamelCase, ChartType, ChartProps, formatNumber, NestedDataPoint } from './utils';
 
 const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
     return data.map(point => {
@@ -123,21 +63,34 @@ export const Chart: React.FC<ChartProps> = ({
 
     const transformedData = transformData(data, keys);
 
-    const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+    const CustomTooltip = ({ active, payload, label, hoveredKey }: TooltipProps<ValueType, NameType> & { hoveredKey: string | null }) => {
         if (!active || !payload || payload.length === 0) {
             return null;
         }
 
-        const keyName = payload[0].dataKey as string;
+        if(hoveredKey === null) {
+            const fallbackKey = keys[0];
+            hoveredKey = fallbackKey;
+        }
 
+        const xAxisValue = payload[0].payload.name;
+        // const xAxisDataPoint = data.find(point => point.name === xAxisValue);
+
+        console.log(hoveredKey, "hoveredKey");
+        
+        const keyName = payload[0].dataKey as string;
+        
         const dataPoint = data.find(point => point.name === label)
         if (!dataPoint) return null;
-
+        
+        
+        const relevantData = dataPoint[hoveredKey];
+        // console.log(hoveredKey, "hoveredKey", relevantData, "relevantData", relevantData.primary.name);
         const nestedData = dataPoint[keyName];
         if (!nestedData || !nestedData.primary) return null;
 
         return (
-            <div className="bg-gray-0 shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[180px] max-w-[400px]">
+            <div  className="bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[180px] !max-w-[200px]">
                 <div className='pl-2 relative'>
                     <div
                         className='absolute top-0.5 left-0 w-1 h-4 rounded-full'
@@ -145,27 +98,25 @@ export const Chart: React.FC<ChartProps> = ({
                     ></div>
                     <div className='flex flex-col'>
                         <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(keyName)}</h3>
-                        <label className='font-500 text-body-xs text-gray-400'>{label}</label>
+                        <label className='font-500 text-body-sm text-gray-400'>{capitaliseCamelCase(xAxisValue)}</label>
                     </div>
                 </div>
 
                 {/* Primary Value for the line that is hovered over */}
                 <div className='pl-2 flex flex-col'>
-                    <label className='text-body-sm font-500 text-gray-400'>{nestedData.primary.name}</label>
-                    <h3 className='text-sm font-600 text-gray-900'>
-                        {typeof nestedData.primary.val === 'number' 
-                            ? formatNumber(nestedData.primary.val) 
-                            : nestedData.primary.val}
+                    <label className='text-body-sm font-500 text-gray-400'>{relevantData.primary.name}</label>
+                    <h3 className='text-sm font-600 text-gray-900 overflow-clip whitespace-nowrap overflow-ellipsis'>
+                            {relevantData.primary.val}
                     </h3>
                 </div>
 
                 {/* Auxiliary Values */}
-                {nestedData.aux && nestedData.aux.length > 0 && (
+                {relevantData.aux && relevantData.aux.length > 0 && (
                     <div className='flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150'>
-                        {nestedData.aux.map((auxItem: any, index: number) => (
+                        {relevantData.aux.map((auxItem: any, index: number) => (
                             <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
-                                <span className="atext-body-xs text-gray-400 truncate">{auxItem.name}</span>
-                                <span className="text-body-sm font-600 text-gray-700">
+                                <span className="text-body-sm text-gray-500 truncate overflow-clip overflow-ellipsis">{auxItem.name}</span>
+                                <span className="text-body-sm font-500 text-gray-700">
                                     {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
                                 </span>
                             </div>
@@ -224,10 +175,10 @@ export const Chart: React.FC<ChartProps> = ({
                                 offset: -15,
                                 fill: '#99A0AE',
                                 fontSize: 14,
-                                fontWeight: 500
+                                fontWeight: 500,
                             } : undefined}
                         />
-                        <Tooltip content={CustomTooltip} isAnimationActive={false} active={true} />
+                            <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey })} active={true}/>
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -278,7 +229,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip content={CustomTooltip} cursor={{ fill: 'transparent' }} />
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey })}/>
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
@@ -406,7 +357,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 keys.map((dataKey, index) => (
                                     <div
                                         key={dataKey}
-                                        className="flex items-center gap-3 pl-1 cursor-pointer shrink-0"
+                                        className="flex items-center gap-2 pl-1 cursor-pointer shrink-0"
                                         onClick={() => handleLegendClick(dataKey)}
                                     >
                                         <div
@@ -429,7 +380,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 keys.map((dataKey, index) => (
                                     <div
                                         key={dataKey}
-                                        className="h-4 flex items-center gap-3 cursor-pointer shrink-0"
+                                        className="h-4 flex items-center gap-2 cursor-pointer shrink-0"
                                         onClick={() => handleLegendClick(dataKey)}
                                     >
                                         <div
