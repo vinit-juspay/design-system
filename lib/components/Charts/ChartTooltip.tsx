@@ -1,7 +1,7 @@
-import { ChartType, formatNumber, NestedDataPoint } from "./utils";
 import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
-import { capitaliseCamelCase } from './utils';
+import { capitaliseCamelCase, formatNumber } from './utils';
+import { ChartType, NestedDataPoint } from './types';
 
 interface CustomTooltipExtraProps {
     hoveredKey: string | null;

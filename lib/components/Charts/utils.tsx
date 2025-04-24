@@ -1,57 +1,19 @@
-import { ReactNode } from "react";
+import { NestedDataPoint } from "./types";
 
-export enum ChartType {
-    LINE = 'line',
-    BAR = 'bar',
-    PIE = 'pie'
+const colorMap: Record<string, string> = {
+    '#8EC5FF': '#BEDBFF',
+    "#00C951": "#B9F8CF",
+    "#C27AFF": "#E9D4FF",
+    "#FB2C36": "#FFC9C9",
+    "#00D492": "#DCFCE7",
+    "#2B7FFF": "#DBEAFE",
+    "#AD46FF": "#F3E8FF",
+    "#FF8904": "#FFEDD4"
 }
 
-export enum ChartLegendPosition {
-    TOP = 'top',
-    RIGHT = 'right',
+export const getAltColor = (color: string) => {
+    return colorMap[color] || color + '4D'; 
 }
-
-export interface NestedDataPoint {
-    name: string;
-    [key: string]: any;
-}
-
-export interface ChartProps {
-    type: ChartType;
-    data: NestedDataPoint[];
-    width?: string | number;
-    height?: string | number;
-    colors?: string[];
-    xAxisLabel?: string;
-    yAxisLabel?: string;
-    metrics?: string[];
-    slot1?: ReactNode;
-    slot2?: ReactNode;
-    slot3?: ReactNode;
-    legendPosition?: ChartLegendPosition;
-}
-
-
-export type ChartLegendsProps = {
-    chartContainerRef: React.RefObject<HTMLDivElement>;
-    keys: string[];
-    activeKeys: string[] | null;
-    handleLegendClick: (dataKey: string) => void;
-    colors: string[];
-    setSelectedKeys: (keys: string[]) => void;
-    stacked?: boolean;
-}
-
-
-export type ChartHeaderProps = {
-    metrics: string[];
-    selectedMetric: string;
-    handleMetricChange: (metric: string) => void;
-    slot1: React.ReactNode;
-    slot2: React.ReactNode;
-    slot3: React.ReactNode;
-}
-
 
 
 export const formatNumber = (value: number | string): string => {
@@ -79,4 +41,29 @@ export const capitaliseCamelCase = (text: string): string => {
         }
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     }).join(' ');
+};
+
+export const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
+    return data.map(point => {
+        const transformed: any = { name: point.name };
+
+        keys.forEach(key => {
+            const nestedData = point[key];
+            if (nestedData && nestedData.primary && nestedData.primary.val !== undefined) {
+                transformed[key] = nestedData.primary.val;
+            }
+        });
+
+        return transformed;
+    });
+};
+
+export const getKeys = (data: NestedDataPoint[]): string[] => {
+    return (data && data.length > 0
+        ? Object.keys(data[0]).filter(key =>
+            key !== 'name' &&
+            typeof data[0][key] === 'object' &&
+            data[0][key] !== null &&
+            data[0][key].primary !== undefined)
+        : []);
 };

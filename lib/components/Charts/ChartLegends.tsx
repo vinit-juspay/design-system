@@ -1,6 +1,6 @@
 import { RotateCcw } from "lucide-react";
 import { capitaliseCamelCase } from "./utils";
-import { ChartLegendsProps } from "./utils";
+import { ChartLegendsProps } from "./types";
 import { useResizeObserver } from "../../hooks/useResizeObserver";
 import React, { useState, useRef, useCallback, useMemo } from "react";
 import { DropdownMenu } from "radix-ui";
@@ -13,7 +13,8 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     colors,
     setSelectedKeys,
     chartContainerRef,
-    stacked = false
+    stacked = false,
+    setHoveredKey
 }) => {
 
     const legendColors = useMemo(
@@ -21,35 +22,13 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         [keys, colors]
     );
 
-
-    if (stacked) return <div className="h-full w-full flex flex-col justify-center gap-2">
-        {
-            keys.map((key, index) => (
-                <div
-                    key={key}
-                    className="h-4 flex items-center gap-2 cursor-pointer justify-start"
-                    onClick={() => handleLegendClick(key)}
-                >
-                    <div
-                        className="w-3 h-3 rounded-sm"
-                        style={{ backgroundColor: legendColors[index] }}
-                    />
-                    <span
-                        className="text-[14px] font-medium"
-                        style={{
-                            color:
-                                activeKeys && activeKeys.includes(key)
-                                    ? "#333"
-                                    : "#717784",
-                        }}
-                    >
-                        {capitaliseCamelCase(key)}
-                    </span>
-                </div>
-            ))
-        }
-    </div>
-
+    if (stacked) return <StackedLegends
+        keys={keys}
+        activeKeys={activeKeys}
+        handleLegendClick={handleLegendClick}
+        colors={legendColors}
+        setSelectedKeys={setSelectedKeys}
+    />
 
     const lastWidth = useRef<number>(0);
     const legendItemsContainerRef = useRef<HTMLDivElement>(null!);
@@ -98,14 +77,17 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     return (
         <div className="flex items-center gap-8 justify-between">
             <div
-                className="flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1 gap-4"
+                className="flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1"
                 ref={legendItemsContainerRef}
             >
                 {keys.slice(0, cuttOffIndex).map((dataKey, index) => (
                     <div
                         key={dataKey}
-                        className="h-4 flex items-center gap-2 cursor-pointer"
+                        className="h-4 flex items-center gap-2 cursor-pointer pr-4"
                         onClick={() => handleLegendClick(dataKey)}
+                        // onMouseEnter={() => setHoveredKey(dataKey)}
+                        // onMouseLeave={() => setHoveredKey(null)}
+                        onMouseOver={() => setHoveredKey(dataKey)}
                     >
                         <div
                             className="w-3 h-3 rounded-sm"
@@ -135,6 +117,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                                     key={dataKey}
                                     className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
                                     onClick={() => handleLegendClick(dataKey)}
+                                    onMouseOver={() => setHoveredKey(dataKey)}
                                 >
                                     {capitaliseCamelCase(dataKey)}
                                 </DropdownMenu.Item>
@@ -152,6 +135,49 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         </div>
     );
 };
+
+
+const StackedLegends: React.FC<{
+    keys: string[];
+    activeKeys: string[] | null;
+    handleLegendClick: (dataKey: string) => void;
+    colors: string[];
+    setSelectedKeys: (keys: string[]) => void;
+}> = ({
+    keys,
+    activeKeys,
+    handleLegendClick,
+    colors,
+    setSelectedKeys,
+}) => {
+        return <div className="h-full w-full flex flex-col justify-center gap-2">
+            {
+                keys.map((key, index) => (
+                    <div
+                        key={key}
+                        className="h-4 flex items-center gap-2 cursor-pointer justify-start"
+                        onClick={() => handleLegendClick(key)}
+                    >
+                        <div
+                            className="w-3 h-3 rounded-sm"
+                            style={{ backgroundColor: colors[index] }}
+                        />
+                        <span
+                            className="text-[14px] font-medium"
+                            style={{
+                                color:
+                                    activeKeys && activeKeys.includes(key)
+                                        ? "#333"
+                                        : "#717784",
+                            }}
+                        >
+                            {capitaliseCamelCase(key)}
+                        </span>
+                    </div>
+                ))
+            }
+        </div>
+    }
 
 ChartLegendsComponent.displayName = "ChartLegends";
 

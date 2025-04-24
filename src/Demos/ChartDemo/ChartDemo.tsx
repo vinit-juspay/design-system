@@ -2,8 +2,10 @@ import { Chart } from '../../../lib/components/Charts/Charts';
 import { Calendar, Download, Filter } from 'lucide-react';
 import { Button } from '../../../lib/components/Button';
 import { ButtonType, ButtonSize } from '../../../lib/components/Button/types';
-import { ChartLegendPosition, ChartType } from '../../../lib/components/Charts/utils';
+
 import { useRef } from 'react';
+import { ChartLegendPosition } from '../../../lib/components/Charts/types';
+import { ChartType } from '../../../lib/components/Charts/types';
 
 const ChartDemo = () => {
 
@@ -55,7 +57,7 @@ const ChartDemo = () => {
       }
     }
   ];
-   
+
   const lineChartData = [
     {
       name: 'Jan',

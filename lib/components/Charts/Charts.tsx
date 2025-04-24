@@ -14,32 +14,20 @@ import {
     Cell
 } from 'recharts';
 
-import { ChartType, ChartProps, formatNumber, NestedDataPoint, ChartLegendPosition } from './utils';
+
 import { CustomTooltip } from './ChartTooltip';
 import { ChartHeader } from './ChartHeader';
 import { ChartLegends } from './ChartLegends';
+import { ChartProps, ChartType, ChartLegendPosition } from './types';
+import { formatNumber, getKeys, transformData } from './utils';
 
-const transformData = (data: NestedDataPoint[], keys: string[]): any[] => {
-    return data.map(point => {
-        const transformed: any = { name: point.name };
-
-        keys.forEach(key => {
-            const nestedData = point[key];
-            if (nestedData && nestedData.primary && nestedData.primary.val !== undefined) {
-                transformed[key] = nestedData.primary.val;
-            }
-        });
-
-        return transformed;
-    });
-};
 
 export const Chart: React.FC<ChartProps> = ({
     type,
     data,
     width = '100%',
     height = "100%",
-    colors = ['#2B7FFF', '#00D492', '#C27AFF', '#FB2C36', '#0088FE'],
+    colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
     xAxisLabel,
     yAxisLabel,
     metrics = [],
@@ -48,22 +36,13 @@ export const Chart: React.FC<ChartProps> = ({
     slot3,
     legendPosition = ChartLegendPosition.TOP
 }) => {
-    // console.log("Chart rendered");
     const chartContainerRef = useRef<HTMLDivElement>(null!);
-    const keys =
-        (data && data.length > 0
-            ? Object.keys(data[0]).filter(key =>
-                key !== 'name' &&
-                typeof data[0][key] === 'object' &&
-                data[0][key] !== null &&
-                data[0][key].primary !== undefined)
-            : []);
+    const keys = getKeys(data);
 
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const [selectedMetric, setSelectedMetric] = useState<string>(metrics.length > 0 ? metrics[0] : '');
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
-
     const transformedData = transformData(data, keys);
 
     const activeKeys = selectedKeys.length > 0 ? selectedKeys : null;
@@ -81,6 +60,8 @@ export const Chart: React.FC<ChartProps> = ({
     const handleMetricChange = (metric: string) => {
         setSelectedMetric(metric);
     };
+
+    console.log(hoveredXValue)
 
     const renderChart = () => {
         switch (type) {
@@ -190,7 +171,6 @@ export const Chart: React.FC<ChartProps> = ({
                     </BarChart>
                 );
             case ChartType.PIE:
-                // Create pie data from the transformed data
                 const pieData = [];
                 for (const point of data) {
                     for (const key of keys) {
@@ -207,7 +187,7 @@ export const Chart: React.FC<ChartProps> = ({
 
                 return (
                     <PieChart margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-                        <Tooltip  content={({ active, payload }) => {
+                        <Tooltip content={({ active, payload }) => {
                             if (!active || !payload || payload.length === 0) return null;
                             const data = payload[0].payload;
 
@@ -255,7 +235,7 @@ export const Chart: React.FC<ChartProps> = ({
                             cy="50%"
                             outerRadius={150}
                             innerRadius={100}
-                            paddingAngle={5}
+                            paddingAngle={0}
                             label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                         >
                             {pieData.map((entry, index) => {
@@ -294,6 +274,7 @@ export const Chart: React.FC<ChartProps> = ({
                     handleLegendClick={handleLegendClick}
                     colors={colors}
                     setSelectedKeys={setSelectedKeys}
+                    setHoveredKey={setHoveredKey}
                 />
                 <div>
                     <ResponsiveContainer width={width} height={height}>
@@ -310,6 +291,7 @@ export const Chart: React.FC<ChartProps> = ({
                         colors={colors}
                         setSelectedKeys={setSelectedKeys}
                         stacked={true}
+                        setHoveredKey={setHoveredKey}
                     />
                 </div>
                 <div className='flex-1 w-full'>

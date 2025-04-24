@@ -5,27 +5,22 @@ import { useRef, useCallback } from "react";
  * The debounced function delays the invocation of the original function until
  * after a specified delay has elapsed since the last time it was invoked.
  *
- * Useful for optimizing performance when reacting to events that can fire frequently,
- * such as window resizing, keystrokes, or mouse movements.
+ * @param fn - The function to debounce.
+ * @param delay - The number of milliseconds to delay the function call.
  *
- * @param {(...args: any[]) => void} fn - The function to debounce.
- * @param {number} delay - The number of milliseconds to delay the function call.
- *
- * @returns {(…args: any[]) => void} - A debounced version of the original function.
+ * @returns A debounced version of the original function.
  *
  * @example
- * const handleResize = () => console.log('Resized!');
- * const debouncedResize = useDebounce(handleResize, 300);
- * 
- * useEffect(() => {
- *   window.addEventListener('resize', debouncedResize);
- *   return () => window.removeEventListener('resize', debouncedResize);
- * }, [debouncedResize]);
+ * const handleInput = (value: string) => console.log(value);
+ * const debouncedInput = useDebounce(handleInput, 300);
  */
-export const useDebounce = (fn: (...args: any[]) => void, delay: number) => {
+export const useDebounce = <Args extends unknown[]>(
+  fn: (...args: Args) => void,
+  delay: number
+): ((...args: Args) => void) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const debouncedFn = useCallback((...args: any[]) => {
+  const debouncedFn = useCallback((...args: Args) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       fn(...args);
