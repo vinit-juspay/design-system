@@ -34,7 +34,11 @@ export const getIconComponentType = (type: SnackbarType) => {
   }
 };
 
-export const useSnackbarLogic = (position: SnackbarPosition, autoClose: boolean, onClose?: () => void) => {
+export const useSnackbarLogic = (
+  position: SnackbarPosition,
+  autoClose: boolean,
+  onClose?: () => void
+) => {
   const [visible, setVisible] = useState(true);
   const positionStyles = getPositionStyles(position);
 
