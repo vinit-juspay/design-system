@@ -10,7 +10,11 @@ import { MenuSide, MenuAlignment, CheckboxPosition } from './types';
 // Create mapping of possible trigger components
 const triggerComponents = {
   'Button': <Button buttonType={ButtonType.SECONDARY}>Actions</Button>,
-  'Search': <Search enabled={true} placeholder="Search..." searchQuery="" onSearchChange={() => {}} />,
+  'Search': (
+    <div className="cursor-pointer">
+      <Search enabled={true} placeholder="Search..." searchQuery="" onSearchChange={() => {}} />
+    </div>
+  ),
 };
 
 /**
@@ -166,15 +170,7 @@ export const WithSearch: Story = {
  */
 export const WithCheckboxes: Story = {
   render: (args) => {
-    const [checkedStates, setCheckedStates] = useState({
-      option1: false,
-      option2: true,
-      option3: false,
-    });
-
-    const handleCheckboxChange = (option: string, checked: boolean) => {
-      setCheckedStates(prev => ({ ...prev, [option]: checked }));
-    };
+    const [selectedValues, setSelectedValues] = useState<string[]>(['option2']);
 
     return (
       <Menu
@@ -184,53 +180,17 @@ export const WithCheckboxes: Story = {
           { 
             content: 'Show notifications', 
             isCheckbox: true, 
-            checked: checkedStates.option1, 
-            onSelect: (checked) => handleCheckboxChange('option1', checked)
-          },
-          { 
-            content: 'Dark mode', 
-            isCheckbox: true, 
-            checked: checkedStates.option2, 
-            onSelect: (checked) => handleCheckboxChange('option2', checked)
-          },
-          { 
-            content: 'Auto-save', 
-            isCheckbox: true, 
-            checked: checkedStates.option3, 
-            onSelect: (checked) => handleCheckboxChange('option3', checked)
-          },
-        ]}
-      />
-    );
-  },
-};
-
-/**
- * Menu with multi-select functionality for selecting multiple options.
- */
-export const WithMultiSelect: Story = {
-  render: (args) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>(['option2']);
-
-    return (
-      <Menu
-        {...args}
-        items={[
-          { isLabel: true, content: 'Select options' },
-          { 
-            content: 'Option 1', 
-            isCheckbox: true, 
             isCheckboxListItem: true,
             value: 'option1'
           },
           { 
-            content: 'Option 2', 
+            content: 'Dark mode', 
             isCheckbox: true, 
             isCheckboxListItem: true,
             value: 'option2'
           },
           { 
-            content: 'Option 3', 
+            content: 'Auto-save', 
             isCheckbox: true, 
             isCheckboxListItem: true,
             value: 'option3'
