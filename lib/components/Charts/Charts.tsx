@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     LineChart,
     Line,
@@ -45,8 +45,10 @@ export const Chart: React.FC<ChartProps> = ({
     metrics = [],
     slot1,
     slot2,
-    slot3
+    slot3,
 }) => {
+    // console.log("Chart rendered");
+    const chartContainerRef = useRef<HTMLDivElement>(null!);
     const keys =
         (data && data.length > 0
             ? Object.keys(data[0]).filter(key =>
@@ -174,7 +176,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })}/>
+                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
@@ -244,7 +246,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 </div>
                             );
                         }} />
-                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })}/>
+                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
                         <Pie
                             data={pieData}
                             dataKey="value"
@@ -275,7 +277,7 @@ export const Chart: React.FC<ChartProps> = ({
     };
 
     return (
-        <div className='w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white'>
+        <div className='w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white' ref={chartContainerRef}>
             <ChartHeader
                 metrics={metrics}
                 selectedMetric={selectedMetric}
@@ -286,11 +288,11 @@ export const Chart: React.FC<ChartProps> = ({
             />
             <div className='py-5 px-4 flex flex-col gap-6'>
                 <ChartLegends
+                    chartContainerRef={chartContainerRef}
                     keys={keys}
                     activeKeys={activeKeys}
                     handleLegendClick={handleLegendClick}
                     colors={colors}
-                    type={type}
                     setSelectedKeys={setSelectedKeys}
                 />
                 <div>

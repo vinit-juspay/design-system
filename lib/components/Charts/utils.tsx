@@ -27,16 +27,13 @@ export interface ChartProps {
 
 
 export type ChartLegendsProps = {
+    chartContainerRef: React.RefObject<HTMLDivElement>;
     keys: string[];
     activeKeys: string[] | null;
     handleLegendClick: (dataKey: string) => void;
     colors: string[];
-    type: ChartType;
     setSelectedKeys: (keys: string[]) => void;
 }
-
-
-
 
 
 export type ChartHeaderProps = {
@@ -56,7 +53,7 @@ export const formatNumber = (value: number | string): string => {
         if (isNaN(parsedValue)) return value;
         value = parsedValue;
     }
-    
+
     if (value >= 1000000) {
         return (value / 1000000).toFixed(1) + 'M';
     } else if (value >= 1000) {

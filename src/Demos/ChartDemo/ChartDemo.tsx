@@ -3,6 +3,7 @@ import { Calendar, Download, Filter } from 'lucide-react';
 import { Button } from '../../../lib/components/Button';
 import { ButtonType, ButtonSize } from '../../../lib/components/Button/types';
 import { ChartType } from '../../../lib/components/Charts/utils';
+import { useRef } from 'react';
 
 const ChartDemo = () => {
 
@@ -54,7 +55,7 @@ const ChartDemo = () => {
       }
     }
   ];
-  
+   
   const lineChartData = [
     {
       name: 'Jan',
@@ -298,16 +299,18 @@ const ChartDemo = () => {
 
   const metrics = ['Revenue Analysis', 'Profit Overview', 'Platform Distribution'];
 
+  const lineChartContainerRef = useRef<HTMLDivElement>(null!);
+  const barChartContainerRef = useRef<HTMLDivElement>(null!);
+  const pieChartContainerRef = useRef<HTMLDivElement>(null!);
   return (
 
     <div className='flex flex-col gap-2'>
 
-      <div className='w-full'>
+      <div className='w-full p-4' ref={lineChartContainerRef}>
 
         <Chart
           type={ChartType.LINE}
           data={lineChartData}
-          // dataKeys={['revenue', 'profit']}
           height={400}
           xAxisLabel="Month"
           yAxisLabel="Amount ($)"
@@ -345,11 +348,10 @@ const ChartDemo = () => {
         />
       </div>
 
-      <div className='w-full mt-7'>
+      <div className='w-full mt-7' ref={barChartContainerRef}>
         <Chart
           type={ChartType.BAR}
-          data={condensedLineChartData}
-          // dataKeys={['revenue', 'profit']}
+          data={lineChartData}
           height={400}
           xAxisLabel="Month"
           yAxisLabel="Amount ($)"
@@ -385,11 +387,10 @@ const ChartDemo = () => {
             </Button>
           }
         />
-        <div className='w-full mt-7'>
+        <div className='w-full mt-7' ref={pieChartContainerRef}>
           <Chart
             type={ChartType.PIE}
             data={pieChartData}
-            // dataKeys={['mobile', 'web', 'desktop']}
             height={400}
             metrics={metrics}
           />
