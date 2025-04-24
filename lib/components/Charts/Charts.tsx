@@ -14,7 +14,7 @@ import {
     Cell
 } from 'recharts';
 
-import { ChartType, ChartProps, formatNumber, NestedDataPoint } from './utils';
+import { ChartType, ChartProps, formatNumber, NestedDataPoint, ChartLegendPosition } from './utils';
 import { CustomTooltip } from './ChartTooltip';
 import { ChartHeader } from './ChartHeader';
 import { ChartLegends } from './ChartLegends';
@@ -38,7 +38,7 @@ export const Chart: React.FC<ChartProps> = ({
     type,
     data,
     width = '100%',
-    height = 400,
+    height = "100%",
     colors = ['#2B7FFF', '#00D492', '#C27AFF', '#FB2C36', '#0088FE'],
     xAxisLabel,
     yAxisLabel,
@@ -46,6 +46,7 @@ export const Chart: React.FC<ChartProps> = ({
     slot1,
     slot2,
     slot3,
+    legendPosition = ChartLegendPosition.TOP
 }) => {
     // console.log("Chart rendered");
     const chartContainerRef = useRef<HTMLDivElement>(null!);
@@ -206,9 +207,8 @@ export const Chart: React.FC<ChartProps> = ({
 
                 return (
                     <PieChart margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-                        <Tooltip active={true} content={({ active, payload }) => {
+                        <Tooltip  content={({ active, payload }) => {
                             if (!active || !payload || payload.length === 0) return null;
-
                             const data = payload[0].payload;
 
                             return (
@@ -286,7 +286,7 @@ export const Chart: React.FC<ChartProps> = ({
                 slot2={slot2}
                 slot3={slot3}
             />
-            <div className='py-5 px-4 flex flex-col gap-6'>
+            {type === ChartType.LINE || type === ChartType.BAR || (type === ChartType.PIE && legendPosition === ChartLegendPosition.TOP) ? <div className='py-5 px-4 flex flex-col gap-6'>
                 <ChartLegends
                     chartContainerRef={chartContainerRef}
                     keys={keys}
@@ -300,7 +300,24 @@ export const Chart: React.FC<ChartProps> = ({
                         {renderChart()}
                     </ResponsiveContainer>
                 </div>
-            </div>
+            </div> : <div className='py-5 px-4 flex flex-row-reverse gap-6'>
+                <div className='w-1/4 flex items-center justify-center'>
+                    <ChartLegends
+                        chartContainerRef={chartContainerRef}
+                        keys={keys}
+                        activeKeys={activeKeys}
+                        handleLegendClick={handleLegendClick}
+                        colors={colors}
+                        setSelectedKeys={setSelectedKeys}
+                        stacked={true}
+                    />
+                </div>
+                <div className='flex-1 w-full'>
+                    <ResponsiveContainer width={width} height={height}>
+                        {renderChart()}
+                    </ResponsiveContainer>
+                </div>
+            </div>}
         </div>
     );
 };

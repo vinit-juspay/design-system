@@ -13,7 +13,44 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     colors,
     setSelectedKeys,
     chartContainerRef,
+    stacked = false
 }) => {
+
+    const legendColors = useMemo(
+        () => keys.map((_, i) => colors[i % colors.length]),
+        [keys, colors]
+    );
+
+
+    if (stacked) return <div className="h-full w-full flex flex-col justify-center gap-2">
+        {
+            keys.map((key, index) => (
+                <div
+                    key={key}
+                    className="h-4 flex items-center gap-2 cursor-pointer justify-start"
+                    onClick={() => handleLegendClick(key)}
+                >
+                    <div
+                        className="w-3 h-3 rounded-sm"
+                        style={{ backgroundColor: legendColors[index] }}
+                    />
+                    <span
+                        className="text-[14px] font-medium"
+                        style={{
+                            color:
+                                activeKeys && activeKeys.includes(key)
+                                    ? "#333"
+                                    : "#717784",
+                        }}
+                    >
+                        {capitaliseCamelCase(key)}
+                    </span>
+                </div>
+            ))
+        }
+    </div>
+
+
     const lastWidth = useRef<number>(0);
     const legendItemsContainerRef = useRef<HTMLDivElement>(null!);
     const [cuttOffIndex, setCuttOffIndex] = useState<number>(keys.length);
@@ -28,7 +65,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     const handleResize = useCallback(() => {
         if (!legendItemsContainerRef.current) return;
         const { right: containerRight } = legendItemsContainerRef.current.getBoundingClientRect();
-        const BUFFER = 100;
+        const BUFFER = 120;
         const legendItems = Array.from(legendItemsContainerRef.current.children);
 
         let currentIndex = 0;
@@ -57,10 +94,6 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         }
     });
 
-    const legendColors = useMemo(
-        () => keys.map((_, i) => colors[i % colors.length]),
-        [keys, colors]
-    );
 
     return (
         <div className="flex items-center gap-8 justify-between">
@@ -96,7 +129,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                         <DropdownMenu.Trigger className="flex items-center gap-2 text-body-md font-medium h-full text-[#525866] hover:text-[#333]">
                             + {keys.length - cuttOffIndex} more
                         </DropdownMenu.Trigger>
-                        <DropdownMenu.Content className="bg-white rounded-md shadow-lg border border-gray-200 min-w-[180px]">
+                        <DropdownMenu.Content className="bg-white z-50 rounded-md shadow-lg border border-gray-200 min-w-[180px]">
                             {keys.slice(cuttOffIndex).map((dataKey) => (
                                 <DropdownMenu.Item
                                     key={dataKey}
@@ -119,5 +152,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         </div>
     );
 };
+
+ChartLegendsComponent.displayName = "ChartLegends";
 
 export const ChartLegends = React.memo(ChartLegendsComponent);

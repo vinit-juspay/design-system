@@ -2,7 +2,7 @@ import { Chart } from '../../../lib/components/Charts/Charts';
 import { Calendar, Download, Filter } from 'lucide-react';
 import { Button } from '../../../lib/components/Button';
 import { ButtonType, ButtonSize } from '../../../lib/components/Button/types';
-import { ChartType } from '../../../lib/components/Charts/utils';
+import { ChartLegendPosition, ChartType } from '../../../lib/components/Charts/utils';
 import { useRef } from 'react';
 
 const ChartDemo = () => {
@@ -351,7 +351,7 @@ const ChartDemo = () => {
       <div className='w-full mt-7' ref={barChartContainerRef}>
         <Chart
           type={ChartType.BAR}
-          data={lineChartData}
+          data={condensedLineChartData}
           height={400}
           xAxisLabel="Month"
           yAxisLabel="Amount ($)"
@@ -393,6 +393,37 @@ const ChartDemo = () => {
             data={pieChartData}
             height={400}
             metrics={metrics}
+            legendPosition={ChartLegendPosition.RIGHT}
+            slot1={
+              <Button
+                buttonType={ButtonType.SECONDARY}
+                leadingIcon={Calendar}
+                size={ButtonSize.SMALL}
+                onClick={() => {
+                  console.log('Calendar clicked');
+                }}
+              >
+                Last 6 months
+              </Button>
+            }
+            slot2={
+              <Button
+                buttonType={ButtonType.SECONDARY}
+                leadingIcon={Filter}
+                size={ButtonSize.SMALL}
+              >
+                Filters
+              </Button>
+            }
+            slot3={
+              <Button
+                buttonType={ButtonType.SECONDARY}
+                leadingIcon={Download}
+                size={ButtonSize.SMALL}
+              >
+                Export
+              </Button>
+            }
           />
         </div>
       </div>

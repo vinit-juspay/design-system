@@ -6,6 +6,11 @@ export enum ChartType {
     PIE = 'pie'
 }
 
+export enum ChartLegendPosition {
+    TOP = 'top',
+    RIGHT = 'right',
+}
+
 export interface NestedDataPoint {
     name: string;
     [key: string]: any;
@@ -23,6 +28,7 @@ export interface ChartProps {
     slot1?: ReactNode;
     slot2?: ReactNode;
     slot3?: ReactNode;
+    legendPosition?: ChartLegendPosition;
 }
 
 
@@ -33,6 +39,7 @@ export type ChartLegendsProps = {
     handleLegendClick: (dataKey: string) => void;
     colors: string[];
     setSelectedKeys: (keys: string[]) => void;
+    stacked?: boolean;
 }
 
 
