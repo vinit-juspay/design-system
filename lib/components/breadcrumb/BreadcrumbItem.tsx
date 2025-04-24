@@ -1,6 +1,7 @@
 import { cn } from '../../utils';
 import { BreadcrumbItemInternalProps } from './types';
 import { getIconSlotClassNames, getBreadcrumbItemClassNames } from './utils';
+import { Button, ButtonSubType, ButtonType } from '../Button';
 
 /**
  * BreadcrumbItem component renders individual items in a breadcrumb trail
@@ -13,8 +14,6 @@ export const BreadcrumbItem = ({
   onClick,
   leftSlot,
   rightSlot,
-  showLeftSlot = true,
-  showRightSlot = true,
   className,
   isLast = false,
 }: BreadcrumbItemInternalProps) => {
@@ -22,13 +21,13 @@ export const BreadcrumbItem = ({
   
   const content = (
     <div className="flex items-center">
-      {leftSlot && showLeftSlot && (
+      {leftSlot && (
         <span className={getIconSlotClassNames('left')}>
           {leftSlot}
         </span>
       )}
       <span className="flex-shrink-0">{label}</span>
-      {rightSlot && showRightSlot && (
+      {rightSlot && (
         <span className={getIconSlotClassNames('right')}>
           {rightSlot}
         </span>
@@ -49,12 +48,13 @@ export const BreadcrumbItem = ({
   }
   
   return (
-    <button 
+    <Button 
       onClick={onClick} 
       className={cn(itemClasses, className)}
-      type="button"
+      buttonType={ButtonType.SECONDARY}
+      subType={ButtonSubType.LINK}
     >
       {content}
-    </button>
+    </Button>
   );
 }; 

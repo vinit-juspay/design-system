@@ -16,8 +16,6 @@ export interface BreadcrumbItemProps {
   onClick?: () => void;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
-  showLeftSlot?: boolean;
-  showRightSlot?: boolean;
   className?: string;
 }
 

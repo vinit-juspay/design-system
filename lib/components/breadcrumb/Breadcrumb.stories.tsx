@@ -44,8 +44,8 @@ const TextInputBreadcrumb = ({
     return {
       label: segment,
       href: index < pathSegments.length - 1 && index < hrefSegments.length ? hrefSegments[index] : undefined,
-      ...(leftSlot && { leftSlot, showLeftSlot: showLeftSlots }),
-      ...(rightSlot && { rightSlot, showRightSlot: showRightSlots }),
+      ...(leftSlot && showLeftSlots && { leftSlot }),
+      ...(rightSlot && showRightSlots && { rightSlot }),
     };
   });
   
