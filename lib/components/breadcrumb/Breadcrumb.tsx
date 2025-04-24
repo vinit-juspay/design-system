@@ -127,17 +127,20 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
             </li>
             
             {/* Last items */}
-            {lastItems.map((item, index) => (
-              <li key={`last-${index}`} className="flex items-center">
-                <BreadcrumbItem 
-                  {...item} 
-                  isLast={index === lastItems.length - 1} 
-                />
-                {index < lastItems.length - 1 && (
-                  <span className={getDividerClassNames()}>/</span>
-                )}
-              </li>
-            ))}
+            {lastItems.map((item, index) => {
+              const isLastItem = index === lastItems.length - 1;
+              return (
+                <li key={`last-${index}`} className="flex items-center">
+                  <BreadcrumbItem 
+                    {...item} 
+                    isLast={isLastItem} 
+                  />
+                  {!isLastItem && (
+                    <span className={getDividerClassNames()}>/</span>
+                  )}
+                </li>
+              );
+            })}
           </ol>
         </nav>
       );
