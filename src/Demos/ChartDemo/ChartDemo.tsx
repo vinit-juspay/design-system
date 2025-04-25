@@ -295,6 +295,13 @@ const ChartDemo = () => {
           { name: 'Users', val: '5K' },
           { name: 'Growth', val: '+5%' }
         ]
+      },
+      tablet: {
+        primary: { name: 'Tablet Revenue', val: 2000 },
+        aux: [
+          { name: 'Users', val: '5K' },
+          { name: 'Growth', val: '+5%' }
+        ]
       }
     }
   ];

@@ -40,7 +40,10 @@ export type ChartLegendsProps = {
   colors: string[];
   setSelectedKeys: (keys: string[]) => void;
   stacked?: boolean;
-  setHoveredKey: (key: string | null) => void;
+  onReset: () => void;
+  handleLegendEnter: (dataKey: string) => void;
+  handleLegendLeave: () => void;
+  hoveredKey: string | null;
 }
 
 

@@ -19,15 +19,24 @@ import { CustomTooltip } from './ChartTooltip';
 import { ChartHeader } from './ChartHeader';
 import { ChartLegends } from './ChartLegends';
 import { ChartProps, ChartType, ChartLegendPosition } from './types';
-import { formatNumber, getKeys, transformData } from './utils';
+import { capitaliseCamelCase, formatNumber, getKeys, transformData } from './utils';
 
+interface PieDataItem {
+    name: string;
+    value: number;
+    dataKey: string;
+    originalData: {
+        primary: { val: number; name: string };
+        aux?: Array<{ name: string; val: number | string }>;
+    };
+}
 
 export const Chart: React.FC<ChartProps> = ({
     type,
     data,
     width = '100%',
     height = "100%",
-    colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
+    colors = ['#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
     xAxisLabel,
     yAxisLabel,
     metrics = [],
@@ -38,30 +47,86 @@ export const Chart: React.FC<ChartProps> = ({
 }) => {
     const chartContainerRef = useRef<HTMLDivElement>(null!);
     const keys = getKeys(data);
-
+    const isChartAnimating = useRef<boolean>(false);
+    const [showingTruncatedData, setShowingTruncatedData] = useState<boolean>(false);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     const [selectedMetric, setSelectedMetric] = useState<string>(metrics.length > 0 ? metrics[0] : '');
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
-    const transformedData = transformData(data, keys);
+
+
+    const transformedData = React.useMemo(() => {
+        const rawTransformed = transformData(data, keys);
+
+        if (!showingTruncatedData && !selectedKeys.length) {
+            return rawTransformed;
+        }
+
+        return rawTransformed.map(item => {
+            const filteredItem: any = { name: item.name };
+            selectedKeys.forEach(key => {
+                if (item[key]) {
+                    filteredItem[key] = item[key];
+                }
+            });
+            return filteredItem;
+        });
+    }, [data, keys, selectedKeys, showingTruncatedData]);
 
     const activeKeys = selectedKeys.length > 0 ? selectedKeys : null;
 
     const handleLegendClick = (dataKey: string) => {
+        setShowingTruncatedData(true);
         setSelectedKeys(prevSelected => {
             if (prevSelected.includes(dataKey)) {
-                return prevSelected.filter(key => key !== dataKey);
+                const newSelected = prevSelected.filter(key => key !== dataKey);
+                if (newSelected.length === 0) {
+                    setShowingTruncatedData(false);
+                }
+                return newSelected;
             } else {
                 return [...prevSelected, dataKey];
             }
         });
+        setHoveredKey(null);
+        // setHoveredXValue(null);
     };
 
     const handleMetricChange = (metric: string) => {
         setSelectedMetric(metric);
     };
 
-    console.log(hoveredXValue)
+    const handleHover = (key: string | null) => {
+        if (!showingTruncatedData) {
+            setHoveredKey(key);
+        }
+    };
+
+    const getElementOpacity = (dataKey: string) => {
+        if (showingTruncatedData) {
+            return activeKeys?.includes(dataKey) ? 1 : 0.3;
+        }
+        return hoveredKey ? (hoveredKey === dataKey ? 1 : 0.3) : 1;
+    };
+
+    const handleReset = () => {
+        setShowingTruncatedData(false);
+        setSelectedKeys([]);
+        setHoveredKey(null);
+        setHoveredXValue(null);
+    };
+
+
+    const handleLegendEnter = (dataKey: string) => {
+        if (isChartAnimating.current || (activeKeys && activeKeys.length > 0)) return;
+        setHoveredKey(dataKey);
+    }
+
+    const handleLegendLeave = () => {
+        console.log("Reached here")
+        console.log('leaving');
+        setHoveredKey(null);
+    }
 
     const renderChart = () => {
         switch (type) {
@@ -98,7 +163,7 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500,
                             } : undefined}
                         />
-                        <Tooltip content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
+                        <Tooltip cursor={{ strokeDasharray: '6 5', stroke: '#99A0AE' }} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
                         {keys.map((dataKey, index) => (
                             <Line
                                 key={dataKey}
@@ -108,11 +173,11 @@ export const Chart: React.FC<ChartProps> = ({
                                 strokeWidth={2}
                                 dot={false}
                                 activeDot={{ r: hoveredKey === dataKey ? 4 : 0 }}
-                                opacity={
-                                    hoveredKey ? (hoveredKey === dataKey ? 1 : 0.3) :
-                                        (activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1)
-                                }
+                                opacity={getElementOpacity(dataKey)}
                                 onMouseOver={() => setHoveredKey(dataKey)}
+                                animationDuration={350}
+                                onAnimationStart={() => isChartAnimating.current = true}
+                                onAnimationEnd={() => isChartAnimating.current = false}
                             />
                         ))}
                     </LineChart>
@@ -158,20 +223,24 @@ export const Chart: React.FC<ChartProps> = ({
                                 fontWeight: 500
                             } : undefined}
                         />
-                        <Tooltip offset={0} cursor={false} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
+                        <Tooltip cursor={{ stroke: '#f3f4f6' }} offset={0} content={(props) => CustomTooltip({ ...props, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type })} />
                         {keys.map((dataKey, index) => (
                             <Bar
                                 key={dataKey}
                                 dataKey={dataKey}
                                 fill={colors[index % colors.length]}
-                                opacity={activeKeys && !activeKeys.includes(dataKey) ? 0.3 : 1}
-                                onMouseOver={() => setHoveredKey(dataKey)}
+                                opacity={getElementOpacity(dataKey)}
+                                // onMouseOver={() => handleHover(dataKey)}
+                                animationDuration={350}
+                                onAnimationStart={() => isChartAnimating.current = true}
+                                onAnimationEnd={() => isChartAnimating.current = false}
+                                radius={[4, 4, 0, 0]}
                             />
                         ))}
                     </BarChart>
                 );
             case ChartType.PIE:
-                const pieData = [];
+                const pieData: PieDataItem[] = [];
                 for (const point of data) {
                     for (const key of keys) {
                         if (point[key] && point[key].primary) {
@@ -199,15 +268,15 @@ export const Chart: React.FC<ChartProps> = ({
                                             style={{ backgroundColor: payload[0].color }}
                                         ></div>
                                         <div className='flex flex-col'>
-                                            <h3 className='text-body-md font-600 text-gray-900'>{data.dataKey}</h3>
+                                            <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(data.dataKey)}</h3>
                                             <label className='font-500 text-body-xs text-gray-400'>{data.name.split(' ')[1].replace(/[()]/g, '')}</label>
                                         </div>
                                     </div>
 
                                     <div className='pl-2 flex flex-col'>
-                                        <label className='text-body-sm font-500 text-gray-400'>{data.originalData.primary.name}</label>
+                                        <label className='text-body-sm font-500 text-gray-400'>{capitaliseCamelCase(data.originalData.primary.name)}</label>
                                         <h3 className='text-sm font-600 text-gray-900'>
-                                            {typeof data.value === 'number' ? formatNumber(data.value) : data.value}
+                                            {data.originalData.primary.val}
                                         </h3>
                                     </div>
 
@@ -236,7 +305,9 @@ export const Chart: React.FC<ChartProps> = ({
                             outerRadius={150}
                             innerRadius={100}
                             paddingAngle={0}
-                            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                            label={false}
+                            onMouseEnter={(_, index) => setHoveredKey(pieData[index].dataKey)}
+                            onMouseLeave={() => setHoveredKey(null)}
                         >
                             {pieData.map((entry, index) => {
                                 const keyIndex = keys.indexOf(entry.dataKey);
@@ -244,7 +315,7 @@ export const Chart: React.FC<ChartProps> = ({
                                     <Cell
                                         key={`cell-${index}`}
                                         fill={colors[keyIndex % colors.length]}
-                                        opacity={activeKeys && !activeKeys.includes(entry.dataKey) ? 0.3 : 1}
+                                        opacity={hoveredKey ? (hoveredKey === entry.dataKey ? 1 : 0.3) : getElementOpacity(entry.dataKey)}
                                     />
                                 );
                             })}
@@ -274,7 +345,10 @@ export const Chart: React.FC<ChartProps> = ({
                     handleLegendClick={handleLegendClick}
                     colors={colors}
                     setSelectedKeys={setSelectedKeys}
-                    setHoveredKey={setHoveredKey}
+                    onReset={handleReset}
+                    handleLegendEnter={handleLegendEnter}
+                    handleLegendLeave={handleLegendLeave}
+                    hoveredKey={hoveredKey}
                 />
                 <div>
                     <ResponsiveContainer width={width} height={height}>
@@ -291,7 +365,10 @@ export const Chart: React.FC<ChartProps> = ({
                         colors={colors}
                         setSelectedKeys={setSelectedKeys}
                         stacked={true}
-                        setHoveredKey={setHoveredKey}
+                        onReset={handleReset}
+                        handleLegendEnter={handleLegendEnter}
+                        handleLegendLeave={handleLegendLeave}
+                        hoveredKey={hoveredKey}
                     />
                 </div>
                 <div className='flex-1 w-full'>

@@ -14,7 +14,10 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     setSelectedKeys,
     chartContainerRef,
     stacked = false,
-    setHoveredKey
+    onReset,
+    handleLegendEnter,
+    handleLegendLeave,
+    hoveredKey
 }) => {
 
     const legendColors = useMemo(
@@ -28,6 +31,8 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         handleLegendClick={handleLegendClick}
         colors={legendColors}
         setSelectedKeys={setSelectedKeys}
+        handleLegendEnter={handleLegendEnter}
+        handleLegendLeave={handleLegendLeave}
     />
 
     const lastWidth = useRef<number>(0);
@@ -83,23 +88,30 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                 {keys.slice(0, cuttOffIndex).map((dataKey, index) => (
                     <div
                         key={dataKey}
-                        className="h-4 flex items-center gap-2 cursor-pointer pr-4"
+                        className="h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300"
                         onClick={() => handleLegendClick(dataKey)}
-                        // onMouseEnter={() => setHoveredKey(dataKey)}
-                        // onMouseLeave={() => setHoveredKey(null)}
-                        onMouseOver={() => setHoveredKey(dataKey)}
+                        onMouseEnter={() => handleLegendEnter(dataKey)}
+                        onMouseLeave={() => handleLegendLeave()}
                     >
                         <div
                             className="w-3 h-3 rounded-sm"
-                            style={{ backgroundColor: legendColors[index] }}
+                            style={{
+                                backgroundColor: colors[index],
+                                opacity: hoveredKey ?
+                                    (hoveredKey === dataKey ? 1 : 0.4) :
+                                    (activeKeys && activeKeys.length > 0 ?
+                                        (activeKeys.includes(dataKey) ? 1 : 0.4) :
+                                        1)
+                            }}
                         />
                         <span
                             className="text-[14px] font-medium"
                             style={{
-                                color:
-                                    activeKeys && activeKeys.includes(dataKey)
-                                        ? "#333"
-                                        : "#717784",
+                                color: hoveredKey ?
+                                    (hoveredKey === dataKey ? "#333" : "#99A0AE") :
+                                    (activeKeys && activeKeys.length > 0 ?
+                                        (activeKeys.includes(dataKey) ? "#333" : "#D1D5DB") :
+                                        "#333")
                             }}
                         >
                             {capitaliseCamelCase(dataKey)}
@@ -117,7 +129,9 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                                     key={dataKey}
                                     className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
                                     onClick={() => handleLegendClick(dataKey)}
-                                    onMouseOver={() => setHoveredKey(dataKey)}
+                                    // onMouseOver={() => setHoveredKey(dataKey)}
+                                    onMouseEnter={() => handleLegendEnter(dataKey)}
+                                    onMouseLeave={handleLegendLeave}
                                 >
                                     {capitaliseCamelCase(dataKey)}
                                 </DropdownMenu.Item>
@@ -126,12 +140,14 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                     </DropdownMenu.Root>
                 )}
             </div>
-            {activeKeys && activeKeys.length > 0 && <button
-                className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
-                onClick={() => setSelectedKeys([])}
-            >
-                <RotateCcw className="w-3 h-3" />
-            </button>}
+            {activeKeys && activeKeys.length > 0 && activeKeys.length !== keys.length && (
+                <button
+                    className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
+                    onClick={onReset}
+                >
+                    <RotateCcw className="w-3 h-3" />
+                </button>
+            )}
         </div>
     );
 };
@@ -143,12 +159,16 @@ const StackedLegends: React.FC<{
     handleLegendClick: (dataKey: string) => void;
     colors: string[];
     setSelectedKeys: (keys: string[]) => void;
+    handleLegendEnter: (dataKey: string) => void;
+    handleLegendLeave: () => void;
 }> = ({
     keys,
     activeKeys,
     handleLegendClick,
     colors,
     setSelectedKeys,
+    handleLegendEnter,
+    handleLegendLeave
 }) => {
         return <div className="h-full w-full flex flex-col justify-center gap-2">
             {
@@ -157,6 +177,8 @@ const StackedLegends: React.FC<{
                         key={key}
                         className="h-4 flex items-center gap-2 cursor-pointer justify-start"
                         onClick={() => handleLegendClick(key)}
+                        onMouseEnter={() => handleLegendEnter(key)}
+                        onMouseLeave={handleLegendLeave}
                     >
                         <div
                             className="w-3 h-3 rounded-sm"
