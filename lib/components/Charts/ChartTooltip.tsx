@@ -25,7 +25,6 @@ export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKe
     }
 
     const xAxisValue = payload[0].payload.name;
-    const keyName = payload[0].dataKey as string;
 
     const dataPoint = data.find(point => point.name === label)
     if (!dataPoint) return null;

@@ -35,7 +35,7 @@ export const formatNumber = (value: number | string): string => {
 export const capitaliseCamelCase = (text: string): string => {
     if (!text) return '';
     const words = text.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);
-    return words.map((word, index) => {
+    return words.map((word) => {
         if (word.toUpperCase() === word && word.length > 1) {
             return word;
         }
