@@ -1,5 +1,3 @@
-import { themeConfig } from '../../themeConfig';
-
 /**
  * Filter items based on search query
  * 

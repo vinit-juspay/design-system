@@ -81,7 +81,6 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       const firstItems = processedItems.slice(0, 1);
       const lastItems = processedItems.slice(-3);
       const moreItems = processedItems.slice(1, -3);
-      const totalItems = processedItems.length;
 
       // Override isActive on all items to ensure consistent styling
       // Only the very last item should have isActive=true
