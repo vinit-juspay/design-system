@@ -12,27 +12,20 @@ const AlertExample = () => {
       {showDefaultAlert && (
         <Alert
           heading="Info Heading"
+          description="This is body message of the information bar which now you have successfully read. This text is going to a run a bit longer so that you can see how spacing in info bar body works"
           onClose={() => setShowDefaultAlert(false)}
-          actions={[{ label: 'Send Alert', onClick: () => console.log('Alert sent') }]}
-        >
-          This is body message of the information bar which now you have successfully read. This
-          text is going to a run a bit longer so that you can see how spacing in info bar body works
-        </Alert>
+        />
       )}
 
       {showRightActionsAlert && (
         <Alert
           heading="Info Heading"
-          variant={AlertVariant.ACTIONS_RIGHT}
+          description="This is body message of the information bar which now you have successfully read. This text is going to a run a bit longer so that you can see how spacing in info bar body works"
+          variant={AlertVariant.ERROR}
           onClose={() => setShowRightActionsAlert(false)}
-          actions={[
-            { label: 'Send Alert', onClick: () => console.log('Alert sent') },
-            { label: 'Send a Message', onClick: () => console.log('Message sent') },
-          ]}
-        >
-          This is body message of the information bar which now you have successfully read. This
-          text is going to a run a bit longer so that you can see how spacing in info bar body works
-        </Alert>
+          primaryAction={{ label: 'Send Alert', onClick: () => console.log('Alert sent') }}
+          secondaryAction={{ label: 'Send a Message', onClick: () => console.log('Message sent') }}
+        />
       )}
     </div>
   );
