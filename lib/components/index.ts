@@ -4,4 +4,6 @@ export * from './Snackbar';
 export * from './Tag';
 export * from './Tabs';
 export * from './Tooltip';
-export * from "./Charts"
+export * from "./Charts";
+export * from './Breadcrumb';
+export * from './Menu';

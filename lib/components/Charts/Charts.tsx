@@ -37,7 +37,7 @@ export const Chart: React.FC<ChartProps> = ({
     data,
     width = '100%',
     height = "100%",
-    colors = ['#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
+    colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
     xAxisLabel,
     yAxisLabel,
     slot1,
