@@ -5,11 +5,7 @@ import { BreadcrumbItem } from './BreadcrumbItem';
 import { BreadcrumbProps, BreadcrumbVariant } from './types';
 import { getBreadcrumbContainerClassNames, getDividerClassNames, getMoreButtonClassNames } from './utils';
 
-/**
- * Breadcrumb component renders a navigation trail showing the user's location
- * in the application hierarchy. It supports both standard and truncated displays.
- */
-export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
+const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
   (
     {
       items,
@@ -25,14 +21,12 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     const breadcrumbTheme = themeConfig.euler.breadcrumb;
     const MAX_ITEMS = 4; // Fixed constant instead of a prop
 
-    // Process items to ensure last item has no href and mark active state
     const processedItems = items.map((item, index) => ({
       ...item,
       href: index === items.length - 1 ? undefined : item.href,
-      isActive: index === items.length - 1 // Only the very last item is active
+      isActive: index === items.length - 1
     }));
 
-    // Handle clicks outside dropdown to close it
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -51,10 +45,6 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       };
     }, []);
 
-    /**
-     * Renders all items in a single row
-     * Used when variant is DEFAULT or when there aren't many items
-     */
     const renderFullBreadcrumb = () => (
       <nav aria-label="Breadcrumb" ref={ref} className={cn(containerClassName, className)}>
         <ol className="flex items-center gap-2">
@@ -73,17 +63,11 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       </nav>
     );
 
-    /**
-     * Renders a truncated breadcrumb with dropdown for hidden middle items
-     * Used when variant is TRUNCATED and there are many items
-     */
     const renderTruncatedBreadcrumb = () => {
       const firstItems = processedItems.slice(0, 1);
       const lastItems = processedItems.slice(-3);
       const moreItems = processedItems.slice(1, -3);
 
-      // Override isActive on all items to ensure consistent styling
-      // Only the very last item should have isActive=true
       firstItems.forEach(item => item.isActive = false);
       moreItems.forEach(item => item.isActive = false);
       lastItems.forEach((item, index) => {
@@ -162,14 +146,10 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       );
     };
 
-    // Determine if we should truncate based on:
-    // 1. Explicit variant setting (if provided)
-    // 2. Item count (automatically truncate if more than MAX_ITEMS and variant not explicitly set to DEFAULT)
     const shouldTruncate =
       variant === BreadcrumbVariant.TRUNCATED ||
       (processedItems.length > MAX_ITEMS && variant !== BreadcrumbVariant.DEFAULT);
 
-    // Show truncated view if shouldTruncate is true AND there are more than MAX_ITEMS
     return (processedItems.length > MAX_ITEMS && shouldTruncate)
       ? renderTruncatedBreadcrumb()
       : renderFullBreadcrumb();
