@@ -1,7 +1,8 @@
 import { cn } from '../../utils';
-import { BreadcrumbItemInternalProps } from './types';
-import { getIconSlotClassNames, getBreadcrumbItemClassNames } from './utils';
+
 import { Button, ButtonSubType, ButtonType } from '../Button';
+import { BreadcrumbItemInternalProps } from './types';
+import { getBreadcrumbItemClassNames, getIconSlotClassNames } from './utils';
 
 /**
  * BreadcrumbItem component renders individual items in a breadcrumb trail

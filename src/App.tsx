@@ -21,7 +21,7 @@ import {
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, Breadcrumb } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
-import { BreadcrumbVariant } from '../lib/components/breadcrumb/types';
+import { BreadcrumbVariant } from '../lib/components/Breadcrumb/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
@@ -41,66 +41,60 @@ const App = () => {
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <button
                 onClick={() => setActiveComponent('buttons')}
-                className={`${
-                  activeComponent === 'buttons'
+                className={`${activeComponent === 'buttons'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Layers className="mr-2 h-5 w-5" />
                 Buttons
               </button>
               <button
                 onClick={() => setActiveComponent('tooltips')}
-                className={`${
-                  activeComponent === 'tooltips'
+                className={`${activeComponent === 'tooltips'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Info className="mr-2 h-5 w-5" />
                 Tooltips
               </button>
               <button
                 onClick={() => setActiveComponent('tags')}
-                className={`${
-                  activeComponent === 'tags'
+                className={`${activeComponent === 'tags'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <TagIcon className="mr-2 h-5 w-5" />
                 Tags
               </button>
               <button
                 onClick={() => setActiveComponent('tabs')}
-                className={`${
-                  activeComponent === 'tabs'
+                className={`${activeComponent === 'tabs'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Tabs
               </button>
               <button
                 onClick={() => setActiveComponent('alerts')}
-                className={`${
-                  activeComponent === 'alerts'
+                className={`${activeComponent === 'alerts'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
               </button>
               <button
                 onClick={() => setActiveComponent('breadcrumbs')}
-                className={`${
-                  activeComponent === 'breadcrumbs'
+                className={`${activeComponent === 'breadcrumbs'
                     ? 'border-blue-500 text-gray-900'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <ChevronRight className="mr-2 h-5 w-5" />
                 Breadcrumbs
@@ -120,66 +114,60 @@ const App = () => {
         <div className="pt-2 pb-3 space-y-1">
           <button
             onClick={() => setActiveComponent('buttons')}
-            className={`${
-              activeComponent === 'buttons'
+            className={`${activeComponent === 'buttons'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Layers className="mr-3 h-5 w-5" />
             Buttons
           </button>
           <button
             onClick={() => setActiveComponent('tooltips')}
-            className={`${
-              activeComponent === 'tooltips'
+            className={`${activeComponent === 'tooltips'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
             Tooltips
           </button>
           <button
             onClick={() => setActiveComponent('tags')}
-            className={`${
-              activeComponent === 'tags'
+            className={`${activeComponent === 'tags'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <TagIcon className="mr-3 h-5 w-5" />
             Tags
           </button>
           <button
             onClick={() => setActiveComponent('tabs')}
-            className={`${
-              activeComponent === 'tabs'
+            className={`${activeComponent === 'tabs'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Settings className="mr-3 h-5 w-5" />
             Tabs
           </button>
           <button
             onClick={() => setActiveComponent('alerts')}
-            className={`${
-              activeComponent === 'alerts'
+            className={`${activeComponent === 'alerts'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
           </button>
           <button
             onClick={() => setActiveComponent('breadcrumbs')}
-            className={`${
-              activeComponent === 'breadcrumbs'
+            className={`${activeComponent === 'breadcrumbs'
                 ? 'bg-blue-50 border-blue-500 text-blue-700'
                 : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <ChevronRight className="mr-3 h-5 w-5" />
             Breadcrumbs
@@ -622,7 +610,7 @@ const App = () => {
           />
         </div>
       </div>
-      
+
       {/* Breadcrumb with Icon Slots */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Breadcrumb with Icon Slots</h3>
