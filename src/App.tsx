@@ -16,19 +16,17 @@ import {
   Home,
   Bell,
   Menu,
-  ChevronRight,
 } from 'lucide-react';
-import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, Breadcrumb } from '../lib/main';
+import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
-import { BreadcrumbVariant } from '../lib/components/Breadcrumb/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'breadcrumbs'
-  >('breadcrumbs');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts'
+  >('buttons');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -42,8 +40,8 @@ const App = () => {
               <button
                 onClick={() => setActiveComponent('buttons')}
                 className={`${activeComponent === 'buttons'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Layers className="mr-2 h-5 w-5" />
@@ -52,8 +50,8 @@ const App = () => {
               <button
                 onClick={() => setActiveComponent('tooltips')}
                 className={`${activeComponent === 'tooltips'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Info className="mr-2 h-5 w-5" />
@@ -62,8 +60,8 @@ const App = () => {
               <button
                 onClick={() => setActiveComponent('tags')}
                 className={`${activeComponent === 'tags'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <TagIcon className="mr-2 h-5 w-5" />
@@ -72,8 +70,8 @@ const App = () => {
               <button
                 onClick={() => setActiveComponent('tabs')}
                 className={`${activeComponent === 'tabs'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Settings className="mr-2 h-5 w-5" />
@@ -82,22 +80,12 @@ const App = () => {
               <button
                 onClick={() => setActiveComponent('alerts')}
                 className={`${activeComponent === 'alerts'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
                   } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
-              </button>
-              <button
-                onClick={() => setActiveComponent('breadcrumbs')}
-                className={`${activeComponent === 'breadcrumbs'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <ChevronRight className="mr-2 h-5 w-5" />
-                Breadcrumbs
               </button>
             </div>
           </div>
@@ -115,8 +103,8 @@ const App = () => {
           <button
             onClick={() => setActiveComponent('buttons')}
             className={`${activeComponent === 'buttons'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
               } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Layers className="mr-3 h-5 w-5" />
@@ -125,8 +113,8 @@ const App = () => {
           <button
             onClick={() => setActiveComponent('tooltips')}
             className={`${activeComponent === 'tooltips'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
               } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
@@ -135,8 +123,8 @@ const App = () => {
           <button
             onClick={() => setActiveComponent('tags')}
             className={`${activeComponent === 'tags'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
               } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <TagIcon className="mr-3 h-5 w-5" />
@@ -145,8 +133,8 @@ const App = () => {
           <button
             onClick={() => setActiveComponent('tabs')}
             className={`${activeComponent === 'tabs'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
               } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Settings className="mr-3 h-5 w-5" />
@@ -155,22 +143,12 @@ const App = () => {
           <button
             onClick={() => setActiveComponent('alerts')}
             className={`${activeComponent === 'alerts'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
               } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
-          </button>
-          <button
-            onClick={() => setActiveComponent('breadcrumbs')}
-            className={`${activeComponent === 'breadcrumbs'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <ChevronRight className="mr-3 h-5 w-5" />
-            Breadcrumbs
           </button>
         </div>
       </div>
@@ -535,99 +513,6 @@ const App = () => {
 
   const renderAlerts = () => <AlertDemo />;
 
-  const renderBreadcrumbs = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Breadcrumb Examples</h2>
-
-      {/* Single Breadcrumb */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Single Breadcrumb</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb variant={BreadcrumbVariant.DEFAULT} items={[{ label: 'Home' }]} />
-        </div>
-      </div>
-
-      {/* Two-Level Breadcrumb */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Two-Level Breadcrumb</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb
-            variant={BreadcrumbVariant.DEFAULT}
-            items={[
-              { label: 'Home', href: '#' },
-              { label: 'Products' },
-            ]}
-          />
-        </div>
-      </div>
-
-      {/* Three-Level Breadcrumb */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Three-Level Breadcrumb</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb
-            variant={BreadcrumbVariant.DEFAULT}
-            items={[
-              { label: 'Home', href: '#' },
-              { label: 'Products', href: '#' },
-              { label: 'Categories' },
-            ]}
-          />
-        </div>
-      </div>
-
-      {/* Four-Level Breadcrumb */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Four-Level Breadcrumb</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb
-            variant={BreadcrumbVariant.DEFAULT}
-            items={[
-              { label: 'Home', href: '#' },
-              { label: 'Products', href: '#' },
-              { label: 'Categories', href: '#' },
-              { label: 'Electronics' },
-            ]}
-          />
-        </div>
-      </div>
-
-      {/* Multiple Breadcrumb with Truncation */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Multiple Breadcrumb with Truncation</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb
-            variant={BreadcrumbVariant.TRUNCATED}
-            items={[
-              { label: 'Home', href: '#', leftSlot: <Home size={18} /> },
-              { label: 'Products', href: '#' },
-              { label: 'Categories', href: '#' },
-              { label: 'Electronics', href: '#' },
-              { label: 'Devices', href: '#' },
-              { label: 'Laptops', href: '#', rightSlot: <Settings size={18} /> },
-              { label: 'Computers', leftSlot: <Layers size={18} /> },
-            ]}
-          />
-        </div>
-      </div>
-
-      {/* Breadcrumb with Icon Slots */}
-      <div className="mt-6">
-        <h3 className="text-xl font-semibold mb-4">Breadcrumb with Icon Slots</h3>
-        <div className="p-4 border border-gray-200 rounded-md">
-          <Breadcrumb
-            variant={BreadcrumbVariant.DEFAULT}
-            items={[
-              { label: 'Home', href: '#', leftSlot: <Home size={18} /> },
-              { label: 'User Settings', href: '#', leftSlot: <User size={18} /> },
-              { label: 'Security', leftSlot: <Lock size={18} />, rightSlot: <AlertCircle size={18} /> },
-            ]}
-          />
-        </div>
-      </div>
-    </>
-  );
-
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -638,7 +523,6 @@ const App = () => {
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
           {activeComponent === 'alerts' && renderAlerts()}
-          {activeComponent === 'breadcrumbs' && renderBreadcrumbs()}
         </div>
       </div>
     </div>
