@@ -17,9 +17,7 @@ import {
   Bell,
   Menu,
   ChevronRight,
-  ChevronRight,
 } from 'lucide-react';
-import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, Breadcrumb } from '../lib/main';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, Breadcrumb } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
@@ -29,8 +27,6 @@ import AlertDemo from './Demos/AlertDemo/AlertDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'breadcrumbs'
-  >('breadcrumbs');
     'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'breadcrumbs'
   >('breadcrumbs');
 

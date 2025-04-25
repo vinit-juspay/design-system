@@ -1,9 +1,9 @@
 import { forwardRef, useState, useRef, useEffect } from 'react';
-import { BreadcrumbProps, BreadcrumbVariant } from './types';
-import { getBreadcrumbContainerClassNames, getDividerClassNames, getMoreButtonClassNames } from './utils';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 import { BreadcrumbItem } from './BreadcrumbItem';
+import { BreadcrumbProps, BreadcrumbVariant } from './types';
+import { getBreadcrumbContainerClassNames, getDividerClassNames, getMoreButtonClassNames } from './utils';
 
 /**
  * Breadcrumb component renders a navigation trail showing the user's location
