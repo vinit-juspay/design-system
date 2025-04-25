@@ -2,6 +2,7 @@ import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { capitaliseCamelCase, formatNumber } from './utils';
 import { ChartType, NestedDataPoint } from './types';
+import { getChartTooltipContainer } from './themeUtils';
 
 interface CustomTooltipExtraProps {
     hoveredKey: string | null;
@@ -11,7 +12,6 @@ interface CustomTooltipExtraProps {
     hoveredXValue: string | null;
     type: ChartType;
 }
-
 
 export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKey, data, keys, hoveredXValue, type }: TooltipProps<ValueType, NameType> & CustomTooltipExtraProps) => {
     if (!active || !payload || payload.length === 0) {
@@ -45,7 +45,7 @@ export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKe
 
 
     return (
-        <div className="bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]">
+        <div className={getChartTooltipContainer()}>
             {type === ChartType.LINE && (
                 <>
                     <div className='pl-2 relative'>
@@ -88,10 +88,9 @@ export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKe
                     <div className='relative '>
                         <div className='flex flex-col '>
                             <h3 className='text-body-md font-500 text-gray-400'>{capitaliseCamelCase(xAxisValue)}</h3>
-                            {/* <label className='font-500 text-body-sm text-gray-400'>{capitaliseCamelCase(xAxisValue)}</label> */}
                         </div>
 
-                        <div className=" mt-3 space-y-3">
+                        <div className="mt-3 space-y-3">
                             {relevantData && Object.keys(relevantData)
                                 .filter(key => key !== 'name')
                                 .map((key, index) => (
@@ -104,13 +103,6 @@ export const CustomTooltip = ({ active, payload, label, hoveredKey, setHoveredKe
                                     </div>
                                 ))}
                         </div>
-                    </div>
-                </>
-            )}
-            {type === ChartType.PIE && (
-                <>
-                    <div className='flex flex-col'>
-                        <h3 className='text-body-md font-600 text-gray-900'>{capitaliseCamelCase(hoveredKey)}</h3>
                     </div>
                 </>
             )}

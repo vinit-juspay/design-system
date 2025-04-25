@@ -319,6 +319,17 @@ const ChartDemo = () => {
 
         <Chart
           type={ChartType.LINE}
+          chartHeaderSlot={
+            <div className='flex items-center gap-2'>
+              <Button
+                buttonType={ButtonType.SECONDARY}
+                leadingIcon={Calendar}
+                size={ButtonSize.SMALL}
+              >
+                Last 6 months
+              </Button>
+            </div>
+          }
           data={lineChartData}
           height={400}
           xAxisLabel="Month"
@@ -359,6 +370,17 @@ const ChartDemo = () => {
 
       <div className='w-full mt-7' ref={barChartContainerRef}>
         <Chart
+          chartHeaderSlot={
+            <div className='flex items-center gap-2'>
+              <Button
+                buttonType={ButtonType.SECONDARY}
+                leadingIcon={Calendar}
+                size={ButtonSize.SMALL}
+              >
+                Last 6 months
+              </Button>
+            </div>
+          }
           type={ChartType.BAR}
           data={condensedLineChartData}
           height={400}
@@ -398,6 +420,17 @@ const ChartDemo = () => {
         />
         <div className='w-full mt-7' ref={pieChartContainerRef}>
           <Chart
+            chartHeaderSlot={
+              <div className='flex items-center gap-2'>
+                <Button
+                  buttonType={ButtonType.SECONDARY}
+                  leadingIcon={Calendar}
+                  size={ButtonSize.SMALL}
+                >
+                  Last 6 months
+                </Button>
+              </div>
+            }
             type={ChartType.PIE}
             data={pieChartData}
             height={400}

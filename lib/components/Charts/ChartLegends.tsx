@@ -5,7 +5,7 @@ import { useResizeObserver } from "../../hooks/useResizeObserver";
 import React, { useState, useRef, useCallback, useMemo } from "react";
 import { DropdownMenu } from "radix-ui";
 import { useDebounce } from "../../hooks/useDebounce";
-
+import { getChartLegendContainer, getChartLegendItem, getChartLegendItemsContainer, getChartLegendMarker, getChartLegendResetButton } from "./themeUtils";
 const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     keys,
     activeKeys,
@@ -80,21 +80,21 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
 
 
     return (
-        <div className="flex items-center gap-8 justify-between">
+        <div className={getChartLegendContainer()}>
             <div
-                className="flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1"
+                className={getChartLegendItemsContainer()}
                 ref={legendItemsContainerRef}
             >
                 {keys.slice(0, cuttOffIndex).map((dataKey, index) => (
                     <div
                         key={dataKey}
-                        className="h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300"
+                        className={getChartLegendItem()}
                         onClick={() => handleLegendClick(dataKey)}
                         onMouseEnter={() => handleLegendEnter(dataKey)}
                         onMouseLeave={() => handleLegendLeave()}
                     >
                         <div
-                            className="w-3 h-3 rounded-sm"
+                            className={getChartLegendMarker()}
                             style={{
                                 backgroundColor: colors[index],
                                 opacity: hoveredKey ?
@@ -142,7 +142,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
             </div>
             {activeKeys && activeKeys.length > 0 && activeKeys.length !== keys.length && (
                 <button
-                    className="text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0"
+                    className={getChartLegendResetButton()}
                     onClick={onReset}
                 >
                     <RotateCcw className="w-3 h-3" />
@@ -175,13 +175,13 @@ const StackedLegends: React.FC<{
                 keys.map((key, index) => (
                     <div
                         key={key}
-                        className="h-4 flex items-center gap-2 cursor-pointer justify-start"
+                        className={getChartLegendItem()}
                         onClick={() => handleLegendClick(key)}
                         onMouseEnter={() => handleLegendEnter(key)}
                         onMouseLeave={handleLegendLeave}
                     >
                         <div
-                            className="w-3 h-3 rounded-sm"
+                            className={getChartLegendMarker()}
                             style={{ backgroundColor: colors[index] }}
                         />
                         <span

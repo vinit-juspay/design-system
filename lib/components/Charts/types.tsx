@@ -29,6 +29,7 @@ export interface ChartProps {
   slot2?: ReactNode;
   slot3?: ReactNode;
   legendPosition?: ChartLegendPosition;
+  chartHeaderSlot: ReactNode;
 }
 
 
@@ -48,10 +49,8 @@ export type ChartLegendsProps = {
 
 
 export type ChartHeaderProps = {
-  metrics: string[];
-  selectedMetric: string;
-  handleMetricChange: (metric: string) => void;
   slot1: React.ReactNode;
   slot2: React.ReactNode;
   slot3: React.ReactNode;
+  chartHeaderSlot: ReactNode;
 }

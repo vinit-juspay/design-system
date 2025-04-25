@@ -20,6 +20,7 @@ import { ChartHeader } from './ChartHeader';
 import { ChartLegends } from './ChartLegends';
 import { ChartProps, ChartType, ChartLegendPosition } from './types';
 import { capitaliseCamelCase, formatNumber, getKeys, transformData } from './utils';
+import { getChartContainer, getChartContentContainer } from './themeUtils';
 
 interface PieDataItem {
     name: string;
@@ -43,14 +44,14 @@ export const Chart: React.FC<ChartProps> = ({
     slot1,
     slot2,
     slot3,
-    legendPosition = ChartLegendPosition.TOP
+    legendPosition = ChartLegendPosition.TOP,
+    chartHeaderSlot
 }) => {
     const chartContainerRef = useRef<HTMLDivElement>(null!);
     const keys = getKeys(data);
     const isChartAnimating = useRef<boolean>(false);
     const [showingTruncatedData, setShowingTruncatedData] = useState<boolean>(false);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-    const [selectedMetric, setSelectedMetric] = useState<string>(metrics.length > 0 ? metrics[0] : '');
     const [hoveredKey, setHoveredKey] = useState<string | null>(null);
     const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
 
@@ -92,15 +93,12 @@ export const Chart: React.FC<ChartProps> = ({
         // setHoveredXValue(null);
     };
 
-    const handleMetricChange = (metric: string) => {
-        setSelectedMetric(metric);
-    };
 
-    const handleHover = (key: string | null) => {
-        if (!showingTruncatedData) {
-            setHoveredKey(key);
-        }
-    };
+    // const handleHover = (key: string | null) => {
+    //     if (!showingTruncatedData) {
+    //         setHoveredKey(key);
+    //     }
+    // };
 
     const getElementOpacity = (dataKey: string) => {
         if (showingTruncatedData) {
@@ -328,16 +326,14 @@ export const Chart: React.FC<ChartProps> = ({
     };
 
     return (
-        <div className='w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white' ref={chartContainerRef}>
+        <div className={getChartContainer()} ref={chartContainerRef}>
             <ChartHeader
-                metrics={metrics}
-                selectedMetric={selectedMetric}
-                handleMetricChange={handleMetricChange}
                 slot1={slot1}
                 slot2={slot2}
                 slot3={slot3}
+                chartHeaderSlot={chartHeaderSlot}
             />
-            {type === ChartType.LINE || type === ChartType.BAR || (type === ChartType.PIE && legendPosition === ChartLegendPosition.TOP) ? <div className='py-5 px-4 flex flex-col gap-6'>
+            {type === ChartType.LINE || type === ChartType.BAR || (type === ChartType.PIE && legendPosition === ChartLegendPosition.TOP) ? <div className={getChartContentContainer(legendPosition)}>
                 <ChartLegends
                     chartContainerRef={chartContainerRef}
                     keys={keys}
@@ -355,7 +351,7 @@ export const Chart: React.FC<ChartProps> = ({
                         {renderChart()}
                     </ResponsiveContainer>
                 </div>
-            </div> : <div className='py-5 px-4 flex flex-row-reverse gap-6'>
+            </div> : <div className={getChartContentContainer(legendPosition)}>
                 <div className='w-1/4 flex items-center justify-center'>
                     <ChartLegends
                         chartContainerRef={chartContainerRef}

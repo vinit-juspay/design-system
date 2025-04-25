@@ -450,5 +450,31 @@ export const themeConfig = {
         default: 'border-[2px]',
       },
     },
+    chart: {
+      base: {
+        chartContainer: "w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white",
+        chartContentContainer: {
+          top: "py-5 px-4 flex flex-col gap-6",
+          right: "py-5 px-4 flex flex-row-reverse gap-6"
+        },
+        chartHeader: {
+          container: "flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]",
+          metrics: "flex items-center gap-2",
+          selectedMetric: "text-base font-semibold text-[#525866]",
+          slotContainer: "flex items-center gap-2"
+        },
+        chartLegend: {
+          container: "flex items-center gap-8 justify-between",
+          legendItemsContainer: "flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1",
+          legendItem: "h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300",
+          legendMarker: "w-3 h-3 rounded-sm",
+          resetButton: "text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0",
+          stackedLegendContainer: "h-full w-full flex flex-col justify-center gap-2"
+        },
+        tooltip: {
+          container: "bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]",
+        }
+      }
+    }
   },
 };
