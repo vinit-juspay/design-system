@@ -452,8 +452,8 @@ export const themeConfig = {
     },
     breadcrumb: {
       base: {
-        container: 'flex items-center flex-wrap',
-        divider: 'mx-2 text-gray-400',
+        container: 'flex items-center flex-wrap gap-2',
+        divider: 'text-gray-400',
       },
       item: {
         default: 'inline-flex items-center text-gray-400 font-medium cursor-pointer',
@@ -472,12 +472,12 @@ export const themeConfig = {
         active: 'border border-gray-150 bg-gray-50 text-gray-1000',
       },
       dropdown: {
-        container: 'absolute top-full left-0 mt-1 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48',
+        container: 'absolute top-full left-0 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48 translate-y-1',
         item: 'px-4 py-2 hover:bg-gray-50',
       },
       iconSlot: {
-        left: 'inline-flex items-center justify-center w-4.5 h-4.5 mr-1.5',
-        right: 'inline-flex items-center justify-center w-4.5 h-4.5 ml-1.5'
+        left: 'inline-flex items-center justify-center w-4.5 h-4.5',
+        right: 'inline-flex items-center justify-center w-4.5 h-4.5'
       }
     }
   },

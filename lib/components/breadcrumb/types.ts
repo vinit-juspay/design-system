@@ -17,6 +17,7 @@ export interface BreadcrumbItemProps {
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
   className?: string;
+  isActive?: boolean;
 }
 
 /**

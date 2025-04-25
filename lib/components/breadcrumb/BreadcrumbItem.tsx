@@ -16,11 +16,14 @@ export const BreadcrumbItem = ({
   rightSlot,
   className,
   isLast = false,
+  isActive = false,
 }: BreadcrumbItemInternalProps) => {
-  const itemClasses = getBreadcrumbItemClassNames(isLast);
+  // Use either isActive or isLast to determine if this is the active item
+  const isActiveItem = isActive || isLast;
+  const itemClasses = getBreadcrumbItemClassNames(isActiveItem);
   
   const content = (
-    <div className="flex items-center">
+    <div className="flex items-center gap-1.5">
       {leftSlot && (
         <span className={getIconSlotClassNames('left')}>
           {leftSlot}
@@ -35,7 +38,7 @@ export const BreadcrumbItem = ({
     </div>
   );
   
-  if (isLast) {
+  if (isActiveItem) {
     return <span className={cn(itemClasses, className)} aria-current="page">{content}</span>;
   }
   

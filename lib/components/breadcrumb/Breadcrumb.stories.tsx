@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumb } from './index';
-import { Home, User, Lock, AlertCircle, ChevronRight } from 'lucide-react';
+import { Home, User, Lock, AlertCircle, ChevronRight, File, Folder } from 'lucide-react';
 
 // Create a wrapper component that uses text inputs instead of object controls
 interface TextInputBreadcrumbProps {
@@ -24,21 +24,31 @@ const TextInputBreadcrumb = ({
   
   // Create items array for the Breadcrumb component
   const items = pathSegments.map((segment, index) => {
-    // Add icons based on position
+    // Add icons based on position and segment name
     let leftSlot, rightSlot;
     
-    if (index === 0) {
+    // Determine left icon based on segment name or position
+    if (segment.toLowerCase() === 'home') {
       leftSlot = <Home size={18} />;
-      rightSlot = <ChevronRight size={18} />;
-    } else if (index === 1) {
-      leftSlot = <User size={18} />;
-      rightSlot = <ChevronRight size={18} />;
+    } else if (segment.toLowerCase().includes('product')) {
+      leftSlot = <Folder size={18} />;
+    } else if (segment.toLowerCase().includes('test')) {
+      leftSlot = <File size={18} />;
+    } else if (segment.toLowerCase().includes('categor')) {
+      leftSlot = <Folder size={18} />;
     } else if (index === pathSegments.length - 1) {
       leftSlot = <Lock size={18} />;
-      rightSlot = <AlertCircle size={18} />;
     } else {
-      // For any other items, add a default right icon
+      // Default icon for other items
+      leftSlot = <File size={18} />;
+    }
+    
+    // Add right icon to all items except the last one
+    if (index < pathSegments.length - 1) {
       rightSlot = <ChevronRight size={18} />;
+    } else {
+      // Only the last item gets a different right icon
+      rightSlot = <AlertCircle size={18} />;
     }
     
     return {
@@ -110,8 +120,8 @@ export const Default: TextInputStory = {
 
 export const Truncated: TextInputStory = {
   args: {
-    path: 'Home / Products / Categories / Electronics / Devices / Laptops / MacBooks',
-    hrefs: '/ /products /categories /electronics /devices /laptops',
+    path: 'Home / Products / Categories / Test 1 / Test 2 / Test 3',
+    hrefs: '/ /products /categories /test1 /test2',
     showLeftSlots: true,
     showRightSlots: true
   },

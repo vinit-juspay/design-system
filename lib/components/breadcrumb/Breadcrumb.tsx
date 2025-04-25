@@ -25,10 +25,11 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
     const breadcrumbTheme = themeConfig.euler.breadcrumb;
     const MAX_ITEMS = 4; // Fixed constant instead of a prop
     
-    // Process items to ensure last item has no href
+    // Process items to ensure last item has no href and mark active state
     const processedItems = items.map((item, index) => ({
       ...item,
-      href: index === items.length - 1 ? undefined : item.href
+      href: index === items.length - 1 ? undefined : item.href,
+      isActive: index === items.length - 1 // Only the very last item is active
     }));
     
     // Handle clicks outside dropdown to close it
@@ -56,10 +57,13 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
      */
     const renderFullBreadcrumb = () => (
       <nav aria-label="Breadcrumb" ref={ref} className={cn(containerClassName, className)}>
-        <ol className="flex items-center">
+        <ol className="flex items-center gap-2">
           {processedItems.map((item, index) => (
-            <li key={index} className="flex items-center">
-              <BreadcrumbItem {...item} isLast={index === processedItems.length - 1} />
+            <li key={index} className="flex items-center gap-2">
+              <BreadcrumbItem 
+                {...item} 
+                isLast={index === processedItems.length - 1} 
+              />
               {index < processedItems.length - 1 && (
                 <span className={getDividerClassNames()}>/</span>
               )}
@@ -77,18 +81,31 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
       const firstItems = processedItems.slice(0, 1);
       const lastItems = processedItems.slice(-3);
       const moreItems = processedItems.slice(1, -3);
+      const totalItems = processedItems.length;
+      
+      // Override isActive on all items to ensure consistent styling
+      // Only the very last item should have isActive=true
+      firstItems.forEach(item => item.isActive = false);
+      moreItems.forEach(item => item.isActive = false);
+      lastItems.forEach((item, index) => {
+        item.isActive = index === lastItems.length - 1 && 
+                       item === processedItems[processedItems.length - 1];
+      });
       
       return (
         <nav aria-label="Breadcrumb" ref={ref} className={cn(containerClassName, className)}>
-          <ol className="flex items-center">
+          <ol className="flex items-center gap-2">
             {/* First item */}
-            <li key="first" className="flex items-center">
-              <BreadcrumbItem {...firstItems[0]} isLast={false} />
+            <li key="first" className="flex items-center gap-2">
+              <BreadcrumbItem 
+                {...firstItems[0]} 
+                isLast={false} 
+              />
               <span className={getDividerClassNames()}>/</span>
             </li>
             
             {/* More button with dropdown */}
-            <li key="dropdown" className="flex items-center relative">
+            <li key="dropdown" className="flex items-center gap-2 relative">
               <button 
                 ref={buttonRef}
                 className={getMoreButtonClassNames(showDropdown)} 
@@ -128,9 +145,9 @@ export const Breadcrumb = forwardRef<HTMLDivElement, BreadcrumbProps>(
             
             {/* Last items */}
             {lastItems.map((item, index) => {
-              const isLastItem = index === lastItems.length - 1;
+              const isLastItem = item.isActive;
               return (
-                <li key={`last-${index}`} className="flex items-center">
+                <li key={`last-${index}`} className="flex items-center gap-2">
                   <BreadcrumbItem 
                     {...item} 
                     isLast={isLastItem} 

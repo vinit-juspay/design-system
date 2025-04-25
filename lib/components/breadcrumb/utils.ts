@@ -2,24 +2,31 @@ import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
 
 /**
- * Retrieves class names for breadcrumb items based on whether it's the last item
- * Last items get active styling, while other items get hover effects
+ * Retrieves class names for breadcrumb items based on whether it's the active item
+ * Active items get active styling (darker color, semibold), while other items get hover effects
  * 
- * @param isLast - Whether this is the last item in the breadcrumb trail
+ * @param isActive - Whether this is the active/last item in the breadcrumb trail
  * @returns Tailwind CSS class string
  */
 export const getBreadcrumbItemClassNames = (
-  isLast: boolean
+  isActive: boolean
 ): string => {
   const breadcrumbTheme = themeConfig.euler.breadcrumb;
   
-  return cn(
+  // Apply default styles to all items
+  const baseStyles = [
     breadcrumbTheme.item.default,
-    isLast 
-      ? breadcrumbTheme.item.active
-      : breadcrumbTheme.item.hover,
     breadcrumbTheme.sizes.md
-  );
+  ];
+  
+  // Apply active or hover styling based on item status
+  if (isActive) {
+    baseStyles.push(breadcrumbTheme.item.active);
+  } else {
+    baseStyles.push(breadcrumbTheme.item.hover);
+  }
+  
+  return cn(...baseStyles);
 };
 
 /**
