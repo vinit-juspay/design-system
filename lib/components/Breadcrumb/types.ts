@@ -23,6 +23,7 @@ export interface BreadcrumbItemInternalProps {
   rightSlot?: ReactNode;
   className?: string;
   isLast?: boolean;
+  isActive?: boolean;
 }
 
 export interface BreadcrumbProps {
