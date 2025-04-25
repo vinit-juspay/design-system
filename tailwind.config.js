@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter Display', 'sans-serif'],
+      },
       /**
        * Colors
        * Usage:
@@ -147,7 +150,7 @@ module.exports = {
         // Body sizes
         'body-lg': ['16px', { lineHeight: '24px' }], // text-body-lg
         'body-md': ['14px', { lineHeight: '20px' }], // text-body-md
-        'body-sm': ['12px', { lineHeight: '16px' }], // text-body-sm
+        'body-sm': ['12px', { lineHeight: '18px' }], // text-body-sm
         'body-xs': ['10px', { lineHeight: '14px' }], // text-body-xs
         // Code sizes
         'code-lg': ['14px', { lineHeight: '20px' }], // text-code-lg
