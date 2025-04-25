@@ -40,7 +40,6 @@ export const Chart: React.FC<ChartProps> = ({
     colors = ['#00C951', '#C27AFF', '#FB2C36', "#00D492", "#2B7FFF", "#AD46FF", "#FF8904"],
     xAxisLabel,
     yAxisLabel,
-    metrics = [],
     slot1,
     slot2,
     slot3,
@@ -90,15 +89,7 @@ export const Chart: React.FC<ChartProps> = ({
             }
         });
         setHoveredKey(null);
-        // setHoveredXValue(null);
     };
-
-
-    // const handleHover = (key: string | null) => {
-    //     if (!showingTruncatedData) {
-    //         setHoveredKey(key);
-    //     }
-    // };
 
     const getElementOpacity = (dataKey: string) => {
         if (showingTruncatedData) {
@@ -114,15 +105,12 @@ export const Chart: React.FC<ChartProps> = ({
         setHoveredXValue(null);
     };
 
-
     const handleLegendEnter = (dataKey: string) => {
         if (isChartAnimating.current || (activeKeys && activeKeys.length > 0)) return;
         setHoveredKey(dataKey);
     }
 
     const handleLegendLeave = () => {
-        console.log("Reached here")
-        console.log('leaving');
         setHoveredKey(null);
     }
 

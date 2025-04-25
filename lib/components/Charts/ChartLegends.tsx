@@ -11,7 +11,6 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
     activeKeys,
     handleLegendClick,
     colors,
-    setSelectedKeys,
     chartContainerRef,
     stacked = false,
     onReset,
@@ -30,7 +29,6 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         activeKeys={activeKeys}
         handleLegendClick={handleLegendClick}
         colors={legendColors}
-        setSelectedKeys={setSelectedKeys}
         handleLegendEnter={handleLegendEnter}
         handleLegendLeave={handleLegendLeave}
     />
@@ -158,7 +156,6 @@ const StackedLegends: React.FC<{
     activeKeys: string[] | null;
     handleLegendClick: (dataKey: string) => void;
     colors: string[];
-    setSelectedKeys: (keys: string[]) => void;
     handleLegendEnter: (dataKey: string) => void;
     handleLegendLeave: () => void;
 }> = ({
@@ -166,7 +163,6 @@ const StackedLegends: React.FC<{
     activeKeys,
     handleLegendClick,
     colors,
-    setSelectedKeys,
     handleLegendEnter,
     handleLegendLeave
 }) => {
