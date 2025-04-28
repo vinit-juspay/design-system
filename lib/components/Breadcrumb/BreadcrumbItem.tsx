@@ -21,27 +21,23 @@ export const BreadcrumbItem = ({
   // Use either isActive or isLast to determine if this is the active item
   const isActiveItem = isActive || isLast;
   const itemClasses = getBreadcrumbItemClassNames(isActiveItem);
-  
+
   const content = (
     <div className="flex items-center gap-1.5">
-      {leftSlot && (
-        <span className={getIconSlotClassNames('left')}>
-          {leftSlot}
-        </span>
-      )}
+      {leftSlot && <span className={getIconSlotClassNames('left')}>{leftSlot}</span>}
       <span className="flex-shrink-0">{label}</span>
-      {rightSlot && (
-        <span className={getIconSlotClassNames('right')}>
-          {rightSlot}
-        </span>
-      )}
+      {rightSlot && <span className={getIconSlotClassNames('right')}>{rightSlot}</span>}
     </div>
   );
-  
+
   if (isActiveItem) {
-    return <span className={cn(itemClasses, className)} aria-current="page">{content}</span>;
+    return (
+      <span className={cn(itemClasses, className)} aria-current="page">
+        {content}
+      </span>
+    );
   }
-  
+
   if (href) {
     return (
       <a href={href} className={cn(itemClasses, className)}>
@@ -49,10 +45,10 @@ export const BreadcrumbItem = ({
       </a>
     );
   }
-  
+
   return (
-    <Button 
-      onClick={onClick} 
+    <Button
+      onClick={onClick}
       className={cn(itemClasses, className)}
       buttonType={ButtonType.SECONDARY}
       subType={ButtonSubType.LINK}
@@ -60,4 +56,4 @@ export const BreadcrumbItem = ({
       {content}
     </Button>
   );
-}; 
+};

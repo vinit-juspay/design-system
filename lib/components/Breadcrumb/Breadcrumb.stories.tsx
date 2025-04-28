@@ -10,23 +10,26 @@ interface TextInputBreadcrumbProps {
   showRightSlots?: boolean;
 }
 
-const TextInputBreadcrumb = ({ 
-  path = 'Home / Products / Categories', 
+const TextInputBreadcrumb = ({
+  path = 'Home / Products / Categories',
   hrefs = '/ /products',
   showLeftSlots = true,
   showRightSlots = true,
 }: TextInputBreadcrumbProps) => {
   // Split the path into segments
   const pathSegments = path.split('/').map(segment => segment.trim());
-  
+
   // Split the hrefs into segments (by space instead of slash)
-  const hrefSegments = hrefs.split(' ').map(segment => segment.trim()).filter(Boolean);
-  
+  const hrefSegments = hrefs
+    .split(' ')
+    .map(segment => segment.trim())
+    .filter(Boolean);
+
   // Create items array for the Breadcrumb component
   const items = pathSegments.map((segment, index) => {
     // Add icons based on position and segment name
     let leftSlot, rightSlot;
-    
+
     // Determine left icon based on segment name or position
     if (segment.toLowerCase() === 'home') {
       leftSlot = <Home size={18} />;
@@ -42,7 +45,7 @@ const TextInputBreadcrumb = ({
       // Default icon for other items
       leftSlot = <File size={18} />;
     }
-    
+
     // Add right icon to all items except the last one
     if (index < pathSegments.length - 1) {
       rightSlot = <ChevronRight size={18} />;
@@ -50,15 +53,18 @@ const TextInputBreadcrumb = ({
       // Only the last item gets a different right icon
       rightSlot = <AlertCircle size={18} />;
     }
-    
+
     return {
       label: segment,
-      href: index < pathSegments.length - 1 && index < hrefSegments.length ? hrefSegments[index] : undefined,
+      href:
+        index < pathSegments.length - 1 && index < hrefSegments.length
+          ? hrefSegments[index]
+          : undefined,
       ...(leftSlot && showLeftSlots && { leftSlot }),
       ...(rightSlot && showRightSlots && { rightSlot }),
     };
   });
-  
+
   // Truncation is now automatic based on item count
   return <Breadcrumb items={items} />;
 };
@@ -73,9 +79,10 @@ const meta: Meta<typeof TextInputBreadcrumb> = {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Breadcrumb navigation component that automatically truncates paths longer than 4 items and shows a dropdown menu for the hidden items. The last item is always the current page.'
-      }
-    }
+        component:
+          'Breadcrumb navigation component that automatically truncates paths longer than 4 items and shows a dropdown menu for the hidden items. The last item is always the current page.',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
@@ -90,13 +97,13 @@ const meta: Meta<typeof TextInputBreadcrumb> = {
     showLeftSlots: {
       control: 'boolean',
       name: 'Show Left Icons',
-      description: 'Toggle visibility of left icon slots'
+      description: 'Toggle visibility of left icon slots',
     },
     showRightSlots: {
       control: 'boolean',
       name: 'Show Right Icons',
-      description: 'Toggle visibility of right icon slots'
-    }
+      description: 'Toggle visibility of right icon slots',
+    },
   },
 };
 
@@ -107,15 +114,16 @@ export const Default: TextInputStory = {
     path: 'Home / Products / Categories',
     hrefs: '/ /products',
     showLeftSlots: true,
-    showRightSlots: true
+    showRightSlots: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Default breadcrumb with customizable paths and URLs. Last segment is automatically the current page.'
-      }
-    }
-  }
+        story:
+          'Default breadcrumb with customizable paths and URLs. Last segment is automatically the current page.',
+      },
+    },
+  },
 };
 
 export const Truncated: TextInputStory = {
@@ -123,15 +131,16 @@ export const Truncated: TextInputStory = {
     path: 'Home / Products / Categories / Test 1 / Test 2 / Test 3',
     hrefs: '/ /products /categories /test1 /test2',
     showLeftSlots: true,
-    showRightSlots: true
+    showRightSlots: true,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Breadcrumb with more than 4 levels automatically showing truncation with dropdown. You will see the first item, ellipsis menu, and last three items.'
-      }
-    }
-  }
+        story:
+          'Breadcrumb with more than 4 levels automatically showing truncation with dropdown. You will see the first item, ellipsis menu, and last three items.',
+      },
+    },
+  },
 };
 
 // Direct component stories for more complex examples
@@ -139,20 +148,20 @@ export const WithIcons = () => {
   return (
     <Breadcrumb
       items={[
-        { 
-          label: 'Home', 
-          href: '#', 
-          leftSlot: <Home size={18} /> 
+        {
+          label: 'Home',
+          href: '#',
+          leftSlot: <Home size={18} />,
         },
-        { 
-          label: 'User Settings', 
-          href: '#', 
-          leftSlot: <User size={18} /> 
+        {
+          label: 'User Settings',
+          href: '#',
+          leftSlot: <User size={18} />,
         },
-        { 
-          label: 'Security', 
-          leftSlot: <Lock size={18} />, 
-          rightSlot: <AlertCircle size={18} /> 
+        {
+          label: 'Security',
+          leftSlot: <Lock size={18} />,
+          rightSlot: <AlertCircle size={18} />,
         },
       ]}
     />
@@ -162,7 +171,7 @@ export const WithIcons = () => {
 WithIcons.parameters = {
   docs: {
     description: {
-      story: 'Breadcrumb items with left and right icon slots for additional visual information.'
-    }
-  }
-}; 
+      story: 'Breadcrumb items with left and right icon slots for additional visual information.',
+    },
+  },
+};

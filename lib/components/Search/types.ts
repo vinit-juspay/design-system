@@ -1,5 +1,3 @@
-
-
 export interface SearchProps {
   /**
    * Whether search is enabled
@@ -33,4 +31,4 @@ export interface SearchProps {
    * Input class names
    */
   inputClassName?: string;
-} 
+}

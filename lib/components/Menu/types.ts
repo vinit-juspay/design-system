@@ -6,19 +6,19 @@ import { LucideIcon } from 'lucide-react';
 export enum MenuAlignment {
   START = 'start',
   CENTER = 'center',
-  END = 'end'
+  END = 'end',
 }
 
 export enum MenuSide {
   TOP = 'top',
   RIGHT = 'right',
   BOTTOM = 'bottom',
-  LEFT = 'left'
+  LEFT = 'left',
 }
 
 export enum SlotDirection {
   LEFT = 'left',
-  RIGHT = 'right'
+  RIGHT = 'right',
 }
 
 // Slot for menu items
@@ -85,7 +85,7 @@ export interface MenuSearchProps {
    * Enable or disable search functionality
    */
   enabled: boolean;
-  
+
   /**
    * Placeholder text for the search input
    */
@@ -100,12 +100,12 @@ export interface MenuMultiSelectProps {
    * Enable or disable multi-select functionality
    */
   enabled: boolean;
-  
+
   /**
    * Array of values that are currently selected
    */
   selectedValues?: string[];
-  
+
   /**
    * Callback function triggered when selection changes
    * @param values Array of currently selected values
@@ -115,7 +115,7 @@ export interface MenuMultiSelectProps {
 
 export enum CheckboxPosition {
   LEFT = 'left',
-  RIGHT = 'right'
+  RIGHT = 'right',
 }
 
 export interface MenuProps {
@@ -123,46 +123,46 @@ export interface MenuProps {
    * The trigger element that opens the menu (typically a button)
    */
   children: ReactNode;
-  
+
   /**
    * Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators
    */
   items: MenuItemWithSeparatorProps[];
-  
+
   /**
    * Controls the horizontal alignment of the menu relative to the trigger element
    * @default MenuAlignment.START
    */
   align?: MenuAlignment;
-  
+
   /**
    * Determines which side the menu appears on relative to the trigger
    * @default MenuSide.BOTTOM
    */
   side?: MenuSide;
-  
+
   /**
    * Configuration for enabling search functionality within the menu, includes options like placeholder text
    */
   search?: MenuSearchProps;
-  
+
   /**
    * Configuration for multi-select functionality, allows selecting multiple menu items with checkboxes
    */
   multiSelect?: MenuMultiSelectProps;
-  
+
   /**
    * Controls the position of checkboxes within menu items
    */
   checkboxPosition?: CheckboxPosition;
-  
+
   /**
    * Additional props to pass to the root element of the menu component
    */
   rootProps?: Omit<DropdownMenu.DropdownMenuProps, 'children'>;
-  
+
   /**
    * Additional props to pass to the content container of the menu component
    */
   contentProps?: Omit<ComponentPropsWithoutRef<typeof DropdownMenu.Content>, 'children'>;
-} 
+}

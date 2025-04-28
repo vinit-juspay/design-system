@@ -10,7 +10,7 @@ export const getCheckboxClassNames = (
   const { baseStyles, sizes, states } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
   const stateClasses = disabled ? states.disabled : states.enabled;
-  
+
   return cn(baseStyles, sizeClasses.root, stateClasses, className);
 };
 
@@ -20,7 +20,7 @@ export const getIndicatorClassNames = (
 ): string => {
   const { indicator, sizes } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
-  
+
   return cn(indicator.baseStyles, sizeClasses.indicator, indicatorClassName);
 };
 
@@ -30,28 +30,23 @@ export const getCheckIconClassNames = (
 ): string => {
   const { indicator, sizes } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
-  
+
   return cn(indicator.icon, sizeClasses.checkIcon, checkIconClassName);
 };
 
-export const getLabelClassNames = (
-  size: CheckboxSize,
-  disabled: boolean
-): string => {
+export const getLabelClassNames = (size: CheckboxSize, disabled: boolean): string => {
   const { sizes, states } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
   const labelState = disabled ? states.labelDisabled : states.labelEnabled;
-  
+
   return cn(sizeClasses.fontSize, labelState);
 };
 
-export const getContainerClassNames = (
-  position: CheckboxPosition
-): string => {
+export const getContainerClassNames = (position: CheckboxPosition): string => {
   const { position: positionStyles } = themeConfig.euler.checkbox;
-  
+
   return cn(
-    positionStyles.wrapper, 
+    positionStyles.wrapper,
     position === CheckboxPosition.LEFT ? positionStyles.left : positionStyles.right
   );
-}; 
+};
