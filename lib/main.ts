@@ -12,3 +12,4 @@ export { default as Alert } from './components/Alert/Alert';
 export { default as Breadcrumb } from './components/Breadcrumb/Breadcrumb';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
 export { default as Checkbox } from './components/Checkbox/Checkbox';
+export { default as Chart } from './components/Charts/Charts';
