@@ -1,18 +1,20 @@
 import { cn } from "../../utils";
 import { DateRange, DateRangePickerSize, DateRangePickerVariant, DateRangePreset } from "./types";
+import { themeConfig } from "../../themeConfig";
 
 export const getDateRangePickerClassNames = (
-  variant: DateRangePickerVariant,
   size: DateRangePickerSize,
+  variant: DateRangePickerVariant,
   isDisabled: boolean
 ): string => {
-  const baseStyles = "relative inline-flex w-full";
-  const variantStyles = variant === DateRangePickerVariant.PRIMARY ? "text-gray-900" : "text-gray-700 bg-gray-50";
-  const sizeStyles = size === DateRangePickerSize.SMALL ? "h-8 text-xs" : 
-                     size === DateRangePickerSize.MEDIUM ? "h-10 text-sm" : "h-12 text-base";
-  const disabledStyles = isDisabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "";
-
-  return cn(baseStyles, variantStyles, sizeStyles, disabledStyles);
+  const theme = themeConfig.euler.dateRangePicker;
+  
+  return cn(
+    theme.base.container,
+    theme.variant[variant],
+    theme.sizes[size],
+    isDisabled && theme.states.disabled
+  );
 };
 
 export const getInputClassNames = (
@@ -52,128 +54,151 @@ export const getActionButtonClassNames = (isPrimary: boolean): string => {
     : "px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2";
 };
 
-// Format date to string using native JS
-export const formatDate = (date: Date, format: string): string => {
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+export const getCalendarGridClassNames = (
+  isStart: boolean,
+  isEnd: boolean,
+  isRangeDay: boolean,
+  isTodayDay: boolean,
+  isSelectedDay: boolean
+): string => {
+  const theme = themeConfig.euler.dateRangePicker.calendar;
+  
+  return cn(
+    theme.dayCell,
+    isStart && theme.startDate,
+    isEnd && theme.endDate,
+    isRangeDay && !isSelectedDay && theme.rangeDay,
+    isTodayDay && !isSelectedDay && theme.todayDay,
+    theme.hoverState
+  );
+};
+
+/**
+ * Formats a date according to the specified format
+ * @param date The date to format
+ * @param format The format string (e.g., "dd/MM/yyyy")
+ * @returns The formatted date string or empty string if date is invalid
+ */
+export const formatDate = (date: Date | null | undefined, format: string = "dd/MM/yyyy"): string => {
+  if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+    return "";
+  }
+  
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
   
-  // Simple format conversion (not as flexible as date-fns but works for basic needs)
-  let formattedDate = format
-    .replace(/yyyy/g, year.toString())
-    .replace(/MM/g, month)
-    .replace(/dd/g, day)
-    .replace(/HH/g, hours)
-    .replace(/mm/g, minutes);
-    
-  if (format.includes('a')) {
-    const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
-    const hour12 = date.getHours() % 12 || 12;
-    formattedDate = formattedDate
-      .replace(/h/g, hour12.toString())
-      .replace(/a/g, ampm);
+  return format
+    .replace("dd", day)
+    .replace("MM", month)
+    .replace("yyyy", year.toString())
+    .replace("HH", hours)
+    .replace("mm", minutes);
+};
+
+/**
+ * Formats a date range for display
+ * @param range The date range to format
+ * @param showTime Whether to include time in the formatted string
+ * @returns The formatted date range string
+ */
+export const formatDateRange = (range: DateRange, showTime: boolean = false): string => {
+  if (!range.startDate) {
+    return "";
   }
   
-  if (format.includes('MMM')) {
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    formattedDate = formattedDate.replace(/MMM/g, monthNames[date.getMonth()]);
+  const startFormat = showTime ? "dd/MM/yyyy, HH:mm" : "dd/MM/yyyy";
+  const endFormat = showTime ? "dd/MM/yyyy, HH:mm" : "dd/MM/yyyy";
+  
+  const start = formatDate(range.startDate, startFormat);
+  
+  if (!range.endDate) {
+    return start;
   }
   
-  return formattedDate;
+  const end = formatDate(range.endDate, endFormat);
+  return `${start} – ${end}`;
 };
 
-export const formatDateRange = (range: DateRange, dateFormat: string): string => {
-  const { startDate, endDate } = range;
-  return `${formatDate(startDate, dateFormat)} – ${formatDate(endDate, dateFormat)}`;
+/**
+ * Parses a date string in the format dd/MM/yyyy
+ * @param dateStr The date string to parse
+ * @returns The parsed date or null if invalid
+ */
+export const parseDate = (dateStr: string): Date | null => {
+  if (!dateStr) return null;
+  
+  const parts = dateStr.split('/');
+  if (parts.length !== 3) return null;
+  
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const year = parseInt(parts[2], 10);
+  
+  if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
+  
+  const date = new Date(year, month, day);
+  return isValidDate(date) ? date : null;
 };
 
-// Helper functions to manipulate dates
-const subtractMinutes = (date: Date, minutes: number): Date => {
-  const result = new Date(date);
-  result.setMinutes(result.getMinutes() - minutes);
-  return result;
+/**
+ * Checks if a date is valid
+ * @param date The date to check
+ * @returns Whether the date is valid
+ */
+export const isValidDate = (date: Date): boolean => {
+  return date instanceof Date && !isNaN(date.getTime());
 };
 
-const subtractHours = (date: Date, hours: number): Date => {
-  const result = new Date(date);
-  result.setHours(result.getHours() - hours);
-  return result;
-};
-
-const subtractDays = (date: Date, days: number): Date => {
-  const result = new Date(date);
-  result.setDate(result.getDate() - days);
-  return result;
-};
-
-const startOfDay = (date: Date): Date => {
-  const result = new Date(date);
-  result.setHours(0, 0, 0, 0);
-  return result;
-};
-
-const endOfDay = (date: Date): Date => {
-  const result = new Date(date);
-  result.setHours(23, 59, 59, 999);
-  return result;
-};
-
+/**
+ * Gets a date range for a preset
+ * @param preset The preset to get the date range for
+ * @returns The date range for the preset
+ */
 export const getPresetDateRange = (preset: DateRangePreset): DateRange => {
   const now = new Date();
+  let startDate: Date;
+  let endDate: Date = new Date(now);
   
   switch (preset) {
     case DateRangePreset.LAST_30_MINUTES:
-      return {
-        startDate: subtractMinutes(now, 30),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getTime() - 30 * 60 * 1000);
+      break;
     case DateRangePreset.LAST_1_HOUR:
-      return {
-        startDate: subtractHours(now, 1),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getTime() - 60 * 60 * 1000);
+      break;
     case DateRangePreset.LAST_6_HOURS:
-      return {
-        startDate: subtractHours(now, 6),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getTime() - 6 * 60 * 60 * 1000);
+      break;
     case DateRangePreset.TODAY:
-      return {
-        startDate: startOfDay(now),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      break;
     case DateRangePreset.YESTERDAY:
-      return {
-        startDate: startOfDay(subtractDays(now, 1)),
-        endDate: endOfDay(subtractDays(now, 1))
-      };
-    
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+      endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 59, 59);
+      break;
     case DateRangePreset.LAST_2_DAYS:
-      return {
-        startDate: startOfDay(subtractDays(now, 2)),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2);
+      break;
     case DateRangePreset.LAST_7_DAYS:
-      return {
-        startDate: startOfDay(subtractDays(now, 7)),
-        endDate: now
-      };
-    
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+      break;
+    case DateRangePreset.CUSTOM:
     default:
-      return {
-        startDate: now,
-        endDate: now
-      };
+      startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      break;
   }
+  
+  return { startDate, endDate };
 };
 
+/**
+ * Gets a label for a preset
+ * @param preset The preset to get the label for
+ * @returns The label for the preset
+ */
 export const getPresetLabel = (preset: DateRangePreset): string => {
   switch (preset) {
     case DateRangePreset.LAST_30_MINUTES:
@@ -191,25 +216,8 @@ export const getPresetLabel = (preset: DateRangePreset): string => {
     case DateRangePreset.LAST_7_DAYS:
       return "Last 7 days";
     case DateRangePreset.CUSTOM:
-      return "Custom Range";
+      return "Custom";
     default:
       return "";
   }
-};
-
-export const parseDate = (dateString: string, format: string): Date | null => {
-  // This is a simplified parser - for production, you might want a more robust solution
-  try {
-    if (format === "yyyy-MM-dd") {
-      const [year, month, day] = dateString.split('-').map(Number);
-      return new Date(year, month - 1, day);
-    }    
-    return new Date(dateString);
-  } catch (e) {
-    return null;
-  }
-};
-
-export const isValidDate = (date: Date): boolean => {
-  return !isNaN(date.getTime());
 }; 

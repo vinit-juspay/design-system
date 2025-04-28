@@ -25,6 +25,7 @@ export enum DateRangePickerVariant {
 export interface DateRange {
   startDate: Date;
   endDate: Date;
+  showTimePicker?: boolean;
 }
 
 export interface DateRangePickerProps {

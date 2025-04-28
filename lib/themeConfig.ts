@@ -625,6 +625,20 @@ export const themeConfig = {
       },
       calendar: {
         container: "absolute z-10 mt-1 w-auto min-w-[320px] bg-white border border-gray-200 rounded-md shadow-lg",
+        gridContainer: "max-h-[400px] overflow-y-auto p-4",
+        monthContainer: "mb-6",
+        monthHeader: "text-lg font-medium mb-2",
+        dayNamesContainer: "grid grid-cols-7 text-center text-gray-500",
+        dayName: "p-2",
+        weekRow: "grid grid-cols-7",
+        emptyCell: "p-2",
+        dayCell: "cursor-pointer text-center p-2 relative",
+        startDate: "bg-primary-500 text-gray-0 rounded-lg",
+        endDate: "bg-primary-500 text-gray-0 rounded-lg",
+        rangeDay: "bg-primary-50 text-gray-600",
+        todayDay: "font-medium text-blue-700",
+        todayIndicator: "absolute w-1 h-1 bg-blue-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2",
+        hoverState: "hover:border hover:border-primary-300 hover:rounded-lg"
       },
       presets: {
         button: "px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500",
@@ -637,3 +651,4 @@ export const themeConfig = {
     },
   },
 };
+ 

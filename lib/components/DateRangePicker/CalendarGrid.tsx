@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
-import { cn } from "../../utils";
 import { DateRange } from "./types";
+import { getCalendarGridClassNames } from "./utils";
+import { themeConfig } from "../../themeConfig";
 
 interface CalendarGridProps {
   selectedRange: DateRange;
@@ -15,16 +16,22 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
   today,
   allowSingleDateSelection = false
 }, ref) => {
-    const generateMonths = () => {
+  // Generate months from Jan 2012 to current year + 5 years
+  const generateMonths = () => {
     const months = [];
     const currentDate = new Date();
-    const startYear = currentDate.getFullYear();
-    const startMonth = currentDate.getMonth();
+    const startYear = 2012;
+    const startMonth = 0; // January
+    const endYear = currentDate.getFullYear() + 5;
+    const endMonth = 11; // December
     
-    for (let i = 0; i < 24; i++) {
-      const year = startYear + Math.floor((startMonth + i) / 12);
-      const month = (startMonth + i) % 12;
-      months.push({ year, month });
+    for (let year = startYear; year <= endYear; year++) {
+      const monthStart = year === startYear ? startMonth : 0;
+      const monthEnd = year === endYear ? endMonth : 11;
+      
+      for (let month = monthStart; month <= monthEnd; month++) {
+        months.push({ year, month });
+      }
     }
     
     return months;
@@ -37,21 +44,24 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
     "July", "August", "September", "October", "November", "December"
   ];
   
+  // Calendar utility functions
   const daysInMonth = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
   const startOfMonth = (year: number, month: number) => {
-    return new Date(year, month, 1).getDay();
+    const day = new Date(year, month, 1).getDay();
+    return day === 0 ? 7 : day; // Convert Sunday (0) to 7 for Monday-based week
   };
   
+  // Date selection handlers
   const handleDateClick = (year: number, month: number, day: number) => {
     const newDate = new Date(year, month, day);
     
     if (!selectedRange.startDate || (selectedRange.startDate && selectedRange.endDate)) {
       onDateSelect({
         startDate: newDate,
-        endDate: allowSingleDateSelection ? newDate : selectedRange.endDate || newDate
+        endDate: newDate
       });
     } else {
       if (allowSingleDateSelection) {
@@ -126,7 +136,7 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
       
       for (let i = 0; i < 7; i++) {
         if ((week === 0 && i < adjustedFirstDay - 1) || day > days) {
-          weekDays.push(<div key={`empty-${week}-${i}`} className="p-2"></div>);
+          weekDays.push(<div key={`empty-${week}-${i}`} className={themeConfig.euler.dateRangePicker.calendar.emptyCell}></div>);
         } else {
           const date = new Date(year, month, day);
           const isRangeDay = isDateInRange(date);
@@ -135,22 +145,17 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
           const isStart = isStartDate(date);
           const isEnd = isEndDate(date);
           
+          const dayClasses = getCalendarGridClassNames(isStart, isEnd, isRangeDay, isTodayDay, isSelectedDay);
+          
           weekDays.push(
             <div 
               key={`${year}-${month}-${day}`}
               onClick={() => handleDateClick(year, month, day)}
-              className={cn(
-                "cursor-pointer text-center p-2 relative",
-                isStart && "bg-primary-500 text-gray-0 rounded-lg",
-                isEnd && "bg-primary-500 text-gray-0 rounded-lg",
-                isRangeDay && "bg-primary-50 text-gray-600",
-                isTodayDay && !isSelectedDay && "font-medium text-blue-700",
-                "hover:border hover:border-primary-300 hover:rounded-lg"
-              )}
+              className={dayClasses}
             >
               {day}
               {isTodayDay && !isSelectedDay && (
-                <div className="absolute w-1 h-1 bg-blue-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2"></div>
+                <div className={themeConfig.euler.dateRangePicker.calendar.todayIndicator}></div>
               )}
             </div>
           );
@@ -159,21 +164,21 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
       }
       
       calendarDays.push(
-        <div key={`week-${year}-${month}-${week}`} className="grid grid-cols-7">
+        <div key={`week-${year}-${month}-${week}`} className={themeConfig.euler.dateRangePicker.calendar.weekRow}>
           {weekDays}
         </div>
       );
     }
     
     return (
-      <div key={`month-${year}-${month}`} className="mb-6">
-        <div className="text-lg font-medium mb-2">
+      <div key={`month-${year}-${month}`} className={themeConfig.euler.dateRangePicker.calendar.monthContainer}>
+        <div className={themeConfig.euler.dateRangePicker.calendar.monthHeader}>
           {monthNames[month]} {year}
         </div>
         
-        <div className="grid grid-cols-7 text-center text-gray-500">
+        <div className={themeConfig.euler.dateRangePicker.calendar.dayNamesContainer}>
           {dayNames.map((day, index) => (
-            <div key={index} className="p-2">{day}</div>
+            <div key={index} className={themeConfig.euler.dateRangePicker.calendar.dayName}>{day}</div>
           ))}
         </div>
         
@@ -183,7 +188,7 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(({
   };
   
   return (
-    <div ref={ref}>
+    <div ref={ref} className={themeConfig.euler.dateRangePicker.calendar.gridContainer}>
       {months.map(({ year, month }) => renderMonthCalendar(year, month))}
     </div>
   );

@@ -59,6 +59,8 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
     formatDate(selectedRange.endDate, "dd/MM/yyyy")
   );
   
+  const [showTimePickerState, setShowTimePickerState] = useState(showTimePicker);
+  
   const calendarRef = useRef<HTMLDivElement>(null);
   const quickRangeRef = useRef<HTMLDivElement>(null);
   const calendarScrollRef = useRef<HTMLDivElement>(null);
@@ -78,11 +80,14 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+      const isOutsideComponent = 
+        calendarRef.current && 
+        !calendarRef.current.contains(event.target as Node) &&
+        quickRangeRef.current && 
+        !quickRangeRef.current.contains(event.target as Node);
       
-      if (quickRangeRef.current && !quickRangeRef.current.contains(event.target as Node)) {
+      if (isOutsideComponent) {
+        setIsOpen(false);
         setIsQuickRangeOpen(false);
       }
     };
@@ -110,9 +115,24 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
   };
   
   const handleDateSelect = (newRange: DateRange) => {
+    if (newRange.startDate && selectedRange.startDate) {
+      newRange.startDate.setHours(selectedRange.startDate.getHours());
+      newRange.startDate.setMinutes(selectedRange.startDate.getMinutes());
+    }
+    
+    if (newRange.endDate && selectedRange.endDate) {
+      newRange.endDate.setHours(selectedRange.endDate.getHours());
+      newRange.endDate.setMinutes(selectedRange.endDate.getMinutes());
+    }
+    
     setSelectedRange(newRange);
+    
     setStartDate(formatDate(newRange.startDate, "dd/MM/yyyy"));
     setEndDate(formatDate(newRange.endDate, "dd/MM/yyyy"));
+    
+    setStartTime(formatDate(newRange.startDate, "HH:mm"));
+    setEndTime(formatDate(newRange.endDate, "HH:mm"));
+    
     setActivePreset(DateRangePreset.CUSTOM);
   };
   
@@ -131,7 +151,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
     const value = e.target.value;
     setStartDate(value);
     
-    const parsedDate = parseDate(value, "dd/MM/yyyy");
+    const parsedDate = parseDate(value);
     if (parsedDate && isValidDate(parsedDate)) {
       const newStartDate = new Date(parsedDate);
       if (selectedRange.startDate) {
@@ -151,7 +171,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
     const value = e.target.value;
     setEndDate(value);
     
-    const parsedDate = parseDate(value, "dd/MM/yyyy");
+    const parsedDate = parseDate(value);
     if (parsedDate && isValidDate(parsedDate)) {
       const newEndDate = new Date(parsedDate);
       if (selectedRange.endDate) {
@@ -217,7 +237,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
     setIsOpen(false);
   };
   
-  const componentClassName = getDateRangePickerClassNames(variant, size, isDisabled);
+  const componentClassName = getDateRangePickerClassNames(size, variant, isDisabled);
   
   return (
     <div className={cn("relative", className)} ref={ref}>
@@ -226,12 +246,14 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
           <div className="relative" ref={quickRangeRef} style={{ width: showPresets ? "40%" : "0%" }}>
             <QuickRangeSelector
               isOpen={isQuickRangeOpen}
-              onToggle={() => {
-                setIsQuickRangeOpen(!isQuickRangeOpen);
-                setIsOpen(false);
-              }}
+              onToggle={() => setIsQuickRangeOpen(!isQuickRangeOpen)}
               activePreset={activePreset}
-              onPresetSelect={handlePresetRange}
+              onPresetSelect={(preset) => {
+                handlePresetRange(preset);
+                const newRange = getPresetDateRange(preset);
+                setStartDate(formatDate(newRange.startDate, "dd/MM/yyyy"));
+                setEndDate(formatDate(newRange.endDate, "dd/MM/yyyy"));
+              }}
               excludeCustom={true}
             />
           </div>
@@ -249,9 +271,9 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
               showPresets ? "rounded-r-md" : "rounded-md",
               "p-2 flex justify-between items-center cursor-pointer w-full"
             )}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setIsOpen(!isOpen);
-              setIsQuickRangeOpen(false);
             }}
             aria-label={ariaLabel}
             aria-expanded={isOpen}
@@ -291,7 +313,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
                       value={startDate}
                       onChange={handleStartDateChange}
                     />
-                    {showTimePicker && (
+                    {showTimePickerState && (
                       <TimeSelector
                         value={startTime}
                         onChange={handleStartTimeChange}
@@ -312,7 +334,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
                         value={endDate}
                         onChange={handleEndDateChange}
                       />
-                      {showTimePicker && (
+                      {showTimePickerState && (
                         <TimeSelector
                           value={endTime}
                           onChange={handleEndTimeChange}
@@ -340,16 +362,20 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(({
                     <div 
                       className={cn(
                         "w-10 h-5 relative rounded-full transition-colors duration-200 ease-in-out",
-                        showTimePicker ? "bg-primary-500" : "bg-gray-200"
+                        showTimePickerState ? "bg-primary-500" : "bg-gray-200"
                       )}
-                      onClick={() => onChange?.({
-                        ...selectedRange,
-                        showTimePicker: !showTimePicker
-                      })}
+                      onClick={() => {
+                        const newShowTimePickerState = !showTimePickerState;
+                        setShowTimePickerState(newShowTimePickerState);
+                        onChange?.({
+                          ...selectedRange,
+                          showTimePicker: newShowTimePickerState
+                        });
+                      }}
                     >
                       <div className={cn(
                         "absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out",
-                        showTimePicker && "transform translate-x-5"
+                        showTimePickerState && "transform translate-x-5"
                       )}></div>
                     </div>
                     <span className="ml-2 text-gray-700">Time Ranges</span>
