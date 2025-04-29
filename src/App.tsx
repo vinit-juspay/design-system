@@ -22,6 +22,7 @@ import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
+import { TextInputSize, TextInputState } from '../lib/components/TextInput/types';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
@@ -540,11 +541,13 @@ const App = () => {
       <h2 className="text-2xl font-semibold">Input Field Examples</h2>
 
 
-      <div className="gap-4 mt-12 align-top">
-        <TextInput label="Search" size="md" mandatory/>
-        <TextInput label="Search" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
-        <TextInput label="Search" state="error" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
-        <TextInput label="Search" state="filled" value="test@test.com" size="lg" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
+      <div className="flex flex-col gap-12 mt-12">
+        <TextInput label="Search" size={TextInputSize.MEDIUM} mandatory/>
+        <TextInput label="Search" size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
+        <TextInput label="Search" state={TextInputState.ERROR} size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
+        <TextInput label="Search" state={TextInputState.FILLED} value="test@test.com" size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
+        <TextInput label="Search" size={TextInputSize.MEDIUM} mandatory/>
+        <TextInput label="Search" size={TextInputSize.LARGE} state={TextInputState.FILLED} value="test@test.com" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
       </div>
     </>
   );

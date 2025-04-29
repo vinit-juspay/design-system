@@ -1,14 +1,27 @@
-export type TextInputSize = 'md' | 'lg';
+import { ReactNode } from 'react';
 
-export type TextInputState = 'default' | 'hover' | 'focused' | 'filled' | 'error' | 'disabled' | 'success';
+export enum TextInputSize {
+  MEDIUM = 'md',
+  LARGE = 'lg',
+}
+
+export enum TextInputState {
+  DEFAULT = 'default',
+  HOVER = 'hover',
+  FOCUSED = 'focused',
+  FILLED = 'filled',
+  ERROR = 'error',
+  DISABLED = 'disabled',
+  SUCCESS = 'success',
+}
 
 export interface TextInputProps {
   hintText?: string;
   label?: string;
-  leftSlot?: React.ReactNode;
+  leftSlot?: ReactNode;
   mandatory?: boolean;
   placeholder?: string;
-  rightSlot?: React.ReactNode;
+  rightSlot?: ReactNode;
   size?: TextInputSize;
   state?: TextInputState;
   sublabel?: string;

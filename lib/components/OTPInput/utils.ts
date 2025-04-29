@@ -9,24 +9,24 @@ export const getOTPContainerClasses = () => {
   return otpTheme.container.base;
 };
 
-export const getInputsContainerClasses = (digits: OTPDigits = '6') => {
+export const getInputsContainerClasses = (digits: OTPDigits = OTPDigits.SIX) => {
   return cn(
     otpTheme.inputsContainer.base,
     otpTheme.inputsContainer.digits[digits]
   );
 };
 
-export const getDigitInputClasses = (state: TextInputState = 'default') => {
+export const getDigitInputClasses = (state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
     otpTheme.digit.base,
-    state === 'default' && [
+    state === TextInputState.DEFAULT && [
       otpTheme.digit.states.default,
       otpTheme.digit.states.hover,
     ],
-    state === 'focused' && otpTheme.digit.states.focused,
-    state === 'filled' && otpTheme.digit.states.filled,
-    state === 'error' && otpTheme.digit.states.error,
-    state === 'disabled' && otpTheme.digit.states.disabled
+    state === TextInputState.FOCUSED && otpTheme.digit.states.focused,
+    state === TextInputState.FILLED && otpTheme.digit.states.filled,
+    state === TextInputState.ERROR && otpTheme.digit.states.error,
+    state === TextInputState.DISABLED && otpTheme.digit.states.disabled
   );
 };
 
@@ -44,9 +44,9 @@ export const getSublabelClasses = () => {
   );
 };
 
-export const getHintClasses = (state: TextInputState = 'default') => {
+export const getHintClasses = (state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
     inputTheme.hint.base,
-    state === 'error' ? inputTheme.hint.error : inputTheme.hint.color
+    state === TextInputState.ERROR ? inputTheme.hint.error : inputTheme.hint.color
   );
 }; 

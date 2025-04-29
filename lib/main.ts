@@ -12,3 +12,6 @@ export { default as NumberInput } from './components/NumberInput/NumberInput';
 export { default as UnitInput } from './components/UnitInput/UnitInput';
 export { default as OTPInput } from './components/OTPInput/OTPInput';
 export { default as TextArea } from './components/TextArea/TextArea';
+export { default as DropdownInput } from './components/DropdownInput/DropdownInput';
+
+export * from './hooks';

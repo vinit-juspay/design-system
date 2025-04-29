@@ -1,8 +1,11 @@
 import React, { forwardRef, useRef, useState, useEffect, KeyboardEvent, ClipboardEvent } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
+import { TooltipSize } from '../Tooltip/types';
+import { TextInputState } from '../TextInput/types';
+import { useInputState } from '../../hooks';
 
-import { OTPInputProps } from './types';
+import { OTPInputProps, OTPDigits, OTPKeyboardKey } from './types';
 import {
   getOTPContainerClasses,
   getInputsContainerClasses,
@@ -16,7 +19,7 @@ import { themeConfig } from '../../themeConfig';
 const { input: inputTheme } = themeConfig.euler;
 
 const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
-  digits = '6',
+  digits = OTPDigits.SIX,
   hintText = "Enter the verification code sent to your device",
   label = "Verification Code",
   mandatory = false,
@@ -24,7 +27,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
   showInfo = false,
   showLabel = true,
   showSublabel = true,
-  state = 'default',
+  state = TextInputState.DEFAULT,
   sublabel = "(required)",
   value = '',
   onChange,
@@ -34,6 +37,12 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
   const [otp, setOtp] = useState<string[]>(Array(parseInt(digits)).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
+
+  // Use a single input state manager for the composite component
+  const inputState = useInputState({
+    initialState: state,
+    initialValue: value
+  });
 
   // Initialize input refs array
   useEffect(() => {
@@ -45,6 +54,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
     if (value) {
       const valueArray = value.split('').slice(0, parseInt(digits));
       setOtp(valueArray.concat(Array(parseInt(digits) - valueArray.length).fill('')));
+      inputState.updateValue(value);
     }
   }, [value, digits]);
 
@@ -53,6 +63,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
     const otpValue = otp.join('');
     if (onChange) {
       onChange(otpValue);
+      inputState.updateValue(otpValue);
     }
   }, [otp, onChange]);
 
@@ -60,6 +71,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
     if (inputRefs.current[index]) {
       inputRefs.current[index]?.focus();
       setFocusedIndex(index);
+      inputState.handleFocus();
     }
   };
 
@@ -90,7 +102,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     // Handle backspace
-    if (e.key === 'Backspace') {
+    if (e.key === OTPKeyboardKey.BACKSPACE) {
       if (otp[index] === '') {
         // If current field is empty, move to previous field
         if (index > 0) {
@@ -110,12 +122,12 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
     }
     
     // Handle left arrow
-    if (e.key === 'ArrowLeft' && index > 0) {
+    if (e.key === OTPKeyboardKey.LEFT && index > 0) {
       focusInput(index - 1);
     }
     
     // Handle right arrow
-    if (e.key === 'ArrowRight' && index < parseInt(digits) - 1) {
+    if (e.key === OTPKeyboardKey.RIGHT && index < parseInt(digits) - 1) {
       focusInput(index + 1);
     }
   };
@@ -160,7 +172,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
               </small>
             )}
           </div>
-          {showInfo && infoTooltip && <Tooltip size='lg' content={infoTooltip}>
+          {showInfo && infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
@@ -172,11 +184,11 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
       <div className={getInputsContainerClasses(digits)}>
         {[...Array(parseInt(digits))].map((_, index) => {
           // Determine the appropriate state for this input
-          let inputState = state;
+          let digitState = state;
           if (index === focusedIndex) {
-            inputState = 'focused';
+            digitState = TextInputState.FOCUSED;
           } else if (otp[index]) {
-            inputState = 'filled';
+            digitState = TextInputState.FILLED;
           }
           
           return (
@@ -190,18 +202,22 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
               inputMode="numeric"
               autoComplete="one-time-code"
               maxLength={1}
-              className={getDigitInputClasses(inputState)}
+              className={getDigitInputClasses(digitState)}
               value={otp[index]}
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
-              onFocus={() => { setFocusedIndex(index); }}
+              onFocus={() => { 
+                setFocusedIndex(index);
+                inputState.handleFocus();
+              }}
               onBlur={() => { 
                 if (focusedIndex === index) {
                   setFocusedIndex(-1);
+                  inputState.handleBlur();
                 }
               }}
-              disabled={state === 'disabled'}
+              disabled={state === TextInputState.DISABLED}
               aria-label={`Digit ${index + 1}`}
             />
           );

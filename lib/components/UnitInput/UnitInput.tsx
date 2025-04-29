@@ -1,8 +1,11 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
+import { TooltipSize } from '../Tooltip/types';
+import { TextInputSize, TextInputState } from '../TextInput/types';
+import { useInputState } from '../../hooks';
 
-import { UnitInputProps } from './types';
+import { UnitInputProps, UnitPosition } from './types';
 import {
   getInputBaseClasses,
   getInputClasses,
@@ -21,18 +24,24 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
   hintText = "This is a hint text to help user.",
   label = "Your Label",
   mandatory = false,
-  placeholder = "Enter value",
-  size = 'md',
-  state = 'default',
+  placeholder = "Enter amount",
+  showUnit = true,
+  size = TextInputSize.MEDIUM,
+  state = TextInputState.DEFAULT,
   sublabel = "(optional)",
+  unitPosition = UnitPosition.SUFFIX,
+  unitText = "cm",
   value,
   infoTooltip,
   successMessage,
-  unitText = "kg",
-  unitPosition = "suffix",
-  showUnit = true,
   ...props
 }, ref) => {
+  // Use the custom hook for state management
+  const inputState = useInputState({
+    initialState: state,
+    initialValue: value || ''
+  });
+
   return (
     <div className="flex flex-col space-y-2">
       {/* Label */}
@@ -50,7 +59,7 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
               </small>
             )}
           </div>
-          {infoTooltip && <Tooltip size='lg' content={infoTooltip}>
+          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
@@ -59,10 +68,10 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
       )}
 
       {/* Input Base */}
-      <div className={`${getInputBaseClasses(size, state)} overflow-hidden`}>
+      <div className={`${getInputBaseClasses(size, inputState.visualState)} overflow-hidden`}>
         {/* Prefix Unit */}
-        {showUnit && unitPosition === 'prefix' && (
-          <div className={getUnitClasses('prefix', state)}>
+        {showUnit && unitPosition === UnitPosition.PREFIX && (
+          <div className={getUnitClasses(UnitPosition.PREFIX, state)}>
             {unitText}
           </div>
         )}
@@ -71,19 +80,22 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
         <input
           ref={ref}
           className={getInputClasses(
-            state,
-            showUnit && unitPosition === 'prefix' ? <div>unit</div> : undefined,
-            showUnit && unitPosition === 'suffix' ? <div>unit</div> : undefined
+            inputState.visualState,
+            showUnit && unitPosition === UnitPosition.PREFIX ? <div>unit</div> : undefined,
+            showUnit && unitPosition === UnitPosition.SUFFIX ? <div>unit</div> : undefined
           )}
           placeholder={placeholder}
-          disabled={state === 'disabled'}
+          disabled={state === TextInputState.DISABLED}
           defaultValue={value}
+          onFocus={inputState.handleFocus}
+          onBlur={inputState.handleBlur}
+          onChange={(e) => inputState.updateValue(e.target.value)}
           {...props}
         />
 
         {/* Suffix Unit */}
-        {showUnit && unitPosition === 'suffix' && (
-          <div className={getUnitClasses('suffix', state)}>
+        {showUnit && unitPosition === UnitPosition.SUFFIX && (
+          <div className={getUnitClasses(UnitPosition.SUFFIX, state)}>
             {unitText}
           </div>
         )}

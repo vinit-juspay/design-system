@@ -226,7 +226,7 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full text-body-md font-medium placeholder:font-normal outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
+        base: 'w-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
         padding: {
           default: 'px-3',
           withLeftSlot: 'pl-9 pr-3',
@@ -245,6 +245,39 @@ export const themeConfig = {
           right: 'absolute right-3',
         },
       },
+    },
+    dropdownInput: {
+      container: 'flex flex-col space-y-2',
+      dropdown: {
+        base: 'flex items-center cursor-pointer !w-fit gap-1',
+        positions: {
+          left: 'pl-3',
+          right: 'pr-3'
+        },
+        withLeftSlot: 'ml-8',
+        option: {
+          container: 'flex items-center gap-1.5 truncate',
+          label: 'text-gray-800 font-medium truncate',
+          placeholder: 'text-gray-400',
+          icon: 'flex-shrink-0',
+          chevron: ' flex-shrink-0 text-gray-400'
+        }
+      },
+      input: {
+        base: 'flex-1 border-none focus:outline-none focus:ring-0',
+        withLeftPadding: 'pl-2'
+      },
+      menu: {
+        base: 'rounded-xl bg-white p-1 shadow-md border border-gray-200 min-w-[8rem] z-50',
+        item: {
+          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-body-md text-gray-800 outline-none transition-colors data-[highlighted]:bg-gray-50 focus:bg-gray-50',
+          active: 'bg-gray-50 font-medium',
+          content: 'flex items-center gap-2 w-full',
+          icon: 'flex-shrink-0',
+          text: 'flex-1',
+          checkIcon: 'h-4 w-4 text-primary-500 flex-shrink-0'
+        }
+      }
     },
     textInput: {
       // TextInput specific styles (if any)

@@ -1,8 +1,11 @@
 import React, { forwardRef, useState, useEffect } from "react";
 import { HelpCircle } from "lucide-react";
 import { Tooltip } from "../../main";
+import { TooltipSize } from '../Tooltip/types';
+import { useInputState } from '../../hooks';
 
 import { TextAreaProps } from "./types";
+import { TextInputState } from '../TextInput/types';
 import {
   getTextAreaContainerClasses,
   getTextAreaClasses,
@@ -26,7 +29,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       showInfo = false,
       showLabel = true,
       showSublabel = true,
-      state = "default",
+      state = TextInputState.DEFAULT,
       sublabel = "(optional)",
       value = "",
       onChange,
@@ -36,29 +39,30 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     },
     ref
   ) => {
-    const [isFocused, setIsFocused] = useState(false);
+    // Maintain internal state for character count
     const [textValue, setTextValue] = useState(value);
+
+    // Use the custom hook for visual state management
+    const inputState = useInputState({
+      initialState: state,
+      initialValue: value
+    });
 
     // Sync with external value if provided
     useEffect(() => {
       setTextValue(value);
+      inputState.updateValue(value);
     }, [value]);
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const newValue = e.target.value;
       setTextValue(newValue);
+      inputState.updateValue(newValue);
 
       if (onChange) {
         onChange(newValue);
       }
     };
-
-    // Determine the current visual state
-    const visualState = isFocused
-      ? "focused"
-      : state === "default" && textValue
-      ? "filled"
-      : state;
 
     return (
       <div className={getTextAreaContainerClasses()}>
@@ -78,7 +82,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             </div>
             {showInfo && infoTooltip && (
               <Tooltip
-                size="lg"
+                size={TooltipSize.LARGE}
                 content={infoTooltip}>
                 <button
                   type="button"
@@ -92,20 +96,28 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         )}
 
         {/* Textarea */}
-
-        <textarea
-          ref={ref}
-          className={getTextAreaClasses(visualState)}
-          placeholder={placeholder}
-          disabled={state === "disabled"}
-          defaultValue={textValue}
-          onChange={handleChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          rows={rows}
-          maxLength={maxLength}
-          {...props}
-        />
+        <div className="relative">
+          <textarea
+            ref={ref}
+            className={getTextAreaClasses(inputState.visualState)}
+            placeholder={placeholder}
+            disabled={state === TextInputState.DISABLED}
+            defaultValue={textValue}
+            onChange={handleChange}
+            onFocus={inputState.handleFocus}
+            onBlur={inputState.handleBlur}
+            rows={rows}
+            maxLength={maxLength}
+            {...props}
+          />
+          
+          {/* Character count if maxLength is specified */}
+          {maxLength && (
+            <div className="absolute bottom-2 right-3 text-xs text-gray-400">
+              {textValue.length}/{maxLength}
+            </div>
+          )}
+        </div>
 
         {/* Hint Text */}
         {showHint && hintText && (

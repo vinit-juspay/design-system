@@ -8,28 +8,28 @@ export const getTextAreaContainerClasses = () => {
   return textAreaTheme.container.base;
 };
 
-export const getTextAreaClasses = (state: TextInputState = 'default') => {
-  const states = textAreaTheme.textarea.states;  
-  return cn(
+export const getTextAreaClasses = (state: TextInputState = TextInputState.DEFAULT) => {
+  // Base classes that apply to all states
+  const baseClasses = [
     textAreaTheme.textarea.base,
-    state === 'default' && [
-      states.default,
-      states.hover,
-    ],
-    state === 'hover' && [
-      states.default,
-      states.hover,
-    ],
-    state === 'focused' && [
-      states.focused,
-    ],
-    state === 'error' && [
-      states.error,
-    ],
-    state === 'disabled' && [
-      states.disabled,
-    ],
-  );
+  ];
+  
+  // State-specific classes
+  const stateClasses = [];
+  
+  if (state === TextInputState.DEFAULT) {
+    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.hover);
+  } else if (state === TextInputState.FOCUSED) {
+    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.focused);
+  } else if (state === TextInputState.FILLED) {
+    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.hover);
+  } else if (state === TextInputState.ERROR) {
+    stateClasses.push(textAreaTheme.textarea.states.error);
+  } else if (state === TextInputState.DISABLED) {
+    stateClasses.push(textAreaTheme.textarea.states.disabled);
+  }
+  
+  return cn(...baseClasses, ...stateClasses);
 };
 
 export const getLabelClasses = () => {
@@ -46,9 +46,9 @@ export const getSublabelClasses = () => {
   );
 };
 
-export const getHintClasses = (state: TextInputState = 'default') => {
+export const getHintClasses = (state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
     inputTheme.hint.base,
-    state === 'error' ? inputTheme.hint.error : inputTheme.hint.color
+    state === TextInputState.ERROR ? inputTheme.hint.error : inputTheme.hint.color
   );
 }; 

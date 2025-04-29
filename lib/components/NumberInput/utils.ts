@@ -1,41 +1,43 @@
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
+import { TextInputSize } from '../TextInput/types';
 
-const { numberInput: numberTheme } = themeConfig.euler;
+const { numberInput: numberInputTheme } = themeConfig.euler;
 
 export const getStepperClasses = () => {
-  return `${numberTheme.stepper.base}`;
+  return cn(
+    numberInputTheme.stepper.base
+  );
 };
 
-export const getStepperButtonClasses = (isDown?: boolean, size?: 'md' | 'lg') => {
-  const sizes = numberTheme.stepper.button.sizes;
-
+export const getStepperButtonClasses = (
+  hasDivider: boolean, 
+  size: TextInputSize = TextInputSize.MEDIUM
+) => {
   return cn(
-    numberTheme.stepper.button.base,
-    numberTheme.stepper.button.states.default,
-    numberTheme.stepper.button.states.hover,
-    numberTheme.stepper.button.states.active,
-    isDown ? numberTheme.stepper.button.divider : '',
-    size === 'md' && [
-      sizes.md
-    ],
-    size === 'lg' && [
-      sizes.lg
-    ],
+    numberInputTheme.stepper.button.base,
+    numberInputTheme.stepper.button.states.default,
+    numberInputTheme.stepper.button.states.hover,
+    numberInputTheme.stepper.button.states.active,
+    numberInputTheme.stepper.button.sizes[size],
+    hasDivider && numberInputTheme.stepper.button.divider
   );
 };
 
 export const getStepperIconClasses = () => {
-  return numberTheme.stepper.button.icon;
+  return cn(
+    numberInputTheme.stepper.button.icon
+  );
 };
 
 export const getNumberInputClasses = () => {
-  return numberTheme.input.base;
+  return cn(
+    numberInputTheme.input.base
+  );
 };
 
 export const getRightSlotWithStepperClasses = () => {
   return cn(
-    themeConfig.euler.input.slot.base, // Get base slot styling from common input theme
-    numberTheme.slot.rightWithStepper
+    numberInputTheme.slot.rightWithStepper
   );
 }; 

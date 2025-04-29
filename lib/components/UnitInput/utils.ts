@@ -1,16 +1,14 @@
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 import { TextInputState } from '../TextInput/types';
 import { UnitPosition } from './types';
-import { cn } from '../../utils';
 
-const { unitInput: unitTheme } = themeConfig.euler;
+const { unitInput: unitInputTheme } = themeConfig.euler;
 
-export const getUnitClasses = (position: UnitPosition, state: TextInputState) => {
-  const isDisabled = state === 'disabled';
-  
+export const getUnitClasses = (position: UnitPosition, state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
-    unitTheme.unit.base,
-    unitTheme.unit.positions[position],
-    isDisabled && unitTheme.unit.states.disabled
+    unitInputTheme.unit.base,
+    unitInputTheme.unit.positions[position],
+    state === TextInputState.DISABLED && unitInputTheme.unit.states.disabled
   );
 }; 

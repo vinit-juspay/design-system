@@ -1,5 +1,9 @@
 import { TextInputState } from '../TextInput/types';
 
+export enum TextAreaSize {
+  DEFAULT = 'default'
+}
+
 export interface TextAreaProps {
   hintText?: string;
   label?: string;

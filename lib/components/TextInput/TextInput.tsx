@@ -1,8 +1,10 @@
 import { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
+import { TooltipSize } from '../Tooltip/types';
+import { useInputState } from '../../hooks';
 
-import { TextInputProps } from './types';
+import { TextInputProps, TextInputSize, TextInputState } from './types';
 import {
   getInputBaseClasses,
   getInputClasses,
@@ -10,6 +12,7 @@ import {
   getSublabelClasses,
   getHintClasses,
   getSlotClasses,
+  SlotPosition
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
@@ -22,14 +25,20 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   mandatory = false,
   placeholder = "Enter your email",
   rightSlot,
-  size = 'md',
-  state = 'default',
+  size = TextInputSize.MEDIUM,
+  state = TextInputState.DEFAULT,
   sublabel = "(optional)",
   value,
   infoTooltip,
   successMessage,
   ...props
 }, ref) => {
+  // Use the custom hook for state management
+  const inputState = useInputState({
+    initialState: state,
+    initialValue: value || ''
+  });
+
   return (
     <div className="flex flex-col space-y-2">
       {/* Label */}
@@ -47,7 +56,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
               </small>
             )}
           </div>
-          {infoTooltip && <Tooltip size='lg' content={infoTooltip}>
+          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
@@ -56,10 +65,10 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
       )}
 
       {/* Input Base */}
-      <div className={getInputBaseClasses(size, state)}>
+      <div className={getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)}>
         {/* Left Slot */}
         {leftSlot && (
-          <div className={getSlotClasses('left')}>
+          <div className={getSlotClasses(SlotPosition.LEFT)}>
             {leftSlot}
           </div>
         )}
@@ -68,16 +77,19 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         <input
           ref={ref}
           type="text"
-          className={getInputClasses(state, leftSlot, rightSlot)}
+          className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
           placeholder={placeholder}
-          disabled={state === 'disabled'}
+          disabled={state === TextInputState.DISABLED}
           defaultValue={value}
+          onFocus={inputState.handleFocus}
+          onBlur={inputState.handleBlur}
+          onChange={(e) => inputState.updateValue(e.target.value)}
           {...props}
         />
 
         {/* Right Slot */}
         {rightSlot && (
-          <div className={getSlotClasses('right')}>
+          <div className={getSlotClasses(SlotPosition.RIGHT)}>
             {rightSlot}
           </div>
         )}

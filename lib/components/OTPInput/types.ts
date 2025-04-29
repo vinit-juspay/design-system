@@ -1,6 +1,22 @@
 import { TextInputState } from '../TextInput/types';
 
-export type OTPDigits = '4' | '6';
+export enum OTPDigits {
+  FOUR = '4',
+  SIX = '6',
+}
+
+export enum Direction {
+  UP = 'up',
+  DOWN = 'down',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+
+export enum OTPKeyboardKey {
+  LEFT = 'ArrowLeft',
+  RIGHT = 'ArrowRight',
+  BACKSPACE = 'Backspace',
+}
 
 export interface OTPInputProps {
   digits?: OTPDigits;
