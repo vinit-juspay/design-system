@@ -1,7 +1,7 @@
 import { RotateCcw } from 'lucide-react';
 import { capitaliseCamelCase } from './utils';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { DropdownMenu } from 'radix-ui';
 import { useDebounce } from '../../hooks/useDebounce';
 import {
