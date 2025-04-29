@@ -9,7 +9,7 @@ type DataPoint = {
   }[];
 };
 
-export type NestedDataPoint = {
+export type NewNestedDataPoint = {
   name: string;
   data: {
     [key: string]: DataPoint;
@@ -17,5 +17,5 @@ export type NestedDataPoint = {
 };
 
 export interface ChartsV2Props {
-  data: NestedDataPoint[];
+  data: NewNestedDataPoint[];
 }

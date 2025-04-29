@@ -1,4 +1,4 @@
-import { ChartsV2Props, NestedDataPoint } from "./types"
+import { ChartsV2Props, NewNestedDataPoint } from "./types"
 import {
   LineChart,
   Line,
@@ -18,7 +18,7 @@ type FlattenedDataPoint = {
 
 const ChartsV2: React.FC<ChartsV2Props> = ({ data }) => {
   const colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', '#00D492', '#2B7FFF', '#AD46FF', '#FF8904'];
-  function transformNestedData(data: NestedDataPoint[]): FlattenedDataPoint[] {
+  function transformNestedData(data: NewNestedDataPoint[]): FlattenedDataPoint[] {
     return data.map(item => {
       const flattened: FlattenedDataPoint = { name: item.name };
 

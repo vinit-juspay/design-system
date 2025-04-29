@@ -1,11 +1,11 @@
 import ChartsV2 from '../../../lib/components/ChartsV2/ChartsV2';
-import { NestedDataPoint } from '../../../lib/components/ChartsV2/types';
+import { NewNestedDataPoint } from '../../../lib/components/ChartsV2/types';
 
 const ChartDemo2 = () => {
- 
-  const data: {name: string, revenue: number}[] = [{name: 'Jan', revenue: 4000}, {name: 'Feb', revenue: 3000}, {name: 'Mar', revenue: 2000}]
 
-  const sampleNestedData: NestedDataPoint[] = [
+  const data: { name: string, revenue: number }[] = [{ name: 'Jan', revenue: 4000 }, { name: 'Feb', revenue: 3000 }, { name: 'Mar', revenue: 2000 }]
+
+  const sampleNestedData: NewNestedDataPoint[] = [
     {
       name: 'January',
       data: {
