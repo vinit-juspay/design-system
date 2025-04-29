@@ -1,11 +1,10 @@
-import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2, NewNestedDataPoint } from "./types"
+import { ChartLegendPositionV2, ChartsV2Props, NewNestedDataPoint } from "./types"
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
@@ -49,6 +48,7 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   chartHeaderSlot, }) => {
 
   const chartContainerRef = useRef<HTMLDivElement>(null!);
+  console.log(type)
 
   if (!colors || colors.length === 0) colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', '#00D492', '#2B7FFF', '#AD46FF', '#FF8904'];
 
