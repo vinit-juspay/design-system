@@ -1,3 +1,2 @@
-import Snackbar from './Snackbar';
-export { Snackbar };
+export { default as Snackbar } from './Snackbar';
 export * from './types';
