@@ -16,23 +16,6 @@ const TimeSelector = forwardRef<HTMLSelectElement, TimeSelectorProps>(
       return `${formattedHour}:${formattedMinute} ${period}`;
     };
 
-    // Parse 12h display format back to 24h value format
-    const parseTimeFrom12Hour = (timeStr: string): string => {
-      const [timePart, period] = timeStr.split(' ');
-      const [hourStr, minuteStr] = timePart.split(':');
-
-      let hour = parseInt(hourStr, 10);
-      const minute = parseInt(minuteStr, 10);
-
-      if (period === 'PM' && hour < 12) {
-        hour += 12;
-      } else if (period === 'AM' && hour === 12) {
-        hour = 0;
-      }
-
-      return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-    };
-
     const generateTimeOptions = () => {
       const options = [];
       for (let hour = 0; hour < 24; hour++) {
@@ -48,14 +31,6 @@ const TimeSelector = forwardRef<HTMLSelectElement, TimeSelectorProps>(
         }
       }
       return options;
-    };
-
-    // Convert the current value to 12h format for display
-    const get12HourDisplayValue = (value: string): string => {
-      const [hourStr, minuteStr] = value.split(':');
-      const hour = parseInt(hourStr, 10);
-      const minute = parseInt(minuteStr, 10);
-      return formatTimeFor12Hour(hour, minute);
     };
 
     return (

@@ -1,5 +1,5 @@
 import { forwardRef, useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import {
   DateRangePickerProps,
   DateRangePickerSize,
