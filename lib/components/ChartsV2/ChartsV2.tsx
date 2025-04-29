@@ -1,4 +1,4 @@
-import { ChartLegendPositionV2, ChartsV2Props, NewNestedDataPoint } from "./types"
+import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2, NewNestedDataPoint } from "./types"
 import {
   LineChart,
   Line,
@@ -31,12 +31,8 @@ function transformNestedData(data: NewNestedDataPoint[]): FlattenedDataPoint[] {
   });
 }
 
-
-
-
-
 const ChartsV2: React.FC<ChartsV2Props> = ({
-  type,
+  chartType = ChartTypeV2.LINE,
   data,
   colors,
   xAxisLabel,
@@ -48,11 +44,9 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   chartHeaderSlot, }) => {
 
   const chartContainerRef = useRef<HTMLDivElement>(null!);
-  console.log(type)
+  console.log(chartType)
 
   if (!colors || colors.length === 0) colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', '#00D492', '#2B7FFF', '#AD46FF', '#FF8904'];
-
-
   const flattenedData = transformNestedData(data);
   const lineKeys = flattenedData.length > 0
     ? Object.keys(flattenedData[0]).filter(key => key !== "name")
