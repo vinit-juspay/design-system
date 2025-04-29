@@ -1,5 +1,5 @@
 import ChartsV2 from '../../../lib/components/ChartsV2/ChartsV2';
-import { NewNestedDataPoint } from '../../../lib/components/ChartsV2/types';
+import { ChartTypeV2, NewNestedDataPoint } from '../../../lib/components/ChartsV2/types';
 
 const ChartDemo2 = () => {
 
@@ -7,7 +7,7 @@ const ChartDemo2 = () => {
 
   const sampleNestedData: NewNestedDataPoint[] = [
     {
-      name: 'January',
+      name: 'Jan',
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 4000 },
@@ -24,7 +24,7 @@ const ChartDemo2 = () => {
       }
     },
     {
-      name: 'February',
+      name: 'Feb',
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 3000 },
@@ -41,7 +41,7 @@ const ChartDemo2 = () => {
       }
     },
     {
-      name: 'March',
+      name: 'Mar',
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 2000 },
@@ -56,11 +56,11 @@ const ChartDemo2 = () => {
           aux: [{ label: 'Change', val: '+30%' }]
         }
       }
-    }
+    },
   ];
   return (
     <div>
-      <ChartsV2 data={sampleNestedData} />
+      <ChartsV2 data={sampleNestedData} type={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
     </div>
   )
 }
