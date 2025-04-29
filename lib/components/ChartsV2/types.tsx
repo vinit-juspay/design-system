@@ -21,7 +21,7 @@ export type NewNestedDataPoint = {
 
 
 export interface ChartsV2Props {
-  type: ChartTypeV2;
+  chartType?: ChartTypeV2;
   data: NewNestedDataPoint[];
   xAxisLabel?: string;
   yAxisLabel?: string;

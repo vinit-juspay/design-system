@@ -60,7 +60,7 @@ const ChartDemo2 = () => {
   ];
   return (
     <div>
-      <ChartsV2 data={sampleNestedData} type={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
+      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
     </div>
   )
 }
