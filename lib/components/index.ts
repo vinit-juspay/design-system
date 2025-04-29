@@ -7,3 +7,4 @@ export * from './Tooltip';
 export * from './Charts';
 export * from './Breadcrumb';
 export * from './Menu';
+export * from './ChartsV2';
