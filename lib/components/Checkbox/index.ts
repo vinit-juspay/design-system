@@ -1,2 +1,2 @@
 export { default } from './Checkbox.tsx';
-export * from './types'; 
+export * from './types';

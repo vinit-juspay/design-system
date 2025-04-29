@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import Alert, {
+import { FileWarning } from 'lucide-react';
+import {
+  Alert,
   AlertActionPlacement,
   AlertStyle,
   AlertVariant,
 } from '../../../lib/components/Alert';
-import { FileWarning } from 'lucide-react';
-
 const AlertDemo = () => {
   const [variant, setVariant] = useState<AlertVariant>(AlertVariant.PRIMARY);
   const [style, setStyle] = useState<AlertStyle>(AlertStyle.SUBTLE);

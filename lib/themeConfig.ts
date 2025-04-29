@@ -452,120 +452,129 @@ export const themeConfig = {
     },
     chart: {
       base: {
-        chartContainer: "w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white",
+        chartContainer: 'w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white',
         chartContentContainer: {
-          top: "py-5 px-4 flex flex-col gap-6",
-          right: "py-5 px-4 flex flex-row-reverse gap-6"
+          top: 'py-5 px-4 flex flex-col gap-6',
+          right: 'py-5 px-4 flex flex-row-reverse gap-6',
         },
         chartHeader: {
-          container: "flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]",
-          metrics: "flex items-center gap-2",
-          selectedMetric: "text-base font-semibold text-[#525866]",
-          slotContainer: "flex items-center gap-2"
+          container:
+            'flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]',
+          metrics: 'flex items-center gap-2',
+          selectedMetric: 'text-base font-semibold text-[#525866]',
+          slotContainer: 'flex items-center gap-2',
         },
         chartLegend: {
-          container: "flex items-center gap-8 justify-between",
-          legendItemsContainer: "flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1",
-          legendItem: "h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300",
-          legendMarker: "w-3 h-3 rounded-sm",
-          resetButton: "text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0",
-          stackedLegendContainer: "h-full w-full flex flex-col justify-center gap-2"
+          container: 'flex items-center gap-8 justify-between',
+          legendItemsContainer:
+            'flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1',
+          legendItem: 'h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300',
+          legendMarker: 'w-3 h-3 rounded-sm',
+          resetButton:
+            'text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0',
+          stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2',
         },
         tooltip: {
-          container: "bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]",
-        }
-      }
+          container:
+            'bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+        },
+      },
     },
     menu: {
-      baseStyles: "z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md",
-      
+      baseStyles:
+        'z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md',
+
       layout: {
-        container: "flex items-start w-full justify-between",
-        content: "flex items-start",
-        checkboxRight: "ml-0",
-        checkboxLeft: "mr-2",
-        threeColumn: "flex items-start w-full",
-        columnContent: "flex-1 min-w-0",
-        flexColumn: "flex flex-col",
-        leftSlot: "mr-2 flex-shrink-0",
-        rightSlotsContainer: "flex items-center justify-end ml-2 space-x-2 flex-shrink-0",
-        menuItemRightContainer: "flex items-center ml-auto space-x-2"
+        container: 'flex items-start w-full justify-between',
+        content: 'flex items-start',
+        checkboxRight: 'ml-0',
+        checkboxLeft: 'mr-2',
+        threeColumn: 'flex items-start w-full',
+        columnContent: 'flex-1 min-w-0',
+        flexColumn: 'flex flex-col',
+        leftSlot: 'mr-2 flex-shrink-0',
+        rightSlotsContainer: 'flex items-center justify-end ml-2 space-x-2 flex-shrink-0',
+        menuItemRightContainer: 'flex items-center ml-auto space-x-2',
       },
       positioning: {
         sideOffset: {
           top: 8,
           right: 0,
           bottom: 8,
-          left: 0
+          left: 0,
         },
         alignOffset: {
           top: 0,
           right: -8,
           bottom: 0,
-          left: -8
-        }
+          left: -8,
+        },
       },
       menuItem: {
-        baseStyles: "relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed",
-        icon: "h-4 w-4 mr-2",
-        subtext: "text-body-sm font-500 text-gray-400 mt-0.5",
-        shortcut: "ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right",
+        baseStyles:
+          'relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed',
+        icon: 'h-4 w-4 mr-2',
+        subtext: 'text-body-sm font-500 text-gray-400 mt-0.5',
+        shortcut: 'ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right',
         colors: {
-          primary: "text-primary-600 data-[highlighted]:text-primary-700",
-          danger: "text-red-500 data-[highlighted]:text-red-600",
-          success: "text-green-500 data-[highlighted]:text-green-600",
-          warning: "text-amber-500 data-[highlighted]:text-amber-600"
-        }
+          primary: 'text-primary-600 data-[highlighted]:text-primary-700',
+          danger: 'text-red-500 data-[highlighted]:text-red-600',
+          success: 'text-green-500 data-[highlighted]:text-green-600',
+          warning: 'text-amber-500 data-[highlighted]:text-amber-600',
+        },
       },
       checkboxMenuItem: {
-        useCheckboxSize: "md",
-        indicator: "absolute right-2 items-center justify-center",
-        icon: "text-primary-500"
+        useCheckboxSize: 'md',
+        indicator: 'absolute right-2 items-center justify-center',
+        icon: 'text-primary-500',
       },
       label: {
-        baseStyles: "text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded"
+        baseStyles: 'text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded',
       },
       separator: {
-        baseStyles: "h-px my-1 bg-gray-200"
+        baseStyles: 'h-px my-1 bg-gray-200',
       },
       search: {
-        baseStyles: "px-2 py-0 border-b border-gray-200",
-        container: "flex items-center bg-white",
-        icon: "h-4 w-4 text-gray-400",
-        input: "w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0"
-      }
+        baseStyles: 'px-2 py-0 border-b border-gray-200',
+        container: 'flex items-center bg-white',
+        icon: 'h-4 w-4 text-gray-400',
+        input:
+          'w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0',
+      },
     },
     checkbox: {
-      baseStyles: "flex items-center justify-center rounded border border-primary-500 bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1",
+      baseStyles:
+        'flex items-center justify-center rounded border border-primary-500 bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1',
       indicator: {
-        baseStyles: "flex items-center justify-center",
-        icon: "text-gray-0"
+        baseStyles: 'flex items-center justify-center',
+        icon: 'text-gray-0',
       },
       sizes: {
         sm: {
-          root: "h-3.5 w-3.5 rounded",
-          indicator: "h-3.5 w-3.5",
-          checkIcon: "h-2.5 w-2.5",
-          fontSize: "text-body-md",
+          root: 'h-3.5 w-3.5 rounded',
+          indicator: 'h-3.5 w-3.5',
+          checkIcon: 'h-2.5 w-2.5',
+          fontSize: 'text-body-md',
         },
         md: {
-          root: "h-4 w-4 rounded",
-          indicator: "h-4 w-4",
-          checkIcon: "h-3 w-3",
-          fontSize: "text-body-md",
-        }
+          root: 'h-4 w-4 rounded',
+          indicator: 'h-4 w-4',
+          checkIcon: 'h-3 w-3',
+          fontSize: 'text-body-md',
+        },
       },
       states: {
-        disabled: "opacity-50 cursor-not-allowed bg-gray-100 border-gray-300",
-        enabled: "cursor-pointer data-[state=checked]:bg-primary-500 data-[state=checked]:border-primary-500 data-[state=indeterminate]:bg-primary-500 data-[state=indeterminate]:border-primary-500 hover:border-primary-600 hover:data-[state=checked]:bg-primary-600 hover:data-[state=indeterminate]:bg-primary-600 transition-colors duration-150",
-        labelDisabled: "text-gray-400 cursor-not-allowed",
-        labelEnabled: "text-gray-600 font-500 cursor-pointer"
+        disabled: 'opacity-50 cursor-not-allowed bg-gray-100 border-gray-300',
+        enabled:
+          'cursor-pointer data-[state=checked]:bg-primary-500 data-[state=checked]:border-primary-500 data-[state=indeterminate]:bg-primary-500 data-[state=indeterminate]:border-primary-500 hover:border-primary-600 hover:data-[state=checked]:bg-primary-600 hover:data-[state=indeterminate]:bg-primary-600 transition-colors duration-150',
+        labelDisabled: 'text-gray-400 cursor-not-allowed',
+        labelEnabled: 'text-gray-600 font-500 cursor-pointer',
       },
       position: {
-        wrapper: "flex items-center",
-        left: "space-x-2",
-        right: "space-x-reverse space-x-2 flex-row-reverse"
-      }
+        wrapper: 'flex items-center',
+        left: 'space-x-2',
+        right: 'space-x-reverse space-x-2 flex-row-reverse',
+      },
     },
     breadcrumb: {
       base: {
@@ -589,7 +598,8 @@ export const themeConfig = {
         active: 'border border-gray-150 bg-gray-50 text-gray-1000',
       },
       dropdown: {
-        container: 'absolute top-full left-0 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48 translate-y-1',
+        container:
+          'absolute top-full left-0 z-50 py-1 bg-white rounded-md shadow-lg border border-gray-200 min-w-48 translate-y-1',
         item: 'px-4 py-2 hover:bg-gray-50',
       },
       iconSlot: {

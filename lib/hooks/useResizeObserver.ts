@@ -23,7 +23,7 @@ export function useResizeObserver(
     const el = targetRef.current;
     if (!el) return;
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       for (const entry of entries) {
         callback(entry.contentRect);
       }

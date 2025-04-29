@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 export enum CheckboxSize {
   SMALL = 'sm',
-  MEDIUM = 'md'
+  MEDIUM = 'md',
 }
 
 export enum CheckboxPosition {
   LEFT = 'left',
-  RIGHT = 'right'
+  RIGHT = 'right',
 }
 
 export interface CheckboxProps {
@@ -55,4 +55,4 @@ export interface CheckboxProps {
    * Position of the checkbox relative to children/label
    */
   position?: CheckboxPosition;
-} 
+}

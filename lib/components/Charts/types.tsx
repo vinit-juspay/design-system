@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export enum ChartType {
   LINE = 'line',
   BAR = 'bar',
-  PIE = 'pie'
+  PIE = 'pie',
 }
 
 export enum ChartLegendPosition {
@@ -32,7 +32,6 @@ export interface ChartProps {
   chartHeaderSlot: ReactNode;
 }
 
-
 export type ChartLegendsProps = {
   chartContainerRef: React.RefObject<HTMLDivElement>;
   keys: string[];
@@ -45,12 +44,11 @@ export type ChartLegendsProps = {
   handleLegendEnter: (dataKey: string) => void;
   handleLegendLeave: () => void;
   hoveredKey: string | null;
-}
-
+};
 
 export type ChartHeaderProps = {
   slot1: React.ReactNode;
   slot2: React.ReactNode;
   slot3: React.ReactNode;
   chartHeaderSlot: ReactNode;
-}
+};
