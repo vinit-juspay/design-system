@@ -59,8 +59,10 @@ const ChartDemo2 = () => {
     },
   ];
   return (
-    <div>
+    <div className='flex flex-col gap-4'>
       <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
+      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Hello</div>} />
+
     </div>
   )
 }

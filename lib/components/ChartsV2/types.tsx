@@ -7,7 +7,7 @@ type DataPoint = {
   };
   aux?: {
     label: string;
-    val: string;
+    val: number;
   }[];
 };
 
@@ -45,6 +45,11 @@ export enum ChartLegendPositionV2 {
   RIGHT = 'right',
 }
 
+export type FlattenedDataPoint = {
+  name: string;
+  [key: string]: number | string;
+};
+
 
 
 export type ChartHeaderPropsV2 = {
@@ -60,6 +65,10 @@ export type ChartLegendsPropsV2 = {
   chartContainerRef: React.RefObject<HTMLDivElement>;
   keys: string[];
   colors: string[];
+  handleLegendClick: (key: string) => void;
+  handleLegendEnter: (key: string) => void;
+  handleLegendLeave: () => void;
+  // ------------------------------------------------------------
   // activeKeys: string[] | null;
   // handleLegendClick: (dataKey: string) => void;
   // setSelectedKeys: (keys: string[]) => void;

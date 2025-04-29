@@ -1,23 +1,13 @@
-import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2, NewNestedDataPoint } from "./types"
+import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2, FlattenedDataPoint, NewNestedDataPoint } from "./types"
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
   ResponsiveContainer,
-  CartesianGrid,
 } from "recharts";
-import { formatNumber } from "./utils";
-import { getChartContainer, getChartContentContainer } from "./themeUtils";
+import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./themeUtils";
 import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { renderChart } from "./renderChart";
 
-type FlattenedDataPoint = {
-  name: string;
-  [key: string]: number | string;
-};
 
 function transformNestedData(data: NewNestedDataPoint[]): FlattenedDataPoint[] {
   return data.map(item => {
@@ -44,67 +34,40 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   chartHeaderSlot, }) => {
 
   const chartContainerRef = useRef<HTMLDivElement>(null!);
-  console.log(chartType)
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  // const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
+  const [_, setSelectedKeys] = useState<string[]>([]);
 
-  if (!colors || colors.length === 0) colors = ['#8EC5FF', '#00C951', '#C27AFF', '#FB2C36', '#00D492', '#2B7FFF', '#AD46FF', '#FF8904'];
+  if (!colors || colors.length === 0) colors = DEFAULT_COLORS;
   const flattenedData = transformNestedData(data);
+
+
   const lineKeys = flattenedData.length > 0
     ? Object.keys(flattenedData[0]).filter(key => key !== "name")
     : [];
 
-  const renderChart = () => {
-    return (<LineChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}>
-      <XAxis dataKey="name" axisLine={false}
-        tickLine={false}
-        tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
-        dy={10}
-        label={
-          xAxisLabel
-            ? {
-              value: xAxisLabel,
-              position: 'bottom',
-              offset: 15,
-              fill: '#99A0AE',
-              fontSize: 14,
-              fontWeight: 500,
-            }
-            : undefined
-        }
-      />
-      <CartesianGrid vertical={false} stroke="#ECEFF3" />
-      <YAxis
-        width={50}
-        axisLine={false}
-        tickLine={false}
-        tickFormatter={value => formatNumber(value)}
-        tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
-        label={
-          yAxisLabel
-            ? {
-              value: yAxisLabel,
-              angle: -90,
-              position: 'insideLeft',
-              style: { textAnchor: 'middle' },
-              offset: -15,
-              fill: '#99A0AE',
-              fontSize: 14,
-              fontWeight: 500,
-            }
-            : undefined
-        }
-      />
-      <Tooltip />
-      {lineKeys.map((key, index) => (
-        <Line
-          key={key}
-          type="monotone"
-          dataKey={key}
-          stroke={colors[index]}
-          dot={false}
-        />
-      ))}
-    </LineChart>)
+
+  const handleLegendClick = (key: string) => {
+    setSelectedKeys(prevActiveKeys => {
+      if (prevActiveKeys.includes(key)) {
+        return prevActiveKeys.filter(k => k !== key);
+      } else {
+        return [...prevActiveKeys, key];
+      }
+    });
   }
+
+  const handleLegendEnter = (key: string) => {
+    setHoveredKey(key);
+  }
+
+  const handleLegendLeave = () => {
+    setHoveredKey(null);
+  }
+
+  useEffect(() => {
+    console.log(hoveredKey, "Hovered Key")
+  }, [hoveredKey])
 
   return (
     <div className={getChartContainer()} ref={chartContainerRef}>
@@ -114,10 +77,13 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
           chartContainerRef={chartContainerRef}
           keys={lineKeys}
           colors={colors}
+          handleLegendClick={handleLegendClick}
+          handleLegendEnter={handleLegendEnter}
+          handleLegendLeave={handleLegendLeave}
         />
         <div>
-          <ResponsiveContainer width="100%" height={300}>
-            {renderChart()}
+          <ResponsiveContainer width="100%" height={400}>
+            {renderChart(flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel)}
           </ResponsiveContainer>
         </div>
       </div>

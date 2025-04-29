@@ -71,6 +71,8 @@ export const Chart: React.FC<ChartProps> = ({
     });
   }, [data, keys, selectedKeys, showingTruncatedData]);
 
+  console.log(transformedData, "Transformed Data")
+
   const activeKeys = selectedKeys.length > 0 ? selectedKeys : null;
 
   const handleLegendClick = (dataKey: string) => {

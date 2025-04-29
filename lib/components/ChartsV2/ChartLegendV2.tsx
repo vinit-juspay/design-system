@@ -16,8 +16,9 @@ import { ChartLegendsPropsV2 } from './types';
 
 const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   keys,
-  // activeKeys,
-  // handleLegendClick,
+  handleLegendClick,
+  handleLegendEnter,
+  handleLegendLeave,
   colors,
   chartContainerRef,
   // stacked = false,
@@ -90,9 +91,9 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
           <div
             key={dataKey}
             className={getChartLegendItem()}
-          // onClick={() => handleLegendClick(dataKey)}
-          // onMouseEnter={() => handleLegendEnter(dataKey)}
-          // onMouseLeave={() => handleLegendLeave()}
+            onClick={() => handleLegendClick(dataKey)}
+            onMouseEnter={() => handleLegendEnter(dataKey)}
+            onMouseLeave={handleLegendLeave}
           >
             <div
               className={getChartLegendMarker()}
