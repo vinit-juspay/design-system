@@ -604,61 +604,65 @@ export const themeConfig = {
       },
       iconSlot: {
         left: 'inline-flex items-center justify-center w-4.5 h-4.5',
-        right: 'inline-flex items-center justify-center w-4.5 h-4.5'
-      }
+        right: 'inline-flex items-center justify-center w-4.5 h-4.5',
+      },
     },
     dateRangePicker: {
       base: {
-        container: "relative inline-flex w-full",
-        input: "flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer",
+        container: 'relative inline-flex w-full',
+        input:
+          'flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer',
       },
       variant: {
-        primary: "text-gray-900",
-        secondary: "text-gray-700 bg-gray-50",
+        primary: 'text-gray-900',
+        secondary: 'text-gray-700 bg-gray-50',
       },
       sizes: {
-        sm: "h-8 text-xs",
-        md: "h-10 text-sm",
-        lg: "h-12 text-base",
+        sm: 'h-8 text-xs',
+        md: 'h-10 text-sm',
+        lg: 'h-12 text-base',
       },
       input: {
-        primary: "border-gray-300",
-        secondary: "border-gray-200 bg-gray-50",
+        primary: 'border-gray-300',
+        secondary: 'border-gray-200 bg-gray-50',
         sizes: {
-          sm: "text-xs py-1",
-          md: "text-sm py-2",
-          lg: "text-base py-2.5",
+          sm: 'text-xs py-1',
+          md: 'text-sm py-2',
+          lg: 'text-base py-2.5',
         },
       },
       states: {
-        disabled: "opacity-50 cursor-not-allowed pointer-events-none",
+        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
       },
       calendar: {
-        container: "absolute z-10 mt-1 w-auto min-w-[320px] bg-white border border-gray-200 rounded-md shadow-lg",
-        gridContainer: "max-h-[400px] overflow-y-auto p-4",
-        monthContainer: "mb-6",
-        monthHeader: "text-lg font-medium mb-2",
-        dayNamesContainer: "grid grid-cols-7 text-center text-gray-500",
-        dayName: "p-2",
-        weekRow: "grid grid-cols-7",
-        emptyCell: "p-2",
-        dayCell: "cursor-pointer text-center p-2 relative",
-        startDate: "bg-primary-500 text-gray-0 rounded-lg",
-        endDate: "bg-primary-500 text-gray-0 rounded-lg",
-        rangeDay: "bg-primary-50 text-gray-600",
-        todayDay: "font-medium text-blue-700",
-        todayIndicator: "absolute w-1 h-1 bg-blue-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2",
-        hoverState: "hover:border hover:border-primary-300 hover:rounded-lg"
+        container:
+          'absolute z-10 mt-1 w-auto min-w-[320px] bg-white border border-gray-200 rounded-md shadow-lg',
+        gridContainer: 'max-h-[400px] overflow-y-auto p-4',
+        monthContainer: 'mb-6',
+        monthHeader: 'text-lg font-medium mb-2',
+        dayNamesContainer: 'grid grid-cols-7 text-center text-gray-500',
+        dayName: 'p-2',
+        weekRow: 'grid grid-cols-7',
+        emptyCell: 'p-2',
+        dayCell: 'cursor-pointer text-center p-2 relative',
+        startDate: 'bg-primary-500 text-gray-0 rounded-lg',
+        endDate: 'bg-primary-500 text-gray-0 rounded-lg',
+        rangeDay: 'bg-primary-50 text-gray-600',
+        todayDay: 'font-medium text-blue-700',
+        todayIndicator:
+          'absolute w-1 h-1 bg-blue-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2',
+        hoverState: 'hover:border hover:border-primary-300 hover:rounded-lg',
       },
       presets: {
-        button: "px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500",
-        activeButton: "bg-primary-50 border-primary-500 text-primary-700",
+        button:
+          'px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+        activeButton: 'bg-primary-50 border-primary-500 text-primary-700',
       },
       timePicker: {
-        container: "p-4 border-t border-gray-200",
-        input: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500",
+        container: 'p-4 border-t border-gray-200',
+        input:
+          'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500',
       },
     },
   },
 };
- 
