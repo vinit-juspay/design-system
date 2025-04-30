@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { TooltipProps } from "recharts";
+import { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 type DataPoint = {
   primary: {
@@ -28,9 +30,8 @@ export interface RenderChartProps {
   xAxisLabel?: string;
   yAxisLabel?: string;
   data: NewNestedDataPoint[];
+  selectedKeys: string[];
 }
-
-
 
 export interface ChartsV2Props {
   chartType?: ChartTypeV2;
@@ -62,16 +63,12 @@ export type FlattenedDataPoint = {
   [key: string]: number | string;
 };
 
-
-
 export type ChartHeaderPropsV2 = {
   slot1: React.ReactNode;
   slot2: React.ReactNode;
   slot3: React.ReactNode;
   chartHeaderSlot: ReactNode;
 };
-
-
 
 export type ChartLegendsPropsV2 = {
   chartContainerRef: React.RefObject<HTMLDivElement>;
@@ -80,13 +77,16 @@ export type ChartLegendsPropsV2 = {
   handleLegendClick: (key: string) => void;
   handleLegendEnter: (key: string) => void;
   handleLegendLeave: () => void;
-  // ------------------------------------------------------------
-  // activeKeys: string[] | null;
-  // handleLegendClick: (dataKey: string) => void;
-  // setSelectedKeys: (keys: string[]) => void;
-  // stacked?: boolean;
-  // onReset: () => void;
-  // handleLegendEnter: (dataKey: string) => void;
-  // handleLegendLeave: () => void;
-  // hoveredKey: string | null;
+  selectedKeys: string[];
+  setSelectedKeys: (keys: string[]) => void;
+  hoveredKey: string | null;
+  activeKeys: string[] | null;
 };
+
+export interface CustomTooltipV2Props extends TooltipProps<ValueType, NameType> {
+  hoveredKey: string | null;
+  originalData: NewNestedDataPoint[];
+  setHoveredKey: (key: string) => void;
+  chartType: ChartTypeV2;
+  selectedKeys: string[];
+}

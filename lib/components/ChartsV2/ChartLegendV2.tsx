@@ -21,6 +21,9 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   handleLegendLeave,
   colors,
   chartContainerRef,
+  selectedKeys,
+  setSelectedKeys,
+  hoveredKey,
   // stacked = false,
   // onReset,
   // handleLegendEnter,
@@ -94,6 +97,17 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
             onClick={() => handleLegendClick(dataKey)}
             onMouseEnter={() => handleLegendEnter(dataKey)}
             onMouseLeave={handleLegendLeave}
+            style={{
+              opacity: hoveredKey
+                ? hoveredKey === dataKey
+                  ? 1
+                  : 0.4
+                : selectedKeys && selectedKeys.length > 0
+                  ? selectedKeys.includes(dataKey)
+                    ? 1
+                    : 0.4
+                  : 1,
+            }}
           >
             <div
               className={getChartLegendMarker()}
@@ -134,11 +148,11 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
           </DropdownMenu.Root>
         )}
       </div>
-      {/* {activeKeys && activeKeys.length > 0 && activeKeys.length !== keys.length && ( */}
-      <button className={getChartLegendResetButton()} >
-        <RotateCcw className="w-3 h-3" />
-      </button>
-      {/* )} */}
+      {selectedKeys && selectedKeys.length > 0 && selectedKeys.length !== keys.length && (
+        <button className={getChartLegendResetButton()} onClick={() => setSelectedKeys([])}>
+          <RotateCcw className="w-3 h-3" />
+        </button>
+      )}
     </div>
   );
 };

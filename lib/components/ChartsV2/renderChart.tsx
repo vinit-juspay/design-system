@@ -1,6 +1,6 @@
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 import { ChartTypeV2, RenderChartProps } from "./types";
-import { formatNumber } from "./utils";
+import { formatNumber, lightenHexColor } from "./utils";
 import { CustomTooltipV2 } from "./CustomTooltipV2";
 
 export const renderChart = ({
@@ -12,16 +12,20 @@ export const renderChart = ({
   setHoveredKey,
   xAxisLabel,
   yAxisLabel,
-  data: originalData
+  data: originalData,
+  selectedKeys
 }: RenderChartProps) => {
-  const getColor = (key: string) => {
+  const getColor = (key: string, chartType: ChartTypeV2) => {
     const originalIndex = lineKeys.indexOf(key);
+    if (hoveredKey && hoveredKey !== key && chartType === ChartTypeV2.LINE) {
+      return lightenHexColor(colors[originalIndex % colors.length], 0.3);
+    }
     return colors[originalIndex % colors.length];
   }
 
   const getElementOpacity = (dataKey: string) => {
     if (hoveredKey) {
-      return hoveredKey === dataKey ? 1 : 0.1;
+      return hoveredKey === dataKey ? 1 : 0.4;
     }
     return 1;
   }
@@ -76,7 +80,8 @@ export const renderChart = ({
             hoveredKey,
             originalData,
             setHoveredKey,
-            chartType
+            chartType,
+            selectedKeys
           })
         } />
         {lineKeys.map((key, _) => (
@@ -84,8 +89,7 @@ export const renderChart = ({
             key={key}
             type="linear"
             dataKey={key}
-            stroke={getColor(key)}
-            opacity={getElementOpacity(key)}
+            stroke={getColor(key, chartType)}
             strokeWidth={2}
             activeDot={{ r: hoveredKey === key ? 4 : 0 }}
             dot={false}
@@ -95,7 +99,7 @@ export const renderChart = ({
         ))}
       </LineChart>)
     case ChartTypeV2.BAR:
-      return (<BarChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}>
+      return (<BarChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }} onMouseLeave={() => setHoveredKey(null)}>
         <CartesianGrid vertical={false} stroke="#ECEFF3" />
         <XAxis
           dataKey="name"
@@ -143,22 +147,26 @@ export const renderChart = ({
             hoveredKey,
             originalData,
             setHoveredKey,
-            chartType
+            chartType,
+            selectedKeys
           })
         } />
         {lineKeys.map((key, _) => (
           <Bar
             key={key}
             dataKey={key}
-            fill={getColor(key)}
-            opacity={getElementOpacity(key)}
+            fill={getColor(key, chartType)}
+            fillOpacity={getElementOpacity(key)}
             animationDuration={350}
             radius={[4, 4, 0, 0]}
-            onMouseEnter={() => setHoveredKey(key)}
-            onMouseLeave={() => setHoveredKey(null)}
+          // onMouseOver={() => setHoveredKey(key)}
           />
         ))}
       </BarChart>)
+
+    case ChartTypeV2.PIE:
+
+      return <></>
 
     default:
       return <div>Unsupported chart type</div>;;

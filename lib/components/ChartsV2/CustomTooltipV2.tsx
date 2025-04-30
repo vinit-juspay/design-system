@@ -1,19 +1,17 @@
-import { TooltipProps } from "recharts";
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { getChartTooltipContainer } from "./themeUtils";
-import { ChartTypeV2, NewNestedDataPoint } from "./types";
+import { ChartTypeV2, CustomTooltipV2Props, NewNestedDataPoint } from "./types";
 import { capitaliseCamelCase, formatNumber } from "./utils";
 
-interface CustomTooltipV2Props extends TooltipProps<ValueType, NameType> {
-  hoveredKey: string | null;
-  originalData: NewNestedDataPoint[];
-  setHoveredKey: (key: string) => void;
-  chartType: ChartTypeV2;
-}
+export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalData, setHoveredKey, chartType, selectedKeys }: CustomTooltipV2Props) => {
 
-export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalData, setHoveredKey, chartType }: CustomTooltipV2Props) => {
-  if (active && hoveredKey == null) {
-    setHoveredKey(Object.keys(originalData[0].data)[0])
+  // case: showing tooltip, if hoveredKey is null, set it to the first selected key
+  // only for LINE CHART
+  if (active && hoveredKey == null && chartType === ChartTypeV2.LINE) {
+    if (selectedKeys.length > 0) {
+      setHoveredKey(selectedKeys[0])
+    } else {
+      setHoveredKey(Object.keys(originalData[0].data)[0])
+    }
   }
 
   if (!active || !payload || !payload.length || !hoveredKey || !label) {
@@ -48,7 +46,6 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
   );
 
 };
-
 
 const BarChartTooltip = ({ originalData, label, getColor }: {
   originalData: NewNestedDataPoint[];
@@ -91,7 +88,6 @@ const BarChartTooltip = ({ originalData, label, getColor }: {
     </>
   )
 }
-
 
 const LineChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
   originalData: NewNestedDataPoint[];

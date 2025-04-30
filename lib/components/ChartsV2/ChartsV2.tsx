@@ -5,29 +5,20 @@ import {
 import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./themeUtils";
 import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { renderChart } from "./renderChart";
 
-export function useUniqueLogger() {
-  const lastLogRef = useRef<string | null>(null);
 
-  function log(...args: unknown[]) {
-    const message = JSON.stringify(args);
-    if (message !== lastLogRef.current) {
-      console.log(...args);
-      lastLogRef.current = message;
-    }
-  }
-
-  return log;
-}
-
-
-function transformNestedData(data: NewNestedDataPoint[]): FlattenedDataPoint[] {
+function transformNestedData(data: NewNestedDataPoint[], selectedKeys: string[] = []): FlattenedDataPoint[] {
   return data.map(item => {
     const flattened: FlattenedDataPoint = { name: item.name };
 
-    for (const key in item.data) {
+    // Get all keys from the data or only the selected ones
+    const keysToInclude = selectedKeys.length > 0
+      ? Object.keys(item.data).filter(key => selectedKeys.includes(key))
+      : Object.keys(item.data);
+
+    for (const key of keysToInclude) {
       flattened[key] = item.data[key].primary.val;
     }
 
@@ -49,14 +40,14 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
 
   const chartContainerRef = useRef<HTMLDivElement>(null!);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  // const [hoveredXValue, setHoveredXValue] = useState<string | null>(null);
-  const [_, setSelectedKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+
 
   if (!colors || colors.length === 0) colors = DEFAULT_COLORS;
-  const flattenedData = transformNestedData(data);
+  const flattenedData = transformNestedData(data, selectedKeys);
 
-  const lineKeys = flattenedData.length > 0
-    ? Object.keys(flattenedData[0]).filter(key => key !== "name")
+  const lineKeys = data.length > 0
+    ? Object.keys(data[0].data)
     : [];
 
   const handleLegendClick = (key: string) => {
@@ -70,7 +61,9 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   }
 
   const handleLegendEnter = (key: string) => {
-    setHoveredKey(key);
+    if (selectedKeys.length === 0 || selectedKeys.length === lineKeys.length) {
+      setHoveredKey(key);
+    }
   }
 
   const handleLegendLeave = () => {
@@ -88,10 +81,14 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
           handleLegendClick={handleLegendClick}
           handleLegendEnter={handleLegendEnter}
           handleLegendLeave={handleLegendLeave}
+          selectedKeys={selectedKeys}
+          setSelectedKeys={setSelectedKeys}
+          hoveredKey={hoveredKey}
+          activeKeys={selectedKeys}
         />
         <div>
           <ResponsiveContainer width="100%" height={400}>
-            {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data })}
+            {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data, selectedKeys })}
           </ResponsiveContainer>
         </div>
       </div>
