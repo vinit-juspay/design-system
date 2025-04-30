@@ -1,19 +1,25 @@
-import { forwardRef, useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import React, {
+  forwardRef,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
+import { Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   DateRangePickerProps,
-  DateRangePickerSize,
-  DateRangePickerVariant,
   DateRangePreset,
   DateRange,
 } from './types';
 import {
-  getDateRangePickerClassNames,
   formatDate,
   getPresetDateRange,
-  parseDate,
+  getDateRangePickerBaseClassNames,
+  getDateRangePickerStatesClassNames,
+  getDateRangePickerCalendarClassNames,
+  getDateRangePickerTimeInputClassNames,
   isValidDate,
-  getPresetLabel,
+  parseDate,
 } from './utils';
 import { cn } from '../../utils';
 import Button from '../Button/Button';
@@ -27,8 +33,6 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     {
       value,
       onChange,
-      size = DateRangePickerSize.MEDIUM,
-      variant = DateRangePickerVariant.PRIMARY,
       showTimePicker = false,
       showPresets = true,
       placeholder = 'Select date range',
@@ -37,6 +41,9 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       dateFormat = 'dd/MM/yyyy',
       ariaLabel = 'Date range picker',
       allowSingleDateSelection = false,
+      disableFutureDates = false,
+      disablePastDates = false,
+      triggerElement = null,
     },
     ref
   ) => {
@@ -60,9 +67,11 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const quickRangeRef = useRef<HTMLDivElement>(null);
     const calendarScrollRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLDivElement>(null);
 
     const today = new Date();
 
+    // Update state when value prop changes
     useEffect(() => {
       if (value) {
         setSelectedRange(value);
@@ -73,6 +82,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
     }, [value, dateFormat]);
 
+    // Handle click outside to close dropdowns
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (!dropdownRef.current) return;
@@ -82,8 +92,10 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           calendarRef.current && !calendarRef.current.contains(event.target as Node);
         const isOutsideQuickRange =
           quickRangeRef.current && !quickRangeRef.current.contains(event.target as Node);
+        const isOutsideTrigger =
+          triggerRef.current && !triggerRef.current.contains(event.target as Node);
 
-        if (isOutsideDropdown && isOutsideCalendar && isOutsideQuickRange) {
+        if (isOutsideDropdown && isOutsideCalendar && isOutsideQuickRange && isOutsideTrigger) {
           setIsOpen(false);
           setIsQuickRangeOpen(false);
         }
@@ -110,199 +122,150 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       }
     }, [isOpen]);
 
+    // Format the date display for the input
     const formatDateDisplay = () => {
       if (!selectedRange.startDate) return placeholder;
 
-      if (activePreset !== DateRangePreset.CUSTOM && showPresets) {
-        return getPresetLabel(activePreset);
+      const formattedStartDate = formatDate(selectedRange.startDate, dateFormat);
+      
+      if (allowSingleDateSelection && 
+          selectedRange.startDate.getTime() === selectedRange.endDate.getTime()) {
+        return formattedStartDate;
       }
-
-      const formatTimeIn12Hour = (date: Date): string => {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const period = hours >= 12 ? 'PM' : 'AM';
-        const displayHours = hours % 12 === 0 ? 12 : hours % 12;
-        return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
-      };
-
-      const formattedStart =
-        formatDate(selectedRange.startDate, dateFormat) +
-        (showTimePickerState ? `, ${formatTimeIn12Hour(selectedRange.startDate)}` : '');
-
-      if (
-        allowSingleDateSelection &&
-        selectedRange.startDate.getTime() === selectedRange.endDate.getTime()
-      ) {
-        return formattedStart;
-      }
-
-      const formattedEnd =
-        formatDate(selectedRange.endDate, dateFormat) +
-        (showTimePickerState ? `, ${formatTimeIn12Hour(selectedRange.endDate)}` : '');
-
-      return `${formattedStart} – ${formattedEnd}`;
+      
+      const formattedEndDate = formatDate(selectedRange.endDate, dateFormat);
+      return `${formattedStartDate} - ${formattedEndDate}`;
     };
 
-    const handleDateSelect = (newRange: DateRange) => {
-      // Ensure start date is always less than end date
-      let finalRange = newRange;
+    // Handle date selection from calendar
+    const handleDateSelectCallback = useCallback(
+      (range: DateRange) => {
+        // Preserve time when selecting dates
+        if (range.startDate) {
+          const [startHour, startMinute] = startTime.split(':').map(Number);
+          range.startDate.setHours(startHour, startMinute);
+        }
 
-      if (
-        newRange.startDate &&
-        newRange.endDate &&
-        newRange.startDate.getTime() > newRange.endDate.getTime()
-      ) {
-        // Swap dates if start is after end
-        finalRange = {
-          startDate: newRange.endDate,
-          endDate: newRange.startDate,
-        };
-      }
+        if (range.endDate) {
+          const [endHour, endMinute] = endTime.split(':').map(Number);
+          range.endDate.setHours(endHour, endMinute);
+        }
 
-      // Preserve time values
-      if (finalRange.startDate && selectedRange.startDate) {
-        finalRange.startDate.setHours(selectedRange.startDate.getHours());
-        finalRange.startDate.setMinutes(selectedRange.startDate.getMinutes());
-      }
+        setSelectedRange(range);
+        setStartDate(formatDate(range.startDate, dateFormat));
+        setEndDate(formatDate(range.endDate, dateFormat));
+        setActivePreset(DateRangePreset.CUSTOM);
+      },
+      [startTime, endTime, dateFormat]
+    );
 
-      if (finalRange.endDate && selectedRange.endDate) {
-        finalRange.endDate.setHours(selectedRange.endDate.getHours());
-        finalRange.endDate.setMinutes(selectedRange.endDate.getMinutes());
-      }
+    // Handle preset selection
+    const handlePresetRangeCallback = useCallback(
+      (preset: DateRangePreset) => {
+        const range = getPresetDateRange(preset);
+        
+        // Preserve time when selecting presets
+        if (showTimePickerState) {
+          const [startHour, startMinute] = startTime.split(':').map(Number);
+          range.startDate.setHours(startHour, startMinute);
+          
+          const [endHour, endMinute] = endTime.split(':').map(Number);
+          range.endDate.setHours(endHour, endMinute);
+        }
+        
+        setSelectedRange(range);
+        setStartDate(formatDate(range.startDate, dateFormat));
+        setEndDate(formatDate(range.endDate, dateFormat));
+        setActivePreset(preset);
+      },
+      [startTime, endTime, dateFormat, showTimePickerState]
+    );
 
-      setSelectedRange(finalRange);
+    // Handle start date input change
+    const handleStartDateChangeCallback = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newDate = e.target.value;
+        setStartDate(newDate);
+        
+          const parsedDate = parseDate(newDate );
+        if (isValidDate(parsedDate) && parsedDate !== null) {
+          // Preserve time
+          const [hours, minutes] = startTime.split(':').map(Number);
+          parsedDate.setHours(hours, minutes);
+          
+          const newRange = { ...selectedRange, startDate: parsedDate };
+          setSelectedRange(newRange);
+          setActivePreset(DateRangePreset.CUSTOM);
+        }
+      },
+      [selectedRange, startTime, dateFormat]
+    );
 
-      // Update input fields
-      setStartDate(formatDate(finalRange.startDate, dateFormat));
-      setEndDate(formatDate(finalRange.endDate, dateFormat));
+    // Handle end date input change
+    const handleEndDateChangeCallback = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newDate = e.target.value;
+        setEndDate(newDate);
+        
+        const parsedDate = parseDate(newDate);
+        if (isValidDate(parsedDate) && parsedDate !== null) {
+          // Preserve time
+          const [hours, minutes] = endTime.split(':').map(Number);
+          parsedDate.setHours(hours, minutes);
+          
+          const newRange = { ...selectedRange, endDate: parsedDate };
+          setSelectedRange(newRange);
+          setActivePreset(DateRangePreset.CUSTOM);
+        }
+      },
+      [selectedRange, endTime, dateFormat]
+    );
 
-      setStartTime(formatDate(finalRange.startDate, 'HH:mm'));
-      setEndTime(formatDate(finalRange.endDate, 'HH:mm'));
-
-      setActivePreset(DateRangePreset.CUSTOM);
-    };
-
-    const handlePresetRange = (preset: DateRangePreset) => {
-      const newRange = getPresetDateRange(preset);
-      setSelectedRange(newRange);
-      setActivePreset(preset);
-
-      setStartDate(formatDate(newRange.startDate, dateFormat));
-      setEndDate(formatDate(newRange.endDate, dateFormat));
-
-      setStartTime(formatDate(newRange.startDate, 'HH:mm'));
-      setEndTime(formatDate(newRange.endDate, 'HH:mm'));
-
-      setIsQuickRangeOpen(false);
-
-      onChange?.(newRange);
-    };
-
-    const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setStartDate(value);
-
-      const parsedDate = parseDate(value);
-      if (parsedDate && isValidDate(parsedDate)) {
-        const newStartDate = new Date(parsedDate);
+    // Handle start time change
+    const handleStartTimeChangeCallback = useCallback(
+      (newTime: string) => {
+        setStartTime(newTime);
+        
         if (selectedRange.startDate) {
-          newStartDate.setHours(selectedRange.startDate.getHours());
-          newStartDate.setMinutes(selectedRange.startDate.getMinutes());
+          const [hours, minutes] = newTime.split(':').map(Number);
+          const newDate = new Date(selectedRange.startDate);
+          newDate.setHours(hours, minutes);
+          
+          const newRange = { ...selectedRange, startDate: newDate };
+          setSelectedRange(newRange);
+          setActivePreset(DateRangePreset.CUSTOM);
         }
+      },
+      [selectedRange]
+    );
 
-        // Ensure start date is not after end date
-        if (selectedRange.endDate && newStartDate > selectedRange.endDate) {
-          // If new start date is after end date, set end date to start date
-          setSelectedRange({
-            startDate: newStartDate,
-            endDate: new Date(newStartDate),
-          });
-          setEndDate(formatDate(newStartDate, dateFormat));
-        } else {
-          setSelectedRange({
-            ...selectedRange,
-            startDate: newStartDate,
-          });
-        }
-
-        setActivePreset(DateRangePreset.CUSTOM);
-      }
-    };
-
-    const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-      setEndDate(value);
-
-      const parsedDate = parseDate(value);
-      if (parsedDate && isValidDate(parsedDate)) {
-        const newEndDate = new Date(parsedDate);
+    // Handle end time change
+    const handleEndTimeChangeCallback = useCallback(
+      (newTime: string) => {
+        setEndTime(newTime);
+        
         if (selectedRange.endDate) {
-          newEndDate.setHours(selectedRange.endDate.getHours());
-          newEndDate.setMinutes(selectedRange.endDate.getMinutes());
+          const [hours, minutes] = newTime.split(':').map(Number);
+          const newDate = new Date(selectedRange.endDate);
+          newDate.setHours(hours, minutes);
+          
+          const newRange = { ...selectedRange, endDate: newDate };
+          setSelectedRange(newRange);
+          setActivePreset(DateRangePreset.CUSTOM);
         }
+      },
+      [selectedRange]
+    );
 
-        // Ensure end date is not before start date
-        if (selectedRange.startDate && newEndDate < selectedRange.startDate) {
-          // If new end date is before start date, set start date to end date
-          setSelectedRange({
-            startDate: new Date(newEndDate),
-            endDate: newEndDate,
-          });
-          setStartDate(formatDate(newEndDate, dateFormat));
-        } else {
-          setSelectedRange({
-            ...selectedRange,
-            endDate: newEndDate,
-          });
-        }
-
-        setActivePreset(DateRangePreset.CUSTOM);
-      }
-    };
-
-    const handleStartTimeChange = (time: string) => {
-      setStartTime(time);
-
-      if (selectedRange.startDate) {
-        const [hours, minutes] = time.split(':').map(Number);
-        const newStartDate = new Date(selectedRange.startDate);
-        newStartDate.setHours(hours);
-        newStartDate.setMinutes(minutes);
-
-        setSelectedRange({
-          ...selectedRange,
-          startDate: newStartDate,
-        });
-        setActivePreset(DateRangePreset.CUSTOM);
-      }
-    };
-
-    const handleEndTimeChange = (time: string) => {
-      setEndTime(time);
-
-      if (selectedRange.endDate) {
-        const [hours, minutes] = time.split(':').map(Number);
-        const newEndDate = new Date(selectedRange.endDate);
-        newEndDate.setHours(hours);
-        newEndDate.setMinutes(minutes);
-
-        setSelectedRange({
-          ...selectedRange,
-          endDate: newEndDate,
-        });
-        setActivePreset(DateRangePreset.CUSTOM);
-      }
-    };
-
+    // Handle apply button click
     const handleApply = () => {
-      onChange?.({
-        ...selectedRange,
-        showTimePicker: showTimePickerState,
-      });
       setIsOpen(false);
+      onChange?.(selectedRange);
     };
 
-    const handleCancel = () => {
+    // Handle cancel button click
+    const handleCancel = useCallback(() => {
+      // Reset to the original value
       if (value) {
         setSelectedRange(value);
         setStartDate(formatDate(value.startDate, dateFormat));
@@ -311,70 +274,88 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
         setEndTime(formatDate(value.endDate, 'HH:mm'));
       }
       setIsOpen(false);
+    }, [value, dateFormat]);
+
+    const baseClassNames = getDateRangePickerBaseClassNames();
+    const statesClassNames = getDateRangePickerStatesClassNames(isDisabled);
+    const calendarClassNames = getDateRangePickerCalendarClassNames();
+    const timeInputClassNames = getDateRangePickerTimeInputClassNames();
+
+    const renderTrigger = () => {
+      if (triggerElement) {
+        return (
+          <div 
+            ref={triggerRef}
+            onClick={() => !isDisabled && setIsOpen(!isOpen)}
+            className={isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+          >
+            {triggerElement}
+          </div>
+        );
+      }
+
+      return (
+        <div
+          className={cn(
+            baseClassNames,
+            statesClassNames,
+            'border border-gray-300',
+            showPresets ? 'rounded-r-lg' : 'rounded-lg',
+            'p-2 flex justify-between items-center cursor-pointer w-full h-10'
+          )}
+          onClick={e => {
+            e.stopPropagation();
+            if (!isDisabled) setIsOpen(!isOpen);
+          }}
+          aria-label={ariaLabel}
+          aria-expanded={isOpen}
+          aria-disabled={isDisabled}
+          role="button"
+          tabIndex={isDisabled ? -1 : 0}
+        >
+          <div className="text-gray-600 font-medium text-md flex-1 flex items-center justify-end">
+            <Calendar className="w-5 h-5 mr-2" />
+            <span>{formatDateDisplay()}</span>
+            {isOpen ? (
+              <ChevronUp className="w-5 h-5 ml-2" />
+            ) : (
+              <ChevronDown className="w-5 h-5 ml-2" />
+            )}
+          </div>
+        </div>
+      );
     };
 
-    const componentClassName = getDateRangePickerClassNames(size, variant, isDisabled);
-
     return (
-      <div className={cn('relative', className)} ref={ref}>
-        <div className="flex">
+      <div className={cn('relative w-full', className)} ref={ref}>
+        <div className="flex flex-col sm:flex-row">
           {showPresets && (
             <div
-              className="relative"
+              className="relative w-full sm:w-32 mb-2 sm:mb-0 h-10"
               ref={quickRangeRef}
-              style={{ width: showPresets ? '40%' : '0%' }}
             >
               <QuickRangeSelector
                 isOpen={isQuickRangeOpen}
-                onToggle={() => setIsQuickRangeOpen(!isQuickRangeOpen)}
+                onToggle={() => !isDisabled && setIsQuickRangeOpen(!isQuickRangeOpen)}
                 activePreset={activePreset}
-                onPresetSelect={handlePresetRange}
+                onPresetSelect={handlePresetRangeCallback}
                 excludeCustom={true}
+                disableFutureDates={disableFutureDates}
+                disablePastDates={disablePastDates}
               />
             </div>
           )}
 
           <div
-            className={cn('relative', showPresets ? 'flex-1' : 'w-full')}
+            className={cn('relative sm:min-w-96')}
             ref={calendarRef}
-            style={{ width: showPresets ? '60%' : '100%' }}
           >
-            <div
-              className={cn(
-                componentClassName,
-                'border border-gray-300',
-                showPresets ? 'rounded-r-md' : 'rounded-md',
-                'p-2 flex justify-between items-center cursor-pointer w-full'
-              )}
-              onClick={e => {
-                e.stopPropagation();
-                setIsOpen(!isOpen);
-              }}
-              aria-label={ariaLabel}
-              aria-expanded={isOpen}
-              aria-disabled={isDisabled}
-              role="button"
-              tabIndex={isDisabled ? -1 : 0}
-            >
-              <div className={cn(showPresets ? 'hidden' : 'flex', 'items-center')}>
-                <span className="mr-2">Date Range</span>
-                <ChevronDown className="w-5 h-5 text-gray-500" />
-              </div>
-              <div className="text-primary-500 flex-1 flex items-center justify-end">
-                <span>{formatDateDisplay()}</span>
-                {isOpen ? (
-                  <ChevronUp className="w-5 h-5 ml-2" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 ml-2" />
-                )}
-              </div>
-            </div>
+            {renderTrigger()}
 
             {isOpen && (
               <div
                 ref={dropdownRef}
-                className="absolute z-10 mt-1 right-0 bg-white rounded-md shadow-lg border border-gray-200"
-                style={{ width: '400px' }}
+                className={cn(calendarClassNames)}
               >
                 <div className="p-4">
                   <div className="space-y-4">
@@ -382,13 +363,13 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                       <div className="w-24 text-gray-500">Start</div>
                       <input
                         type="text"
-                        className="border border-gray-300 rounded-md px-3 py-2 mr-2 w-32"
+                        className={cn(timeInputClassNames)}
                         placeholder="DD/MM/YYYY"
                         value={startDate}
-                        onChange={handleStartDateChange}
+                        onChange={handleStartDateChangeCallback}
                       />
                       {showTimePickerState && (
-                        <TimeSelector value={startTime} onChange={handleStartTimeChange} />
+                        <TimeSelector value={startTime} onChange={handleStartTimeChangeCallback} />
                       )}
                     </div>
 
@@ -401,13 +382,13 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                         <div className="w-24 text-gray-500">End</div>
                         <input
                           type="text"
-                          className="border border-gray-300 rounded-md px-3 py-2 mr-2 w-32"
+                          className={cn(timeInputClassNames)}
                           placeholder="DD/MM/YYYY"
                           value={endDate}
-                          onChange={handleEndDateChange}
+                          onChange={handleEndDateChangeCallback}
                         />
                         {showTimePickerState && (
-                          <TimeSelector value={endTime} onChange={handleEndTimeChange} />
+                          <TimeSelector value={endTime} onChange={handleEndTimeChangeCallback} />
                         )}
                       </div>
                     )}
@@ -417,9 +398,11 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                   <div ref={calendarScrollRef} className="mt-4 max-h-[300px] overflow-y-auto">
                     <CalendarGrid
                       selectedRange={selectedRange}
-                      onDateSelect={handleDateSelect}
+                      onDateSelect={handleDateSelectCallback}
                       today={today}
                       allowSingleDateSelection={allowSingleDateSelection}
+                      disableFutureDates={disableFutureDates}
+                      disablePastDates={disablePastDates}
                     />
                   </div>
 
@@ -442,20 +425,20 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                           )}
                         ></div>
                       </div>
-                      <span className="ml-2 text-gray-700">Time Ranges</span>
+                      <span className="ml-2 text-gray-600 text-md">Time Ranges</span>
                     </div>
 
                     <div className="flex space-x-2">
                       <Button
                         buttonType={ButtonType.SECONDARY}
-                        size={ButtonSize.SMALL}
+                        size={ButtonSize.MEDIUM}
                         onClick={handleCancel}
                       >
                         Cancel
                       </Button>
                       <Button
                         buttonType={ButtonType.PRIMARY}
-                        size={ButtonSize.SMALL}
+                        size={ButtonSize.MEDIUM}
                         onClick={handleApply}
                       >
                         Apply

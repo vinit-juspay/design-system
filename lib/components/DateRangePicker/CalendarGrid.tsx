@@ -8,10 +8,12 @@ interface CalendarGridProps {
   onDateSelect: (range: DateRange) => void;
   today: Date;
   allowSingleDateSelection?: boolean;
+  disableFutureDates?: boolean;
+  disablePastDates?: boolean;
 }
 
 const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
-  ({ selectedRange, onDateSelect, today, allowSingleDateSelection = false }, ref) => {
+  ({ selectedRange, onDateSelect, today, allowSingleDateSelection = false, disableFutureDates, disablePastDates }, ref) => {
     const currentMonthRef = useRef<HTMLDivElement>(null);
 
     // Scroll to current month when component mounts
@@ -43,11 +45,6 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
     };
 
     const months = generateMonths();
-
-    // Get the day names for the calendar header
-    const getDayNames = () => {
-      return ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-    };
 
     // Check if a date is in the selected range (but not start or end date)
     const isInRange = (date: Date) => {
@@ -197,16 +194,24 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
           data-current-month={isCurrentMonth ? 'true' : 'false'}
           ref={isCurrentMonth ? currentMonthRef : null}
         >
-          <div className={themeConfig.euler.dateRangePicker.calendar.monthHeader}>
-            {monthNames[month]} {year}
-          </div>
+
 
           <div className={themeConfig.euler.dateRangePicker.calendar.dayNamesContainer}>
-            {getDayNames().map((name, index) => (
-              <div key={index} className={themeConfig.euler.dateRangePicker.calendar.dayName}>
-                {name}
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+              <div 
+                key={day} 
+                className={cn(
+                  themeConfig.euler.dateRangePicker.calendar.dayName,
+                  themeConfig.euler.dateRangePicker.text.dayName
+                )}
+              >
+                {day}
               </div>
             ))}
+          </div>
+
+          <div className={themeConfig.euler.dateRangePicker.calendar.monthHeader}>
+            {monthNames[month]} {year}
           </div>
 
           {weeks.map((week, weekIndex) => (
@@ -244,6 +249,12 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
                 // Add today indicator without changing the selection styling
                 if (isTodayDay && !isStart && !isEnd) {
                   dayClasses = cn(dayClasses, themeConfig.euler.dateRangePicker.calendar.todayDay);
+                }
+
+                // Add disabled state for future/past dates
+                if ((disableFutureDates && date > today) || 
+                    (disablePastDates && date < today)) {
+                  dayClasses = cn(dayClasses, 'opacity-40 cursor-not-allowed pointer-events-none');
                 }
 
                 return (

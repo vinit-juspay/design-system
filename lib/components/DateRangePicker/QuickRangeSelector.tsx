@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '../../utils';
 import { DateRangePreset } from './types';
 import { getPresetLabel } from './utils';
+import { themeConfig } from '../../themeConfig';
 
 interface QuickRangeSelectorProps {
   isOpen: boolean;
@@ -11,23 +12,56 @@ interface QuickRangeSelectorProps {
   onPresetSelect: (preset: DateRangePreset) => void;
   excludeCustom?: boolean;
   className?: string;
+  disableFutureDates?: boolean;
+  disablePastDates?: boolean;
 }
 
-/**
- * QuickRangeSelector component for selecting date range presets
- */
 const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
-  ({ isOpen, onToggle, activePreset, onPresetSelect, excludeCustom = false, className }, ref) => {
-    // Get the active preset label
+  ({ 
+    isOpen, 
+    onToggle, 
+    activePreset, 
+    onPresetSelect, 
+    excludeCustom = false, 
+    className,
+    disableFutureDates = false,
+    disablePastDates = false
+  }, ref) => {
     const activePresetLabel = getPresetLabel(activePreset);
+
+    const getFilteredPresets = () => {
+      const pastPresets = [
+        DateRangePreset.YESTERDAY,
+        DateRangePreset.LAST_1_HOUR,
+        DateRangePreset.LAST_6_HOURS,
+        DateRangePreset.LAST_7_DAYS,
+      ];
+      
+      const futurePresets: DateRangePreset[] = [];
+      
+      let availablePresets = Object.values(DateRangePreset);
+      
+      if (disablePastDates) {
+        availablePresets = availablePresets.filter(preset => !pastPresets.includes(preset));
+      }
+      
+      if (disableFutureDates) {
+        availablePresets = availablePresets.filter(preset => !futurePresets.includes(preset));
+      }
+      
+      if (excludeCustom) {
+        availablePresets = availablePresets.filter(preset => preset !== DateRangePreset.CUSTOM);
+      }
+      
+      return availablePresets;
+    };
 
     return (
       <div className={cn('relative w-full', className)} ref={ref}>
         <div
           className={cn(
-            'border border-gray-300 rounded-md p-2 flex justify-between items-center cursor-pointer w-full',
-            'hover:border-gray-400 transition-colors duration-200',
-            'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500'
+            'h-10 border border-gray-300 rounded-l-lg p-2 flex justify-between items-center cursor-pointer w-full',
+            'hover:border-gray-400 transition-colors duration-200'
           )}
           onClick={onToggle}
           role="button"
@@ -36,11 +70,15 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
           aria-haspopup="listbox"
         >
           <div className="flex items-center justify-between w-full">
-            <span className="font-medium text-gray-700">{activePresetLabel}</span>
+            <span className={cn(
+              themeConfig.euler.dateRangePicker.text.value
+            )}>
+              {activePresetLabel}
+            </span>
             {isOpen ? (
-              <ChevronUp className="w-4 h-4 text-gray-500" />
+              <ChevronUp className="w-4 h-4 text-gray-600" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-gray-500" />
+              <ChevronDown className="w-4 h-4 text-gray-600" />
             )}
           </div>
         </div>
@@ -55,26 +93,25 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
             aria-labelledby="date-range-preset-selector"
           >
             <div className="p-1">
-              {Object.values(DateRangePreset)
-                .filter(preset => !excludeCustom || preset !== DateRangePreset.CUSTOM)
-                .map(preset => (
-                  <button
-                    key={preset}
-                    onClick={() => {
-                      onPresetSelect(preset);
-                      onToggle(); // Close the dropdown after selection
-                    }}
-                    className={cn(
-                      'w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150',
-                      'focus:outline-none focus:bg-gray-50',
-                      activePreset === preset && 'bg-primary-50 text-primary-700 font-medium'
-                    )}
-                    role="option"
-                    aria-selected={activePreset === preset}
-                  >
-                    {getPresetLabel(preset)}
-                  </button>
-                ))}
+              {getFilteredPresets().map(preset => (
+                <button
+                  key={preset}
+                  onClick={() => {
+                    onPresetSelect(preset);
+                    onToggle(); // Close the dropdown after selection
+                  }}
+                  className={cn(
+                    'w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150',
+                    'focus:outline-none focus:bg-gray-50',
+                    themeConfig.euler.dateRangePicker.text.value,
+                    activePreset === preset && 'bg-primary-50 text-primary-700 font-medium'
+                  )}
+                  role="option"
+                  aria-selected={activePreset === preset}
+                >
+                  {getPresetLabel(preset)}
+                </button>
+              ))}
             </div>
           </div>
         )}
