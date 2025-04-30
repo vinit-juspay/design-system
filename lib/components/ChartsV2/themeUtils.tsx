@@ -53,3 +53,8 @@ export const getChartStackedLegendContainer = () => {
 export const getChartTooltipContainer = () => {
   return themeConfig.euler.chart.base.tooltip.container;
 };
+
+
+export const getChartLegendItemText = () => {
+  return themeConfig.euler.chart.base.chartLegend.legendItemText;
+};

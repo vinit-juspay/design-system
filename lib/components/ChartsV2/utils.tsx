@@ -1,17 +1,21 @@
-const colorMap: Record<string, string> = {
-  '#8EC5FF': '#BEDBFF',
-  '#00C951': '#B9F8CF',
-  '#C27AFF': '#E9D4FF',
-  '#FB2C36': '#FFC9C9',
-  '#00D492': '#DCFCE7',
-  '#2B7FFF': '#DBEAFE',
-  '#AD46FF': '#F3E8FF',
-  '#FF8904': '#FFEDD4',
-};
+import { NewNestedDataPoint, FlattenedDataPoint } from "./types";
 
-export const getAltColor = (color: string) => {
-  return colorMap[color] || color + '4D';
-};
+export function transformNestedData(data: NewNestedDataPoint[], selectedKeys: string[] = []): FlattenedDataPoint[] {
+  return data.map(item => {
+    const flattened: FlattenedDataPoint = { name: item.name };
+
+    // Get all keys from the data or only the selected ones
+    const keysToInclude = selectedKeys.length > 0
+      ? Object.keys(item.data).filter(key => selectedKeys.includes(key))
+      : Object.keys(item.data);
+
+    for (const key of keysToInclude) {
+      flattened[key] = item.data[key].primary.val;
+    }
+
+    return flattened;
+  });
+}
 
 export function lightenHexColor(hex: string, amount: number = 0.3): string {
   hex = hex.replace(/^#/, '');
@@ -110,7 +114,7 @@ export const formatNumber = (value: number | string): string => {
   return value.toString();
 };
 
-// Transform camelCase to Capitalized Text
+
 export const capitaliseCamelCase = (text: string): string => {
   if (!text) return '';
   const words = text.split(/(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])/);

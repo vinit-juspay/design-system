@@ -1,4 +1,4 @@
-import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2, FlattenedDataPoint, NewNestedDataPoint } from "./types"
+import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2 } from "./types"
 import {
   ResponsiveContainer,
 } from "recharts";
@@ -7,38 +7,7 @@ import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
 import { useRef, useState } from "react";
 import { renderChart } from "./renderChart";
-
-// TODO: remove this
-export function useUniqueLogger() {
-  const lastLogRef = useRef<string | null>(null);
-
-  function log(...args: unknown[]) {
-    const message = JSON.stringify(args);
-    if (message !== lastLogRef.current) {
-      console.log(...args);
-      lastLogRef.current = message;
-    }
-  }
-
-  return log;
-}
-
-function transformNestedData(data: NewNestedDataPoint[], selectedKeys: string[] = []): FlattenedDataPoint[] {
-  return data.map(item => {
-    const flattened: FlattenedDataPoint = { name: item.name };
-
-    // Get all keys from the data or only the selected ones
-    const keysToInclude = selectedKeys.length > 0
-      ? Object.keys(item.data).filter(key => selectedKeys.includes(key))
-      : Object.keys(item.data);
-
-    for (const key of keysToInclude) {
-      flattened[key] = item.data[key].primary.val;
-    }
-
-    return flattened;
-  });
-}
+import { transformNestedData } from "./utils";
 
 const ChartsV2: React.FC<ChartsV2Props> = ({
   chartType = ChartTypeV2.LINE,
@@ -51,7 +20,6 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   slot3,
   legendPosition = ChartLegendPositionV2.TOP,
   chartHeaderSlot, }) => {
-
   const chartContainerRef = useRef<HTMLDivElement>(null!);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
@@ -74,8 +42,6 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
       }
     });
   }
-
-
 
   const handleLegendEnter = (key: string) => {
     if (selectedKeys.length === 0 || selectedKeys.length === lineKeys.length) {

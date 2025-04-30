@@ -2,35 +2,12 @@ import { getChartTooltipContainer } from "./themeUtils";
 import { ChartTypeV2, CustomTooltipV2Props, NewNestedDataPoint } from "./types";
 import { capitaliseCamelCase, formatNumber } from "./utils";
 
+import { Payload, ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
+
 export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalData, setHoveredKey, chartType, selectedKeys }: CustomTooltipV2Props) => {
-  if (active && hoveredKey == null && chartType === ChartTypeV2.LINE) {
-    if (selectedKeys.length > 0) {
-      setHoveredKey(selectedKeys[0])
-    } else {
-      setHoveredKey(Object.keys(originalData[0].data)[0])
-    }
-  }
-
-  if (!active || !payload || !payload.length || !hoveredKey || !label) {
-    console.log('no active or payload or hoveredKey or label', active, payload, hoveredKey, label);
+  if (!active || !payload || !payload.length) {
     return null;
   }
-
-  const getRelevantData = () => {
-    const currentDataPoint = originalData.find(item => item.name === label);
-
-    if (!currentDataPoint || !currentDataPoint.data || !currentDataPoint.data[hoveredKey]) {
-      return null;
-    }
-
-    return currentDataPoint.data[hoveredKey];
-  }
-  const relevantData = getRelevantData();
-  if (!relevantData) {
-    console.log('no relevant data', originalData, hoveredKey, label);
-    return null;
-  }
-
 
   const getColor = (key: string) => {
     const payloadItem = payload.find(item => item.dataKey === key);
@@ -39,9 +16,9 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
 
   return (
     <div className={getChartTooltipContainer()}>
-      {chartType === ChartTypeV2.LINE && <LineChartTooltip originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
+      {chartType === ChartTypeV2.LINE && <LineChartTooltip active={active} payload={payload} selectedKeys={selectedKeys} setHoveredKey={setHoveredKey} originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
       {chartType === ChartTypeV2.BAR && <BarChartTooltip originalData={originalData} label={label} getColor={getColor} />}
-      {chartType === ChartTypeV2.PIE && <PieChartTooltip originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
+      {chartType === ChartTypeV2.PIE && <PieChartTooltip active={active} payload={payload} selectedKeys={selectedKeys} setHoveredKey={setHoveredKey} originalData={originalData} hoveredKey={hoveredKey} getColor={getColor} />}
     </div>
   );
 
@@ -88,12 +65,28 @@ const BarChartTooltip = ({ originalData, label, getColor }: {
   )
 }
 
-const LineChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
+const LineChartTooltip = ({ originalData, hoveredKey, label, getColor, active, payload, selectedKeys, setHoveredKey }: {
   originalData: NewNestedDataPoint[];
-  hoveredKey: string;
+  hoveredKey: string | null;
   label: string;
   getColor: (key: string) => string | undefined;
+  active: boolean;
+  payload: Payload<ValueType, NameType>[];
+  selectedKeys: string[];
+  setHoveredKey: (key: string) => void;
 }) => {
+
+  if (active && hoveredKey == null) {
+    if (selectedKeys.length > 0) {
+      setHoveredKey(selectedKeys[0])
+    } else {
+      setHoveredKey(Object.keys(originalData[0].data)[0])
+    }
+  }
+
+  if (!active || !payload || !payload.length || !hoveredKey || !label) {
+    return null;
+  }
   const getRelevantData = () => {
 
     // Find the data point that matches the current label (x-axis value)
@@ -155,22 +148,79 @@ const LineChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
   )
 }
 
-const PieChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
+const PieChartTooltip = ({ originalData, hoveredKey, getColor, active, payload, selectedKeys, setHoveredKey }: {
   originalData: NewNestedDataPoint[];
-  hoveredKey: string;
-  label: string;
+  hoveredKey: string | null;
   getColor: (key: string) => string | undefined;
+  active: boolean;
+  payload: Payload<ValueType, NameType>[];
+  selectedKeys: string[];
+  setHoveredKey: (key: string) => void;
 }) => {
-  console.log(originalData, hoveredKey, label, getColor);
+  if (active && hoveredKey == null) {
+    if (selectedKeys.length > 0) {
+      setHoveredKey(selectedKeys[0])
+    } else {
+      setHoveredKey(Object.keys(originalData[0].data)[0])
+    }
+  }
+
+  if (!active || !payload || !payload.length || !hoveredKey) {
+    return null;
+  }
+
+  let name = payload[0].name as string;
+  if (!name) name = Object.keys(originalData[0].data)[0];
+
+  const data = originalData[0].data[name];
+  console.log(payload[0].payload.fill)
+
+
   return (
     <>
       <div className="pl-2 relative">
+        <div
+          className="absolute top-0.5 left-0 w-1 h-4 rounded-full"
+          style={{ backgroundColor: payload[0].payload.fill }}
+        ></div>
         <div className="flex flex-col">
           <h3 className="text-body-md font-600 text-gray-900">
-            {capitaliseCamelCase(hoveredKey)}
+            {capitaliseCamelCase(name)}
           </h3>
+          <label className="font-500 text-body-xs text-gray-400">
+            {capitaliseCamelCase(originalData[0].name)}
+          </label>
         </div>
       </div>
+
+      <div className="pl-2 flex flex-col">
+        <label className="text-body-sm font-500 text-gray-400">
+          {capitaliseCamelCase(data.primary.label)}
+        </label>
+        <h3 className="text-sm font-600 text-gray-900">
+          {data.primary.val}
+        </h3>
+      </div>
+
+      {data.aux && data.aux.length > 0 && (
+        <div className="flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150">
+          {data.aux.map((auxItem: any, index: number) => (
+            <div
+              key={`aux-${index}`}
+              className="flex items-center justify-between gap-2"
+            >
+              <span className="text-body-xs text-gray-400 truncate">
+                {auxItem.label}
+              </span>
+              <span className="text-body-sm font-600 text-gray-700">
+                {typeof auxItem.val === 'number'
+                  ? formatNumber(auxItem.val)
+                  : auxItem.val}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   )
 }

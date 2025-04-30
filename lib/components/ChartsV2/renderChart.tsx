@@ -30,7 +30,6 @@ export const renderChart = ({
     return 1;
   }
 
-
   switch (chartType) {
     case ChartTypeV2.LINE:
       return (<LineChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
@@ -160,7 +159,6 @@ export const renderChart = ({
             fillOpacity={getElementOpacity(key)}
             animationDuration={350}
             radius={[4, 4, 0, 0]}
-          // onMouseOver={() => setHoveredKey(key)}
           />
         ))}
       </BarChart>)

@@ -8,6 +8,7 @@ import {
   getChartLegendContainer,
   getChartLegendItem,
   getChartLegendItemsContainer,
+  getChartLegendItemText,
   getChartLegendMarker,
   getChartLegendResetButton,
   getChartStackedLegendContainer,
@@ -116,7 +117,7 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
               }}
             />
             <span
-              className="text-[14px] font-medium"
+              className={getChartLegendItemText()}
               style={{
                 color: '#333'
               }}
@@ -198,15 +199,15 @@ const StackedLegends: React.FC<{
           }}
         >
           <div className={getChartLegendMarker()} style={{ backgroundColor: colors[index] }} />
-          <label
-            className="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis"
+          <span
+            className={getChartLegendItemText()}
             style={{
               color: activeKeys && activeKeys.includes(key) ? '#333' : '#717784',
             }}
             title={capitaliseCamelCase(key)}
           >
             {capitaliseCamelCase(key)}
-          </label>
+          </span>
         </div>
       ))}
     </div>

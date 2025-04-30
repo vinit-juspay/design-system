@@ -216,18 +216,34 @@ const ChartDemo2 = () => {
     {
       name: 'Jan',
       data: {
-        revenue: {
-          primary: { label: 'Total Revenue', val: 4000 },
-          aux: [{ label: 'Growth', val: 12 }, { label: 'GGWP', val: 32 }]
+        mobile: {
+          primary: { label: 'Mobile Revenue', val: 4000 },
+          aux: [
+            { label: 'Users', val: 15000 },
+            { label: 'Growth', val: 12 },
+          ],
         },
-        profit: {
-          primary: { label: 'Net Profit', val: 2400 },
-          aux: [{ label: 'Margin', val: 24 }]
+        web: {
+          primary: { label: 'Web Revenue', val: 3000 },
+          aux: [
+            { label: 'Users', val: 10000 },
+            { label: 'Growth', val: 8 },
+          ],
         },
-        traffic: {
-          primary: { label: 'Website Traffic', val: 15000 },
-          aux: [{ label: 'Change', val: 8 }]
-        }
+        desktop: {
+          primary: { label: 'Desktop Revenue', val: 2000 },
+          aux: [
+            { label: 'Users', val: 5000 },
+            { label: 'Growth', val: 5 },
+          ],
+        },
+        tablet: {
+          primary: { label: 'Tablet Revenue', val: 2000 },
+          aux: [
+            { label: 'Users', val: 5000 },
+            { label: 'Growth', val: 5 },
+          ],
+        },
       }
     },
   ];
@@ -235,8 +251,8 @@ const ChartDemo2 = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Line Chart Demo</div>} />
-      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Bar Chart Demo</div>} /> */}
+      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Line Chart Demo</div>} />
+      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Bar Chart Demo</div>} />
       <ChartsV2 data={pieChartData} chartType={ChartTypeV2.PIE} chartHeaderSlot={<div>Pie Chart Demo</div>} legendPosition={ChartLegendPositionV2.RIGHT} />
     </div>
   )

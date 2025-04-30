@@ -473,6 +473,7 @@ export const themeConfig = {
           resetButton:
             'text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0',
           stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2 ',
+          legendItemText: "text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis"
         },
         tooltip: {
           container:
