@@ -208,10 +208,10 @@ export const themeConfig = {
         success: 'text-green-600',
       },
       inputBase: {
-        base: 'w-full flex flex-row justify-between items-center relative border-[1px] transition-all',
+        base: 'w-full flex flex-row justify-between items-center relative border-[1px] transition-all rounded-xl',
         sizes: {
-          md: 'h-9 rounded-xl',
-          lg: 'h-10 rounded-2xl',
+          md: 'h-9',
+          lg: 'h-10',
         },
         slots: {
           left: '',

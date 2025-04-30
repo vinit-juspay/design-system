@@ -31,14 +31,15 @@ export const getInputBaseClasses = (
   // Apply state-specific classes
   const stateClasses = [];
   
-  if (state === TextInputState.DEFAULT) {
+  // If state is ERROR, only apply error classes regardless of focus state
+  if (state === TextInputState.ERROR) {
+    stateClasses.push(states.default, states.error);
+  } else if (state === TextInputState.DEFAULT) {
     stateClasses.push(states.default, states.hover);
   } else if (state === TextInputState.FOCUSED) {
     stateClasses.push(states.default, states.focused);
   } else if (state === TextInputState.FILLED) {
     stateClasses.push(states.default, states.hover); // Keep hover for filled state
-  } else if (state === TextInputState.ERROR) {
-    stateClasses.push(states.error);
   } else if (state === TextInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }

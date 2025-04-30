@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef, useEffect } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
 import { TooltipSize } from '../Tooltip/types';
@@ -19,25 +19,51 @@ import { themeConfig } from '../../themeConfig';
 const inputTheme = themeConfig.euler.input;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
-  hintText = "This is a hint text to help user.",
-  label = "Your Label",
+  hintText,
+  label,
   leftSlot,
   mandatory = false,
-  placeholder = "Enter your email",
+  placeholder = "Placeholder Text",
   rightSlot,
   size = TextInputSize.MEDIUM,
   state = TextInputState.DEFAULT,
-  sublabel = "(optional)",
+  sublabel,
   value,
   infoTooltip,
   successMessage,
+  errorMessage,
+  onChange,
+  onBlur,
+  onFocus,
   ...props
 }, ref) => {
   // Use the custom hook for state management
   const inputState = useInputState({
     initialState: state,
-    initialValue: value || ''
   });
+
+  // Create internal ref for reliable focusing
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Connect the forwarded ref with our internal ref
+  useEffect(() => {
+    if (typeof ref === 'function') {
+      ref(inputRef.current);
+    } else if (ref) {
+      ref.current = inputRef.current;
+    }
+  }, [ref]);
+
+  // Composite handlers
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    inputState.handleFocus();
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    inputState.handleBlur();
+    onBlur?.(e);
+  };
 
   return (
     <div className="flex flex-col space-y-2">
@@ -65,7 +91,10 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
       )}
 
       {/* Input Base */}
-      <div className={getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)}>
+      <div 
+        className={getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)}
+        onClick={() => inputRef.current?.focus()}
+      >
         {/* Left Slot */}
         {leftSlot && (
           <div className={getSlotClasses(SlotPosition.LEFT)}>
@@ -75,15 +104,15 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
 
         {/* Input */}
         <input
-          ref={ref}
+          ref={inputRef}
           type="text"
           className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
           placeholder={placeholder}
           disabled={state === TextInputState.DISABLED}
           defaultValue={value}
-          onFocus={inputState.handleFocus}
-          onBlur={inputState.handleBlur}
-          onChange={(e) => inputState.updateValue(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onChange={onChange}
           {...props}
         />
 
@@ -95,13 +124,18 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         )}
       </div>
 
-      {/* Hint Text */}
-      {successMessage && (
+      {/* Message based on state */}
+      {state === TextInputState.ERROR && errorMessage && (
+        <span className={getHintClasses(state)}>
+          {errorMessage}
+        </span>
+      )}
+      {state === TextInputState.SUCCESS && successMessage && (
         <span className={getHintClasses(state)}>
           {successMessage}
         </span>
       )}
-      {hintText && !successMessage && (
+      {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
         <span className={getHintClasses(state)}>
           {hintText}
         </span>
