@@ -5,7 +5,7 @@ import {
 import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./themeUtils";
 import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { renderChart } from "./renderChart";
 
 
@@ -60,6 +60,20 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
     });
   }
 
+  function useUniqueLogger() {
+    const lastLogRef = useRef<string | null>(null);
+
+    function log(...args: unknown[]) {
+      const message = JSON.stringify(args);
+      if (message !== lastLogRef.current) {
+        console.log(...args);
+        lastLogRef.current = message;
+      }
+    }
+
+    return log;
+  }
+
   const handleLegendEnter = (key: string) => {
     if (selectedKeys.length === 0 || selectedKeys.length === lineKeys.length) {
       setHoveredKey(key);
@@ -69,6 +83,11 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   const handleLegendLeave = () => {
     setHoveredKey(null);
   }
+
+  const log = useUniqueLogger();
+  useEffect(() => {
+    log(hoveredKey);
+  }, [hoveredKey]);
 
   return (
     <div className={getChartContainer()} ref={chartContainerRef}>

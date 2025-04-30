@@ -232,13 +232,12 @@ const ChartDemo2 = () => {
     },
   ];
 
-  
+
   return (
     <div className='flex flex-col gap-4'>
-      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
-      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Hello</div>} />
-      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Hello</div>} /> */}
-
+      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Line Chart Demo</div>} /> */}
+      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Bar Chart Demo</div>} /> */}
+      <ChartsV2 data={pieChartData} chartType={ChartTypeV2.PIE} chartHeaderSlot={<div>Pie Chart Demo</div>} />
     </div>
   )
 }

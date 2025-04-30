@@ -42,6 +42,7 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
     <div className={getChartTooltipContainer()}>
       {chartType === ChartTypeV2.LINE && <LineChartTooltip originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
       {chartType === ChartTypeV2.BAR && <BarChartTooltip originalData={originalData} label={label} getColor={getColor} />}
+      {chartType === ChartTypeV2.PIE && <PieChartTooltip originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
     </div>
   );
 
@@ -152,6 +153,26 @@ const LineChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
           </div>
         )}
       </>
+    </>
+  )
+}
+
+const PieChartTooltip = ({ originalData, hoveredKey, label, getColor }: {
+  originalData: NewNestedDataPoint[];
+  hoveredKey: string;
+  label: string;
+  getColor: (key: string) => string | undefined;
+}) => {
+  console.log(originalData, hoveredKey, label, getColor);
+  return (
+    <>
+      <div className="pl-2 relative">
+        <div className="flex flex-col">
+          <h3 className="text-body-md font-600 text-gray-900">
+            {capitaliseCamelCase(hoveredKey)}
+          </h3>
+        </div>
+      </div>
     </>
   )
 }
