@@ -11,15 +11,15 @@ const ChartDemo2 = () => {
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 4000 },
-          aux: [{ label: 'Growth', val: '+12%' }]
+          aux: [{ label: 'Growth', val: 12 }, { label: 'GGWP', val: 32 }]
         },
         profit: {
           primary: { label: 'Net Profit', val: 2400 },
-          aux: [{ label: 'Margin', val: '24%' }]
+          aux: [{ label: 'Margin', val: 24 }]
         },
         traffic: {
           primary: { label: 'Website Traffic', val: 15000 },
-          aux: [{ label: 'Change', val: '+8%' }]
+          aux: [{ label: 'Change', val: 8 }]
         }
       }
     },
@@ -28,15 +28,15 @@ const ChartDemo2 = () => {
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 3000 },
-          aux: [{ label: 'Growth', val: '-25%' }]
+          aux: [{ label: 'Growth', val: -25 }]
         },
         profit: {
           primary: { label: 'Net Profit', val: 1398 },
-          aux: [{ label: 'Margin', val: '19%' }]
+          aux: [{ label: 'Margin', val: 19 }]
         },
         traffic: {
           primary: { label: 'Website Traffic', val: 13000 },
-          aux: [{ label: 'Change', val: '-13%' }]
+          aux: [{ label: 'Change', val: -13 }]
         }
       }
     },
@@ -45,15 +45,15 @@ const ChartDemo2 = () => {
       data: {
         revenue: {
           primary: { label: 'Total Revenue', val: 2000 },
-          aux: [{ label: 'Growth', val: '-33%' }]
+          aux: [{ label: 'Growth', val: -33 }]
         },
         profit: {
           primary: { label: 'Net Profit', val: 9800 },
-          aux: [{ label: 'Margin', val: '32%' }]
+          aux: [{ label: 'Margin', val: 32 }]
         },
         traffic: {
           primary: { label: 'Website Traffic', val: 17000 },
-          aux: [{ label: 'Change', val: '+30%' }]
+          aux: [{ label: 'Change', val: 30 }]
         }
       }
     },

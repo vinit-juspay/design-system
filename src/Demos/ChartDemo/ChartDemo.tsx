@@ -502,7 +502,7 @@ const ChartDemo = () => {
         />
       </div>
 
-      {/* <div className="w-full mt-7" ref={barChartContainerRef}>
+      <div className="w-full mt-7" ref={barChartContainerRef}>
         <Chart
           chartHeaderSlot={
             <div className="flex items-center gap-2">
@@ -598,7 +598,7 @@ const ChartDemo = () => {
             }
           />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

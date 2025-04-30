@@ -8,6 +8,20 @@ import { ChartLegends } from "./ChartLegendV2";
 import { useEffect, useRef, useState } from "react";
 import { renderChart } from "./renderChart";
 
+export function useUniqueLogger() {
+  const lastLogRef = useRef<string | null>(null);
+
+  function log(...args: unknown[]) {
+    const message = JSON.stringify(args);
+    if (message !== lastLogRef.current) {
+      console.log(...args);
+      lastLogRef.current = message;
+    }
+  }
+
+  return log;
+}
+
 
 function transformNestedData(data: NewNestedDataPoint[]): FlattenedDataPoint[] {
   return data.map(item => {
@@ -41,11 +55,9 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
   if (!colors || colors.length === 0) colors = DEFAULT_COLORS;
   const flattenedData = transformNestedData(data);
 
-
   const lineKeys = flattenedData.length > 0
     ? Object.keys(flattenedData[0]).filter(key => key !== "name")
     : [];
-
 
   const handleLegendClick = (key: string) => {
     setSelectedKeys(prevActiveKeys => {
@@ -65,10 +77,6 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
     setHoveredKey(null);
   }
 
-  useEffect(() => {
-    console.log(hoveredKey, "Hovered Key")
-  }, [hoveredKey])
-
   return (
     <div className={getChartContainer()} ref={chartContainerRef}>
       <ChartHeaderV2 slot1={slot1} slot2={slot2} slot3={slot3} chartHeaderSlot={chartHeaderSlot} />
@@ -83,7 +91,7 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
         />
         <div>
           <ResponsiveContainer width="100%" height={400}>
-            {renderChart(flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel)}
+            {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data })}
           </ResponsiveContainer>
         </div>
       </div>

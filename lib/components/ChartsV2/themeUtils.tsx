@@ -1,7 +1,14 @@
 import { themeConfig } from '../../themeConfig';
 import { ChartLegendPositionV2 } from './types';
 
-export const DEFAULT_COLORS = ['#00C951', '#C27AFF', '#FB2C36', '#00D492', '#2B7FFF', '#AD46FF', '#FF8904'];
+const GREEN = '#00C951';
+const BLUE = '#2B7FFF';
+const RED = '#FB2C36';
+const YELLOW = '#FF8904';
+const PURPLE = '#AD46FF';
+const CYAN = '#00D492';
+
+export const DEFAULT_COLORS = [GREEN, BLUE, RED, YELLOW, PURPLE, CYAN];
 
 export const getChartContainer = () => {
   return themeConfig.euler.chart.base.chartContainer;

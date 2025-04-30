@@ -18,6 +18,18 @@ export type NewNestedDataPoint = {
   };
 };
 
+export interface RenderChartProps {
+  flattenedData: FlattenedDataPoint[];
+  chartType: ChartTypeV2;
+  hoveredKey: string | null;
+  lineKeys: string[];
+  colors: string[];
+  setHoveredKey: (key: string | null) => void;
+  xAxisLabel?: string;
+  yAxisLabel?: string;
+  data: NewNestedDataPoint[];
+}
+
 
 
 export interface ChartsV2Props {

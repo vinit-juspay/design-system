@@ -1,10 +1,19 @@
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
-import { ChartTypeV2, FlattenedDataPoint } from "./types";
+import { ChartTypeV2, RenderChartProps } from "./types";
 import { formatNumber } from "./utils";
 import { CustomTooltipV2 } from "./CustomTooltipV2";
 
-// TODO: Add a type for the chart
-export const renderChart = (flattenedData: FlattenedDataPoint[], chartType: ChartTypeV2, hoveredKey: string | null, lineKeys: string[], colors: string[], setHoveredKey: (key: string) => void, xAxisLabel?: string, yAxisLabel?: string) => {
+export const renderChart = ({
+  flattenedData,
+  chartType,
+  hoveredKey,
+  lineKeys,
+  colors,
+  setHoveredKey,
+  xAxisLabel,
+  yAxisLabel,
+  data: originalData
+}: RenderChartProps) => {
   const getColor = (key: string) => {
     const originalIndex = lineKeys.indexOf(key);
     return colors[originalIndex % colors.length];
@@ -12,15 +21,15 @@ export const renderChart = (flattenedData: FlattenedDataPoint[], chartType: Char
 
   const getElementOpacity = (dataKey: string) => {
     if (hoveredKey) {
-      return hoveredKey === dataKey ? 1 : 0.5;
+      return hoveredKey === dataKey ? 1 : 0.1;
     }
     return 1;
   }
 
-
   switch (chartType) {
     case ChartTypeV2.LINE:
       return (<LineChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }}
+        onMouseLeave={() => setHoveredKey(null)}
       >
         <XAxis dataKey="name" axisLine={false}
           tickLine={false}
@@ -61,7 +70,15 @@ export const renderChart = (flattenedData: FlattenedDataPoint[], chartType: Char
               : undefined
           }
         />
-        <Tooltip cursor={{ strokeDasharray: '6 5', stroke: '#99A0AE' }} content={CustomTooltipV2} />
+        <Tooltip cursor={{ strokeDasharray: '6 5', stroke: '#99A0AE' }} content={props =>
+          CustomTooltipV2({
+            ...props,
+            hoveredKey,
+            originalData,
+            setHoveredKey,
+            chartType
+          })
+        } />
         {lineKeys.map((key, _) => (
           <Line
             key={key}
@@ -120,7 +137,15 @@ export const renderChart = (flattenedData: FlattenedDataPoint[], chartType: Char
               : undefined
           }
         />
-        <Tooltip cursor={{ fill: "#f3f4f6" }} content={CustomTooltipV2} />
+        <Tooltip cursor={{ fill: "#f3f4f6" }} content={props =>
+          CustomTooltipV2({
+            ...props,
+            hoveredKey,
+            originalData,
+            setHoveredKey,
+            chartType
+          })
+        } />
         {lineKeys.map((key, _) => (
           <Bar
             key={key}
@@ -129,6 +154,8 @@ export const renderChart = (flattenedData: FlattenedDataPoint[], chartType: Char
             opacity={getElementOpacity(key)}
             animationDuration={350}
             radius={[4, 4, 0, 0]}
+            onMouseEnter={() => setHoveredKey(key)}
+            onMouseLeave={() => setHoveredKey(null)}
           />
         ))}
       </BarChart>)
