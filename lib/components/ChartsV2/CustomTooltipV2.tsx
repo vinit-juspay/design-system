@@ -3,9 +3,6 @@ import { ChartTypeV2, CustomTooltipV2Props, NewNestedDataPoint } from "./types";
 import { capitaliseCamelCase, formatNumber } from "./utils";
 
 export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalData, setHoveredKey, chartType, selectedKeys }: CustomTooltipV2Props) => {
-
-  // case: showing tooltip, if hoveredKey is null, set it to the first selected key
-  // only for LINE CHART
   if (active && hoveredKey == null && chartType === ChartTypeV2.LINE) {
     if (selectedKeys.length > 0) {
       setHoveredKey(selectedKeys[0])
@@ -15,6 +12,7 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
   }
 
   if (!active || !payload || !payload.length || !hoveredKey || !label) {
+    console.log('no active or payload or hoveredKey or label', active, payload, hoveredKey, label);
     return null;
   }
 
@@ -29,6 +27,7 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
   }
   const relevantData = getRelevantData();
   if (!relevantData) {
+    console.log('no relevant data', originalData, hoveredKey, label);
     return null;
   }
 
@@ -53,7 +52,6 @@ const BarChartTooltip = ({ originalData, label, getColor }: {
   label: string;
   getColor: (key: string) => string | undefined;
 }) => {
-
   const relevantData = originalData.find(item => item.name === label)?.data;
   return (
     <>

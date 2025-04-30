@@ -455,7 +455,7 @@ export const themeConfig = {
         chartContainer: 'w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white',
         chartContentContainer: {
           top: 'py-5 px-4 flex flex-col gap-6',
-          right: 'py-5 px-4 flex flex-row-reverse gap-6',
+          right: 'py-5 px-4 flex gap-6',
         },
         chartHeader: {
           container:
@@ -469,10 +469,10 @@ export const themeConfig = {
           legendItemsContainer:
             'flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1',
           legendItem: 'h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300',
-          legendMarker: 'w-3 h-3 rounded-sm',
+          legendMarker: 'w-3 h-3 rounded-sm shrink-0',
           resetButton:
             'text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0',
-          stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2',
+          stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2 ',
         },
         tooltip: {
           container:

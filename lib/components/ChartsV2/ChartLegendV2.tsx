@@ -10,6 +10,7 @@ import {
   getChartLegendItemsContainer,
   getChartLegendMarker,
   getChartLegendResetButton,
+  getChartStackedLegendContainer,
 } from './themeUtils';
 import { ChartLegendsPropsV2 } from './types';
 
@@ -24,25 +25,23 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   selectedKeys,
   setSelectedKeys,
   hoveredKey,
-  // stacked = false,
-  // onReset,
-  // handleLegendEnter,
-  // handleLegendLeave,
-  // hoveredKey, 
+  stacked = false,
 }) => {
   // const legendColors = useMemo(() => keys.map((_, i) => colors[i % colors.length]), [keys, colors]);
 
-  // if (stacked)
-  //   return (
-  //     <StackedLegends
-  //       keys={keys}
-  //       activeKeys={activeKeys}
-  //       handleLegendClick={handleLegendClick}
-  //       colors={legendColors}
-  //       handleLegendEnter={handleLegendEnter}
-  //       handleLegendLeave={handleLegendLeave}
-  //     />
-  //   );
+  if (stacked)
+    return (
+      <StackedLegends
+        keys={keys}
+        activeKeys={selectedKeys}
+        handleLegendClick={handleLegendClick}
+        colors={colors}
+        handleLegendEnter={handleLegendEnter}
+        handleLegendLeave={handleLegendLeave}
+        hoveredKey={hoveredKey}
+        selectedKeys={selectedKeys}
+      />
+    );
 
   const lastWidth = useRef<number>(0);
   const legendItemsContainerRef = useRef<HTMLDivElement>(null!);
@@ -136,10 +135,20 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
                 <DropdownMenu.Item
                   key={dataKey}
                   className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
-                // onClick={() => handleLegendClick(dataKey)}
-                // // onMouseOver={() => setHoveredKey(dataKey)}
-                // onMouseEnter={() => handleLegendEnter(dataKey)}
-                // onMouseLeave={handleLegendLeave}
+                  onClick={() => handleLegendClick(dataKey)}
+                  onMouseEnter={() => handleLegendEnter(dataKey)}
+                  onMouseLeave={handleLegendLeave}
+                  style={{
+                    opacity: hoveredKey
+                      ? hoveredKey === dataKey
+                        ? 1
+                        : 0.4
+                      : selectedKeys && selectedKeys.length > 0
+                        ? selectedKeys.includes(dataKey)
+                          ? 1
+                          : 0.4
+                        : 1,
+                  }}
                 >
                   {capitaliseCamelCase(dataKey)}
                 </DropdownMenu.Item>
@@ -157,38 +166,52 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   );
 };
 
-// const StackedLegends: React.FC<{
-//   keys: string[];
-//   activeKeys: string[] | null;
-//   handleLegendClick: (dataKey: string) => void;
-//   colors: string[];
-//   handleLegendEnter: (dataKey: string) => void;
-//   handleLegendLeave: () => void;
-// }> = ({ keys, activeKeys, handleLegendClick, colors, handleLegendEnter, handleLegendLeave }) => {
-//   return (
-//     <div className="h-full w-full flex flex-col justify-center gap-2">
-//       {keys.map((key, index) => (
-//         <div
-//           key={key}
-//           className={getChartLegendItem()}
-//           onClick={() => handleLegendClick(key)}
-//           onMouseEnter={() => handleLegendEnter(key)}
-//           onMouseLeave={handleLegendLeave}
-//         >
-//           <div className={getChartLegendMarker()} style={{ backgroundColor: colors[index] }} />
-//           <span
-//             className="text-[14px] font-medium"
-//             style={{
-//               color: activeKeys && activeKeys.includes(key) ? '#333' : '#717784',
-//             }}
-//           >
-//             {capitaliseCamelCase(key)}
-//           </span>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+const StackedLegends: React.FC<{
+  keys: string[];
+  activeKeys: string[] | null;
+  handleLegendClick: (dataKey: string) => void;
+  colors: string[];
+  handleLegendEnter: (dataKey: string) => void;
+  handleLegendLeave: () => void;
+  hoveredKey: string | null;
+  selectedKeys: string[];
+}> = ({ keys, activeKeys, handleLegendClick, colors, handleLegendEnter, handleLegendLeave, hoveredKey, selectedKeys }) => {
+  return (
+    <div className={getChartStackedLegendContainer()}>
+      {keys.map((key, index) => (
+        <div
+          key={key}
+          className={getChartLegendItem()}
+          onClick={() => handleLegendClick(key)}
+          onMouseEnter={() => handleLegendEnter(key)}
+          onMouseLeave={handleLegendLeave}
+          style={{
+            opacity: hoveredKey
+              ? hoveredKey === key
+                ? 1
+                : 0.4
+              : selectedKeys && selectedKeys.length > 0
+                ? selectedKeys.includes(key)
+                  ? 1
+                  : 0.4
+                : 1,
+          }}
+        >
+          <div className={getChartLegendMarker()} style={{ backgroundColor: colors[index] }} />
+          <label
+            className="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis"
+            style={{
+              color: activeKeys && activeKeys.includes(key) ? '#333' : '#717784',
+            }}
+            title={capitaliseCamelCase(key)}
+          >
+            {capitaliseCamelCase(key)}
+          </label>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 ChartLegendsComponentV2.displayName = 'ChartLegends';
 

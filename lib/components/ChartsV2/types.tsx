@@ -13,6 +13,17 @@ type DataPoint = {
   }[];
 };
 
+export enum ChartLegendPositionV2 {
+  TOP = 'top',
+  RIGHT = 'right',
+}
+
+export enum ChartTypeV2 {
+  LINE = 'line',
+  BAR = 'bar',
+  PIE = 'pie',
+}
+
 export type NewNestedDataPoint = {
   name: string;
   data: {
@@ -47,17 +58,6 @@ export interface ChartsV2Props {
   chartHeaderSlot: ReactNode;
 }
 
-export enum ChartTypeV2 {
-  LINE = 'line',
-  BAR = 'bar',
-  PIE = 'pie',
-}
-
-export enum ChartLegendPositionV2 {
-  TOP = 'top',
-  RIGHT = 'right',
-}
-
 export type FlattenedDataPoint = {
   name: string;
   [key: string]: number | string;
@@ -81,6 +81,7 @@ export type ChartLegendsPropsV2 = {
   setSelectedKeys: (keys: string[]) => void;
   hoveredKey: string | null;
   activeKeys: string[] | null;
+  stacked?: boolean;
 };
 
 export interface CustomTooltipV2Props extends TooltipProps<ValueType, NameType> {

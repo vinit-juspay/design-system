@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis, PieChart, Pie, Cell } from "recharts";
-import { ChartTypeV2, RenderChartProps } from "./types";
+import { ChartLegendPositionV2, ChartTypeV2, RenderChartProps } from "./types";
 import { formatNumber, lightenHexColor } from "./utils";
 import { CustomTooltipV2 } from "./CustomTooltipV2";
 
@@ -13,7 +13,7 @@ export const renderChart = ({
   xAxisLabel,
   yAxisLabel,
   data: originalData,
-  selectedKeys
+  selectedKeys,
 }: RenderChartProps) => {
   const getColor = (key: string, chartType: ChartTypeV2) => {
     const originalIndex = lineKeys.indexOf(key);
@@ -29,6 +29,7 @@ export const renderChart = ({
     }
     return 1;
   }
+
 
   switch (chartType) {
     case ChartTypeV2.LINE:
@@ -165,25 +166,25 @@ export const renderChart = ({
       </BarChart>)
 
     case ChartTypeV2.PIE:
-      // Transform nested data into pie chart format
-      const pieData = lineKeys.map((key, index) => ({
+      const pieData = lineKeys.map((key, _) => ({
         name: key,
         value: originalData[0].data[key]?.primary.val || 0,
       }));
 
       return (
-        <PieChart margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+        <PieChart margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
           <Pie
             data={pieData}
             cx="50%"
             cy="50%"
-            outerRadius={150}
-            innerRadius={100}
+            outerRadius="100%"
+            innerRadius="70%"
             paddingAngle={0}
             fill="#8884d8"
             dataKey="value"
             nameKey="name"
-            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+            label={false}
+            animationDuration={350}
             onMouseEnter={(_, index) => setHoveredKey(pieData[index].name)}
             onMouseLeave={() => setHoveredKey(null)}
           >

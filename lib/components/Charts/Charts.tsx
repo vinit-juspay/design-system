@@ -133,13 +133,13 @@ export const Chart: React.FC<ChartProps> = ({
               label={
                 xAxisLabel
                   ? {
-                      value: xAxisLabel,
-                      position: 'bottom',
-                      offset: 15,
-                      fill: '#99A0AE',
-                      fontSize: 14,
-                      fontWeight: 500,
-                    }
+                    value: xAxisLabel,
+                    position: 'bottom',
+                    offset: 15,
+                    fill: '#99A0AE',
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }
                   : undefined
               }
             />
@@ -152,15 +152,15 @@ export const Chart: React.FC<ChartProps> = ({
               label={
                 yAxisLabel
                   ? {
-                      value: yAxisLabel,
-                      angle: -90,
-                      position: 'insideLeft',
-                      style: { textAnchor: 'middle' },
-                      offset: -15,
-                      fill: '#99A0AE',
-                      fontSize: 14,
-                      fontWeight: 500,
-                    }
+                    value: yAxisLabel,
+                    angle: -90,
+                    position: 'insideLeft',
+                    style: { textAnchor: 'middle' },
+                    offset: -15,
+                    fill: '#99A0AE',
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }
                   : undefined
               }
             />
@@ -188,6 +188,7 @@ export const Chart: React.FC<ChartProps> = ({
                 dot={false}
                 activeDot={{ r: hoveredKey === dataKey ? 4 : 0 }}
                 opacity={getElementOpacity(dataKey)}
+                // FIX: this is causing the tooltip to show on hover
                 onMouseOver={() => setHoveredKey(dataKey)}
                 animationDuration={350}
                 onAnimationStart={() => (isChartAnimating.current = true)}
@@ -221,13 +222,13 @@ export const Chart: React.FC<ChartProps> = ({
               label={
                 xAxisLabel
                   ? {
-                      value: xAxisLabel,
-                      position: 'bottom',
-                      offset: 15,
-                      fill: '#99A0AE',
-                      fontSize: 14,
-                      fontWeight: 500,
-                    }
+                    value: xAxisLabel,
+                    position: 'bottom',
+                    offset: 15,
+                    fill: '#99A0AE',
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }
                   : undefined
               }
             />
@@ -240,15 +241,15 @@ export const Chart: React.FC<ChartProps> = ({
               label={
                 yAxisLabel
                   ? {
-                      value: yAxisLabel,
-                      angle: -90,
-                      position: 'insideLeft',
-                      style: { textAnchor: 'middle' },
-                      offset: -15,
-                      fill: '#99A0AE',
-                      fontSize: 14,
-                      fontWeight: 500,
-                    }
+                    value: yAxisLabel,
+                    angle: -90,
+                    position: 'insideLeft',
+                    style: { textAnchor: 'middle' },
+                    offset: -15,
+                    fill: '#99A0AE',
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }
                   : undefined
               }
             />
@@ -407,8 +408,8 @@ export const Chart: React.FC<ChartProps> = ({
     <div className={getChartContainer()} ref={chartContainerRef}>
       <ChartHeader slot1={slot1} slot2={slot2} slot3={slot3} chartHeaderSlot={chartHeaderSlot} />
       {type === ChartType.LINE ||
-      type === ChartType.BAR ||
-      (type === ChartType.PIE && legendPosition === ChartLegendPosition.TOP) ? (
+        type === ChartType.BAR ||
+        (type === ChartType.PIE && legendPosition === ChartLegendPosition.TOP) ? (
         <div className={getChartContentContainer(legendPosition)}>
           <ChartLegends
             chartContainerRef={chartContainerRef}

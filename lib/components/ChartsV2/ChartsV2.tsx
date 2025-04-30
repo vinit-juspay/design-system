@@ -5,9 +5,23 @@ import {
 import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./themeUtils";
 import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { renderChart } from "./renderChart";
 
+// TODO: remove this
+export function useUniqueLogger() {
+  const lastLogRef = useRef<string | null>(null);
+
+  function log(...args: unknown[]) {
+    const message = JSON.stringify(args);
+    if (message !== lastLogRef.current) {
+      console.log(...args);
+      lastLogRef.current = message;
+    }
+  }
+
+  return log;
+}
 
 function transformNestedData(data: NewNestedDataPoint[], selectedKeys: string[] = []): FlattenedDataPoint[] {
   return data.map(item => {
@@ -51,6 +65,7 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
     : [];
 
   const handleLegendClick = (key: string) => {
+    if (chartType === ChartTypeV2.PIE) return;
     setSelectedKeys(prevActiveKeys => {
       if (prevActiveKeys.includes(key)) {
         return prevActiveKeys.filter(k => k !== key);
@@ -60,19 +75,7 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
     });
   }
 
-  function useUniqueLogger() {
-    const lastLogRef = useRef<string | null>(null);
 
-    function log(...args: unknown[]) {
-      const message = JSON.stringify(args);
-      if (message !== lastLogRef.current) {
-        console.log(...args);
-        lastLogRef.current = message;
-      }
-    }
-
-    return log;
-  }
 
   const handleLegendEnter = (key: string) => {
     if (selectedKeys.length === 0 || selectedKeys.length === lineKeys.length) {
@@ -84,33 +87,62 @@ const ChartsV2: React.FC<ChartsV2Props> = ({
     setHoveredKey(null);
   }
 
-  const log = useUniqueLogger();
-  useEffect(() => {
-    log(hoveredKey);
-  }, [hoveredKey]);
+  const showHorizontallyStackedLegends = () => {
+    return !(chartType === ChartTypeV2.PIE && legendPosition === ChartLegendPositionV2.RIGHT);
+  }
 
   return (
     <div className={getChartContainer()} ref={chartContainerRef}>
       <ChartHeaderV2 slot1={slot1} slot2={slot2} slot3={slot3} chartHeaderSlot={chartHeaderSlot} />
-      <div className={getChartContentContainer(legendPosition)}>
-        <ChartLegends
-          chartContainerRef={chartContainerRef}
-          keys={lineKeys}
-          colors={colors}
-          handleLegendClick={handleLegendClick}
-          handleLegendEnter={handleLegendEnter}
-          handleLegendLeave={handleLegendLeave}
-          selectedKeys={selectedKeys}
-          setSelectedKeys={setSelectedKeys}
-          hoveredKey={hoveredKey}
-          activeKeys={selectedKeys}
-        />
-        <div>
-          <ResponsiveContainer width="100%" height={400}>
-            {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data, selectedKeys })}
-          </ResponsiveContainer>
-        </div>
-      </div>
+      {showHorizontallyStackedLegends() ?
+        (<>
+          <div className={getChartContentContainer(legendPosition)}>
+            <ChartLegends
+              chartContainerRef={chartContainerRef}
+              keys={lineKeys}
+              colors={colors}
+              handleLegendClick={handleLegendClick}
+              handleLegendEnter={handleLegendEnter}
+              handleLegendLeave={handleLegendLeave}
+              selectedKeys={selectedKeys}
+              setSelectedKeys={setSelectedKeys}
+              hoveredKey={hoveredKey}
+              activeKeys={selectedKeys}
+              stacked={false}
+            />
+            <div>
+              <ResponsiveContainer width="100%" height={400}>
+                {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data, selectedKeys })}
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </>)
+        :
+        (<>
+          <div className={getChartContentContainer(legendPosition)}>
+            <div className="flex-1 w-full">
+              <ResponsiveContainer width="100%" height={400}>
+                {renderChart({ flattenedData, chartType, hoveredKey, lineKeys, colors, setHoveredKey, xAxisLabel, yAxisLabel, data, selectedKeys })}
+              </ResponsiveContainer>
+            </div>
+            <div className="w-1/4 flex items-center justify-center">
+              <ChartLegends
+                chartContainerRef={chartContainerRef}
+                keys={lineKeys}
+                colors={colors}
+                handleLegendClick={handleLegendClick}
+                handleLegendEnter={handleLegendEnter}
+                handleLegendLeave={handleLegendLeave}
+                selectedKeys={selectedKeys}
+                setSelectedKeys={setSelectedKeys}
+                hoveredKey={hoveredKey}
+                activeKeys={selectedKeys}
+                stacked={true}
+              />
+            </div>
+          </div>
+        </>)
+      }
     </div>
   );
 }

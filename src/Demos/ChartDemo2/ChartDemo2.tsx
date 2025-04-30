@@ -1,5 +1,5 @@
 import ChartsV2 from '../../../lib/components/ChartsV2/ChartsV2';
-import { ChartTypeV2, NewNestedDataPoint } from '../../../lib/components/ChartsV2/types';
+import { ChartLegendPositionV2, ChartTypeV2, NewNestedDataPoint } from '../../../lib/components/ChartsV2/types';
 
 const ChartDemo2 = () => {
 
@@ -235,9 +235,9 @@ const ChartDemo2 = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Line Chart Demo</div>} /> */}
-      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Bar Chart Demo</div>} /> */}
-      <ChartsV2 data={pieChartData} chartType={ChartTypeV2.PIE} chartHeaderSlot={<div>Pie Chart Demo</div>} />
+      {/* <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Line Chart Demo</div>} />
+      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.BAR} chartHeaderSlot={<div>Bar Chart Demo</div>} /> */}
+      <ChartsV2 data={pieChartData} chartType={ChartTypeV2.PIE} chartHeaderSlot={<div>Pie Chart Demo</div>} legendPosition={ChartLegendPositionV2.RIGHT} />
     </div>
   )
 }
