@@ -3,7 +3,7 @@ import { ChartTypeV2, NewNestedDataPoint } from '../../../lib/components/ChartsV
 
 const ChartDemo2 = () => {
 
-  const data: { name: string, revenue: number }[] = [{ name: 'Jan', revenue: 4000 }, { name: 'Feb', revenue: 3000 }, { name: 'Mar', revenue: 2000 }]
+  // const data: { name: string, revenue: number }[] = [{ name: 'Jan', revenue: 4000 }, { name: 'Feb', revenue: 3000 }, { name: 'Mar', revenue: 2000 }]
 
   const sampleNestedData: NewNestedDataPoint[] = [
     {
