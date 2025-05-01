@@ -2,12 +2,12 @@ import { ChartLegendPositionV2, ChartsV2Props, ChartTypeV2 } from "./types"
 import {
   ResponsiveContainer,
 } from "recharts";
-import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./themeUtils";
+import { DEFAULT_COLORS, getChartContainer, getChartContentContainer } from "./utils";
 import { ChartHeaderV2 } from "./ChartHeaderV2";
 import { ChartLegends } from "./ChartLegendV2";
 import { useRef, useState } from "react";
 import { renderChart } from "./renderChart";
-import { transformNestedData } from "./utils";
+import { transformNestedData } from "./chartUtils";
 
 const ChartsV2: React.FC<ChartsV2Props> = ({
   chartType = ChartTypeV2.LINE,

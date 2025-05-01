@@ -451,6 +451,17 @@ export const themeConfig = {
       },
     },
     chart: {
+      config: {
+        tickFill: '#99A0AE',
+        tickFontSize: 14,
+        tickFontWeight: 500,
+        axisLine: false,
+        tickLine: false,
+        labelFill: '#99A0AE',
+        labelFontSize: 14,
+        labelFontWeight: 500,
+        gridStroke: '#ECEFF3',
+      },
       base: {
         chartContainer: 'w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white',
         chartContentContainer: {
@@ -478,6 +489,7 @@ export const themeConfig = {
         tooltip: {
           container:
             'bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+
         },
       },
     },

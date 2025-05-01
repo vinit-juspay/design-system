@@ -1,6 +1,6 @@
-import { getChartTooltipContainer } from "./themeUtils";
+import { getChartTooltipContainer } from "./utils";
 import { ChartTypeV2, CustomTooltipV2Props, NewNestedDataPoint } from "./types";
-import { capitaliseCamelCase, formatNumber } from "./utils";
+import { capitaliseCamelCase, formatNumber } from "./chartUtils";
 
 import { Payload, ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 
@@ -18,7 +18,7 @@ export const CustomTooltipV2 = ({ active, payload, label, hoveredKey, originalDa
     <div className={getChartTooltipContainer()}>
       {chartType === ChartTypeV2.LINE && <LineChartTooltip active={active} payload={payload} selectedKeys={selectedKeys} setHoveredKey={setHoveredKey} originalData={originalData} hoveredKey={hoveredKey} label={label} getColor={getColor} />}
       {chartType === ChartTypeV2.BAR && <BarChartTooltip originalData={originalData} label={label} getColor={getColor} />}
-      {chartType === ChartTypeV2.PIE && <PieChartTooltip active={active} payload={payload} selectedKeys={selectedKeys} setHoveredKey={setHoveredKey} originalData={originalData} hoveredKey={hoveredKey} getColor={getColor} />}
+      {chartType === ChartTypeV2.PIE && <PieChartTooltip active={active} payload={payload} selectedKeys={selectedKeys} setHoveredKey={setHoveredKey} originalData={originalData} hoveredKey={hoveredKey} />}
     </div>
   );
 
@@ -32,8 +32,8 @@ const BarChartTooltip = ({ originalData, label, getColor }: {
   const relevantData = originalData.find(item => item.name === label)?.data;
   return (
     <>
-      <div className="relative ">
-        <div className="flex flex-col ">
+      <div className="relative">
+        <div className="flex flex-col">
           <h3 className="text-body-md font-500 text-gray-400">
             {capitaliseCamelCase(label)}
           </h3>
@@ -87,8 +87,8 @@ const LineChartTooltip = ({ originalData, hoveredKey, label, getColor, active, p
   if (!active || !payload || !payload.length || !hoveredKey || !label) {
     return null;
   }
-  const getRelevantData = () => {
 
+  const getRelevantData = () => {
     // Find the data point that matches the current label (x-axis value)
     const currentDataPoint = originalData.find(item => item.name === label);
 
@@ -148,10 +148,9 @@ const LineChartTooltip = ({ originalData, hoveredKey, label, getColor, active, p
   )
 }
 
-const PieChartTooltip = ({ originalData, hoveredKey, getColor, active, payload, selectedKeys, setHoveredKey }: {
+const PieChartTooltip = ({ originalData, hoveredKey, active, payload, selectedKeys, setHoveredKey }: {
   originalData: NewNestedDataPoint[];
   hoveredKey: string | null;
-  getColor: (key: string) => string | undefined;
   active: boolean;
   payload: Payload<ValueType, NameType>[];
   selectedKeys: string[];
@@ -173,8 +172,6 @@ const PieChartTooltip = ({ originalData, hoveredKey, getColor, active, payload, 
   if (!name) name = Object.keys(originalData[0].data)[0];
 
   const data = originalData[0].data[name];
-  console.log(payload[0].payload.fill)
-
 
   return (
     <>

@@ -1,7 +1,8 @@
 import { Bar, BarChart, CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis, PieChart, Pie, Cell } from "recharts";
-import { ChartLegendPositionV2, ChartTypeV2, RenderChartProps } from "./types";
-import { formatNumber, lightenHexColor } from "./utils";
+import { ChartTypeV2, RenderChartProps } from "./types";
+import { formatNumber, lightenHexColor } from "./chartUtils";
 import { CustomTooltipV2 } from "./CustomTooltipV2";
+import { getChartConfig } from "./utils";
 
 export const renderChart = ({
   flattenedData,
@@ -15,20 +16,26 @@ export const renderChart = ({
   data: originalData,
   selectedKeys,
 }: RenderChartProps) => {
+
+
   const getColor = (key: string, chartType: ChartTypeV2) => {
     const originalIndex = lineKeys.indexOf(key);
-    if (hoveredKey && hoveredKey !== key && chartType === ChartTypeV2.LINE) {
-      return lightenHexColor(colors[originalIndex % colors.length], 0.3);
+    const baseColor = colors[originalIndex % colors.length];
+
+    // For bar charts, highlight only the hovered bar
+    if (chartType === ChartTypeV2.BAR) {
+      return hoveredKey === null ? baseColor : hoveredKey === key ? baseColor : lightenHexColor(baseColor, 0.3);
     }
-    return colors[originalIndex % colors.length];
+
+    // For other chart types (LINE, PIE), dim non-hovered elements
+    if (hoveredKey && hoveredKey !== key) {
+      return lightenHexColor(baseColor, 0.3);
+    }
+
+    return baseColor;
   }
 
-  const getElementOpacity = (dataKey: string) => {
-    if (hoveredKey) {
-      return hoveredKey === dataKey ? 1 : 0.4;
-    }
-    return 1;
-  }
+  const chartConfig = getChartConfig();
 
   switch (chartType) {
     case ChartTypeV2.LINE:
@@ -37,7 +44,7 @@ export const renderChart = ({
       >
         <XAxis dataKey="name" axisLine={false}
           tickLine={false}
-          tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+          tick={{ fill: chartConfig.tickFill, fontSize: chartConfig.tickFontSize, fontWeight: chartConfig.tickFontWeight }}
           dy={10}
           label={
             xAxisLabel
@@ -45,20 +52,20 @@ export const renderChart = ({
                 value: xAxisLabel,
                 position: 'bottom',
                 offset: 15,
-                fill: '#99A0AE',
-                fontSize: 14,
-                fontWeight: 500,
+                fill: chartConfig.labelFill,
+                fontSize: chartConfig.labelFontSize,
+                fontWeight: chartConfig.labelFontWeight,
               }
               : undefined
           }
         />
-        <CartesianGrid vertical={false} stroke="#ECEFF3" />
+        <CartesianGrid vertical={false} stroke={chartConfig.gridStroke} />
         <YAxis
           width={50}
           axisLine={false}
           tickLine={false}
           tickFormatter={value => formatNumber(value)}
-          tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+          tick={{ fill: chartConfig.tickFill, fontSize: chartConfig.tickFontSize, fontWeight: chartConfig.tickFontWeight }}
           label={
             yAxisLabel
               ? {
@@ -67,14 +74,14 @@ export const renderChart = ({
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' },
                 offset: -15,
-                fill: '#99A0AE',
-                fontSize: 14,
-                fontWeight: 500,
+                fill: chartConfig.labelFill,
+                fontSize: chartConfig.labelFontSize,
+                fontWeight: chartConfig.labelFontWeight,
               }
               : undefined
           }
         />
-        <Tooltip cursor={{ strokeDasharray: '6 5', stroke: '#99A0AE' }} content={props =>
+        <Tooltip cursor={{ strokeDasharray: '6 5', stroke: chartConfig.tickFill }} content={props =>
           CustomTooltipV2({
             ...props,
             hoveredKey,
@@ -100,12 +107,12 @@ export const renderChart = ({
       </LineChart>)
     case ChartTypeV2.BAR:
       return (<BarChart data={flattenedData} margin={{ top: 10, right: 30, left: yAxisLabel ? 30 : 10, bottom: xAxisLabel ? 30 : 0 }} onMouseLeave={() => setHoveredKey(null)}>
-        <CartesianGrid vertical={false} stroke="#ECEFF3" />
+        <CartesianGrid vertical={false} stroke={chartConfig.gridStroke} />
         <XAxis
           dataKey="name"
           axisLine={false}
           tickLine={false}
-          tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+          tick={{ fill: chartConfig.tickFill, fontSize: chartConfig.tickFontSize, fontWeight: chartConfig.tickFontWeight }}
           dy={10}
           label={
             xAxisLabel
@@ -113,9 +120,9 @@ export const renderChart = ({
                 value: xAxisLabel,
                 position: 'bottom',
                 offset: 15,
-                fill: '#99A0AE',
-                fontSize: 14,
-                fontWeight: 500,
+                fill: chartConfig.labelFill,
+                fontSize: chartConfig.labelFontSize,
+                fontWeight: chartConfig.labelFontWeight,
               }
               : undefined
           }
@@ -125,7 +132,7 @@ export const renderChart = ({
           axisLine={false}
           tickLine={false}
           tickFormatter={value => formatNumber(value)}
-          tick={{ fill: '#99A0AE', fontSize: 14, fontWeight: 500 }}
+          tick={{ fill: chartConfig.tickFill, fontSize: chartConfig.tickFontSize, fontWeight: chartConfig.tickFontWeight }}
           label={
             yAxisLabel
               ? {
@@ -134,14 +141,14 @@ export const renderChart = ({
                 position: 'insideLeft',
                 style: { textAnchor: 'middle' },
                 offset: -15,
-                fill: '#99A0AE',
-                fontSize: 14,
-                fontWeight: 500,
+                fill: chartConfig.labelFill,
+                fontSize: chartConfig.labelFontSize,
+                fontWeight: chartConfig.labelFontWeight,
               }
               : undefined
           }
         />
-        <Tooltip cursor={{ fill: "#f3f4f6" }} content={props =>
+        <Tooltip cursor={{ fill: chartConfig.gridStroke }} content={props =>
           CustomTooltipV2({
             ...props,
             hoveredKey,
@@ -156,7 +163,6 @@ export const renderChart = ({
             key={key}
             dataKey={key}
             fill={getColor(key, chartType)}
-            fillOpacity={getElementOpacity(key)}
             animationDuration={350}
             radius={[4, 4, 0, 0]}
           />
@@ -178,7 +184,7 @@ export const renderChart = ({
             outerRadius="100%"
             innerRadius="70%"
             paddingAngle={0}
-            fill="#8884d8"
+            fill={colors[0]}
             dataKey="value"
             nameKey="name"
             label={false}
@@ -190,7 +196,6 @@ export const renderChart = ({
               <Cell
                 key={`cell-${index}`}
                 fill={getColor(entry.name, chartType)}
-                opacity={hoveredKey && hoveredKey !== entry.name ? 0.6 : 1}
               />
             ))}
           </Pie>

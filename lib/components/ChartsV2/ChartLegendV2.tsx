@@ -1,5 +1,5 @@
 import { RotateCcw } from 'lucide-react';
-import { capitaliseCamelCase } from './utils';
+import { capitaliseCamelCase } from './chartUtils';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import React, { useState, useRef, useCallback } from 'react';
 import { DropdownMenu } from 'radix-ui';
@@ -12,7 +12,7 @@ import {
   getChartLegendMarker,
   getChartLegendResetButton,
   getChartStackedLegendContainer,
-} from './themeUtils';
+} from './utils';
 import { ChartLegendsPropsV2 } from './types';
 
 
@@ -28,8 +28,6 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   hoveredKey,
   stacked = false,
 }) => {
-  // const legendColors = useMemo(() => keys.map((_, i) => colors[i % colors.length]), [keys, colors]);
-
   if (stacked)
     return (
       <StackedLegends
@@ -47,13 +45,6 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   const lastWidth = useRef<number>(0);
   const legendItemsContainerRef = useRef<HTMLDivElement>(null!);
   const [cuttOffIndex, setCuttOffIndex] = useState<number>(keys.length);
-
-  const highlight = useCallback((element: HTMLElement, className: string) => {
-    element.classList.add(className);
-    setTimeout(() => {
-      element.classList.remove(className);
-    }, 200);
-  }, []);
 
   const handleResize = useCallback(() => {
     if (!legendItemsContainerRef.current) return;
@@ -82,7 +73,6 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   useResizeObserver(chartContainerRef, ({ width }) => {
     if (width && width !== lastWidth.current) {
       lastWidth.current = width;
-      highlight(chartContainerRef.current, 'bg-red-500/20');
       debouncedResize();
     }
   });
@@ -119,7 +109,7 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
             <span
               className={getChartLegendItemText()}
               style={{
-                color: '#333'
+                color: '#717784'
               }}
             >
               {capitaliseCamelCase(dataKey)}
