@@ -16,7 +16,7 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 export function AvatarGroup({
   avatars,
   maxCount = 5,
-  size = "md",
+  size = "regular",
   className,
   ...props
 }: AvatarGroupProps) {
@@ -29,11 +29,11 @@ export function AvatarGroup({
 
   // Size mappings for the overflow counter
   const overflowSizeClasses = {
-    sm: "h-8 w-8 text-body-sm",
-    regular: "h-10 w-10 text-body-md",
-    md: "h-10 w-10 text-body-md",
-    lg: "h-12 w-12 text-body-lg",
-    xl: "h-16 w-16 text-body-lg",
+    sm: "h-6 w-6 text-body-xs text-500 text-gray-100",
+    regular: "h-8 w-8 text-body-sm text-500 text-gray-100",
+    md: "h-10 w-10 text-body-md text-500 text-gray-100",
+    lg: "h-12 w-12 text-body-lg text-500 text-gray-100",
+    xl: "h-16 w-16 text-sm text-600 text-gray-100",
   }
 
   return (

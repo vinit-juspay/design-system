@@ -9,25 +9,47 @@ const meta: Meta<typeof Avatar> = {
     size: {
       control: "select",
       options: ["sm", "regular", "md", "lg", "xl"],
-    },
-    online: {
-      control: "boolean",
-    },
-    src: {
-      control: "text",
-    },
-    alt: {
-      control: "text",
-    },
-    fallback: {
-      control: "text",
+      description: "Controls the size of the avatar.",
+      table: { defaultValue: { summary: "regular" } },
     },
     shape: {
       control: "select",
       options: ["circular", "rounded"],
-      defaultValue: "circular",
+      description: "Determines the shape of the avatar.",
+      table: { defaultValue: { summary: "circular" } },
     },
+    online: {
+      control: "boolean",
+      description: "If true, displays a green dot indicating online status.",
+      table: { defaultValue: { summary: "false" } },
+    },
+    src: {
+      control: "text",
+      description: "The URL of the image to display. If invalid or empty, fallback mechanisms are used.",
+      table: { defaultValue: { summary: "undefined" } },
+    },
+    alt: {
+      control: "text",
+      description: "Alternative text for the image. Used for accessibility and to generate initials if `src` is missing and `fallback` is not provided.",
+      table: { defaultValue: { summary: '""' } },
+    },
+    fallback: {
+      control: "text",
+      description: "Custom text/initials to display when `src` is missing or invalid. Overrides initials generated from `alt`.",
+      table: { defaultValue: { summary: "undefined" } },
+    },
+    className: {
+      control: "text",
+      description: "Optional additional CSS classes to apply to the root element. Useful for adding margins or other container-level styles. Example: `mt-2`",
+      table: { defaultValue: { summary: "undefined" } },
+    }
   },
+  args: {
+    size: "regular",
+    shape: "circular",
+    online: false,
+    alt: "Default Alt Text",
+  }
 };
 
 export default meta;

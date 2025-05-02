@@ -1,6 +1,17 @@
 import { useState } from 'react';
-import { Avatar } from '../../../lib/main'; // Assuming Avatar is exported from main
+import { Avatar, AvatarGroup } from '../../../lib/main'; // Assuming Avatar is exported from main
 import { AvatarProps } from '../../../lib/components/Avatar/Avatar'; // Import props if needed
+import { AvatarData } from '../../../lib/components/Avatar/AvatarGroup'; // Import AvatarData
+
+const avatarGroupData: AvatarData[] = [
+  { id: 1, src: 'https://randomuser.me/api/portraits/women/10.jpg', alt: 'User 1' },
+  { id: 2, src: 'https://randomuser.me/api/portraits/men/20.jpg', alt: 'User 2' },
+  { id: 3, alt: 'User 3 No Src' }, // Fallback initials
+  { id: 4, src: 'https://randomuser.me/api/portraits/women/30.jpg', alt: 'User 4' },
+  { id: 5, fallback: 'U5', alt: 'User 5 Fallback' }, // Custom fallback
+  { id: 6, src: 'https://randomuser.me/api/portraits/men/40.jpg', alt: 'User 6' },
+  { id: 7, src: 'https://randomuser.me/api/portraits/women/50.jpg', alt: 'User 7' },
+];
 
 const AvatarDemo = () => {
   const [size, setSize] = useState<AvatarProps['size']>('regular');
@@ -10,6 +21,7 @@ const AvatarDemo = () => {
   const [fallback, setFallback] = useState('');
   const [useInvalidSrc, setUseInvalidSrc] = useState(false);
   const [shape, setShape] = useState<AvatarProps['shape']>('circular');
+  const [groupMaxCount, setGroupMaxCount] = useState(5); // State for AvatarGroup maxCount
 
   const currentSrc = useInvalidSrc ? 'invalid-url' : src;
 
@@ -244,6 +256,91 @@ const AvatarDemo = () => {
               <span className="text-xs text-gray-500">{s}</span>
             </div>
         ))}
+      </div>
+
+      {/* --- AvatarGroup Section --- */}
+      <div className="mt-10 pt-8 border-t border-gray-200">
+        <h1 className="text-2xl font-bold mb-6">AvatarGroup Component Examples</h1>
+
+        {/* Controls for AvatarGroup */}
+        <div className="mb-8 p-4 border border-dashed border-gray-300 rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">AvatarGroup Controls</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="groupMaxCount" className="block mb-2 font-medium">Max Visible Avatars (maxCount)</label>
+              <input
+                type="number"
+                id="groupMaxCount"
+                value={groupMaxCount}
+                onChange={e => setGroupMaxCount(Math.max(1, parseInt(e.target.value, 10) || 1))} // Ensure at least 1
+                min="1"
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </div>
+             <div>
+              <label className="block mb-2 font-medium">Group Size (Inherited by Avatars)</label>
+              <select
+                value={size} // Reuse the existing size state for simplicity
+                onChange={e => setSize(e.target.value as AvatarProps['size'])}
+                className="w-full p-2 border border-gray-300 rounded"
+              >
+                {sizes.map(s => (
+                  <option key={`group-size-${s}`} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Live Preview */}
+        <div className="flex flex-col gap-4 items-center justify-center min-h-32 p-8 border border-gray-200 rounded-lg mb-8">
+          <h3 className="text-lg font-medium mb-3">Live Preview</h3>
+           <AvatarGroup
+              avatars={avatarGroupData}
+              maxCount={groupMaxCount}
+              size={size} // Use the controlled size
+            />
+           <div className="mt-4 text-sm text-gray-600">
+            Current state: size={size}, maxCount={groupMaxCount}, total avatars={avatarGroupData.length}
+          </div>
+        </div>
+
+
+        {/* Static Examples */}
+        <h2 className="text-xl font-semibold mb-4">Static AvatarGroup Examples</h2>
+
+        <h3 className="text-lg font-medium mt-6 mb-3">Default (size='md', maxCount=5)</h3>
+        <AvatarGroup avatars={avatarGroupData} />
+
+        <h3 className="text-lg font-medium mt-6 mb-3">Different Sizes</h3>
+        <div className="flex flex-wrap gap-x-8 gap-y-4 items-end">
+           {sizes.map(s => (
+            <div key={`group-size-example-${s}`} className="flex flex-col items-center gap-1 text-center">
+               <AvatarGroup avatars={avatarGroupData.slice(0, 4)} size={s} />
+               <span className="text-xs text-gray-500">{s}</span>
+             </div>
+           ))}
+         </div>
+
+        <h3 className="text-lg font-medium mt-6 mb-3">Different maxCount Values</h3>
+        <div className="flex flex-wrap gap-x-8 gap-y-4 items-end">
+          <div>
+            <AvatarGroup avatars={avatarGroupData} maxCount={3} size="regular" />
+            <span className="block text-xs text-gray-500 text-center mt-1">maxCount=3</span>
+          </div>
+          <div>
+            <AvatarGroup avatars={avatarGroupData} maxCount={5} size="regular" />
+             <span className="block text-xs text-gray-500 text-center mt-1">maxCount=5</span>
+          </div>
+           <div>
+            <AvatarGroup avatars={avatarGroupData} maxCount={avatarGroupData.length} size="regular" />
+            <span className="block text-xs text-gray-500 text-center mt-1">maxCount={avatarGroupData.length} (no overflow)</span>
+          </div>
+          <div>
+            <AvatarGroup avatars={avatarGroupData} maxCount={10} size="regular" />
+            <span className="block text-xs text-gray-500 text-center mt-1">maxCount=10 (more than available)</span>
+          </div>
+        </div>
       </div>
     </div>
   );
