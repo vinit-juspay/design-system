@@ -471,7 +471,7 @@ const ChartDemo = () => {
           data={lineChartData}
           height={400}
           xAxisLabel="Month"
-          yAxisLabel="Amount ($)"
+          yAxisLabel="Title"
           metrics={metrics}
           slot1={
             <Button

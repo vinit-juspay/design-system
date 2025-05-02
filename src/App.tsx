@@ -17,6 +17,7 @@ import {
   Bell,
   Menu,
   BarChart2,
+  Type,
   Calendar as CalendarIcon,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
@@ -27,10 +28,11 @@ import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
+import FontDemo from './Demos/FontDemo/FontDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'datePicker'
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker'
   >('datePicker');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -130,6 +132,16 @@ const App = () => {
                 Charts V2
               </button>
               <button
+                onClick={() => setActiveComponent('fonts')}
+                className={`${activeComponent === 'fonts'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Type className="mr-2 h-5 w-5" />
+                Fonts
+              </button>
+              <button
                 onClick={() => setActiveComponent('datePicker')}
                 className={`${
                   activeComponent === 'datePicker'
@@ -220,6 +232,26 @@ const App = () => {
             Charts
           </button>
           <button
+            onClick={() => setActiveComponent('chartsV2')}
+            className={`${activeComponent === 'chartsV2'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <BarChart2 className="mr-3 h-5 w-5" />
+            Charts V2
+          </button>
+          <button
+            onClick={() => setActiveComponent('fonts')}
+            className={`${activeComponent === 'fonts'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Type className="mr-3 h-5 w-5" />
+            Fonts
+          </button>
+          <button
             onClick={() => setActiveComponent('datePicker')}
             className={`${
               activeComponent === 'datePicker'
@@ -238,8 +270,7 @@ const App = () => {
   const renderButtons = () => (
     <>
       <h2 className="text-2xl font-semibold">Button Examples</h2>
-
-      {/* Button Types */}
+      <div>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Button Types</h3>
         <div className="flex flex-wrap gap-4">
@@ -679,6 +710,7 @@ const App = () => {
           {activeComponent === 'alerts' && renderAlerts()}
           {activeComponent === 'charts' && <ChartDemo />}
           {activeComponent === 'chartsV2' && <ChartDemo2 />}
+          {activeComponent === 'fonts' && <FontDemo />}
           {activeComponent === 'datePicker' && renderDatePicker()}
         </div>
       </div>
