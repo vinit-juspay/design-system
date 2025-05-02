@@ -225,14 +225,14 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
                     key={`${year}-${month}-${day}`}
                     onClick={() => handleDateClick(year, month, day)}
                     className={cn(
-                      dayClasses,
+                      dayClasses, 
                       textColorClass,
-                      // Apply gray-600 text color to all dates except selected dates
+                      !isStart && !isEnd && !isRangeDay && isTodayDay ? 'text-primary-500' : 
                       !isStart && !isEnd ? 'text-gray-600' : ''
                     )}
                   >
                     {day}
-                    {isTodayDay && !isStart && !isEnd && (
+                    {isTodayDay && !isStart && !isEnd && !isRangeDay && (
                       <div className={themeConfig.euler.dateRangePicker.calendar.todayIndicator} />
                     )}
                   </div>
