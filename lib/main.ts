@@ -12,6 +12,7 @@ export { default as Alert } from './components/Alert/Alert';
 export { default as Breadcrumb } from './components/Breadcrumb/Breadcrumb';
 export { default as Dropdown } from './components/Dropdown/Dropdown';
 export { default as Checkbox } from './components/Checkbox/Checkbox';
+export { Avatar } from './components/Avatar/Avatar';
 // export { default as Chart } from './components/Charts/Charts';
 export { default as ChartsV2 } from './components/ChartsV2/ChartsV2';
 export { default as DateRangePicker } from './components/DateRangePicker/DateRangePicker';

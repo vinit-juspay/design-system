@@ -1,0 +1,252 @@
+import { useState } from 'react';
+import { Avatar } from '../../../lib/main'; // Assuming Avatar is exported from main
+import { AvatarProps } from '../../../lib/components/Avatar/Avatar'; // Import props if needed
+
+const AvatarDemo = () => {
+  const [size, setSize] = useState<AvatarProps['size']>('regular');
+  const [online, setOnline] = useState(true);
+  const [src, setSrc] = useState('https://i.pravatar.cc/150?img=3'); // Example image source
+  const [alt, setAlt] = useState('Jane Doe');
+  const [fallback, setFallback] = useState('');
+  const [useInvalidSrc, setUseInvalidSrc] = useState(false);
+  const [shape, setShape] = useState<AvatarProps['shape']>('circular');
+
+  const currentSrc = useInvalidSrc ? 'invalid-url' : src;
+
+  const sizes: Array<AvatarProps['size']> = ['sm', 'regular', 'md', 'lg', 'xl'];
+
+  return (
+    <div className="flex flex-col gap-8 p-6 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold">Avatar Component Playground</h1>
+
+      {/* Preview area */}
+      <div className="flex flex-col gap-4 items-center justify-center min-h-32 p-8 border border-gray-200 rounded-lg">
+        <Avatar
+          src={currentSrc}
+          alt={alt}
+          fallback={fallback}
+          size={size}
+          online={online}
+          shape={shape}
+        />
+        <div className="mt-4 text-sm text-gray-600">
+          Current state: size={size}, online={String(online)}, src={currentSrc || '(none)'}, alt="{alt}", fallback="{fallback || '(auto)'}", shape={shape}
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Left column */}
+        <div className="flex flex-col gap-4">
+          <div>
+            <label className="block mb-2 font-medium">Size</label>
+            <select
+              value={size}
+              onChange={e => setSize(e.target.value as AvatarProps['size'])}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              {sizes.map(s => (
+                <option key={s} value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="online"
+              checked={online}
+              onChange={e => setOnline(e.target.checked)}
+              className="w-4 h-4"
+            />
+            <label htmlFor="online" className="font-medium">
+              Show Online Indicator
+            </label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="useInvalidSrc"
+              checked={useInvalidSrc}
+              onChange={e => setUseInvalidSrc(e.target.checked)}
+              className="w-4 h-4"
+            />
+            <label htmlFor="useInvalidSrc" className="font-medium">
+              Use Invalid Image Source (for fallback test)
+            </label>
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">Shape</label>
+            <select
+              value={shape}
+              onChange={e => setShape(e.target.value as AvatarProps['shape'])}
+              className="w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="circular">Circular</option>
+              <option value="rounded">Rounded</option>
+            </select>
+          </div>
+
+        </div>
+
+        {/* Right column */}
+        <div className="flex flex-col gap-4">
+           <div>
+            <label className="block mb-2 font-medium">Image Source (URL)</label>
+            <input
+              type="text"
+              value={src}
+              onChange={e => setSrc(e.target.value)}
+              placeholder="e.g., https://..."
+              className="w-full p-2 border border-gray-300 rounded"
+              disabled={useInvalidSrc}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">Alt Text (used for initials if no src/fallback)</label>
+            <input
+              type="text"
+              value={alt}
+              onChange={e => setAlt(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 font-medium">Custom Fallback Text (overrides initials)</label>
+            <input
+              type="text"
+              value={fallback}
+              onChange={e => setFallback(e.target.value)}
+              placeholder="e.g., JD"
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+        </div>
+      </div>
+
+       {/* Static Examples */}
+       <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4">Static Examples - All Sizes</h2>
+
+        {/* With Image */}
+        <h3 className="text-lg font-medium mt-6 mb-3">With Image</h3>
+        <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s, index) => (
+             <div key={`img-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar src={`https://randomuser.me/api/portraits/women/${index}.jpg`} alt="User Image" size={s} />
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+
+        {/* With Image + Online Indicator */}
+        <h3 className="text-lg font-medium mt-6 mb-3">With Image + Online</h3>
+         <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s, index) => (
+             <div key={`img-online-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar src={`https://randomuser.me/api/portraits/men/${index}.jpg`} alt="Online User" size={s} online={true}/>
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+
+        {/* Initials Fallback (No Src) */}
+        <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (No Src)</h3>
+        <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s) => (
+             <div key={`initials-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar alt="John Smith" size={s} />
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+
+         {/* Initials Fallback (Invalid Src) */}
+        <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (Invalid Src)</h3>
+        <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s) => (
+             <div key={`initials-invalid-src-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar src="invalid-url" alt="Jane Doe" size={s} />
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+
+        {/* Custom Fallback (No Src) */}
+        <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (No Src)</h3>
+        <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s) => (
+             <div key={`custom-fallback-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar fallback="FB" size={s} />
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+
+         {/* Custom Fallback (Invalid Src) */}
+        <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (Invalid Src)</h3>
+         <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map((s) => (
+             <div key={`custom-fallback-invalid-src-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+                <Avatar src="invalid-url" fallback="CF" alt="Ignored Alt" size={s} />
+                <span className="text-xs text-gray-500">{s}</span>
+              </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --- Rounded Examples --- */}
+      <h2 className="text-xl font-semibold mt-10 mb-4">Static Examples - Rounded</h2>
+
+      {/* With Image */}
+      <h3 className="text-lg font-medium mt-6 mb-3">With Image (Rounded)</h3>
+      <div className="flex flex-wrap gap-6 items-end">
+        {sizes.map((s, index) => (
+           <div key={`img-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+              <Avatar src={`https://randomuser.me/api/portraits/women/${index+10}.jpg`} alt="Rounded User Image" size={s} shape="rounded" />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
+        ))}
+      </div>
+
+      {/* With Image + Online Indicator */}
+      <h3 className="text-lg font-medium mt-6 mb-3">With Image + Online (Rounded)</h3>
+       <div className="flex flex-wrap gap-6 items-end">
+        {sizes.map((s, index) => (
+           <div key={`img-online-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+              <Avatar src={`https://randomuser.me/api/portraits/men/${index+10}.jpg`} alt="Rounded Online User" size={s} online={true} shape="rounded"/>
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
+        ))}
+      </div>
+
+      {/* Initials Fallback (No Src) */}
+      <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (No Src, Rounded)</h3>
+      <div className="flex flex-wrap gap-6 items-end">
+        {sizes.map((s) => (
+           <div key={`initials-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+              <Avatar alt="Adam West" size={s} shape="rounded" />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
+        ))}
+      </div>
+
+      {/* Custom Fallback (No Src) */}
+      <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (No Src, Rounded)</h3>
+      <div className="flex flex-wrap gap-6 items-end">
+        {sizes.map((s) => (
+           <div key={`custom-fallback-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+              <Avatar fallback="AW" size={s} shape="rounded" />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default AvatarDemo; 
