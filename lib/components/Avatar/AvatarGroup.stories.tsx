@@ -19,26 +19,41 @@ const meta: Meta<typeof AvatarGroup> = {
   argTypes: {
     avatars: {
       control: 'object',
-      description: 'Array of avatar data objects',
+      description: 'An array of avatar data objects (`AvatarData[]`). Each object should contain at least an `id`, and optionally `src`, `alt`, and `fallback` properties, similar to the `Avatar` component.',
+      table: { 
+        type: { summary: 'AvatarData[]' } 
+      },
     },
     maxCount: {
       control: 'number',
-      description: 'Maximum number of avatars to display before showing overflow count',
+      description: 'The maximum number of avatars to display inline before collapsing the rest into an overflow count indicator. Must be at least 1.',
+      table: { 
+        defaultValue: { summary: '5' },
+        type: { summary: 'number' },
+       },
     },
     size: {
       control: 'select',
       options: ['sm', 'regular', 'md', 'lg', 'xl'],
-      description: 'Size of the avatars within the group',
+      description: 'Controls the size of the individual avatars *and* the overflow indicator within the group.',
+      table: { 
+        defaultValue: { summary: '\'regular\'' }, // Updated default
+        type: { summary: "'sm' | 'regular' | 'md' | 'lg' | 'xl'" }
+       },
     },
     className: {
       control: 'text',
-      description: 'Optional additional CSS classes',
+      description: 'Optional additional CSS classes to apply to the root `div` container of the group. Useful for adding spacing or custom styles. Example: `mt-4`',
+      table: { 
+        defaultValue: { summary: 'undefined' },
+        type: { summary: 'string' },
+       },
     },
   },
   args: { // Default args for controls
-    avatars: avatarGroupData.slice(0, 5), // Show first 5 by default
-    maxCount: 3,
-    size: 'regular',
+    avatars: avatarGroupData.slice(0, 5), // Show first 5 by default in controls
+    maxCount: 5, // Match component default
+    size: 'regular', // Match component default
   }
 };
 
@@ -51,7 +66,7 @@ export const Default: Story = {
   args: {
     avatars: avatarGroupData,
     maxCount: 5,
-    size: 'regular',
+    size: 'regular', // Align with the new component default
   },
 };
 
