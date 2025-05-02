@@ -654,7 +654,7 @@ export const themeConfig = {
       timePicker: {
         container: 'p-4 border-t border-gray-200',
         input:
-          'w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500',
+          'w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-gray-700',
       },
       text: {
         label: 'text-gray-400',
