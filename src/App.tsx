@@ -17,19 +17,21 @@ import {
   Bell,
   Menu,
   BarChart2,
+  Smartphone,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
+import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2'
-  >('chartsV2');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'popovers'
+  >('buttons');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -59,6 +61,16 @@ const App = () => {
               >
                 <Info className="mr-2 h-5 w-5" />
                 Tooltips
+              </button>
+              <button
+                onClick={() => setActiveComponent('popovers')}
+                className={`${activeComponent === 'popovers'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Smartphone className="mr-2 h-5 w-5" />
+                Popovers
               </button>
               <button
                 onClick={() => setActiveComponent('tags')}
@@ -144,6 +156,16 @@ const App = () => {
             Tooltips
           </button>
           <button
+            onClick={() => setActiveComponent('popovers')}
+            className={`${activeComponent === 'popovers'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Smartphone className="mr-3 h-5 w-5" />
+            Popovers
+          </button>
+          <button
             onClick={() => setActiveComponent('tags')}
             className={`${activeComponent === 'tags'
               ? 'bg-blue-50 border-blue-500 text-blue-700'
@@ -182,6 +204,16 @@ const App = () => {
           >
             <BarChart2 className="mr-3 h-5 w-5" />
             Charts
+          </button>
+          <button
+            onClick={() => setActiveComponent('chartsV2')}
+            className={`${activeComponent === 'chartsV2'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <BarChart2 className="mr-3 h-5 w-5" />
+            Charts V2
           </button>
         </div>
       </div>
@@ -546,6 +578,8 @@ const App = () => {
 
   const renderAlerts = () => <AlertDemo />;
 
+  const renderPopovers = () => <PopoverDemo />;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -556,6 +590,7 @@ const App = () => {
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
           {activeComponent === 'alerts' && renderAlerts()}
+          {activeComponent === 'popovers' && renderPopovers()}
           {activeComponent === 'charts' && <ChartDemo />}
           {activeComponent === 'chartsV2' && <ChartDemo2 />}
         </div>
