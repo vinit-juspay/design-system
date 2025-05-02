@@ -13,7 +13,6 @@ import {
 } from './themeUtils';
 import { ChartLegendsPropsV2 } from './types';
 
-
 const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   keys,
   // activeKeys,
@@ -24,7 +23,7 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
   // onReset,
   // handleLegendEnter,
   // handleLegendLeave,
-  // hoveredKey, 
+  // hoveredKey,
 }) => {
   // const legendColors = useMemo(() => keys.map((_, i) => colors[i % colors.length]), [keys, colors]);
 
@@ -90,21 +89,21 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
           <div
             key={dataKey}
             className={getChartLegendItem()}
-          // onClick={() => handleLegendClick(dataKey)}
-          // onMouseEnter={() => handleLegendEnter(dataKey)}
-          // onMouseLeave={() => handleLegendLeave()}
+            // onClick={() => handleLegendClick(dataKey)}
+            // onMouseEnter={() => handleLegendEnter(dataKey)}
+            // onMouseLeave={() => handleLegendLeave()}
           >
             <div
               className={getChartLegendMarker()}
               style={{
                 backgroundColor: colors[index],
-                opacity: 1
+                opacity: 1,
               }}
             />
             <span
               className="text-[14px] font-medium"
               style={{
-                color: '#333'
+                color: '#333',
               }}
             >
               {capitaliseCamelCase(dataKey)}
@@ -121,10 +120,10 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
                 <DropdownMenu.Item
                   key={dataKey}
                   className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
-                // onClick={() => handleLegendClick(dataKey)}
-                // // onMouseOver={() => setHoveredKey(dataKey)}
-                // onMouseEnter={() => handleLegendEnter(dataKey)}
-                // onMouseLeave={handleLegendLeave}
+                  // onClick={() => handleLegendClick(dataKey)}
+                  // // onMouseOver={() => setHoveredKey(dataKey)}
+                  // onMouseEnter={() => handleLegendEnter(dataKey)}
+                  // onMouseLeave={handleLegendLeave}
                 >
                   {capitaliseCamelCase(dataKey)}
                 </DropdownMenu.Item>
@@ -134,7 +133,7 @@ const ChartLegendsComponentV2: React.FC<ChartLegendsPropsV2> = ({
         )}
       </div>
       {/* {activeKeys && activeKeys.length > 0 && activeKeys.length !== keys.length && ( */}
-      <button className={getChartLegendResetButton()} >
+      <button className={getChartLegendResetButton()}>
         <RotateCcw className="w-3 h-3" />
       </button>
       {/* )} */}

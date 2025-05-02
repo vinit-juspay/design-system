@@ -56,14 +56,18 @@ const ChartDemo2 = () => {
         },
         traffic: {
           primary: { label: 'Website Traffic', val: 17000 },
-          aux: [{ label: 'Change', val: '+30%' }]
-        }
-      }
+          aux: [{ label: 'Change', val: '+30%' }],
+        },
+      },
     },
   ];
   return (
     <div>
-      <ChartsV2 data={sampleNestedData} chartType={ChartTypeV2.LINE} chartHeaderSlot={<div>Hello</div>} />
+      <ChartsV2
+        data={sampleNestedData}
+        chartType={ChartTypeV2.LINE}
+        chartHeaderSlot={<div>Hello</div>}
+      />
     </div>
   );
 };

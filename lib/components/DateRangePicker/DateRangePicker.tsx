@@ -1,16 +1,6 @@
-import React, {
-  forwardRef,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from 'react';
+import React, { forwardRef, useState, useEffect, useRef, useCallback } from 'react';
 import { Calendar, ChevronDown, ChevronUp } from 'lucide-react';
-import {
-  DateRangePickerProps,
-  DateRangePreset,
-  DateRange,
-} from './types';
+import { DateRangePickerProps, DateRangePreset, DateRange } from './types';
 import {
   formatDate,
   getPresetDateRange,
@@ -35,7 +25,6 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       onChange,
       showTimePicker = false,
       showPresets = true,
-      placeholder = 'Select date range',
       isDisabled = false,
       className,
       dateFormat = 'dd/MM/yyyy',
@@ -124,17 +113,37 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
 
     // Format the date display for the input
     const formatDateDisplay = () => {
-      if (!selectedRange.startDate) return placeholder;
-
-      const formattedStartDate = formatDate(selectedRange.startDate, dateFormat);
-      
-      if (allowSingleDateSelection && 
-          selectedRange.startDate.getTime() === selectedRange.endDate.getTime()) {
-        return formattedStartDate;
+      if (!selectedRange.startDate) {
+        return 'Select date range';
       }
-      
-      const formattedEndDate = formatDate(selectedRange.endDate, dateFormat);
-      return `${formattedStartDate} - ${formattedEndDate}`;
+
+      const formatOptions: Intl.DateTimeFormatOptions = {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      };
+
+      const timeFormatOptions: Intl.DateTimeFormatOptions = {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      };
+
+      const startDateStr = selectedRange.startDate.toLocaleDateString('en-US', formatOptions);
+      const startTimeStr = selectedRange.startDate.toLocaleTimeString('en-US', timeFormatOptions);
+
+      if (
+        !selectedRange.endDate ||
+        (allowSingleDateSelection &&
+          selectedRange.startDate.getTime() === selectedRange.endDate.getTime())
+      ) {
+        return `${startDateStr}, ${startTimeStr}`;
+      }
+
+      const endDateStr = selectedRange.endDate.toLocaleDateString('en-US', formatOptions);
+      const endTimeStr = selectedRange.endDate.toLocaleTimeString('en-US', timeFormatOptions);
+
+      return `${startDateStr}, ${startTimeStr} - ${endDateStr}, ${endTimeStr}`;
     };
 
     // Handle date selection from calendar
@@ -163,16 +172,16 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const handlePresetRangeCallback = useCallback(
       (preset: DateRangePreset) => {
         const range = getPresetDateRange(preset);
-        
+
         // Preserve time when selecting presets
         if (showTimePickerState) {
           const [startHour, startMinute] = startTime.split(':').map(Number);
           range.startDate.setHours(startHour, startMinute);
-          
+
           const [endHour, endMinute] = endTime.split(':').map(Number);
           range.endDate.setHours(endHour, endMinute);
         }
-        
+
         setSelectedRange(range);
         setStartDate(formatDate(range.startDate, dateFormat));
         setEndDate(formatDate(range.endDate, dateFormat));
@@ -186,13 +195,13 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const newDate = e.target.value;
         setStartDate(newDate);
-        
-          const parsedDate = parseDate(newDate );
+
+        const parsedDate = parseDate(newDate);
         if (isValidDate(parsedDate) && parsedDate !== null) {
           // Preserve time
           const [hours, minutes] = startTime.split(':').map(Number);
           parsedDate.setHours(hours, minutes);
-          
+
           const newRange = { ...selectedRange, startDate: parsedDate };
           setSelectedRange(newRange);
           setActivePreset(DateRangePreset.CUSTOM);
@@ -206,13 +215,13 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       (e: React.ChangeEvent<HTMLInputElement>) => {
         const newDate = e.target.value;
         setEndDate(newDate);
-        
+
         const parsedDate = parseDate(newDate);
         if (isValidDate(parsedDate) && parsedDate !== null) {
           // Preserve time
           const [hours, minutes] = endTime.split(':').map(Number);
           parsedDate.setHours(hours, minutes);
-          
+
           const newRange = { ...selectedRange, endDate: parsedDate };
           setSelectedRange(newRange);
           setActivePreset(DateRangePreset.CUSTOM);
@@ -225,12 +234,12 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const handleStartTimeChangeCallback = useCallback(
       (newTime: string) => {
         setStartTime(newTime);
-        
+
         if (selectedRange.startDate) {
           const [hours, minutes] = newTime.split(':').map(Number);
           const newDate = new Date(selectedRange.startDate);
           newDate.setHours(hours, minutes);
-          
+
           const newRange = { ...selectedRange, startDate: newDate };
           setSelectedRange(newRange);
           setActivePreset(DateRangePreset.CUSTOM);
@@ -243,12 +252,12 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const handleEndTimeChangeCallback = useCallback(
       (newTime: string) => {
         setEndTime(newTime);
-        
+
         if (selectedRange.endDate) {
           const [hours, minutes] = newTime.split(':').map(Number);
           const newDate = new Date(selectedRange.endDate);
           newDate.setHours(hours, minutes);
-          
+
           const newRange = { ...selectedRange, endDate: newDate };
           setSelectedRange(newRange);
           setActivePreset(DateRangePreset.CUSTOM);
@@ -284,7 +293,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
     const renderTrigger = () => {
       if (triggerElement) {
         return (
-          <div 
+          <div
             ref={triggerRef}
             onClick={() => !isDisabled && setIsOpen(!isOpen)}
             className={isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
@@ -313,9 +322,11 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           role="button"
           tabIndex={isDisabled ? -1 : 0}
         >
-          <div className="text-gray-600 font-medium text-md flex-1 flex items-center justify-end">
-            <Calendar className="w-5 h-5 mr-2" />
-            <span>{formatDateDisplay()}</span>
+          <div className="text-gray-600 font-medium text-md flex-1 flex items-center justify-between">
+            <div className="flex items-center">
+              <Calendar className="w-5 h-5 mr-2" />
+              <span>{formatDateDisplay()}</span>
+            </div>
             {isOpen ? (
               <ChevronUp className="w-5 h-5 ml-2" />
             ) : (
@@ -330,10 +341,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
       <div className={cn('relative w-full', className)} ref={ref}>
         <div className="flex flex-col sm:flex-row">
           {showPresets && (
-            <div
-              className="relative w-full sm:w-32 mb-2 sm:mb-0 h-10"
-              ref={quickRangeRef}
-            >
+            <div className="relative w-full sm:w-32 mb-2 sm:mb-0 h-10" ref={quickRangeRef}>
               <QuickRangeSelector
                 isOpen={isQuickRangeOpen}
                 onToggle={() => !isDisabled && setIsQuickRangeOpen(!isQuickRangeOpen)}
@@ -346,20 +354,14 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             </div>
           )}
 
-          <div
-            className={cn('relative sm:min-w-96')}
-            ref={calendarRef}
-          >
+          <div className={cn('relative sm:min-w-96')} ref={calendarRef}>
             {renderTrigger()}
 
             {isOpen && (
-              <div
-                ref={dropdownRef}
-                className={cn(calendarClassNames)}
-              >
+              <div ref={dropdownRef} className={cn(calendarClassNames)}>
                 <div className="p-4">
-                  <div className="space-y-4">
-                    <div className="flex items-center">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
                       <div className="w-24 text-gray-500">Start</div>
                       <input
                         type="text"
@@ -378,7 +380,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                         selectedRange.startDate &&
                         selectedRange.endDate &&
                         selectedRange.startDate.getTime() !== selectedRange.endDate.getTime())) && (
-                      <div className="flex items-center">
+                      <div className="flex items-center gap-2">
                         <div className="w-24 text-gray-500">End</div>
                         <input
                           type="text"

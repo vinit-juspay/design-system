@@ -596,7 +596,7 @@ const App = () => {
   const renderDatePicker = () => (
     <>
       <h2 className="text-2xl font-semibold">Date Range Picker</h2>
-      
+
       <div className="mt-6 space-y-8">
         <div>
           <h3 className="text-lg font-medium mb-2">Default DateRangePicker</h3>
@@ -608,7 +608,7 @@ const App = () => {
             showPresets={true}
           />
         </div>
-        
+
         <div>
           <h3 className="text-lg font-medium mb-2">Secondary Variant</h3>
           <DateRangePicker
@@ -619,7 +619,7 @@ const App = () => {
             showPresets={true}
           />
         </div>
-        
+
         <div>
           <h3 className="text-lg font-medium mb-2">With Custom Trigger Button</h3>
           <DateRangePicker
@@ -627,14 +627,10 @@ const App = () => {
             onChange={handleDateRangeChange}
             showTimePicker={true}
             showPresets={false}
-            triggerElement={
-              <Button buttonType={ButtonType.SECONDARY}>
-                Select Date Range
-              </Button>
-            }
+            triggerElement={<Button buttonType={ButtonType.SECONDARY}>Select Date Range</Button>}
           />
         </div>
-        
+
         <div>
           <h3 className="text-lg font-medium mb-2">Disable Future Dates</h3>
           <DateRangePicker
@@ -645,7 +641,7 @@ const App = () => {
             disableFutureDates={true}
           />
         </div>
-        
+
         <div>
           <h3 className="text-lg font-medium mb-2">Disable Past Dates</h3>
           <DateRangePicker
@@ -656,7 +652,7 @@ const App = () => {
             disablePastDates={true}
           />
         </div>
-        
+
         <div>
           <h3 className="text-lg font-medium mb-2">Allow Single Date Selection</h3>
           <DateRangePicker

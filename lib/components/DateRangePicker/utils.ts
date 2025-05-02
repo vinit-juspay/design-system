@@ -1,56 +1,85 @@
 import { cn } from '../../utils';
-import {
-  DateRange,
-  DateRangePickerVariant,
-  DateRangePreset,
-} from './types';
+import { DateRange, DateRangePickerVariant, DateRangePreset } from './types';
 import { themeConfig } from '../../themeConfig';
 
-export const getDateRangePickerClassNames = (
-  isDisabled: boolean
-): string => {
+interface CalendarDayClassNamesProps {
+  isStart: boolean;
+  isEnd: boolean;
+  isRangeDay: boolean;
+  isTodayDay: boolean;
+  isSingleDate: boolean;
+  isDisabled: boolean;
+}
+
+export const getCalendarDayClassNames = ({
+  isStart,
+  isEnd,
+  isRangeDay,
+  isTodayDay,
+  isSingleDate,
+  isDisabled,
+}: CalendarDayClassNamesProps): { dayClasses: string; textColorClass: string } => {
+  const theme = themeConfig.euler.dateRangePicker;
+
+  let dayClasses = theme.calendar.dayCell;
+  let textColorClass = 'text-gray-600';
+
+  if (isSingleDate) {
+    dayClasses = cn(dayClasses, theme.calendar.singleDate);
+    textColorClass = theme.text.selectedDay;
+  } else if (isStart) {
+    dayClasses = cn(dayClasses, theme.calendar.startDate);
+    textColorClass = theme.text.selectedDay;
+  } else if (isEnd) {
+    dayClasses = cn(dayClasses, theme.calendar.endDate);
+    textColorClass = theme.text.selectedDay;
+  } else if (isRangeDay) {
+    dayClasses = cn(dayClasses, theme.calendar.rangeDay);
+  }
+
+  if (isTodayDay && !isStart && !isEnd) {
+    dayClasses = cn(dayClasses, theme.calendar.todayDay);
+  }
+
+  dayClasses = cn(dayClasses, theme.calendar.hoverState);
+
+  if (isDisabled) {
+    dayClasses = cn(dayClasses, theme.states.disabledDay);
+  }
+
+  return { dayClasses, textColorClass };
+};
+
+export const getDateRangePickerClassNames = (isDisabled: boolean): string => {
+  const theme = themeConfig.euler.dateRangePicker;
+
+  return cn(theme.base.container, isDisabled && theme.states.disabled);
+};
+
+export const getInputClassNames = (variant: DateRangePickerVariant): string => {
   const theme = themeConfig.euler.dateRangePicker;
 
   return cn(
-    theme.base.container,
-    isDisabled && theme.states.disabled
+    theme.base.input,
+    variant === DateRangePickerVariant.PRIMARY ? theme.input.primary : theme.input.secondary
   );
 };
 
-export const getInputClassNames = (
-  variant: DateRangePickerVariant,
-): string => {
-  const baseStyles =
-    'flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer';
-  const variantStyles =
-    variant === DateRangePickerVariant.PRIMARY ? 'border-gray-300' : 'border-gray-200 bg-gray-50';
-  return cn(baseStyles, variantStyles);
-};
-
 export const getCalendarClassNames = (): string => {
-  return 'absolute z-10 mt-1 w-auto min-w-[320px] bg-white border border-gray-200 rounded-md shadow-lg';
+  return themeConfig.euler.dateRangePicker.calendar.container;
 };
 
 export const getPresetButtonClassNames = (isActive: boolean): string => {
-  const baseStyles =
-    'px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500';
-  const activeStyles = isActive ? 'bg-primary-50 border-primary-500 text-primary-700' : '';
-
-  return cn(baseStyles, activeStyles);
+  const theme = themeConfig.euler.dateRangePicker.presets;
+  return cn(theme.button, isActive && theme.activeButton);
 };
 
 export const getTimePickerClassNames = (): string => {
-  return 'p-4 border-t border-gray-200';
+  return themeConfig.euler.dateRangePicker.timePicker.container;
 };
 
 export const getTimeInputClassNames = (): string => {
-  return 'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500';
-};
-
-export const getActionButtonClassNames = (isPrimary: boolean): string => {
-  return isPrimary
-    ? 'px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2'
-    : 'px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2';
+  return themeConfig.euler.dateRangePicker.timePicker.input;
 };
 
 export const getCalendarGridClassNames = (
@@ -146,18 +175,18 @@ export const formatDateRange = (range: DateRange, showTime: boolean = false): st
  */
 export const parseDate = (dateStr: string): Date | null => {
   if (!dateStr) return null;
-  
+
   try {
     // For now, we'll just support dd/MM/yyyy format regardless of the format parameter
     const parts = dateStr.split('/');
     if (parts.length !== 3) return null;
-    
+
     const day = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10) - 1;
     const year = parseInt(parts[2], 10);
-    
+
     if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
-    
+
     const date = new Date(year, month, day);
     return isValidDate(date) ? date : null;
   } catch (e) {
@@ -402,14 +431,18 @@ export const handleEndTimeChange = (
  * @returns The date range for the preset
  */
 export const getPresetDateRange = (preset: DateRangePreset): DateRange => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let startDate = new Date(today);
+  let endDate = new Date();
+  endDate.setHours(23, 59, 59, 999);
+
   const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  let startDate: Date;
-  let endDate: Date = new Date(now);
 
   switch (preset) {
     case DateRangePreset.LAST_1_HOUR:
-      startDate = new Date(now.getTime() - 60 * 60 * 1000);
+      startDate = new Date(now.getTime() - 1 * 60 * 60 * 1000);
       break;
     case DateRangePreset.LAST_6_HOURS:
       startDate = new Date(now.getTime() - 6 * 60 * 60 * 1000);
@@ -447,6 +480,8 @@ export const getPresetLabel = (preset: DateRangePreset): string => {
   switch (preset) {
     case DateRangePreset.LAST_1_HOUR:
       return 'Last 1 hour';
+    case DateRangePreset.LAST_6_HOURS:
+      return 'Last 6 hours';
     case DateRangePreset.TODAY:
       return 'Today';
     case DateRangePreset.YESTERDAY:

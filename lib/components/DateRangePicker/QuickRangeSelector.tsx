@@ -17,16 +17,19 @@ interface QuickRangeSelectorProps {
 }
 
 const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
-  ({ 
-    isOpen, 
-    onToggle, 
-    activePreset, 
-    onPresetSelect, 
-    excludeCustom = false, 
-    className,
-    disableFutureDates = false,
-    disablePastDates = false
-  }, ref) => {
+  (
+    {
+      isOpen,
+      onToggle,
+      activePreset,
+      onPresetSelect,
+      excludeCustom = false,
+      className,
+      disableFutureDates = false,
+      disablePastDates = false,
+    },
+    ref
+  ) => {
     const activePresetLabel = getPresetLabel(activePreset);
 
     const getFilteredPresets = () => {
@@ -36,23 +39,23 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
         DateRangePreset.LAST_6_HOURS,
         DateRangePreset.LAST_7_DAYS,
       ];
-      
+
       const futurePresets: DateRangePreset[] = [];
-      
+
       let availablePresets = Object.values(DateRangePreset);
-      
+
       if (disablePastDates) {
         availablePresets = availablePresets.filter(preset => !pastPresets.includes(preset));
       }
-      
+
       if (disableFutureDates) {
         availablePresets = availablePresets.filter(preset => !futurePresets.includes(preset));
       }
-      
+
       if (excludeCustom) {
         availablePresets = availablePresets.filter(preset => preset !== DateRangePreset.CUSTOM);
       }
-      
+
       return availablePresets;
     };
 
@@ -69,10 +72,8 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
           aria-expanded={isOpen}
           aria-haspopup="listbox"
         >
-          <div className="flex items-center justify-between w-full">
-            <span className={cn(
-              themeConfig.euler.dateRangePicker.text.value
-            )}>
+          <div className="flex items-center justify-between w-full text-md text-gray-600">
+            <span className={cn(themeConfig.euler.dateRangePicker.text.value)}>
               {activePresetLabel}
             </span>
             {isOpen ? (
