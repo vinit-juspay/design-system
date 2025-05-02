@@ -41,4 +41,3 @@ export const capitaliseCamelCase = (text: string): string => {
     })
     .join(' ');
 };
-

@@ -18,9 +18,11 @@ import {
   Menu,
   BarChart2,
   Type,
+  Calendar as CalendarIcon,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
+import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
@@ -30,8 +32,18 @@ import FontDemo from './Demos/FontDemo/FontDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts'
-  >('chartsV2');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker'
+  >('datePicker');
+
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
+
+  const handleDateRangeChange = (newRange: any) => {
+    console.log('Selected Date Range:', newRange);
+    setSelectedDateRange(newRange);
+  };
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
@@ -44,70 +56,77 @@ const App = () => {
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <button
                 onClick={() => setActiveComponent('buttons')}
-                className={`${activeComponent === 'buttons'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'buttons'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Layers className="mr-2 h-5 w-5" />
                 Buttons
               </button>
               <button
                 onClick={() => setActiveComponent('tooltips')}
-                className={`${activeComponent === 'tooltips'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'tooltips'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Info className="mr-2 h-5 w-5" />
                 Tooltips
               </button>
               <button
                 onClick={() => setActiveComponent('tags')}
-                className={`${activeComponent === 'tags'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'tags'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <TagIcon className="mr-2 h-5 w-5" />
                 Tags
               </button>
               <button
                 onClick={() => setActiveComponent('tabs')}
-                className={`${activeComponent === 'tabs'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'tabs'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Tabs
               </button>
               <button
                 onClick={() => setActiveComponent('alerts')}
-                className={`${activeComponent === 'alerts'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'alerts'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Bell className="mr-2 h-5 w-5" />
                 Alerts
               </button>
               <button
                 onClick={() => setActiveComponent('charts')}
-                className={`${activeComponent === 'charts'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'charts'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <BarChart2 className="mr-2 h-5 w-5" />
                 Charts
               </button>
               <button
                 onClick={() => setActiveComponent('chartsV2')}
-                className={`${activeComponent === 'chartsV2'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${
+                  activeComponent === 'chartsV2'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <BarChart2 className="mr-2 h-5 w-5" />
                 Charts V2
@@ -121,6 +140,17 @@ const App = () => {
               >
                 <Type className="mr-2 h-5 w-5" />
                 Fonts
+              </button>
+              <button
+                onClick={() => setActiveComponent('datePicker')}
+                className={`${
+                  activeComponent === 'datePicker'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <CalendarIcon className="mr-2 h-5 w-5" />
+                Date Picker
               </button>
             </div>
           </div>
@@ -137,60 +167,66 @@ const App = () => {
         <div className="pt-2 pb-3 space-y-1">
           <button
             onClick={() => setActiveComponent('buttons')}
-            className={`${activeComponent === 'buttons'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'buttons'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Layers className="mr-3 h-5 w-5" />
             Buttons
           </button>
           <button
             onClick={() => setActiveComponent('tooltips')}
-            className={`${activeComponent === 'tooltips'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'tooltips'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
             Tooltips
           </button>
           <button
             onClick={() => setActiveComponent('tags')}
-            className={`${activeComponent === 'tags'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'tags'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <TagIcon className="mr-3 h-5 w-5" />
             Tags
           </button>
           <button
             onClick={() => setActiveComponent('tabs')}
-            className={`${activeComponent === 'tabs'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'tabs'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Settings className="mr-3 h-5 w-5" />
             Tabs
           </button>
           <button
             onClick={() => setActiveComponent('alerts')}
-            className={`${activeComponent === 'alerts'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'alerts'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Bell className="mr-3 h-5 w-5" />
             Alerts
           </button>
           <button
             onClick={() => setActiveComponent('charts')}
-            className={`${activeComponent === 'charts'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${
+              activeComponent === 'charts'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <BarChart2 className="mr-3 h-5 w-5" />
             Charts
@@ -214,6 +250,17 @@ const App = () => {
           >
             <Type className="mr-3 h-5 w-5" />
             Fonts
+          </button>
+          <button
+            onClick={() => setActiveComponent('datePicker')}
+            className={`${
+              activeComponent === 'datePicker'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <CalendarIcon className="mr-3 h-5 w-5" />
+            Date Picker
           </button>
         </div>
       </div>
@@ -577,6 +624,80 @@ const App = () => {
 
   const renderAlerts = () => <AlertDemo />;
 
+  const renderDatePicker = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Date Range Picker</h2>
+
+      <div className="mt-6 space-y-8">
+        <div>
+          <h3 className="text-lg font-medium mb-2">Default DateRangePicker</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            placeholder="Select a date range"
+            showTimePicker={true}
+            showPresets={true}
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Secondary Variant</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            variant={DateRangePickerVariant.SECONDARY}
+            showTimePicker={false}
+            showPresets={true}
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">With Custom Trigger Button</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            showTimePicker={true}
+            showPresets={false}
+            triggerElement={<Button buttonType={ButtonType.SECONDARY}>Select Date Range</Button>}
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Disable Future Dates</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            showTimePicker={true}
+            showPresets={true}
+            disableFutureDates={true}
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Disable Past Dates</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            showTimePicker={true}
+            showPresets={true}
+            disablePastDates={true}
+          />
+        </div>
+
+        <div>
+          <h3 className="text-lg font-medium mb-2">Allow Single Date Selection</h3>
+          <DateRangePicker
+            value={selectedDateRange}
+            onChange={handleDateRangeChange}
+            showTimePicker={true}
+            showPresets={true}
+            allowSingleDateSelection={true}
+          />
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {renderNavbar()}
@@ -590,6 +711,7 @@ const App = () => {
           {activeComponent === 'charts' && <ChartDemo />}
           {activeComponent === 'chartsV2' && <ChartDemo2 />}
           {activeComponent === 'fonts' && <FontDemo />}
+          {activeComponent === 'datePicker' && renderDatePicker()}
         </div>
       </div>
     </div>

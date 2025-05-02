@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 type DataPoint = {
   primary: {
@@ -17,8 +17,6 @@ export type NewNestedDataPoint = {
     [key: string]: DataPoint;
   };
 };
-
-
 
 export interface ChartsV2Props {
   chartType?: ChartTypeV2;
@@ -45,16 +43,12 @@ export enum ChartLegendPositionV2 {
   RIGHT = 'right',
 }
 
-
-
 export type ChartHeaderPropsV2 = {
   slot1: React.ReactNode;
   slot2: React.ReactNode;
   slot3: React.ReactNode;
   chartHeaderSlot: ReactNode;
 };
-
-
 
 export type ChartLegendsPropsV2 = {
   chartContainerRef: React.RefObject<HTMLDivElement>;
