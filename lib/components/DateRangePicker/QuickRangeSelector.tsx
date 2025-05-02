@@ -72,7 +72,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
           aria-expanded={isOpen}
           aria-haspopup="listbox"
         >
-          <div className="flex items-center justify-between w-full text-md text-gray-600">
+          <div className="flex items-center justify-between w-full text-gray-600">
             <span className={cn(themeConfig.euler.dateRangePicker.text.value)}>
               {activePresetLabel}
             </span>
@@ -99,7 +99,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
                   key={preset}
                   onClick={() => {
                     onPresetSelect(preset);
-                    onToggle(); // Close the dropdown after selection
+                    onToggle();
                   }}
                   className={cn(
                     'w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150',

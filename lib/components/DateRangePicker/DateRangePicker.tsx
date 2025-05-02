@@ -322,7 +322,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           role="button"
           tabIndex={isDisabled ? -1 : 0}
         >
-          <div className="text-gray-600 font-medium text-md flex-1 flex items-center justify-between">
+          <div className="text-gray-600 font-sm font-medium flex-1 flex items-center justify-between">
             <div className="flex items-center">
               <Calendar className="w-5 h-5 mr-2" />
               <span>{formatDateDisplay()}</span>

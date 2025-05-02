@@ -658,7 +658,7 @@ export const themeConfig = {
       },
       text: {
         label: 'text-gray-400',
-        value: 'text-gray-600 font-medium',
+        value: 'text-gray-600 font-medium text-sm w-full',
         dayName: 'text-gray-400',
         dayNumber: 'text-gray-600',
         selectedDay: 'text-gray-0',
