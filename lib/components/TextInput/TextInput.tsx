@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Tooltip } from "../../main";
 import { TooltipSize } from '../Tooltip/types';
@@ -42,18 +42,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
     initialState: state,
   });
 
-  // Create internal ref for reliable focusing
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // Connect the forwarded ref with our internal ref
-  useEffect(() => {
-    if (typeof ref === 'function') {
-      ref(inputRef.current);
-    } else if (ref) {
-      ref.current = inputRef.current;
-    }
-  }, [ref]);
-
   // Composite handlers
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     inputState.handleFocus();
@@ -63,7 +51,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     inputState.handleBlur();
     onBlur?.(e);
-  };
+  };  
 
   return (
     <div className="flex flex-col space-y-2">
@@ -93,7 +81,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
       {/* Input Base */}
       <div 
         className={getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)}
-        onClick={() => inputRef.current?.focus()}
       >
         {/* Left Slot */}
         {leftSlot && (
@@ -104,7 +91,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
 
         {/* Input */}
         <input
-          ref={inputRef}
+          ref={ref}
           type="text"
           className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
           placeholder={placeholder}
