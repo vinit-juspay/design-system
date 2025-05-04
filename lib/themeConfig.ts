@@ -192,7 +192,10 @@ export const themeConfig = {
       },
     },
     input: {
+      container: 'flex flex-col space-y-2',
       label: {
+        container: 'flex items-center gap-2',
+        labelwSublabel: 'flex items-center gap-1',
         base: 'text-body-md font-medium tracking-normal',
         color: 'text-gray-700',
         mandatory: 'text-red-500 text-body-md font-normal -top-0.5',
@@ -208,14 +211,10 @@ export const themeConfig = {
         success: 'text-green-600',
       },
       inputBase: {
-        base: 'w-full flex flex-row justify-between items-center relative border-[1px] transition-all rounded-xl',
+        base: 'w-full overflow-hidden flex flex-row justify-between items-center relative border-[1px] transition-all rounded-xl',
         sizes: {
           md: 'h-9',
           lg: 'h-10',
-        },
-        slots: {
-          left: '',
-          right: '',
         },
         states: {
           default: 'border-gray-300 bg-white',
@@ -226,13 +225,7 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
-        padding: {
-          default: 'px-3',
-          withLeftSlot: 'pl-9 pr-3',
-          withRightSlot: 'pl-3 pr-9',
-          withBothSlots: 'pl-9 pr-9',
-        },
+        base: 'w-full h-full px-2 text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
         states: {
           default: ' text-gray-800 placeholder:text-gray-400',
           disabled: 'text-gray-400 placeholder:text-gray-300',
@@ -241,8 +234,8 @@ export const themeConfig = {
       slot: {
         base: '',
         positions: {
-          left: 'absolute left-3',
-          right: 'absolute right-3',
+          left: 'pl-3',
+          right: 'pr-3',
         },
       },
     },

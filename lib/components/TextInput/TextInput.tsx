@@ -54,11 +54,11 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   };  
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className={inputTheme.container}>
       {/* Label */}
       {label && (
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+        <div className={inputTheme.label.container}>
+          <div className={inputTheme.label.labelwSublabel}>
             <label className={getLabelClasses()}>
               {label} {mandatory && (
               <sup className={inputTheme.label.mandatory}>*</sup>
@@ -80,7 +80,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
 
       {/* Input Base */}
       <div 
-        className={getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)}
+        className={getInputBaseClasses(size, inputState.visualState)}
       >
         {/* Left Slot */}
         {leftSlot && (
@@ -93,7 +93,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         <input
           ref={ref}
           type="text"
-          className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
+          className={getInputClasses(inputState.visualState)}
           placeholder={placeholder}
           disabled={state === TextInputState.DISABLED}
           defaultValue={value}
