@@ -18,3 +18,4 @@ export { default as DateRangePicker } from './components/DateRangePicker/DateRan
 export { default as Switch } from './components/Switch/Switch';
 export { default as SwitchGroup } from './components/Switch/SwitchGroup';
 export { Radio, RadioGroup } from './components/Radio';
+export { default as ButtonGroup } from './components/ButtonGroup/ButtonGroup';
