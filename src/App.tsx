@@ -565,12 +565,7 @@ const App = () => {
 
 
       <div className="flex flex-col gap-12 mt-12">
-        <TextInput label="Search" size={TextInputSize.MEDIUM} mandatory/>
-        <TextInput label="Search" size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
-        <TextInput label="Search" state={TextInputState.ERROR} size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} />
-        <TextInput label="Search" state={TextInputState.FILLED} value="test@test.com" size={TextInputSize.LARGE} rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
-        <TextInput label="Search" size={TextInputSize.MEDIUM} mandatory/>
-        <TextInput label="Search" size={TextInputSize.LARGE} state={TextInputState.FILLED} value="test@test.com" rightSlot={<ArrowRight className="text-gray-400 w-4 h-4" />} infoTooltip="Additional information about this field"/>
+        <TextInput label='Search everywhere' infoTooltip='Additional Info'/>
       </div>
     </>
   );

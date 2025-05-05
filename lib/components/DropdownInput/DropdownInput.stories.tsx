@@ -1,211 +1,208 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Phone, Calendar, DollarSign } from 'lucide-react';
-
+import { Meta, StoryObj } from '@storybook/react';
+import { User, Mail, Phone, Lock, Search } from 'lucide-react';
 import DropdownInput from './DropdownInput';
 import { DropdownInputSize, DropdownInputState, DropdownPosition } from './types';
 
 const meta: Meta<typeof DropdownInput> = {
   title: 'Components/DropdownInput',
   component: DropdownInput,
+  tags: ['autodocs'],
+  args: {
+    label: 'Label',
+    sublabel: '(optional)',
+    placeholder: 'Select or enter text',
+    hintText: 'This is a hint text to help user',
+    options: [
+      { label: 'Option 1', value: 'option1' },
+      { label: 'Option 2', value: 'option2' },
+      { label: 'Option 3', value: 'option3' }
+    ],
+    dropdownPlaceholder: 'Select',
+    showSelectedOptionInInput: true,
+    mandatory: false
+  },
   argTypes: {
     size: {
       control: 'select',
       options: Object.values(DropdownInputSize),
+      description: 'Size of the input component'
     },
     state: {
       control: 'select',
       options: Object.values(DropdownInputState),
+      description: 'Visual state of the input component'
     },
     dropdownPosition: {
       control: 'select',
       options: Object.values(DropdownPosition),
+      description: 'Position of the dropdown (left or right)'
     },
     leftSlot: {
-      control: { type: 'boolean' },
+      control: false,
+      description: 'Optional element to display on the left side of the input'
     },
     rightSlot: {
-      control: { type: 'boolean' },
+      control: false,
+      description: 'Optional element to display on the right side of the input'
     },
-    mandatory: {
-      control: 'boolean',
+    options: {
+      control: 'object',
+      description: 'Array of options for the dropdown'
     },
-    showSelectedOptionInInput: {
-      control: 'boolean',
-    },
-    dropdownWidth: {
-      control: 'text',
-    },
-  },
-  parameters: {
-    layout: 'centered',
-  },
+    onChange: { action: 'changed' },
+    onOptionSelect: { action: 'option selected' }
+  }
 };
 
 export default meta;
 type Story = StoryObj<typeof DropdownInput>;
 
-// Example options for countries with flags/icons
-const countryOptions = [
-  { 
-    label: '+1', 
-    value: 'us',
-  },
-  { 
-    label: '+1', 
-    value: 'ca',
-  },
-  { 
-    label: '+44', 
-    value: 'uk',
-  },
-  { 
-    label: '+61', 
-    value: 'au',
-  },
-  { 
-    label: '+49', 
-    value: 'de',
-  },
-  { 
-    label: '+33', 
-    value: 'fr',
-  },
-  { 
-    label: '+81', 
-    value: 'jp',
-  },
-];
-
-// Currency options for financial inputs
-const currencyOptions = [
-  { label: 'USD', value: 'usd' },
-  { label: 'EUR', value: 'eur' },
-  { label: 'GBP', value: 'gbp' },
-  { label: 'JPY', value: 'jpy' },
-  { label: 'CAD', value: 'cad' },
-  { label: 'AUD', value: 'aud' },
-];
-
-// Unit options for measurement inputs
-const unitOptions = [
-  { label: 'px', value: 'pixels' },
-  { label: '%', value: 'percent' },
-  { label: 'em', value: 'em' },
-  { label: 'rem', value: 'rem' },
-  { label: 'vh', value: 'viewport-height' },
-  { label: 'vw', value: 'viewport-width' },
-];
-
-// Date format options
-const dateFormatOptions = [
-  { label: 'MM/DD/YYYY', value: 'us' },
-  { label: 'DD/MM/YYYY', value: 'eu' },
-  { label: 'YYYY-MM-DD', value: 'iso' },
-];
-
-
-export const PhoneNumberInput: Story = {
-  args: {
-    label: 'Phone Number',
-    sublabel: '(with country code)',
-    placeholder: 'Enter your phone number',
-    hintText: 'Select country code and enter your phone number',
-    options: countryOptions,
-    value: 'us',
-    inputValue: '',
-    showSelectedOptionInInput: true,
-    dropdownWidth: '90px',
-    dropdownPosition: DropdownPosition.LEFT,
-    leftSlot: <Phone className="h-4 w-4 text-gray-400" />,
-    rightSlot: <Phone className="h-4 w-4 text-gray-400" />,
-  },
+// Basic Example
+export const Default: Story = {
+  args: {}
 };
 
-export const DropdownOnRight: Story = {
+// Different Sizes
+export const Medium: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    dropdownPosition: DropdownPosition.RIGHT,
-    dropdownWidth: '110px',
-    rightSlot: null,
-  },
+    size: DropdownInputSize.MEDIUM
+  }
 };
 
-export const CurrencyInput: Story = {
+export const Large: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    label: 'Amount',
-    sublabel: '(with currency)',
-    placeholder: 'Enter amount',
-    hintText: 'Select currency and enter amount',
-    options: currencyOptions,
-    value: 'usd',
-    dropdownWidth: '80px',
-    rightSlot: <DollarSign className="h-4 w-4 text-gray-400" />,
-  },
+    size: DropdownInputSize.LARGE
+  }
 };
 
-export const UnitMeasurementInput: Story = {
+// Different States
+export const Hover: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    label: 'Width',
-    sublabel: '(with unit)',
-    placeholder: 'Enter width value',
-    hintText: 'Select measurement unit and enter value',
-    options: unitOptions,
-    value: 'pixels',
-    dropdownPosition: DropdownPosition.RIGHT,
-    dropdownWidth: '70px',
-    rightSlot: null,
-  },
+    state: DropdownInputState.HOVER
+  }
 };
 
-export const DateInput: Story = {
+export const Focused: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    label: 'Date',
-    sublabel: '(with format)',
-    placeholder: 'Enter date',
-    hintText: 'Select date format and enter date',
-    options: dateFormatOptions,
-    value: 'us',
-    dropdownWidth: '120px',
-    rightSlot: <Calendar className="h-4 w-4 text-gray-400" />,
-  },
+    state: DropdownInputState.FOCUSED
+  }
 };
 
-export const NoLabel: Story = {
+export const Filled: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    label: undefined,
-    sublabel: undefined,
-  },
+    state: DropdownInputState.FILLED,
+    value: 'option1',
+    inputValue: 'Option 1'
+  }
 };
 
-export const NoHint: Story = {
+export const Error: Story = {
   args: {
-    ...PhoneNumberInput.args,
-    hintText: undefined,
-  },
-};
-
-export const LargeSize: Story = {
-  args: {
-    ...PhoneNumberInput.args,
-    size: DropdownInputSize.LARGE,
-  },
-};
-
-export const ErrorState: Story = {
-  args: {
-    ...PhoneNumberInput.args,
     state: DropdownInputState.ERROR,
-    hintText: 'Please enter a valid value',
-  },
+    errorMessage: 'This field has an error'
+  }
 };
 
-export const DisabledState: Story = {
+export const Success: Story = {
   args: {
-    ...PhoneNumberInput.args,
+    state: DropdownInputState.SUCCESS,
+    successMessage: 'Successfully validated'
+  }
+};
+
+export const Disabled: Story = {
+  args: {
     state: DropdownInputState.DISABLED,
-  },
+    inputValue: 'You cannot change this'
+  }
+};
+
+// Dropdown Positions
+export const LeftDropdown: Story = {
+  args: {
+    dropdownPosition: DropdownPosition.LEFT
+  }
+};
+
+export const RightDropdown: Story = {
+  args: {
+    dropdownPosition: DropdownPosition.RIGHT
+  }
+};
+
+// With Icons in Options
+export const WithIconOptions: Story = {
+  args: {
+    options: [
+      { label: 'User', value: 'user', icon: <User size={16} /> },
+      { label: 'Mail', value: 'mail', icon: <Mail size={16} /> },
+      { label: 'Phone', value: 'phone', icon: <Phone size={16} /> }
+    ]
+  }
+};
+
+// With Slots
+export const WithLeftSlot: Story = {
+  args: {
+    leftSlot: <Search className="h-4 w-4 text-gray-500" />
+  }
+};
+
+export const WithRightSlot: Story = {
+  args: {
+    rightSlot: <Lock className="h-4 w-4 text-gray-500" />
+  }
+};
+
+export const WithBothSlots: Story = {
+  args: {
+    leftSlot: <Search className="h-4 w-4 text-gray-500" />,
+    rightSlot: <Lock className="h-4 w-4 text-gray-500" />
+  }
+};
+
+// With Tooltip
+export const WithInfoTooltip: Story = {
+  args: {
+    infoTooltip: 'This is additional information about this field'
+  }
+};
+
+// Required Input
+export const Required: Story = {
+  args: {
+    mandatory: true
+  }
+};
+
+// Custom Width for Dropdown
+export const CustomDropdownWidth: Story = {
+  args: {
+    dropdownWidth: '120px'
+  }
+};
+
+// Hide Selected Option in Input
+export const HideSelectedOptionInInput: Story = {
+  args: {
+    showSelectedOptionInInput: false
+  }
+};
+
+// Playground
+export const Playground: Story = {
+  args: {
+    label: 'Contact Method',
+    sublabel: '(pick one)',
+    options: [
+      { label: 'Email', value: 'email', icon: <Mail size={16} /> },
+      { label: 'Phone', value: 'phone', icon: <Phone size={16} /> },
+      { label: 'In Person', value: 'in-person', icon: <User size={16} /> }
+    ],
+    hintText: 'How would you like to be contacted?',
+    mandatory: true,
+    size: DropdownInputSize.LARGE,
+    placeholder: 'Select contact method',
+    dropdownPosition: DropdownPosition.LEFT
+  }
 }; 

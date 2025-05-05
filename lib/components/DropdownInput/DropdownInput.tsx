@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useEffect } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp, Check } from 'lucide-react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Tooltip } from "../../main";
@@ -34,28 +34,36 @@ import {
   getDropdownMenuItemIconClasses,
   getDropdownMenuItemTextClasses,
   getDropdownMenuItemCheckIconClasses,
-  getDropdownWithLeftSlotClass,
   SlotPosition
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
 const inputTheme = themeConfig.euler.input;
-const dropdownInputTheme = themeConfig.euler.dropdownInput;
 
+/**
+ * DropdownInput component
+ * 
+ * A combination of text input and dropdown menu, allowing both free-form text
+ * entry and selection from a predefined list of options.
+ */
 const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
-  hintText = "This is a hint text to help user.",
-  label = "Your Label",
+  // Input props - shared with TextInput
+  hintText,
+  label,
   leftSlot,
   mandatory = false,
   placeholder = "Enter text",
   rightSlot,
   size = DropdownInputSize.MEDIUM,
   state = DropdownInputState.DEFAULT,
-  sublabel = "(optional)",
+  sublabel,
   value,
-  inputValue = "",
   infoTooltip,
   successMessage,
+  errorMessage,
+  
+  // Dropdown-specific props
+  inputValue = "",
   options = [],
   onOptionSelect,
   onChange,
@@ -63,93 +71,103 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
   dropdownWidth = "auto",
   dropdownPlaceholder = "Select",
   dropdownPosition = DropdownPosition.LEFT,
-  ..._props
+  
+  // Rest of props (passed to input element)
+  ...props
 }, ref) => {
-  // Use the custom hook for state management
+  // Input state management
   const inputState = useInputState({
     initialState: state as unknown as TextInputState,
     initialValue: inputValue
   });
 
+  // Dropdown state management
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
-    value ? options.find(option => option.value === value) || null : null
-  );
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
   const [inputTextValue, setInputTextValue] = useState(inputValue);
   
-  const inputRef = useRef<HTMLInputElement>(null);
-  
-  // Forward the ref
+  // Initialize selected option from the value prop
   useEffect(() => {
-    if (typeof ref === 'function') {
-      ref(inputRef.current);
-    } else if (ref) {
-      ref.current = inputRef.current;
-    }
-  }, [ref]);
-
-  // Update input value if prop changes
-  useEffect(() => {
-    setInputTextValue(inputValue);
-  }, [inputValue]);
-
-  // Update selected option if value prop changes
-  useEffect(() => {
-    if (value !== undefined) {
+    if (value) {
       const option = options.find(opt => opt.value === value) || null;
       setSelectedOption(option);
     }
   }, [value, options]);
-
+  
+  // Sync input value with prop changes
+  useEffect(() => {
+    setInputTextValue(inputValue);
+  }, [inputValue]);
+  
+  // Event handlers
   const handleSelect = (option: DropdownOption) => {
     setSelectedOption(option);
+    setInputTextValue(showSelectedOptionInInput ? option.label : inputTextValue);
     inputState.updateValue(option.value);
     onOptionSelect?.(option);
     setIsOpen(false);
-    
-    // Focus the input after selection
-    inputRef.current?.focus();
   };
-
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setInputTextValue(newValue);
     inputState.updateValue(newValue);
     onChange?.(newValue);
   };
-
-  const handleInputFocus = () => {
+  
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     inputState.handleFocus();
+    props.onFocus?.(e);
   };
-
-  const handleInputBlur = () => {
+  
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     inputState.handleBlur();
+    props.onBlur?.(e);
   };
-
-  const defaultRightSlot = isOpen ? 
+  
+  // Dropdown chevron icon based on dropdown state
+  const chevronIcon = isOpen ? 
     <ChevronUp className={getDropdownChevronClasses()} /> : 
     <ChevronDown className={getDropdownChevronClasses()} />;
-
+  
+  // Dropdown component
   const renderDropdown = () => (
-    <DropdownMenuPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenuPrimitive.Root 
+      open={isOpen} 
+      onOpenChange={setIsOpen} 
+      modal={false}
+    >
       <DropdownMenuPrimitive.Trigger asChild>
         <div 
           className={getDropdownClasses(dropdownPosition)}
           style={{ width: showSelectedOptionInInput ? dropdownWidth : 'auto' }}
-          onClick={() => state !== DropdownInputState.DISABLED && setIsOpen(!isOpen)}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (state !== DropdownInputState.DISABLED) {
+              setIsOpen(!isOpen);
+            }
+          }}
           aria-label="Select option"
           role="combobox"
           aria-expanded={isOpen}
         >
           {selectedOption ? (
             <div className={getDropdownOptionContainerClasses()}>
-              {selectedOption.icon && <span className={getDropdownOptionIconClasses()}>{selectedOption.icon}</span>}
-              <span className={getDropdownOptionLabelClasses()}>{selectedOption.label}</span>
+              {selectedOption.icon && (
+                <span className={getDropdownOptionIconClasses()}>
+                  {selectedOption.icon}
+                </span>
+              )}
+              <span className={getDropdownOptionLabelClasses()}>
+                {selectedOption.label}
+              </span>
             </div>
           ) : (
-            <span className={getDropdownPlaceholderClasses()}>{dropdownPlaceholder}</span>
+            <span className={getDropdownPlaceholderClasses()}>
+              {dropdownPlaceholder}
+            </span>
           )}
-          <span className={getDropdownChevronClasses()}>{defaultRightSlot}</span>
+          <span className={getDropdownChevronClasses()}>{chevronIcon}</span>
         </div>
       </DropdownMenuPrimitive.Trigger>
 
@@ -157,7 +175,10 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
         <DropdownMenuPrimitive.Content
           className={getDropdownMenuClasses()}
           align="start"
+          side="bottom"
           sideOffset={4}
+          avoidCollisions={true}
+          collisionPadding={8}
         >
           {options.map((option) => (
             <DropdownMenuPrimitive.Item
@@ -166,8 +187,14 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
               onSelect={() => handleSelect(option)}
             >
               <div className={getDropdownMenuItemContentClasses()}>
-                {option.icon && <span className={getDropdownMenuItemIconClasses()}>{option.icon}</span>}
-                <span className={getDropdownMenuItemTextClasses()}>{option.label}</span>
+                {option.icon && (
+                  <span className={getDropdownMenuItemIconClasses()}>
+                    {option.icon}
+                  </span>
+                )}
+                <span className={getDropdownMenuItemTextClasses()}>
+                  {option.label}
+                </span>
                 {selectedOption?.value === option.value && (
                   <Check className={getDropdownMenuItemCheckIconClasses()} />
                 )}
@@ -179,16 +206,23 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
     </DropdownMenuPrimitive.Root>
   );
 
+  // Visual state for the input component
+  const visualState = isOpen
+    ? state === DropdownInputState.ERROR 
+      ? DropdownInputState.ERROR 
+      : DropdownInputState.FOCUSED
+    : (inputState.visualState as unknown as DropdownInputState);
+  
   return (
-    <div className={dropdownInputTheme.container}>
-      {/* Label */}
+    <div className={inputTheme.container}>
+      {/* Label - Same as TextInput */}
       {label && (
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
+        <div className={inputTheme.label.container}>
+          <div className={inputTheme.label.labelwSublabel}>
             <label className={getLabelClasses()}>
               {label} {mandatory && (
-              <sup className={inputTheme.label.mandatory}>*</sup>
-            )}
+                <sup className={inputTheme.label.mandatory}>*</sup>
+              )}
             </label>
             {sublabel && (
               <small className={getSublabelClasses()}>
@@ -196,20 +230,23 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
               </small>
             )}
           </div>
-          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
-            <button type="button" aria-label="More information" className="focus:outline-none">
-              <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
-            </button>
-          </Tooltip>}
+          {infoTooltip && (
+            <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+              <button 
+                type="button" 
+                aria-label="More information" 
+                className="focus:outline-none"
+              >
+                <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+              </button>
+            </Tooltip>
+          )}
         </div>
       )}
 
       {/* Input with Dropdown */}
       <div 
-        className={cn(
-          getInputBaseClasses(size, isOpen ? DropdownInputState.FOCUSED : (inputState.visualState as unknown as DropdownInputState), leftSlot, rightSlot),
-          'flex items-center relative'
-        )}
+        className={getInputBaseClasses(size, visualState, leftSlot, rightSlot)}
       >
         {/* Left Slot */}
         {leftSlot && (
@@ -218,34 +255,40 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
           </div>
         )}
 
-        {/* Left Dropdown - render with adjusted position when leftSlot exists */}
+        {/* Left Dropdown */}
         {dropdownPosition === DropdownPosition.LEFT && (
-          <div className={leftSlot ? getDropdownWithLeftSlotClass() : ""}>
+          <div className={cn("relative", leftSlot && "ml-8")}>
             {renderDropdown()}
           </div>
         )}
 
-        {/* Input Field */}
+        {/* Input */}
         <input
-          ref={inputRef}
+          ref={ref}
           type="text"
           className={cn(
-            getInputClasses((inputState.visualState as unknown as DropdownInputState), leftSlot, rightSlot),
-            dropdownPosition === DropdownPosition.LEFT && showSelectedOptionInInput && getInputWithLeftPaddingClasses()
+            getInputClasses(inputState.visualState as unknown as DropdownInputState, leftSlot, rightSlot),
+            dropdownPosition === DropdownPosition.LEFT && 
+            showSelectedOptionInInput && 
+            getInputWithLeftPaddingClasses()
           )}
           placeholder={placeholder}
           value={inputTextValue}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
           disabled={state === DropdownInputState.DISABLED}
-          aria-labelledby={label ? `${label.toLowerCase().replace(/\s+/g, '-')}-label` : undefined}
-          {..._props}
+          onChange={handleInputChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          {...props}
         />
 
-        {/* Right Dropdown and Right Slot */}
-        {dropdownPosition === DropdownPosition.RIGHT && renderDropdown()}
+        {/* Right Dropdown */}
+        {dropdownPosition === DropdownPosition.RIGHT && (
+          <div className="relative">
+            {renderDropdown()}
+          </div>
+        )}
         
+        {/* Right Slot */}
         {rightSlot && (
           <div className={getSlotClasses(SlotPosition.RIGHT)}>
             {rightSlot}
@@ -253,13 +296,18 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(({
         )}
       </div>
 
-      {/* Hint Text */}
-      {successMessage && (
+      {/* Messages - Same as TextInput */}
+      {state === DropdownInputState.ERROR && errorMessage && (
+        <span className={getHintClasses(state)}>
+          {errorMessage}
+        </span>
+      )}
+      {state === DropdownInputState.SUCCESS && successMessage && (
         <span className={getHintClasses(state)}>
           {successMessage}
         </span>
       )}
-      {hintText && !successMessage && (
+      {state !== DropdownInputState.ERROR && state !== DropdownInputState.SUCCESS && hintText && (
         <span className={getHintClasses(state)}>
           {hintText}
         </span>

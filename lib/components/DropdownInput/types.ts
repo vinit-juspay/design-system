@@ -53,6 +53,8 @@ export interface DropdownInputProps extends Omit<InputHTMLAttributes<HTMLInputEl
   infoTooltip?: string;
   /** Success message shown below the input */
   successMessage?: string;
+  /** Error message shown below the input when in error state */
+  errorMessage?: string;
   /** Array of options for the dropdown */
   options: DropdownOption[];
   /** Callback when a dropdown option is selected */

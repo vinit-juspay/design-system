@@ -32,14 +32,15 @@ export const getInputBaseClasses = (
   // Apply state-specific classes
   const stateClasses = [];
   
-  if (state === DropdownInputState.DEFAULT) {
+  // If state is ERROR, only apply error classes regardless of focus state
+  if (state === DropdownInputState.ERROR) {
+    stateClasses.push(states.error);
+  } else if (state === DropdownInputState.DEFAULT) {
     stateClasses.push(states.default, states.hover);
   } else if (state === DropdownInputState.FOCUSED) {
     stateClasses.push(states.default, states.focused);
   } else if (state === DropdownInputState.FILLED) {
     stateClasses.push(states.default, states.hover); // Keep hover for filled state
-  } else if (state === DropdownInputState.ERROR) {
-    stateClasses.push(states.error);
   } else if (state === DropdownInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }

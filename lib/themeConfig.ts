@@ -248,7 +248,7 @@ export const themeConfig = {
     dropdownInput: {
       container: 'flex flex-col space-y-2',
       dropdown: {
-        base: 'flex items-center cursor-pointer !w-fit gap-1',
+        base: 'flex items-center cursor-pointer gap-1',
         positions: {
           left: 'pl-3',
           right: 'pr-3'
