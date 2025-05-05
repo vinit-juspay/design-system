@@ -14,4 +14,5 @@ export { default as Dropdown } from './components/Dropdown/Dropdown';
 export { default as Checkbox } from './components/Checkbox/Checkbox';
 // export { default as Chart } from './components/Charts/Charts';
 export { default as ChartsV2 } from './components/ChartsV2/ChartsV2';
+export { default as ButtonGroup } from './components/ButtonGroup/ButtonGroup';
 
