@@ -760,5 +760,52 @@ export const themeConfig = {
       },
       disabledSubtext: 'text-gray-200'
     },
+    avatar: {
+      base: {
+        container: 'relative inline-flex items-center justify-center bg-gray-100 border',
+        image: 'h-full w-full object-cover',
+        fallbackText: 'font-medium text-muted-foreground',
+      },
+      sizes: {
+        sm: 'h-6 w-6 text-body-xs text-500 text-gray-900',
+        regular: 'h-8 w-8 text-body-sm text-500 text-gray-900',
+        md: 'h-10 w-10 text-body-md text-500 text-gray-900',
+        lg: 'h-12 w-12 text-body-lg text-500 text-gray-900',
+        xl: 'h-16 w-16 text-sm text-600 text-gray-900',
+      },
+      shapes: {
+        circular: 'rounded-full',
+        rounded: 'rounded-md',
+      },
+      indicator: {
+        base: 'absolute block rounded-full bg-green-500 ring-white',
+        sizes: {
+          sm: 'h-1.5 w-1.5 ring-1 -top-0.5 -right-0.5',
+          regular: 'h-2 w-2 ring-1 -top-0.5 -right-0.5',
+          md: 'h-2.5 w-2.5 ring-1 -top-0.5 -right-0.5',
+          lg: 'h-3 w-3 ring-2 -top-0.5 -right-0.5',
+          xl: 'h-4 w-4 ring-2 -top-0.5 -right-0.5',
+        },
+      },
+      border: {
+        withImage: 'border-white',
+        withoutImage: 'border-gray-200',
+      },
+    },
+    avatarGroup: {
+      base: {
+        container: 'flex flex-row items-center -space-x-2',
+        avatarWrapper: 'relative cursor-pointer inline-flex items-center justify-center',
+        overflowCounter: 'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
+      },
+      selected: 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400',
+      sizes: {
+        sm: 'h-6 w-6 text-body-xs',
+        regular: 'h-8 w-8 text-body-sm',
+        md: 'h-10 w-10 text-body-md',
+        lg: 'h-12 w-12 text-body-lg',
+        xl: 'h-16 w-16 text-sm',
+      },
+    },
   },
 };

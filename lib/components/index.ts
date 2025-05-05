@@ -9,3 +9,5 @@ export * from './Charts';
 export * from './Breadcrumb';
 export * from './Menu';
 export * from './ChartsV2';
+export * from './Avatar';
+export * from './AvatarGroup';
