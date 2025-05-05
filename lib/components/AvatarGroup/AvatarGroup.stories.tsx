@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AvatarGroup, AvatarData } from './AvatarGroup';
+import AvatarGroup from './AvatarGroup';
+import { AvatarData } from './types';
 import { AvatarSize } from '../Avatar/types';
 
 const avatarGroupData: AvatarData[] = [

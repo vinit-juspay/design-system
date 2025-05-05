@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from "react"
+import { forwardRef, useState, useEffect } from "react"
 import Avatar from "../Avatar/Avatar"
-import { AvatarProps, AvatarSize } from "../Avatar/types"
+import { AvatarSize } from "../Avatar/types"
 import { cn } from "../../utils"
 import Menu from "../Menu/Menu"
-import type { MenuItemWithSeparatorProps, MenuStandardProps } from "../Menu/types"
+import type { MenuStandardProps } from "../Menu/types"
+import { AvatarData, AvatarGroupProps } from "./types"
+import {
+  getAvatarGroupContainerClassNames,
+  getAvatarWrapperClassNames,
+  getSelectedAvatarClassNames,
+  getOverflowCounterClassNames
+} from "./utils"
 
-export interface AvatarData extends Omit<AvatarProps, "className" | "id"> {
-  id: string | number
-  alt?: string
-  fallback?: string
-}
-
-export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  avatars: AvatarData[]
-  maxCount?: number
-  size?: AvatarProps["size"]
-  className?: string
-  selectedAvatarIds?: (string | number)[]
-  onSelectionChange?: (selectedIds: (string | number)[]) => void
-}
-
-export function AvatarGroup({
+const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(({
   avatars,
   maxCount = 5,
   size = AvatarSize.REGULAR,
@@ -28,7 +20,7 @@ export function AvatarGroup({
   selectedAvatarIds,
   onSelectionChange,
   ...props
-}: AvatarGroupProps) {
+}, ref) => {
   // Ensure maxCount is at least 1
   const safeMaxCount = Math.max(1, maxCount)
 
@@ -46,17 +38,9 @@ export function AvatarGroup({
   const visibleAvatars = avatars.slice(0, safeMaxCount)
   const overflowCount = Math.max(0, avatars.length - safeMaxCount)
 
-  // Define outline classes for selected state (adjust as needed)
-  const selectedClasses = "ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400" // Example selection highlight
-
-  // Size mappings for the overflow counter
-  const overflowSizeClasses = {
-    sm: "h-6 w-6 text-body-xs",
-    regular: "h-8 w-8 text-body-sm",
-    md: "h-10 w-10 text-body-md",
-    lg: "h-12 w-12 text-body-lg",
-    xl: "h-16 w-16 text-sm", // Adjusted text size for xl
-  }
+  // Get theme classes
+  const containerClasses = getAvatarGroupContainerClassNames(className)
+  const selectedClasses = getSelectedAvatarClassNames()
 
   // Handle avatar selection (toggle) from menu or direct click
   const handleSelect = (id: string | number) => {
@@ -67,14 +51,12 @@ export function AvatarGroup({
     setInternalSelectedIds(newSelectedIds)
     onSelectionChange?.(newSelectedIds) // Call updated callback
     // Don't close menu automatically on multi-select toggle
-    // setIsMenuOpen(false)
   }
 
   // Generate menu items from the full avatars list
-  const generateMenuItems = (): MenuItemWithSeparatorProps[] => {
+  const generateMenuItems = (): MenuStandardProps[] => {
     return avatars.map(
       (avatar): MenuStandardProps => ({
-        // Use MenuStandardProps type
         content: avatar.alt || avatar.fallback || `Avatar ${avatar.id}`,
         leftSlot: {
           content: (
@@ -92,14 +74,14 @@ export function AvatarGroup({
         },
         // Adapt onSelect to fit type and handle event internally
         onSelect: () => handleSelect(avatar.id),
-        // We prevent closing via contentProps->onCloseAutoFocus below
       })
     )
   }
 
   return (
     <div
-      className={cn("flex flex-row items-center -space-x-2", className)}
+      ref={ref}
+      className={containerClasses}
       role="group"
       aria-label={`Group of ${avatars.length} avatars, ${internalSelectedIds.length} selected`}
       {...props}
@@ -118,10 +100,7 @@ export function AvatarGroup({
               handleSelect(avatar.id);
             }
           }}
-          // Add inline-flex and item centering to the wrapper
-          className={cn(
-            "relative cursor-pointer inline-flex items-center justify-center",
-          )}
+          className={getAvatarWrapperClassNames(index, visibleAvatars.length)}
           style={{ zIndex: visibleAvatars.length - index }}
         >
           <Avatar
@@ -145,22 +124,10 @@ export function AvatarGroup({
             // Prevent menu from closing automatically when an item is clicked
             onCloseAutoFocus: (event) => event.preventDefault(),
           }}
-          // Optional: Adjust align/side if needed
-          // align={MenuAlignment.START}
-          // side={MenuSide.BOTTOM}
         >
           {/* Trigger for the menu */}
           <div
-            className={cn(
-              // Base styles: dark background, light text, centered, rounded, cursor
-              "relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent",
-              "bg-gray-900 text-gray-50 font-medium", // Dark background, light text
-              "transition-colors", // Keep color transition
-              // Size classes
-              overflowSizeClasses[size],
-              // Highlight when menu is open using the same style as selected avatars
-              isMenuOpen && selectedClasses // Use selectedClasses for consistency
-            )}
+            className={getOverflowCounterClassNames(size, isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-haspopup="menu"
             aria-label={`+${overflowCount} more avatars, click to view and select`} // Update label
@@ -190,4 +157,8 @@ export function AvatarGroup({
       )}
     </div>
   )
-}
+})
+
+AvatarGroup.displayName = "AvatarGroup"
+
+export default AvatarGroup

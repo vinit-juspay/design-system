@@ -698,5 +698,20 @@ export const themeConfig = {
         withoutImage: 'border-gray-200',
       },
     },
+    avatarGroup: {
+      base: {
+        container: 'flex flex-row items-center -space-x-2',
+        avatarWrapper: 'relative cursor-pointer inline-flex items-center justify-center',
+        overflowCounter: 'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
+      },
+      selected: 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400',
+      sizes: {
+        sm: 'h-6 w-6 text-body-xs',
+        regular: 'h-8 w-8 text-body-sm',
+        md: 'h-10 w-10 text-body-md',
+        lg: 'h-12 w-12 text-body-lg',
+        xl: 'h-16 w-16 text-sm',
+      },
+    },
   },
 };
