@@ -19,32 +19,26 @@ import {
   BarChart2,
   Type,
   Calendar as CalendarIcon,
+  ListFilter,
   User as UserIcon,
 } from 'lucide-react';
-import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent } from '../lib/main';
+import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, ButtonGroup } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
+import { ButtonGroupSize, ButtonGroupMode } from '../lib/components/ButtonGroup/types';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
+import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    |'buttons'
-    |'tooltips'
-    |'tags'
-    |'tabs'
-    |'alerts'
-    |'charts'
-    |'chartsV2'
-    |'fonts'
-    |'datePicker'
-    |'avatars'
-  >('avatars');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars'
+  >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date(),
@@ -77,12 +71,21 @@ const App = () => {
                 Buttons
               </button>
               <button
+                onClick={() => setActiveComponent('buttonGroups')}
+                className={`${activeComponent === 'buttonGroups'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <ListFilter className="mr-2 h-5 w-5" />
+                Button Groups
+              </button>
+              <button
                 onClick={() => setActiveComponent('tooltips')}
-                className={`${
-                  activeComponent === 'tooltips'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${activeComponent === 'tooltips'
+                  ? 'border-blue-500 text-gray-900'
+                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 <Info className="mr-2 h-5 w-5" />
                 Tooltips
@@ -164,6 +167,17 @@ const App = () => {
                 Date Picker
               </button>
               <button
+                onClick={() => setActiveComponent('selectors')}
+                className={`${
+                  activeComponent === 'selectors'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Check className="mr-2 h-5 w-5" />
+                Selectors
+              </button>
+              <button
                 onClick={() => setActiveComponent('avatars')}
                 className={`${
                   activeComponent === 'avatars'
@@ -199,12 +213,21 @@ const App = () => {
             Buttons
           </button>
           <button
+            onClick={() => setActiveComponent('buttonGroups')}
+            className={`${activeComponent === 'buttonGroups'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <ListFilter className="mr-3 h-5 w-5" />
+            Button Groups
+          </button>
+          <button
             onClick={() => setActiveComponent('tooltips')}
-            className={`${
-              activeComponent === 'tooltips'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+            className={`${activeComponent === 'tooltips'
+              ? 'bg-blue-50 border-blue-500 text-blue-700'
+              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
           >
             <Info className="mr-3 h-5 w-5" />
             Tooltips
@@ -283,6 +306,17 @@ const App = () => {
           >
             <CalendarIcon className="mr-3 h-5 w-5" />
             Date Picker
+          </button>
+          <button
+            onClick={() => setActiveComponent('selectors')}
+            className={`${
+              activeComponent === 'selectors'
+                ? 'bg-blue-50 border-blue-500 text-blue-700'
+                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
+            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
+          >
+            <Check className="mr-3 h-5 w-5" />
+            Selectors
           </button>
           <button
             onClick={() => setActiveComponent('avatars')}
@@ -655,6 +689,130 @@ const App = () => {
     </>
   );
 
+  const renderButtonGroups = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Button Group Examples</h2>
+
+      {/* Basic Button Groups */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Basic Button Groups</h3>
+        <div className="flex flex-col gap-4">
+          <ButtonGroup size={ButtonGroupSize.MEDIUM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.MEDIUM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 3" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.MEDIUM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 3" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 4" />
+          </ButtonGroup>
+        </div>
+      </div>
+
+      {/* Non-Stacked Button Groups */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Non-Stacked Button Groups</h3>
+        <div className="flex flex-col gap-4">
+          <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={false}>
+            <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={false}>
+            <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Button 3" />
+          </ButtonGroup>
+        </div>
+      </div>
+
+      {/* Button Group Sizes */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Button Group Sizes</h3>
+        <div className="flex flex-col gap-4">
+          <ButtonGroup size={ButtonGroupSize.SMALL}>
+            <Button buttonType={ButtonType.PRIMARY} text="Small 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Small 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Small 3" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.MEDIUM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Medium 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Medium 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Medium 3" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.LARGE}>
+            <Button buttonType={ButtonType.PRIMARY} text="Large 1" />
+            <Button buttonType={ButtonType.PRIMARY} text="Large 2" />
+            <Button buttonType={ButtonType.PRIMARY} text="Large 3" />
+          </ButtonGroup>
+        </div>
+      </div>
+
+      {/* Button Type Control Modes */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Button Type Control Modes</h3>
+        
+        <div className="mb-4">
+          <h4 className="text-lg font-medium mb-2">Single Primary Mode (Default)</h4>
+          <p className="text-gray-600 mb-2">Only the first non-secondary button keeps its type, others become secondary</p>
+          <ButtonGroup mode={ButtonGroupMode.SINGLE_PRIMARY}>
+            <Button buttonType={ButtonType.PRIMARY} text="Primary (kept)" />
+            <Button buttonType={ButtonType.DANGER} text="Now Secondary" />
+            <Button buttonType={ButtonType.SUCCESS} text="Now Secondary" />
+          </ButtonGroup>
+        </div>
+        
+        <div className="mb-4">
+          <h4 className="text-lg font-medium mb-2">No Transform Mode</h4>
+          <p className="text-gray-600 mb-2">Each button keeps its original button type</p>
+          <ButtonGroup mode={ButtonGroupMode.NO_TRANSFORM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Primary" />
+            <Button buttonType={ButtonType.DANGER} text="Danger" />
+            <Button buttonType={ButtonType.SUCCESS} text="Success" />
+          </ButtonGroup>
+        </div>
+        
+        <div className="mb-4">
+          <h4 className="text-lg font-medium mb-2">All Secondary Mode</h4>
+          <p className="text-gray-600 mb-2">Forces all buttons to be secondary type</p>
+          <ButtonGroup mode={ButtonGroupMode.ALL_SECONDARY}>
+            <Button buttonType={ButtonType.PRIMARY} text="Now Secondary" />
+            <Button buttonType={ButtonType.DANGER} text="Now Secondary" />
+            <Button buttonType={ButtonType.SUCCESS} text="Now Secondary" />
+          </ButtonGroup>
+        </div>
+      </div>
+
+      {/* Mixed Button Types */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Mixed Button Types</h3>
+        <div className="flex flex-col gap-4">
+          <ButtonGroup size={ButtonGroupSize.MEDIUM}>
+            <Button buttonType={ButtonType.PRIMARY} text="Primary" />
+            <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
+            <Button buttonType={ButtonType.DANGER} text="Danger" />
+          </ButtonGroup>
+          
+          <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={true}>
+            <Button buttonType={ButtonType.PRIMARY} text="Primary" />
+            <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
+            <Button buttonType={ButtonType.SUCCESS} text="Success" />
+          </ButtonGroup>
+        </div>
+      </div>
+    </>
+  );
+
   const renderAlerts = () => <AlertDemo />;
 
   const renderDatePicker = () => (
@@ -737,6 +895,7 @@ const App = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white shadow rounded-lg p-6">
           {activeComponent === 'buttons' && renderButtons()}
+          {activeComponent === 'buttonGroups' && renderButtonGroups()}
           {activeComponent === 'tooltips' && <TooltipDemo />}
           {activeComponent === 'tags' && renderTags()}
           {activeComponent === 'tabs' && renderTabs()}
@@ -745,6 +904,7 @@ const App = () => {
           {activeComponent === 'chartsV2' && <ChartDemo2 />}
           {activeComponent === 'fonts' && <FontDemo />}
           {activeComponent === 'datePicker' && renderDatePicker()}
+          {activeComponent === 'selectors' && <SelectorsDemo />}
           {activeComponent === 'avatars' && <AvatarDemo />}
         </div>
       </div>

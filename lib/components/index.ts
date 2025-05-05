@@ -1,5 +1,6 @@
 export * from './Alert';
 export * from './Button';
+export * from './ButtonGroup';
 export * from './Snackbar';
 export * from './Tag';
 export * from './Tabs';
