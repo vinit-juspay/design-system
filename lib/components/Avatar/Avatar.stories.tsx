@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "./Avatar";
+import Avatar from "./Avatar";
+import { AvatarSize, AvatarShape } from "./types";
 
 const meta: Meta<typeof Avatar> = {
   title: "Components/Avatar",
@@ -8,15 +9,17 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: "select",
-      options: ["sm", "regular", "md", "lg", "xl"],
+      options: Object.values(AvatarSize),
+      mapping: AvatarSize,
       description: "Controls the size of the avatar.",
-      table: { defaultValue: { summary: "regular" } },
+      table: { defaultValue: { summary: AvatarSize.REGULAR } },
     },
     shape: {
       control: "select",
-      options: ["circular", "rounded"],
+      options: Object.values(AvatarShape),
+      mapping: AvatarShape,
       description: "Determines the shape of the avatar.",
-      table: { defaultValue: { summary: "circular" } },
+      table: { defaultValue: { summary: AvatarShape.CIRCULAR } },
     },
     online: {
       control: "boolean",
@@ -45,8 +48,8 @@ const meta: Meta<typeof Avatar> = {
     }
   },
   args: {
-    size: "regular",
-    shape: "circular",
+    size: AvatarSize.REGULAR,
+    shape: AvatarShape.CIRCULAR,
     online: false,
     alt: "Default Alt Text",
   }
@@ -59,7 +62,7 @@ export const Default: Story = {
   args: {
     src: "https://randomuser.me/api/portraits/women/75.jpg",
     alt: "Default Avatar",
-    size: "regular",
+    size: AvatarSize.REGULAR,
   },
 };
 
@@ -67,7 +70,7 @@ export const Small: Story = {
   args: {
     src: "https://randomuser.me/api/portraits/men/75.jpg",
     alt: "Small Avatar",
-    size: "sm",
+    size: AvatarSize.SM,
   },
 };
 
@@ -75,7 +78,7 @@ export const Large: Story = {
   args: {
     src: "https://randomuser.me/api/portraits/women/76.jpg",
     alt: "Large Avatar",
-    size: "lg",
+    size: AvatarSize.LG,
   },
 };
 
@@ -83,7 +86,7 @@ export const ExtraLarge: Story = {
   args: {
     src: "https://randomuser.me/api/portraits/men/76.jpg",
     alt: "Extra Large Avatar",
-    size: "xl",
+    size: AvatarSize.XL,
   },
 };
 
@@ -91,7 +94,7 @@ export const WithOnlineIndicator: Story = {
   args: {
     src: "https://randomuser.me/api/portraits/women/76.jpg",
     alt: "Online Avatar",
-    size: "regular",
+    size: AvatarSize.REGULAR,
     online: true,
   },
 };
@@ -99,7 +102,7 @@ export const WithOnlineIndicator: Story = {
 export const WithFallbackInitials: Story = {
   args: {
     alt: "Samit Barai",
-    size: "regular",
+    size: AvatarSize.REGULAR,
   },
 };
 
@@ -107,7 +110,7 @@ export const WithCustomFallback: Story = {
   args: {
     alt: "No Image",
     fallback: "!",
-    size: "regular",
+    size: AvatarSize.REGULAR,
   },
 };
 
@@ -115,6 +118,6 @@ export const WithImageError: Story = {
   args: {
     src: "invalid-image-url",
     alt: "Error Fallback",
-    size: "regular",
+    size: AvatarSize.REGULAR,
   },
 }; 

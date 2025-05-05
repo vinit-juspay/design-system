@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Avatar, AvatarGroup } from '../../../lib/main'; // Assuming Avatar is exported from main
-import { AvatarProps } from '../../../lib/components/Avatar'; // Updated path to directory index
+import { AvatarProps, AvatarSize, AvatarShape } from '../../../lib/components/Avatar/types'; // Updated path to directory index
 import { AvatarData } from '../../../lib/components/AvatarGroup'; // Updated path to directory index
 
 const avatarGroupData: AvatarData[] = [
@@ -14,18 +14,19 @@ const avatarGroupData: AvatarData[] = [
 ];
 
 const AvatarDemo = () => {
-  const [size, setSize] = useState<AvatarProps['size']>('regular');
+  const [size, setSize] = useState<AvatarProps['size']>(AvatarSize.REGULAR);
   const [online, setOnline] = useState(true);
   const [src, setSrc] = useState('https://i.pravatar.cc/150?img=3'); // Example image source
   const [alt, setAlt] = useState('Jane Doe');
   const [fallback, setFallback] = useState('');
   const [useInvalidSrc, setUseInvalidSrc] = useState(false);
-  const [shape, setShape] = useState<AvatarProps['shape']>('circular');
+  const [shape, setShape] = useState<AvatarProps['shape']>(AvatarShape.CIRCULAR);
   const [groupMaxCount, setGroupMaxCount] = useState(5); // State for AvatarGroup maxCount
 
   const currentSrc = useInvalidSrc ? 'invalid-url' : src;
 
-  const sizes: Array<AvatarProps['size']> = ['sm', 'regular', 'md', 'lg', 'xl'];
+  const sizes: Array<AvatarSize | undefined> = Object.values(AvatarSize);
+  const shapes: Array<AvatarShape | undefined> = Object.values(AvatarShape);
 
   return (
     <div className="flex flex-col gap-8 p-6 max-w-4xl mx-auto">
@@ -54,7 +55,7 @@ const AvatarDemo = () => {
             <label className="block mb-2 font-medium">Size</label>
             <select
               value={size}
-              onChange={e => setSize(e.target.value as AvatarProps['size'])}
+              onChange={e => setSize(e.target.value as AvatarSize)}
               className="w-full p-2 border border-gray-300 rounded"
             >
               {sizes.map(s => (
@@ -93,11 +94,12 @@ const AvatarDemo = () => {
             <label className="block mb-2 font-medium">Shape</label>
             <select
               value={shape}
-              onChange={e => setShape(e.target.value as AvatarProps['shape'])}
+              onChange={e => setShape(e.target.value as AvatarShape)}
               className="w-full p-2 border border-gray-300 rounded"
             >
-              <option value="circular">Circular</option>
-              <option value="rounded">Rounded</option>
+              {shapes.map(s => (
+                <option key={s} value={s}>{s ? s.charAt(0).toUpperCase() + s.slice(1) : ''}</option>
+              ))}
             </select>
           </div>
 
@@ -219,7 +221,7 @@ const AvatarDemo = () => {
       <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s, index) => (
            <div key={`img-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar src={`https://randomuser.me/api/portraits/women/${index+10}.jpg`} alt="Rounded User Image" size={s} shape="rounded" />
+              <Avatar src={`https://randomuser.me/api/portraits/women/${index+10}.jpg`} alt="Rounded User Image" size={s} shape={AvatarShape.ROUNDED} />
               <span className="text-xs text-gray-500">{s}</span>
             </div>
         ))}
@@ -230,7 +232,7 @@ const AvatarDemo = () => {
        <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s, index) => (
            <div key={`img-online-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar src={`https://randomuser.me/api/portraits/men/${index+10}.jpg`} alt="Rounded Online User" size={s} online={true} shape="rounded"/>
+              <Avatar src={`https://randomuser.me/api/portraits/men/${index+10}.jpg`} alt="Rounded Online User" size={s} online={true} shape={AvatarShape.ROUNDED}/>
               <span className="text-xs text-gray-500">{s}</span>
             </div>
         ))}
@@ -241,7 +243,7 @@ const AvatarDemo = () => {
       <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s) => (
            <div key={`initials-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar alt="Adam West" size={s} shape="rounded" />
+              <Avatar alt="Adam West" size={s} shape={AvatarShape.ROUNDED} />
               <span className="text-xs text-gray-500">{s}</span>
             </div>
         ))}
@@ -252,7 +254,7 @@ const AvatarDemo = () => {
       <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s) => (
            <div key={`custom-fallback-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar fallback="AW" size={s} shape="rounded" />
+              <Avatar fallback="AW" size={s} shape={AvatarShape.ROUNDED} />
               <span className="text-xs text-gray-500">{s}</span>
             </div>
         ))}
@@ -280,8 +282,8 @@ const AvatarDemo = () => {
              <div>
               <label className="block mb-2 font-medium">Group Size (Inherited by Avatars)</label>
               <select
-                value={size} // Reuse the existing size state for simplicity
-                onChange={e => setSize(e.target.value as AvatarProps['size'])}
+                value={size}
+                onChange={e => setSize(e.target.value as AvatarSize)}
                 className="w-full p-2 border border-gray-300 rounded"
               >
                 {sizes.map(s => (
@@ -298,7 +300,7 @@ const AvatarDemo = () => {
            <AvatarGroup
               avatars={avatarGroupData}
               maxCount={groupMaxCount}
-              size={size} // Use the controlled size
+              size={size}
             />
            <div className="mt-4 text-sm text-gray-600">
             Current state: size={size}, maxCount={groupMaxCount}, total avatars={avatarGroupData.length}
@@ -325,19 +327,19 @@ const AvatarDemo = () => {
         <h3 className="text-lg font-medium mt-6 mb-3">Different maxCount Values</h3>
         <div className="flex flex-wrap gap-x-8 gap-y-4 items-end">
           <div>
-            <AvatarGroup avatars={avatarGroupData} maxCount={3} size="regular" />
+            <AvatarGroup avatars={avatarGroupData} maxCount={3} size={AvatarSize.REGULAR} />
             <span className="block text-xs text-gray-500 text-center mt-1">maxCount=3</span>
           </div>
           <div>
-            <AvatarGroup avatars={avatarGroupData} maxCount={5} size="regular" />
+            <AvatarGroup avatars={avatarGroupData} maxCount={5} size={AvatarSize.REGULAR} />
              <span className="block text-xs text-gray-500 text-center mt-1">maxCount=5</span>
           </div>
            <div>
-            <AvatarGroup avatars={avatarGroupData} maxCount={avatarGroupData.length} size="regular" />
+            <AvatarGroup avatars={avatarGroupData} maxCount={avatarGroupData.length} size={AvatarSize.REGULAR} />
             <span className="block text-xs text-gray-500 text-center mt-1">maxCount={avatarGroupData.length} (no overflow)</span>
           </div>
           <div>
-            <AvatarGroup avatars={avatarGroupData} maxCount={10} size="regular" />
+            <AvatarGroup avatars={avatarGroupData} maxCount={10} size={AvatarSize.REGULAR} />
             <span className="block text-xs text-gray-500 text-center mt-1">maxCount=10 (more than available)</span>
           </div>
         </div>

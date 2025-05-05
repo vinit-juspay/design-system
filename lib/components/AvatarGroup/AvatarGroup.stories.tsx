@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AvatarGroup, AvatarData } from './AvatarGroup';
+import { AvatarSize } from '../Avatar/types';
 
 const avatarGroupData: AvatarData[] = [
   { id: 1, src: 'https://randomuser.me/api/portraits/women/10.jpg', alt: 'User 1' },
@@ -53,7 +54,7 @@ const meta: Meta<typeof AvatarGroup> = {
   args: { // Default args for controls
     avatars: avatarGroupData.slice(0, 5), // Show first 5 by default in controls
     maxCount: 5, // Match component default
-    size: 'regular', // Match component default
+    size: AvatarSize.REGULAR, // Match component default
   }
 };
 

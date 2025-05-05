@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { Avatar, AvatarProps } from "../Avatar/Avatar"
+import Avatar from "../Avatar/Avatar"
+import { AvatarProps, AvatarSize } from "../Avatar/types"
 import { cn } from "../../utils"
 import Menu from "../Menu/Menu"
 import type { MenuItemWithSeparatorProps, MenuStandardProps } from "../Menu/types"
@@ -22,7 +23,7 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 export function AvatarGroup({
   avatars,
   maxCount = 5,
-  size = "regular",
+  size = AvatarSize.REGULAR,
   className,
   selectedAvatarIds,
   onSelectionChange,
@@ -78,7 +79,7 @@ export function AvatarGroup({
         leftSlot: {
           content: (
             <Avatar
-              size="sm" // Use small avatar in menu
+              size={AvatarSize.SM} // Use small avatar in menu
               src={avatar.src}
               alt={avatar.alt}
               fallback={avatar.fallback}
