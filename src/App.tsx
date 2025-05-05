@@ -34,7 +34,7 @@ import FontDemo from './Demos/FontDemo/FontDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker'
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'buttonGroups'
   >('datePicker');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -46,8 +46,6 @@ const App = () => {
     console.log('Selected Date Range:', newRange);
     setSelectedDateRange(newRange);
   };
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'buttonGroups'
-  >('buttons');
 
   const renderNavbar = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
