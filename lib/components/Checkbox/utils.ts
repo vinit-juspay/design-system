@@ -1,15 +1,28 @@
 import { themeConfig } from '../../themeConfig';
 import { cn } from '../../utils';
-import { CheckboxSize, CheckboxPosition } from './types';
+import { CheckboxSize } from './types';
 
 export const getCheckboxClassNames = (
   size: CheckboxSize,
   disabled: boolean,
+  checked: boolean | 'indeterminate' = false,
   className: string = ''
 ): string => {
   const { baseStyles, sizes, states } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
-  const stateClasses = disabled ? states.disabled : states.enabled;
+  
+  let stateClasses;
+  if (disabled) {
+    if (checked) {
+      // Checked and disabled: primary-200 bg and no border
+      stateClasses = 'bg-primary-200 border-0';
+    } else {
+      // Unchecked and disabled: gray-150 border and gray-50 bg
+      stateClasses = 'border-gray-150 bg-gray-50';
+    }
+  } else {
+    stateClasses = disabled ? states.disabled : states.enabled;
+  }
 
   return cn(baseStyles, sizeClasses.root, stateClasses, className);
 };
@@ -42,11 +55,31 @@ export const getLabelClassNames = (size: CheckboxSize, disabled: boolean): strin
   return cn(sizeClasses.fontSize, labelState);
 };
 
-export const getContainerClassNames = (position: CheckboxPosition): string => {
+export const getContainerClassNames = (): string => {
   const { position: positionStyles } = themeConfig.euler.checkbox;
 
   return cn(
     positionStyles.wrapper,
-    position === CheckboxPosition.LEFT ? positionStyles.left : positionStyles.right
+  );
+};
+
+export const getCheckboxContentWrapperClassNames = (): string => {
+  return themeConfig.euler.checkbox.wrapper || 'flex items-center';
+};
+
+export const getCheckboxRightSlotClassNames = (): string => {
+  return themeConfig.euler.checkbox.rightSlot || 'ml-1.5';
+};
+
+export const getCheckboxSubtextClassNames = (
+  size: CheckboxSize,
+  disabled: boolean
+): string => {
+  const theme = themeConfig.euler.checkbox;
+  
+  return cn(
+    theme.subtext || 'text-gray-400 font-normal',
+    theme.sizes[size].subtext || (size === CheckboxSize.SMALL ? 'text-body-sm ml-5 mt-1' : 'text-body-md ml-4 mt-1'),
+    disabled && (theme.disabledSubtext || 'text-gray-200')
   );
 };

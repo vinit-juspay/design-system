@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { Slot } from '@radix-ui/react-slot';
 import { Check, Minus } from 'lucide-react';
 import { CheckboxProps, CheckboxSize, CheckboxPosition } from './types';
 import {
@@ -8,6 +9,9 @@ import {
   getCheckIconClassNames,
   getLabelClassNames,
   getContainerClassNames,
+  getCheckboxContentWrapperClassNames,
+  getCheckboxRightSlotClassNames,
+  getCheckboxSubtextClassNames
 } from './utils';
 
 /**
@@ -38,6 +42,8 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
       size = CheckboxSize.MEDIUM,
       children,
       position = CheckboxPosition.LEFT,
+      subtext,
+      rightSlot,
     },
     ref
   ) => {
@@ -52,16 +58,20 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
       return <Check className={getCheckIconClassNames(size, checkIconClassName)} />;
     };
 
+    // Generate a unique ID for accessibility
+    const uniqueId = value ? `checkbox-${value}` : `checkbox-${React.useId()}`;
+
     // Checkbox element
     const checkboxElement = (
       <CheckboxPrimitive.Root
         ref={ref}
+        id={uniqueId}
         checked={checked === 'indeterminate' ? false : checked}
         onCheckedChange={onCheckedChange}
         disabled={disabled}
         required={required}
         value={value}
-        className={getCheckboxClassNames(size, disabled, className)}
+        className={getCheckboxClassNames(size, disabled, checked, className)}
         data-state={
           checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'
         }
@@ -77,22 +87,46 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
 
     // Label element if children exist
     const labelElement = children && (
-      <label className={getLabelClassNames(size, disabled)}>{children}</label>
+      <label htmlFor={uniqueId} className={getLabelClassNames(size, disabled)}>
+        {children}
+      </label>
     );
 
-    // Render based on position
     return (
-      <div className={getContainerClassNames(position)}>
-        {position === CheckboxPosition.LEFT ? (
-          <>
-            {checkboxElement}
-            {labelElement}
-          </>
-        ) : (
-          <>
-            {labelElement}
-            {checkboxElement}
-          </>
+      <div className={getContainerClassNames()}>
+        <div className={getCheckboxContentWrapperClassNames()}>
+          {position === CheckboxPosition.LEFT ? (
+            <>
+              {checkboxElement}
+              <div className="flex items-center flex-1">
+                {labelElement}
+                {rightSlot && (
+                  <span className={getCheckboxRightSlotClassNames()}>
+                    <Slot>{rightSlot}</Slot>
+                  </span>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center flex-1">
+                {labelElement}
+                {rightSlot && (
+                  <span className={getCheckboxRightSlotClassNames()}>
+                    <Slot>{rightSlot}</Slot>
+                  </span>
+                )}
+              </div>
+              {checkboxElement}
+            </>
+          )}
+        </div>
+        
+        {/* Second row: subtext only */}
+        {subtext && (
+          <div className={getCheckboxSubtextClassNames(size, disabled)}>
+            {subtext}
+          </div>
         )}
       </div>
     );
