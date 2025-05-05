@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import OTPInput from './OTPInput';
-
+import { TextInputState } from '../TextInput/types';
+import { OTPDigits } from './types';
 const meta = {
   title: 'Components/Input/OTPInput',
   component: OTPInput,
@@ -37,25 +38,21 @@ const meta = {
       control: 'text',
       description: 'Hint text displayed below the inputs',
     },
-    showLabel: {
-      control: 'boolean',
-      description: 'Whether to show the label',
-    },
-    showSublabel: {
-      control: 'boolean',
-      description: 'Whether to show the sublabel',
-    },
-    showHint: {
-      control: 'boolean',
-      description: 'Whether to show the hint text',
-    },
-    showInfo: {
-      control: 'boolean',
-      description: 'Whether to show the info tooltip',
-    },
     mandatory: {
       control: 'boolean',
       description: 'Whether the input is required',
+    },
+    errorMessage: {
+      control: 'text',
+      description: 'Error message displayed below the inputs',
+    },
+    successMessage: {
+      control: 'text',
+      description: 'Success message displayed below the inputs',
+    },
+    infoTooltip: {
+      control: 'text',
+      description: 'Tooltip text displayed below the inputs',
     },
   },
 } satisfies Meta<typeof OTPInput>;
@@ -68,13 +65,12 @@ export const Default: Story = {
     label: 'Verification Code',
     sublabel: '(required)',
     hintText: 'Enter the verification code sent to your device',
-    digits: '6',
-    state: 'default',
-    showLabel: true,
-    showSublabel: true,
-    showHint: true,
-    showInfo: false,
+    digits: OTPDigits.SIX,
+    state: TextInputState.DEFAULT,
     mandatory: true,
+    successMessage: 'Verification code is valid',
+    errorMessage: 'Invalid verification code',
+    infoTooltip: 'The verification code was sent to your email or phone',
     onChange: fn(),
   },
 };
@@ -82,7 +78,7 @@ export const Default: Story = {
 export const FourDigits: Story = {
   args: {
     ...Default.args,
-    digits: '4',
+    digits: OTPDigits.FOUR,
     sublabel: '4-digit code',
   },
 };
@@ -90,7 +86,6 @@ export const FourDigits: Story = {
 export const WithInfo: Story = {
   args: {
     ...Default.args,
-    showInfo: true,
     infoTooltip: 'The verification code was sent to your email or phone',
   },
 };
@@ -98,14 +93,14 @@ export const WithInfo: Story = {
 export const Focused: Story = {
   args: {
     ...Default.args,
-    state: 'focused',
+    state: TextInputState.FOCUSED,
   },
 };
 
 export const Filled: Story = {
   args: {
     ...Default.args,
-    state: 'filled',
+    state: TextInputState.FILLED,
     value: '123456',
   },
 };
@@ -113,8 +108,8 @@ export const Filled: Story = {
 export const FourDigitsFilled: Story = {
   args: {
     ...Default.args,
-    digits: '4',
-    state: 'filled',
+    digits: OTPDigits.FOUR,
+    state: TextInputState.FILLED,
     value: '1234',
   },
 };
@@ -122,15 +117,15 @@ export const FourDigitsFilled: Story = {
 export const Error: Story = {
   args: {
     ...Default.args,
-    state: 'error',
-    hintText: 'Invalid verification code',
+    state: TextInputState.ERROR,
+    errorMessage: 'Invalid verification code',
   },
 };
 
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    state: 'disabled',
+    state: TextInputState.DISABLED,
     hintText: 'You cannot edit this field',
   },
 }; 

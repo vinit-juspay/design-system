@@ -181,17 +181,17 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
       {/* OTP Input Fields */}
       <div 
         className={getInputsContainerClasses(digits)}
-        onClick={() => {
-          // Find the first unfilled input or the first input
-          const firstEmptyIndex = otp.findIndex(digit => digit === '');
-          const indexToFocus = firstEmptyIndex !== -1 ? firstEmptyIndex : 0;
-          focusInput(indexToFocus);
-        }}
       >
         {[...Array(parseInt(digits))].map((_, index) => {
           // Determine the appropriate state for this input
           let digitState = state;
-          if (index === focusedIndex) {
+          
+          // If the base state is ERROR, maintain the error state
+          // but also apply focused styling via the utility function if focused
+          if (state === TextInputState.ERROR) {
+            digitState = TextInputState.ERROR;
+            // The focused styling will be applied by the getDigitInputClasses
+          } else if (index === focusedIndex) {
             digitState = TextInputState.FOCUSED;
           } else if (otp[index]) {
             digitState = TextInputState.FILLED;
@@ -213,6 +213,10 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
               onChange={(e) => handleChange(e, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
+              onClick={(e) => {
+                // Stop propagation to prevent container's onClick from interfering
+                e.stopPropagation();
+              }}
               onFocus={() => { 
                 setFocusedIndex(index);
                 inputState.handleFocus();

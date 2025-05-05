@@ -39,6 +39,9 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
       infoTooltip,
       successMessage,
       errorMessage,
+      onChange,
+      onBlur,
+      onFocus,
       ...props
     },
     ref
@@ -47,6 +50,17 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
     const inputState = useInputState({
       initialState: state,
     });
+
+      // Composite handlers
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    inputState.handleFocus();
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    inputState.handleBlur();
+    onBlur?.(e);
+  };
 
     return (
       <div className={inputTheme.container}>
@@ -93,9 +107,9 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
               placeholder={placeholder}
               disabled={state === TextInputState.DISABLED}
               defaultValue={value}
-              onFocus={inputState.handleFocus}
-              onBlur={inputState.handleBlur}
-              onChange={e => inputState.updateValue(e.target.value)}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={onChange}
               {...props}
             />
 

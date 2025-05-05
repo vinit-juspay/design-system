@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import TextArea from './TextArea';
+import { TextInputState } from '../TextInput/types';
 
 const meta = {
   title: 'Components/Input/TextArea',
@@ -76,13 +77,39 @@ export const Mandatory: Story = {
   args: {
     ...Default.args,
     mandatory: true,
-    sublabel: '',
+    sublabel: undefined,
+    infoTooltip: undefined,
   },
 };
 
 export const WithInfo: Story = {
   args: {
     ...Default.args,
+    sublabel: undefined,
     infoTooltip: 'Your feedback helps us improve our service',
   },
 };
+
+export const Error: Story = {
+  args: {
+    ...Default.args,
+    state: TextInputState.ERROR,
+    errorMessage: 'Please enter a valid paragraph',
+  },
+};
+
+export const Success: Story = {
+  args: {
+    ...Default.args,
+    state: TextInputState.SUCCESS,
+    successMessage: 'Paragraph is valid',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    state: TextInputState.DISABLED,
+  },
+};
+

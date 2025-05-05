@@ -27,7 +27,8 @@ export const getDigitInputClasses = (state: TextInputState = TextInputState.DEFA
         : state === TextInputState.FILLED
           ? otpTheme.digit.states.filled
           : [otpTheme.digit.states.default, otpTheme.digit.states.hover]
-    )
+    ),
+    state === TextInputState.FOCUSED && otpTheme.digit.states.focused
   );
 };
 
