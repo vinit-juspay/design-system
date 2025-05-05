@@ -1,4 +1,131 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Display:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter+Display:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
+
+/* Inter Display Font Faces */
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 100;
+  src: url('/font/InterDisplay-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 100;
+  src: url('/font/InterDisplay-ThinItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 200;
+  src: url('/font/InterDisplay-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 200;
+  src: url('/font/InterDisplay-ExtraLightItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/font/InterDisplay-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 300;
+  src: url('/font/InterDisplay-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/font/InterDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/font/InterDisplay-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/font/InterDisplay-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 500;
+  src: url('/font/InterDisplay-MediumItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/font/InterDisplay-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/font/InterDisplay-SemiBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/font/InterDisplay-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 700;
+  src: url('/font/InterDisplay-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 800;
+  src: url('/font/InterDisplay-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 800;
+  src: url('/font/InterDisplay-ExtraBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: normal;
+  font-weight: 900;
+  src: url('/font/InterDisplay-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display';
+  font-style: italic;
+  font-weight: 900;
+  src: url('/font/InterDisplay-BlackItalic.ttf') format('truetype');
+}
 
 * {
   box-sizing: border-box;

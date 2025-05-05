@@ -10,7 +10,7 @@ import { ChartType } from '../../../lib/components/Charts/types';
 const ChartDemo = () => {
   const condensedLineChartData = [
     {
-      name: 'Jan',
+      name: 'Jan', // xAxis value
       revenue: {
         primary: { name: 'Total Revenue', val: 4000 },
         aux: [{ name: 'Growth', val: '+12%' }],
@@ -471,7 +471,7 @@ const ChartDemo = () => {
           data={lineChartData}
           height={400}
           xAxisLabel="Month"
-          yAxisLabel="Amount ($)"
+          yAxisLabel="Title"
           metrics={metrics}
           slot1={
             <Button
