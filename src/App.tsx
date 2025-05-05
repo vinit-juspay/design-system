@@ -29,7 +29,7 @@ import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
-import { TextInputSize, TextInputState } from '../lib/components/TextInput/types';
+
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
