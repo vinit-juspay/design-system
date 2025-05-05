@@ -55,4 +55,12 @@ export interface CheckboxProps {
    * Position of the checkbox relative to children/label
    */
   position?: CheckboxPosition;
+  /**
+   * Additional text to display below the checkbox
+   */
+  subtext?: string;
+  /**
+   * Optional content to render on the right side
+   */
+  rightSlot?: ReactNode;
 }
