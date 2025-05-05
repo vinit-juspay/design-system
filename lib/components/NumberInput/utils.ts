@@ -35,9 +35,3 @@ export const getNumberInputClasses = () => {
     numberInputTheme.input.base
   );
 };
-
-export const getRightSlotWithStepperClasses = () => {
-  return cn(
-    numberInputTheme.slot.rightWithStepper
-  );
-}; 

@@ -20,18 +20,16 @@ const { input: inputTheme } = themeConfig.euler;
 
 const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
   digits = OTPDigits.SIX,
-  hintText = "Enter the verification code sent to your device",
-  label = "Verification Code",
+  hintText,
+  label,
   mandatory = false,
-  showHint = true,
-  showInfo = false,
-  showLabel = true,
-  showSublabel = true,
   state = TextInputState.DEFAULT,
-  sublabel = "(required)",
-  value = '',
+  sublabel,
+  value,
   onChange,
   infoTooltip,
+  successMessage,
+  errorMessage,
   ...props
 }, ref) => {
   const [otp, setOtp] = useState<string[]>(Array(parseInt(digits)).fill(''));
@@ -158,21 +156,21 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
   return (
     <div ref={ref} className={getOTPContainerClasses()} {...props}>
       {/* Label */}
-      {showLabel && label && (
-        <div className="flex items-center gap-2">
-          <div className="flex gap-1">
+      {label && (
+        <div className={inputTheme.label.container}>
+          <div className={inputTheme.label.labelwSublabel}>
             <label className={getLabelClasses()}>
               {label} {mandatory && (
               <sup className={inputTheme.label.mandatory}>*</sup>
             )}
             </label>
-            {showSublabel && sublabel && (
+            {sublabel && (
               <small className={getSublabelClasses()}>
                 {sublabel}
               </small>
             )}
           </div>
-          {showInfo && infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
@@ -181,7 +179,15 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
       )}
 
       {/* OTP Input Fields */}
-      <div className={getInputsContainerClasses(digits)}>
+      <div 
+        className={getInputsContainerClasses(digits)}
+        onClick={() => {
+          // Find the first unfilled input or the first input
+          const firstEmptyIndex = otp.findIndex(digit => digit === '');
+          const indexToFocus = firstEmptyIndex !== -1 ? firstEmptyIndex : 0;
+          focusInput(indexToFocus);
+        }}
+      >
         {[...Array(parseInt(digits))].map((_, index) => {
           // Determine the appropriate state for this input
           let digitState = state;
@@ -224,8 +230,18 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(({
         })}
       </div>
 
-      {/* Hint Text */}
-      {showHint && hintText && (
+      {/* Message based on state */}
+      {state === TextInputState.ERROR && errorMessage && (
+        <span className={getHintClasses(state)}>
+          {errorMessage}
+        </span>
+      )}
+      {state === TextInputState.SUCCESS && successMessage && (
+        <span className={getHintClasses(state)}>
+          {successMessage}
+        </span>
+      )}
+      {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
         <span className={getHintClasses(state)}>
           {hintText}
         </span>

@@ -19,14 +19,15 @@ export const getInputsContainerClasses = (digits: OTPDigits = OTPDigits.SIX) => 
 export const getDigitInputClasses = (state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
     otpTheme.digit.base,
-    state === TextInputState.DEFAULT && [
-      otpTheme.digit.states.default,
-      otpTheme.digit.states.hover,
-    ],
-    state === TextInputState.FOCUSED && otpTheme.digit.states.focused,
-    state === TextInputState.FILLED && otpTheme.digit.states.filled,
     state === TextInputState.ERROR && otpTheme.digit.states.error,
-    state === TextInputState.DISABLED && otpTheme.digit.states.disabled
+    state === TextInputState.DISABLED && otpTheme.digit.states.disabled,
+    state !== TextInputState.ERROR && state !== TextInputState.DISABLED && (
+      state === TextInputState.FOCUSED 
+        ? otpTheme.digit.states.focused
+        : state === TextInputState.FILLED
+          ? otpTheme.digit.states.filled
+          : [otpTheme.digit.states.default, otpTheme.digit.states.hover]
+    )
   );
 };
 

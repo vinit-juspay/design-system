@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import TextArea from './TextArea';
 
 const meta = {
@@ -33,22 +32,6 @@ const meta = {
       control: 'text',
       description: 'Hint text displayed below the textarea',
     },
-    showLabel: {
-      control: 'boolean',
-      description: 'Whether to show the label',
-    },
-    showSublabel: {
-      control: 'boolean',
-      description: 'Whether to show the sublabel',
-    },
-    showHint: {
-      control: 'boolean',
-      description: 'Whether to show the hint text',
-    },
-    showInfo: {
-      control: 'boolean',
-      description: 'Whether to show the info tooltip',
-    },
     mandatory: {
       control: 'boolean',
       description: 'Whether the textarea is required',
@@ -57,9 +40,17 @@ const meta = {
       control: 'number',
       description: 'Number of rows to display',
     },
-    maxLength: {
-      control: 'number',
-      description: 'Maximum number of characters allowed',
+    errorMessage: {
+      control: 'text',
+      description: 'Error message displayed below the textarea',
+    },
+    successMessage: {
+      control: 'text',
+      description: 'Success message displayed below the textarea',
+    },
+    infoTooltip: {
+      control: 'text',
+      description: 'Tooltip text displayed below the textarea',
     },
   },
 } satisfies Meta<typeof TextArea>;
@@ -72,14 +63,12 @@ export const Default: Story = {
     label: 'Your Feedback',
     sublabel: '(optional)',
     placeholder: 'Enter your feedback here',
-    hintText: 'Please provide any comments or suggestions',
-    showLabel: true,
-    showSublabel: true,
-    showHint: true,
-    showInfo: false,
     mandatory: false,
     rows: 4,
-    onChange: fn(),
+    hintText: 'Please provide any comments or suggestions',
+    errorMessage: 'Please enter a valid email address',
+    successMessage: 'Email address is valid',
+    infoTooltip: 'Additional information about this field',
   },
 };
 
@@ -94,22 +83,6 @@ export const Mandatory: Story = {
 export const WithInfo: Story = {
   args: {
     ...Default.args,
-    showInfo: true,
     infoTooltip: 'Your feedback helps us improve our service',
-  },
-};
-
-export const Error: Story = {
-  args: {
-    ...Default.args,
-    state: 'error',
-    hintText: 'Please enter at least 10 characters',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    ...Default.args,
-    state: 'disabled',
   },
 };

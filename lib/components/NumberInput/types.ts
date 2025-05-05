@@ -1,6 +1,11 @@
 import { TextInputSize, TextInputState } from '../TextInput/types';
 import { ReactNode } from 'react';
 
+export enum StepperDirection {
+  UP = 'up',
+  DOWN = 'down',
+}
+
 export interface NumberInputProps {
   hintText?: string;
   label?: string;
@@ -14,9 +19,11 @@ export interface NumberInputProps {
   value?: number;
   infoTooltip?: string;
   successMessage?: string;
-  showStepper?: boolean;
+  errorMessage?: string;
   min?: number;
   max?: number;
   step?: number;
   onChange?: (value: number | undefined) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 } 

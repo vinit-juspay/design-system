@@ -93,7 +93,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         <input
           ref={ref}
           type="text"
-          className={getInputClasses(inputState.visualState)}
+          className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
           placeholder={placeholder}
           disabled={state === TextInputState.DISABLED}
           defaultValue={value}

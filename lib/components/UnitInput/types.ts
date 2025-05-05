@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { TextInputSize, TextInputState } from '../TextInput/types';
 
 export enum UnitPosition {
@@ -10,8 +11,9 @@ export interface UnitInputProps {
   label?: string;
   mandatory?: boolean;
   placeholder?: string;
-  showUnit?: boolean;
   size?: TextInputSize;
+  rightSlot?: ReactNode;
+  leftSlot?: ReactNode;
   state?: TextInputState;
   sublabel?: string;
   unitPosition?: UnitPosition;
@@ -19,4 +21,5 @@ export interface UnitInputProps {
   value?: string;
   infoTooltip?: string;
   successMessage?: string;
+  errorMessage?: string;
 } 

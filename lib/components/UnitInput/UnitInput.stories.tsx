@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UnitInput } from '../../main';
+import { TextInputState, TextInputSize } from '../TextInput/types';
+import { Mail, ArrowRight } from "lucide-react";
+import { UnitPosition } from './types';
+
 
 const meta = {
   title: 'Components/Input/UnitInput',
@@ -14,7 +18,7 @@ const meta = {
     },
     state: {
       control: 'select',
-      options: ['default', 'error', 'disabled'],
+      options: ['default', 'error', 'disabled', 'success'],
     },
     unitPosition: {
       control: 'select',
@@ -38,9 +42,6 @@ const meta = {
     mandatory: {
       control: 'boolean',
     },
-    showUnit: {
-      control: 'boolean',
-    },
     value: {
       control: 'text',
     },
@@ -52,143 +53,118 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    label: 'Measurement',
+    placeholder: 'Placeholder Text',
+    unitText: 'cm',
+    unitPosition: UnitPosition.SUFFIX,
+    hintText: 'Enter a value with unit',
+    size: TextInputSize.MEDIUM,
+    state: TextInputState.DEFAULT,
+    mandatory: false,
+    sublabel: '(optional)',
+    value: '100',
+    infoTooltip: 'This is additional information about the field',
+    successMessage: 'Input is valid',
+    errorMessage: 'This field contains an error',
+    leftSlot: <Mail className="w-4 h-4 text-gray-400" />,
+    rightSlot: <ArrowRight className="w-4 h-4 text-gray-400" />,
+  },
+};
+
+export const WithSuffix: Story = {
+  args: {
     label: 'Weight',
     sublabel: '(optional)',
     placeholder: 'Enter weight',
     unitText: 'kg',
-    unitPosition: 'suffix',
+    unitPosition: UnitPosition.SUFFIX,
     hintText: 'Enter weight in kilograms',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
+    size: TextInputSize.MEDIUM,
+    state: TextInputState.DEFAULT,
   },
 };
 
-export const TextWithSuffix: Story = {
+export const WithPrefix: Story = {
   args: {
-    label: 'Username',
-    sublabel: '(required)',
-    placeholder: 'Enter username',
-    unitText: '@company.com',
-    unitPosition: 'suffix',
-    hintText: 'Enter your username only',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
-    mandatory: true,
+    label: 'Price',
+    placeholder: 'Enter price',
+    unitText: '$',
+    unitPosition: UnitPosition.PREFIX,
+    hintText: 'Enter price in USD',
+    size: TextInputSize.MEDIUM,
+    state: TextInputState.DEFAULT,
   },
 };
 
-export const TextWithPrefix: Story = {
-  args: {
-    label: 'Twitter Handle',
-    placeholder: 'username',
-    unitText: '@',
-    unitPosition: 'prefix',
-    hintText: 'Enter your Twitter handle without the @ symbol',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
-  },
-};
-
-export const EmailWithDomain: Story = {
+export const WithMandatory: Story = {
   args: {
     label: 'Email',
     placeholder: 'username',
     unitText: '@example.com',
-    unitPosition: 'suffix',
+    unitPosition: UnitPosition.SUFFIX,
     hintText: 'Enter your username only',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
+    size: TextInputSize.MEDIUM,
+    state: TextInputState.DEFAULT,
     mandatory: true,
   },
 };
 
-export const CurrencyExample: Story = {
-  args: {
-    label: 'Price',
-    unitPosition: 'prefix',
-    unitText: '$',
-    hintText: 'Enter price in dollars',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
-    value: '19.99',
-  },
-};
-
-export const PercentageExample: Story = {
-  args: {
-    label: 'Discount',
-    unitPosition: 'suffix',
-    unitText: '%',
-    hintText: 'Enter discount percentage',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
-    value: '15',
-  },
-};
-
-export const PhoneWithCountryCode: Story = {
-  args: {
-    label: 'Phone Number',
-    placeholder: '123456789',
-    unitText: '+1',
-    unitPosition: 'prefix',
-    hintText: 'Enter your phone number without country code',
-    showUnit: true,
-    size: 'md',
-    state: 'default',
-
-  },
-};
-
-export const WithoutUnit: Story = {
-  args: {
-    label: 'Unit Input',
-    sublabel: 'Without unit',
-    placeholder: 'Placeholder',
-    showUnit: false,
-    hintText: 'Unit input without any unit displayed',
-  },
-};
-
-export const LargeSize: Story = {
+export const WithLargeSize: Story = {
   args: {
     ...Default.args,
-    size: 'lg',
+    size: TextInputSize.LARGE,
+    label: 'Large Input',
   },
 };
 
-export const Error: Story = {
+export const WithErrorState: Story = {
   args: {
     ...Default.args,
-    state: 'error',
-    hintText: 'Please enter a valid value',
+    state: TextInputState.ERROR,
+    label: 'Error State',
+    errorMessage: 'This field contains an error',
   },
 };
 
-export const Disabled: Story = {
+export const WithSuccessState: Story = {
   args: {
-    label: 'Unit Input',
-    sublabel: 'Sublabel text',
-    placeholder: 'Placeholder',
-    unitText: 'kg',
-    state: 'disabled',
-    hintText: 'Hint text message',
-  },
-};
-
-export const Filled: Story = {
-  args: {
-    label: 'Unit Input',
-    sublabel: 'With filled value',
-    unitText: 'km',
-    state: 'filled',
+    ...Default.args,
+    state: TextInputState.SUCCESS,
+    label: 'Success State',
+    successMessage: 'Input is valid',
     value: '100',
-    hintText: 'Shows a filled input field',
   },
-}; 
+};
+
+export const WithDisabledState: Story = {
+  args: {
+    ...Default.args,
+    state: TextInputState.DISABLED,
+    label: 'Disabled Input',
+    value: '50',
+  },
+};
+
+export const WithInfoTooltip: Story = {
+  args: {
+    ...Default.args,
+    label: 'With Tooltip',
+    infoTooltip: 'This is additional information about the field',
+  },
+};
+
+export const WithLeftSlot: Story = {
+  args: {
+    ...Default.args,
+    leftSlot: <Mail className="w-4 h-4 text-gray-400" />,
+    rightSlot: undefined,
+  },
+};
+
+export const WithRightSlot: Story = {
+  args: {
+    ...Default.args,
+    leftSlot: undefined,
+    rightSlot: <ArrowRight className="w-4 h-4 text-gray-400" />,
+  },
+};

@@ -5,28 +5,32 @@ import { TextInputState } from '../TextInput/types';
 const { textArea: textAreaTheme, input: inputTheme } = themeConfig.euler;
 
 export const getTextAreaContainerClasses = () => {
-  return textAreaTheme.container.base;
+  return textAreaTheme.container;
 };
 
 export const getTextAreaClasses = (state: TextInputState = TextInputState.DEFAULT) => {
-  // Base classes that apply to all states
-  const baseClasses = [
-    textAreaTheme.textarea.base,
-  ];
   
-  // State-specific classes
+  const states = textAreaTheme.textarea.states;
+
+  // base-specific classes
+  const baseClasses = [
+    textAreaTheme.textarea.base
+  ];
+
+  // Apply state-specific classes
   const stateClasses = [];
   
-  if (state === TextInputState.DEFAULT) {
-    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.hover);
+  // If state is ERROR, only apply error classes regardless of focus state
+  if (state === TextInputState.ERROR) {
+    stateClasses.push(states.default, states.error);
+  } else if (state === TextInputState.DEFAULT) {
+    stateClasses.push(states.default, states.hover);
   } else if (state === TextInputState.FOCUSED) {
-    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.focused);
+    stateClasses.push(states.default, states.focused);
   } else if (state === TextInputState.FILLED) {
-    stateClasses.push(textAreaTheme.textarea.states.default, textAreaTheme.textarea.states.hover);
-  } else if (state === TextInputState.ERROR) {
-    stateClasses.push(textAreaTheme.textarea.states.error);
+    stateClasses.push(states.default, states.hover); // Keep hover for filled state
   } else if (state === TextInputState.DISABLED) {
-    stateClasses.push(textAreaTheme.textarea.states.disabled);
+    stateClasses.push(states.disabled);
   }
   
   return cn(...baseClasses, ...stateClasses);

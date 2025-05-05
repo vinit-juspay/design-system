@@ -9,15 +9,14 @@ export interface TextAreaProps {
   label?: string;
   mandatory?: boolean;
   placeholder?: string;
-  showHint?: boolean;
-  showInfo?: boolean;
-  showLabel?: boolean;
-  showSublabel?: boolean;
   state?: TextInputState;
   sublabel?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onFocus?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   infoTooltip?: string;
   rows?: number;
-  maxLength?: number;
+  successMessage?: string;
+  errorMessage?: string;
 } 

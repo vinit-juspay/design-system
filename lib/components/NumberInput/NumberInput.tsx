@@ -1,13 +1,13 @@
-import React, { forwardRef, useCallback, useState, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useRef } from 'react';
 import { HelpCircle } from 'lucide-react';
-import { Tooltip } from "../../main";
+import { Tooltip } from '../../main';
 import { ChevronIcon } from './ChevronIcon';
 import { TooltipSize } from '../Tooltip/types';
 import { TextInputSize, TextInputState } from '../TextInput/types';
 import { SlotPosition } from '../TextInput/utils';
 import { useInputState } from '../../hooks';
 
-import { NumberInputProps } from './types';
+import { NumberInputProps, StepperDirection } from './types';
 import {
   getInputBaseClasses,
   getInputClasses,
@@ -21,156 +21,158 @@ import {
   getStepperButtonClasses,
   getStepperIconClasses,
   getNumberInputClasses,
-  getRightSlotWithStepperClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
 
 const { input: inputTheme } = themeConfig.euler;
 
-// Create an enum for stepper directions to follow cursor rules
-export enum StepperDirection {
-  UP = 'up',
-  DOWN = 'down',
-}
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
+  (
+    {
+      hintText,
+      label,
+      leftSlot,
+      mandatory = false,
+      placeholder = 'Placeholder Text',
+      rightSlot,
+      size = TextInputSize.MEDIUM,
+      state = TextInputState.DEFAULT,
+      sublabel,
+      value,
+      infoTooltip,
+      successMessage,
+      errorMessage,
+      min,
+      max,
+      step = 1,
+      onChange,
+      onBlur,
+      onFocus,
+      ...props
+    },
+    ref
+  ) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
-  hintText = "This is a hint text to help user.",
-  label = "Your Label",
-  leftSlot,
-  mandatory = false,
-  placeholder = "Add your number",
-  rightSlot,
-  size = TextInputSize.MEDIUM,
-  state = TextInputState.DEFAULT,
-  sublabel = "(optional)",
-  value,
-  infoTooltip,
-  successMessage,
-  showStepper = true,
-  min,
-  max,
-  step = 1,
-  onChange,
-  ...props
-}, ref) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [localInputValue, setLocalInputValue] = useState<string>(value === undefined ? '' : String(value));
-  
-  // Use the custom hook for state management
-  const inputState = useInputState({
-    initialState: state, 
-    initialValue: localInputValue
-  });
+    // Use the custom hook for state management
+    const inputState = useInputState({
+      initialState: state,
+      initialValue: value !== undefined ? String(value) : '',
+    });
 
-  // Sync with external value when it changes
-  useEffect(() => {
-    if (value !== undefined) {
-      setLocalInputValue(String(value));
-      inputState.updateValue(String(value));
-    }
-  }, [value]);
+    const showStepper = step !== undefined && step > 0;
 
-  // Connect the forwarded ref with our local ref
-  useEffect(() => {
-    if (typeof ref === 'function') {
-      ref(inputRef.current);
-    } else if (ref) {
-      ref.current = inputRef.current;
-    }
-  }, [ref]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setLocalInputValue(newValue);
-    inputState.updateValue(newValue);
-    
-    if (newValue === '') {
-      onChange?.(undefined);
-    } else {
-      const numValue = Number(newValue);
-      if (!isNaN(numValue)) {
-        onChange?.(numValue);
+    // Connect the forwarded ref with our local ref
+    const setInputRef = useCallback((el: HTMLInputElement | null) => {
+      inputRef.current = el;
+      if (typeof ref === 'function') {
+        ref(el);
+      } else if (ref) {
+        ref.current = el;
       }
-    }
-  };
+    }, [ref]);
 
-  const handleStepperClick = useCallback((direction: StepperDirection) => {
-    if (state === TextInputState.DISABLED) return;
-    
-    // Focus the input when using stepper
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-    
-    // Get the current value from the input field or fall back to value prop
-    const currentValue = localInputValue !== '' ? Number(localInputValue) : (value ?? 0);
-    const newValue = direction === StepperDirection.UP ? currentValue + step : currentValue - step;
-    
-    if (min !== undefined && newValue < min) return;
-    if (max !== undefined && newValue > max) return;
-    
-    // Update both states
-    setLocalInputValue(String(newValue));
-    inputState.updateValue(String(newValue));
-    onChange?.(newValue);
-  }, [localInputValue, value, step, min, max, onChange, state]);
+    // Handle input change
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      inputState.updateValue(newValue);
 
-  return (
-    <div className="flex flex-col space-y-2">
-      {/* Label */}
-      {label && (
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            <label className={getLabelClasses()}>
-              {label} {mandatory && (
-              <sup className={inputTheme.label.mandatory}>*</sup>
+      if (newValue === '') {
+        onChange?.(undefined);
+      } else {
+        const numValue = Number(newValue);
+        if (!isNaN(numValue)) {
+          onChange?.(numValue);
+        }
+      }
+    };
+
+    // Composite handlers
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      inputState.handleFocus();
+      onFocus?.(e);
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      inputState.handleBlur();
+      onBlur?.(e);
+    };
+
+    const handleStepperClick = useCallback(
+      (direction: StepperDirection) => {
+        if (state === TextInputState.DISABLED) return;
+
+        // Focus the input when using stepper
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+
+        // Get the current value from the input field or fall back to value prop
+        const currentValue =
+          inputRef.current?.value !== '' ? Number(inputRef.current?.value) : (value ?? 0);
+
+        const newValue =
+          direction === StepperDirection.UP ? currentValue + step : currentValue - step;
+
+        if (min !== undefined && newValue < min) return;
+        if (max !== undefined && newValue > max) return;
+
+        // Update input value
+        if (inputRef.current) {
+          inputRef.current.value = String(newValue);
+          inputState.updateValue(String(newValue));
+        }
+
+        onChange?.(newValue);
+      },
+      [inputState, min, max, onChange, step, state, value]
+    );
+
+    return (
+      <div className={inputTheme.container}>
+        {/* Label */}
+        {label && (
+          <div className={inputTheme.label.container}>
+            <div className={inputTheme.label.labelwSublabel}>
+              <label className={getLabelClasses()}>
+                {label} {mandatory && <sup className={inputTheme.label.mandatory}>*</sup>}
+              </label>
+              {sublabel && <small className={getSublabelClasses()}>{sublabel}</small>}
+            </div>
+            {infoTooltip && (
+              <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+                <button type="button" aria-label="More information" className="focus:outline-none">
+                  <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+                </button>
+              </Tooltip>
             )}
-            </label>
-            {sublabel && (
-              <small className={getSublabelClasses()}>
-                {sublabel}
-              </small>
-            )}
-          </div>
-          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
-              <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
-          </Tooltip>}
-        </div>
-      )}
-
-      {/* Input Base */}
-      <div className={`${getInputBaseClasses(size, inputState.visualState, leftSlot, rightSlot)} overflow-hidden`}>
-        {/* Left Slot */}
-        {leftSlot && (
-          <div className={getSlotClasses(SlotPosition.LEFT)}>
-            {leftSlot}
           </div>
         )}
 
-        {/* Input */}
-        <input
-          ref={inputRef}
-          type="number"
-          className={`${getInputClasses(inputState.visualState, leftSlot, showStepper || rightSlot ? <div /> : undefined)} ${getNumberInputClasses()}`}
-          placeholder={placeholder}
-          disabled={state === TextInputState.DISABLED}
-          value={localInputValue}
-          min={min}
-          max={max}
-          step={step}
-          onChange={handleInputChange}
-          onFocus={inputState.handleFocus}
-          onBlur={inputState.handleBlur}
-          {...props}
-        />
+        {/* Input Base */}
+        <div className={getInputBaseClasses(size, inputState.visualState)}>
+          {/* Left Slot */}
+          {leftSlot && <div className={getSlotClasses(SlotPosition.LEFT)}>{leftSlot}</div>}
 
-        {/* Right Slot with Stepper */}
-        <div className="flex items-center">
-          {rightSlot && (
-            <div className={showStepper ? getRightSlotWithStepperClasses() : getSlotClasses(SlotPosition.RIGHT)}>
-              {rightSlot}
-            </div>
-          )}
+          {/* Input */}
+          <input
+            ref={setInputRef}
+            type="number"
+            className={`${getInputClasses(inputState.visualState, leftSlot, showStepper || rightSlot ? <div /> : undefined)} ${getNumberInputClasses()}`}
+            placeholder={placeholder}
+            disabled={state === TextInputState.DISABLED}
+            defaultValue={value}
+            min={min}
+            max={max}
+            step={step}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            inputMode="numeric"
+            {...props}
+          />
+
+          {rightSlot && <div className={getSlotClasses(SlotPosition.RIGHT)}>{rightSlot}</div>}
           {showStepper && (
             <div className={getStepperClasses()}>
               <button
@@ -181,9 +183,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
                 onMouseUp={inputState.endInteraction}
                 onMouseLeave={inputState.endInteraction}
                 disabled={
-                  state === TextInputState.DISABLED || 
-                  (max !== undefined && 
-                   Number(localInputValue || 0) >= max)
+                  state === TextInputState.DISABLED ||
+                  (max !== undefined && Number(inputRef.current?.value || 0) >= max)
                 }
               >
                 <ChevronIcon direction="up" className={getStepperIconClasses()} />
@@ -196,9 +197,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
                 onMouseUp={inputState.endInteraction}
                 onMouseLeave={inputState.endInteraction}
                 disabled={
-                  state === TextInputState.DISABLED || 
-                  (min !== undefined && 
-                   Number(localInputValue || 0) <= min)
+                  state === TextInputState.DISABLED ||
+                  (min !== undefined && Number(inputRef.current?.value || 0) <= min)
                 }
               >
                 <ChevronIcon direction="down" className={getStepperIconClasses()} />
@@ -206,23 +206,22 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({
             </div>
           )}
         </div>
-      </div>
 
-      {/* Hint Text */}
-      {successMessage && (
-        <span className={getHintClasses(state)}>
-          {successMessage}
-        </span>
-      )}
-      {hintText && !successMessage && (
-        <span className={getHintClasses(state)}>
-          {hintText}
-        </span>
-      )}
-    </div>
-  );
-});
+        {/* Message based on state */}
+        {state === TextInputState.ERROR && errorMessage && (
+          <span className={getHintClasses(state)}>{errorMessage}</span>
+        )}
+        {state === TextInputState.SUCCESS && successMessage && (
+          <span className={getHintClasses(state)}>{successMessage}</span>
+        )}
+        {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
+          <span className={getHintClasses(state)}>{hintText}</span>
+        )}
+      </div>
+    );
+  }
+);
 
 NumberInput.displayName = 'NumberInput';
 
-export default NumberInput; 
+export default NumberInput;

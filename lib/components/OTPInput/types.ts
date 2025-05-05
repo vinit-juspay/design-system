@@ -23,13 +23,11 @@ export interface OTPInputProps {
   hintText?: string;
   label?: string;
   mandatory?: boolean;
-  showHint?: boolean;
-  showInfo?: boolean;
-  showLabel?: boolean;
-  showSublabel?: boolean;
   state?: TextInputState;
   sublabel?: string;
   value?: string;
   onChange?: (value: string) => void;
   infoTooltip?: string;
+  successMessage?: string;
+  errorMessage?: string;
 } 

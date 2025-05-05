@@ -22,12 +22,14 @@ export function useInputState({
   const [value, setValue] = useState<string>(initialValue.toString());
 
   // Compute the visual state based on current conditions
-  const visualState = (isFocused || isInteracting)
-    ? TextInputState.FOCUSED
-    // If we have a value and the base state is DEFAULT, show as FILLED
-    : (value && initialState === TextInputState.DEFAULT)
-      ? TextInputState.FILLED
-      : initialState;
+  const visualState = initialState === TextInputState.ERROR
+    ? TextInputState.ERROR // Always keep ERROR state regardless of focus
+    : (isFocused || isInteracting)
+      ? TextInputState.FOCUSED
+      // If we have a value and the base state is DEFAULT, show as FILLED
+      : (value && initialState === TextInputState.DEFAULT)
+        ? TextInputState.FILLED
+        : initialState;
 
   // Handle input focus
   const handleFocus = () => {

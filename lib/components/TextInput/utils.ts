@@ -13,19 +13,15 @@ export enum SlotPosition {
 export const getInputBaseClasses = (
   size: TextInputSize = TextInputSize.MEDIUM,
   state: TextInputState = TextInputState.DEFAULT,
-  leftSlot?: ReactNode,
-  rightSlot?: ReactNode
+
 ) => {
-  const hasLeftSlot = !!leftSlot;
-  const hasRightSlot = !!rightSlot;
+
   const states = inputTheme.inputBase.states;  
   
   // Extract the base classes that apply to all states
   const baseClasses = [
     inputTheme.inputBase.base,
     inputTheme.inputBase.sizes[size],
-    hasLeftSlot && inputTheme.inputBase.slots.left,
-    hasRightSlot && inputTheme.inputBase.slots.right,
   ];
   
   // Apply state-specific classes
@@ -49,11 +45,11 @@ export const getInputBaseClasses = (
 
 export const getInputClasses = (
   state: TextInputState = TextInputState.DEFAULT,
-  leftSlot?: ReactNode,
-  rightSlot?: ReactNode
+  leftSlot: ReactNode,
+  rightSlot: ReactNode
 ) => {
-  const hasLeftSlot = !!leftSlot;
-  const hasRightSlot = !!rightSlot;
+  const hasLeftSlot = leftSlot;
+  const hasRightSlot = rightSlot;
   const states = inputTheme.input.states;
   
   let paddingClass = inputTheme.input.padding.default;
@@ -68,7 +64,7 @@ export const getInputClasses = (
   // Base classes regardless of state
   const baseClasses = [
     inputTheme.input.base,
-    paddingClass
+    paddingClass,
   ];
   
   // State-specific classes

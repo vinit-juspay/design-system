@@ -59,9 +59,7 @@ export const Default: Story = {
     sublabel: '(optional)',
     placeholder: 'Enter amount',
     hintText: 'Enter the amount in USD',
-    showStepper: true,
-    size: 'md',
-    state: 'default',
+
     rightSlot: <DollarSign className="text-gray-400 w-4 h-4" />,
     leftSlot: <DollarSign className="text-gray-400 w-4 h-4" />,
   },

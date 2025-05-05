@@ -211,7 +211,7 @@ export const themeConfig = {
         success: 'text-green-600',
       },
       inputBase: {
-        base: 'w-full overflow-hidden flex flex-row justify-between items-center relative border-[1px] transition-all rounded-xl',
+        base: 'w-full overflow-hidden flex flex-row justify-between items-center relative border transition-all rounded-xl',
         sizes: {
           md: 'h-9',
           lg: 'h-10',
@@ -225,7 +225,13 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full h-full px-2 text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
+        base: 'w-full h-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
+        padding: {
+          default: 'px-3',
+          withLeftSlot: 'pl-2 pr-3',
+          withRightSlot: 'pr-2 pl-3',
+          withBothSlots: 'px-2',
+        },
         states: {
           default: ' text-gray-800 placeholder:text-gray-400',
           disabled: 'text-gray-400 placeholder:text-gray-300',
@@ -296,11 +302,9 @@ export const themeConfig = {
       input: {
         base: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
       },
-      slot: {
-        rightWithStepper: 'absolute right-11',
-      },
     },
     unitInput: {
+      container: 'flex items-center h-full',
       unit: {
         base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
         positions: {
@@ -400,18 +404,15 @@ export const themeConfig = {
       },
     },
     textArea: {
-      container: {
-        base: 'flex flex-col space-y-2',
-      },
+      container: 'flex flex-col space-y-2',
       textarea: {
-        base: 'w-full h-[100px] text-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border-[1px] transition-all placeholder:text-gray-400',
+        base: 'w-full overflow-hidden text-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border transition-all placeholder:text-gray-400',
         states: {
-          default: 'border-gray-300 bg-white text-gray-800 placeholder:text-gray-400',
+          default: 'border-gray-300 bg-white',
           hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
-          focused: 'border-primary-500 ring-2 ring-primary-100',
-          filled: 'border-gray-300 bg-white',
-          error: 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100',
-          disabled: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed placeholder:text-gray-300',
+          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
         },
       },
     },

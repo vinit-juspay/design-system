@@ -1,10 +1,10 @@
-import React, { forwardRef, useState, useEffect } from "react";
-import { HelpCircle } from "lucide-react";
-import { Tooltip } from "../../main";
+import { forwardRef } from 'react';
+import { HelpCircle } from 'lucide-react';
+import { Tooltip } from '../../main';
 import { TooltipSize } from '../Tooltip/types';
 import { useInputState } from '../../hooks';
 
-import { TextAreaProps } from "./types";
+import { TextAreaProps } from './types';
 import { TextInputState } from '../TextInput/types';
 import {
   getTextAreaContainerClasses,
@@ -12,82 +12,62 @@ import {
   getLabelClasses,
   getSublabelClasses,
   getHintClasses,
-} from "./utils";
-import { themeConfig } from "../../themeConfig";
+} from './utils';
+import { themeConfig } from '../../themeConfig';
 
 const { input: inputTheme } = themeConfig.euler;
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
-      hintText = "This is a hint text to help user",
-      label = "Your Label",
+      hintText,
+      label,
       mandatory = false,
-      placeholder = "Enter your text here",
+      placeholder = 'Enter your text here',
       rows = 4,
-      showHint = true,
-      showInfo = false,
-      showLabel = true,
-      showSublabel = true,
       state = TextInputState.DEFAULT,
-      sublabel = "(optional)",
-      value = "",
+      sublabel,
+      value,
       onChange,
+      onBlur,
+      onFocus,
       infoTooltip,
-      maxLength,
+      successMessage,
+      errorMessage,
       ...props
     },
     ref
   ) => {
-    // Maintain internal state for character count
-    const [textValue, setTextValue] = useState(value);
-
     // Use the custom hook for visual state management
     const inputState = useInputState({
       initialState: state,
-      initialValue: value
     });
 
-    // Sync with external value if provided
-    useEffect(() => {
-      setTextValue(value);
-      inputState.updateValue(value);
-    }, [value]);
+    // Composite handlers
+    const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+      inputState.handleFocus();
+      onFocus?.(e);
+    };
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const newValue = e.target.value;
-      setTextValue(newValue);
-      inputState.updateValue(newValue);
-
-      if (onChange) {
-        onChange(newValue);
-      }
+    const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+      inputState.handleBlur();
+      onBlur?.(e);
     };
 
     return (
       <div className={getTextAreaContainerClasses()}>
         {/* Label */}
-        {showLabel && label && (
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
+        {label && (
+          <div className={inputTheme.label.container}>
+            <div className={inputTheme.label.labelwSublabel}>
               <label className={getLabelClasses()}>
-                {label}{" "}
-                {mandatory && (
-                  <sup className={inputTheme.label.mandatory}>*</sup>
-                )}
+                {label} {mandatory && <sup className={inputTheme.label.mandatory}>*</sup>}
               </label>
-              {showSublabel && sublabel && (
-                <small className={getSublabelClasses()}>{sublabel}</small>
-              )}
+              {sublabel && <small className={getSublabelClasses()}>{sublabel}</small>}
             </div>
-            {showInfo && infoTooltip && (
-              <Tooltip
-                size={TooltipSize.LARGE}
-                content={infoTooltip}>
-                <button
-                  type="button"
-                  aria-label="More information"
-                  className="focus:outline-none">
+            {infoTooltip && (
+              <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+                <button type="button" aria-label="More information" className="focus:outline-none">
                   <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
                 </button>
               </Tooltip>
@@ -96,31 +76,27 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         )}
 
         {/* Textarea */}
-        <div className="relative">
-          <textarea
-            ref={ref}
-            className={getTextAreaClasses(inputState.visualState)}
-            placeholder={placeholder}
-            disabled={state === TextInputState.DISABLED}
-            defaultValue={textValue}
-            onChange={handleChange}
-            onFocus={inputState.handleFocus}
-            onBlur={inputState.handleBlur}
-            rows={rows}
-            maxLength={maxLength}
-            {...props}
-          />
-          
-          {/* Character count if maxLength is specified */}
-          {maxLength && (
-            <div className="absolute bottom-2 right-3 text-xs text-gray-400">
-              {textValue.length}/{maxLength}
-            </div>
-          )}
-        </div>
+        <textarea
+          ref={ref}
+          placeholder={placeholder}
+          disabled={state === TextInputState.DISABLED}
+          defaultValue={value}
+          onChange={onChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          rows={rows}
+          className={getTextAreaClasses(inputState.visualState)}
+          {...props}
+        />
 
-        {/* Hint Text */}
-        {showHint && hintText && (
+        {/* Message based on state */}
+        {state === TextInputState.ERROR && errorMessage && (
+          <span className={getHintClasses(state)}>{errorMessage}</span>
+        )}
+        {state === TextInputState.SUCCESS && successMessage && (
+          <span className={getHintClasses(state)}>{successMessage}</span>
+        )}
+        {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
           <span className={getHintClasses(state)}>{hintText}</span>
         )}
       </div>
@@ -128,6 +104,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   }
 );
 
-TextArea.displayName = "TextArea";
+TextArea.displayName = 'TextArea';
 
 export default TextArea;

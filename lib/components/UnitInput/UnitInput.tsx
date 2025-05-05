@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
-import { Tooltip } from "../../main";
+import { Tooltip } from '../../main';
 import { TooltipSize } from '../Tooltip/types';
 import { TextInputSize, TextInputState } from '../TextInput/types';
 import { useInputState } from '../../hooks';
@@ -12,110 +12,119 @@ import {
   getLabelClasses,
   getSublabelClasses,
   getHintClasses,
+  getSlotClasses,
+  SlotPosition,
 } from '../TextInput/utils';
-import {
-  getUnitClasses,
-} from './utils';
+import { getUnitClasses } from './utils';
 import { themeConfig } from '../../themeConfig';
 
 const { input: inputTheme } = themeConfig.euler;
+const { unitInput: unitInputTheme } = themeConfig.euler;
 
-const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(({
-  hintText = "This is a hint text to help user.",
-  label = "Your Label",
-  mandatory = false,
-  placeholder = "Enter amount",
-  showUnit = true,
-  size = TextInputSize.MEDIUM,
-  state = TextInputState.DEFAULT,
-  sublabel = "(optional)",
-  unitPosition = UnitPosition.SUFFIX,
-  unitText = "cm",
-  value,
-  infoTooltip,
-  successMessage,
-  ...props
-}, ref) => {
-  // Use the custom hook for state management
-  const inputState = useInputState({
-    initialState: state,
-    initialValue: value || ''
-  });
+const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
+  (
+    {
+      hintText,
+      label,
+      leftSlot,
+      rightSlot,
+      mandatory = false,
+      placeholder = 'Placeholder Text',
+      size = TextInputSize.MEDIUM,
+      state = TextInputState.DEFAULT,
+      sublabel,
+      unitPosition = UnitPosition.SUFFIX,
+      unitText,
+      value,
+      infoTooltip,
+      successMessage,
+      errorMessage,
+      ...props
+    },
+    ref
+  ) => {
+    // Use the custom hook for state management
+    const inputState = useInputState({
+      initialState: state,
+    });
 
-  return (
-    <div className="flex flex-col space-y-2">
-      {/* Label */}
-      {label && (
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            <label className={getLabelClasses()}>
-              {label} {mandatory && (
-              <sup className={inputTheme.label.mandatory}>*</sup>
+    return (
+      <div className={inputTheme.container}>
+        {/* Label */}
+        {label && (
+          <div className={inputTheme.label.container}>
+            <div className={inputTheme.label.labelwSublabel}>
+              <label className={getLabelClasses()}>
+                {label} {mandatory && <sup className={inputTheme.label.mandatory}>*</sup>}
+              </label>
+              {sublabel && <small className={getSublabelClasses()}>{sublabel}</small>}
+            </div>
+            {infoTooltip && (
+              <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+                <button type="button" aria-label="More information" className="focus:outline-none">
+                  <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+                </button>
+              </Tooltip>
             )}
-            </label>
-            {sublabel && (
-              <small className={getSublabelClasses()}>
-                {sublabel}
-              </small>
-            )}
-          </div>
-          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
-            <button type="button" aria-label="More information" className="focus:outline-none">
-              <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
-            </button>
-          </Tooltip>}
-        </div>
-      )}
-
-      {/* Input Base */}
-      <div className={`${getInputBaseClasses(size, inputState.visualState)} overflow-hidden`}>
-        {/* Prefix Unit */}
-        {showUnit && unitPosition === UnitPosition.PREFIX && (
-          <div className={getUnitClasses(UnitPosition.PREFIX, state)}>
-            {unitText}
           </div>
         )}
 
-        {/* Input */}
-        <input
-          ref={ref}
-          className={getInputClasses(
-            inputState.visualState,
-            showUnit && unitPosition === UnitPosition.PREFIX ? <div>unit</div> : undefined,
-            showUnit && unitPosition === UnitPosition.SUFFIX ? <div>unit</div> : undefined
+        {/* Input Base */}
+        <div className={`${getInputBaseClasses(size, inputState.visualState)}`}>
+          {/* Prefix Unit */}
+          {unitText && unitPosition === UnitPosition.PREFIX && (
+            <div className={getUnitClasses(UnitPosition.PREFIX, inputState.visualState)}>
+              {unitText}
+            </div>
           )}
-          placeholder={placeholder}
-          disabled={state === TextInputState.DISABLED}
-          defaultValue={value}
-          onFocus={inputState.handleFocus}
-          onBlur={inputState.handleBlur}
-          onChange={(e) => inputState.updateValue(e.target.value)}
-          {...props}
-        />
 
-        {/* Suffix Unit */}
-        {showUnit && unitPosition === UnitPosition.SUFFIX && (
-          <div className={getUnitClasses(UnitPosition.SUFFIX, state)}>
-            {unitText}
+          <div className={unitInputTheme.container}>
+            {leftSlot && <div className={getSlotClasses(SlotPosition.LEFT)}>{leftSlot}</div>}
+
+            {/* Input */}
+            <input
+              ref={ref}
+              type='text'
+              className={getInputClasses(
+                inputState.visualState,
+                leftSlot,
+                rightSlot
+              )}
+              placeholder={placeholder}
+              disabled={state === TextInputState.DISABLED}
+              defaultValue={value}
+              onFocus={inputState.handleFocus}
+              onBlur={inputState.handleBlur}
+              onChange={e => inputState.updateValue(e.target.value)}
+              {...props}
+            />
+
+            {rightSlot && <div className={getSlotClasses(SlotPosition.RIGHT)}>{rightSlot}</div>}
           </div>
+
+          {/* Suffix Unit */}
+          {unitText && unitPosition === UnitPosition.SUFFIX && (
+            <div className={getUnitClasses(UnitPosition.SUFFIX, inputState.visualState)}>
+              {unitText}
+            </div>
+          )}
+        </div>
+
+        {/* Message based on state */}
+        {state === TextInputState.ERROR && errorMessage && (
+          <span className={getHintClasses(state)}>{errorMessage}</span>
+        )}
+        {state === TextInputState.SUCCESS && successMessage && (
+          <span className={getHintClasses(state)}>{successMessage}</span>
+        )}
+        {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
+          <span className={getHintClasses(state)}>{hintText}</span>
         )}
       </div>
-
-      {/* Hint Text */}
-      {successMessage && (
-        <span className={getHintClasses(state)}>
-          {successMessage}
-        </span>
-      )}
-      {hintText && !successMessage && (
-        <span className={getHintClasses(state)}>
-          {hintText}
-        </span>
-      )}
-    </div>
-  );
-});
+    );
+  }
+);
 
 UnitInput.displayName = 'UnitInput';
 
-export default UnitInput; 
+export default UnitInput;
