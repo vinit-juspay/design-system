@@ -663,7 +663,7 @@ export const themeConfig = {
       },
       text: {
         label: 'text-gray-400',
-        value: 'text-gray-600 font-medium text-sm w-full',
+        value: 'text-gray-600 font-medium text-body-md',
         dayName: 'text-gray-400',
         dayNumber: 'text-gray-600',
         selectedDay: 'text-gray-0',

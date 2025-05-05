@@ -63,7 +63,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
       <div className={cn('relative w-full', className)} ref={ref}>
         <div
           className={cn(
-            'h-10 border border-gray-300 rounded-l-lg p-2 flex justify-between items-center cursor-pointer w-full',
+            'h-10 border border-gray-300 rounded-l-lg py-2.5 px-3 flex justify-between items-center cursor-pointer w-full',
             'hover:border-gray-400 transition-colors duration-200'
           )}
           onClick={onToggle}
@@ -77,9 +77,9 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
               {activePresetLabel}
             </span>
             {isOpen ? (
-              <ChevronUp className="w-4 h-4 text-gray-600" />
+              <ChevronUp className="w-3.5 h-3.5 ml-2 text-gray-600" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-gray-600" />
+              <ChevronDown className="w-3.5 h-3.5 ml-2 text-gray-600" />
             )}
           </div>
         </div>
