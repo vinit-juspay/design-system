@@ -1,6 +1,5 @@
 import { HTMLAttributes } from "react";
-import { AvatarProps, AvatarSize } from "../Avatar/types";
-import { MenuItemWithSeparatorProps, MenuStandardProps } from "../Menu/types";
+import { AvatarProps } from "../Avatar/types";
 
 export interface AvatarData extends Omit<AvatarProps, "className" | "id"> {
   id: string | number;

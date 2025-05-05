@@ -4,7 +4,7 @@ import { AvatarSize } from "../Avatar/types"
 import { cn } from "../../utils"
 import Menu from "../Menu/Menu"
 import type { MenuStandardProps } from "../Menu/types"
-import { AvatarData, AvatarGroupProps } from "./types"
+import { AvatarGroupProps } from "./types"
 import {
   getAvatarGroupContainerClassNames,
   getAvatarWrapperClassNames,

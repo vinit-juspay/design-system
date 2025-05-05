@@ -11,7 +11,7 @@ export const getAvatarGroupContainerClassNames = (className?: string): string =>
   );
 };
 
-export const getAvatarWrapperClassNames = (index: number, total: number): string => {
+export const getAvatarWrapperClassNames = (_index: number, _total: number): string => {
   const avatarGroupTheme = themeConfig.euler.avatarGroup;
   
   return cn(
