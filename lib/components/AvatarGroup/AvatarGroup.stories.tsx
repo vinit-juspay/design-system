@@ -9,7 +9,7 @@ const avatarGroupData: AvatarData[] = [
   { id: 5, fallback: 'U5', alt: 'User 5 Fallback' }, // Custom fallback
   { id: 6, src: 'https://randomuser.me/api/portraits/men/40.jpg', alt: 'User 6' },
   { id: 7, src: 'https://randomuser.me/api/portraits/women/50.jpg', alt: 'User 7' },
-  { id: 8, src: 'invalid-url', alt: 'User 8 Bad Src' }, // Bad source, initials fallback
+  { id: 8, src: 'invalid-url', alt: 'User 8 Bad Src' },
 ];
 
 const meta: Meta<typeof AvatarGroup> = {

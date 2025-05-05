@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Avatar, AvatarProps } from "./Avatar"
+import { Avatar, AvatarProps } from "../Avatar/Avatar"
 import { cn } from "../../utils"
 import Menu from "../Menu/Menu"
 import type { MenuItemWithSeparatorProps, MenuStandardProps } from "../Menu/types"

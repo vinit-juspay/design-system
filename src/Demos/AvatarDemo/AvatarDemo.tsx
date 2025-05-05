@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Avatar, AvatarGroup } from '../../../lib/main'; // Assuming Avatar is exported from main
-import { AvatarProps } from '../../../lib/components/Avatar/Avatar'; // Import props if needed
-import { AvatarData } from '../../../lib/components/Avatar/AvatarGroup'; // Import AvatarData
+import { AvatarProps } from '../../../lib/components/Avatar'; // Updated path to directory index
+import { AvatarData } from '../../../lib/components/AvatarGroup'; // Updated path to directory index
 
 const avatarGroupData: AvatarData[] = [
   { id: 1, src: 'https://randomuser.me/api/portraits/women/10.jpg', alt: 'User 1' },
