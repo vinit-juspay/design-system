@@ -114,6 +114,27 @@ export const themeConfig = {
         },
       },
     },
+    buttonGroup: {
+      base: {
+        container: 'inline-flex items-center',
+      },
+      spacing: {
+        stacked: '',
+        nonStacked: {
+          sm: 'gap-3',
+          md: 'gap-4',
+          lg: 'gap-4',
+        },
+      },
+      buttonStyles: {
+        stacked: {
+          first: 'rounded-r-none border-r-0',
+          middle: 'rounded-none border-r-0',
+          last: 'rounded-l-none',
+        },
+        nonStacked: '',
+      },
+    },
     tag: {
       variant: {
         noFill: {
