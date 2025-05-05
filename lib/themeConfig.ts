@@ -628,5 +628,64 @@ export const themeConfig = {
         right: 'inline-flex items-center justify-center w-4.5 h-4.5',
       },
     },
+    dateRangePicker: {
+      base: {
+        container: 'relative inline-flex w-full',
+        input:
+          'flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer',
+      },
+      input: {
+        primary: 'border-gray-300',
+        secondary: 'border-gray-200 bg-gray-50',
+        sizes: {
+          sm: 'text-xs py-1',
+          md: 'text-sm py-2',
+          lg: 'text-base py-2.5',
+        },
+      },
+      states: {
+        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+        disabledDay: 'opacity-40 cursor-not-allowed pointer-events-none',
+      },
+      calendar: {
+        container:
+          'absolute z-10 mt-1 w-auto min-w-96 bg-white border border-gray-200 rounded-lg shadow-lg',
+        gridContainer: 'max-h-[400px] overflow-y-auto p-4',
+        monthContainer: 'mb-6',
+        monthHeader: 'text-lg font-semibold text-gray-700 my-1',
+        dayNamesContainer: 'grid grid-cols-7 text-center text-gray-500',
+        dayName: 'p-2 border-b border-gray-100',
+        weekRow: 'grid grid-cols-7 py-1',
+        emptyCell: 'p-2',
+        dayCell: 'cursor-pointer text-center p-2 relative font-medium box-border',
+        startDate: 'bg-primary-500 rounded-l-lg',
+        endDate: 'bg-primary-500 rounded-r-lg',
+        singleDate: 'bg-primary-500 rounded-lg',
+        rangeDay: 'bg-primary-50',
+        todayDay: 'font-medium',
+        todayIndicator:
+          'absolute w-1 h-1 bg-primary-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2',
+        hoverState: 'hover:ring-1 hover:ring-inset hover:ring-primary-500 hover:rounded-lg',
+      },
+      presets: {
+        button:
+          'px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+        activeButton: 'bg-primary-50 border-primary-500 text-primary-700',
+      },
+      timePicker: {
+        container: 'p-4 border-t border-gray-200',
+        input:
+          'w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-gray-700',
+      },
+      text: {
+        label: 'text-gray-400',
+        value: 'text-gray-600 font-medium text-sm w-full',
+        dayName: 'text-gray-400',
+        dayNumber: 'text-gray-600',
+        selectedDay: 'text-gray-0',
+        rangeDay: 'text-gray-600',
+        todayDay: 'text-primary-500',
+      },
+    },
   },
 };

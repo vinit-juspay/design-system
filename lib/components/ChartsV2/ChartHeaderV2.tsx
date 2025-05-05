@@ -1,4 +1,3 @@
-
 import { getChartHeaderContainer, getChartSlotContainer } from './themeUtils';
 import { ChartHeaderPropsV2 } from './types';
 
