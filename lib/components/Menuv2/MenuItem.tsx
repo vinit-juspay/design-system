@@ -1,6 +1,7 @@
 import React, { forwardRef, useState, useEffect, ReactElement, useRef } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "../../utils";
+import { themeConfig } from "../../themeConfig";
 import { 
   MenuItemProps, 
   MenuItemType, 
@@ -246,11 +247,11 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   let hoverClass = "";
   if (!disabled && state !== MenuItemState.NA && !isLabel) {
     if (action === MenuItemAction.PRIMARY) {
-      hoverClass = "hover:bg-blue-50";
+      hoverClass = themeConfig.euler.menuv2.menuItem.hover.PRIMARY;
     } else if (action === MenuItemAction.DANGER) {
-      hoverClass = "hover:bg-red-50";
+      hoverClass = themeConfig.euler.menuv2.menuItem.hover.DANGER;
     } else {
-      hoverClass = "hover:bg-[#F3F4F6]";
+      hoverClass = themeConfig.euler.menuv2.menuItem.hover.DEFAULT;
     }
   }
 
@@ -260,14 +261,14 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
     if (React.isValidElement(icon)) {
       const elementWithClassName = icon as ReactElement<IconElementProps>;
       return React.cloneElement(elementWithClassName, { 
-        className: cn("w-4 h-4", elementWithClassName.props.className) 
+        className: cn(themeConfig.euler.menuv2.iconSize, elementWithClassName.props.className) 
       });
     }
     
     // If it's a Lucide icon component
     if (typeof icon === 'function') {
       const Icon = icon as React.ComponentType<IconElementProps>;
-      return <Icon className="w-4 h-4" />;
+      return <Icon className={themeConfig.euler.menuv2.iconSize} />;
     }
     
     return icon;
@@ -300,13 +301,11 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
     // Create submenu portal content with proper collision area
     const submenuPortalContent = (
       <div 
+        className={cn(themeConfig.euler.menuv2.menuItem.submenu.portal.base)}
         style={{
-          position: 'absolute',
-          zIndex: 9999,
           top: top, 
           left: left,
         }}
-        className="submenu-portal"
         onMouseEnter={() => {
           // Clear any close timers when mouse enters the submenu
           if (submenuTimerRef.current) {
@@ -316,30 +315,21 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
         }}
       >
         {/* Safe area to prevent unwanted closing */}
-        <div className="relative">
+        <div className={themeConfig.euler.menuv2.menuItem.submenu.portal.container}>
           {/* Collision zone that extends toward the parent menu item */}
           <div 
-            className="absolute"
-            style={{
-              top: 0,
-              [shouldFlipHorizontal ? 'right' : 'left']: '0px',
-              width: '24px', // Wider collision zone
-              height: '100%',
-              transform: `translateX(${shouldFlipHorizontal ? '100%' : '-100%'})`,
-              // Uncomment to debug: backgroundColor: 'rgba(255,0,0,0.1)',
-            }}
+            className={cn(
+              themeConfig.euler.menuv2.menuItem.submenu.portal.collisionZone.base, 
+              shouldFlipHorizontal 
+                ? themeConfig.euler.menuv2.menuItem.submenu.portal.collisionZone.right 
+                : themeConfig.euler.menuv2.menuItem.submenu.portal.collisionZone.left
+            )}
           />
           
-          <div
-            className={cn(
-              "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem]",
-              "origin-top-left"
-            )}
-            style={{
-              animation: 'menuAnimation 150ms ease-out',
-            }}
-            onClick={e => e.stopPropagation()} // Prevent clicks from closing parent menu
-          >
+          <div className={cn(getSubmenuClassNames())} onClick={e => e.stopPropagation()}>
+            {/* Use animation from theme config */}
+            <style>{themeConfig.euler.menuv2.animation}</style>
+            
             {submenuItems.map((item: MenuItemProps, index: number) => (
               <MenuItem
                 key={`${item.id || index}-submenu`}
@@ -353,27 +343,13 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       </div>
     );
     
-    // Inject the animation style
-    const animationStyle = `
-      @keyframes menuAnimation {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-      }
-    `;
-    
     // Use createPortal to render at body level to avoid z-index issues
-    return createPortal(
-      <>
-        <style>{animationStyle}</style>
-        {submenuPortalContent}
-      </>,
-      document.body
-    );
+    return createPortal(submenuPortalContent, document.body);
   };
 
   // If type is separator, render a simple divider
   if (type === MenuItemType.SEPARATOR) {
-    return <div className="h-px my-1 bg-gray-200" role="separator" />;
+    return <div className={themeConfig.euler.menuv2.separator} role="separator" />;
   }
 
   return (
@@ -388,7 +364,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
         menuItemRef.current = node;
       }}
       id={id}
-      className={cn(itemClassName, hoverClass, "rounded-md", className)}
+      className={cn(itemClassName, hoverClass, themeConfig.euler.menuv2.menuItem.rounded, className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -404,7 +380,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       )}
       
       {/* Text content */}
-      <span className="flex-grow truncate" style={{ fontFeatureSettings: "'liga' off, 'clig' off" }}>{text}</span>
+      <span className={themeConfig.euler.menuv2.textContent}>{text}</span>
       
       {/* Shortcut */}
       {hasShortcut && shortcutValue && (
@@ -419,7 +395,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
           <Checkbox 
             checked={isSelected}
             disabled={disabled}
-            className="pointer-events-none !m-0 !p-0"
+            className={themeConfig.euler.menuv2.menuItem.checkbox.wrapper}
             size={CheckboxSize.SMALL}
           />
         </div>
@@ -441,7 +417,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       {/* Show chevron if item has submenu */}
       {hasSubmenu && (
         <div className={getSlotR2ClassNames()}>
-          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <ChevronRight className={cn(themeConfig.euler.menuv2.iconSize, themeConfig.euler.menuv2.chevronColor)} />
         </div>
       )}
       

@@ -207,66 +207,6 @@ export const MultiSelect: Story = {
   render: () => <MultiSelectMenuExample />,
 };
 
-// Multi-Select Menu with Checkbox
-export const MultiSelectWithCheckbox: Story = {
-  render: () => {
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
-    
-    const multiSelectWithCheckboxItems = [
-      {
-        id: 'label1',
-        text: 'Select Options',
-        type: MenuItemType.LABEL,
-      },
-      {
-        id: 'option1',
-        text: 'Documentation',
-        type: MenuItemType.MULTI_SELECT,
-        hasSlotL: true,
-        slotL: <FileText size={16} />,
-      },
-      {
-        id: 'option2',
-        text: 'Spreadsheets',
-        type: MenuItemType.MULTI_SELECT,
-        hasSlotL: true,
-        slotL: <FileSpreadsheet size={16} />,
-      },
-      {
-        id: 'option3',
-        text: 'Other Files',
-        type: MenuItemType.MULTI_SELECT,
-        hasSlotL: true,
-        slotL: <FileIcon size={16} />,
-      },
-      {
-        id: 'separator2',
-        text: '',
-        type: MenuItemType.SEPARATOR,
-      },
-      {
-        id: 'applyBtn',
-        text: 'Apply Selection',
-        type: MenuItemType.ACTION,
-        action: MenuItemAction.PRIMARY,
-      }
-    ];
-
-    return (
-      <div>
-        <Menu
-          type={MenuType.MULTI_SELECT}
-          hasSearch={true}
-          searchPlaceholder="Search options..."
-          items={multiSelectWithCheckboxItems}
-          selectedItems={selectedItems}
-          onSelectionChange={(items) => setSelectedItems(items)}
-        />
-      </div>
-    );
-  }
-};
-
 // Menu Item Examples
 export const MenuItems: Story = {
   render: () => (

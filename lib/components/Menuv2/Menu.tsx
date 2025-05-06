@@ -1,5 +1,6 @@
 import React, { createContext, forwardRef, useContext, useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils';
+import { themeConfig } from '../../themeConfig';
 import {
   MenuProps,
   MenuType,
@@ -31,21 +32,6 @@ const MenuContext = createContext<MenuContextValue>({
   setHighlightedIndex: () => {},
   closeMenu: () => {}
 });
-
-// If your Menu component doesn't have CSS animations for the submenu, add the following
-// at the beginning of the file:
-
-const submenuAnimation = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  
-  .submenu-portal > div {
-    animation: fadeIn 150ms ease-out;
-    transform-origin: top left;
-  }
-`;
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   children,
@@ -213,13 +199,13 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
         {...props}
       >
         {/* Style tag for submenu animations */}
-        <style>{submenuAnimation}</style>
+        <style>{themeConfig.euler.menuv2.animation}</style>
         
         {/* Search Input */}
         {hasSearch && (
           <div className={getMenuSearchClassNames()}>
-            <div className="relative p-2 flex items-center">
-              <span className="absolute left-2 flex items-center justify-center">
+            <div className={themeConfig.euler.menuv2.search.wrapper}>
+              <span className={themeConfig.euler.menuv2.search.icon}>
                 <Search size={16} className="text-gray-400" />
               </span>
               <input
@@ -241,8 +227,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
         
         {/* Menu Items Container with padding - add gap when search is visible */}
         <div ref={menuRef} className={cn(
-          "max-h-60 overflow-auto px-1",
-          hasSearch && "mt-1" // Add 4px top margin (mt-1) only when search is visible
+          themeConfig.euler.menuv2.menuItemContainer.base,
+          hasSearch && themeConfig.euler.menuv2.menuItemContainer.withSearch
         )}>
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => {

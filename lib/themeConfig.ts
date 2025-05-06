@@ -563,6 +563,97 @@ export const themeConfig = {
           'w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0',
       },
     },
+    menuv2: {
+      baseStyles: "rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1",
+      animation: `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        .submenu-portal > div {
+          animation: fadeIn 150ms ease-out;
+          transform-origin: top left;
+        }
+      `,
+      types: {
+        DEFAULT: "w-52",
+        MULTI_SELECT: "w-52",
+        CONTEXT_MENU: "w-52"
+      },
+      search: {
+        container: "p-0 border-b border-gray-100",
+        input: "w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]",
+        icon: "absolute left-2 flex items-center justify-center text-gray-400",
+        noResults: "p-3 text-sm text-gray-500 text-center",
+        wrapper: "relative p-2 flex items-center"
+      },
+      menuItemContainer: {
+        base: "max-h-60 overflow-auto px-1",
+        withSearch: "mt-1"
+      },
+      separator: "h-px my-1 bg-gray-200",
+      iconSize: "w-4 h-4",
+      chevronColor: "text-gray-400", 
+      textContent: "flex-grow truncate font-feature-settings-normal",
+      menuItem: {
+        baseStyles: "flex items-center px-3 py-1.5 text-[#525866] font-['Inter_Display'] text-[14px] font-medium leading-[20px]",
+        types: {
+          DEFAULT: "cursor-pointer font-[500] text-[#525866]",
+          MULTI_SELECT: "cursor-pointer",
+          ACTION: "cursor-pointer font-medium",
+          LABEL: "font-semibold text-xs text-gray-500 uppercase tracking-wider py-1",
+          SEPARATOR: "py-0 my-1 border-b border-gray-200",
+          SUBMENU: "cursor-pointer font-[500] text-[#525866] relative"
+        },
+        states: {
+          DEFAULT: "bg-[#FFFFFF]",
+          HOVER: "!bg-[#F3F4F6]",
+          SELECTED: "bg-blue-50 text-blue-700",
+          NA: "pointer-events-none"
+        },
+        actions: {
+          NA: "",
+          DANGER: "text-red-600",
+          PRIMARY: "text-blue-600"
+        },
+        actionHover: {
+          NA: "!bg-[#F3F4F6]",
+          PRIMARY: "!bg-blue-50",
+          DANGER: "!bg-red-50"
+        },
+        hover: {
+          PRIMARY: "hover:bg-blue-50",
+          DANGER: "hover:bg-red-50",
+          DEFAULT: "hover:bg-[#F3F4F6]"
+        },
+        disabled: "opacity-50 pointer-events-none",
+        shortcut: "ml-auto text-xs text-gray-300",
+        slots: {
+          slotL: "mr-2 flex-shrink-0",
+          slotR1: "ml-auto flex-shrink-0",
+          slotR2: "ml-2 flex-shrink-0"
+        },
+        submenu: {
+          container: "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem] origin-top-left",
+          animation: "animation: menuAnimation 150ms ease-out",
+          animationClass: "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          portal: {
+            base: "submenu-portal absolute z-[9999]",
+            container: "relative",
+            collisionZone: {
+              base: "absolute top-0 h-full w-6",
+              left: "left-0 -translate-x-full",
+              right: "right-0 translate-x-full"
+            }
+          }
+        },
+        checkbox: {
+          wrapper: "pointer-events-none !m-0 !p-0"
+        },
+        rounded: "rounded-md"
+      }
+    },
     checkbox: {
       baseStyles:
         'flex items-center justify-center rounded border bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
