@@ -20,9 +20,8 @@ import {
   FileText,
   FileSpreadsheet,
   FileIcon,
-  Download,
-  Share,
   Mail,
+  Share,
   Save,
   Printer
 } from 'lucide-react';
@@ -208,6 +207,66 @@ export const MultiSelect: Story = {
   render: () => <MultiSelectMenuExample />,
 };
 
+// Multi-Select Menu with Checkbox
+export const MultiSelectWithCheckbox: Story = {
+  render: () => {
+    const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    
+    const multiSelectWithCheckboxItems = [
+      {
+        id: 'label1',
+        text: 'Select Options',
+        type: MenuItemType.LABEL,
+      },
+      {
+        id: 'option1',
+        text: 'Documentation',
+        type: MenuItemType.MULTI_SELECT,
+        hasSlotL: true,
+        slotL: <FileText size={16} />,
+      },
+      {
+        id: 'option2',
+        text: 'Spreadsheets',
+        type: MenuItemType.MULTI_SELECT,
+        hasSlotL: true,
+        slotL: <FileSpreadsheet size={16} />,
+      },
+      {
+        id: 'option3',
+        text: 'Other Files',
+        type: MenuItemType.MULTI_SELECT,
+        hasSlotL: true,
+        slotL: <FileIcon size={16} />,
+      },
+      {
+        id: 'separator2',
+        text: '',
+        type: MenuItemType.SEPARATOR,
+      },
+      {
+        id: 'applyBtn',
+        text: 'Apply Selection',
+        type: MenuItemType.ACTION,
+        action: MenuItemAction.PRIMARY,
+      }
+    ];
+
+    return (
+      <div>
+        <Menu
+          type={MenuType.MULTI_SELECT}
+          hasSearch={true}
+          searchPlaceholder="Search options..."
+          items={multiSelectWithCheckboxItems}
+          selectedItems={selectedItems}
+          onSelectionChange={(items) => setSelectedItems(items)}
+        />
+      </div>
+    );
+  }
+};
+
 // Menu Item Examples
 export const MenuItems: Story = {
   render: () => (
@@ -281,115 +340,122 @@ export const MenuItems: Story = {
   ),
 };
 
-// Add a story for showcasing submenus
+// Menu with Submenus
 export const WithSubmenu: Story = {
-  render: () => (
-    <div className="p-4">
-      <p className="mb-6 text-gray-700">
-        Hover over "Export" or "Share" to see submenus. The "More Options" item in the Share submenu
-        demonstrates nested submenus. Submenus are positioned intelligently to avoid scrollbars and stay within window bounds.
-      </p>
-      <div className="h-96 flex items-start justify-center pt-10">
+  render: () => {
+    // Example items with submenus
+    const itemsWithSubmenu = [
+      {
+        id: 'edit',
+        text: 'Edit',
+        type: MenuItemType.DEFAULT,
+        hasSlotL: true,
+        slotL: <Edit size={16} />,
+        hasShortcut: true,
+        shortcutValue: '⌘E',
+      },
+      {
+        id: 'export',
+        text: 'Export',
+        type: MenuItemType.DEFAULT,
+        hasSlotL: true,
+        slotL: <FileText size={16} />,
+        hasSubmenu: true,
+        submenuItems: [
+          {
+            id: 'export-pdf',
+            text: 'Export as PDF',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <FileText size={16} />,
+          },
+          {
+            id: 'export-excel',
+            text: 'Export as Excel',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <FileSpreadsheet size={16} />,
+          },
+          {
+            id: 'export-csv',
+            text: 'Export as CSV',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <FileIcon size={16} />,
+          }
+        ]
+      },
+      {
+        id: 'separator1',
+        text: '',
+        type: MenuItemType.SEPARATOR,
+      },
+      {
+        id: 'share',
+        text: 'Share',
+        type: MenuItemType.DEFAULT,
+        hasSlotL: true,
+        slotL: <Share size={16} />,
+        hasSubmenu: true,
+        submenuItems: [
+          {
+            id: 'share-email',
+            text: 'Email',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <Mail size={16} />,
+          },
+          {
+            id: 'share-link',
+            text: 'Copy Link',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <Copy size={16} />,
+          },
+          {
+            id: 'more-options',
+            text: 'More Options',
+            type: MenuItemType.DEFAULT,
+            hasSlotL: true,
+            slotL: <Share size={16} />,
+            hasSubmenu: true,
+            submenuItems: [
+              {
+                id: 'print',
+                text: 'Print',
+                type: MenuItemType.DEFAULT,
+                hasSlotL: true,
+                slotL: <Printer size={16} />,
+              },
+              {
+                id: 'save',
+                text: 'Save',
+                type: MenuItemType.DEFAULT,
+                hasSlotL: true,
+                slotL: <Save size={16} />,
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'delete',
+        text: 'Delete',
+        type: MenuItemType.ACTION,
+        action: MenuItemAction.DANGER,
+        hasSlotL: true,
+        slotL: <Trash2 size={16} />,
+      },
+    ];
+
+    return (
+      <div>
         <Menu
           type={MenuType.DEFAULT}
-          isOpen={true}
-          items={[
-            {
-              id: 'edit',
-              text: 'Edit',
-              type: MenuItemType.DEFAULT,
-              hasSlotL: true,
-              slotL: <Edit size={16} />,
-            },
-            {
-              id: 'separator1',
-              text: '',
-              type: MenuItemType.SEPARATOR,
-            },
-            {
-              id: 'export',
-              text: 'Export',
-              hasSubmenu: true,
-              submenuItems: [
-                {
-                  id: 'pdf',
-                  text: 'PDF',
-                  hasSlotL: true,
-                  slotL: <FileText size={16} />
-                },
-                {
-                  id: 'excel',
-                  text: 'Excel',
-                  hasSlotL: true,
-                  slotL: <FileSpreadsheet size={16} />
-                },
-                {
-                  id: 'csv',
-                  text: 'CSV',
-                  hasSlotL: true,
-                  slotL: <FileIcon size={16} />
-                }
-              ]
-            },
-            {
-              id: 'share',
-              text: 'Share',
-              hasSubmenu: true,
-              submenuItems: [
-                {
-                  id: 'email',
-                  text: 'Email',
-                  hasSlotL: true,
-                  slotL: <Mail size={16} />
-                },
-                {
-                  id: 'link',
-                  text: 'Copy Link',
-                  hasSlotL: true,
-                  slotL: <Share size={16} />
-                },
-                {
-                  id: 'separator-share',
-                  text: '',
-                  type: MenuItemType.SEPARATOR,
-                },
-                {
-                  id: 'more',
-                  text: 'More Options',
-                  hasSubmenu: true,
-                  submenuItems: [
-                    {
-                      id: 'save',
-                      text: 'Save',
-                      hasSlotL: true,
-                      slotL: <Save size={16} />
-                    },
-                    {
-                      id: 'print',
-                      text: 'Print',
-                      hasSlotL: true,
-                      slotL: <Printer size={16} />
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              id: 'separator2',
-              text: '',
-              type: MenuItemType.SEPARATOR,
-            },
-            {
-              id: 'delete',
-              text: 'Delete',
-              type: MenuItemType.ACTION,
-              action: MenuItemAction.DANGER,
-              hasSlotL: true,
-              slotL: <Trash2 size={16} />,
-            }
-          ]}
+          hasSearch={false}
+          items={itemsWithSubmenu}
         />
       </div>
-    </div>
-  )
+    );
+  }
 }; 

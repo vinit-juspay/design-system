@@ -14,13 +14,56 @@ import {
   getSlotR1ClassNames, 
   getSlotR2ClassNames,
   getShortcutClassNames,
-  getMenuClassNames
+  getMenuClassNames,
+  getSubmenuClassNames
 } from "./utils";
 import { LucideIcon, ChevronRight } from "lucide-react";
-import Checkbox from "../Checkbox";
+import Checkbox from "../Checkbox/Checkbox";
 import { CheckboxSize } from "../Checkbox/types";
 
 type IconElementProps = { className?: string };
+
+// Create a global submenu manager to track active submenus
+// This helps ensure proper nesting of submenus
+const submenuManager = {
+  activeSubmenuIds: new Set<string>(),
+  setActiveSubmenu(id: string | null, parentId: string | null = null) {
+    if (id === null) {
+      // Clear all submenus
+      this.activeSubmenuIds.clear();
+    } else {
+      // Add this submenu to active set
+      this.activeSubmenuIds.add(id);
+      
+      // If this is a child submenu, keep the parent active too
+      if (parentId) {
+        this.activeSubmenuIds.add(parentId);
+      }
+    }
+    
+    // Trigger a custom event to notify other menu items
+    window.dispatchEvent(new CustomEvent('submenu-changed', { 
+      detail: { 
+        id,
+        parentId,
+        activeIds: Array.from(this.activeSubmenuIds)
+      } 
+    }));
+  },
+  isSubmenuActive(id: string): boolean {
+    return this.activeSubmenuIds.has(id);
+  },
+  removeSubmenu(id: string) {
+    this.activeSubmenuIds.delete(id);
+    window.dispatchEvent(new CustomEvent('submenu-changed', { 
+      detail: { 
+        id: null,
+        removedId: id,
+        activeIds: Array.from(this.activeSubmenuIds)
+      } 
+    }));
+  }
+};
 
 const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   id,
@@ -47,86 +90,76 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   submenuItems = [],
   ...props
 }, ref) => {
-  const [isHovering, setIsHovering] = useState(false);
-  const [showSubmenu, setShowSubmenu] = useState(false);
-  const [submenuPosition, setSubmenuPosition] = useState({ top: 0, left: 0 });
-  const menuItemRef = useRef<HTMLDivElement>(null);
-  
-  // Style for scaleIn animation
-  useEffect(() => {
-    // Add keyframes to document once
-    const styleId = 'menu-keyframes-style';
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.textContent = `
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-    
-    return () => {
-      // No cleanup needed, we keep the style in the document
-    };
-  }, []);
-  
-  // Function to calculate submenu position (Radix-like)
-  const calculateSubmenuPosition = () => {
-    if (menuItemRef.current && hasSubmenu) {
-      const rect = menuItemRef.current.getBoundingClientRect();
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      
-      // Radix style positioning
-      // Default is to show the submenu at the right side with a slight offset
-      let left = rect.right;
-      let top = rect.top;
-      
-      // For horizontal position, add sideOffset (consistent with Radix)
-      const sideOffset = 8;
-      left += sideOffset;
-      
-      // For vertical position, adjust with alignOffset (consistent with Radix)
-      const alignOffset = -4;
-      top += alignOffset;
-      
-      // Check if submenu would go off right edge of window
-      const submenuWidth = 220; // Typical submenu width
-      if (left + submenuWidth > windowWidth) {
-        // Position to the left of the parent with offset
-        left = rect.left - submenuWidth - sideOffset;
-      }
-      
-      // Check for bottom overflow
-      const submenuHeight = Math.min(submenuItems.length * 36, 300);
-      if (top + submenuHeight > windowHeight) {
-        // Adjust top to prevent going off bottom
-        top = Math.max(5, windowHeight - submenuHeight - 5);
-      }
-      
-      setSubmenuPosition({ top, left });
-    }
-  };
-  
-  // If type is separator, render a simple divider
-  if (type === MenuItemType.SEPARATOR) {
-    return <div className="h-px my-1 bg-gray-200" role="separator" />;
-  }
-
   // Labels should not have hover effects
   const isLabel = type === MenuItemType.LABEL;
+  
+  const [isHovering, setIsHovering] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
+  const menuItemRef = useRef<HTMLDivElement>(null);
+  const submenuTimerRef = useRef<number | null>(null);
+  
+  // Create a unique ID for this menu item if not provided
+  const uniqueId = useRef<string>(id || `menu-item-${Math.random().toString(36).substring(2, 9)}`);
+  
+  // Listen for submenu-changed events to close this submenu when another opens
+  useEffect(() => {
+    const handleSubmenuChanged = (e: Event) => {
+      // If this menu isn't in the active path, close it
+      if (hasSubmenu && showSubmenu) {
+        // Keep this submenu open if it's in the active path or it's the parent of the active submenu
+        if (!submenuManager.isSubmenuActive(uniqueId.current)) {
+          setShowSubmenu(false);
+        }
+      }
+    };
+    
+    window.addEventListener('submenu-changed', handleSubmenuChanged);
+    return () => {
+      window.removeEventListener('submenu-changed', handleSubmenuChanged);
+      
+      // Clear any timers when this effect is cleaned up
+      if (submenuTimerRef.current) {
+        window.clearTimeout(submenuTimerRef.current);
+        submenuTimerRef.current = null;
+      }
+    };
+  }, [showSubmenu, hasSubmenu]);
 
-  // Handle hover states
-  const handleMouseEnter = () => {
+  // Add effect to clean up when unmounting
+  useEffect(() => {
+    return () => {
+      // If this component unmounts and it was the active submenu, clear the global state
+      if (hasSubmenu && submenuManager.isSubmenuActive(uniqueId.current)) {
+        submenuManager.removeSubmenu(uniqueId.current);
+      }
+      
+      // Clear any pending timers
+      if (submenuTimerRef.current) {
+        window.clearTimeout(submenuTimerRef.current);
+        submenuTimerRef.current = null;
+      }
+    };
+  }, [hasSubmenu]);
+
+  // Handle hover states with delay for better UX
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    // Clear any pending close timers immediately
+    if (submenuTimerRef.current) {
+      window.clearTimeout(submenuTimerRef.current);
+      submenuTimerRef.current = null;
+    }
+    
     if (!disabled && state !== MenuItemState.NA && !isLabel) {
       setIsHovering(true);
-      // Show submenu if it exists
       if (hasSubmenu) {
-        calculateSubmenuPosition();
+        // Tell the submenu manager that this submenu is now active
+        // Pass the parent ID if available
+        submenuManager.setActiveSubmenu(uniqueId.current, props.parentId);
+        // Show submenu immediately on hover
         setShowSubmenu(true);
+      } else if (submenuManager.isSubmenuActive(uniqueId.current)) {
+        // If hovering a regular menu item, close any open submenus
+        submenuManager.removeSubmenu(uniqueId.current);
       }
       onMouseEnter?.();
     }
@@ -134,32 +167,21 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
 
   const handleMouseLeave = (e: React.MouseEvent) => {
     if (!disabled && state !== MenuItemState.NA && !isLabel) {
-      // Check if the mouse is moving to a submenu
-      // This helps prevent flickering when moving from parent to submenu
+      setIsHovering(false);
+      
+      // Only handle submenu closing with a delay for menu items that have a submenu
       if (hasSubmenu && showSubmenu) {
-        // Get the coordinates of the mouse
-        const { clientX, clientY } = e;
-        
-        // Get submenu dimensions (approximate)
-        const submenuWidth = 220;
-        const submenuRight = submenuPosition.left + submenuWidth;
-        const direction = submenuPosition.left > window.innerWidth / 2 ? 'left' : 'right';
-        
-        // If mouse is moving toward submenu, don't hide it immediately
-        if ((direction === 'right' && clientX > menuItemRef.current?.getBoundingClientRect().right!) ||
-            (direction === 'left' && clientX < menuItemRef.current?.getBoundingClientRect().left!)) {
-          // Let the submenu handle its own events
-          return;
-        }
+        // Use a short delay to allow movement to the submenu
+        // Radix uses a similar approach
+        submenuTimerRef.current = window.setTimeout(() => {
+          setShowSubmenu(false);
+          submenuManager.removeSubmenu(uniqueId.current);
+        }, 100);
+      } else {
+        // For regular menu items, reset hover state immediately
+        setIsHovering(false);
       }
       
-      setIsHovering(false);
-      // Hide submenu with a small delay to allow moving to submenu
-      if (hasSubmenu) {
-        setTimeout(() => {
-          setShowSubmenu(false);
-        }, 100);
-      }
       onMouseLeave?.();
     }
   };
@@ -167,12 +189,24 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   // Handle click
   const handleClick = (e: React.MouseEvent) => {
     if (!disabled && state !== MenuItemState.NA && !isLabel) {
-      // Don't trigger onClick if the item has a submenu
-      if (!hasSubmenu) {
-        onClick?.();
-      } else {
-        // Prevent the menu from closing when clicking on a submenu item
+      if (hasSubmenu) {
+        // Toggle submenu on click
+        const newState = !showSubmenu;
+        setShowSubmenu(newState);
+        
+        // Update the global submenu state
+        if (newState) {
+          submenuManager.setActiveSubmenu(uniqueId.current, props.parentId);
+        } else {
+          submenuManager.removeSubmenu(uniqueId.current);
+        }
+        
+        // Prevent menu from closing when clicking on parent of submenu
         e.stopPropagation();
+      } else {
+        // If this is a regular menu item, close any open submenus
+        submenuManager.removeSubmenu(uniqueId.current);
+        onClick?.();
       }
     }
   };
@@ -182,7 +216,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
 
   // Get class names
   const itemClassName = getMenuItemClassNames({
-    type: hasSubmenu ? MenuItemType.SUBMENU : type,
+    type,
     // Labels always use default state, regardless of hover
     state: isLabel ? MenuItemState.DEFAULT : currentState,
     action,
@@ -238,6 +272,109 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
     
     return icon;
   };
+
+  // Render submenu content - using portal for proper positioning
+  const renderSubmenu = () => {
+    // Early return if conditions aren't met
+    if (!hasSubmenu || !showSubmenu || submenuItems.length === 0 || !menuItemRef.current) {
+      return null;
+    }
+
+    // Get the position of the parent menu item
+    const rect = menuItemRef.current.getBoundingClientRect();
+    
+    // Account for scroll position
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    
+    // Determine if we need to flip direction (when near window edge)
+    const rightSpace = window.innerWidth - rect.right;
+    const shouldFlipHorizontal = rightSpace < 200; // Flip if less than 200px available
+    
+    // Calculate positions
+    const top = rect.top + scrollY;
+    const left = shouldFlipHorizontal 
+      ? rect.left + scrollX - 12  // Flip to left side with overlap
+      : rect.right + scrollX - 12; // Right side with overlap
+    
+    // Create submenu portal content with proper collision area
+    const submenuPortalContent = (
+      <div 
+        style={{
+          position: 'absolute',
+          zIndex: 9999,
+          top: top, 
+          left: left,
+        }}
+        className="submenu-portal"
+        onMouseEnter={() => {
+          // Clear any close timers when mouse enters the submenu
+          if (submenuTimerRef.current) {
+            window.clearTimeout(submenuTimerRef.current);
+            submenuTimerRef.current = null;
+          }
+        }}
+      >
+        {/* Safe area to prevent unwanted closing */}
+        <div className="relative">
+          {/* Collision zone that extends toward the parent menu item */}
+          <div 
+            className="absolute"
+            style={{
+              top: 0,
+              [shouldFlipHorizontal ? 'right' : 'left']: '0px',
+              width: '24px', // Wider collision zone
+              height: '100%',
+              transform: `translateX(${shouldFlipHorizontal ? '100%' : '-100%'})`,
+              // Uncomment to debug: backgroundColor: 'rgba(255,0,0,0.1)',
+            }}
+          />
+          
+          <div
+            className={cn(
+              "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem]",
+              "origin-top-left"
+            )}
+            style={{
+              animation: 'menuAnimation 150ms ease-out',
+            }}
+            onClick={e => e.stopPropagation()} // Prevent clicks from closing parent menu
+          >
+            {submenuItems.map((item: MenuItemProps, index: number) => (
+              <MenuItem
+                key={`${item.id || index}-submenu`}
+                {...item}
+                // Pass our ID as the parent ID to create proper nesting
+                parentId={uniqueId.current}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+    
+    // Inject the animation style
+    const animationStyle = `
+      @keyframes menuAnimation {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    `;
+    
+    // Use createPortal to render at body level to avoid z-index issues
+    return createPortal(
+      <>
+        <style>{animationStyle}</style>
+        {submenuPortalContent}
+      </>,
+      document.body
+    );
+  };
+
+  // If type is separator, render a simple divider
+  if (type === MenuItemType.SEPARATOR) {
+    return <div className="h-px my-1 bg-gray-200" role="separator" />;
+  }
 
   return (
     <div
@@ -304,45 +441,12 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       {/* Show chevron if item has submenu */}
       {hasSubmenu && (
         <div className={getSlotR2ClassNames()}>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-4 h-4 text-gray-400" />
         </div>
       )}
       
-      {/* Render submenu if item has one and is being hovered */}
-      {hasSubmenu && showSubmenu && submenuItems.length > 0 && createPortal(
-        <div 
-          className={cn(getMenuClassNames(MenuType.DEFAULT))} 
-          style={{ 
-            position: 'fixed', /* Radix uses fixed positioning from Portal root */
-            top: submenuPosition.top, 
-            left: submenuPosition.left,
-            zIndex: 1100,
-            boxShadow: '0 1px 6px rgba(0, 0, 0, 0.1)',
-            margin: 0,
-            padding: '4px 0', /* Same padding as Radix */
-            minWidth: '8rem',
-            border: '1px solid rgba(0, 0, 0, 0.08)',
-            transformOrigin: 'top left',
-            animationName: 'scaleIn',
-            animationDuration: '150ms',
-            animationTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            willChange: 'transform, opacity'
-          }}
-          onClick={(e) => e.stopPropagation()}
-          onMouseEnter={(e) => {
-            // Prevent parent's leave handler from hiding this submenu
-            e.stopPropagation();
-          }}
-        >
-          {submenuItems.map((item, index) => (
-            <MenuItem
-              key={`${item.id || index}-submenu`}
-              {...item}
-            />
-          ))}
-        </div>,
-        document.body
-      )}
+      {/* Render submenu using portal */}
+      {renderSubmenu()}
     </div>
   );
 });

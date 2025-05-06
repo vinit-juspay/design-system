@@ -135,4 +135,16 @@ export function filterMenuItems(items: MenuItemProps[], searchTerm: string): Men
     // Filter by text content
     return item.text.toLowerCase().includes(lowerCaseSearchTerm);
   });
+}
+
+export function getSubmenuClassNames(): string {
+  return cn(
+    themeConfig.menu.baseStyles,
+    "shadow-lg",  // Add stronger shadow to indicate it's floating
+    "min-w-[8rem]", // Ensure minimum width
+    "border border-gray-200",
+    "mt-0 p-0", // Reset margin and padding
+    "rounded-md",
+    "z-[1100]" // Ensure high z-index
+  );
 } 

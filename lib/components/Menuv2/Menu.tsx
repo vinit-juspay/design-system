@@ -32,6 +32,21 @@ const MenuContext = createContext<MenuContextValue>({
   closeMenu: () => {}
 });
 
+// If your Menu component doesn't have CSS animations for the submenu, add the following
+// at the beginning of the file:
+
+const submenuAnimation = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .submenu-portal > div {
+    animation: fadeIn 150ms ease-out;
+    transform-origin: top left;
+  }
+`;
+
 const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   children,
   className,
@@ -197,6 +212,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
         aria-orientation="vertical"
         {...props}
       >
+        {/* Style tag for submenu animations */}
+        <style>{submenuAnimation}</style>
+        
         {/* Search Input */}
         {hasSearch && (
           <div className={getMenuSearchClassNames()}>

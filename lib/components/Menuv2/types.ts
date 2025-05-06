@@ -73,6 +73,7 @@ export interface MenuItemWithMultiSelectProps extends MenuItemWithShortcutProps 
   isSelected?: boolean;
   hasSubmenu?: boolean;
   submenuItems?: MenuItemProps[];
+  parentId?: string;
 }
 
 // Combined MenuItem props
