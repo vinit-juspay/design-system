@@ -34,10 +34,11 @@ import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
+import TooltipDemoV2 from './Demos/TooltipDemos/TooltipDemoV2';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars'
+    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' 
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -54,6 +55,7 @@ const App = () => {
     { id: 'buttons', label: 'Buttons', icon: Layers },
     { id: 'buttonGroups', label: 'Button Groups', icon: ListFilter },
     { id: 'tooltips', label: 'Tooltips', icon: Info },
+    { id: 'tooltipsV2', label: 'Tooltips V2', icon: Info },
     { id: 'tags', label: 'Tags', icon: TagIcon },
     { id: 'tabs', label: 'Tabs', icon: Settings },
     { id: 'alerts', label: 'Alerts', icon: Bell },
@@ -63,17 +65,16 @@ const App = () => {
     { id: 'datePicker', label: 'Date Picker', icon: CalendarIcon },
     { id: 'selectors', label: 'Selectors', icon: Check },
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
+    
   ];
 
   const renderSidebar = () => (
     <div className="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-sm">
-      <div className="flex flex-col h-full">
-        {/* Logo */}
+      <div className="flex flex-col h-full">      
         <div className="flex items-center justify-center h-16 border-b border-gray-200">
           <span className="text-lg font-bold text-gray-900">Design System</span>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
           {navigationItems.map((item) => {
             const Icon = item.icon;
@@ -96,7 +97,6 @@ const App = () => {
           })}
         </nav>
 
-        {/* Version Badge */}
         <div className="p-4 border-t border-gray-200">
           <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
             v1.0.0
@@ -669,8 +669,10 @@ const App = () => {
         return renderButtons();
       case 'buttonGroups':
         return renderButtonGroups();
-      case 'tooltips':
-        return <TooltipDemo />;
+          case 'tooltips':
+            return <TooltipDemo />;
+      case 'tooltipsV2':
+        return <TooltipDemoV2 />;
       case 'tags':
         return renderTags();
       case 'tabs':
