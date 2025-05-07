@@ -1,5 +1,4 @@
 import React, { forwardRef, useContext } from 'react';
-import { Slot } from '@radix-ui/react-slot';
 import { RadioProps, RadioSize } from './types';
 import {
   getRadioWrapperClassNames,
@@ -76,7 +75,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
           
           {rightSlot && (
             <span className={getRadioRightSlotClassNames()}>
-              <Slot>{rightSlot}</Slot>
+              {rightSlot}
             </span>
           )}
         </div>

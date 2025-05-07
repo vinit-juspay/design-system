@@ -9,7 +9,6 @@ import {
   getSwitchSubtextClassNames,
   getSwitchContentWrapperClassNames,
 } from './utils';
-import { Slot } from '@radix-ui/react-slot';
 import { SwitchGroupContext } from './SwitchGroupContext';
 import { cn } from '../../utils';
 
@@ -33,10 +32,8 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     },
     ref
   ) => {
-    // Get context from SwitchGroup if available
     const switchGroup = React.useContext(SwitchGroupContext);
     
-    // Determine if controlled by SwitchGroup or standalone
     const name = switchGroup?.name || propName;
     const isChecked = switchGroup?.values && value 
       ? switchGroup.values.includes(value) 
@@ -44,7 +41,6 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const isGroupDisabled = switchGroup?.isDisabled || false;
     const finalDisabled = disabled || isGroupDisabled;
 
-    // Handle change events
     const handleToggle = () => {
       if (finalDisabled) return;
       
@@ -59,7 +55,6 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       }
       
       if (onChange) {
-        // Create synthetic event
         const event = {
           target: {
             name,
@@ -78,7 +73,6 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
     return (
       <div className={cn(getSwitchContainerClassNames(), className)}>
-        {/* First row: switch input, label, and right slot */}
         <div className={getSwitchContentWrapperClassNames()}>
           <button
             ref={ref}
@@ -106,7 +100,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           
           {rightSlot && (
             <span className={getSwitchRightSlotClassNames()}>
-              <Slot>{rightSlot}</Slot>
+              {rightSlot}
             </span>
           )}
         </div>

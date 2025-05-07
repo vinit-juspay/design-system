@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
-import { Slot } from '@radix-ui/react-slot';
 import { Check, Minus } from 'lucide-react';
 import { CheckboxProps, CheckboxSize, CheckboxPosition } from './types';
 import {
@@ -102,7 +101,7 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
                 {labelElement}
                 {rightSlot && (
                   <span className={getCheckboxRightSlotClassNames()}>
-                    <Slot>{rightSlot}</Slot>
+                    {rightSlot}
                   </span>
                 )}
               </div>
@@ -113,7 +112,7 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
                 {labelElement}
                 {rightSlot && (
                   <span className={getCheckboxRightSlotClassNames()}>
-                    <Slot>{rightSlot}</Slot>
+                    {rightSlot}
                   </span>
                 )}
               </div>
