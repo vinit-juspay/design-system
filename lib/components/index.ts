@@ -11,3 +11,4 @@ export * from './Menu';
 export * from './ChartsV2';
 export * from './Avatar';
 export * from './AvatarGroup';
+// export * from './TooltipV2';
