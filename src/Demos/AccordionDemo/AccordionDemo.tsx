@@ -44,6 +44,7 @@ const AccordionDemo = () => {
             value="item-3"
             title="Notifications"
             subtext="Email and push notification preferences"
+            isDisabled={true}
           >
             <p className="text-gray-600">
               Control which notifications you receive and how they are delivered. You can customize
@@ -88,8 +89,9 @@ const AccordionDemo = () => {
           <AccordionItem
             value="border-3"
             title="How do I contact customer support?"
+            subtext="Choose the right plan for your needs"
             isDisabled={true}
-            leftSlot={<HelpCircle className="h-3.5 w-3.5" />}
+            leftSlot={<HelpCircle className="h-3.5 w-3.5 text-gray-500" />}
           >
             <p className="text-gray-600">
               This content is not accessible because the item is disabled.

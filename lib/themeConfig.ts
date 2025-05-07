@@ -815,11 +815,15 @@ export const themeConfig = {
         container: 'w-full',
         item: 'border-b border-gray-200',
         trigger:
-          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500',
+          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:cursor-not-allowed hover:bg-gray-50',
         content:
           'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-        title: 'text-gray-800 text-body-lg font-medium',
-        subtext: 'text-gray-600 text-body-md mt-1',
+        title: 'text-body-lg font-medium',
+        titleEnabled: 'text-gray-800',
+        titleDisabled: 'text-gray-500',
+        subtext: 'text-body-md mt-1',
+        subtextEnabled: 'text-gray-600',
+        subtextDisabled: 'text-gray-300',
         contentWrapper: 'py-5 px-3',
       },
       variant: {
@@ -842,7 +846,7 @@ export const themeConfig = {
         border: {
           container: 'space-y-6',
           item: 'border border-gray-200 rounded-lg overflow-hidden',
-          trigger: 'px-4',
+          trigger: 'px-4 data-[state=open]:bg-gray-50',
           content: 'px-4',
           contentWrapper: '',
         },
@@ -859,12 +863,15 @@ export const themeConfig = {
         rightSlot: 'ml-2 flex-shrink-0',
         headerRow: 'flex items-center',
         chevronRight: 'absolute right-0 top-0 flex items-center justify-center',
-        chevronLeft: 'flex items-center justify-center mr-1 flex-shrink-0',
-        chevronIcon:
-          'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+        chevronLeft: 'flex items-center justify-center mr-1.5 flex-shrink-0',
+        chevronIcon: {
+          default: 'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+          enabled: 'text-gray-500',
+          disabled: 'text-gray-300',
+        },
       },
       states: {
-        disabled: 'opacity-50 cursor-not-allowed',
+        disabled: 'bg-gray-50',
       },
     },
   },
