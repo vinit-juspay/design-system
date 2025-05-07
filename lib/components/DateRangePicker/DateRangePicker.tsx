@@ -325,7 +325,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           <div className="text-gray-600 flex-1 flex items-center justify-between">
             <div className="flex items-center">
               <Calendar className="w-3.5 h-3.5 mr-1.5" />
-              <span className='text-gray-600 font-body-sm text-body-md'>{formatDateDisplay()}</span>
+              <span className="text-gray-600 font-body-sm text-body-md">{formatDateDisplay()}</span>
             </div>
             {isOpen ? (
               <ChevronUp className="w-3.5 h-3.5 ml-2" />

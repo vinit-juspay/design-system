@@ -1,18 +1,18 @@
-import { forwardRef, useState } from "react"
-import { cn } from "../../utils"
-import { AvatarProps, AvatarSize, AvatarShape } from "./types"
+import { forwardRef, useState } from 'react';
+import { cn } from '../../utils';
+import { AvatarProps, AvatarSize, AvatarShape } from './types';
 import {
   getAvatarContainerClassNames,
   getAvatarImageClassNames,
   getAvatarFallbackClassNames,
   getIndicatorClassNames,
-} from "./utils"
+} from './utils';
 
 const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   (
     {
       src,
-      alt = "",
+      alt = '',
       fallback,
       size = AvatarSize.REGULAR,
       shape = AvatarShape.CIRCULAR,
@@ -22,37 +22,33 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     },
     ref
   ) => {
-    const [imageError, setImageError] = useState(false)
+    const [imageError, setImageError] = useState(false);
 
     // Get initials from alt text for fallback
     const getInitials = () => {
-      if (fallback) return fallback
-      if (!alt) return ""
+      if (fallback) return fallback;
+      if (!alt) return '';
 
       return alt
-        .split(" ")
-        .map((word) => word[0])
+        .split(' ')
+        .map(word => word[0])
         .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    }
+        .join('')
+        .toUpperCase();
+    };
 
-    const showImage = src && !imageError
+    const showImage = src && !imageError;
 
-    const containerClasses = getAvatarContainerClassNames(size, shape, !!showImage)
-    const imageClasses = getAvatarImageClassNames(shape)
-    const fallbackClasses = getAvatarFallbackClassNames()
-    const indicatorClasses = getIndicatorClassNames(size)
+    const containerClasses = getAvatarContainerClassNames(size, shape, !!showImage);
+    const imageClasses = getAvatarImageClassNames(shape);
+    const fallbackClasses = getAvatarFallbackClassNames();
+    const indicatorClasses = getIndicatorClassNames(size);
 
     return (
-      <div
-        ref={ref}
-        className={cn(containerClasses, className)}
-        {...props}
-      >
+      <div ref={ref} className={cn(containerClasses, className)} {...props}>
         {showImage ? (
           <img
-            src={src || "/placeholder.svg"}
+            src={src || '/placeholder.svg'}
             alt={alt}
             className={imageClasses}
             onError={() => setImageError(true)}
@@ -66,17 +62,12 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         {/* Visually hidden text for screen readers */}
         <span className="sr-only">{alt}</span>
 
-        {online && (
-          <span
-            className={indicatorClasses}
-            aria-hidden="true"
-          />
-        )}
+        {online && <span className={indicatorClasses} aria-hidden="true" />}
       </div>
-    )
+    );
   }
-)
+);
 
-Avatar.displayName = "Avatar"
+Avatar.displayName = 'Avatar';
 
-export default Avatar
+export default Avatar;

@@ -43,7 +43,8 @@ const AvatarDemo = () => {
           shape={shape}
         />
         <div className="mt-4 text-sm text-gray-600">
-          Current state: size={size}, online={String(online)}, src={currentSrc || '(none)'}, alt="{alt}", fallback="{fallback || '(auto)'}", shape={shape}
+          Current state: size={size}, online={String(online)}, src={currentSrc || '(none)'}, alt="
+          {alt}", fallback="{fallback || '(auto)'}", shape={shape}
         </div>
       </div>
 
@@ -59,7 +60,9 @@ const AvatarDemo = () => {
               className="w-full p-2 border border-gray-300 rounded"
             >
               {sizes.map(s => (
-                <option key={s} value={s}>{s}</option>
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
           </div>
@@ -98,16 +101,17 @@ const AvatarDemo = () => {
               className="w-full p-2 border border-gray-300 rounded"
             >
               {shapes.map(s => (
-                <option key={s} value={s}>{s ? s.charAt(0).toUpperCase() + s.slice(1) : ''}</option>
+                <option key={s} value={s}>
+                  {s ? s.charAt(0).toUpperCase() + s.slice(1) : ''}
+                </option>
               ))}
             </select>
           </div>
-
         </div>
 
         {/* Right column */}
         <div className="flex flex-col gap-4">
-           <div>
+          <div>
             <label className="block mb-2 font-medium">Image Source (URL)</label>
             <input
               type="text"
@@ -120,7 +124,9 @@ const AvatarDemo = () => {
           </div>
 
           <div>
-            <label className="block mb-2 font-medium">Alt Text (used for initials if no src/fallback)</label>
+            <label className="block mb-2 font-medium">
+              Alt Text (used for initials if no src/fallback)
+            </label>
             <input
               type="text"
               value={alt}
@@ -130,7 +136,9 @@ const AvatarDemo = () => {
           </div>
 
           <div>
-            <label className="block mb-2 font-medium">Custom Fallback Text (overrides initials)</label>
+            <label className="block mb-2 font-medium">
+              Custom Fallback Text (overrides initials)
+            </label>
             <input
               type="text"
               value={fallback}
@@ -142,73 +150,97 @@ const AvatarDemo = () => {
         </div>
       </div>
 
-       {/* Static Examples */}
-       <div className="mt-8">
+      {/* Static Examples */}
+      <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Static Examples - All Sizes</h2>
 
         {/* With Image */}
         <h3 className="text-lg font-medium mt-6 mb-3">With Image</h3>
         <div className="flex flex-wrap gap-6 items-end">
           {sizes.map((s, index) => (
-             <div key={`img-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar src={`https://randomuser.me/api/portraits/women/${index}.jpg`} alt="User Image" size={s} />
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+            <div key={`img-size-${s}`} className="flex flex-col items-center gap-1 text-center">
+              <Avatar
+                src={`https://randomuser.me/api/portraits/women/${index}.jpg`}
+                alt="User Image"
+                size={s}
+              />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
 
         {/* With Image + Online Indicator */}
         <h3 className="text-lg font-medium mt-6 mb-3">With Image + Online</h3>
-         <div className="flex flex-wrap gap-6 items-end">
+        <div className="flex flex-wrap gap-6 items-end">
           {sizes.map((s, index) => (
-             <div key={`img-online-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar src={`https://randomuser.me/api/portraits/men/${index}.jpg`} alt="Online User" size={s} online={true}/>
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+            <div
+              key={`img-online-size-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <Avatar
+                src={`https://randomuser.me/api/portraits/men/${index}.jpg`}
+                alt="Online User"
+                size={s}
+                online={true}
+              />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
 
         {/* Initials Fallback (No Src) */}
         <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (No Src)</h3>
         <div className="flex flex-wrap gap-6 items-end">
-          {sizes.map((s) => (
-             <div key={`initials-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar alt="John Smith" size={s} />
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+          {sizes.map(s => (
+            <div
+              key={`initials-size-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <Avatar alt="John Smith" size={s} />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
 
-         {/* Initials Fallback (Invalid Src) */}
+        {/* Initials Fallback (Invalid Src) */}
         <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (Invalid Src)</h3>
         <div className="flex flex-wrap gap-6 items-end">
-          {sizes.map((s) => (
-             <div key={`initials-invalid-src-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar src="invalid-url" alt="Jane Doe" size={s} />
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+          {sizes.map(s => (
+            <div
+              key={`initials-invalid-src-size-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <Avatar src="invalid-url" alt="Jane Doe" size={s} />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
 
         {/* Custom Fallback (No Src) */}
         <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (No Src)</h3>
         <div className="flex flex-wrap gap-6 items-end">
-          {sizes.map((s) => (
-             <div key={`custom-fallback-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar fallback="FB" size={s} />
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+          {sizes.map(s => (
+            <div
+              key={`custom-fallback-size-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <Avatar fallback="FB" size={s} />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
 
-         {/* Custom Fallback (Invalid Src) */}
+        {/* Custom Fallback (Invalid Src) */}
         <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (Invalid Src)</h3>
-         <div className="flex flex-wrap gap-6 items-end">
-          {sizes.map((s) => (
-             <div key={`custom-fallback-invalid-src-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-                <Avatar src="invalid-url" fallback="CF" alt="Ignored Alt" size={s} />
-                <span className="text-xs text-gray-500">{s}</span>
-              </div>
+        <div className="flex flex-wrap gap-6 items-end">
+          {sizes.map(s => (
+            <div
+              key={`custom-fallback-invalid-src-size-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <Avatar src="invalid-url" fallback="CF" alt="Ignored Alt" size={s} />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -220,43 +252,66 @@ const AvatarDemo = () => {
       <h3 className="text-lg font-medium mt-6 mb-3">With Image (Rounded)</h3>
       <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s, index) => (
-           <div key={`img-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar src={`https://randomuser.me/api/portraits/women/${index+10}.jpg`} alt="Rounded User Image" size={s} shape={AvatarShape.ROUNDED} />
-              <span className="text-xs text-gray-500">{s}</span>
-            </div>
+          <div
+            key={`img-rounded-size-${s}`}
+            className="flex flex-col items-center gap-1 text-center"
+          >
+            <Avatar
+              src={`https://randomuser.me/api/portraits/women/${index + 10}.jpg`}
+              alt="Rounded User Image"
+              size={s}
+              shape={AvatarShape.ROUNDED}
+            />
+            <span className="text-xs text-gray-500">{s}</span>
+          </div>
         ))}
       </div>
 
       {/* With Image + Online Indicator */}
       <h3 className="text-lg font-medium mt-6 mb-3">With Image + Online (Rounded)</h3>
-       <div className="flex flex-wrap gap-6 items-end">
+      <div className="flex flex-wrap gap-6 items-end">
         {sizes.map((s, index) => (
-           <div key={`img-online-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar src={`https://randomuser.me/api/portraits/men/${index+10}.jpg`} alt="Rounded Online User" size={s} online={true} shape={AvatarShape.ROUNDED}/>
-              <span className="text-xs text-gray-500">{s}</span>
-            </div>
+          <div
+            key={`img-online-rounded-size-${s}`}
+            className="flex flex-col items-center gap-1 text-center"
+          >
+            <Avatar
+              src={`https://randomuser.me/api/portraits/men/${index + 10}.jpg`}
+              alt="Rounded Online User"
+              size={s}
+              online={true}
+              shape={AvatarShape.ROUNDED}
+            />
+            <span className="text-xs text-gray-500">{s}</span>
+          </div>
         ))}
       </div>
 
       {/* Initials Fallback (No Src) */}
       <h3 className="text-lg font-medium mt-6 mb-3">Initials Fallback (No Src, Rounded)</h3>
       <div className="flex flex-wrap gap-6 items-end">
-        {sizes.map((s) => (
-           <div key={`initials-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar alt="Adam West" size={s} shape={AvatarShape.ROUNDED} />
-              <span className="text-xs text-gray-500">{s}</span>
-            </div>
+        {sizes.map(s => (
+          <div
+            key={`initials-rounded-size-${s}`}
+            className="flex flex-col items-center gap-1 text-center"
+          >
+            <Avatar alt="Adam West" size={s} shape={AvatarShape.ROUNDED} />
+            <span className="text-xs text-gray-500">{s}</span>
+          </div>
         ))}
       </div>
 
       {/* Custom Fallback (No Src) */}
       <h3 className="text-lg font-medium mt-6 mb-3">Custom Fallback (No Src, Rounded)</h3>
       <div className="flex flex-wrap gap-6 items-end">
-        {sizes.map((s) => (
-           <div key={`custom-fallback-rounded-size-${s}`} className="flex flex-col items-center gap-1 text-center">
-              <Avatar fallback="AW" size={s} shape={AvatarShape.ROUNDED} />
-              <span className="text-xs text-gray-500">{s}</span>
-            </div>
+        {sizes.map(s => (
+          <div
+            key={`custom-fallback-rounded-size-${s}`}
+            className="flex flex-col items-center gap-1 text-center"
+          >
+            <Avatar fallback="AW" size={s} shape={AvatarShape.ROUNDED} />
+            <span className="text-xs text-gray-500">{s}</span>
+          </div>
         ))}
       </div>
 
@@ -269,7 +324,9 @@ const AvatarDemo = () => {
           <h2 className="text-xl font-semibold mb-4">AvatarGroup Controls</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="groupMaxCount" className="block mb-2 font-medium">Max Visible Avatars (maxCount)</label>
+              <label htmlFor="groupMaxCount" className="block mb-2 font-medium">
+                Max Visible Avatars (maxCount)
+              </label>
               <input
                 type="number"
                 id="groupMaxCount"
@@ -279,7 +336,7 @@ const AvatarDemo = () => {
                 className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
-             <div>
+            <div>
               <label className="block mb-2 font-medium">Group Size (Inherited by Avatars)</label>
               <select
                 value={size}
@@ -287,7 +344,9 @@ const AvatarDemo = () => {
                 className="w-full p-2 border border-gray-300 rounded"
               >
                 {sizes.map(s => (
-                  <option key={`group-size-${s}`} value={s}>{s}</option>
+                  <option key={`group-size-${s}`} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </div>
@@ -297,16 +356,12 @@ const AvatarDemo = () => {
         {/* Live Preview */}
         <div className="flex flex-col gap-4 items-center justify-center min-h-32 p-8 border border-gray-200 rounded-lg mb-8">
           <h3 className="text-lg font-medium mb-3">Live Preview</h3>
-           <AvatarGroup
-              avatars={avatarGroupData}
-              maxCount={groupMaxCount}
-              size={size}
-            />
-           <div className="mt-4 text-sm text-gray-600">
-            Current state: size={size}, maxCount={groupMaxCount}, total avatars={avatarGroupData.length}
+          <AvatarGroup avatars={avatarGroupData} maxCount={groupMaxCount} size={size} />
+          <div className="mt-4 text-sm text-gray-600">
+            Current state: size={size}, maxCount={groupMaxCount}, total avatars=
+            {avatarGroupData.length}
           </div>
         </div>
-
 
         {/* Static Examples */}
         <h2 className="text-xl font-semibold mb-4">Static AvatarGroup Examples</h2>
@@ -316,13 +371,16 @@ const AvatarDemo = () => {
 
         <h3 className="text-lg font-medium mt-6 mb-3">Different Sizes</h3>
         <div className="flex flex-wrap gap-x-8 gap-y-4 items-end">
-           {sizes.map(s => (
-            <div key={`group-size-example-${s}`} className="flex flex-col items-center gap-1 text-center">
-               <AvatarGroup avatars={avatarGroupData.slice(0, 4)} size={s} />
-               <span className="text-xs text-gray-500">{s}</span>
-             </div>
-           ))}
-         </div>
+          {sizes.map(s => (
+            <div
+              key={`group-size-example-${s}`}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <AvatarGroup avatars={avatarGroupData.slice(0, 4)} size={s} />
+              <span className="text-xs text-gray-500">{s}</span>
+            </div>
+          ))}
+        </div>
 
         <h3 className="text-lg font-medium mt-6 mb-3">Different maxCount Values</h3>
         <div className="flex flex-wrap gap-x-8 gap-y-4 items-end">
@@ -332,15 +390,23 @@ const AvatarDemo = () => {
           </div>
           <div>
             <AvatarGroup avatars={avatarGroupData} maxCount={5} size={AvatarSize.REGULAR} />
-             <span className="block text-xs text-gray-500 text-center mt-1">maxCount=5</span>
+            <span className="block text-xs text-gray-500 text-center mt-1">maxCount=5</span>
           </div>
-           <div>
-            <AvatarGroup avatars={avatarGroupData} maxCount={avatarGroupData.length} size={AvatarSize.REGULAR} />
-            <span className="block text-xs text-gray-500 text-center mt-1">maxCount={avatarGroupData.length} (no overflow)</span>
+          <div>
+            <AvatarGroup
+              avatars={avatarGroupData}
+              maxCount={avatarGroupData.length}
+              size={AvatarSize.REGULAR}
+            />
+            <span className="block text-xs text-gray-500 text-center mt-1">
+              maxCount={avatarGroupData.length} (no overflow)
+            </span>
           </div>
           <div>
             <AvatarGroup avatars={avatarGroupData} maxCount={10} size={AvatarSize.REGULAR} />
-            <span className="block text-xs text-gray-500 text-center mt-1">maxCount=10 (more than available)</span>
+            <span className="block text-xs text-gray-500 text-center mt-1">
+              maxCount=10 (more than available)
+            </span>
           </div>
         </div>
       </div>
@@ -348,4 +414,4 @@ const AvatarDemo = () => {
   );
 };
 
-export default AvatarDemo; 
+export default AvatarDemo;

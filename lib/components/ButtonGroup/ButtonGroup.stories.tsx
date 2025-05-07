@@ -55,37 +55,35 @@ const meta: Meta<ButtonGroupStoryArgs> = {
       },
     },
   },
-  render: (args) => {
-    const { numberOfButtons = 2, mode = ButtonGroupMode.SINGLE_PRIMARY, ...buttonGroupProps } = args;
-    
+  render: args => {
+    const {
+      numberOfButtons = 2,
+      mode = ButtonGroupMode.SINGLE_PRIMARY,
+      ...buttonGroupProps
+    } = args;
+
     // Generate the specified number of buttons
     const buttons = Array.from({ length: numberOfButtons }, (_, index) => {
       // Set different button types based on index
       let buttonType;
-      
+
       if (mode === ButtonGroupMode.NO_TRANSFORM) {
         // In NO_TRANSFORM mode, use a variety of button types
         const types = [
-          ButtonType.PRIMARY, 
-          ButtonType.DANGER, 
-          ButtonType.SUCCESS, 
-          ButtonType.SECONDARY
+          ButtonType.PRIMARY,
+          ButtonType.DANGER,
+          ButtonType.SUCCESS,
+          ButtonType.SECONDARY,
         ];
         buttonType = types[index % types.length];
       } else {
         // For other modes, follow the standard pattern (first PRIMARY, rest SECONDARY)
         buttonType = index === 0 ? ButtonType.PRIMARY : ButtonType.SECONDARY;
       }
-      
-      return (
-        <Button 
-          key={index} 
-          buttonType={buttonType} 
-          text={`Button ${index + 1}`} 
-        />
-      );
+
+      return <Button key={index} buttonType={buttonType} text={`Button ${index + 1}`} />;
     });
-    
+
     return (
       <ButtonGroup {...buttonGroupProps} mode={mode}>
         {buttons}
@@ -104,14 +102,14 @@ export const Default: Story = {
     isStacked: true,
     mode: ButtonGroupMode.SINGLE_PRIMARY,
     numberOfButtons: 2,
-  }
+  },
 };
 
 export const NotStacked: Story = {
   args: {
     ...Default.args,
     isStacked: false,
-  }
+  },
 };
 
 export const SmallSize: Story = {
@@ -119,7 +117,7 @@ export const SmallSize: Story = {
     ...Default.args,
     size: ButtonGroupSize.SMALL,
     numberOfButtons: 3,
-  }
+  },
 };
 
 export const MediumSize: Story = {
@@ -127,7 +125,7 @@ export const MediumSize: Story = {
     ...Default.args,
     size: ButtonGroupSize.MEDIUM,
     numberOfButtons: 3,
-  }
+  },
 };
 
 export const LargeSize: Story = {
@@ -135,19 +133,15 @@ export const LargeSize: Story = {
     ...Default.args,
     size: ButtonGroupSize.LARGE,
     numberOfButtons: 3,
-  }
+  },
 };
 
 // For stories with special button types, we need a custom render function
 export const MixedButtonTypes: Story = {
-  render: (args) => {
+  render: args => {
     const { size, isStacked, mode } = args;
     return (
-      <ButtonGroup
-        size={size}
-        isStacked={isStacked}
-        mode={mode}
-      >
+      <ButtonGroup size={size} isStacked={isStacked} mode={mode}>
         <Button key="1" buttonType={ButtonType.PRIMARY} text="Primary" />
         <Button key="2" buttonType={ButtonType.DANGER} text="Danger" />
         <Button key="3" buttonType={ButtonType.SUCCESS} text="Success" />
@@ -158,18 +152,14 @@ export const MixedButtonTypes: Story = {
     size: ButtonGroupSize.MEDIUM,
     isStacked: true,
     mode: ButtonGroupMode.SINGLE_PRIMARY,
-  }
+  },
 };
 
 export const NoTransformMode: Story = {
-  render: (args) => {
+  render: args => {
     const { size, isStacked } = args;
     return (
-      <ButtonGroup
-        size={size}
-        isStacked={isStacked}
-        mode={ButtonGroupMode.NO_TRANSFORM}
-      >
+      <ButtonGroup size={size} isStacked={isStacked} mode={ButtonGroupMode.NO_TRANSFORM}>
         <Button key="1" buttonType={ButtonType.PRIMARY} text="Original Primary" />
         <Button key="2" buttonType={ButtonType.DANGER} text="Original Danger" />
         <Button key="3" buttonType={ButtonType.SUCCESS} text="Original Success" />
@@ -180,18 +170,14 @@ export const NoTransformMode: Story = {
   args: {
     size: ButtonGroupSize.MEDIUM,
     isStacked: true,
-  }
+  },
 };
 
 export const AllSecondaryMode: Story = {
-  render: (args) => {
+  render: args => {
     const { size, isStacked } = args;
     return (
-      <ButtonGroup
-        size={size}
-        isStacked={isStacked}
-        mode={ButtonGroupMode.ALL_SECONDARY}
-      >
+      <ButtonGroup size={size} isStacked={isStacked} mode={ButtonGroupMode.ALL_SECONDARY}>
         <Button key="1" buttonType={ButtonType.PRIMARY} text="Forced Secondary 1" />
         <Button key="2" buttonType={ButtonType.DANGER} text="Forced Secondary 2" />
         <Button key="3" buttonType={ButtonType.SUCCESS} text="Forced Secondary 3" />
@@ -201,5 +187,5 @@ export const AllSecondaryMode: Story = {
   args: {
     size: ButtonGroupSize.MEDIUM,
     isStacked: true,
-  }
-}; 
+  },
+};

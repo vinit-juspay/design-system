@@ -12,12 +12,7 @@ export const getAvatarContainerClassNames = (
   const shapeClass = avatarTheme.shapes[shape];
   const borderClass = hasImage ? avatarTheme.border.withImage : avatarTheme.border.withoutImage;
 
-  return cn(
-    avatarTheme.base.container,
-    sizeClass,
-    shapeClass,
-    borderClass
-  );
+  return cn(avatarTheme.base.container, sizeClass, shapeClass, borderClass);
 };
 
 export const getAvatarImageClassNames = (shape: AvatarShape): string => {
@@ -27,8 +22,8 @@ export const getAvatarImageClassNames = (shape: AvatarShape): string => {
 };
 
 export const getAvatarFallbackClassNames = (): string => {
-    const avatarTheme = themeConfig.euler.avatar;
-    return cn(avatarTheme.base.fallbackText);
+  const avatarTheme = themeConfig.euler.avatar;
+  return cn(avatarTheme.base.fallbackText);
 };
 
 export const getIndicatorClassNames = (size: AvatarSize): string => {
@@ -36,4 +31,4 @@ export const getIndicatorClassNames = (size: AvatarSize): string => {
   const indicatorSizeClass = avatarTheme.indicator.sizes[size];
 
   return cn(avatarTheme.indicator.base, indicatorSizeClass);
-}; 
+};

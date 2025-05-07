@@ -11,7 +11,7 @@ import {
   getContainerClassNames,
   getCheckboxContentWrapperClassNames,
   getCheckboxRightSlotClassNames,
-  getCheckboxSubtextClassNames
+  getCheckboxSubtextClassNames,
 } from './utils';
 
 /**
@@ -121,13 +121,9 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
             </>
           )}
         </div>
-        
+
         {/* Second row: subtext only */}
-        {subtext && (
-          <div className={getCheckboxSubtextClassNames(size, disabled)}>
-            {subtext}
-          </div>
-        )}
+        {subtext && <div className={getCheckboxSubtextClassNames(size, disabled)}>{subtext}</div>}
       </div>
     );
   }
