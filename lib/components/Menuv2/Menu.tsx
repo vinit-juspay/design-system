@@ -33,6 +33,38 @@ const MenuContext = createContext<MenuContextValue>({
   closeMenu: () => {}
 });
 
+// Helper function to check if item is interactive
+const isInteractiveItem = (item: MenuItemProps): boolean => {
+  return item.type !== MenuItemType.SEPARATOR && item.type !== MenuItemType.LABEL;
+};
+
+// Helper function to find next valid item index
+const findNextValidItemIndex = (
+  currentIndex: number, 
+  items: MenuItemProps[], 
+  direction: 'next' | 'prev'
+): number => {
+  const itemCount = items.length;
+  if (itemCount === 0) return -1;
+  
+  let nextIndex = direction === 'next' 
+    ? (currentIndex + 1) % itemCount
+    : (currentIndex - 1 + itemCount) % itemCount;
+    
+  // Skip separators and labels
+  while (
+    nextIndex >= 0 && 
+    nextIndex < itemCount && 
+    !isInteractiveItem(items[nextIndex])
+  ) {
+    nextIndex = direction === 'next'
+      ? (nextIndex + 1) % itemCount
+      : (nextIndex - 1 + itemCount) % itemCount;
+  }
+  
+  return nextIndex;
+};
+
 const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   children,
   className,
@@ -81,61 +113,39 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
       switch (e.key) {
         case 'ArrowDown': {
           e.preventDefault();
-          const itemCount = filteredItems.filter(item => item.type !== MenuItemType.SEPARATOR).length;
-          if (itemCount === 0) return;
-          
-          let nextIndex = highlightedIndex + 1;
-          // Skip separators and labels
-          while (
-            nextIndex < filteredItems.length && 
-            (filteredItems[nextIndex].type === MenuItemType.SEPARATOR || 
-             filteredItems[nextIndex].type === MenuItemType.LABEL)
-          ) {
-            nextIndex++;
+          const nextIndex = findNextValidItemIndex(highlightedIndex, filteredItems, 'next');
+          if (nextIndex >= 0) {
+            setHighlightedIndex(nextIndex);
+            
+            if (menuRef.current) {
+              const targetElement = menuRef.current.querySelector(`[data-index="${nextIndex}"]`) as HTMLElement;
+              if (targetElement) {
+                targetElement.scrollIntoView({ block: "nearest" });
+              }
+            }
           }
-          
-          if (nextIndex >= filteredItems.length) {
-            nextIndex = 0;
-          }
-          
-          setHighlightedIndex(nextIndex);
           break;
         }
         case 'ArrowUp': {
           e.preventDefault();
-          const itemCount = filteredItems.filter(item => item.type !== MenuItemType.SEPARATOR).length;
-          if (itemCount === 0) return;
-          
-          let prevIndex = highlightedIndex - 1;
-          // Skip separators and labels
-          while (
-            prevIndex >= 0 && 
-            (filteredItems[prevIndex].type === MenuItemType.SEPARATOR || 
-             filteredItems[prevIndex].type === MenuItemType.LABEL)
-          ) {
-            prevIndex--;
-          }
-          
-          if (prevIndex < 0) {
-            prevIndex = filteredItems.length - 1;
-            // Skip separators and labels from the end
-            while (
-              prevIndex >= 0 && 
-              (filteredItems[prevIndex].type === MenuItemType.SEPARATOR || 
-               filteredItems[prevIndex].type === MenuItemType.LABEL)
-            ) {
-              prevIndex--;
+          const prevIndex = findNextValidItemIndex(highlightedIndex, filteredItems, 'prev');
+          if (prevIndex >= 0) {
+            setHighlightedIndex(prevIndex);
+            
+            if (menuRef.current) {
+              const targetElement = menuRef.current.querySelector(`[data-index="${prevIndex}"]`) as HTMLElement;
+              if (targetElement) {
+                targetElement.scrollIntoView({ block: "nearest" });
+              }
             }
           }
-          
-          setHighlightedIndex(prevIndex);
           break;
         }
         case 'Enter': {
           e.preventDefault();
           if (highlightedIndex >= 0 && highlightedIndex < filteredItems.length) {
             const item = filteredItems[highlightedIndex];
-            if (item.type !== MenuItemType.SEPARATOR && item.type !== MenuItemType.LABEL) {
+            if (isInteractiveItem(item)) {
               if (type === MenuType.MULTI_SELECT) {
                 toggleSelection(item.id);
               } else {
@@ -172,6 +182,36 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
     onOpenChange?.(false);
   };
   
+  // Helper function to modify item for multi-select
+  const prepareItemForMultiSelect = (item: MenuItemProps): MenuItemProps => {
+    if (type !== MenuType.MULTI_SELECT) return item;
+    
+    // Create a copy of the item to modify
+    const modifiedItem = {...item};
+    
+    // For label items, don't display checkbox or any other elements
+    if (modifiedItem.type === MenuItemType.LABEL) {
+      modifiedItem.hasSlotR1 = false;
+      modifiedItem.slotR1 = null;
+    } else {
+      // Remove any icons that might appear as checks
+      if (modifiedItem.slotR1) {
+        modifiedItem.slotR1 = null;
+      }
+      
+      // Remove any check icons from slotR2 as well
+      if (modifiedItem.slotR2) {
+        modifiedItem.slotR2 = null;
+        modifiedItem.hasSlotR2 = false;
+      }
+      
+      // Always set hasSlotR1 to true for multi-select to ensure checkbox renders
+      modifiedItem.hasSlotR1 = true;
+    }
+    
+    return modifiedItem;
+  };
+  
   // Provide context value
   const contextValue: MenuContextValue = {
     selectedItems,
@@ -206,7 +246,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
           <div className={getMenuSearchClassNames()}>
             <div className={themeConfig.euler.menuv2.search.wrapper}>
               <span className={themeConfig.euler.menuv2.search.icon}>
-                <Search size={16} className="text-gray-400" />
+                <Search size={16} />
               </span>
               <input
                 ref={searchInputRef}
@@ -232,29 +272,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
         )}>
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => {
-              // For multi-select menu, remove any check icons in slotR1 if they exist
-              const modifiedItem = {...item};
-              if (type === MenuType.MULTI_SELECT) {
-                // For label items, don't display checkbox or any other elements
-                if (modifiedItem.type === MenuItemType.LABEL) {
-                  modifiedItem.hasSlotR1 = false;
-                  modifiedItem.slotR1 = null;
-                } else {
-                  // Remove any icons that might appear as checks
-                  if (modifiedItem.slotR1) {
-                    modifiedItem.slotR1 = null;
-                  }
-                  
-                  // Remove any check icons from slotR2 as well
-                  if (modifiedItem.slotR2) {
-                    modifiedItem.slotR2 = null;
-                    modifiedItem.hasSlotR2 = false;
-                  }
-                  
-                  // Always set hasSlotR1 to true for multi-select to ensure checkbox renders
-                  modifiedItem.hasSlotR1 = true;
-                }
-              }
+              const modifiedItem = prepareItemForMultiSelect(item);
               
               return (
                 <MenuItem
@@ -272,6 +290,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                     }
                   }}
                   onMouseEnter={() => setHighlightedIndex(index)}
+                  data-index={index}
                 />
               );
             })

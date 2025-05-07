@@ -584,6 +584,11 @@ export const themeConfig = {
         MULTI_SELECT: "w-52",
         CONTEXT_MENU: "w-52"
       },
+      dimensions: {
+        minWidth: "min-w-[180px]",
+        maxWidth: "max-w-[320px]",
+        width: "w-auto"
+      },
       search: {
         container: "p-0 border-b border-gray-100",
         input: "w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]",
@@ -594,6 +599,122 @@ export const themeConfig = {
       menuItemContainer: {
         base: "max-h-60 overflow-auto px-1",
         withSearch: "mt-1"
+      },
+      dropdown: {
+        container: {
+          base: "relative",
+          withLabel: "mb-2",
+          wrapper: "relative flex items-center"
+        },
+        menu: {
+          container: "absolute z-50",
+          base: "rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap"
+        },
+        trigger: {
+          base: "focus:outline-none",
+          clearButtonRight: "rounded-r-none",
+          noBorderClearButtonRight: "rounded-r-none",
+          withBorderClearButtonRight: "rounded-r-none border-r-0",
+          widthFit: "w-fit"
+        },
+        label: {
+          container: "flex items-center gap-1.5",
+          mandatory: "text-red-600",
+          helpIcon: "text-gray-400",
+          base: "font-medium text-gray-700",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        sublabel: {
+          base: "font-normal text-gray-500",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        hint: {
+          base: "font-normal text-gray-500 mt-2",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        leftIcon: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "mr-2",
+          sizes: {
+            SMALL: "w-3 h-3",
+            MEDIUM: "w-3.5 h-3.5",
+            LARGE: "w-3.5 h-3.5"
+          }
+        },
+        chevron: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "ml-2",
+          sizes: {
+            SMALL: "w-3.5 h-3.5",
+            MEDIUM: "w-4 h-4",
+            LARGE: "w-4 h-4"
+          }
+        },
+        displayText: "flex-grow font-normal text-gray-700",
+        clearButton: {
+          base: "rounded-l-none",
+          withContainer: "border-[1px]",
+          noContainer: "border-[1px] border-gray-200",
+          icon: "text-gray-600"
+        },
+        multiSelectTag: {
+          base: "ml-1.5 flex items-center justify-center",
+          sizeSm: "h-4 w-4 min-w-4",
+          sizeDefault: "h-[18px] w-[18px] min-w-[18px]"
+        },
+        selectedText: "text-gray-400 ml-1.5",
+        baseClasses: "relative flex items-center transition-colors",
+        typeClasses: {
+          ICON_ONLY: "justify-center",
+          SINGLE_SELECT: "",
+          MULTI_SELECT: ""
+        },
+        states: {
+          noBorder: {
+            DEFAULT: "bg-white text-gray-700",
+            HOVER: "bg-gray-50 text-gray-700",
+            OPEN: "bg-gray-25 text-gray-700",
+            SELECTED: "bg-white text-gray-700"
+          },
+          withBorder: {
+            DEFAULT: "bg-white text-gray-700 border border-gray-200",
+            HOVER: "bg-gray-50 text-gray-700 border border-gray-200",
+            OPEN: "bg-gray-25 text-gray-700 border border-gray-200",
+            SELECTED: "bg-white text-gray-700 border border-gray-200"
+          }
+        },
+        sizes: {
+          SMALL: "h-8 px-3.5 py-1.5 text-[14px]",
+          MEDIUM: "h-9 px-3.5 py-2 text-[14px]",
+          LARGE: "h-10 px-3.5 py-2.5 text-[14px]"
+        },
+        subtypes: {
+          HAS_CONTAINER: "rounded-[10px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
+          NO_CONTAINER: "rounded-[10px]"
+        },
+        disabled: {
+          true: "opacity-50 cursor-not-allowed bg-gray-100",
+          false: "cursor-pointer hover:bg-gray-50"
+        },
+        positioning: {
+          offset: 4,
+          rightPadding: 10,
+          menuWidth: 200,
+          menuHeight: 200,
+          maxHeightOffset: 20
+        }
       },
       separator: "h-px my-1 bg-gray-200",
       iconSize: "w-4 h-4",

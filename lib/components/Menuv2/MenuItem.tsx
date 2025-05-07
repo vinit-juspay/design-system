@@ -66,6 +66,33 @@ const submenuManager = {
   }
 };
 
+// Helper to safely clear timeout
+const clearTimeout = (ref: React.MutableRefObject<number | null>) => {
+  if (ref.current) {
+    window.clearTimeout(ref.current);
+    ref.current = null;
+  }
+};
+
+// Helper function to render icons consistently
+const renderIcon = (icon: React.ReactNode): React.ReactNode => {
+  // If it's a valid React element with className prop
+  if (React.isValidElement(icon)) {
+    const elementWithClassName = icon as ReactElement<IconElementProps>;
+    return React.cloneElement(elementWithClassName, { 
+      className: cn(themeConfig.euler.menuv2.iconSize, elementWithClassName.props.className) 
+    });
+  }
+  
+  // If it's a Lucide icon component
+  if (typeof icon === 'function') {
+    const Icon = icon as React.ComponentType<IconElementProps>;
+    return <Icon className={themeConfig.euler.menuv2.iconSize} />;
+  }
+  
+  return icon;
+};
+
 const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   id,
   text,
@@ -146,10 +173,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   // Handle hover states with delay for better UX
   const handleMouseEnter = (e: React.MouseEvent) => {
     // Clear any pending close timers immediately
-    if (submenuTimerRef.current) {
-      window.clearTimeout(submenuTimerRef.current);
-      submenuTimerRef.current = null;
-    }
+    clearTimeout(submenuTimerRef);
     
     if (!disabled && state !== MenuItemState.NA && !isLabel) {
       setIsHovering(true);
@@ -255,25 +279,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       hoverClass = themeConfig.euler.menuv2.menuItem.hover.DEFAULT;
     }
   }
-
-  // Helper function to render icons consistently
-  const renderIcon = (icon: React.ReactNode) => {
-    // If it's a valid React element with className prop
-    if (React.isValidElement(icon)) {
-      const elementWithClassName = icon as ReactElement<IconElementProps>;
-      return React.cloneElement(elementWithClassName, { 
-        className: cn(themeConfig.euler.menuv2.iconSize, elementWithClassName.props.className) 
-      });
-    }
-    
-    // If it's a Lucide icon component
-    if (typeof icon === 'function') {
-      const Icon = icon as React.ComponentType<IconElementProps>;
-      return <Icon className={themeConfig.euler.menuv2.iconSize} />;
-    }
-    
-    return icon;
-  };
 
   // Render submenu content - using portal for proper positioning
   const renderSubmenu = () => {

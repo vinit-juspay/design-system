@@ -13,12 +13,28 @@ import {
   DropdownSelectionType
 } from "./types";
 
-// Helper functions for generating class names
+// Generic helper to map enum values to themeConfig keys
+export function mapEnumToThemeKey(value: any, mapping: Record<any, string>): string {
+  return mapping[value] || Object.values(mapping)[0]; // Default to first value if not found
+}
+
+// Maps dropdown size enum to themeConfig size key
+export function getSizeKey(size: DropdownSize): 'SMALL' | 'MEDIUM' | 'LARGE' {
+  return size === DropdownSize.SMALL 
+    ? 'SMALL' 
+    : size === DropdownSize.LARGE 
+      ? 'LARGE' 
+      : 'MEDIUM';
+}
+
+// ===== Menu Helpers =====
 export function getMenuClassNames(type: MenuType = MenuType.DEFAULT): string {
   return cn(
     themeConfig.euler.menuv2.baseStyles,
     themeConfig.euler.menuv2.types[type],
-    "w-auto min-w-[180px] max-w-[320px]" // Added max-width and changed from w-full to w-auto
+    themeConfig.euler.menuv2.dimensions.width,
+    themeConfig.euler.menuv2.dimensions.minWidth,
+    themeConfig.euler.menuv2.dimensions.maxWidth
   );
 }
 
@@ -46,6 +62,7 @@ export function getMenuItemClassNames({
   );
 }
 
+// Search-related classnames
 export function getMenuSearchClassNames(): string {
   return cn(themeConfig.euler.menuv2.search.container);
 }
@@ -62,25 +79,21 @@ export function getMenuNoResultsClassNames(): string {
   return cn(themeConfig.euler.menuv2.search.noResults);
 }
 
-export function getSlotLClassNames(): string {
-  return cn(themeConfig.euler.menuv2.menuItem.slots.slotL);
-}
+// Consolidated slot class getters
+export const menuItemSlotClasses = {
+  slotL: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotL),
+  slotR1: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR1),
+  slotR2: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR2),
+  shortcut: () => cn(themeConfig.euler.menuv2.menuItem.shortcut),
+  submenu: () => cn(themeConfig.euler.menuv2.menuItem.submenu.container)
+};
 
-export function getSlotR1ClassNames(): string {
-  return cn(themeConfig.euler.menuv2.menuItem.slots.slotR1);
-}
-
-export function getSlotR2ClassNames(): string {
-  return cn(themeConfig.euler.menuv2.menuItem.slots.slotR2);
-}
-
-export function getShortcutClassNames(): string {
-  return cn(themeConfig.euler.menuv2.menuItem.shortcut);
-}
-
-export function getSubmenuClassNames(): string {
-  return cn(themeConfig.euler.menuv2.menuItem.submenu.container);
-}
+// For backward compatibility
+export const getSlotLClassNames = menuItemSlotClasses.slotL;
+export const getSlotR1ClassNames = menuItemSlotClasses.slotR1;
+export const getSlotR2ClassNames = menuItemSlotClasses.slotR2;
+export const getShortcutClassNames = menuItemSlotClasses.shortcut;
+export const getSubmenuClassNames = menuItemSlotClasses.submenu;
 
 // Filter items based on search term
 export function filterMenuItems(items: MenuItemProps[], searchTerm: string): MenuItemProps[] {
@@ -97,6 +110,7 @@ export function filterMenuItems(items: MenuItemProps[], searchTerm: string): Men
   });
 }
 
+// Helper for menu navigation
 export const isNodeInRange = (currentNode: HTMLElement, menuElement: HTMLElement) => {
   const menuRect = menuElement.getBoundingClientRect();
   const currentRect = currentNode.getBoundingClientRect();
@@ -139,16 +153,37 @@ export const handleHighlightOption = (
   }
 };
 
-export const getFilteredItems = (items: MenuItemProps[], searchTerm: string): MenuItemProps[] => {
-  if (!searchTerm) return items;
-
-  const lowerCaseSearchTerm = searchTerm.toLowerCase();
-  return items.filter(item => 
-    item.text.toLowerCase().includes(lowerCaseSearchTerm)
-  );
-};
+// Alias for filterMenuItems to maintain backward compatibility
+export const getFilteredItems = filterMenuItems;
 
 // ========== Dropdown Utils ==========
+
+// Maps dropdown state to theme key
+export function getStateKey(state: DropdownState): 'DEFAULT' | 'HOVER' | 'OPEN' | 'SELECTED' {
+  return state === DropdownState.DEFAULT 
+    ? 'DEFAULT' 
+    : state === DropdownState.HOVER 
+      ? 'HOVER' 
+      : state === DropdownState.OPEN 
+        ? 'OPEN' 
+        : 'SELECTED';
+}
+
+// Maps dropdown type to theme key
+export function getTypeKey(type: DropdownType): 'ICON_ONLY' | 'MULTI_SELECT' | 'SINGLE_SELECT' {
+  return type === DropdownType.ICON_ONLY 
+    ? 'ICON_ONLY' 
+    : type === DropdownType.MULTI_SELECT 
+      ? 'MULTI_SELECT' 
+      : 'SINGLE_SELECT';
+}
+
+// Maps dropdown subtype to theme key
+export function getSubTypeKey(subType: DropdownSubType): 'HAS_CONTAINER' | 'NO_CONTAINER' {
+  return subType === DropdownSubType.HAS_CONTAINER 
+    ? 'HAS_CONTAINER' 
+    : 'NO_CONTAINER';
+}
 
 /**
  * Generates the base class names for a dropdown based on its type, state, size, and other properties
@@ -162,55 +197,26 @@ export const getDropdownBaseClasses = (
   disabled: boolean = false,
   className?: string
 ): string => {
-  const baseClasses = "relative flex items-center transition-colors";
-  
-  const typeClasses = {
-    [DropdownType.ICON_ONLY]: "justify-center",
-    [DropdownType.SINGLE_SELECT]: "",
-    [DropdownType.MULTI_SELECT]: "",
-  };
-  
-  // Create separate state classes for NO_CONTAINER (borderless) and HAS_CONTAINER
-  const stateClassesNoBorder = {
-    [DropdownState.DEFAULT]: "bg-white text-gray-700",
-    [DropdownState.HOVER]: "bg-gray-50 text-gray-700",
-    [DropdownState.OPEN]: "bg-gray-25 text-gray-700",
-    [DropdownState.SELECTED]: "bg-white text-gray-700",
-  };
-  
-  const stateClassesWithBorder = {
-    [DropdownState.DEFAULT]: "bg-white text-gray-700 border border-gray-200",
-    [DropdownState.HOVER]: "bg-gray-50 text-gray-700 border border-gray-200",
-    [DropdownState.OPEN]: "bg-gray-25 text-gray-700 border border-gray-200",
-    [DropdownState.SELECTED]: "bg-white text-gray-700 border border-gray-200",
-  };
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "h-8 px-3.5 py-1.5 text-[14px]",
-    [DropdownSize.MEDIUM]: "h-9 px-3.5 py-2 text-[14px]",
-    [DropdownSize.LARGE]: "h-10 px-3.5 py-2.5 text-[14px]",
-  };
-
-  const subTypeClasses = {
-    [DropdownSubType.HAS_CONTAINER]: `rounded-[10px] ${themeConfig.euler.menuv2.shadows.xs}`,
-    [DropdownSubType.NO_CONTAINER]: "rounded-[10px]",
-  };
-  
-  const disabledClasses = disabled 
-    ? "opacity-50 cursor-not-allowed bg-gray-100" 
-    : "cursor-pointer hover:bg-gray-50";
-
-  // Choose state classes based on subType
-  const stateClasses = subType === DropdownSubType.NO_CONTAINER ? 
-    stateClassesNoBorder : stateClassesWithBorder;
+  // Map enum values to themeConfig keys
+  const stateKey = getStateKey(state);
+  const typeKey = getTypeKey(type);
+  const sizeKey = getSizeKey(size);
+  const subTypeKey = getSubTypeKey(subType);
+        
+  // Select the appropriate state classes based on subType
+  const stateClasses = subType === DropdownSubType.NO_CONTAINER 
+    ? themeConfig.euler.menuv2.dropdown.states.noBorder[stateKey] 
+    : themeConfig.euler.menuv2.dropdown.states.withBorder[stateKey];
 
   return cn(
-    baseClasses,
-    typeClasses[type],
-    stateClasses[state],
-    sizeClasses[size],
-    subTypeClasses[subType],
-    disabledClasses,
+    themeConfig.euler.menuv2.dropdown.baseClasses,
+    themeConfig.euler.menuv2.dropdown.typeClasses[typeKey],
+    stateClasses,
+    themeConfig.euler.menuv2.dropdown.sizes[sizeKey],
+    themeConfig.euler.menuv2.dropdown.subtypes[subTypeKey],
+    disabled 
+      ? themeConfig.euler.menuv2.dropdown.disabled.true 
+      : themeConfig.euler.menuv2.dropdown.disabled.false,
     className
   );
 };
@@ -227,105 +233,105 @@ export const calculateDropdownPosition = (
   const scrollY = window.scrollY || document.documentElement.scrollTop;
   const scrollX = window.scrollX || document.documentElement.scrollLeft;
 
+  // Get constants from themeConfig
+  const menuWidth = themeConfig.euler.menuv2.dropdown.positioning.menuWidth;
+  const menuHeight = themeConfig.euler.menuv2.dropdown.positioning.menuHeight;
+  const rightPadding = themeConfig.euler.menuv2.dropdown.positioning.rightPadding;
+  const maxHeightOffset = themeConfig.euler.menuv2.dropdown.positioning.maxHeightOffset;
+  const configOffset = themeConfig.euler.menuv2.dropdown.positioning.offset;
+  
+  // Use provided offset or default from config
+  const finalOffset = offset !== 4 ? offset : configOffset;
+
   // Default position is below the trigger element
-  let top = rect.bottom + scrollY + offset;
+  let top = rect.bottom + scrollY + finalOffset;
   let left = rect.left + scrollX;
-  let maxHeight = window.innerHeight - rect.bottom - offset - 20;
+  let maxHeight = window.innerHeight - rect.bottom - finalOffset - maxHeightOffset;
 
   // Calculate position based on the specified position
   if (position === 'bottom-end') {
-    left = (rect.right + scrollX) - 200; // Assuming menu width of 200px
+    left = (rect.right + scrollX) - menuWidth;
   } else if (position === 'top-start') {
-    top = rect.top + scrollY - offset - 200; // Assuming menu height
-    maxHeight = rect.top - offset - 20;
+    top = rect.top + scrollY - finalOffset - menuHeight;
+    maxHeight = rect.top - finalOffset - maxHeightOffset;
   } else if (position === 'top-end') {
-    top = rect.top + scrollY - offset - 200; // Assuming menu height
-    left = (rect.right + scrollX) - 200; // Assuming menu width of 200px
-    maxHeight = rect.top - offset - 20;
+    top = rect.top + scrollY - finalOffset - menuHeight;
+    left = (rect.right + scrollX) - menuWidth;
+    maxHeight = rect.top - finalOffset - maxHeightOffset;
   } else if (position === 'left') {
-    left = rect.left + scrollX - 200 - offset; // Assuming menu width of 200px
+    left = rect.left + scrollX - menuWidth - finalOffset;
   } else if (position === 'right') {
-    left = rect.right + scrollX + offset;
+    left = rect.right + scrollX + finalOffset;
   }
 
   // Adjust if overflows right side of window
-  if (left + 200 > window.innerWidth + scrollX) {
-    left = window.innerWidth + scrollX - 200 - 10;
+  if (left + menuWidth > window.innerWidth + scrollX) {
+    left = window.innerWidth + scrollX - menuWidth - rightPadding;
   }
 
   // Adjust if overflows left side of window
   if (left < scrollX) {
-    left = scrollX + 10;
+    left = scrollX + rightPadding;
   }
 
   // If vertical position overflows, flip it
-  if (position.startsWith('bottom') && top + 200 > window.innerHeight + scrollY) {
-    top = rect.top + scrollY - offset - 200;
-    maxHeight = rect.top - offset - 20;
+  if (position.startsWith('bottom') && top + menuHeight > window.innerHeight + scrollY) {
+    top = rect.top + scrollY - finalOffset - menuHeight;
+    maxHeight = rect.top - finalOffset - maxHeightOffset;
   } else if (position.startsWith('top') && top < scrollY) {
-    top = rect.bottom + scrollY + offset;
-    maxHeight = window.innerHeight - rect.bottom - offset - 20;
+    top = rect.bottom + scrollY + finalOffset;
+    maxHeight = window.innerHeight - rect.bottom - finalOffset - maxHeightOffset;
   }
 
   return { top, left, maxHeight };
 };
 
+// Consolidated theme class getters using the shared size mapper
+export const getComponentClassBySize = (
+  componentPath: string,
+  basePath: string,
+  size: DropdownSize
+): string => {
+  const sizeKey = getSizeKey(size);
+  const theme = themeConfig.euler.menuv2;
+  
+  // Safely navigate to the component's path
+  const parts = componentPath.split('.');
+  let current: any = theme;
+  
+  for (const part of parts) {
+    if (current && current[part]) {
+      current = current[part];
+    } else {
+      console.warn(`Path ${componentPath} not found in theme config`);
+      return '';
+    }
+  }
+  
+  // Return the combined classes
+  return cn(
+    current.base,
+    current.sizes ? current.sizes[sizeKey] : ''
+  );
+};
+
+// Component-specific class name getters
 export const getLeftIconClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  const baseClasses = "mr-2";
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "w-3 h-3",
-    [DropdownSize.MEDIUM]: "w-3.5 h-3.5",
-    [DropdownSize.LARGE]: "w-3.5 h-3.5",
-  };
-  
-  return cn(baseClasses, sizeClasses[size]);
+  return getComponentClassBySize('dropdown.leftIcon', 'base', size);
 };
 
 export const getChevronIconClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  const baseClasses = "ml-2";
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "w-3.5 h-3.5",
-    [DropdownSize.MEDIUM]: "w-4 h-4",
-    [DropdownSize.LARGE]: "w-4 h-4",
-  };
-  
-  return cn(baseClasses, sizeClasses[size]);
+  return getComponentClassBySize('dropdown.chevron', 'base', size);
 };
 
 export const getLabelClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  const baseClasses = "font-medium text-gray-700";
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "text-[12px]",
-    [DropdownSize.MEDIUM]: "text-[14px]",
-    [DropdownSize.LARGE]: "text-[14px]",
-  };
-  
-  return cn(baseClasses, sizeClasses[size]);
+  return getComponentClassBySize('dropdown.label', 'base', size);
 };
 
 export const getSubLabelClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  const baseClasses = "font-normal text-gray-500";
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "text-[12px]",
-    [DropdownSize.MEDIUM]: "text-[14px]",
-    [DropdownSize.LARGE]: "text-[14px]",
-  };
-  
-  return cn(baseClasses, sizeClasses[size]);
+  return getComponentClassBySize('dropdown.sublabel', 'base', size);
 };
 
 export const getHintTextClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  const baseClasses = "font-normal text-gray-500 mt-2";
-  
-  const sizeClasses = {
-    [DropdownSize.SMALL]: "text-[12px]",
-    [DropdownSize.MEDIUM]: "text-[14px]",
-    [DropdownSize.LARGE]: "text-[14px]",
-  };
-  
-  return cn(baseClasses, sizeClasses[size]);
+  return getComponentClassBySize('dropdown.hint', 'base', size);
 }; 

@@ -15,7 +15,8 @@ import {
   getChevronIconClassNames, 
   getLabelClassNames,
   getSubLabelClassNames,
-  getHintTextClassNames
+  getHintTextClassNames,
+  getSizeKey
 } from "./utils";
 import { cn } from "../../utils";
 import Menu from "./Menu";
@@ -262,10 +263,10 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
                 size={size === DropdownSize.SMALL ? "xs" : size === DropdownSize.LARGE ? "md" : "sm"}
                 label={count.toString()}
                 className={cn(
-                  "ml-1.5 flex items-center justify-center",
+                  themeConfig.euler.menuv2.dropdown.multiSelectTag.base,
                   size === DropdownSize.SMALL 
-                    ? "h-4 w-4 min-w-4" // 16x16px
-                    : "h-[18px] w-[18px] min-w-[18px]" // 18x18px
+                    ? themeConfig.euler.menuv2.dropdown.multiSelectTag.sizeSm
+                    : themeConfig.euler.menuv2.dropdown.multiSelectTag.sizeDefault
                 )}
               />
             </>
@@ -282,7 +283,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
           if (Array.isArray(selectedOption) && selectedOption.length === 1) {
             return (
               <>
-                {placeholder} <span className="text-gray-400 ml-1.5">{firstItem?.text}</span>
+                {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem?.text}</span>
               </>
             );
           }
@@ -290,7 +291,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
           // Multiple items selected
           return (
             <>
-              {placeholder} <span className="text-gray-400 ml-1.5">{firstItem?.text}, +{count - 1} more</span>
+              {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem?.text}, +{count - 1} more</span>
             </>
           );
         }
@@ -321,10 +322,14 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
     className
   );
   
+  // Helper function to format width consistently
+  const getWidthClass = (width?: string | number) => {
+    if (!width) return themeConfig.euler.menuv2.dropdown.trigger.widthFit;
+    return typeof width === 'number' ? `w-[${width}px]` : `w-${width}`;
+  };
+  
   // Dropdown widths based on size
-  const widthClasses = width 
-    ? typeof width === 'number' ? `w-[${width}px]` : `w-${width}`
-    : "w-fit"; // Make all dropdowns fit content by default
+  const widthClasses = getWidthClass(width);
   
   // Effect to update menu width and position based on available space
   useEffect(() => {
@@ -371,20 +376,20 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
   }, [isOpen, type, menuItems.length]);
   
   return (
-    <div className="relative">
+    <div className={themeConfig.euler.menuv2.dropdown.container.base}>
       {/* Label, SubLabel, Mandatory indicator and Help icon - only render if subType is HAS_CONTAINER */}
       {subType === DropdownSubType.HAS_CONTAINER && hasLabel && label && (
-        <div className="mb-2">
-          <div className="flex items-center gap-1.5">
+        <div className={themeConfig.euler.menuv2.dropdown.container.withLabel}>
+          <div className={themeConfig.euler.menuv2.dropdown.label.container}>
             <label htmlFor={id} className={getLabelClassNames(size)}>
               {label}
             </label>
             {hasSubLabel && subLabel && (
               <span className={getSubLabelClassNames(size)}>{subLabel}</span>
             )}
-            {mandatory && <span className="text-red-600">*</span>}
+            {mandatory && <span className={themeConfig.euler.menuv2.dropdown.label.mandatory}>*</span>}
             {hasHelp && (
-              <span className="text-gray-400">
+              <span className={themeConfig.euler.menuv2.dropdown.label.helpIcon}>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 13.6668C3.31833 13.6668 0.333336 10.6818 0.333336 7.00016C0.333336 3.3185 3.31833 0.333496 7 0.333496C10.6817 0.333496 13.6667 3.3185 13.6667 7.00016C13.6667 10.6818 10.6817 13.6668 7 13.6668ZM7 12.3335C8.41448 12.3335 9.77108 11.7716 10.7713 10.7714C11.7714 9.77126 12.3333 8.41466 12.3333 7.00016C12.3333 5.58567 11.7714 4.22907 10.7713 3.22888C9.77108 2.22869 8.41448 1.66683 7 1.66683C5.58551 1.66683 4.22893 2.22869 3.22873 3.22888C2.22853 4.22907 1.66667 5.58567 1.66667 7.00016C1.66667 8.41466 2.22853 9.77126 3.22873 10.7714C4.22893 11.7716 5.58551 12.3335 7 12.3335ZM6.35 4.3335H7.65V5.66683H6.35V4.3335ZM6.35 7.00016H7.65V9.66683H6.35V7.00016Z" fill="currentColor"/>
                 </svg>
@@ -394,7 +399,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
         </div>
       )}
       
-      <div className="relative flex items-center">
+      <div className={themeConfig.euler.menuv2.dropdown.container.wrapper}>
         {/* Dropdown trigger */}
         <div
           ref={(node) => {
@@ -411,12 +416,13 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
           id={id}
           className={cn(
             dropdownClasses, 
-            widthClasses,
-            "focus:outline-none",
-            hasSelection && showClearButton && type !== DropdownType.ICON_ONLY && 
-              (subType === DropdownSubType.NO_CONTAINER 
-                ? "rounded-r-none" 
-                : "rounded-r-none border-r-0")
+            getWidthClass(width),
+            themeConfig.euler.menuv2.dropdown.trigger.base,
+            hasSelection && showClearButton && type !== DropdownType.ICON_ONLY && (
+              subType === DropdownSubType.NO_CONTAINER 
+                ? themeConfig.euler.menuv2.dropdown.trigger.noBorderClearButtonRight
+                : themeConfig.euler.menuv2.dropdown.trigger.withBorderClearButtonRight
+            )
           )}
           onClick={handleToggle}
           onKeyDown={(e) => {
@@ -435,29 +441,29 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
         >
           {/* Left icon */}
           {hasLeftIcon && leftIcon && (
-            <span className={cn(getLeftIconClassNames(size), "text-gray-400 flex items-center justify-center")}>
+            <span className={cn(getLeftIconClassNames(size), themeConfig.euler.menuv2.dropdown.leftIcon.wrapper)}>
               {leftIcon}
             </span>
           )}
           
           {/* Display text - only shown for non-icon-only dropdowns */}
           {type !== DropdownType.ICON_ONLY && (
-            <span className="flex-grow font-normal text-gray-700">
+            <span className={themeConfig.euler.menuv2.dropdown.displayText}>
               {getDisplayText()}
             </span>
           )}
           
           {/* Dropdown icon */}
           <span className={cn(
-            "text-gray-400 flex items-center justify-center",
+            themeConfig.euler.menuv2.dropdown.chevron.wrapper,
             type !== DropdownType.ICON_ONLY && getChevronIconClassNames(size)
           )}>
             {isOpen ? 
               <ChevronUp className={
-                size === DropdownSize.SMALL ? "w-3.5 h-3.5" : "w-4 h-4"
+                themeConfig.euler.menuv2.dropdown.chevron.sizes[getSizeKey(size)]
               } /> : 
               <ChevronDown className={
-                size === DropdownSize.SMALL ? "w-3.5 h-3.5" : "w-4 h-4"
+                themeConfig.euler.menuv2.dropdown.chevron.sizes[getSizeKey(size)]
               } />
             }
           </span>
@@ -471,13 +477,15 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
                  size === DropdownSize.LARGE ? ButtonSize.LARGE : ButtonSize.MEDIUM}
             subType={ButtonSubType.ICON_ONLY}
             className={cn(
-              "rounded-l-none", 
-              subType === DropdownSubType.HAS_CONTAINER ? "border-[1px]" : "border-[1px] border-gray-200"
+              themeConfig.euler.menuv2.dropdown.clearButton.base, 
+              subType === DropdownSubType.HAS_CONTAINER 
+                ? themeConfig.euler.menuv2.dropdown.clearButton.withContainer
+                : themeConfig.euler.menuv2.dropdown.clearButton.noContainer
             )}
             onClick={handleClear}
             ariaLabel="Clear selection"
           >
-            <X size={16} className="text-gray-600" />
+            <X size={16} className={themeConfig.euler.menuv2.dropdown.clearButton.icon} />
           </Button>
         )}
         
@@ -486,14 +494,14 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
           <div 
             ref={menuContainerRef}
             id={id ? `${id}-menu` : 'dropdown-menu'}
-            className="absolute z-50"
+            className={themeConfig.euler.menuv2.dropdown.menu.container}
             style={{ width: 'auto' }}
           >
             <Menu
               items={menuItems}
               onItemClick={handleSelect}
               className={cn(
-                "rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap",
+                themeConfig.euler.menuv2.dropdown.menu.base,
                 themeConfig.euler.menuv2.shadows.xs
               )}
               type={type === DropdownType.MULTI_SELECT ? MenuType.MULTI_SELECT : MenuType.DEFAULT}

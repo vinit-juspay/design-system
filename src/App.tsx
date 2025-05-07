@@ -1131,6 +1131,21 @@ const App = () => {
                 placeholder="Select options"
               />
             </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">NO_CONTAINER with Text Display</p>
+              <MenuDropdown 
+                type={DropdownType.MULTI_SELECT}
+                subType={DropdownSubType.NO_CONTAINER}
+                selectionType={DropdownSelectionType.TEXT}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                ]}
+                placeholder="Text display"
+              />
+            </div>
           </div>
         </div>
       </div>
