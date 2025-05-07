@@ -23,23 +23,23 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
     // Get React children as array
     const childrenArray = React.Children.toArray(children);
     const totalChildren = childrenArray.length;
-    
+
     // Find the first primary/success/danger button (for singlePrimary mode)
     let primaryButtonIndex = -1;
     if (mode === ButtonGroupMode.SINGLE_PRIMARY) {
       childrenArray.forEach((child, index) => {
         if (!React.isValidElement(child)) return;
-        
+
         const childProps = child.props as Partial<ButtonProps>;
         const buttonType = childProps.buttonType;
-        
+
         // If we find a non-secondary button, mark it as our primary button
         if (buttonType && buttonType !== ButtonType.SECONDARY && primaryButtonIndex === -1) {
           primaryButtonIndex = index;
         }
       });
     }
-    
+
     return (
       <div
         ref={ref}
@@ -51,29 +51,24 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           if (!React.isValidElement(child)) {
             return child;
           }
-          
+
           // Type checking for Button component
           const childProps = child.props as Partial<ButtonProps>;
           let finalButtonType = childProps.buttonType;
-          
+
           // Apply button type transformation based on mode
           if (mode === ButtonGroupMode.ALL_SECONDARY) {
             // Force all buttons to secondary
             finalButtonType = ButtonType.SECONDARY;
           } else if (mode === ButtonGroupMode.SINGLE_PRIMARY && primaryButtonIndex !== -1) {
             // Only allow one primary/success/danger button, make others secondary
-            finalButtonType = index === primaryButtonIndex 
-              ? childProps.buttonType 
-              : ButtonType.SECONDARY;
+            finalButtonType =
+              index === primaryButtonIndex ? childProps.buttonType : ButtonType.SECONDARY;
           }
-          
+
           // Get position-based styling for the button
-          const buttonGroupClassName = getButtonGroupStyles.button(
-            index,
-            totalChildren,
-            isStacked
-          );
-          
+          const buttonGroupClassName = getButtonGroupStyles.button(index, totalChildren, isStacked);
+
           return React.cloneElement(child, {
             ...childProps,
             buttonType: finalButtonType,
@@ -88,4 +83,4 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
 
 ButtonGroup.displayName = 'ButtonGroup';
 
-export default ButtonGroup; 
+export default ButtonGroup;

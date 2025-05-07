@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Accordion, AccordionItem } from './Accordion';
-import { AccordionType, AccordionVariant } from './types';
+import { AccordionType, AccordionChevronPosition } from './types';
 import { Info, AlertCircle, Settings } from 'lucide-react';
 
 const meta: Meta<typeof Accordion> = {
@@ -37,31 +37,32 @@ export const Basic: Story = {
 // Bordered Variant
 export const Bordered: Story = {
   args: {
-    variant: AccordionVariant.BORDERED,
     defaultValue: 'item-1',
     children: (
       <>
-        <AccordionItem 
-          value="item-1" 
-          title="Basic Information" 
+        <AccordionItem
+          value="item-1"
+          title="Basic Information"
           subtext="Personal and account details"
           leftSlot={<Info />}
         >
           This section contains all your basic profile information.
         </AccordionItem>
-        <AccordionItem 
-          value="item-2" 
-          title="Security Settings" 
+        <AccordionItem
+          value="item-2"
+          title="Security Settings"
           subtext="Password and authentication options"
           leftSlot={<Settings />}
         >
           Manage your security preferences here.
         </AccordionItem>
-        <AccordionItem 
-          value="item-3" 
-          title="Notifications" 
+        <AccordionItem
+          value="item-3"
+          title="Notifications"
           subtext="Email and push notification preferences"
-          rightSlot={<span className="bg-red-100 text-red-600 text-xs rounded-full px-2 py-1">New</span>}
+          rightSlot={
+            <span className="bg-red-100 text-red-600 text-xs rounded-full px-2 py-1">New</span>
+          }
         >
           Control which notifications you receive and how they are delivered.
         </AccordionItem>
@@ -73,28 +74,20 @@ export const Bordered: Story = {
 // Filled Variant
 export const Filled: Story = {
   args: {
-    variant: AccordionVariant.FILLED,
     defaultValue: 'item-1',
     children: (
       <>
-        <AccordionItem 
-          value="item-1" 
-          title="How do I create an account?" 
+        <AccordionItem
+          value="item-1"
+          title="How do I create an account?"
           leftSlot={<AlertCircle />}
         >
           To create an account, click the "Sign Up" button and follow the instructions.
         </AccordionItem>
-        <AccordionItem 
-          value="item-2" 
-          title="What payment methods do you accept?"
-        >
+        <AccordionItem value="item-2" title="What payment methods do you accept?">
           We accept credit cards, PayPal, and bank transfers.
         </AccordionItem>
-        <AccordionItem 
-          value="item-3" 
-          title="How do I contact support?"
-          isDisabled={true}
-        >
+        <AccordionItem value="item-3" title="How do I contact support?" isDisabled={true}>
           This content is not accessible because the item is disabled.
         </AccordionItem>
       </>
@@ -131,24 +124,17 @@ export const NoBorder: Story = {
     className: 'w-[400px]',
     children: (
       <>
-        <AccordionItem 
-          value="item-1" 
-          title="Basic FAQ Item" 
-        >
+        <AccordionItem value="item-1" title="Basic FAQ Item">
           This is a simple no-border accordion item.
         </AccordionItem>
-        <AccordionItem 
-          value="item-2" 
-          title="With Subtext" 
+        <AccordionItem
+          value="item-2"
+          title="With Subtext"
           subtext="Additional information below the title"
         >
           No-border accordion with subtext.
         </AccordionItem>
-        <AccordionItem 
-          value="item-3" 
-          title="With Icon" 
-          leftSlot={<Info />}
-        >
+        <AccordionItem value="item-3" title="With Icon" leftSlot={<Info />}>
           No-border accordion with an icon.
         </AccordionItem>
       </>
@@ -164,17 +150,37 @@ export const Border: Story = {
     className: 'w-[400px]',
     children: (
       <>
-        <AccordionItem 
-          value="item-1" 
-          title="Bordered Item" 
-        >
+        <AccordionItem value="item-1" title="Bordered Item">
           This item has a full border around it.
         </AccordionItem>
-        <AccordionItem 
-          value="item-2" 
-          title="Another Bordered Item" 
-        >
+        <AccordionItem value="item-2" title="Another Bordered Item">
           Each item is independently bordered.
+        </AccordionItem>
+      </>
+    ),
+  },
+};
+
+export const LeftChevron: Story = {
+  args: {
+    defaultValue: 'item-1',
+    className: 'w-[400px]',
+    children: (
+      <>
+        <AccordionItem
+          value="item-1"
+          title="Left Chevron Position"
+          chevronPosition={AccordionChevronPosition.LEFT}
+        >
+          The chevron icon is positioned on the left side.
+        </AccordionItem>
+        <AccordionItem
+          value="item-2"
+          title="With Subtext"
+          subtext="Subtext with left chevron"
+          chevronPosition={AccordionChevronPosition.LEFT}
+        >
+          Left chevron with subtext example.
         </AccordionItem>
       </>
     ),

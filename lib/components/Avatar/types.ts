@@ -1,16 +1,16 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes } from 'react';
 
 export enum AvatarSize {
-  SM = "sm",
-  REGULAR = "regular",
-  MD = "md",
-  LG = "lg",
-  XL = "xl",
+  SM = 'sm',
+  REGULAR = 'regular',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
 }
 
 export enum AvatarShape {
-  CIRCULAR = "circular",
-  ROUNDED = "rounded",
+  CIRCULAR = 'circular',
+  ROUNDED = 'rounded',
 }
 
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,4 +21,4 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   shape?: AvatarShape;
   online?: boolean;
   className?: string;
-} 
+}

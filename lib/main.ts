@@ -21,3 +21,9 @@ export { default as Switch } from './components/Switch/Switch';
 export { default as SwitchGroup } from './components/Switch/SwitchGroup';
 export { Radio, RadioGroup } from './components/Radio';
 export { default as ButtonGroup } from './components/ButtonGroup/ButtonGroup';
+export {
+  Accordion,
+  AccordionItem,
+  AccordionType,
+  AccordionChevronPosition,
+} from './components/Accordion';

@@ -1,13 +1,13 @@
-import { ReactNode } from "react";
-
-export enum AccordionVariant {
-  BORDERED = "bordered",
-  FILLED = "filled"
-}
+import { ReactNode } from 'react';
 
 export enum AccordionType {
-  BORDER = "border",
-  NO_BORDER = "noborder"
+  BORDER = 'border',
+  NO_BORDER = 'noborder',
+}
+
+export enum AccordionChevronPosition {
+  LEFT = 'left',
+  RIGHT = 'right',
 }
 
 export interface AccordionItemProps {
@@ -29,14 +29,14 @@ export interface AccordionItemProps {
   isDisabled?: boolean;
   /** Optional additional className for this item */
   className?: string;
+  /** Position of the chevron icon */
+  chevronPosition?: AccordionChevronPosition;
 }
 
 export interface AccordionProps {
   /** Child accordion items */
   children: ReactNode;
   /** Type of accordion styling */
-  variant?: AccordionVariant;
-  /** Border style of accordion */
   type?: AccordionType;
   /** Default expanded value(s) */
   defaultValue?: string | string[];
@@ -50,4 +50,4 @@ export interface AccordionProps {
   onValueChange?: (value: string | string[]) => void;
   /** Optional additional className */
   className?: string;
-} 
+}

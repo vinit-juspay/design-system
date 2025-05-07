@@ -7,4 +7,4 @@ export interface SwitchGroupContextType {
   isDisabled?: boolean;
 }
 
-export const SwitchGroupContext = createContext<SwitchGroupContextType | undefined>(undefined); 
+export const SwitchGroupContext = createContext<SwitchGroupContextType | undefined>(undefined);

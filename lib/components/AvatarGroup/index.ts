@@ -1,2 +1,2 @@
-export { default } from "./AvatarGroup";
-export * from "./types"; 
+export { default } from './AvatarGroup';
+export * from './types';

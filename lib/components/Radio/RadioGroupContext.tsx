@@ -7,4 +7,4 @@ export interface RadioGroupContextType {
   isDisabled?: boolean;
 }
 
-export const RadioGroupContext = createContext<RadioGroupContextType | undefined>(undefined); 
+export const RadioGroupContext = createContext<RadioGroupContextType | undefined>(undefined);
