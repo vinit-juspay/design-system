@@ -807,5 +807,52 @@ export const themeConfig = {
         xl: 'h-16 w-16 text-sm',
       },
     },
+    accordion: {
+      base: {
+        container: "w-full",
+        item: "border-b border-gray-200",
+        trigger: "flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+        content: "overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+        title: "text-gray-800 text-body-lg font-medium",
+        subtext: "text-gray-600 text-body-md mt-1",
+      },
+      variant: {
+        bordered: {
+          container: "",
+          item: "",
+          trigger: "hover:bg-gray-50",
+          content: "px-0",
+        },
+        filled: {
+          container: "",
+          item: "bg-gray-50 overflow-hidden",
+          trigger: "px-4 hover:bg-gray-100",
+          content: "px-4",
+        },
+      },
+      type: {
+        border: {
+          container: "space-y-6",
+          item: "border border-gray-200 rounded-lg overflow-hidden",
+          trigger: "px-4",
+          content: "px-4",
+        },
+        noborder: {
+          container: "space-y-5",
+          item: "border-b border-gray-200 last:border-b-0",
+          trigger: "",
+          content: "px-0",
+        },
+      },
+      layout: {
+        leftSlot: "mr-2 flex-shrink-0",
+        rightSlot: "ml-2 flex-shrink-0",
+        headerRow: "flex items-center",
+        chevron: "absolute right-0 top-0 flex items-center justify-center h-4 w-4",
+      },
+      states: {
+        disabled: "opacity-50 cursor-not-allowed",
+      },
+    },
   },
 };
