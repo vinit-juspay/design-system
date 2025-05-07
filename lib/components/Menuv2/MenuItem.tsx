@@ -89,6 +89,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   isSelected = false,
   hasSubmenu = false,
   submenuItems = [],
+  parentId,
   ...props
 }, ref) => {
   // Labels should not have hover effects
@@ -155,7 +156,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       if (hasSubmenu) {
         // Tell the submenu manager that this submenu is now active
         // Pass the parent ID if available
-        submenuManager.setActiveSubmenu(uniqueId.current, props.parentId);
+        submenuManager.setActiveSubmenu(uniqueId.current, parentId);
         // Show submenu immediately on hover
         setShowSubmenu(true);
       } else if (submenuManager.isSubmenuActive(uniqueId.current)) {
@@ -197,7 +198,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
         
         // Update the global submenu state
         if (newState) {
-          submenuManager.setActiveSubmenu(uniqueId.current, props.parentId);
+          submenuManager.setActiveSubmenu(uniqueId.current, parentId);
         } else {
           submenuManager.removeSubmenu(uniqueId.current);
         }

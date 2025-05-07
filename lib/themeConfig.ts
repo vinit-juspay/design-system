@@ -576,6 +576,9 @@ export const themeConfig = {
           transform-origin: top left;
         }
       `,
+      shadows: {
+        xs: "shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
+      },
       types: {
         DEFAULT: "w-52",
         MULTI_SELECT: "w-52",

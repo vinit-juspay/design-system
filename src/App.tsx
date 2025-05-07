@@ -15,18 +15,20 @@ import {
   Lock,
   Home,
   Bell,
-  Menu,
+  Menu as MenuIcon,
   BarChart2,
   Type,
   Calendar as CalendarIcon,
   ListFilter,
   User as UserIcon,
+  ChevronDown,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, ButtonGroup } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import { ButtonGroupSize, ButtonGroupMode } from '../lib/components/ButtonGroup/types';
+import { Menu, MenuItem, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menuv2';
 import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
@@ -37,14 +39,14 @@ import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars'
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown'
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date(),
     endDate: new Date(),
   });
-
+  
   const handleDateRangeChange = (newRange: any) => {
     console.log('Selected Date Range:', newRange);
     setSelectedDateRange(newRange);
@@ -63,6 +65,8 @@ const App = () => {
     { id: 'datePicker', label: 'Date Picker', icon: CalendarIcon },
     { id: 'selectors', label: 'Selectors', icon: Check },
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
+    { id: 'menu', label: 'Menu V2', icon: MenuIcon },
+    { id: 'dropdown', label: 'Dropdown V2', icon: ChevronDown },
   ];
 
   const renderSidebar = () => (
@@ -225,7 +229,7 @@ const App = () => {
           <Button
             buttonType={ButtonType.SECONDARY}
             subType={ButtonSubType.ICON_ONLY}
-            leadingIcon={Menu}
+            leadingIcon={MenuIcon}
             ariaLabel="Open menu"
             ariaExpanded={false}
             ariaControls="main-menu"
@@ -661,37 +665,717 @@ const App = () => {
     </>
   );
 
+  const renderMenu = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Menu V2 Examples</h2>
+
+      {/* Basic Menu */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Basic Menu</h3>
+        <Menu
+          items={[
+            {
+              id: '1',
+              text: 'Profile',
+              type: MenuItemType.DEFAULT,
+              slotL: <User size={16} />,
+            },
+            {
+              id: '2',
+              text: 'Settings',
+              type: MenuItemType.DEFAULT,
+              slotL: <Settings size={16} />,
+            },
+            {
+              id: '3',
+              text: 'Help',
+              type: MenuItemType.DEFAULT,
+              slotL: <HelpCircle size={16} />,
+            },
+          ]}
+        />
+      </div>
+
+      {/* Menu with Submenu */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Menu with Submenu</h3>
+        <Menu
+          items={[
+            {
+              id: '1',
+              text: 'Profile',
+              type: MenuItemType.SUBMENU,
+              slotL: <User size={16} />,
+              hasSubmenu: true,
+              submenuItems: [
+                {
+                  id: '1-1',
+                  text: 'View Profile',
+                  type: MenuItemType.DEFAULT,
+                  slotL: <User size={16} />,
+                },
+                {
+                  id: '1-2',
+                  text: 'Edit Profile',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <Settings size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '1-2-1',
+                      text: 'Personal Info',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <User size={16} />,
+                    },
+                    {
+                      id: '1-2-2',
+                      text: 'Preferences',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Settings size={16} />,
+                    },
+                    {
+                      id: '1-2-3',
+                      text: 'Security',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Lock size={16} />,
+                    },
+                  ],
+                },
+                {
+                  id: '1-3',
+                  text: 'Account Settings',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <Lock size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '1-3-1',
+                      text: 'Billing',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <TagIcon size={16} />,
+                    },
+                    {
+                      id: '1-3-2',
+                      text: 'Subscription',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Layers size={16} />,
+                    },
+                    {
+                      id: '1-3-3',
+                      text: 'API Keys',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Lock size={16} />,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              id: '2',
+              text: 'Notifications',
+              type: MenuItemType.SUBMENU,
+              slotL: <Bell size={16} />,
+              hasSubmenu: true,
+              submenuItems: [
+                {
+                  id: '2-1',
+                  text: 'All Notifications',
+                  type: MenuItemType.DEFAULT,
+                  slotL: <Bell size={16} />,
+                },
+                {
+                  id: '2-2',
+                  text: 'Unread',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <AlertCircle size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '2-2-1',
+                      text: 'High Priority',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                    {
+                      id: '2-2-2',
+                      text: 'Medium Priority',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                    {
+                      id: '2-2-3',
+                      text: 'Low Priority',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                  ],
+                },
+                {
+                  id: '2-3',
+                  text: 'Settings',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <Settings size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '2-3-1',
+                      text: 'Email Notifications',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Bell size={16} />,
+                    },
+                    {
+                      id: '2-3-2',
+                      text: 'Push Notifications',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Bell size={16} />,
+                    },
+                    {
+                      id: '2-3-3',
+                      text: 'SMS Notifications',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Bell size={16} />,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              id: '3',
+              text: 'Help & Support',
+              type: MenuItemType.SUBMENU,
+              slotL: <HelpCircle size={16} />,
+              hasSubmenu: true,
+              submenuItems: [
+                {
+                  id: '3-1',
+                  text: 'Documentation',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <Type size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '3-1-1',
+                      text: 'Getting Started',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Home size={16} />,
+                    },
+                    {
+                      id: '3-1-2',
+                      text: 'API Reference',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <Type size={16} />,
+                    },
+                    {
+                      id: '3-1-3',
+                      text: 'Tutorials',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <HelpCircle size={16} />,
+                    },
+                  ],
+                },
+                {
+                  id: '3-2',
+                  text: 'Contact Support',
+                  type: MenuItemType.SUBMENU,
+                  slotL: <AlertCircle size={16} />,
+                  hasSubmenu: true,
+                  submenuItems: [
+                    {
+                      id: '3-2-1',
+                      text: 'Email Support',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                    {
+                      id: '3-2-2',
+                      text: 'Live Chat',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                    {
+                      id: '3-2-3',
+                      text: 'Phone Support',
+                      type: MenuItemType.DEFAULT,
+                      slotL: <AlertCircle size={16} />,
+                    },
+                  ],
+                },
+                {
+                  id: '3-3',
+                  text: 'FAQ',
+                  type: MenuItemType.DEFAULT,
+                  slotL: <HelpCircle size={16} />,
+                },
+              ],
+            },
+          ]}
+        />
+      </div>
+
+      {/* Multi-select Menu */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Multi-select Menu</h3>
+        <Menu
+          type={MenuType.MULTI_SELECT}
+          items={[
+            {
+              id: '1',
+              text: 'Option 1',
+              type: MenuItemType.MULTI_SELECT,
+              isMultiSelect: true,
+            },
+            {
+              id: '2',
+              text: 'Option 2',
+              type: MenuItemType.MULTI_SELECT,
+              isMultiSelect: true,
+            },
+            {
+              id: '3',
+              text: 'Option 3',
+              type: MenuItemType.MULTI_SELECT,
+              isMultiSelect: true,
+            },
+          ]}
+        />
+      </div>
+
+      {/* Menu with Search */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Menu with Search</h3>
+        <Menu
+          hasSearch={true}
+          searchPlaceholder="Search items..."
+          items={[
+            {
+              id: '1',
+              text: 'Profile',
+              type: MenuItemType.DEFAULT,
+              slotL: <User size={16} />,
+            },
+            {
+              id: '2',
+              text: 'Settings',
+              type: MenuItemType.DEFAULT,
+              slotL: <Settings size={16} />,
+            },
+            {
+              id: '3',
+              text: 'Help',
+              type: MenuItemType.DEFAULT,
+              slotL: <HelpCircle size={16} />,
+            },
+          ]}
+        />
+      </div>
+
+      {/* Menu with Actions */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Menu with Actions</h3>
+        <Menu
+          items={[
+            {
+              id: '1',
+              text: 'Edit Profile',
+              type: MenuItemType.ACTION,
+              action: MenuItemAction.PRIMARY,
+              slotL: <User size={16} />,
+            },
+            {
+              id: '2',
+              text: 'Delete Account',
+              type: MenuItemType.ACTION,
+              action: MenuItemAction.DANGER,
+              slotL: <Trash2 size={16} />,
+            },
+          ]}
+        />
+      </div>
+    </>
+  );
+
+  const renderDropdown = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Dropdown V2 Examples</h2>
+
+      {/* Dropdown Types */}
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold mb-4">Dropdown Types</h3>
+        
+        {/* Single Select */}
+        <div className="mt-6 pb-6 border-b border-gray-200">
+          <h4 className="text-lg font-medium mb-4">1. Single Select Dropdown</h4>
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
+              <MenuDropdown 
+                type={DropdownType.SINGLE_SELECT}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.DEFAULT },
+                ]}
+                hasLabel={true}
+                label="Single Select"
+                hasHint={true}
+                hint="Select one option"
+                placeholder="Select an option"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
+              <MenuDropdown 
+                type={DropdownType.SINGLE_SELECT}
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.DEFAULT },
+                ]}
+                placeholder="Select an option"
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Icon Only */}
+        <div className="mt-6 pb-6 border-b border-gray-200">
+          <h4 className="text-lg font-medium mb-4">2. Icon Only Dropdown</h4>
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                menuItems={[
+                  { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
+                  { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
+                  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <HelpCircle size={16} /> },
+                ]}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+                hasLabel={true}
+                label="Icon Only"
+                hasHint={true}
+                hint="Click icon to open"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
+                  { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
+                  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <HelpCircle size={16} /> },
+                ]}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Multi Select */}
+        <div className="mt-6 pb-6 border-b border-gray-200">
+          <h4 className="text-lg font-medium mb-4">3. Multi Select Dropdown</h4>
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Count Display (HAS_CONTAINER)</p>
+              <MenuDropdown 
+                type={DropdownType.MULTI_SELECT}
+                selectionType={DropdownSelectionType.COUNT}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                ]}
+                hasLabel={true}
+                label="Multi Select (Count)"
+                hasHint={true}
+                hint="Select multiple options"
+                placeholder="Select options"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Text Display (HAS_CONTAINER)</p>
+              <MenuDropdown 
+                type={DropdownType.MULTI_SELECT}
+                selectionType={DropdownSelectionType.TEXT}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                ]}
+                hasLabel={true}
+                label="Multi Select (Text)"
+                hasHint={true}
+                hint="Select multiple options"
+                placeholder="Select options"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
+              <MenuDropdown 
+                type={DropdownType.MULTI_SELECT}
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                ]}
+                placeholder="Select options"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Dropdown Subtypes */}
+      <div className="mt-10">
+        <h3 className="text-xl font-semibold mb-4">Dropdown Subtypes</h3>
+        
+        {/* HAS_CONTAINER */}
+        <div className="mt-6 pb-6 border-b border-gray-200">
+          <h4 className="text-lg font-medium mb-4">1. HAS_CONTAINER Subtype</h4>
+          <p className="text-gray-600 mb-4">Shows label, sublabel, and hint text</p>
+          
+          <div className="flex flex-col space-y-4">
+            <MenuDropdown 
+              subType={DropdownSubType.HAS_CONTAINER}
+              hasLabel={true}
+              label="Regular Label"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Basic label"
+            />
+            
+            <MenuDropdown 
+              subType={DropdownSubType.HAS_CONTAINER}
+              hasLabel={true}
+              label="With Sublabel"
+              hasSubLabel={true}
+              subLabel="(optional)"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Label and sublabel"
+            />
+            
+            <MenuDropdown 
+              subType={DropdownSubType.HAS_CONTAINER}
+              hasLabel={true}
+              label="With Hint"
+              hasHint={true}
+              hint="This is a helpful hint text"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Label and hint"
+            />
+            
+            <MenuDropdown 
+              subType={DropdownSubType.HAS_CONTAINER}
+              hasLabel={true}
+              label="Required Field"
+              mandatory={true}
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="With required indicator"
+            />
+          </div>
+        </div>
+        
+        {/* NO_CONTAINER */}
+        <div className="mt-6">
+          <h4 className="text-lg font-medium mb-4">2. NO_CONTAINER Subtype</h4>
+          <p className="text-gray-600 mb-4">Standalone dropdown with no labels, hints, or borders</p>
+          
+          <div className="flex flex-wrap gap-8">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Single Select</p>
+              <MenuDropdown 
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                ]}
+                placeholder="No container dropdown"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Multi Select</p>
+              <MenuDropdown 
+                type={DropdownType.MULTI_SELECT}
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                ]}
+                placeholder="No container multiselect"
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Icon Only</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                subType={DropdownSubType.NO_CONTAINER}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
+                ]}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Dropdown Sizes */}
+      <div className="mt-10">
+        <h3 className="text-xl font-semibold mb-4">Dropdown Sizes</h3>
+        <div className="flex flex-wrap gap-6 items-end">
+          <div>
+            <p className="text-sm text-gray-600 mb-2">Small (sm)</p>
+            <MenuDropdown 
+              size={DropdownSize.SMALL}
+              hasLabel={true}
+              label="Small Dropdown"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Small"
+            />
+          </div>
+          
+          <div>
+            <p className="text-sm text-gray-600 mb-2">Medium (md)</p>
+            <MenuDropdown 
+              size={DropdownSize.MEDIUM}
+              hasLabel={true}
+              label="Medium Dropdown"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Medium"
+            />
+          </div>
+          
+          <div>
+            <p className="text-sm text-gray-600 mb-2">Large (lg)</p>
+            <MenuDropdown 
+              size={DropdownSize.LARGE}
+              hasLabel={true}
+              label="Large Dropdown"
+              menuItems={[
+                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+              ]}
+              placeholder="Large"
+            />
+          </div>
+        </div>
+        
+        <div className="mt-8">
+          <h4 className="text-lg font-medium mb-4">Icon Size Comparison</h4>
+          <div className="flex flex-wrap gap-6 items-end">
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Small (sm)</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                size={DropdownSize.SMALL}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                ]}
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Medium (md)</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                size={DropdownSize.MEDIUM}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                ]}
+              />
+            </div>
+            
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Large (lg)</p>
+              <MenuDropdown 
+                type={DropdownType.ICON_ONLY}
+                size={DropdownSize.LARGE}
+                hasLeftIcon={true}
+                leftIcon={<User size={16} />}
+                menuItems={[
+                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
   const renderContent = () => (
     <div className="bg-white shadow rounded-lg p-6">
       {(() => {
         switch (activeComponent) {
           case 'buttons':
-        return renderButtons();
-      case 'buttonGroups':
-        return renderButtonGroups();
-      case 'tooltips':
-        return <TooltipDemo />;
-      case 'tags':
-        return renderTags();
-      case 'tabs':
-        return renderTabs();
-      case 'alerts':
-        return renderAlerts();
-      case 'charts':
-        return <ChartDemo />;
-      case 'chartsV2':
-        return <ChartDemo2 />;
-      case 'fonts':
-        return <FontDemo />;
-      case 'datePicker':
-        return renderDatePicker();
-      case 'selectors':
-        return <SelectorsDemo />;
-      case 'avatars':
-        return <AvatarDemo />;
-      default:
-        return null;
-    }
+            return renderButtons();
+          case 'buttonGroups':
+            return renderButtonGroups();
+          case 'tooltips':
+            return <TooltipDemo />;
+          case 'tags':
+            return renderTags();
+          case 'tabs':
+            return renderTabs();
+          case 'alerts':
+            return renderAlerts();
+          case 'charts':
+            return <ChartDemo />;
+          case 'chartsV2':
+            return <ChartDemo2 />;
+          case 'fonts':
+            return <FontDemo />;
+          case 'datePicker':
+            return renderDatePicker();
+          case 'selectors':
+            return <SelectorsDemo />;
+          case 'avatars':
+            return <AvatarDemo />;
+          case 'menu':
+            return renderMenu();
+          case 'dropdown':
+            return renderDropdown();
+          default:
+            return null;
+        }
       })()}
     </div>
   );

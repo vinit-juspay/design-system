@@ -27,7 +27,7 @@ import {
 } from 'lucide-react';
 
 const meta: Meta<typeof Menu> = {
-  title: 'Components/Menuv2',
+  title: 'Components/Menu and Dropdown/Menu',
   component: Menu,
   parameters: {
     layout: 'centered',
@@ -205,79 +205,6 @@ const MultiSelectMenuExample = () => {
 
 export const MultiSelect: Story = {
   render: () => <MultiSelectMenuExample />,
-};
-
-// Menu Item Examples
-export const MenuItems: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h3 className="text-sm font-semibold mb-2">Default Item</h3>
-        <MenuItem
-          text="Default Menu Item"
-          type={MenuItemType.DEFAULT}
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">With Left Slot</h3>
-        <MenuItem
-          text="Item with Left Slot"
-          type={MenuItemType.DEFAULT}
-          hasSlotL={true}
-          slotL={<Search size={16} />}
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">With Shortcut</h3>
-        <MenuItem
-          text="Item with Shortcut"
-          type={MenuItemType.DEFAULT}
-          hasShortcut={true}
-          shortcutValue="⌘S"
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">Action Item (Primary)</h3>
-        <MenuItem
-          text="Primary Action"
-          type={MenuItemType.ACTION}
-          action={MenuItemAction.PRIMARY}
-          hasSlotL={true}
-          slotL={<Archive size={16} />}
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">Action Item (Danger)</h3>
-        <MenuItem
-          text="Danger Action"
-          type={MenuItemType.ACTION}
-          action={MenuItemAction.DANGER}
-          hasSlotL={true}
-          slotL={<Trash2 size={16} />}
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">Label</h3>
-        <MenuItem
-          text="Category Label"
-          type={MenuItemType.LABEL}
-        />
-      </div>
-      
-      <div>
-        <h3 className="text-sm font-semibold mb-2">Separator</h3>
-        <MenuItem
-          text=""
-          type={MenuItemType.SEPARATOR}
-        />
-      </div>
-    </div>
-  ),
 };
 
 // Menu with Submenus
