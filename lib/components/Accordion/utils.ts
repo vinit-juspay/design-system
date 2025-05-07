@@ -87,4 +87,23 @@ export const getAccordionChevronClassNames = (): string => {
   const theme = themeConfig.euler.accordion;
   
   return cn(theme.layout.chevron);
+};
+
+export const getAccordionContentWrapperClassNames = (
+  variant: AccordionVariant,
+  type: AccordionType
+): string => {
+  const theme = themeConfig.euler.accordion;
+  
+  return cn(
+    theme.base.contentWrapper,
+    theme.variant[variant].contentWrapper,
+    theme.type[type].contentWrapper
+  );
+};
+
+export const getAccordionChevronIconClassNames = (): string => {
+  const theme = themeConfig.euler.accordion;
+  
+  return cn(theme.layout.chevronIcon);
 }; 

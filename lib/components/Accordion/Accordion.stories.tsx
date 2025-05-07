@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Accordion, AccordionItem } from './Accordion';
-import { AccordionVariant } from './types';
+import { AccordionType, AccordionVariant } from './types';
 import { Info, AlertCircle, Settings } from 'lucide-react';
 
 const meta: Meta<typeof Accordion> = {
@@ -117,6 +117,64 @@ export const Multiple: Story = {
         </AccordionItem>
         <AccordionItem value="item-3" title="Item 3">
           Content for item 3
+        </AccordionItem>
+      </>
+    ),
+  },
+};
+
+// No Border Type Example
+export const NoBorder: Story = {
+  args: {
+    type: AccordionType.NO_BORDER,
+    defaultValue: 'item-1',
+    className: 'w-[400px]',
+    children: (
+      <>
+        <AccordionItem 
+          value="item-1" 
+          title="Basic FAQ Item" 
+        >
+          This is a simple no-border accordion item.
+        </AccordionItem>
+        <AccordionItem 
+          value="item-2" 
+          title="With Subtext" 
+          subtext="Additional information below the title"
+        >
+          No-border accordion with subtext.
+        </AccordionItem>
+        <AccordionItem 
+          value="item-3" 
+          title="With Icon" 
+          leftSlot={<Info />}
+        >
+          No-border accordion with an icon.
+        </AccordionItem>
+      </>
+    ),
+  },
+};
+
+// Border Type Example
+export const Border: Story = {
+  args: {
+    type: AccordionType.BORDER,
+    defaultValue: 'item-1',
+    className: 'w-[400px]',
+    children: (
+      <>
+        <AccordionItem 
+          value="item-1" 
+          title="Bordered Item" 
+        >
+          This item has a full border around it.
+        </AccordionItem>
+        <AccordionItem 
+          value="item-2" 
+          title="Another Bordered Item" 
+        >
+          Each item is independently bordered.
         </AccordionItem>
       </>
     ),

@@ -21,6 +21,7 @@ import {
   Calendar as CalendarIcon,
   ListFilter,
   User as UserIcon,
+  ChevronDown
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, ButtonGroup } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
@@ -34,10 +35,11 @@ import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
+import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars'
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion'
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -63,6 +65,7 @@ const App = () => {
     { id: 'datePicker', label: 'Date Picker', icon: CalendarIcon },
     { id: 'selectors', label: 'Selectors', icon: Check },
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
+    { id: 'accordion', label: 'Accordion', icon: ChevronDown },
   ];
 
   const renderSidebar = () => (
@@ -689,6 +692,8 @@ const App = () => {
         return <SelectorsDemo />;
       case 'avatars':
         return <AvatarDemo />;
+      case 'accordion':
+        return <AccordionDemo />;
       default:
         return null;
     }

@@ -18,7 +18,9 @@ import {
   getAccordionSubtextClassNames,
   getAccordionSlotClassNames,
   getAccordionHeaderRowClassNames,
-  getAccordionChevronClassNames
+  getAccordionChevronClassNames,
+  getAccordionContentWrapperClassNames,
+  getAccordionChevronIconClassNames
 } from "./utils";
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
@@ -34,41 +36,47 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(({
 }, ref) => {
   const rootClassName = getAccordionRootClassNames(variant, type, className);
   
-  const accordionType = isMultiple ? "multiple" : "single";
+  const baseProps = {
+    collapsible: isCollapsible,
+    className: rootClassName,
+    ref: ref
+  };
   
-  const accordionProps = isMultiple
-    ? {
-        type: accordionType as "multiple",
-        value: (value as string[]) || undefined,
-        defaultValue: (defaultValue as string[]) || undefined,
-        onValueChange: (onValueChange as ((value: string[]) => void)) || undefined,
-        collapsible: isCollapsible
-      }
-    : {
-        type: accordionType as "single",
-        value: (value as string) || undefined,
-        defaultValue: (defaultValue as string) || undefined,
-        onValueChange: (onValueChange as ((value: string) => void)) || undefined,
-        collapsible: isCollapsible
-      };
-  
-  return (
-    <RadixAccordion.Root 
-      className={rootClassName}
-      ref={ref}
-      {...accordionProps}
+  return isMultiple ? (
+    <RadixAccordion.Root
+      type="multiple"
+      value={value as string[] | undefined}
+      defaultValue={defaultValue as string[] | undefined}
+      onValueChange={onValueChange as ((value: string[]) => void) | undefined}
+      {...baseProps}
     >
-      {React.Children.map(children, child => {
-        if (!React.isValidElement(child)) return child;
-        
-        return React.cloneElement(child as React.ReactElement<AccordionItemProps>, {
-          // @ts-ignore - This is a valid operation, passing parent's variant/type to children
-          accordionVariant: variant,
-          accordionType: type
-        });
-      })}
+      {renderChildren()}
+    </RadixAccordion.Root>
+  ) : (
+    <RadixAccordion.Root
+      type="single"
+      value={value as string | undefined}
+      defaultValue={defaultValue as string | undefined}
+      onValueChange={onValueChange as ((value: string) => void) | undefined}
+      {...baseProps}
+    >
+      {renderChildren()}
     </RadixAccordion.Root>
   );
+  
+  function renderChildren() {
+    return React.Children.map(children, (child) => {
+      if (!React.isValidElement(child)) return child;
+      
+      const childProps = {
+        ...(child.props as object),
+        accordionVariant: variant,
+        accordionType: type
+      };
+      
+      return React.cloneElement(child, childProps);
+    });
+  }
 });
 
 Accordion.displayName = "Accordion";
@@ -96,11 +104,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps & {
   const subtextClassName = getAccordionSubtextClassNames();
   const headerRowClassName = getAccordionHeaderRowClassNames();
   const chevronClassName = getAccordionChevronClassNames();
-  
-  const contentWrapperClassName = cn(
-    "py-5 px-3",
-    (accordionType === AccordionType.NO_BORDER || accordionVariant === AccordionVariant.BORDERED) && "border-t border-gray-200"
-  );
+  const chevronIconClassName = getAccordionChevronIconClassNames();
+  const contentWrapperClassName = getAccordionContentWrapperClassNames(accordionVariant, accordionType);
   
   return (
     <RadixAccordion.Item 
@@ -112,7 +117,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps & {
       <RadixAccordion.Header className="flex">
         <RadixAccordion.Trigger className={triggerClassName} disabled={isDisabled}>
           <div className="w-full relative">
-            {/* First row: left slot, title, and right slot */}
             <div className={headerRowClassName}>
               {leftSlot && (
                 <div className={getAccordionSlotClassNames(true)}>
@@ -127,7 +131,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps & {
               )}
             </div>
             
-            {/* Second row: subtext and subtextSlot */}
             {(subtext || subtextSlot) && (
               <div className="flex items-center">
                 {subtext && <div className={subtextClassName}>{subtext}</div>}
@@ -139,9 +142,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps & {
               </div>
             )}
             
-            {/* Arrow positioned absolutely at top right */}
             <div className={chevronClassName}>
-              <ChevronDown className="h-4 w-4 transition-transform duration-200 data-[state=open]:rotate-180" />
+              <ChevronDown className={chevronIconClassName} />
             </div>
           </div>
         </RadixAccordion.Trigger>

@@ -815,6 +815,7 @@ export const themeConfig = {
         content: "overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
         title: "text-gray-800 text-body-lg font-medium",
         subtext: "text-gray-600 text-body-md mt-1",
+        contentWrapper: "py-5 px-3",
       },
       variant: {
         bordered: {
@@ -822,12 +823,14 @@ export const themeConfig = {
           item: "",
           trigger: "hover:bg-gray-50",
           content: "px-0",
+          contentWrapper: "border-t border-gray-200",
         },
         filled: {
           container: "",
           item: "bg-gray-50 overflow-hidden",
           trigger: "px-4 hover:bg-gray-100",
           content: "px-4",
+          contentWrapper: "",
         },
       },
       type: {
@@ -836,12 +839,14 @@ export const themeConfig = {
           item: "border border-gray-200 rounded-lg overflow-hidden",
           trigger: "px-4",
           content: "px-4",
+          contentWrapper: "",
         },
         noborder: {
           container: "space-y-5",
           item: "border-b border-gray-200 last:border-b-0",
           trigger: "",
           content: "px-0",
+          contentWrapper: "border-t border-gray-200",
         },
       },
       layout: {
@@ -849,6 +854,7 @@ export const themeConfig = {
         rightSlot: "ml-2 flex-shrink-0",
         headerRow: "flex items-center",
         chevron: "absolute right-0 top-0 flex items-center justify-center h-4 w-4",
+        chevronIcon: "h-4 w-4 transition-transform duration-300 ease-in-out [&[data-state=open]]:rotate-180",
       },
       states: {
         disabled: "opacity-50 cursor-not-allowed",
