@@ -34,7 +34,7 @@ const FontDemo = () => {
         <select
           className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           value={fontWeight}
-          onChange={(e) => setFontWeight(Number(e.target.value) as FontWeight)}
+          onChange={e => setFontWeight(Number(e.target.value) as FontWeight)}
         >
           <option value={FontWeight.THIN}>Thin (100)</option>
           <option value={FontWeight.EXTRA_LIGHT}>Extra Light (200)</option>
@@ -53,7 +53,7 @@ const FontDemo = () => {
         <select
           className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           value={fontStyle}
-          onChange={(e) => setFontStyle(e.target.value as FontStyle)}
+          onChange={e => setFontStyle(e.target.value as FontStyle)}
         >
           <option value={FontStyle.NORMAL}>Normal</option>
           <option value={FontStyle.ITALIC}>Italic</option>
@@ -66,7 +66,7 @@ const FontDemo = () => {
     <div className="mb-8">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-13 gap-4">
-        {characters.map((char) => (
+        {characters.map(char => (
           <div
             key={char}
             className="flex items-center justify-center bg-gray-50 border border-gray-200 rounded-md aspect-square"
@@ -86,8 +86,6 @@ const FontDemo = () => {
     </div>
   );
 
-
-
   return (
     <div>
       {renderControls()}
@@ -98,4 +96,4 @@ const FontDemo = () => {
   );
 };
 
-export default FontDemo; 
+export default FontDemo;

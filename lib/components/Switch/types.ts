@@ -61,4 +61,4 @@ export interface SwitchGroupProps {
   onChange?: (data: { name: string; values: string[] }) => void;
   className?: string;
   isDisabled?: boolean;
-} 
+}

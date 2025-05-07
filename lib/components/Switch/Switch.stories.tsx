@@ -58,13 +58,13 @@ export const Sizes: Story = {
 export const WithSubtext: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Switch 
-        label="Remember Me" 
+      <Switch
+        label="Remember Me"
         subtext="Save my login details for next time"
         rightSlot={<HelpCircle className="w-5 h-5 text-purple-400" />}
       />
-      <Switch 
-        label="Notifications" 
+      <Switch
+        label="Notifications"
         subtext="Receive email notifications for important updates"
         rightSlot={<Bell className="w-4 h-4 text-gray-500" />}
         checked={true}
@@ -85,15 +85,8 @@ export const Disabled: Story = {
 export const WithRightSlot: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Switch 
-        label="Light mode" 
-        rightSlot={<Moon className="w-4 h-4 text-gray-500" />}
-      />
-      <Switch 
-        label="Settings" 
-        rightSlot={<Settings className="w-4 h-4 text-gray-500" />}
-        checked
-      />
+      <Switch label="Light mode" rightSlot={<Moon className="w-4 h-4 text-gray-500" />} />
+      <Switch label="Settings" rightSlot={<Settings className="w-4 h-4 text-gray-500" />} checked />
     </div>
   ),
 };
@@ -104,11 +97,7 @@ const ControlledSwitchDemo = () => {
   return (
     <div className="flex flex-col gap-4">
       <p>Switch is {checked ? 'ON' : 'OFF'}</p>
-      <Switch 
-        label="Controlled switch" 
-        checked={checked}
-        onCheckedChange={setChecked}
-      />
+      <Switch label="Controlled switch" checked={checked} onCheckedChange={setChecked} />
     </div>
   );
 };
@@ -120,49 +109,46 @@ export const ControlledSwitch: Story = {
 export const SwitchGroups: Story = {
   render: () => (
     <div className="flex flex-col gap-8">
-      <SwitchGroup 
+      <SwitchGroup
         label="Notification settings"
         name="notifications"
-        defaultValue={["email"]}
-        onChange={({name, values}) => console.log({name, values})}
+        defaultValue={['email']}
+        onChange={({ name, values }) => console.log({ name, values })}
       >
         <Switch value="email" label="Email notifications" />
         <Switch value="sms" label="SMS notifications" />
         <Switch value="push" label="Push notifications" />
       </SwitchGroup>
-      
-      <SwitchGroup 
+
+      <SwitchGroup
         label="Privacy settings"
         name="privacy"
-        defaultValue={["location"]}
-        onChange={({name, values}) => console.log({name, values})}
+        defaultValue={['location']}
+        onChange={({ name, values }) => console.log({ name, values })}
       >
-        <Switch 
-          value="location" 
-          label="Location services" 
+        <Switch
+          value="location"
+          label="Location services"
           subtext="Allow the app to use your location"
         />
-        <Switch 
-          value="analytics" 
-          label="Usage analytics" 
+        <Switch
+          value="analytics"
+          label="Usage analytics"
           subtext="Help us improve by sending anonymous usage data"
           rightSlot={<HelpCircle className="w-4 h-4 text-blue-500" />}
         />
-        <Switch 
-          value="cookies" 
-          label="Accept cookies" 
-        />
+        <Switch value="cookies" label="Accept cookies" />
       </SwitchGroup>
-      
-      <SwitchGroup 
+
+      <SwitchGroup
         label="Disabled settings group"
         name="disabled-group"
         isDisabled
-        defaultValue={["option1"]}
+        defaultValue={['option1']}
       >
         <Switch value="option1" label="Option 1" />
         <Switch value="option2" label="Option 2" />
       </SwitchGroup>
     </div>
   ),
-}; 
+};

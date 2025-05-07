@@ -21,8 +21,18 @@ import {
   Calendar as CalendarIcon,
   ListFilter,
   User as UserIcon,
+  ChevronDown,
 } from 'lucide-react';
-import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, ButtonGroup } from '../lib/main';
+import {
+  Button,
+  Tag,
+  SplitTag,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  ButtonGroup,
+} from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
 import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
@@ -35,10 +45,11 @@ import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 import TooltipDemoV2 from './Demos/TooltipDemos/TooltipDemoV2';
+import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' 
+    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion'
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -65,7 +76,7 @@ const App = () => {
     { id: 'datePicker', label: 'Date Picker', icon: CalendarIcon },
     { id: 'selectors', label: 'Selectors', icon: Check },
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
-    
+    { id: 'accordion', label: 'Accordion', icon: ChevronDown },
   ];
 
   const renderSidebar = () => (
@@ -76,7 +87,7 @@ const App = () => {
         </div>
 
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-          {navigationItems.map((item) => {
+          {navigationItems.map(item => {
             const Icon = item.icon;
             return (
               <button
@@ -88,9 +99,13 @@ const App = () => {
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 } group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full`}
               >
-                <Icon className={`${
-                  activeComponent === item.id ? 'text-blue-700' : 'text-gray-400 group-hover:text-gray-500'
-                } mr-3 h-5 w-5`} />
+                <Icon
+                  className={`${
+                    activeComponent === item.id
+                      ? 'text-blue-700'
+                      : 'text-gray-400 group-hover:text-gray-500'
+                  } mr-3 h-5 w-5`}
+                />
                 {item.label}
               </button>
             );
@@ -473,13 +488,13 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
@@ -497,7 +512,7 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={false}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
@@ -515,13 +530,13 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Small 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Small 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Medium 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Medium 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Medium 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.LARGE}>
             <Button buttonType={ButtonType.PRIMARY} text="Large 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Large 2" />
@@ -533,17 +548,19 @@ const App = () => {
       {/* Button Type Control Modes */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Button Type Control Modes</h3>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">Single Primary Mode (Default)</h4>
-          <p className="text-gray-600 mb-2">Only the first non-secondary button keeps its type, others become secondary</p>
+          <p className="text-gray-600 mb-2">
+            Only the first non-secondary button keeps its type, others become secondary
+          </p>
           <ButtonGroup mode={ButtonGroupMode.SINGLE_PRIMARY}>
             <Button buttonType={ButtonType.PRIMARY} text="Primary (kept)" />
             <Button buttonType={ButtonType.DANGER} text="Now Secondary" />
             <Button buttonType={ButtonType.SUCCESS} text="Now Secondary" />
           </ButtonGroup>
         </div>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">No Transform Mode</h4>
           <p className="text-gray-600 mb-2">Each button keeps its original button type</p>
@@ -553,7 +570,7 @@ const App = () => {
             <Button buttonType={ButtonType.SUCCESS} text="Success" />
           </ButtonGroup>
         </div>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">All Secondary Mode</h4>
           <p className="text-gray-600 mb-2">Forces all buttons to be secondary type</p>
@@ -574,7 +591,7 @@ const App = () => {
             <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
             <Button buttonType={ButtonType.DANGER} text="Danger" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={true}>
             <Button buttonType={ButtonType.PRIMARY} text="Primary" />
             <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
@@ -691,6 +708,8 @@ const App = () => {
         return <SelectorsDemo />;
       case 'avatars':
         return <AvatarDemo />;
+        case 'accordion':
+            return <AccordionDemo />;
       default:
         return null;
     }
@@ -701,10 +720,10 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {renderSidebar()}
-      <div className="pl-64"> {/* Add left padding to account for sidebar */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {renderContent()}
-        </div>
+      <div className="pl-64">
+        {' '}
+        {/* Add left padding to account for sidebar */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">{renderContent()}</div>
       </div>
     </div>
   );

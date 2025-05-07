@@ -225,10 +225,13 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
                     key={`${year}-${month}-${day}`}
                     onClick={() => handleDateClick(year, month, day)}
                     className={cn(
-                      dayClasses, 
+                      dayClasses,
                       textColorClass,
-                      !isStart && !isEnd && !isRangeDay && isTodayDay ? 'text-primary-500' : 
-                      !isStart && !isEnd ? 'text-gray-600' : ''
+                      !isStart && !isEnd && !isRangeDay && isTodayDay
+                        ? 'text-primary-500'
+                        : !isStart && !isEnd
+                          ? 'text-gray-600'
+                          : ''
                     )}
                   >
                     {day}

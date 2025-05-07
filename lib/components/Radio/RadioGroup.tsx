@@ -19,23 +19,23 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     ref
   ) => {
     const [internalValue, setInternalValue] = useState<string | undefined>(defaultValue);
-    
+
     const isControlled = controlledValue !== undefined;
     const value = isControlled ? controlledValue : internalValue;
-    
+
     useEffect(() => {
       if (!isControlled && defaultValue !== undefined) {
         setInternalValue(defaultValue);
       }
     }, [defaultValue, isControlled]);
-    
+
     const handleChange = (data: { name: string; value: string }) => {
       if (isDisabled) return;
-      
+
       if (!isControlled) {
         setInternalValue(data.value);
       }
-      
+
       if (onChange) {
         onChange(data);
       }
@@ -44,9 +44,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     return (
       <RadioGroupContext.Provider value={{ name, value, onChange: handleChange, isDisabled }}>
         <div className={cn(getRadioGroupClassNames(className))} ref={ref} role="radiogroup">
-          {label && (
-            <div className={getRadioGroupLabelClassNames()}>{label}</div>
-          )}
+          {label && <div className={getRadioGroupLabelClassNames()}>{label}</div>}
           {children}
         </div>
       </RadioGroupContext.Provider>
@@ -56,4 +54,4 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
 
 RadioGroup.displayName = 'RadioGroup';
 
-export default RadioGroup; 
+export default RadioGroup;
