@@ -5,11 +5,11 @@ import {
   TooltipSide,
   TooltipSize,
 } from '../../../lib/components/Tooltip/types';
-import { Tooltip } from '../../../lib/main';
 import { Info } from 'lucide-react';
 import { useState } from 'react';
 import { ButtonSize } from '../../../lib/components/Button/types';
 import { ButtonType } from '../../../lib/components/Button/types';
+import { Tooltip } from '../../../lib/components/Tooltip';
 
 const TooltipDemo = () => {
   const [content, setContent] = useState('This is a tooltip');
