@@ -54,7 +54,7 @@ const TimeSelector = forwardRef<HTMLDivElement, TimeSelectorProps>(({ value, onC
             className="border border-gray-300 rounded-lg px-3 py-2 flex items-center gap-2 hover:border-gray-400 focus:outline-none whitespace-nowrap"
             aria-label="Select time"
           >
-            <span className='text-gray-700'>{displayTime}</span>
+            <span className="text-gray-700">{displayTime}</span>
           </button>
         </DropdownMenu.Trigger>
 

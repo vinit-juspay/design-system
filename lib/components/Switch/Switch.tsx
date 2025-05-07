@@ -35,25 +35,23 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     const switchGroup = React.useContext(SwitchGroupContext);
     
     const name = switchGroup?.name || propName;
-    const isChecked = switchGroup?.values && value 
-      ? switchGroup.values.includes(value) 
-      : checked;
+    const isChecked = switchGroup?.values && value ? switchGroup.values.includes(value) : checked;
     const isGroupDisabled = switchGroup?.isDisabled || false;
     const finalDisabled = disabled || isGroupDisabled;
 
     const handleToggle = () => {
       if (finalDisabled) return;
-      
+
       const newChecked = !isChecked;
-      
+
       if (onCheckedChange) {
         onCheckedChange(newChecked);
       }
-      
+
       if (switchGroup?.onChange && value) {
         switchGroup.onChange({ name: name || '', value, checked: newChecked });
       }
-      
+
       if (onChange) {
         const event = {
           target: {
@@ -64,7 +62,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           preventDefault: () => {},
           stopPropagation: () => {},
         } as unknown as React.ChangeEvent<HTMLInputElement>;
-        
+
         onChange(event);
       }
     };
@@ -87,9 +85,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
           >
             <div className={getSwitchThumbClassNames(size, isChecked)} />
           </button>
-          
+
           {label && (
-            <label 
+            <label
               id={`${uniqueId}-label`}
               htmlFor={uniqueId}
               className={getSwitchLabelClassNames(size, finalDisabled)}
@@ -97,19 +95,17 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
               {label}
             </label>
           )}
-          
+
           {rightSlot && (
             <span className={getSwitchRightSlotClassNames()}>
               {rightSlot}
             </span>
           )}
         </div>
-        
+
         {/* Second row: subtext only - matching Radio's pattern */}
         {subtext && (
-          <div className={getSwitchSubtextClassNames(size, finalDisabled)}>
-            {subtext}
-          </div>
+          <div className={getSwitchSubtextClassNames(size, finalDisabled)}>{subtext}</div>
         )}
       </div>
     );
@@ -118,4 +114,4 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
 Switch.displayName = 'Switch';
 
-export default Switch; 
+export default Switch;

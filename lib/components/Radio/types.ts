@@ -27,4 +27,4 @@ export interface RadioGroupProps {
   onChange?: (data: { name: string; value: string }) => void;
   className?: string;
   isDisabled?: boolean;
-} 
+}

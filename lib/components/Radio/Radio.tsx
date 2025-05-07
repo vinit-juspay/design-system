@@ -6,7 +6,7 @@ import {
   getRadioLabelClassNames,
   getRadioSubtextClassNames,
   getRadioRightSlotClassNames,
-  getRadioContentWrapperClassNames
+  getRadioContentWrapperClassNames,
 } from './utils';
 import { cn } from '../../utils';
 import { RadioGroupContext } from './RadioGroupContext';
@@ -29,23 +29,21 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ) => {
     // Get context from RadioGroup if available
     const radioGroup = useContext(RadioGroupContext);
-    
+
     // Determine if controlled by RadioGroup or standalone
     const name = radioGroup?.name || propName;
-    const isChecked = radioGroup?.value !== undefined 
-      ? radioGroup.value === value 
-      : checked;
+    const isChecked = radioGroup?.value !== undefined ? radioGroup.value === value : checked;
     const isGroupDisabled = radioGroup?.isDisabled || false;
     const finalDisabled = isDisabled || isGroupDisabled;
-    
+
     // Handle change events
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (finalDisabled) return;
-      
+
       if (propOnChange) {
         propOnChange(e);
       }
-      
+
       if (radioGroup?.onChange) {
         radioGroup.onChange({ name: name || '', value });
       }
@@ -65,27 +63,23 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
             onChange={handleChange}
             className={getRadioInputClassNames(size, finalDisabled)}
           />
-          
-          <label 
-            htmlFor={`radio-${value}`} 
+
+          <label
+            htmlFor={`radio-${value}`}
             className={getRadioLabelClassNames(size, finalDisabled)}
           >
             {children}
           </label>
-          
+
           {rightSlot && (
             <span className={getRadioRightSlotClassNames()}>
               {rightSlot}
             </span>
           )}
         </div>
-        
+
         {/* Second row: subtext only */}
-        {subtext && (
-          <div className={getRadioSubtextClassNames(size, finalDisabled)}>
-            {subtext}
-          </div>
-        )}
+        {subtext && <div className={getRadioSubtextClassNames(size, finalDisabled)}>{subtext}</div>}
       </div>
     );
   }
@@ -93,4 +87,4 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
 
 Radio.displayName = 'Radio';
 
-export default Radio; 
+export default Radio;

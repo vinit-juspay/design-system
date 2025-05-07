@@ -693,10 +693,12 @@ export const themeConfig = {
       },
     },
     switch: {
-      baseStyles: 'relative rounded-full transition-colors duration-300 cursor-pointer disabled:cursor-not-allowed',
+      baseStyles:
+        'relative rounded-full transition-colors duration-300 cursor-pointer disabled:cursor-not-allowed',
       container: 'relative flex flex-col',
       thumb: {
-        baseStyles: 'absolute rounded-full bg-gray-25 border border-gray-300 transition-transform duration-300 border-[0.5px]',
+        baseStyles:
+          'absolute rounded-full bg-gray-25 border border-gray-300 transition-transform duration-300 border-[0.5px]',
       },
       label: {
         baseStyles: 'ml-2 font-medium text-gray-700',
@@ -729,7 +731,7 @@ export const themeConfig = {
           subtext: 'text-body-md ml-6 mt-1',
         },
       },
-      disabledSubtext: 'text-gray-200'
+      disabledSubtext: 'text-gray-200',
     },
     radio: {
       baseStyles: 'relative flex flex-col',
@@ -737,11 +739,11 @@ export const themeConfig = {
       groupLabel: 'text-sm font-medium text-gray-700',
       input: {
         base: 'text-primary-600 border-gray-300 hover:cursor-pointer ',
-        disabled: 'text-primary-300 cursor-not-allowed'
+        disabled: 'text-primary-300 cursor-not-allowed',
       },
       label: {
         base: 'ml-2 font-medium text-gray-700',
-        disabled: 'text-gray-300'
+        disabled: 'text-gray-300',
       },
       subtext: 'text-gray-400 font-normal',
       rightSlot: 'ml-1.5',
@@ -758,7 +760,7 @@ export const themeConfig = {
           subtext: 'text-body-md ml-6 mt-1',
         },
       },
-      disabledSubtext: 'text-gray-200'
+      disabledSubtext: 'text-gray-200',
     },
     avatar: {
       base: {
@@ -796,7 +798,8 @@ export const themeConfig = {
       base: {
         container: 'flex flex-row items-center -space-x-2',
         avatarWrapper: 'relative cursor-pointer inline-flex items-center justify-center',
-        overflowCounter: 'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
+        overflowCounter:
+          'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
       },
       selected: 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400',
       sizes: {
@@ -805,6 +808,70 @@ export const themeConfig = {
         md: 'h-10 w-10 text-body-md',
         lg: 'h-12 w-12 text-body-lg',
         xl: 'h-16 w-16 text-sm',
+      },
+    },
+    accordion: {
+      base: {
+        container: 'w-full',
+        item: 'border-b border-gray-200',
+        trigger:
+          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:cursor-not-allowed hover:bg-gray-50',
+        content:
+          'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+        title: 'text-body-lg font-medium',
+        titleEnabled: 'text-gray-800',
+        titleDisabled: 'text-gray-500',
+        subtext: 'text-body-md mt-1',
+        subtextEnabled: 'text-gray-600',
+        subtextDisabled: 'text-gray-300',
+        contentWrapper: 'py-5 px-3',
+      },
+      variant: {
+        bordered: {
+          container: '',
+          item: '',
+          trigger: 'hover:bg-gray-50',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+        filled: {
+          container: '',
+          item: 'bg-gray-50 overflow-hidden',
+          trigger: 'px-4 hover:bg-gray-100',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+      },
+      type: {
+        border: {
+          container: 'space-y-6',
+          item: 'border border-gray-200 rounded-lg overflow-hidden',
+          trigger: 'px-4 data-[state=open]:bg-gray-50',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+        noborder: {
+          container: 'space-y-5',
+          item: 'border-b border-gray-200 last:border-b-0',
+          trigger: '',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+      },
+      layout: {
+        leftSlot: 'mr-2 flex-shrink-0',
+        rightSlot: 'ml-2 flex-shrink-0',
+        headerRow: 'flex items-center',
+        chevronRight: 'absolute right-0 top-0 flex items-center justify-center',
+        chevronLeft: 'flex items-center justify-center mr-1.5 flex-shrink-0',
+        chevronIcon: {
+          default: 'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+          enabled: 'text-gray-500',
+          disabled: 'text-gray-300',
+        },
+      },
+      states: {
+        disabled: 'bg-gray-50',
       },
     },
   },
