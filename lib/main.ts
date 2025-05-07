@@ -27,4 +27,4 @@ export {
   AccordionType,
   AccordionChevronPosition,
 } from './components/Accordion';
-export { default as TooltipV2 } from './components/Tooltip/TooltipV2';
+export { default as TooltipV2 } from './components/TooltipV2/TooltipV2';

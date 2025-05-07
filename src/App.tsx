@@ -44,7 +44,7 @@ import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
-import TooltipDemoV2 from './Demos/TooltipDemos/TooltipDemoV2';
+import TooltipDemoV2 from './Demos/TooltipV2Demo/TooltipDemoV2';
 import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
 
 const App = () => {
