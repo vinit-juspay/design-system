@@ -76,31 +76,36 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
     offset = 4,
     "aria-label": ariaLabel,
     children,
+    searchTerm: controlledSearchTerm,
+    onSearchTermChange,
+    onSelectedItemsChange,
   },
   ref
 ) => {
-  // For uncontrolled component - dropdown open state
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
-  
+
   // For uncontrolled component - selection state
   const [uncontrolledSelectedOption, setUncontrolledSelectedOption] = useState<string | string[] | undefined>(undefined);
+  const [uncontrolledSearchTerm, setUncontrolledSearchTerm] = useState<string>('');
   
   // Determine if component is controlled or uncontrolled
   const isControlled = controlledIsOpen !== undefined;
   const isSelectionControlled = controlledSelectedOption !== undefined;
-  
+  const isSearchTermControlled = controlledSearchTerm !== undefined;
+
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen;
   const selectedOption = isSelectionControlled ? controlledSelectedOption : uncontrolledSelectedOption;
-  
+  const searchTerm = isSearchTermControlled ? controlledSearchTerm : uncontrolledSearchTerm;
+
   // Default hasClearButton to true for multi-select if not explicitly provided
   // Hide clear button for NO_CONTAINER multiselect dropdowns
-  const showClearButton = 
-    hasClearButton !== undefined 
-      ? hasClearButton 
+  const showClearButton =
+    hasClearButton !== undefined
+      ? hasClearButton
       : (type === DropdownType.MULTI_SELECT && subType !== DropdownSubType.NO_CONTAINER);
-  
+
   // Determine current state based on isOpen and propState
-  const currentState = isOpen 
+  const currentState = isOpen
     ? DropdownState.OPEN 
     : (disabled ? DropdownState.DEFAULT : propState);
   
@@ -522,11 +527,23 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
                   setUncontrolledSelectedOption(selected);
                 }
               }}
+              searchTerm={searchTerm}
+              onSearchTermChange={(term: string) => {
+                if (!isSearchTermControlled) {
+                  setUncontrolledSearchTerm(term);
+                }
+                if (onSearchTermChange) {
+                  onSearchTermChange(term);
+                }
+              }}
+              onContextChange={({ selectedItems, searchTerm }) => {
+                onSelectedItemsChange?.(selectedItems);
+                onSearchTermChange?.(searchTerm);
+              }}
             />
           </div>
         )}
       </div>
-      
       {/* Hint text - only render if subType is HAS_CONTAINER */}
       {subType === DropdownSubType.HAS_CONTAINER && hasHint && hint && (
         <div className={getHintTextClassNames(size)}>{hint}</div>
@@ -537,4 +554,4 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
 
 MenuDropdown.displayName = "MenuDropdown";
 
-export default MenuDropdown; 
+export default MenuDropdown;

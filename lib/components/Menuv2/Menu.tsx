@@ -78,11 +78,25 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   onSelectionChange,
   isOpen = true,
   onOpenChange,
+  searchTerm: controlledSearchTerm,
+  onSearchTermChange,
+  onContextChange,
   ...props
 }, ref) => {
   // State
-  const [selectedItems, setSelectedItems] = useState<string[]>(controlledSelectedItems || []);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedItems, setSelectedItems] = useState<string[]>(controlledSelectedItems !== undefined ? controlledSelectedItems : []);
+  const [searchTerm, setSearchTerm] = useState(controlledSearchTerm !== undefined ? controlledSearchTerm : '');
+
+  useEffect(() => {
+    onContextChange?.({
+      selectedItems,
+      searchTerm,
+      setSearchTerm: (term: string) => {
+        setSearchTerm(term);
+        onSearchTermChange?.(term);
+      }
+    });
+  }, [selectedItems, searchTerm, onContextChange, onSearchTermChange]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -310,4 +324,4 @@ Menu.displayName = "Menu";
 // Custom hook for accessing menu context
 export const useMenu = () => useContext(MenuContext);
 
-export default Menu; 
+export default Menu;

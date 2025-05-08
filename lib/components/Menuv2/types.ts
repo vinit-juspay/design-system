@@ -159,6 +159,9 @@ export interface DropdownProps {
   position?: "bottom-start" | "bottom-end" | "top-start" | "top-end" | "left" | "right";
   offset?: number;
   "aria-label"?: string;
+  searchTerm?: string;
+  onSearchTermChange?: (searchTerm: string) => void;
+  onSelectedItemsChange?: (selectedItems: string[]) => void;
 }
 
 // Menu props
@@ -175,11 +178,18 @@ export interface MenuProps {
   onSelectionChange?: (selectedItems: string[]) => void;
   isOpen?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
+  searchTerm?: string;
+  onSearchTermChange?: (searchTerm: string) => void;
+  onContextChange?: (context: {
+    selectedItems: string[];
+    searchTerm: string;
+    setSearchTerm: (searchTerm: string) => void;
+  }) => void;
 }
 
 // Menu compound components props
 export interface MenuContextValue {
-  selectedItems: string[];
+  selectedItems?: string[];
   toggleSelection: (itemId: string) => void;
   setSelectedItems: (items: string[]) => void;
   searchTerm: string;
@@ -188,4 +198,4 @@ export interface MenuContextValue {
   highlightedIndex: number;
   setHighlightedIndex: (index: number) => void;
   closeMenu: () => void;
-} 
+}
