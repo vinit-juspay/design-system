@@ -21,6 +21,9 @@ import {
   Calendar as CalendarIcon,
   ListFilter,
   User as UserIcon,
+  Sidebar as SidebarIcon,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { Button, Tag, SplitTag, Tabs, TabsList, TabsTrigger, TabsContent, ButtonGroup } from '../lib/main';
 import { Snackbar } from '../lib/components/Snackbar';
@@ -34,11 +37,12 @@ import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
+import SidebarDemo from './Demos/SidebarDemo/SidebarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars'
-  >('selectors');
+    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'sidebar'
+  >('sidebar');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date(),
@@ -50,286 +54,62 @@ const App = () => {
     setSelectedDateRange(newRange);
   };
 
-  const renderNavbar = () => (
+  // Component navigation list
+  const componentNavItems = [
+    { id: 'buttons', label: 'Buttons', icon: Layers },
+    { id: 'buttonGroups', label: 'Button Groups', icon: ListFilter },
+    { id: 'tooltips', label: 'Tooltips', icon: Info },
+    { id: 'tags', label: 'Tags', icon: TagIcon },
+    { id: 'tabs', label: 'Tabs', icon: Settings },
+    { id: 'alerts', label: 'Alerts', icon: Bell },
+    { id: 'charts', label: 'Charts', icon: BarChart2 },
+    { id: 'chartsV2', label: 'Charts V2', icon: BarChart2 },
+    { id: 'fonts', label: 'Fonts', icon: Type },
+    { id: 'datePicker', label: 'Date Picker', icon: CalendarIcon },
+    { id: 'selectors', label: 'Selectors', icon: Check },
+    { id: 'avatars', label: 'Avatars', icon: UserIcon },
+    { id: 'sidebar', label: 'Sidebar', icon: SidebarIcon },
+  ];
+
+  const renderComponentsNav = () => (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <span className="text-lg font-bold text-gray-900">Design System</span>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <button
-                onClick={() => setActiveComponent('buttons')}
-                className={`${
-                  activeComponent === 'buttons'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Layers className="mr-2 h-5 w-5" />
-                Buttons
-              </button>
-              <button
-                onClick={() => setActiveComponent('buttonGroups')}
-                className={`${activeComponent === 'buttonGroups'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <ListFilter className="mr-2 h-5 w-5" />
-                Button Groups
-              </button>
-              <button
-                onClick={() => setActiveComponent('tooltips')}
-                className={`${activeComponent === 'tooltips'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Info className="mr-2 h-5 w-5" />
-                Tooltips
-              </button>
-              <button
-                onClick={() => setActiveComponent('tags')}
-                className={`${
-                  activeComponent === 'tags'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <TagIcon className="mr-2 h-5 w-5" />
-                Tags
-              </button>
-              <button
-                onClick={() => setActiveComponent('tabs')}
-                className={`${
-                  activeComponent === 'tabs'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Settings className="mr-2 h-5 w-5" />
-                Tabs
-              </button>
-              <button
-                onClick={() => setActiveComponent('alerts')}
-                className={`${
-                  activeComponent === 'alerts'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Bell className="mr-2 h-5 w-5" />
-                Alerts
-              </button>
-              <button
-                onClick={() => setActiveComponent('charts')}
-                className={`${
-                  activeComponent === 'charts'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <BarChart2 className="mr-2 h-5 w-5" />
-                Charts
-              </button>
-              <button
-                onClick={() => setActiveComponent('chartsV2')}
-                className={`${
-                  activeComponent === 'chartsV2'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <BarChart2 className="mr-2 h-5 w-5" />
-                Charts V2
-              </button>
-              <button
-                onClick={() => setActiveComponent('fonts')}
-                className={`${activeComponent === 'fonts'
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Type className="mr-2 h-5 w-5" />
-                Fonts
-              </button>
-              <button
-                onClick={() => setActiveComponent('datePicker')}
-                className={`${
-                  activeComponent === 'datePicker'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <CalendarIcon className="mr-2 h-5 w-5" />
-                Date Picker
-              </button>
-              <button
-                onClick={() => setActiveComponent('selectors')}
-                className={`${
-                  activeComponent === 'selectors'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <Check className="mr-2 h-5 w-5" />
-                Selectors
-              </button>
-              <button
-                onClick={() => setActiveComponent('avatars')}
-                className={`${
-                  activeComponent === 'avatars'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                <UserIcon className="mr-2 h-5 w-5" />
-                Avatars
-              </button>
-            </div>
-          </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex-shrink-0 flex items-center mr-6">
+            <span className="text-lg font-bold text-gray-900">Design System</span>
+            <span className="ml-2 px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
               v1.0.0
             </span>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className="sm:hidden">
-        <div className="pt-2 pb-3 space-y-1">
-          <button
-            onClick={() => setActiveComponent('buttons')}
-            className={`${
-              activeComponent === 'buttons'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Layers className="mr-3 h-5 w-5" />
-            Buttons
-          </button>
-          <button
-            onClick={() => setActiveComponent('buttonGroups')}
-            className={`${activeComponent === 'buttonGroups'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <ListFilter className="mr-3 h-5 w-5" />
-            Button Groups
-          </button>
-          <button
-            onClick={() => setActiveComponent('tooltips')}
-            className={`${activeComponent === 'tooltips'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Info className="mr-3 h-5 w-5" />
-            Tooltips
-          </button>
-          <button
-            onClick={() => setActiveComponent('tags')}
-            className={`${
-              activeComponent === 'tags'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <TagIcon className="mr-3 h-5 w-5" />
-            Tags
-          </button>
-          <button
-            onClick={() => setActiveComponent('tabs')}
-            className={`${
-              activeComponent === 'tabs'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Settings className="mr-3 h-5 w-5" />
-            Tabs
-          </button>
-          <button
-            onClick={() => setActiveComponent('alerts')}
-            className={`${
-              activeComponent === 'alerts'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Bell className="mr-3 h-5 w-5" />
-            Alerts
-          </button>
-          <button
-            onClick={() => setActiveComponent('charts')}
-            className={`${
-              activeComponent === 'charts'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <BarChart2 className="mr-3 h-5 w-5" />
-            Charts
-          </button>
-          <button
-            onClick={() => setActiveComponent('chartsV2')}
-            className={`${activeComponent === 'chartsV2'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <BarChart2 className="mr-3 h-5 w-5" />
-            Charts V2
-          </button>
-          <button
-            onClick={() => setActiveComponent('fonts')}
-            className={`${activeComponent === 'fonts'
-              ? 'bg-blue-50 border-blue-500 text-blue-700'
-              : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-              } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Type className="mr-3 h-5 w-5" />
-            Fonts
-          </button>
-          <button
-            onClick={() => setActiveComponent('datePicker')}
-            className={`${
-              activeComponent === 'datePicker'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <CalendarIcon className="mr-3 h-5 w-5" />
-            Date Picker
-          </button>
-          <button
-            onClick={() => setActiveComponent('selectors')}
-            className={`${
-              activeComponent === 'selectors'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <Check className="mr-3 h-5 w-5" />
-            Selectors
-          </button>
-          <button
-            onClick={() => setActiveComponent('avatars')}
-            className={`${
-              activeComponent === 'avatars'
-                ? 'bg-blue-50 border-blue-500 text-blue-700'
-                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'
-            } pl-3 pr-4 py-2 border-l-4 text-base font-medium w-full text-left flex items-center`}
-          >
-            <UserIcon className="mr-3 h-5 w-5" />
-            Avatars
-          </button>
+      {/* Scrollable component list - used for both mobile and desktop */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <div className="overflow-x-auto scrollbar-hide -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-2 flex space-x-1 whitespace-nowrap">
+          {componentNavItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveComponent(item.id as any)}
+                className={`
+                  inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
+                  ${activeComponent === item.id
+                    ? 'bg-blue-50 text-blue-700'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}
+                `}
+              >
+                <Icon className="mr-2 h-5 w-5" />
+                {item.label}
+              </button>
+            );
+          })}
         </div>
+
+        {/* Shadow indicators for scroll */}
+        <div className="absolute top-0 left-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
       </div>
     </div>
   );
@@ -701,13 +481,13 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
@@ -725,7 +505,7 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={false}>
             <Button buttonType={ButtonType.PRIMARY} text="Button 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Button 2" />
@@ -743,13 +523,13 @@ const App = () => {
             <Button buttonType={ButtonType.PRIMARY} text="Small 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Small 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM}>
             <Button buttonType={ButtonType.PRIMARY} text="Medium 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Medium 2" />
             <Button buttonType={ButtonType.PRIMARY} text="Medium 3" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.LARGE}>
             <Button buttonType={ButtonType.PRIMARY} text="Large 1" />
             <Button buttonType={ButtonType.PRIMARY} text="Large 2" />
@@ -761,7 +541,7 @@ const App = () => {
       {/* Button Type Control Modes */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Button Type Control Modes</h3>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">Single Primary Mode (Default)</h4>
           <p className="text-gray-600 mb-2">Only the first non-secondary button keeps its type, others become secondary</p>
@@ -771,7 +551,7 @@ const App = () => {
             <Button buttonType={ButtonType.SUCCESS} text="Now Secondary" />
           </ButtonGroup>
         </div>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">No Transform Mode</h4>
           <p className="text-gray-600 mb-2">Each button keeps its original button type</p>
@@ -781,7 +561,7 @@ const App = () => {
             <Button buttonType={ButtonType.SUCCESS} text="Success" />
           </ButtonGroup>
         </div>
-        
+
         <div className="mb-4">
           <h4 className="text-lg font-medium mb-2">All Secondary Mode</h4>
           <p className="text-gray-600 mb-2">Forces all buttons to be secondary type</p>
@@ -802,7 +582,7 @@ const App = () => {
             <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
             <Button buttonType={ButtonType.DANGER} text="Danger" />
           </ButtonGroup>
-          
+
           <ButtonGroup size={ButtonGroupSize.MEDIUM} isStacked={true}>
             <Button buttonType={ButtonType.PRIMARY} text="Primary" />
             <Button buttonType={ButtonType.SECONDARY} text="Secondary" />
@@ -891,7 +671,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {renderNavbar()}
+      {renderComponentsNav()}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white shadow rounded-lg p-6">
           {activeComponent === 'buttons' && renderButtons()}
@@ -906,6 +686,7 @@ const App = () => {
           {activeComponent === 'datePicker' && renderDatePicker()}
           {activeComponent === 'selectors' && <SelectorsDemo />}
           {activeComponent === 'avatars' && <AvatarDemo />}
+          {activeComponent === 'sidebar' && <SidebarDemo />}
         </div>
       </div>
     </div>
