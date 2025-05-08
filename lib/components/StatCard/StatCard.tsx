@@ -58,14 +58,13 @@ const StatCard = ({
   const areaColor = isTrendingDown ? "rgba(239, 68, 68, 0.2)" : "rgba(34, 197, 94, 0.2)" // transparent red/green
 
 
-  const CustomTooltip = ({ active, payload, coordinate }: TooltipProps<number, string>) => {
+  const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (!active || !payload || payload.length === 0) return null;
 
     const currentValue = payload[0].value as number
     const currentIndex = payload[0].payload?.index as number
     const previousIndex = Math.max(0, currentIndex - 1)
     const previousValue = chartData?.[previousIndex]?.value || currentValue
-    const currentLabel = chartData?.[currentIndex]?.label || ""
 
     const diff = currentValue - previousValue
     const percentage = previousValue ? (diff / previousValue) * 100 : 0
