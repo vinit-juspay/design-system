@@ -46,10 +46,11 @@ import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 import TooltipDemoV2 from './Demos/TooltipV2Demo/TooltipDemoV2';
 import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
+import StatCardDemo from './Demos/StatCardDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion'
+    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion' | 'statCard'
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -77,6 +78,7 @@ const App = () => {
     { id: 'selectors', label: 'Selectors', icon: Check },
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
     { id: 'accordion', label: 'Accordion', icon: ChevronDown },
+    { id: 'statCard', label: 'Stat Card', icon: BarChart2 },
   ];
 
   const renderSidebar = () => (
@@ -708,8 +710,10 @@ const App = () => {
         return <SelectorsDemo />;
       case 'avatars':
         return <AvatarDemo />;
-        case 'accordion':
-            return <AccordionDemo />;
+      case 'accordion':
+          return <AccordionDemo />;
+      case 'statCard':
+          return <StatCardDemo />;
       default:
         return null;
     }

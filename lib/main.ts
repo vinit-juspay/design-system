@@ -28,3 +28,4 @@ export {
   AccordionChevronPosition,
 } from './components/Accordion';
 export { default as TooltipV2 } from './components/TooltipV2/TooltipV2';
+export { default as StatCard } from './components/StatCard/StatCard';
