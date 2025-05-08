@@ -112,16 +112,13 @@ export interface MenuItemWithShortcutProps extends MenuItemWithSlotsProps {
 }
 
 // Combined MenuItem props
-export interface MenuItemWithMultiSelectProps extends MenuItemWithShortcutProps {
+export interface MenuItemProps extends MenuItemWithShortcutProps {
   isMultiSelect?: boolean;
   isSelected?: boolean;
   hasSubmenu?: boolean;
   submenuItems?: MenuItemProps[];
   parentId?: string;
 }
-
-// Combined MenuItem props
-export type MenuItemProps = MenuItemWithMultiSelectProps;
 
 // ========== Dropdown Props ==========
 export interface DropdownProps {
@@ -180,17 +177,13 @@ export interface MenuProps {
   onOpenChange?: (isOpen: boolean) => void;
   searchTerm?: string;
   onSearchTermChange?: (searchTerm: string) => void;
-  onContextChange?: (context: {
-    selectedItems: string[];
-    searchTerm: string;
-    setSearchTerm: (searchTerm: string) => void;
-  }) => void;
+  onContextChange?: (context: MenuContextValue) => void;
 }
 
-// Menu compound components props
+// Menu context value type
 export interface MenuContextValue {
-  selectedItems?: string[];
-  toggleSelection: (itemId: string) => void;
+  selectedItems: string[];
+  toggleSelection: (itemId?: string) => void;
   setSelectedItems: (items: string[]) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;

@@ -15,7 +15,6 @@ import {
   getSlotR1ClassNames, 
   getSlotR2ClassNames,
   getShortcutClassNames,
-  getMenuClassNames,
   getSubmenuClassNames
 } from "./utils";
 import { LucideIcon, ChevronRight } from "lucide-react";
@@ -26,7 +25,7 @@ type IconElementProps = { className?: string };
 
 // Create a global submenu manager to track active submenus
 // This helps ensure proper nesting of submenus
-const submenuManager = {
+export const submenuManager = {
   activeSubmenuIds: new Set<string>(),
   setActiveSubmenu(id: string | null, parentId: string | null = null) {
     if (id === null) {
@@ -67,7 +66,7 @@ const submenuManager = {
 };
 
 // Helper to safely clear timeout
-const clearTimeout = (ref: React.MutableRefObject<number | null>) => {
+const clearTimeoutRef = (ref: React.MutableRefObject<number | null>) => {
   if (ref.current) {
     window.clearTimeout(ref.current);
     ref.current = null;
@@ -121,6 +120,8 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
 }, ref) => {
   // Labels should not have hover effects
   const isLabel = type === MenuItemType.LABEL;
+  // Define a flag for interactive items to avoid repeating the condition
+  const isInteractive = !disabled && state !== MenuItemState.NA && !isLabel;
   
   const [isHovering, setIsHovering] = useState(false);
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -147,10 +148,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       window.removeEventListener('submenu-changed', handleSubmenuChanged);
       
       // Clear any timers when this effect is cleaned up
-      if (submenuTimerRef.current) {
-        window.clearTimeout(submenuTimerRef.current);
-        submenuTimerRef.current = null;
-      }
+      clearTimeoutRef(submenuTimerRef);
     };
   }, [showSubmenu, hasSubmenu]);
 
@@ -163,19 +161,16 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       }
       
       // Clear any pending timers
-      if (submenuTimerRef.current) {
-        window.clearTimeout(submenuTimerRef.current);
-        submenuTimerRef.current = null;
-      }
+      clearTimeoutRef(submenuTimerRef);
     };
   }, [hasSubmenu]);
 
   // Handle hover states with delay for better UX
   const handleMouseEnter = (e: React.MouseEvent) => {
     // Clear any pending close timers immediately
-    clearTimeout(submenuTimerRef);
+    clearTimeoutRef(submenuTimerRef);
     
-    if (!disabled && state !== MenuItemState.NA && !isLabel) {
+    if (isInteractive) {
       setIsHovering(true);
       if (hasSubmenu) {
         // Tell the submenu manager that this submenu is now active
@@ -192,7 +187,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   };
 
   const handleMouseLeave = (e: React.MouseEvent) => {
-    if (!disabled && state !== MenuItemState.NA && !isLabel) {
+    if (isInteractive) {
       setIsHovering(false);
       
       // Only handle submenu closing with a delay for menu items that have a submenu
@@ -203,9 +198,6 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
           setShowSubmenu(false);
           submenuManager.removeSubmenu(uniqueId.current);
         }, 100);
-      } else {
-        // For regular menu items, reset hover state immediately
-        setIsHovering(false);
       }
       
       onMouseLeave?.();
@@ -214,7 +206,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
 
   // Handle click
   const handleClick = (e: React.MouseEvent) => {
-    if (!disabled && state !== MenuItemState.NA && !isLabel) {
+    if (isInteractive) {
       if (hasSubmenu) {
         // Toggle submenu on click
         const newState = !showSubmenu;
@@ -270,7 +262,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
 
   // Custom hover class based on action type
   let hoverClass = "";
-  if (!disabled && state !== MenuItemState.NA && !isLabel) {
+  if (isInteractive) {
     if (action === MenuItemAction.PRIMARY) {
       hoverClass = themeConfig.euler.menuv2.menuItem.hover.PRIMARY;
     } else if (action === MenuItemAction.DANGER) {
@@ -314,10 +306,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
         }}
         onMouseEnter={() => {
           // Clear any close timers when mouse enters the submenu
-          if (submenuTimerRef.current) {
-            window.clearTimeout(submenuTimerRef.current);
-            submenuTimerRef.current = null;
-          }
+          clearTimeoutRef(submenuTimerRef);
         }}
       >
         {/* Safe area to prevent unwanted closing */}

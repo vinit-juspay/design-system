@@ -15,7 +15,8 @@ import {
   getMenuSearchInputClassNames,
   getMenuSearchIconClassNames,
   getMenuNoResultsClassNames,
-  filterMenuItems
+  filterMenuItems,
+  handleHighlightOption
 } from './utils';
 import MenuItem from './MenuItem';
 import { Search } from 'lucide-react';
@@ -52,17 +53,22 @@ const findNextValidItemIndex = (
     : (currentIndex - 1 + itemCount) % itemCount;
     
   // Skip separators and labels
+  let loopGuard = 0;
+  const maxLoops = items.length;
+  
   while (
     nextIndex >= 0 && 
     nextIndex < itemCount && 
-    !isInteractiveItem(items[nextIndex])
+    !isInteractiveItem(items[nextIndex]) &&
+    loopGuard < maxLoops
   ) {
+    loopGuard++;
     nextIndex = direction === 'next'
       ? (nextIndex + 1) % itemCount
       : (nextIndex - 1 + itemCount) % itemCount;
   }
   
-  return nextIndex;
+  return loopGuard < maxLoops ? nextIndex : -1;
 };
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>(({
@@ -83,10 +89,20 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   onContextChange,
   ...props
 }, ref) => {
-  // State
-  const [selectedItems, setSelectedItems] = useState<string[]>(controlledSelectedItems !== undefined ? controlledSelectedItems : []);
-  const [searchTerm, setSearchTerm] = useState(controlledSearchTerm !== undefined ? controlledSearchTerm : '');
-
+  // State management
+  const [selectedItems, setSelectedItems] = useState<string[]>(
+    controlledSelectedItems !== undefined ? controlledSelectedItems : []
+  );
+  const [searchTerm, setSearchTerm] = useState(
+    controlledSearchTerm !== undefined ? controlledSearchTerm : ''
+  );
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  
+  // Refs
+  const menuRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  
+  // Sync context value when selectedItems or searchTerm change
   useEffect(() => {
     onContextChange?.({
       selectedItems,
@@ -94,12 +110,15 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
       setSearchTerm: (term: string) => {
         setSearchTerm(term);
         onSearchTermChange?.(term);
-      }
+      },
+      toggleSelection,
+      setSelectedItems,
+      filteredItems,
+      highlightedIndex,
+      setHighlightedIndex,
+      closeMenu
     });
-  }, [selectedItems, searchTerm, onContextChange, onSearchTermChange]);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  }, [selectedItems, searchTerm, highlightedIndex, onContextChange, onSearchTermChange]);
   
   // Filter menu items based on search term
   const filteredItems = filterMenuItems(items, searchTerm);
@@ -125,29 +144,17 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
 
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
-        case 'ArrowDown': {
+        case 'ArrowDown':
+        case 'ArrowUp': {
           e.preventDefault();
-          const nextIndex = findNextValidItemIndex(highlightedIndex, filteredItems, 'next');
+          const direction = e.key === 'ArrowDown' ? 'next' : 'prev';
+          const nextIndex = findNextValidItemIndex(highlightedIndex, filteredItems, direction);
+          
           if (nextIndex >= 0) {
             setHighlightedIndex(nextIndex);
             
             if (menuRef.current) {
               const targetElement = menuRef.current.querySelector(`[data-index="${nextIndex}"]`) as HTMLElement;
-              if (targetElement) {
-                targetElement.scrollIntoView({ block: "nearest" });
-              }
-            }
-          }
-          break;
-        }
-        case 'ArrowUp': {
-          e.preventDefault();
-          const prevIndex = findNextValidItemIndex(highlightedIndex, filteredItems, 'prev');
-          if (prevIndex >= 0) {
-            setHighlightedIndex(prevIndex);
-            
-            if (menuRef.current) {
-              const targetElement = menuRef.current.querySelector(`[data-index="${prevIndex}"]`) as HTMLElement;
               if (targetElement) {
                 targetElement.scrollIntoView({ block: "nearest" });
               }
@@ -189,7 +196,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, highlightedIndex, filteredItems, type]);
+  }, [isOpen, highlightedIndex, filteredItems, type, onItemClick]);
 
   // Close the menu
   const closeMenu = () => {
@@ -207,23 +214,30 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
     if (modifiedItem.type === MenuItemType.LABEL) {
       modifiedItem.hasSlotR1 = false;
       modifiedItem.slotR1 = null;
-    } else {
+    } else if (modifiedItem.type !== MenuItemType.SEPARATOR) {
       // Remove any icons that might appear as checks
-      if (modifiedItem.slotR1) {
-        modifiedItem.slotR1 = null;
-      }
+      modifiedItem.slotR1 = null;
       
       // Remove any check icons from slotR2 as well
-      if (modifiedItem.slotR2) {
-        modifiedItem.slotR2 = null;
-        modifiedItem.hasSlotR2 = false;
-      }
+      modifiedItem.slotR2 = null;
+      modifiedItem.hasSlotR2 = false;
       
       // Always set hasSlotR1 to true for multi-select to ensure checkbox renders
       modifiedItem.hasSlotR1 = true;
     }
     
     return modifiedItem;
+  };
+  
+  // Handle search input change
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    onSearch?.(value);
+    onSearchTermChange?.(value);
+    
+    // Reset highlighted index when search term changes
+    setHighlightedIndex(-1);
   };
   
   // Provide context value
@@ -268,10 +282,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                 className={getMenuSearchInputClassNames()}
                 placeholder={searchPlaceholder}
                 value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  onSearch?.(e.target.value);
-                }}
+                onChange={handleSearchChange}
                 role="searchbox"
                 aria-label="Search menu items"
               />
@@ -287,6 +298,18 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
           {filteredItems.length > 0 ? (
             filteredItems.map((item, index) => {
               const modifiedItem = prepareItemForMultiSelect(item);
+              const isSelected = type === MenuType.MULTI_SELECT && 
+                item.id !== undefined && 
+                selectedItems.includes(item.id);
+                
+              const handleItemClick = () => {
+                if (type === MenuType.MULTI_SELECT) {
+                  toggleSelection(item.id);
+                } else {
+                  onItemClick?.(item);
+                  closeMenu();
+                }
+              };
               
               return (
                 <MenuItem
@@ -294,15 +317,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                   {...modifiedItem}
                   state={highlightedIndex === index ? MenuItemState.HOVER : item.state}
                   isMultiSelect={type === MenuType.MULTI_SELECT && modifiedItem.type !== MenuItemType.LABEL}
-                  isSelected={type === MenuType.MULTI_SELECT ? selectedItems.includes(item.id || '') : false}
-                  onClick={() => {
-                    if (type === MenuType.MULTI_SELECT) {
-                      toggleSelection(item.id);
-                    } else {
-                      onItemClick?.(item);
-                      closeMenu();
-                    }
-                  }}
+                  isSelected={isSelected}
+                  onClick={handleItemClick}
                   onMouseEnter={() => setHighlightedIndex(index)}
                   data-index={index}
                 />

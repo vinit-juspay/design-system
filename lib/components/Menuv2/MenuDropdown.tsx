@@ -40,51 +40,47 @@ import { themeConfig } from "../../themeConfig";
  * - Count: Shows the selection count in a badge
  * - Text: Shows the first selected item followed by "+X more"
  */
-const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
-  {
-    id,
-    className,
-    type = DropdownType.SINGLE_SELECT,
-    subType = DropdownSubType.HAS_CONTAINER,
-    size = DropdownSize.MEDIUM,
-    state: propState = DropdownState.DEFAULT,
-    selectionType = DropdownSelectionType.COUNT,
-    hasLabel = false,
-    hasSubLabel = false,
-    mandatory = false,
-    hasHelp = false,
-    hasHint = false,
-    hasClearButton,
-    hasLeftIcon = false,
-    leftIcon,
-    label,
-    subLabel,
-    hint,
-    placeholder = "Select an option",
-    selectedOption: controlledSelectedOption,
-    selectedCount,
-    selectedText,
-    menuItems,
-    onSelect,
-    onClear,
-    onOpen,
-    onClose,
-    isOpen: controlledIsOpen,
-    disabled = false,
-    width,
-    position = "bottom-start",
-    offset = 4,
-    "aria-label": ariaLabel,
-    children,
-    searchTerm: controlledSearchTerm,
-    onSearchTermChange,
-    onSelectedItemsChange,
-  },
-  ref
-) => {
+const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
+  id,
+  className,
+  type = DropdownType.SINGLE_SELECT,
+  subType = DropdownSubType.HAS_CONTAINER,
+  size = DropdownSize.MEDIUM,
+  state: propState = DropdownState.DEFAULT,
+  selectionType = DropdownSelectionType.COUNT,
+  hasLabel = false,
+  hasSubLabel = false,
+  mandatory = false,
+  hasHelp = false,
+  hasHint = false,
+  hasClearButton,
+  hasLeftIcon = false,
+  leftIcon,
+  label,
+  subLabel,
+  hint,
+  placeholder = "Select an option",
+  selectedOption: controlledSelectedOption,
+  selectedCount,
+  selectedText,
+  menuItems,
+  onSelect,
+  onClear,
+  onOpen,
+  onClose,
+  isOpen: controlledIsOpen,
+  disabled = false,
+  width,
+  position = "bottom-start",
+  offset = 4,
+  "aria-label": ariaLabel,
+  children,
+  searchTerm: controlledSearchTerm,
+  onSearchTermChange,
+  onSelectedItemsChange,
+}, ref) => {
+  // State management
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
-
-  // For uncontrolled component - selection state
   const [uncontrolledSelectedOption, setUncontrolledSelectedOption] = useState<string | string[] | undefined>(undefined);
   const [uncontrolledSearchTerm, setUncontrolledSearchTerm] = useState<string>('');
   
@@ -93,6 +89,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
   const isSelectionControlled = controlledSelectedOption !== undefined;
   const isSearchTermControlled = controlledSearchTerm !== undefined;
 
+  // Derived state values
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen;
   const selectedOption = isSelectionControlled ? controlledSelectedOption : uncontrolledSelectedOption;
   const searchTerm = isSearchTermControlled ? controlledSearchTerm : uncontrolledSearchTerm;
@@ -109,14 +106,16 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
     ? DropdownState.OPEN 
     : (disabled ? DropdownState.DEFAULT : propState);
   
+  // References
   const dropdownRef = useRef<HTMLDivElement>(null);
   const menuContainerRef = useRef<HTMLDivElement>(null);
   
   // Close dropdown when clicking outside
   useEffect(() => {
+    if (!isOpen) return; // Don't add listener if not open
+    
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        isOpen &&
         dropdownRef.current &&
         menuContainerRef.current &&
         !dropdownRef.current.contains(event.target as Node) &&
@@ -139,7 +138,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
         if (event.key === "Escape") {
           handleClose();
         }
-      } else {
+      } else if (!disabled) {
         if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
           if (document.activeElement === dropdownRef.current) {
             event.preventDefault();
@@ -153,7 +152,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, disabled]);
   
   // Toggle dropdown
   const handleToggle = () => {
@@ -229,16 +228,31 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
     
     // Clear internal state for uncontrolled components
     if (!isSelectionControlled) {
-      if (type === DropdownType.MULTI_SELECT) {
-        setUncontrolledSelectedOption([]);
-      } else {
-        setUncontrolledSelectedOption(undefined);
-      }
+      setUncontrolledSelectedOption(type === DropdownType.MULTI_SELECT ? [] : undefined);
     }
     
     // Call external handler if provided
     if (onClear) {
       onClear();
+    }
+  };
+  
+  // Handle context changes from the Menu component
+  const handleContextChange = (context: any) => {
+    // Update selected items if provided
+    if (context.selectedItems && onSelectedItemsChange) {
+      onSelectedItemsChange(context.selectedItems);
+    }
+    
+    // Update search term if provided
+    if (context.searchTerm !== undefined) {
+      if (!isSearchTermControlled) {
+        setUncontrolledSearchTerm(context.searchTerm);
+      }
+      
+      if (onSearchTermChange) {
+        onSearchTermChange(context.searchTerm);
+      }
     }
   };
   
@@ -316,7 +330,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
   const hasSelection = selectedOption !== undefined && 
     (Array.isArray(selectedOption) ? selectedOption.length > 0 : !!selectedOption);
   
-  // Render dropdown element
+  // Generate dropdown classes
   const dropdownClasses = getDropdownBaseClasses(
     type,
     subType,
@@ -338,47 +352,66 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
   
   // Effect to update menu width and position based on available space
   useEffect(() => {
-    if (isOpen && dropdownRef.current && menuContainerRef.current) {
-      const dropdownWidth = dropdownRef.current.offsetWidth;
-      const dropdownRect = dropdownRef.current.getBoundingClientRect();
-      
-      // Set minimum width based on dropdown width but not more than 320px
-      const minWidth = Math.min(Math.max(dropdownWidth, 180), 320);
-      menuContainerRef.current.style.minWidth = `${minWidth}px`;
-      
-      // For icon-only type, always use sensible width rather than tiny icon width
-      if (type === DropdownType.ICON_ONLY) {
-        menuContainerRef.current.style.minWidth = '220px';
-      }
-      
-      // Calculate available space below and above the dropdown
-      const spaceBelow = window.innerHeight - dropdownRect.bottom;
-      const spaceAbove = dropdownRect.top;
-      
-      // Estimate menu height (this will be approximate until rendered)
-      // Using 56 as approx height per item + padding
-      const estimatedMenuHeight = Math.min(
-        (menuItems.length * 40) + 16 + (type === DropdownType.MULTI_SELECT ? 56 : 0), 
-        320
-      ); 
-      
-      // Determine if menu should open upward
-      const shouldOpenUpward = spaceBelow < estimatedMenuHeight && spaceAbove > spaceBelow;
-      
-      // Position the menu accordingly
-      if (shouldOpenUpward) {
-        menuContainerRef.current.style.bottom = '100%';
-        menuContainerRef.current.style.top = 'auto';
-        menuContainerRef.current.style.marginTop = '0';
-        menuContainerRef.current.style.marginBottom = '4px';
-      } else {
-        menuContainerRef.current.style.top = '100%';
-        menuContainerRef.current.style.bottom = 'auto';
-        menuContainerRef.current.style.marginTop = '4px';
-        menuContainerRef.current.style.marginBottom = '0';
-      }
+    if (!isOpen || !dropdownRef.current || !menuContainerRef.current) return;
+    
+    const dropdownWidth = dropdownRef.current.offsetWidth;
+    const dropdownRect = dropdownRef.current.getBoundingClientRect();
+    
+    // Set minimum width based on dropdown width but not more than 320px
+    const minWidth = Math.min(Math.max(dropdownWidth, 180), 320);
+    menuContainerRef.current.style.minWidth = `${minWidth}px`;
+    
+    // For icon-only type, always use sensible width rather than tiny icon width
+    if (type === DropdownType.ICON_ONLY) {
+      menuContainerRef.current.style.minWidth = '220px';
+    }
+    
+    // Calculate available space below and above the dropdown
+    const spaceBelow = window.innerHeight - dropdownRect.bottom;
+    const spaceAbove = dropdownRect.top;
+    
+    // Estimate menu height (this will be approximate until rendered)
+    // Using 56 as approx height per item + padding
+    const estimatedMenuHeight = Math.min(
+      (menuItems.length * 40) + 16 + (type === DropdownType.MULTI_SELECT ? 56 : 0), 
+      320
+    ); 
+    
+    // Determine if menu should open upward
+    const shouldOpenUpward = spaceBelow < estimatedMenuHeight && spaceAbove > spaceBelow;
+    
+    // Position the menu accordingly
+    if (shouldOpenUpward) {
+      menuContainerRef.current.style.bottom = '100%';
+      menuContainerRef.current.style.top = 'auto';
+      menuContainerRef.current.style.marginTop = '0';
+      menuContainerRef.current.style.marginBottom = '4px';
+    } else {
+      menuContainerRef.current.style.top = '100%';
+      menuContainerRef.current.style.bottom = 'auto';
+      menuContainerRef.current.style.marginTop = '4px';
+      menuContainerRef.current.style.marginBottom = '0';
     }
   }, [isOpen, type, menuItems.length]);
+  
+  // ARIA attributes for the dropdown trigger
+  const ariaProps = {
+    role: "combobox",
+    "aria-expanded": isOpen,
+    "aria-haspopup": "listbox" as "listbox",
+    "aria-disabled": disabled,
+    "aria-controls": isOpen ? `${id}-menu` : undefined,
+    "aria-label": ariaLabel || "Dropdown menu",
+    tabIndex: disabled ? -1 : 0
+  };
+  
+  // Common classes for the clear button
+  const clearButtonClasses = cn(
+    themeConfig.euler.menuv2.dropdown.clearButton.base, 
+    subType === DropdownSubType.HAS_CONTAINER 
+      ? themeConfig.euler.menuv2.dropdown.clearButton.withContainer
+      : themeConfig.euler.menuv2.dropdown.clearButton.noContainer
+  );
   
   return (
     <div className={themeConfig.euler.menuv2.dropdown.container.base}>
@@ -421,7 +454,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
           id={id}
           className={cn(
             dropdownClasses, 
-            getWidthClass(width),
+            widthClasses,
             themeConfig.euler.menuv2.dropdown.trigger.base,
             hasSelection && showClearButton && type !== DropdownType.ICON_ONLY && (
               subType === DropdownSubType.NO_CONTAINER 
@@ -436,13 +469,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
               handleToggle();
             }
           }}
-          tabIndex={disabled ? -1 : 0}
-          role="combobox"
-          aria-expanded={isOpen}
-          aria-haspopup="listbox"
-          aria-disabled={disabled}
-          aria-controls={isOpen ? `${id}-menu` : undefined}
-          aria-label={ariaLabel || "Dropdown menu"}
+          {...ariaProps}
         >
           {/* Left icon */}
           {hasLeftIcon && leftIcon && (
@@ -481,12 +508,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
             size={size === DropdownSize.SMALL ? ButtonSize.SMALL : 
                  size === DropdownSize.LARGE ? ButtonSize.LARGE : ButtonSize.MEDIUM}
             subType={ButtonSubType.ICON_ONLY}
-            className={cn(
-              themeConfig.euler.menuv2.dropdown.clearButton.base, 
-              subType === DropdownSubType.HAS_CONTAINER 
-                ? themeConfig.euler.menuv2.dropdown.clearButton.withContainer
-                : themeConfig.euler.menuv2.dropdown.clearButton.noContainer
-            )}
+            className={clearButtonClasses}
             onClick={handleClear}
             ariaLabel="Clear selection"
           >
@@ -536,10 +558,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>((
                   onSearchTermChange(term);
                 }
               }}
-              onContextChange={({ selectedItems, searchTerm }) => {
-                onSelectedItemsChange?.(selectedItems);
-                onSearchTermChange?.(searchTerm);
-              }}
+              onContextChange={handleContextChange}
             />
           </div>
         )}

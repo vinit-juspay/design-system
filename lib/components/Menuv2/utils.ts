@@ -14,17 +14,59 @@ import {
 } from "./types";
 
 // Generic helper to map enum values to themeConfig keys
-export function mapEnumToThemeKey(value: any, mapping: Record<any, string>): string {
-  return mapping[value] || Object.values(mapping)[0]; // Default to first value if not found
+export function mapEnumToThemeKey<T extends string | number, R extends string>(
+  value: T, 
+  mapping: Record<T, R>
+): R {
+  return mapping[value] || (Object.values(mapping)[0] as R); // Cast to R to fix type error
 }
 
+// Size enum mapping
+const SIZE_KEY_MAP = {
+  [DropdownSize.SMALL]: 'SMALL',
+  [DropdownSize.MEDIUM]: 'MEDIUM',
+  [DropdownSize.LARGE]: 'LARGE'
+} as const;
+
+// State enum mapping
+const STATE_KEY_MAP = {
+  [DropdownState.DEFAULT]: 'DEFAULT',
+  [DropdownState.HOVER]: 'HOVER',
+  [DropdownState.OPEN]: 'OPEN',
+  [DropdownState.SELECTED]: 'SELECTED'
+} as const;
+
+// Type enum mapping
+const TYPE_KEY_MAP = {
+  [DropdownType.ICON_ONLY]: 'ICON_ONLY',
+  [DropdownType.MULTI_SELECT]: 'MULTI_SELECT',
+  [DropdownType.SINGLE_SELECT]: 'SINGLE_SELECT'
+} as const;
+
+// Subtype enum mapping
+const SUBTYPE_KEY_MAP = {
+  [DropdownSubType.HAS_CONTAINER]: 'HAS_CONTAINER',
+  [DropdownSubType.NO_CONTAINER]: 'NO_CONTAINER'
+} as const;
+
 // Maps dropdown size enum to themeConfig size key
-export function getSizeKey(size: DropdownSize): 'SMALL' | 'MEDIUM' | 'LARGE' {
-  return size === DropdownSize.SMALL 
-    ? 'SMALL' 
-    : size === DropdownSize.LARGE 
-      ? 'LARGE' 
-      : 'MEDIUM';
+export function getSizeKey(size: DropdownSize) {
+  return SIZE_KEY_MAP[size] || 'MEDIUM';
+}
+
+// Maps dropdown state to theme key
+export function getStateKey(state: DropdownState) {
+  return STATE_KEY_MAP[state] || 'DEFAULT';
+}
+
+// Maps dropdown type to theme key
+export function getTypeKey(type: DropdownType) {
+  return TYPE_KEY_MAP[type] || 'SINGLE_SELECT';
+}
+
+// Maps dropdown subtype to theme key
+export function getSubTypeKey(subType: DropdownSubType) {
+  return SUBTYPE_KEY_MAP[subType] || 'HAS_CONTAINER';
 }
 
 // ===== Menu Helpers =====
@@ -62,38 +104,33 @@ export function getMenuItemClassNames({
   );
 }
 
-// Search-related classnames
-export function getMenuSearchClassNames(): string {
-  return cn(themeConfig.euler.menuv2.search.container);
-}
-
-export function getMenuSearchInputClassNames(): string {
-  return cn(themeConfig.euler.menuv2.search.input);
-}
-
-export function getMenuSearchIconClassNames(): string {
-  return cn(themeConfig.euler.menuv2.search.icon);
-}
-
-export function getMenuNoResultsClassNames(): string {
-  return cn(themeConfig.euler.menuv2.search.noResults);
-}
-
-// Consolidated slot class getters
-export const menuItemSlotClasses = {
-  slotL: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotL),
-  slotR1: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR1),
-  slotR2: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR2),
-  shortcut: () => cn(themeConfig.euler.menuv2.menuItem.shortcut),
-  submenu: () => cn(themeConfig.euler.menuv2.menuItem.submenu.container)
+// Menu UI element classnames
+export const menuUIClasses = {
+  search: {
+    container: () => cn(themeConfig.euler.menuv2.search.container),
+    input: () => cn(themeConfig.euler.menuv2.search.input),
+    icon: () => cn(themeConfig.euler.menuv2.search.icon),
+    noResults: () => cn(themeConfig.euler.menuv2.search.noResults),
+  },
+  menuItem: {
+    slotL: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotL),
+    slotR1: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR1),
+    slotR2: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR2),
+    shortcut: () => cn(themeConfig.euler.menuv2.menuItem.shortcut),
+    submenu: () => cn(themeConfig.euler.menuv2.menuItem.submenu.container)
+  }
 };
 
 // For backward compatibility
-export const getSlotLClassNames = menuItemSlotClasses.slotL;
-export const getSlotR1ClassNames = menuItemSlotClasses.slotR1;
-export const getSlotR2ClassNames = menuItemSlotClasses.slotR2;
-export const getShortcutClassNames = menuItemSlotClasses.shortcut;
-export const getSubmenuClassNames = menuItemSlotClasses.submenu;
+export const getMenuSearchClassNames = menuUIClasses.search.container;
+export const getMenuSearchInputClassNames = menuUIClasses.search.input;
+export const getMenuSearchIconClassNames = menuUIClasses.search.icon;
+export const getMenuNoResultsClassNames = menuUIClasses.search.noResults;
+export const getSlotLClassNames = menuUIClasses.menuItem.slotL;
+export const getSlotR1ClassNames = menuUIClasses.menuItem.slotR1;
+export const getSlotR2ClassNames = menuUIClasses.menuItem.slotR2;
+export const getShortcutClassNames = menuUIClasses.menuItem.shortcut;
+export const getSubmenuClassNames = menuUIClasses.menuItem.submenu;
 
 // Filter items based on search term
 export function filterMenuItems(items: MenuItemProps[], searchTerm: string): MenuItemProps[] {
@@ -128,62 +165,23 @@ export const handleHighlightOption = (
   setHighlightedIndex: (index: number) => void,
   menuElement: HTMLElement | null
 ) => {
-  if (event.key === "ArrowDown") {
+  if (!menuElement) return;
+
+  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
     event.preventDefault();
-    const newIndex = (currentIndex + 1) % totalItems;
+    
+    const newIndex = event.key === "ArrowDown"
+      ? (currentIndex + 1) % totalItems
+      : (currentIndex - 1 + totalItems) % totalItems;
+    
     setHighlightedIndex(newIndex);
 
-    if (menuElement) {
-      const targetElement = menuElement.querySelector(`[data-index="${newIndex}"]`) as HTMLElement;
-      if (targetElement && !isNodeInRange(targetElement, menuElement)) {
-        targetElement.scrollIntoView({ block: "nearest" });
-      }
-    }
-  } else if (event.key === "ArrowUp") {
-    event.preventDefault();
-    const newIndex = (currentIndex - 1 + totalItems) % totalItems;
-    setHighlightedIndex(newIndex);
-
-    if (menuElement) {
-      const targetElement = menuElement.querySelector(`[data-index="${newIndex}"]`) as HTMLElement;
-      if (targetElement && !isNodeInRange(targetElement, menuElement)) {
-        targetElement.scrollIntoView({ block: "nearest" });
-      }
+    const targetElement = menuElement.querySelector(`[data-index="${newIndex}"]`) as HTMLElement;
+    if (targetElement && !isNodeInRange(targetElement, menuElement)) {
+      targetElement.scrollIntoView({ block: "nearest" });
     }
   }
 };
-
-// Alias for filterMenuItems to maintain backward compatibility
-export const getFilteredItems = filterMenuItems;
-
-// ========== Dropdown Utils ==========
-
-// Maps dropdown state to theme key
-export function getStateKey(state: DropdownState): 'DEFAULT' | 'HOVER' | 'OPEN' | 'SELECTED' {
-  return state === DropdownState.DEFAULT 
-    ? 'DEFAULT' 
-    : state === DropdownState.HOVER 
-      ? 'HOVER' 
-      : state === DropdownState.OPEN 
-        ? 'OPEN' 
-        : 'SELECTED';
-}
-
-// Maps dropdown type to theme key
-export function getTypeKey(type: DropdownType): 'ICON_ONLY' | 'MULTI_SELECT' | 'SINGLE_SELECT' {
-  return type === DropdownType.ICON_ONLY 
-    ? 'ICON_ONLY' 
-    : type === DropdownType.MULTI_SELECT 
-      ? 'MULTI_SELECT' 
-      : 'SINGLE_SELECT';
-}
-
-// Maps dropdown subtype to theme key
-export function getSubTypeKey(subType: DropdownSubType): 'HAS_CONTAINER' | 'NO_CONTAINER' {
-  return subType === DropdownSubType.HAS_CONTAINER 
-    ? 'HAS_CONTAINER' 
-    : 'NO_CONTAINER';
-}
 
 /**
  * Generates the base class names for a dropdown based on its type, state, size, and other properties
@@ -286,10 +284,9 @@ export const calculateDropdownPosition = (
   return { top, left, maxHeight };
 };
 
-// Consolidated theme class getters using the shared size mapper
+// Helper to get component classes by size
 export const getComponentClassBySize = (
   componentPath: string,
-  basePath: string,
   size: DropdownSize
 ): string => {
   const sizeKey = getSizeKey(size);
@@ -317,21 +314,21 @@ export const getComponentClassBySize = (
 
 // Component-specific class name getters
 export const getLeftIconClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  return getComponentClassBySize('dropdown.leftIcon', 'base', size);
+  return getComponentClassBySize('dropdown.leftIcon', size);
 };
 
 export const getChevronIconClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  return getComponentClassBySize('dropdown.chevron', 'base', size);
+  return getComponentClassBySize('dropdown.chevron', size);
 };
 
 export const getLabelClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  return getComponentClassBySize('dropdown.label', 'base', size);
+  return getComponentClassBySize('dropdown.label', size);
 };
 
 export const getSubLabelClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  return getComponentClassBySize('dropdown.sublabel', 'base', size);
+  return getComponentClassBySize('dropdown.sublabel', size);
 };
 
 export const getHintTextClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
-  return getComponentClassBySize('dropdown.hint', 'base', size);
+  return getComponentClassBySize('dropdown.hint', size);
 }; 
