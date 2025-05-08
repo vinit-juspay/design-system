@@ -1,6 +1,6 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { TooltipProps, TooltipSide, TooltipSize, TooltipSlotDirection } from './types';
-import { getArrowClassNames, getSlotClassNames, getTooltipClassNames } from './utils';
+import { getArrowClassNames, getArrowPosition, getSlotClassNames, getTooltipClassNames } from './utils';
 
 const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -23,13 +23,13 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
     const [position, setPosition] = useState({ top: -9999, left: -9999 });
     const [readyToPosition, setReadyToPosition] = useState(false);
     const triggerRef = useRef<HTMLDivElement>(null);
-    const tooltipRef = useRef<HTMLDivElement>(null);
+    const tooltipRef = useRef<HTMLDivElement | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const tooltipClassName = getTooltipClassNames(size);
     const arrowWidth = size === TooltipSize.SMALL ? 8 : 12;
     const arrowHeight = size === TooltipSize.SMALL ? 6 : 8;
-    const tooltipBgColor = '#333';
+    const tooltipBgColor = '#181B25';
 
     const calculatePosition = () => {
       const triggerEl = triggerRef.current;
@@ -129,6 +129,8 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
       };
     }, []);
 
+
+
     return (
       <div
         ref={triggerRef}
@@ -137,7 +139,7 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
         style={{ display: 'inline-block', position: 'relative' }}
       >
         {children}
-        {isVisible && (
+        {isVisible && (<>
           <div
             ref={(node) => {
               tooltipRef.current = node;
@@ -155,12 +157,6 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
               top: position.top,
               left: position.left,
               zIndex: 1000,
-              backgroundColor: tooltipBgColor,
-              padding: '6px 10px',
-              color: 'white',
-              borderRadius: '4px',
-              fontSize: size === TooltipSize.SMALL ? '12px' : '14px',
-              whiteSpace: 'nowrap',
             }}
           >
             {slot && slotDirection === TooltipSlotDirection.LEFT && (
@@ -172,48 +168,14 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
             {slot && slotDirection === TooltipSlotDirection.RIGHT && (
               <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
             )}
-
-            {showArrow && (
-              <div
-                className={getArrowClassNames()}
-                style={{
-                  position: 'absolute',
-                  width: 0,
-                  height: 0,
-                  borderStyle: 'solid',
-                  ...(side === TooltipSide.TOP && {
-                    bottom: -arrowHeight,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    borderWidth: `${arrowHeight}px ${arrowWidth / 2}px 0 ${arrowWidth / 2}px`,
-                    borderColor: `${tooltipBgColor} transparent transparent transparent`,
-                  }),
-                  ...(side === TooltipSide.BOTTOM && {
-                    top: -arrowHeight,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    borderWidth: `0 ${arrowWidth / 2}px ${arrowHeight}px ${arrowWidth / 2}px`,
-                    borderColor: `transparent transparent ${tooltipBgColor} transparent`,
-                  }),
-                  ...(side === TooltipSide.LEFT && {
-                    right: -arrowWidth,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    borderWidth: `${arrowHeight / 2}px 0 ${arrowHeight / 2}px ${arrowWidth}px`,
-                    borderColor: `transparent transparent transparent ${tooltipBgColor}`,
-                  }),
-                  ...(side === TooltipSide.RIGHT && {
-                    left: -arrowWidth,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    borderWidth: `${arrowHeight / 2}px ${arrowWidth}px ${arrowHeight / 2}px 0`,
-                    borderColor: `transparent ${tooltipBgColor} transparent transparent`,
-                  }),
-                }}
-              />
-            )}
           </div>
-        )}
+          {showArrow && (
+            <div
+              className={getArrowClassNames()}
+              style={getArrowPosition(side, position, tooltipRef, arrowWidth, arrowHeight, tooltipBgColor)}
+            />
+          )}
+        </>)}
       </div>
     );
   }

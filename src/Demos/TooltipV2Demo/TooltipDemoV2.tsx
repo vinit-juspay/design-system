@@ -48,6 +48,18 @@ const TooltipDemoV2 = () => {
           </div>
 
           <div>
+            <label className="block text-sm font-medium mb-2">Show Arrow</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={config.showArrow}
+              onChange={(e) => setConfig({ ...config, showArrow: e.target.checked })}
+              />
+              <span className="text-sm">Show Arrow</span>
+            </div>
+          </div>
+
+          <div>
             <label className="block text-sm font-medium mb-2">Side</label>
             <select
               className="w-full p-2 border rounded"
