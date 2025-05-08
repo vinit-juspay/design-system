@@ -119,7 +119,7 @@ export const Multiple: Story = {
 // No Border Type Example
 export const NoBorder: Story = {
   args: {
-    type: AccordionType.NO_BORDER,
+    accordionType: AccordionType.NO_BORDER,
     defaultValue: 'item-1',
     className: 'w-[400px]',
     children: (
@@ -145,7 +145,7 @@ export const NoBorder: Story = {
 // Border Type Example
 export const Border: Story = {
   args: {
-    type: AccordionType.BORDER,
+    accordionType: AccordionType.BORDER,
     defaultValue: 'item-1',
     className: 'w-[400px]',
     children: (

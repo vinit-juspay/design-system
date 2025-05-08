@@ -9,7 +9,7 @@ const AccordionDemo = () => {
 
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">No Border Accordion (Default)</h3>
-        <Accordion defaultValue="item-1" type={AccordionType.NO_BORDER}>
+        <Accordion defaultValue="item-1" accordionType={AccordionType.NO_BORDER}>
           <AccordionItem
             value="item-1"
             title="Basic Information"
@@ -56,7 +56,7 @@ const AccordionDemo = () => {
 
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Border Accordion</h3>
-        <Accordion defaultValue="border-1" type={AccordionType.BORDER}>
+        <Accordion defaultValue="border-1" accordionType={AccordionType.BORDER}>
           <AccordionItem
             value="border-1"
             title="How do I create an account?"
@@ -102,7 +102,7 @@ const AccordionDemo = () => {
 
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">left acccordion</h3>
-        <Accordion isMultiple defaultValue={['multi-1', 'multi-3']} type={AccordionType.BORDER}>
+        <Accordion isMultiple defaultValue={['multi-1', 'multi-3']} accordionType={AccordionType.BORDER}>
           <AccordionItem
             value="multi-1"
             title="Product Features"

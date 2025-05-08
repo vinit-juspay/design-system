@@ -37,7 +37,7 @@ export interface AccordionProps {
   /** Child accordion items */
   children: ReactNode;
   /** Type of accordion styling */
-  type?: AccordionType;
+  accordionType?: AccordionType;
   /** Default expanded value(s) */
   defaultValue?: string | string[];
   /** Current expanded value(s) - for controlled component */

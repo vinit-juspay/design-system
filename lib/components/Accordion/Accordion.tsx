@@ -27,7 +27,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
-      type = AccordionType.NO_BORDER,
+      accordionType = AccordionType.NO_BORDER,
       defaultValue,
       value,
       isCollapsible = true,
@@ -37,7 +37,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     },
     ref
   ) => {
-    const rootClassName = getAccordionRootClassNames(type, className);
+    const rootClassName = getAccordionRootClassNames(accordionType, className);
 
     const baseProps = {
       collapsible: isCollapsible,
@@ -73,7 +73,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
         const childProps = {
           ...(child.props as object),
-          accordionType: type,
+          accordionType: accordionType,
         };
 
         return React.cloneElement(child, childProps);
