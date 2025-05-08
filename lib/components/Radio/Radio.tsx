@@ -71,11 +71,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
             {children}
           </label>
 
-          {rightSlot && (
-            <span className={getRadioRightSlotClassNames()}>
-              {rightSlot}
-            </span>
-          )}
+          {rightSlot && <span className={getRadioRightSlotClassNames()}>{rightSlot}</span>}
         </div>
 
         {/* Second row: subtext only */}

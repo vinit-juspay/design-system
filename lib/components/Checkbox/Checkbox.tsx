@@ -99,22 +99,14 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
               {checkboxElement}
               <div className="flex items-center flex-1">
                 {labelElement}
-                {rightSlot && (
-                  <span className={getCheckboxRightSlotClassNames()}>
-                    {rightSlot}
-                  </span>
-                )}
+                {rightSlot && <span className={getCheckboxRightSlotClassNames()}>{rightSlot}</span>}
               </div>
             </>
           ) : (
             <>
               <div className="flex items-center flex-1">
                 {labelElement}
-                {rightSlot && (
-                  <span className={getCheckboxRightSlotClassNames()}>
-                    {rightSlot}
-                  </span>
-                )}
+                {rightSlot && <span className={getCheckboxRightSlotClassNames()}>{rightSlot}</span>}
               </div>
               {checkboxElement}
             </>

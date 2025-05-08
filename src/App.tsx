@@ -61,7 +61,7 @@ const App = () => {
     | 'buttonGroups'
     | 'avatars'
     | 'accordion'
-  >('accordion');
+  >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date(),

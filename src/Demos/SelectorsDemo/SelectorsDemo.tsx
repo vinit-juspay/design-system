@@ -6,9 +6,6 @@ import { HelpCircle, User, Info } from 'lucide-react';
 
 const SelectorsDemo = () => {
   const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(true);
-  const [isToggled1, setIsToggled1] = useState(false);
-  const [isToggled2, setIsToggled2] = useState(true);
   const [selectedRadio, setSelectedRadio] = useState('size-md');
 
   return (
@@ -27,11 +24,7 @@ const SelectorsDemo = () => {
             >
               Checkbox with right slot and subtext
             </Checkbox>
-            <Checkbox
-              checked={isChecked2}
-              onCheckedChange={setIsChecked2}
-              rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}
-            >
+            <Checkbox rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}>
               Checkbox with right slot only
             </Checkbox>
             <Checkbox checked={true} subtext="Additional information below the checkbox">
@@ -50,35 +43,22 @@ const SelectorsDemo = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Switches</h3>
           <div className="flex flex-col space-y-4">
+            <Switch label="Unchecked switch" subtext="Like WhatsApp, Facebook" />
+            <Switch label="Checked switch" />
+            <Switch label="Disabled checked switch" />
+            <Switch label="Disabled unchecked switch" />
             <Switch
-              checked={isToggled1}
-              onCheckedChange={setIsToggled1}
-              label="Unchecked switch"
-              subtext="Like WhatsApp, Facebook"
-            />
-            <Switch checked={isToggled2} onCheckedChange={setIsToggled2} label="Checked switch" />
-            <Switch checked={true} disabled label="Disabled checked switch" />
-            <Switch checked={false} disabled label="Disabled unchecked switch" />
-            <Switch
-              checked={isToggled1}
-              onCheckedChange={setIsToggled1}
               label="Switch with slot"
               rightSlot={<span className="text-xs text-gray-500">Additional info</span>}
             />
             <div className="space-y-2">
               <h4 className="text-lg font-medium">Switch sizes</h4>
               <Switch
-                checked={isToggled1}
-                onCheckedChange={setIsToggled1}
                 label="Small switch"
                 size={SwitchSize.SMALL}
+                subtext="Like WhatsApp, Facebook"
               />
-              <Switch
-                checked={isToggled1}
-                onCheckedChange={setIsToggled1}
-                label="Medium switch"
-                size={SwitchSize.MEDIUM}
-              />
+              <Switch label="Medium switch" size={SwitchSize.MEDIUM} />
             </div>
 
             <div className="space-y-2">
