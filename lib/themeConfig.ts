@@ -114,6 +114,27 @@ export const themeConfig = {
         },
       },
     },
+    buttonGroup: {
+      base: {
+        container: 'inline-flex items-center',
+      },
+      spacing: {
+        stacked: '',
+        nonStacked: {
+          sm: 'gap-3',
+          md: 'gap-4',
+          lg: 'gap-4',
+        },
+      },
+      buttonStyles: {
+        stacked: {
+          first: 'rounded-r-none border-r-0',
+          middle: 'rounded-none border-r-0',
+          last: 'rounded-l-none',
+        },
+        nonStacked: '',
+      },
+    },
     tag: {
       variant: {
         noFill: {
@@ -544,23 +565,29 @@ export const themeConfig = {
     },
     checkbox: {
       baseStyles:
-        'flex items-center justify-center rounded border border-primary-500 bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1',
+        'flex items-center justify-center rounded border bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
       indicator: {
         baseStyles: 'flex items-center justify-center',
         icon: 'text-gray-0',
       },
+      wrapper: 'flex items-center',
+      rightSlot: 'ml-1.5',
+      subtext: 'text-gray-400 font-normal',
+      disabledSubtext: 'text-gray-200',
       sizes: {
         sm: {
           root: 'h-3.5 w-3.5 rounded',
           indicator: 'h-3.5 w-3.5',
           checkIcon: 'h-2.5 w-2.5',
           fontSize: 'text-body-md',
+          subtext: 'text-body-sm ml-5 mt-1',
         },
         md: {
           root: 'h-4 w-4 rounded',
           indicator: 'h-4 w-4',
           checkIcon: 'h-3 w-3',
           fontSize: 'text-body-md',
+          subtext: 'text-body-md ml-6 mt-1',
         },
       },
       states: {
@@ -571,9 +598,8 @@ export const themeConfig = {
         labelEnabled: 'text-gray-600 font-500 cursor-pointer',
       },
       position: {
-        wrapper: 'flex items-center',
-        left: 'space-x-2',
-        right: 'space-x-reverse space-x-2 flex-row-reverse',
+        wrapper: 'flex flex-col',
+        right: 'flex-row-reverse',
       },
     },
     breadcrumb: {
@@ -605,6 +631,248 @@ export const themeConfig = {
       iconSlot: {
         left: 'inline-flex items-center justify-center w-4.5 h-4.5',
         right: 'inline-flex items-center justify-center w-4.5 h-4.5',
+      },
+    },
+    dateRangePicker: {
+      base: {
+        container: 'relative inline-flex w-full',
+        input:
+          'flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer',
+      },
+      input: {
+        primary: 'border-gray-300',
+        secondary: 'border-gray-200 bg-gray-50',
+        sizes: {
+          sm: 'text-xs py-1',
+          md: 'text-sm py-2',
+          lg: 'text-base py-2.5',
+        },
+      },
+      states: {
+        disabled: 'opacity-50 cursor-not-allowed pointer-events-none',
+        disabledDay: 'opacity-40 cursor-not-allowed pointer-events-none',
+      },
+      calendar: {
+        container:
+          'absolute z-10 mt-1 w-auto min-w-96 bg-white border border-gray-200 rounded-lg shadow-lg',
+        gridContainer: 'max-h-[400px] overflow-y-auto p-4',
+        monthContainer: 'mb-6',
+        monthHeader: 'text-lg font-semibold text-gray-700 my-1',
+        dayNamesContainer: 'grid grid-cols-7 text-center text-gray-500',
+        dayName: 'p-2 border-b border-gray-100',
+        weekRow: 'grid grid-cols-7 py-1',
+        emptyCell: 'p-2',
+        dayCell: 'cursor-pointer text-center p-2 relative font-medium box-border',
+        startDate: 'bg-primary-500 rounded-l-lg',
+        endDate: 'bg-primary-500 rounded-r-lg',
+        singleDate: 'bg-primary-500 rounded-lg',
+        rangeDay: 'bg-primary-50',
+        todayDay: 'font-medium',
+        todayIndicator:
+          'absolute w-1 h-1 bg-primary-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2',
+        hoverState: 'hover:ring-1 hover:ring-inset hover:ring-primary-500 hover:rounded-lg',
+      },
+      presets: {
+        button:
+          'px-3 py-1 text-sm rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500',
+        activeButton: 'bg-primary-50 border-primary-500 text-primary-700',
+      },
+      timePicker: {
+        container: 'p-4 border-t border-gray-200',
+        input:
+          'w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-gray-700',
+      },
+      text: {
+        label: 'text-gray-400',
+        value: 'text-gray-600 font-medium text-body-md',
+        dayName: 'text-gray-400',
+        dayNumber: 'text-gray-600',
+        selectedDay: 'text-gray-0',
+        rangeDay: 'text-gray-600',
+        todayDay: 'text-primary-500',
+      },
+    },
+    switch: {
+      baseStyles:
+        'relative rounded-full transition-colors duration-300 cursor-pointer disabled:cursor-not-allowed',
+      container: 'relative flex flex-col',
+      thumb: {
+        baseStyles:
+          'absolute rounded-full bg-gray-25 border border-gray-300 transition-transform duration-300 border-[0.5px]',
+      },
+      label: {
+        baseStyles: 'ml-2 font-medium text-gray-700',
+        disabled: 'text-gray-300',
+      },
+      subtext: 'text-gray-400 font-normal',
+      rightSlot: 'ml-2',
+      wrapper: 'flex items-center',
+      states: {
+        enabled: 'bg-primary-500',
+        disabled: 'bg-primary-300',
+        inactive: 'bg-gray-150',
+      },
+      groupLabel: 'text-sm font-medium text-gray-700 mb-2',
+      sizes: {
+        sm: {
+          root: 'w-6 h-3',
+          thumb: 'w-2.5 h-2.5 top-[1px]',
+          thumbOn: 'translate-x-3',
+          thumbOff: 'translate-x-0.5',
+          label: 'text-body-sm',
+          subtext: 'text-body-sm ml-8 mt-1',
+        },
+        md: {
+          root: 'w-7 h-3.5',
+          thumb: 'w-3 h-3 top-[1px]',
+          thumbOn: 'translate-x-3.5',
+          thumbOff: 'translate-x-0.5',
+          label: 'text-body-md',
+          subtext: 'text-body-md ml-9 mt-1',
+        },
+      },
+      disabledSubtext: 'text-gray-200',
+    },
+    radio: {
+      baseStyles: 'relative flex flex-col',
+      container: 'flex flex-col space-y-4',
+      groupLabel: 'text-sm font-medium text-gray-700',
+      input: {
+        base: 'text-primary-600 border-gray-300 hover:cursor-pointer ',
+        disabled: 'text-primary-300 cursor-not-allowed',
+      },
+      label: {
+        base: 'ml-2 font-medium text-gray-700',
+        disabled: 'text-gray-300',
+      },
+      subtext: 'text-gray-400 font-normal',
+      rightSlot: 'ml-1.5',
+      wrapper: 'flex items-center',
+      sizes: {
+        sm: {
+          input: 'h-3.5 w-3.5',
+          label: 'text-body-sm',
+          subtext: 'text-body-sm ml-5 mt-1',
+        },
+        md: {
+          input: 'h-4 w-4',
+          label: 'text-body-md',
+          subtext: 'text-body-md ml-6 mt-1',
+        },
+      },
+      disabledSubtext: 'text-gray-200',
+    },
+    avatar: {
+      base: {
+        container: 'relative inline-flex items-center justify-center bg-gray-100 border',
+        image: 'h-full w-full object-cover',
+        fallbackText: 'font-medium text-muted-foreground',
+      },
+      sizes: {
+        sm: 'h-6 w-6 text-body-xs text-500 text-gray-900',
+        regular: 'h-8 w-8 text-body-sm text-500 text-gray-900',
+        md: 'h-10 w-10 text-body-md text-500 text-gray-900',
+        lg: 'h-12 w-12 text-body-lg text-500 text-gray-900',
+        xl: 'h-16 w-16 text-sm text-600 text-gray-900',
+      },
+      shapes: {
+        circular: 'rounded-full',
+        rounded: 'rounded-md',
+      },
+      indicator: {
+        base: 'absolute block rounded-full bg-green-500 ring-white',
+        sizes: {
+          sm: 'h-1.5 w-1.5 ring-1 -top-0.5 -right-0.5',
+          regular: 'h-2 w-2 ring-1 -top-0.5 -right-0.5',
+          md: 'h-2.5 w-2.5 ring-1 -top-0.5 -right-0.5',
+          lg: 'h-3 w-3 ring-2 -top-0.5 -right-0.5',
+          xl: 'h-4 w-4 ring-2 -top-0.5 -right-0.5',
+        },
+      },
+      border: {
+        withImage: 'border-white',
+        withoutImage: 'border-gray-200',
+      },
+    },
+    avatarGroup: {
+      base: {
+        container: 'flex flex-row items-center -space-x-2',
+        avatarWrapper: 'relative cursor-pointer inline-flex items-center justify-center',
+        overflowCounter:
+          'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
+      },
+      selected: 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400',
+      sizes: {
+        sm: 'h-6 w-6 text-body-xs',
+        regular: 'h-8 w-8 text-body-sm',
+        md: 'h-10 w-10 text-body-md',
+        lg: 'h-12 w-12 text-body-lg',
+        xl: 'h-16 w-16 text-sm',
+      },
+    },
+    accordion: {
+      base: {
+        container: 'w-full',
+        item: 'border-b border-gray-200',
+        trigger:
+          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:cursor-not-allowed hover:bg-gray-50',
+        content:
+          'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+        title: 'text-body-lg font-medium',
+        titleEnabled: 'text-gray-800',
+        titleDisabled: 'text-gray-500',
+        subtext: 'text-body-md mt-1',
+        subtextEnabled: 'text-gray-600',
+        subtextDisabled: 'text-gray-300',
+        contentWrapper: 'py-5 px-3',
+      },
+      variant: {
+        bordered: {
+          container: '',
+          item: '',
+          trigger: 'hover:bg-gray-50',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+        filled: {
+          container: '',
+          item: 'bg-gray-50 overflow-hidden',
+          trigger: 'px-4 hover:bg-gray-100',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+      },
+      type: {
+        border: {
+          container: 'space-y-6',
+          item: 'border border-gray-200 rounded-lg overflow-hidden',
+          trigger: 'px-4 data-[state=open]:bg-gray-50',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+        noborder: {
+          container: 'space-y-5',
+          item: 'border-b border-gray-200 last:border-b-0',
+          trigger: '',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+      },
+      layout: {
+        leftSlot: 'mr-2 flex-shrink-0',
+        rightSlot: 'ml-2 flex-shrink-0',
+        headerRow: 'flex items-center',
+        chevronRight: 'absolute right-0 top-0 flex items-center justify-center',
+        chevronLeft: 'flex items-center justify-center mr-1.5 flex-shrink-0',
+        chevronIcon: {
+          default:
+            'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+          enabled: 'text-gray-500',
+          disabled: 'text-gray-300',
+        },
+      },
+      states: {
+        disabled: 'bg-gray-50',
       },
     },
   },
