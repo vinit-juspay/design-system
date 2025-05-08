@@ -193,8 +193,8 @@ const Menu = React.forwardRef<React.ElementRef<typeof DropdownMenu.Content>, Men
                   {/* Checkbox */}
                   {checkboxPosition === CheckboxPosition.RIGHT && (
                     <Checkbox
-                      checked={isChecked}
-                      disabled={item.disabled}
+                      isChecked={isChecked}
+                      isDisabled={item.disabled}
                       size={checkboxSize as CheckboxSize}
                       onCheckedChange={() => {}}
                       className={themeConfig.euler.menu.layout.checkboxRight}
@@ -244,8 +244,8 @@ const Menu = React.forwardRef<React.ElementRef<typeof DropdownMenu.Content>, Men
                 {/* Checkbox */}
                 {checkboxPosition === CheckboxPosition.RIGHT && (
                   <Checkbox
-                    checked={item.checked}
-                    disabled={item.disabled}
+                    isChecked={item.checked}
+                    isDisabled={item.disabled}
                     size={checkboxSize as CheckboxSize}
                     onCheckedChange={() => {}}
                     className={themeConfig.euler.menu.layout.checkboxRight}

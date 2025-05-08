@@ -720,7 +720,7 @@ export const themeConfig = {
           thumbOn: 'translate-x-3',
           thumbOff: 'translate-x-0.5',
           label: 'text-body-sm',
-          subtext: 'text-body-sm ml-5 mt-1',
+          subtext: 'text-body-sm ml-8 mt-1',
         },
         md: {
           root: 'w-7 h-3.5',
@@ -728,7 +728,7 @@ export const themeConfig = {
           thumbOn: 'translate-x-3.5',
           thumbOff: 'translate-x-0.5',
           label: 'text-body-md',
-          subtext: 'text-body-md ml-6 mt-1',
+          subtext: 'text-body-md ml-9 mt-1',
         },
       },
       disabledSubtext: 'text-gray-200',
@@ -865,7 +865,8 @@ export const themeConfig = {
         chevronRight: 'absolute right-0 top-0 flex items-center justify-center',
         chevronLeft: 'flex items-center justify-center mr-1.5 flex-shrink-0',
         chevronIcon: {
-          default: 'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+          default:
+            'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
           enabled: 'text-gray-500',
           disabled: 'text-gray-300',
         },

@@ -8,12 +8,9 @@ export const getAccordionRootClassNames = (type: AccordionType, className?: stri
   return cn(theme.base.container, theme.type[type].container, className);
 };
 
-export const getAccordionItemClassNames = (
-  type: AccordionType,
-  isDisabled?: boolean
-): string => {
+export const getAccordionItemClassNames = (type: AccordionType, isDisabled?: boolean): string => {
   const theme = themeConfig.euler.accordion;
-  
+
   return cn(
     theme.base.item,
     theme.type[type].item,
@@ -26,7 +23,7 @@ export const getAccordionTriggerClassNames = (
   isDisabled?: boolean
 ): string => {
   const theme = themeConfig.euler.accordion;
-  
+
   return cn(
     theme.base.trigger,
     theme.type[type].trigger,
@@ -42,16 +39,13 @@ export const getAccordionContentClassNames = (type: AccordionType): string => {
 
 export const getAccordionTitleClassNames = (isDisabled?: boolean): string => {
   const theme = themeConfig.euler.accordion;
-  
-  return cn(
-    theme.base.title,
-    isDisabled ? theme.base.titleDisabled : theme.base.titleEnabled
-  );
+
+  return cn(theme.base.title, isDisabled ? theme.base.titleDisabled : theme.base.titleEnabled);
 };
 
 export const getAccordionSubtextClassNames = (isDisabled?: boolean): string => {
   const theme = themeConfig.euler.accordion;
-  
+
   return cn(
     theme.base.subtext,
     isDisabled ? theme.base.subtextDisabled : theme.base.subtextEnabled
@@ -91,7 +85,7 @@ export const getAccordionContentWrapperClassNames = (type: AccordionType): strin
 
 export const getAccordionChevronIconClassNames = (isDisabled?: boolean): string => {
   const theme = themeConfig.euler.accordion;
-  
+
   return cn(
     theme.layout.chevronIcon.default,
     isDisabled ? theme.layout.chevronIcon.disabled : theme.layout.chevronIcon.enabled

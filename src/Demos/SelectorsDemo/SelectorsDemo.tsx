@@ -5,11 +5,11 @@ import { RadioSize } from '../../../lib/components/Radio/types';
 import { HelpCircle, User, Info } from 'lucide-react';
 
 const SelectorsDemo = () => {
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(true);
+  const [isChecked1, setIsChecked1] = useState<boolean | 'indeterminate'>(false);
+  const [selectedRadio, setSelectedRadio] = useState('size-md');
   const [isToggled1, setIsToggled1] = useState(false);
   const [isToggled2, setIsToggled2] = useState(true);
-  const [selectedRadio, setSelectedRadio] = useState('size-md');
+  const [isToggled3, setIsToggled3] = useState(false);
 
   return (
     <>
@@ -20,73 +20,56 @@ const SelectorsDemo = () => {
           <h3 className="text-xl font-semibold mb-4">Checkboxes</h3>
           <div className="flex flex-col space-y-4">
             <Checkbox
-              checked={isChecked1}
-              onCheckedChange={setIsChecked1}
+              isChecked={isChecked1}
+              onCheckedChange={(checked) => setIsChecked1(checked)}
               rightSlot={<Info className="w-3.5 h-3.5 text-gray-500" />}
               subtext="This is a helpful description"
             >
               Checkbox with right slot and subtext
             </Checkbox>
-            <Checkbox
-              checked={isChecked2}
-              onCheckedChange={setIsChecked2}
-              rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}
-            >
+            <Checkbox rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}>
               Checkbox with right slot only
             </Checkbox>
-            <Checkbox checked={true} subtext="Additional information below the checkbox">
+            <Checkbox isChecked={true} subtext="Additional information below the checkbox">
               Checkbox with subtext only
             </Checkbox>
-            <Checkbox checked={true} disabled>
+            <Checkbox isChecked={true} isDisabled>
               Disabled checked checkbox
             </Checkbox>
-            <Checkbox checked={false} disabled>
+            <Checkbox isChecked={false} isDisabled>
               Disabled unchecked checkbox
             </Checkbox>
-            <Checkbox checked="indeterminate">Indeterminate checkbox</Checkbox>
+            <Checkbox isChecked="indeterminate">Indeterminate checkbox</Checkbox>
           </div>
         </div>
 
         <div>
           <h3 className="text-xl font-semibold mb-4">Switches</h3>
           <div className="flex flex-col space-y-4">
+            <Switch label="Unchecked switch" subtext="Like WhatsApp, Facebook" />
+            <Switch defaultChecked={true} label="Checked switch" />
+            <Switch isChecked={true} isDisabled label="Disabled checked switch" />
+            <Switch isDisabled label="Disabled unchecked switch" />
             <Switch
-              checked={isToggled1}
-              onCheckedChange={setIsToggled1}
-              label="Unchecked switch"
-              subtext="Like WhatsApp, Facebook"
-            />
-            <Switch checked={isToggled2} onCheckedChange={setIsToggled2} label="Checked switch" />
-            <Switch checked={true} disabled label="Disabled checked switch" />
-            <Switch checked={false} disabled label="Disabled unchecked switch" />
-            <Switch
-              checked={isToggled1}
-              onCheckedChange={setIsToggled1}
               label="Switch with slot"
               rightSlot={<span className="text-xs text-gray-500">Additional info</span>}
             />
             <div className="space-y-2">
               <h4 className="text-lg font-medium">Switch sizes</h4>
               <Switch
-                checked={isToggled1}
-                onCheckedChange={setIsToggled1}
                 label="Small switch"
                 size={SwitchSize.SMALL}
+                subtext="Like WhatsApp, Facebook"
               />
-              <Switch
-                checked={isToggled1}
-                onCheckedChange={setIsToggled1}
-                label="Medium switch"
-                size={SwitchSize.MEDIUM}
-              />
+              <Switch label="Medium switch" size={SwitchSize.MEDIUM} />
             </div>
 
             <div className="space-y-2">
               <h4 className="text-lg font-medium">Switch Group</h4>
-              <SwitchGroup name="features" onChange={data => console.log(data)}>
-                <Switch value="notifications" label="Enable notifications" />
-                <Switch value="marketing" label="Marketing emails" />
-                <Switch value="updates" label="Product updates" />
+              <SwitchGroup name="features" onChange={values => console.log(values)}>
+                <Switch value="notifications" isChecked={isToggled1} onChange={setIsToggled1} label="Enable notifications" />
+                <Switch value="marketing" isChecked={isToggled2} onChange={setIsToggled2} label="Marketing emails" />
+                <Switch value="updates" isChecked={isToggled3} onChange={setIsToggled3} label="Product updates" />
               </SwitchGroup>
             </div>
           </div>
@@ -99,8 +82,8 @@ const SelectorsDemo = () => {
               <h4 className="text-lg font-medium">Radio sizes</h4>
               <Radio
                 value="size-sm"
-                checked={selectedRadio === 'size-sm'}
-                onChange={e => setSelectedRadio(e.target.value)}
+                isChecked={selectedRadio === 'size-sm'}
+                onChange={checked => checked && setSelectedRadio('size-sm')}
                 size={RadioSize.SMALL}
                 rightSlot={<User className="w-2.5 h-2.5 text-gray-500" />}
               >
@@ -108,18 +91,11 @@ const SelectorsDemo = () => {
               </Radio>
               <Radio
                 value="size-md"
-                checked={selectedRadio === 'size-md'}
-                onChange={e => setSelectedRadio(e.target.value)}
+                isChecked={selectedRadio === 'size-md'}
+                onChange={checked => checked && setSelectedRadio('size-md')}
                 size={RadioSize.MEDIUM}
               >
                 Medium radio (default)
-              </Radio>
-              <Radio
-                value="size-lg"
-                checked={selectedRadio === 'size-lg'}
-                onChange={e => setSelectedRadio(e.target.value)}
-              >
-                Large radio
               </Radio>
             </div>
 
@@ -128,7 +104,7 @@ const SelectorsDemo = () => {
               <RadioGroup
                 label="Where do you want to collect payments?"
                 name="payment-collection"
-                onChange={({ name, value }) => console.log({ name, value })}
+                onChange={checked => checked && setSelectedRadio('size-md')}
                 defaultValue="website"
               >
                 <Radio rightSlot={<HelpCircle className="w-3 h-3 text-gray-500" />} value="website">
