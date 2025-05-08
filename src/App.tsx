@@ -29,7 +29,6 @@ import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateR
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import { ButtonGroupSize, ButtonGroupMode } from '../lib/components/ButtonGroup/types';
 import { Menu, MenuItem, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menuv2';
-import TooltipDemo from './Demos/TooltipDemos/TooltipDemo';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
@@ -39,8 +38,8 @@ import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown'
-  >('selectors');
+    'buttons' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown'
+  >('buttons');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date(),
@@ -55,7 +54,6 @@ const App = () => {
   const navigationItems = [
     { id: 'buttons', label: 'Buttons', icon: Layers },
     { id: 'buttonGroups', label: 'Button Groups', icon: ListFilter },
-    { id: 'tooltips', label: 'Tooltips', icon: Info },
     { id: 'tags', label: 'Tags', icon: TagIcon },
     { id: 'tabs', label: 'Tabs', icon: Settings },
     { id: 'alerts', label: 'Alerts', icon: Bell },
@@ -1364,8 +1362,6 @@ const App = () => {
             return renderButtons();
           case 'buttonGroups':
             return renderButtonGroups();
-          case 'tooltips':
-            return <TooltipDemo />;
           case 'tags':
             return renderTags();
           case 'tabs':

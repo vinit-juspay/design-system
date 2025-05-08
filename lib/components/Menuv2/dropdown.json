@@ -1,0 +1,3378 @@
+{
+    "dropdown": {
+      "name": "dropdown",
+      "props": {
+        "dropdownType": {
+          "id": "dropdownType",
+          "values": [
+            "iconOnly",
+            "singleSelect",
+            "multiSelect"
+          ]
+        },
+        "hasClearButton": {
+          "id": "hasClearButton#5575:0",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "hasHelp": {
+          "id": "hasHelp#5740:180",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "hasHint": {
+          "id": "hasHint#5740:239",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "hasLabel": {
+          "id": "hasLabel#5740:3",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "hasLeftIcon": {
+          "id": "hasLeftIcon#5073:3",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "hasSubLabel": {
+          "id": "hasSubLabel#5740:62",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "leftIcon": {
+          "id": "leftIcon#5073:0",
+          "type": "Component swap options"
+        },
+        "mandatory": {
+          "id": "mandatory#5740:121",
+          "values": [
+            true,
+            false
+          ]
+        },
+        "selectionType": {
+          "id": "selectionType",
+          "values": [
+            "text",
+            "default",
+            "count"
+          ]
+        },
+        "size": {
+          "id": "size",
+          "values": [
+            "lg",
+            "md",
+            "sm"
+          ]
+        },
+        "state": {
+          "id": "state",
+          "values": [
+            "default",
+            "hover",
+            "open",
+            "selected"
+          ]
+        },
+        "subType": {
+          "id": "subType",
+          "values": [
+            "hasContainer",
+            "noContainer"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=lg, state=default, selectionType=default",
+          "width": 131,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 131,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=default, selectionType=default",
+          "width": 123,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 123,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=lg, state=selected, selectionType=default",
+          "width": 113,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 113,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=selected, selectionType=default",
+          "width": 123,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 123,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=hover, selectionType=default",
+          "width": 123,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 123,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=open, selectionType=default",
+          "width": 123,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 123,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=selected, selectionType=count",
+          "width": 158,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 158,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=lg, state=default, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=lg, state=default, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=lg, state=hover, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=lg, state=hover, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=lg, state=open, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=lg, state=open, selectionType=default",
+          "width": 62,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 62,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=md, state=default, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=md, state=default, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=md, state=hover, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=md, state=hover, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=md, state=open, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=md, state=open, selectionType=default",
+          "width": 58,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 58,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=sm, state=default, selectionType=default",
+          "width": 52,
+          "height": 30,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 30
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=sm, state=default, selectionType=default",
+          "width": 52,
+          "height": 30,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 30
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=sm, state=hover, selectionType=default",
+          "width": 52,
+          "height": 30,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 30
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=sm, state=hover, selectionType=default",
+          "width": 52,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=hasContainer, size=sm, state=open, selectionType=default",
+          "width": 52,
+          "height": 30,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 30
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=iconOnly, subType=noContainer, size=sm, state=open, selectionType=default",
+          "width": 52,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "SPACE_BETWEEN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 52,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=lg, state=hover, selectionType=default",
+          "width": 131,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 131,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=hover, selectionType=count",
+          "width": 158,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 158,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=lg, state=open, selectionType=default",
+          "width": 131,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 131,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=open, selectionType=count",
+          "width": 158,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 158,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=md, state=default, selectionType=default",
+          "width": 127,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 127,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=default, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=md, state=selected, selectionType=default",
+          "width": 101,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 101,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=selected, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=hover, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=open, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=selected, selectionType=count",
+          "width": 149,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 149,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=md, state=hover, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=hover, selectionType=count",
+          "width": 149,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 149,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=md, state=open, selectionType=default",
+          "width": 119,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 119,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=open, selectionType=count",
+          "width": 149,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 149,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=sm, state=default, selectionType=default",
+          "width": 111,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 111,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=default, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=sm, state=selected, selectionType=default",
+          "width": 88,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 88,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=selected, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=hover, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=open, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=selected, selectionType=count",
+          "width": 130,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 130,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=sm, state=hover, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=hover, selectionType=count",
+          "width": 130,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 130,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=noContainer, size=sm, state=open, selectionType=default",
+          "width": 103,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 103,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=open, selectionType=count",
+          "width": 130,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 130,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=default, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=selected, selectionType=count",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=hover, selectionType=count",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=open, selectionType=count",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=default, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=selected, selectionType=count",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=hover, selectionType=count",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=open, selectionType=count",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=default, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=selected, selectionType=count",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=hover, selectionType=count",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=open, selectionType=count",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=lg, state=default, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=lg, state=selected, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=selected, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=open, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=hover, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=lg, state=hover, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=lg, state=open, selectionType=default",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=md, state=default, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=md, state=selected, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=selected, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=open, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=hover, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=md, state=hover, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=md, state=open, selectionType=default",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=sm, state=default, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=sm, state=selected, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=selected, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=open, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=hover, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=sm, state=hover, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=singleSelect, subType=hasContainer, size=sm, state=open, selectionType=default",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=selected, selectionType=text",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=hover, selectionType=text",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=lg, state=open, selectionType=text",
+          "width": 255,
+          "height": 96,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 40
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=selected, selectionType=text",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=hover, selectionType=text",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=md, state=open, selectionType=text",
+          "width": 255,
+          "height": 92,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 36
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 20
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=selected, selectionType=text",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=hover, selectionType=text",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=hasContainer, size=sm, state=open, selectionType=text",
+          "width": 255,
+          "height": 86,
+          "layout": {
+            "type": "VERTICAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": 8,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "MIN"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "Label",
+              "width": 255,
+              "height": 20
+            },
+            {
+              "name": "dropdownBase",
+              "width": 255,
+              "height": 32
+            },
+            {
+              "name": "Hint text",
+              "width": 255,
+              "height": 18
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=hover, selectionType=text",
+          "width": 204,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 204,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=open, selectionType=text",
+          "width": 204,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 204,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=lg, state=selected, selectionType=text",
+          "width": 204,
+          "height": 40,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 204,
+              "height": 40
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=hover, selectionType=text",
+          "width": 184,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 184,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=open, selectionType=text",
+          "width": 184,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 184,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=md, state=selected, selectionType=text",
+          "width": 184,
+          "height": 36,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 184,
+              "height": 36
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=hover, selectionType=text",
+          "width": 160,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 160,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=open, selectionType=text",
+          "width": 160,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 160,
+              "height": 32
+            }
+          ]
+        },
+        {
+          "type": "AutoLayout Frame",
+          "name": "dropdownType=multiSelect, subType=noContainer, size=sm, state=selected, selectionType=text",
+          "width": 160,
+          "height": 32,
+          "layout": {
+            "type": "HORIZONTAL",
+            "padding": {
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            },
+            "itemSpacing": -1,
+            "alignment": {
+              "primary": "MIN",
+              "counter": "CENTER"
+            }
+          },
+          "variantProperties": {},
+          "children": [
+            {
+              "name": "dropdown",
+              "width": 160,
+              "height": 32
+            }
+          ]
+        }
+      ]
+    }
+  }
