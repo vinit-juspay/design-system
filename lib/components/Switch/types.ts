@@ -37,11 +37,11 @@ export interface SwitchProps {
   /**
    * Label text to display next to the switch
    */
-  label?: ReactNode;
+  label?: string;
   /**
    * Additional text to display below the label
    */
-  subtext?: ReactNode;
+  subtext?: string;
   /**
    * Accessible label for screen readers (sets aria-label)
    */
@@ -68,7 +68,7 @@ export interface SwitchGroupProps {
   /**
    * Label for the group
    */
-  label?: ReactNode;
+  label?: string;
   /**
    * Name for all switches in the group
    */

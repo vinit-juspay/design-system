@@ -6,25 +6,29 @@ export enum RadioSize {
 }
 
 export interface RadioProps {
-  value: string;
-  checked?: boolean;
+  id?: string;
+  value?: string;
+  isChecked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (checked: boolean) => void;
   isDisabled?: boolean;
   size?: RadioSize;
-  children: ReactNode;
+  children?: ReactNode;
   subtext?: string;
   rightSlot?: ReactNode;
   className?: string;
   name?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  accessibilityLabel?: string;
 }
 
 export interface RadioGroupProps {
+  id?: string;
   label?: string;
   name: string;
   defaultValue?: string;
   value?: string;
   children: ReactNode;
-  onChange?: (data: { name: string; value: string }) => void;
+  onChange?: (value: string) => void;
   className?: string;
   isDisabled?: boolean;
 }
