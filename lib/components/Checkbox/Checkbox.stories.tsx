@@ -97,7 +97,6 @@ export const Sizes: Story = {
     <div className="flex flex-col gap-4">
       <Checkbox size={CheckboxSize.SMALL}>Small checkbox</Checkbox>
       <Checkbox size={CheckboxSize.MEDIUM}>Medium checkbox (default)</Checkbox>
-      <Checkbox size={CheckboxSize.LARGE}>Large checkbox</Checkbox>
     </div>
   ),
 };
