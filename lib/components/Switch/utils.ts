@@ -53,8 +53,9 @@ export const getSwitchLabelClassNames = (size: SwitchSize, disabled: boolean): s
 
 export const getSwitchSubtextClassNames = (size: SwitchSize, disabled: boolean): string => {
   const theme = themeConfig.euler.radio;
+  const switchTheme = themeConfig.euler.switch;
 
-  return cn(theme.subtext, theme.sizes[size].subtext, disabled && theme.disabledSubtext);
+  return cn(theme.subtext, switchTheme.sizes[size].subtext, disabled && theme.disabledSubtext);
 };
 
 export const getSwitchRightSlotClassNames = (): string => {

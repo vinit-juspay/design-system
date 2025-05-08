@@ -1,12 +1,14 @@
-import { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { SwitchGroupProps } from './types';
-import { SwitchGroupContext } from './SwitchGroupContext';
 import { getSwitchGroupClassNames, getSwitchGroupLabelClassNames } from './utils';
 import { cn } from '../../utils';
+import Switch from './Switch';
+import { SwitchProps } from './types';
 
 const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
   (
     {
+      id,
       label,
       name,
       defaultValue = [],
@@ -18,48 +20,65 @@ const SwitchGroup = forwardRef<HTMLDivElement, SwitchGroupProps>(
     },
     ref
   ) => {
-    const [internalValues, setInternalValues] = useState<string[]>(() => defaultValue);
+    const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
 
     const isControlled = controlledValue !== undefined;
     const values = isControlled ? controlledValue : internalValues;
 
-    useEffect(() => {
-      if (
-        !isControlled &&
-        defaultValue !== undefined &&
-        JSON.stringify(defaultValue) !== JSON.stringify(internalValues)
-      ) {
-        setInternalValues(defaultValue);
-      }
-    }, [defaultValue, isControlled, internalValues]);
-
-    const handleChange = (data: { name: string; value: string; checked: boolean }) => {
-      if (isDisabled) return;
-
-      if (!isControlled) {
-        if (data.checked) {
-          setInternalValues(prev => [...prev, data.value]);
-        } else {
-          setInternalValues(prev => prev.filter(v => v !== data.value));
-        }
-      }
-
-      if (onChange) {
-        const newValues = data.checked
-          ? [...values, data.value]
-          : values.filter(v => v !== data.value);
-
-        onChange({ name: data.name, values: newValues });
-      }
+    const isSwitchElement = (
+      child: React.ReactElement
+    ): child is React.ReactElement<SwitchProps> => {
+      return child.type === Switch;
     };
 
+    const enhancedChildren = React.Children.map(children, child => {
+      // Make sure the child is a valid element
+      if (!React.isValidElement(child)) return child;
+
+      // Only modify Switch components
+      if (isSwitchElement(child)) {
+        const childValue = child.props.value;
+
+        if (!childValue) return child;
+
+        return React.cloneElement(child, {
+          isChecked: values.includes(childValue),
+          onChange: (checked: boolean) => {
+            let newValues: string[];
+
+            if (checked) {
+              newValues = [...values, childValue];
+            } else {
+              newValues = values.filter(v => v !== childValue);
+            }
+
+            // Update internal state if uncontrolled
+            if (!isControlled) {
+              setInternalValues(newValues);
+            }
+
+            if (child.props.onChange) {
+              child.props.onChange(checked);
+            }
+
+            // Call group onChange if provided
+            if (onChange) {
+              onChange(newValues);
+            }
+          },
+          name: name,
+          isDisabled: isDisabled || child.props.isDisabled,
+        });
+      }
+
+      return child;
+    });
+
     return (
-      <SwitchGroupContext.Provider value={{ name, values, onChange: handleChange, isDisabled }}>
-        <div className={cn(getSwitchGroupClassNames(className))} ref={ref} role="group">
-          {label && <div className={getSwitchGroupLabelClassNames()}>{label}</div>}
-          {children}
-        </div>
-      </SwitchGroupContext.Provider>
+      <div className={cn(getSwitchGroupClassNames(className))} ref={ref} role="group" id={id}>
+        {label && <div className={getSwitchGroupLabelClassNames()}>{label}</div>}
+        {enhancedChildren}
+      </div>
     );
   }
 );
