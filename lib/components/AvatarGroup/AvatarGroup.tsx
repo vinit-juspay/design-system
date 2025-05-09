@@ -9,20 +9,24 @@ import {
   getAvatarGroupContainerClassNames,
   getAvatarWrapperClassNames,
   getSelectedAvatarClassNames,
-  getOverflowCounterClassNames
-} from "./utils"
+  getOverflowCounterClassNames,
+} from './utils';
 
-const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(({
-  avatars,
-  maxCount = 5,
-  size = AvatarSize.REGULAR,
-  className,
-  selectedAvatarIds,
-  onSelectionChange,
-  ...props
-}, ref) => {
-  // Ensure maxCount is at least 1
-  const safeMaxCount = Math.max(1, maxCount)
+const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
+  (
+    {
+      avatars,
+      maxCount = 5,
+      size = AvatarSize.REGULAR,
+      className,
+      selectedAvatarIds,
+      onSelectionChange,
+      ...props
+    },
+    ref
+  ) => {
+    // Ensure maxCount is at least 1
+    const safeMaxCount = Math.max(1, maxCount);
 
   // State for menu open/closed
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -122,19 +126,19 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(({
     setInternalSelectedIds(selectedAvatarIds || [])
   }, [selectedAvatarIds]);
 
-  // Determine visible avatars and overflow count
-  const visibleAvatars = avatars.slice(0, safeMaxCount)
-  const overflowCount = Math.max(0, avatars.length - safeMaxCount)
+    // Determine visible avatars and overflow count
+    const visibleAvatars = avatars.slice(0, safeMaxCount);
+    const overflowCount = Math.max(0, avatars.length - safeMaxCount);
 
-  // Get theme classes
-  const containerClasses = getAvatarGroupContainerClassNames(className)
-  const selectedClasses = getSelectedAvatarClassNames()
+    // Get theme classes
+    const containerClasses = getAvatarGroupContainerClassNames(className);
+    const selectedClasses = getSelectedAvatarClassNames();
 
-  // Handle avatar selection (toggle) from menu or direct click
-  const handleSelect = (id: string | number) => {
-    const newSelectedIds = internalSelectedIds.includes(id)
-      ? internalSelectedIds.filter((selectedId) => selectedId !== id) // Remove id
-      : [...internalSelectedIds, id] // Add id
+    // Handle avatar selection (toggle) from menu or direct click
+    const handleSelect = (id: string | number) => {
+      const newSelectedIds = internalSelectedIds.includes(id)
+        ? internalSelectedIds.filter(selectedId => selectedId !== id) // Remove id
+        : [...internalSelectedIds, id]; // Add id
 
     setInternalSelectedIds(newSelectedIds)
     onSelectionChange?.(newSelectedIds) // Call updated callback
@@ -272,16 +276,18 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(({
         </div>
       )}
 
-      {/* Hidden text for screen readers to announce the overflow */}
-      {overflowCount > 0 && !isMenuOpen && ( // Hide if menu is open as trigger handles label
-        <span className="sr-only">
-          And {overflowCount} more {overflowCount === 1 ? "avatar" : "avatars"}
-        </span>
-      )}
-    </div>
-  )
-})
+        {/* Hidden text for screen readers to announce the overflow */}
+        {overflowCount > 0 &&
+          !isMenuOpen && ( // Hide if menu is open as trigger handles label
+            <span className="sr-only">
+              And {overflowCount} more {overflowCount === 1 ? 'avatar' : 'avatars'}
+            </span>
+          )}
+      </div>
+    );
+  }
+);
 
-AvatarGroup.displayName = "AvatarGroup"
+AvatarGroup.displayName = 'AvatarGroup';
 
-export default AvatarGroup
+export default AvatarGroup;

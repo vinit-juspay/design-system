@@ -1,12 +1,14 @@
-import { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { RadioGroupProps } from './types';
-import { RadioGroupContext } from './RadioGroupContext';
 import { getRadioGroupClassNames, getRadioGroupLabelClassNames } from './utils';
 import { cn } from '../../utils';
+import Radio from './Radio';
+import { RadioProps } from './types';
 
 const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
   (
     {
+      id,
       label,
       name,
       defaultValue,
@@ -22,38 +24,57 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     
     const isControlled = controlledValue !== undefined;
     const value = isControlled ? controlledValue : internalValue;
-    
-    useEffect(() => {
-      if (!isControlled && defaultValue !== undefined) {
-        setInternalValue(defaultValue);
-      }
-    }, [defaultValue, isControlled]);
-    
-    const handleChange = (data: { name: string; value: string }) => {
-      if (isDisabled) return;
-      
-      if (!isControlled) {
-        setInternalValue(data.value);
-      }
-      
-      if (onChange) {
-        onChange(data);
-      }
+
+    const isRadioElement = (
+      child: React.ReactElement
+    ): child is React.ReactElement<RadioProps> => {
+      return child.type === Radio;
     };
 
+    const enhancedChildren = React.Children.map(children, child => {
+      if (!React.isValidElement(child)) return child;
+      
+      if (isRadioElement(child)) {
+        const childValue = child.props.value;
+        
+        if (!childValue) return child;
+        
+        return React.cloneElement(child, {
+          isChecked: value === childValue,
+          onChange: (checked: boolean) => {
+            if (checked) {
+              // Update internal state if uncontrolled
+              if (!isControlled) {
+                setInternalValue(childValue);
+              }
+
+              if (child.props.onChange) {
+                child.props.onChange(checked);
+              }
+
+              // Call group onChange if provided
+              if (onChange) {
+                onChange(childValue);
+              }
+            }
+          },
+          name,
+          isDisabled: isDisabled || child.props.isDisabled,
+        });
+      }
+      
+      return child;
+    });
+
     return (
-      <RadioGroupContext.Provider value={{ name, value, onChange: handleChange, isDisabled }}>
-        <div className={cn(getRadioGroupClassNames(className))} ref={ref} role="radiogroup">
-          {label && (
-            <div className={getRadioGroupLabelClassNames()}>{label}</div>
-          )}
-          {children}
-        </div>
-      </RadioGroupContext.Provider>
+      <div className={cn(getRadioGroupClassNames(className))} ref={ref} role="radiogroup" id={id}>
+        {label && <div className={getRadioGroupLabelClassNames()}>{label}</div>}
+        {enhancedChildren}
+      </div>
     );
   }
 );
 
 RadioGroup.displayName = 'RadioGroup';
 
-export default RadioGroup; 
+export default RadioGroup;

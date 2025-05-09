@@ -1,5 +1,4 @@
-import React, { forwardRef, useContext } from 'react';
-import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 import { RadioProps, RadioSize } from './types';
 import {
   getRadioWrapperClassNames,
@@ -7,50 +6,53 @@ import {
   getRadioLabelClassNames,
   getRadioSubtextClassNames,
   getRadioRightSlotClassNames,
-  getRadioContentWrapperClassNames
+  getRadioContentWrapperClassNames,
 } from './utils';
 import { cn } from '../../utils';
-import { RadioGroupContext } from './RadioGroupContext';
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(
+const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (
     {
+      id,
       value,
-      checked,
+      isChecked,
+      defaultChecked = false,
+      onChange,
       isDisabled = false,
       size = RadioSize.MEDIUM,
       children,
       subtext,
       rightSlot,
-      className,
-      name: propName,
-      onChange: propOnChange,
+      className = '',
+      name,
+      accessibilityLabel,
     },
     ref
   ) => {
-    // Get context from RadioGroup if available
-    const radioGroup = useContext(RadioGroupContext);
+    // Use internal state for uncontrolled component
+    const [checkedState, setCheckedState] = React.useState(defaultChecked);
     
-    // Determine if controlled by RadioGroup or standalone
-    const name = radioGroup?.name || propName;
-    const isChecked = radioGroup?.value !== undefined 
-      ? radioGroup.value === value 
-      : checked;
-    const isGroupDisabled = radioGroup?.isDisabled || false;
-    const finalDisabled = isDisabled || isGroupDisabled;
-    
-    // Handle change events
+    // Determine if component is controlled
+    const isControlled = isChecked !== undefined;
+    const checked = isControlled ? isChecked : checkedState;
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (finalDisabled) return;
-      
-      if (propOnChange) {
-        propOnChange(e);
+      if (isDisabled) return;
+
+      const newChecked = e.target.checked;
+
+      // Update internal state if uncontrolled
+      if (!isControlled) {
+        setCheckedState(newChecked);
       }
-      
-      if (radioGroup?.onChange) {
-        radioGroup.onChange({ name: name || '', value });
+
+      // Call onChange callback
+      if (onChange) {
+        onChange(newChecked);
       }
     };
+
+    const uniqueId = id || (value ? `radio-${value}` : `radio-${React.useId()}`);
 
     return (
       <div className={cn(getRadioWrapperClassNames(), className)}>
@@ -58,32 +60,36 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
           <input
             ref={ref}
             type="radio"
-            id={`radio-${value}`}
+            id={uniqueId}
             name={name}
             value={value}
-            checked={isChecked}
-            disabled={finalDisabled}
+            checked={checked}
+            disabled={isDisabled}
             onChange={handleChange}
-            className={getRadioInputClassNames(size, finalDisabled)}
+            aria-label={accessibilityLabel}
+            aria-labelledby={children ? `${uniqueId}-label` : undefined}
+            aria-describedby={subtext ? `${uniqueId}-description` : undefined}
+            className={getRadioInputClassNames(size, isDisabled)}
           />
-          
-          <label 
-            htmlFor={`radio-${value}`} 
-            className={getRadioLabelClassNames(size, finalDisabled)}
-          >
-            {children}
-          </label>
-          
-          {rightSlot && (
-            <span className={getRadioRightSlotClassNames()}>
-              <Slot>{rightSlot}</Slot>
-            </span>
+
+          {children && (
+            <label
+              id={`${uniqueId}-label`}
+              htmlFor={uniqueId}
+              className={getRadioLabelClassNames(size, isDisabled)}
+            >
+              {children}
+            </label>
           )}
+
+          {rightSlot && <span className={getRadioRightSlotClassNames()}>{rightSlot}</span>}
         </div>
-        
-        {/* Second row: subtext only */}
+
         {subtext && (
-          <div className={getRadioSubtextClassNames(size, finalDisabled)}>
+          <div
+            id={`${uniqueId}-description`}
+            className={getRadioSubtextClassNames(size, isDisabled)}
+          >
             {subtext}
           </div>
         )}
@@ -94,4 +100,4 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
 
 Radio.displayName = 'Radio';
 
-export default Radio; 
+export default Radio;

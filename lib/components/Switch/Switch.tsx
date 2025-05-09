@@ -9,111 +9,91 @@ import {
   getSwitchSubtextClassNames,
   getSwitchContentWrapperClassNames,
 } from './utils';
-import { Slot } from '@radix-ui/react-slot';
-import { SwitchGroupContext } from './SwitchGroupContext';
 import { cn } from '../../utils';
 
-/**
- * Switch component for toggling settings or options
- */
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
-      value,
-      checked = false,
-      onCheckedChange,
-      disabled = false,
+      id,
+      isChecked,
+      defaultChecked = false,
+      onChange,
+      isDisabled = false,
       size = SwitchSize.MEDIUM,
       label,
       subtext,
       rightSlot,
       className = '',
-      name: propName,
-      onChange,
+      name,
+      value,
+      accessibilityLabel,
     },
     ref
   ) => {
-    // Get context from SwitchGroup if available
-    const switchGroup = React.useContext(SwitchGroupContext);
-    
-    // Determine if controlled by SwitchGroup or standalone
-    const name = switchGroup?.name || propName;
-    const isChecked = switchGroup?.values && value 
-      ? switchGroup.values.includes(value) 
-      : checked;
-    const isGroupDisabled = switchGroup?.isDisabled || false;
-    const finalDisabled = disabled || isGroupDisabled;
+    // Use internal state for uncontrolled component
+    const [checkedState, setCheckedState] = React.useState(defaultChecked);
 
-    // Handle change events
+    // Determine if component is controlled
+    const isControlled = isChecked !== undefined;
+    const checked = isControlled ? isChecked : checkedState;
+
     const handleToggle = () => {
-      if (finalDisabled) return;
-      
-      const newChecked = !isChecked;
-      
-      if (onCheckedChange) {
-        onCheckedChange(newChecked);
+      if (isDisabled) return;
+
+      const newChecked = !checked;
+
+      // Update internal state if uncontrolled
+      if (!isControlled) {
+        setCheckedState(newChecked);
       }
-      
-      if (switchGroup?.onChange && value) {
-        switchGroup.onChange({ name: name || '', value, checked: newChecked });
-      }
-      
+
+      // Call onChange callback
       if (onChange) {
-        // Create synthetic event
-        const event = {
-          target: {
-            name,
-            value,
-            checked: newChecked,
-          },
-          preventDefault: () => {},
-          stopPropagation: () => {},
-        } as unknown as React.ChangeEvent<HTMLInputElement>;
-        
-        onChange(event);
+        onChange(newChecked);
       }
     };
 
-    const uniqueId = value ? `switch-${value}` : `switch-${React.useId()}`;
+    const uniqueId = id || (value ? `switch-${value}` : `switch-${React.useId()}`);
 
     return (
       <div className={cn(getSwitchContainerClassNames(), className)}>
-        {/* First row: switch input, label, and right slot */}
         <div className={getSwitchContentWrapperClassNames()}>
           <button
             ref={ref}
             type="button"
             role="switch"
-            aria-checked={isChecked}
-            aria-labelledby={label ? `${uniqueId}-label` : undefined}
-            disabled={finalDisabled}
             id={uniqueId}
+            aria-checked={checked}
+            aria-label={accessibilityLabel}
+            aria-labelledby={label ? `${uniqueId}-label` : undefined}
+            aria-describedby={subtext ? `${uniqueId}-description` : undefined}
+            disabled={isDisabled}
             onClick={handleToggle}
-            className={getSwitchRootClassNames(size, finalDisabled, isChecked)}
+            className={getSwitchRootClassNames(size, isDisabled, checked)}
+            value={value}
+            name={name}
           >
-            <div className={getSwitchThumbClassNames(size, isChecked)} />
+            <div className={getSwitchThumbClassNames(size, checked)} />
           </button>
-          
+
           {label && (
-            <label 
+            <label
               id={`${uniqueId}-label`}
               htmlFor={uniqueId}
-              className={getSwitchLabelClassNames(size, finalDisabled)}
+              className={getSwitchLabelClassNames(size, isDisabled)}
             >
               {label}
             </label>
           )}
-          
-          {rightSlot && (
-            <span className={getSwitchRightSlotClassNames()}>
-              <Slot>{rightSlot}</Slot>
-            </span>
-          )}
+
+          {rightSlot && <span className={getSwitchRightSlotClassNames()}>{rightSlot}</span>}
         </div>
-        
-        {/* Second row: subtext only - matching Radio's pattern */}
+
         {subtext && (
-          <div className={getSwitchSubtextClassNames(size, finalDisabled)}>
+          <div
+            id={`${uniqueId}-description`}
+            className={getSwitchSubtextClassNames(size, isDisabled)}
+          >
             {subtext}
           </div>
         )}
@@ -124,4 +104,4 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
 Switch.displayName = 'Switch';
 
-export default Switch; 
+export default Switch;

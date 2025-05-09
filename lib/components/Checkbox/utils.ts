@@ -10,7 +10,7 @@ export const getCheckboxClassNames = (
 ): string => {
   const { baseStyles, sizes, states } = themeConfig.euler.checkbox;
   const sizeClasses = sizes[size];
-  
+
   let stateClasses;
   if (disabled) {
     if (checked) {
@@ -58,9 +58,7 @@ export const getLabelClassNames = (size: CheckboxSize, disabled: boolean): strin
 export const getContainerClassNames = (): string => {
   const { position: positionStyles } = themeConfig.euler.checkbox;
 
-  return cn(
-    positionStyles.wrapper,
-  );
+  return cn(positionStyles.wrapper);
 };
 
 export const getCheckboxContentWrapperClassNames = (): string => {
@@ -71,15 +69,13 @@ export const getCheckboxRightSlotClassNames = (): string => {
   return themeConfig.euler.checkbox.rightSlot || 'ml-1.5';
 };
 
-export const getCheckboxSubtextClassNames = (
-  size: CheckboxSize,
-  disabled: boolean
-): string => {
+export const getCheckboxSubtextClassNames = (size: CheckboxSize, disabled: boolean): string => {
   const theme = themeConfig.euler.checkbox;
-  
+
   return cn(
     theme.subtext || 'text-gray-400 font-normal',
-    theme.sizes[size].subtext || (size === CheckboxSize.SMALL ? 'text-body-sm ml-5 mt-1' : 'text-body-md ml-4 mt-1'),
+    theme.sizes[size].subtext ||
+      (size === CheckboxSize.SMALL ? 'text-body-sm ml-5 mt-1' : 'text-body-md ml-4 mt-1'),
     disabled && (theme.disabledSubtext || 'text-gray-200')
   );
 };
