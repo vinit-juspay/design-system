@@ -44,7 +44,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({
     if (closeOnBackdropClick) {
       onClose();
     }
-  }, []);
+  }, [closeOnBackdropClick, onClose]);
 
   const handleModalClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
