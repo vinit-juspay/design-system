@@ -3,7 +3,7 @@ import Avatar from "../Avatar/Avatar"
 import { AvatarSize } from "../Avatar/types"
 import { cn } from "../../utils"
 import Menu from "../Menuv2/Menu"
-import { MenuItemProps, MenuType } from "../Menuv2/types"
+import { MenuItemProps } from "../Menuv2/types"
 import { AvatarGroupProps } from "./types"
 import {
   getAvatarGroupContainerClassNames,
