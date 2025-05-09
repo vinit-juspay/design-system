@@ -21,12 +21,7 @@ export { default as Switch } from './components/Switch/Switch';
 export { default as SwitchGroup } from './components/Switch/SwitchGroup';
 export { Radio, RadioGroup } from './components/Radio';
 export { default as ButtonGroup } from './components/ButtonGroup/ButtonGroup';
-export {
-  Accordion,
-  AccordionItem,
-  AccordionType,
-  AccordionChevronPosition,
-} from './components/Accordion';
+export {Accordion, AccordionItem} from './components/Accordion';
 export { default as TooltipV2 } from './components/TooltipV2/TooltipV2';
 export { default as StatCard } from './components/StatCard/StatCard';
 export { default as Modal } from './components/Modal/Modal';

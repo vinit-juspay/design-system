@@ -1,4 +1,5 @@
-import { Accordion, AccordionItem } from './Accordion';
+import Accordion from './Accordion';
+import AccordionItem from './AccordionItem';
 import { AccordionType, AccordionChevronPosition } from './types';
 
 export { Accordion, AccordionItem, AccordionType, AccordionChevronPosition };

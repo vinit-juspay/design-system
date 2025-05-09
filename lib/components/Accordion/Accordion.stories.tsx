@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionItem } from './Accordion';
+import Accordion from './Accordion';
+import AccordionItem from './AccordionItem';
 import { AccordionType, AccordionChevronPosition } from './types';
 import { Info, AlertCircle, Settings } from 'lucide-react';
 
