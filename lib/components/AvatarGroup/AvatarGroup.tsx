@@ -2,8 +2,8 @@ import { forwardRef, useState, useEffect, useRef, useLayoutEffect } from "react"
 import Avatar from "../Avatar/Avatar"
 import { AvatarSize } from "../Avatar/types"
 import { cn } from "../../utils"
-import Menu from "../Menuv2/Menu"
-import { MenuItemProps } from "../Menuv2/types"
+import Menu from "../Menu/Menu"
+import { MenuItemProps } from "../Menu/types"
 import { AvatarGroupProps } from "./types"
 import {
   getAvatarGroupContainerClassNames,

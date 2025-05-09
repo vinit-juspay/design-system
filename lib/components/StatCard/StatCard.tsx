@@ -14,7 +14,7 @@ import { cn } from "../../utils"
 import { ChangeType, StatCardVariant, type StatCardProps } from "./types"
 import { useMemo } from "react"
 import { ArrowDown, ArrowUp, CircleHelp } from "lucide-react"
-import { TooltipV2 } from "../TooltipV2"
+import { TooltipV2 } from "../Tooltip"
 
 const StatCard = ({
   title,

@@ -6,7 +6,7 @@ import {
   MenuType, 
   MenuItemType, 
   MenuItemAction 
-} from '../';
+} from '..';
 import { 
   Edit, 
   Copy, 

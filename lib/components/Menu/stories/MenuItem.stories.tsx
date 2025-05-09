@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { MenuItem, MenuItemType, MenuItemState, MenuItemAction } from '../';
+import { MenuItem, MenuItemType, MenuItemState, MenuItemAction } from '..';
 import { 
   Edit, 
   Copy, 

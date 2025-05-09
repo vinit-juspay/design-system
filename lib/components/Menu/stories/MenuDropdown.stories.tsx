@@ -8,7 +8,7 @@ import {
   DropdownState,
   DropdownSelectionType, 
   MenuItemType 
-} from '../';
+} from '..';
 import { 
   User, 
   Settings, 

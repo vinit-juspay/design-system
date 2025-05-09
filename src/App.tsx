@@ -37,7 +37,7 @@ import { Snackbar } from '../lib/components/Snackbar';
 import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import { ButtonGroupSize, ButtonGroupMode } from '../lib/components/ButtonGroup/types';
-import { Menu, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menuv2';
+import { Menu, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menu';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';

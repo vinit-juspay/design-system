@@ -2,8 +2,8 @@ import  { useState } from 'react';
 import { Button } from '../../../lib/main';
 import { Info, AlertCircle, HelpCircle, Settings } from 'lucide-react';
 import { ButtonType } from '../../../lib/components/Button/types';
-import TooltipV2 from '../../../lib/components/TooltipV2/TooltipV2';
-import { TooltipAlign, TooltipSide, TooltipSize, TooltipSlotDirection } from '../../../lib/components/TooltipV2/types';
+import TooltipV2 from '../../../lib/components/Tooltip/TooltipV2';
+import { TooltipAlign, TooltipSide, TooltipSize, TooltipSlotDirection } from '../../../lib/components/Tooltip/types';
 
 const TooltipDemoV2 = () => {
   const [config, setConfig] = useState({
