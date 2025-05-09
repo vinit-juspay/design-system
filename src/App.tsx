@@ -22,7 +22,6 @@ import {
   ListFilter,
   User as UserIcon,
   ChevronDown,
-  ChevronDown,
 } from 'lucide-react';
 import {
   Button,
@@ -38,7 +37,7 @@ import { Snackbar } from '../lib/components/Snackbar';
 import { DateRangePicker, DateRangePickerVariant } from '../lib/components/DateRangePicker';
 import { ButtonType, ButtonSize, ButtonSubType } from '../lib/components/Button/types';
 import { ButtonGroupSize, ButtonGroupMode } from '../lib/components/ButtonGroup/types';
-import { Menu, MenuItem, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menuv2';
+import { Menu, MenuType, MenuItemType, MenuItemAction, MenuDropdown, DropdownType, DropdownSize, DropdownSubType, DropdownSelectionType } from '../lib/components/Menuv2';
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
 import ChartDemo from './Demos/ChartDemo/ChartDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
@@ -1382,8 +1381,6 @@ const App = () => {
         return renderButtons();
       case 'buttonGroups':
         return renderButtonGroups();
-          case 'tooltips':
-            return <TooltipDemo />;
       case 'tooltipsV2':
         return <TooltipDemoV2 />;
       case 'tags':
@@ -1408,37 +1405,13 @@ const App = () => {
           return <AccordionDemo />;
       case 'statCard':
           return <StatCardDemo />;
-      default:
-        return null;
-    }
-            return renderButtons();
-          case 'buttonGroups':
-            return renderButtonGroups();
-          case 'tags':
-            return renderTags();
-          case 'tabs':
-            return renderTabs();
-          case 'alerts':
-            return renderAlerts();
-          case 'charts':
-            return <ChartDemo />;
-          case 'chartsV2':
-            return <ChartDemo2 />;
-          case 'fonts':
-            return <FontDemo />;
-          case 'datePicker':
-            return renderDatePicker();
-          case 'selectors':
-            return <SelectorsDemo />;
-          case 'avatars':
-            return <AvatarDemo />;
           case 'menu':
             return renderMenu();
           case 'dropdown':
             return renderDropdown();
-          default:
-            return null;
-        }
+      default:
+        return null;
+    }
       })()}
     </div>
   );

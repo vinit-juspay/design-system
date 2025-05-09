@@ -387,8 +387,8 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
       {isMultiSelect ? (
         <div className={cn(getSlotR1ClassNames())}>
           <Checkbox 
-            checked={isSelected}
-            disabled={disabled}
+            isChecked={isSelected}
+            isDisabled={disabled}
             className={themeConfig.euler.menuv2.menuItem.checkbox.wrapper}
             size={CheckboxSize.SMALL}
           />
