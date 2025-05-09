@@ -69,7 +69,10 @@ const AccordionItem = forwardRef<
       >
         <RadixAccordion.Header className="flex">
           <RadixAccordion.Trigger
-            className={triggerClassName}
+            className={cn(
+              triggerClassName,
+              accordionType === AccordionType.BORDER && 'data-[state=open]:border-b border-gray-200'
+            )}
             disabled={isDisabled}
             data-type={accordionType}
             data-disabled={isDisabled || undefined}
