@@ -145,7 +145,6 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(({
     e.preventDefault();
     e.stopPropagation();
     setIsMenuOpen(!isMenuOpen);
-    return false;
   };
 
   // Generate menu items from the full avatars list
