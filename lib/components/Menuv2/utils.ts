@@ -1,3 +1,4 @@
+import React from 'react';
 import { cn } from "../../utils";
 import { themeConfig } from "../../themeConfig";
 import { 
@@ -9,8 +10,7 @@ import {
   DropdownType,
   DropdownState,
   DropdownSubType,
-  DropdownSize,
-  DropdownSelectionType
+  DropdownSize
 } from "./types";
 
 // Generic helper to map enum values to themeConfig keys
@@ -113,11 +113,11 @@ export const menuUIClasses = {
     noResults: () => cn(themeConfig.euler.menuv2.search.noResults),
   },
   menuItem: {
-    slotL: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotL),
-    slotR1: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR1),
-    slotR2: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR2),
-    shortcut: () => cn(themeConfig.euler.menuv2.menuItem.shortcut),
-    submenu: () => cn(themeConfig.euler.menuv2.menuItem.submenu.container)
+  slotL: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotL),
+  slotR1: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR1),
+  slotR2: () => cn(themeConfig.euler.menuv2.menuItem.slots.slotR2),
+  shortcut: () => cn(themeConfig.euler.menuv2.menuItem.shortcut),
+  submenu: () => cn(themeConfig.euler.menuv2.menuItem.submenu.container)
   }
 };
 
@@ -176,10 +176,10 @@ export const handleHighlightOption = (
     
     setHighlightedIndex(newIndex);
 
-    const targetElement = menuElement.querySelector(`[data-index="${newIndex}"]`) as HTMLElement;
-    if (targetElement && !isNodeInRange(targetElement, menuElement)) {
-      targetElement.scrollIntoView({ block: "nearest" });
-    }
+      const targetElement = menuElement.querySelector(`[data-index="${newIndex}"]`) as HTMLElement;
+      if (targetElement && !isNodeInRange(targetElement, menuElement)) {
+        targetElement.scrollIntoView({ block: "nearest" });
+      }
   }
 };
 
@@ -191,7 +191,6 @@ export const getDropdownBaseClasses = (
   subType: DropdownSubType,
   size: DropdownSize,
   state: DropdownState,
-  selectionType: DropdownSelectionType,
   disabled: boolean = false,
   className?: string
 ): string => {
@@ -331,4 +330,141 @@ export const getSubLabelClassNames = (size: DropdownSize = DropdownSize.MEDIUM):
 
 export const getHintTextClassNames = (size: DropdownSize = DropdownSize.MEDIUM): string => {
   return getComponentClassBySize('dropdown.hint', size);
+};
+
+// Helper function to check if item is interactive
+export const isInteractiveItem = (item: MenuItemProps): boolean => {
+  return item.type !== MenuItemType.SEPARATOR && item.type !== MenuItemType.LABEL;
+};
+
+// Helper function to find next valid item index
+export const findNextValidItemIndex = (
+  currentIndex: number, 
+  items: MenuItemProps[], 
+  direction: 'next' | 'prev'
+): number => {
+  const itemCount = items.length;
+  if (itemCount === 0) return -1;
+  
+  let nextIndex = direction === 'next' 
+    ? (currentIndex + 1) % itemCount
+    : (currentIndex - 1 + itemCount) % itemCount;
+    
+  // Skip separators and labels
+  let loopGuard = 0;
+  const maxLoops = items.length;
+  
+  while (
+    nextIndex >= 0 && 
+    nextIndex < itemCount && 
+    !isInteractiveItem(items[nextIndex]) &&
+    loopGuard < maxLoops
+  ) {
+    loopGuard++;
+    nextIndex = direction === 'next'
+      ? (nextIndex + 1) % itemCount
+      : (nextIndex - 1 + itemCount) % itemCount;
+  }
+  
+  return loopGuard < maxLoops ? nextIndex : -1;
+};
+
+// Helper function to modify item for multi-select
+export const prepareItemForMultiSelect = (item: MenuItemProps, type: MenuType): MenuItemProps => {
+  if (type !== MenuType.MULTI_SELECT) return item;
+  
+  // Create a copy of the item to modify
+  const modifiedItem = {...item};
+  
+  // For label items, don't display checkbox or any other elements
+  if (modifiedItem.type === MenuItemType.LABEL) {
+    modifiedItem.hasSlotR1 = false;
+    modifiedItem.slotR1 = null;
+  } else if (modifiedItem.type !== MenuItemType.SEPARATOR) {
+    // Remove any icons that might appear as checks
+    modifiedItem.slotR1 = null;
+    
+    // Remove any check icons from slotR2 as well
+    modifiedItem.slotR2 = null;
+    modifiedItem.hasSlotR2 = false;
+    
+    // Always set hasSlotR1 to true for multi-select to ensure checkbox renders
+    modifiedItem.hasSlotR1 = true;
+  }
+  
+  return modifiedItem;
+};
+
+// Handle keyboard navigation logic
+export const handleKeyboardNavigation = (
+  e: KeyboardEvent, 
+  highlightedIndex: number, 
+  filteredItems: MenuItemProps[], 
+  setHighlightedIndex: (index: number) => void,
+  onItemClick?: (item: MenuItemProps) => void,
+  toggleSelection?: (itemId?: string) => void,
+  closeMenu?: () => void,
+  type?: MenuType,
+  menuRef?: React.RefObject<HTMLDivElement> | undefined
+): void => {
+  switch (e.key) {
+    case 'ArrowDown':
+    case 'ArrowUp': {
+      e.preventDefault();
+      const direction = e.key === 'ArrowDown' ? 'next' : 'prev';
+      const nextIndex = findNextValidItemIndex(highlightedIndex, filteredItems, direction);
+      
+      if (nextIndex >= 0) {
+        setHighlightedIndex(nextIndex);
+        
+        if (menuRef?.current) {
+          const targetElement = menuRef.current.querySelector(`[data-index="${nextIndex}"]`) as HTMLElement;
+          if (targetElement) {
+            targetElement.scrollIntoView({ block: "nearest" });
+          }
+        }
+      }
+      break;
+    }
+    case 'Enter': {
+      e.preventDefault();
+      if (highlightedIndex >= 0 && highlightedIndex < filteredItems.length) {
+        const item = filteredItems[highlightedIndex];
+        if (isInteractiveItem(item)) {
+          if (type === MenuType.MULTI_SELECT) {
+            toggleSelection?.(item.id);
+          } else {
+            onItemClick?.(item);
+            closeMenu?.();
+          }
+        }
+      }
+      break;
+    }
+    case 'Escape': {
+      e.preventDefault();
+      closeMenu?.();
+      break;
+    }
+  }
+};
+
+// Handle item selection for multi-select menus
+export const toggleItemSelection = (
+  itemId: string | undefined,
+  selectedItems: string[],
+  setSelectedItems: (items: string[]) => void,
+  onSelectionChange?: (items: string[]) => void
+): void => {
+  if (!itemId) return;
+  
+  let newSelectedItems;
+  if (selectedItems.includes(itemId)) {
+    newSelectedItems = selectedItems.filter(id => id !== itemId);
+  } else {
+    newSelectedItems = [...selectedItems, itemId];
+  }
+  
+  setSelectedItems(newSelectedItems);
+  onSelectionChange?.(newSelectedItems);
 }; 

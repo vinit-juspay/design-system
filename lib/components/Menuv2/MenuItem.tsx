@@ -6,8 +6,7 @@ import {
   MenuItemProps, 
   MenuItemType, 
   MenuItemState, 
-  MenuItemAction,
-  MenuType
+  MenuItemAction
 } from "./types";
 import { 
   getMenuItemClassNames, 
@@ -17,7 +16,7 @@ import {
   getShortcutClassNames,
   getSubmenuClassNames
 } from "./utils";
-import { LucideIcon, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Checkbox from "../Checkbox/Checkbox";
 import { CheckboxSize } from "../Checkbox/types";
 
@@ -133,7 +132,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   
   // Listen for submenu-changed events to close this submenu when another opens
   useEffect(() => {
-    const handleSubmenuChanged = (e: Event) => {
+    const handleSubmenuChanged = (_: Event) => {
       // If this menu isn't in the active path, close it
       if (hasSubmenu && showSubmenu) {
         // Keep this submenu open if it's in the active path or it's the parent of the active submenu
@@ -166,7 +165,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
   }, [hasSubmenu]);
 
   // Handle hover states with delay for better UX
-  const handleMouseEnter = (e: React.MouseEvent) => {
+  const handleMouseEnter = (_: React.MouseEvent) => {
     // Clear any pending close timers immediately
     clearTimeoutRef(submenuTimerRef);
     
@@ -186,7 +185,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(({
     }
   };
 
-  const handleMouseLeave = (e: React.MouseEvent) => {
+  const handleMouseLeave = (_: React.MouseEvent) => {
     if (isInteractive) {
       setIsHovering(false);
       

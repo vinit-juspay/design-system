@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, forwardRef } from "react";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { ChevronDown, ChevronUp, X, HelpCircle } from "lucide-react";
 import { 
   DropdownProps, 
   DropdownType, 
@@ -71,10 +71,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   isOpen: controlledIsOpen,
   disabled = false,
   width,
-  position = "bottom-start",
-  offset = 4,
   "aria-label": ariaLabel,
-  children,
   searchTerm: controlledSearchTerm,
   onSearchTermChange,
   onSelectedItemsChange,
@@ -336,7 +333,6 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     subType,
     size,
     currentState,
-    selectionType,
     disabled,
     className
   );
@@ -428,9 +424,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
             {mandatory && <span className={themeConfig.euler.menuv2.dropdown.label.mandatory}>*</span>}
             {hasHelp && (
               <span className={themeConfig.euler.menuv2.dropdown.label.helpIcon}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 13.6668C3.31833 13.6668 0.333336 10.6818 0.333336 7.00016C0.333336 3.3185 3.31833 0.333496 7 0.333496C10.6817 0.333496 13.6667 3.3185 13.6667 7.00016C13.6667 10.6818 10.6817 13.6668 7 13.6668ZM7 12.3335C8.41448 12.3335 9.77108 11.7716 10.7713 10.7714C11.7714 9.77126 12.3333 8.41466 12.3333 7.00016C12.3333 5.58567 11.7714 4.22907 10.7713 3.22888C9.77108 2.22869 8.41448 1.66683 7 1.66683C5.58551 1.66683 4.22893 2.22869 3.22873 3.22888C2.22853 4.22907 1.66667 5.58567 1.66667 7.00016C1.66667 8.41466 2.22853 9.77126 3.22873 10.7714C4.22893 11.7716 5.58551 12.3335 7 12.3335ZM6.35 4.3335H7.65V5.66683H6.35V4.3335ZM6.35 7.00016H7.65V9.66683H6.35V7.00016Z" fill="currentColor"/>
-                </svg>
+                <HelpCircle size={14} />
               </span>
             )}
           </div>

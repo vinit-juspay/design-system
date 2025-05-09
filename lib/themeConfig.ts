@@ -501,83 +501,17 @@ export const themeConfig = {
         },
       },
     },
-    menu: {
-      baseStyles:
-        'z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md',
 
-      layout: {
-        container: 'flex items-start w-full justify-between',
-        content: 'flex items-start',
-        checkboxRight: 'ml-0',
-        checkboxLeft: 'mr-2',
-        threeColumn: 'flex items-start w-full',
-        columnContent: 'flex-1 min-w-0',
-        flexColumn: 'flex flex-col',
-        leftSlot: 'mr-2 flex-shrink-0',
-        rightSlotsContainer: 'flex items-center justify-end ml-2 space-x-2 flex-shrink-0',
-        menuItemRightContainer: 'flex items-center ml-auto space-x-2',
-      },
-      positioning: {
-        sideOffset: {
-          top: 8,
-          right: 0,
-          bottom: 8,
-          left: 0,
-        },
-        alignOffset: {
-          top: 0,
-          right: -8,
-          bottom: 0,
-          left: -8,
-        },
-      },
-      menuItem: {
-        baseStyles:
-          'relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed',
-        icon: 'h-4 w-4 mr-2',
-        subtext: 'text-body-sm font-500 text-gray-400 mt-0.5',
-        shortcut: 'ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right',
-        colors: {
-          primary: 'text-primary-600 data-[highlighted]:text-primary-700',
-          danger: 'text-red-500 data-[highlighted]:text-red-600',
-          success: 'text-green-500 data-[highlighted]:text-green-600',
-          warning: 'text-amber-500 data-[highlighted]:text-amber-600',
-        },
-      },
-      checkboxMenuItem: {
-        useCheckboxSize: 'md',
-        indicator: 'absolute right-2 items-center justify-center',
-        icon: 'text-primary-500',
-      },
-      label: {
-        baseStyles: 'text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded',
-      },
-      separator: {
-        baseStyles: 'h-px my-1 bg-gray-200',
-      },
-      search: {
-        baseStyles: 'px-2 py-0 border-b border-gray-200',
-        container: 'flex items-center bg-white',
-        icon: 'h-4 w-4 text-gray-400',
-        input:
-          'w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0',
-      },
-    },
     menuv2: {
       baseStyles: "rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1",
       animation: `
-        @keyframes fadeIn {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        
         .submenu-portal > div {
-          animation: fadeIn 150ms ease-out;
+          @apply animate-fade-in animate-zoom-in;
           transform-origin: top left;
         }
       `,
       shadows: {
-        xs: "shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
+        xs: "shadow-xs",
       },
       types: {
         DEFAULT: "w-52",

@@ -1,4 +1,4 @@
-import { ReactNode, ElementType } from "react";
+import { ReactNode } from "react";
 
 // Menu Item Types
 export enum MenuItemType {

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import { 
   Menu, 
-  MenuItem, 
   MenuType, 
   MenuItemType, 
-  MenuItemState, 
   MenuItemAction 
 } from '../';
 import { 
@@ -15,7 +14,6 @@ import {
   Archive, 
   Check, 
   ChevronRight, 
-  Search, 
   FileEdit,
   FileText,
   FileSpreadsheet,
@@ -116,7 +114,13 @@ export const Default: Story = {
   args: {
     type: MenuType.DEFAULT,
     hasSearch: false,
-    items: defaultItems
+    items: defaultItems,
+    onItemClick: fn(),
+    onSearch: fn(),
+    onSearchTermChange: fn(),
+    onSelectionChange: fn(),
+    onOpenChange: fn(),
+    onContextChange: fn()
   },
 };
 
@@ -126,7 +130,13 @@ export const WithSearch: Story = {
     type: MenuType.DEFAULT,
     hasSearch: true,
     searchPlaceholder: 'Search...',
-    items: defaultItems
+    items: defaultItems,
+    onItemClick: fn(),
+    onSearch: fn(),
+    onSearchTermChange: fn(),
+    onSelectionChange: fn(),
+    onOpenChange: fn(),
+    onContextChange: fn()
   },
 };
 
@@ -135,7 +145,13 @@ export const ContextMenu: Story = {
   args: {
     type: MenuType.CONTEXT_MENU,
     hasSearch: false,
-    items: defaultItems
+    items: defaultItems,
+    onItemClick: fn(),
+    onSearch: fn(),
+    onSearchTermChange: fn(),
+    onSelectionChange: fn(),
+    onOpenChange: fn(),
+    onContextChange: fn()
   },
 };
 
@@ -199,6 +215,10 @@ const MultiSelectMenuExample = () => {
           setSelectedItems(newSelectedItems);
         }
       }}
+      onSearch={fn()}
+      onSearchTermChange={fn()}
+      onOpenChange={fn()}
+      onContextChange={fn()}
     />
   );
 };
@@ -321,6 +341,12 @@ export const WithSubmenu: Story = {
           type={MenuType.DEFAULT}
           hasSearch={false}
           items={itemsWithSubmenu}
+          onItemClick={fn()}
+          onSearch={fn()}
+          onSearchTermChange={fn()}
+          onSelectionChange={fn()}
+          onOpenChange={fn()}
+          onContextChange={fn()}
         />
       </div>
     );

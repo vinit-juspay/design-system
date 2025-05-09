@@ -1,11 +1,10 @@
-import React, { createContext, forwardRef, useContext, useState, useRef, useEffect } from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 import {
   MenuProps,
   MenuType,
   MenuContextValue,
-  MenuItemProps,
   MenuItemType,
   MenuItemState
 } from './types';
@@ -13,63 +12,16 @@ import {
   getMenuClassNames,
   getMenuSearchClassNames,
   getMenuSearchInputClassNames,
-  getMenuSearchIconClassNames,
   getMenuNoResultsClassNames,
-  filterMenuItems,
-  handleHighlightOption
+  prepareItemForMultiSelect
 } from './utils';
+import { useMenuSearch, useMenuKeyboardNavigation, useMenuSelection, useMenu as useMenuContext } from '../../hooks/useMenu';
+import { MenuContext } from './context';
 import MenuItem from './MenuItem';
 import { Search } from 'lucide-react';
 
-// Create context for menu state
-const MenuContext = createContext<MenuContextValue>({
-  selectedItems: [],
-  toggleSelection: () => {},
-  setSelectedItems: () => {},
-  searchTerm: '',
-  setSearchTerm: () => {},
-  filteredItems: [],
-  highlightedIndex: -1,
-  setHighlightedIndex: () => {},
-  closeMenu: () => {}
-});
-
-// Helper function to check if item is interactive
-const isInteractiveItem = (item: MenuItemProps): boolean => {
-  return item.type !== MenuItemType.SEPARATOR && item.type !== MenuItemType.LABEL;
-};
-
-// Helper function to find next valid item index
-const findNextValidItemIndex = (
-  currentIndex: number, 
-  items: MenuItemProps[], 
-  direction: 'next' | 'prev'
-): number => {
-  const itemCount = items.length;
-  if (itemCount === 0) return -1;
-  
-  let nextIndex = direction === 'next' 
-    ? (currentIndex + 1) % itemCount
-    : (currentIndex - 1 + itemCount) % itemCount;
-    
-  // Skip separators and labels
-  let loopGuard = 0;
-  const maxLoops = items.length;
-  
-  while (
-    nextIndex >= 0 && 
-    nextIndex < itemCount && 
-    !isInteractiveItem(items[nextIndex]) &&
-    loopGuard < maxLoops
-  ) {
-    loopGuard++;
-    nextIndex = direction === 'next'
-      ? (nextIndex + 1) % itemCount
-      : (nextIndex - 1 + itemCount) % itemCount;
-  }
-  
-  return loopGuard < maxLoops ? nextIndex : -1;
-};
+// Re-export the hook for backward compatibility
+export const useMenu = useMenuContext;
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   children,
@@ -89,169 +41,76 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   onContextChange,
   ...props
 }, ref) => {
-  // State management
-  const [selectedItems, setSelectedItems] = useState<string[]>(
-    controlledSelectedItems !== undefined ? controlledSelectedItems : []
-  );
-  const [searchTerm, setSearchTerm] = useState(
-    controlledSearchTerm !== undefined ? controlledSearchTerm : ''
-  );
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
-  
   // Refs
   const menuRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   
-  // Sync context value when selectedItems or searchTerm change
-  useEffect(() => {
-    onContextChange?.({
-      selectedItems,
-      searchTerm,
-      setSearchTerm: (term: string) => {
-        setSearchTerm(term);
-        onSearchTermChange?.(term);
-      },
-      toggleSelection,
-      setSelectedItems,
-      filteredItems,
-      highlightedIndex,
-      setHighlightedIndex,
-      closeMenu
-    });
-  }, [selectedItems, searchTerm, highlightedIndex, onContextChange, onSearchTermChange]);
+  // Use custom hooks for menu functionality
+  const selection = useMenuSelection(controlledSelectedItems, onSelectionChange);
   
-  // Filter menu items based on search term
-  const filteredItems = filterMenuItems(items, searchTerm);
-
-  // Handle item selection for multi-select menus
-  const toggleSelection = (itemId?: string) => {
-    if (!itemId) return;
-    
-    let newSelectedItems;
-    if (selectedItems.includes(itemId)) {
-      newSelectedItems = selectedItems.filter(id => id !== itemId);
-    } else {
-      newSelectedItems = [...selectedItems, itemId];
-    }
-    
-    setSelectedItems(newSelectedItems);
-    onSelectionChange?.(newSelectedItems);
-  };
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case 'ArrowDown':
-        case 'ArrowUp': {
-          e.preventDefault();
-          const direction = e.key === 'ArrowDown' ? 'next' : 'prev';
-          const nextIndex = findNextValidItemIndex(highlightedIndex, filteredItems, direction);
-          
-          if (nextIndex >= 0) {
-            setHighlightedIndex(nextIndex);
-            
-            if (menuRef.current) {
-              const targetElement = menuRef.current.querySelector(`[data-index="${nextIndex}"]`) as HTMLElement;
-              if (targetElement) {
-                targetElement.scrollIntoView({ block: "nearest" });
-              }
-            }
-          }
-          break;
-        }
-        case 'Enter': {
-          e.preventDefault();
-          if (highlightedIndex >= 0 && highlightedIndex < filteredItems.length) {
-            const item = filteredItems[highlightedIndex];
-            if (isInteractiveItem(item)) {
-              if (type === MenuType.MULTI_SELECT) {
-                toggleSelection(item.id);
-              } else {
-                onItemClick?.(item);
-                closeMenu();
-              }
-            }
-          }
-          break;
-        }
-        case 'Escape': {
-          e.preventDefault();
-          closeMenu();
-          break;
-        }
-      }
-    };
-
-    // Focus on search input if available, otherwise on the menu
-    if (hasSearch && searchInputRef.current) {
-      searchInputRef.current.focus();
-    } else if (menuRef.current) {
-      menuRef.current.focus();
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, highlightedIndex, filteredItems, type, onItemClick]);
+  const search = useMenuSearch(
+    items,
+    controlledSearchTerm,
+    onSearch,
+    onSearchTermChange
+  );
 
   // Close the menu
   const closeMenu = () => {
     onOpenChange?.(false);
   };
   
-  // Helper function to modify item for multi-select
-  const prepareItemForMultiSelect = (item: MenuItemProps): MenuItemProps => {
-    if (type !== MenuType.MULTI_SELECT) return item;
-    
-    // Create a copy of the item to modify
-    const modifiedItem = {...item};
-    
-    // For label items, don't display checkbox or any other elements
-    if (modifiedItem.type === MenuItemType.LABEL) {
-      modifiedItem.hasSlotR1 = false;
-      modifiedItem.slotR1 = null;
-    } else if (modifiedItem.type !== MenuItemType.SEPARATOR) {
-      // Remove any icons that might appear as checks
-      modifiedItem.slotR1 = null;
-      
-      // Remove any check icons from slotR2 as well
-      modifiedItem.slotR2 = null;
-      modifiedItem.hasSlotR2 = false;
-      
-      // Always set hasSlotR1 to true for multi-select to ensure checkbox renders
-      modifiedItem.hasSlotR1 = true;
-    }
-    
-    return modifiedItem;
-  };
-  
-  // Handle search input change
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    onSearch?.(value);
-    onSearchTermChange?.(value);
-    
-    // Reset highlighted index when search term changes
-    setHighlightedIndex(-1);
-  };
-  
-  // Provide context value
+  // Combine context value
   const contextValue: MenuContextValue = {
-    selectedItems,
-    toggleSelection,
-    setSelectedItems,
-    searchTerm,
-    setSearchTerm,
-    filteredItems,
-    highlightedIndex,
-    setHighlightedIndex,
+    selectedItems: selection.selectedItems,
+    toggleSelection: selection.toggleSelection,
+    setSelectedItems: selection.setSelectedItems,
+    searchTerm: search.searchTerm,
+    setSearchTerm: search.setSearchTerm,
+    filteredItems: search.filteredItems,
+    highlightedIndex: search.highlightedIndex,
+    setHighlightedIndex: search.setHighlightedIndex,
     closeMenu
   };
+  
+  // Set up keyboard navigation
+  useMenuKeyboardNavigation(
+    isOpen,
+    search.highlightedIndex,
+    search.filteredItems,
+    search.setHighlightedIndex,
+    onItemClick,
+    selection.toggleSelection,
+    closeMenu,
+    type,
+    menuRef as React.RefObject<HTMLDivElement>,
+    hasSearch,
+    search.searchInputRef as React.RefObject<HTMLInputElement>
+  );
+  
+  // Sync context value when states change
+  useEffect(() => {
+    onContextChange?.({
+      selectedItems: selection.selectedItems,
+      searchTerm: search.searchTerm,
+      setSearchTerm: (term: string) => {
+        search.setSearchTerm(term);
+        onSearchTermChange?.(term);
+      },
+      toggleSelection: selection.toggleSelection,
+      setSelectedItems: selection.setSelectedItems,
+      filteredItems: search.filteredItems,
+      highlightedIndex: search.highlightedIndex,
+      setHighlightedIndex: search.setHighlightedIndex,
+      closeMenu
+    });
+  }, [
+    selection.selectedItems, 
+    search.searchTerm, 
+    search.highlightedIndex, 
+    search.filteredItems,
+    onContextChange, 
+    onSearchTermChange
+  ]);
 
   // If menu is closed, don't render anything
   if (!isOpen) return null;
@@ -277,12 +136,12 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                 <Search size={16} />
               </span>
               <input
-                ref={searchInputRef}
+                ref={search.searchInputRef}
                 type="text"
                 className={getMenuSearchInputClassNames()}
                 placeholder={searchPlaceholder}
-                value={searchTerm}
-                onChange={handleSearchChange}
+                value={search.searchTerm}
+                onChange={search.handleSearchChange}
                 role="searchbox"
                 aria-label="Search menu items"
               />
@@ -295,16 +154,16 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
           themeConfig.euler.menuv2.menuItemContainer.base,
           hasSearch && themeConfig.euler.menuv2.menuItemContainer.withSearch
         )}>
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => {
-              const modifiedItem = prepareItemForMultiSelect(item);
+          {search.filteredItems.length > 0 ? (
+            search.filteredItems.map((item, index) => {
+              const modifiedItem = prepareItemForMultiSelect(item, type);
               const isSelected = type === MenuType.MULTI_SELECT && 
                 item.id !== undefined && 
-                selectedItems.includes(item.id);
+                selection.selectedItems.includes(item.id);
                 
               const handleItemClick = () => {
                 if (type === MenuType.MULTI_SELECT) {
-                  toggleSelection(item.id);
+                  selection.toggleSelection(item.id);
                 } else {
                   onItemClick?.(item);
                   closeMenu();
@@ -315,11 +174,11 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                 <MenuItem
                   key={`${item.id || index}`}
                   {...modifiedItem}
-                  state={highlightedIndex === index ? MenuItemState.HOVER : item.state}
+                  state={search.highlightedIndex === index ? MenuItemState.HOVER : item.state}
                   isMultiSelect={type === MenuType.MULTI_SELECT && modifiedItem.type !== MenuItemType.LABEL}
                   isSelected={isSelected}
                   onClick={handleItemClick}
-                  onMouseEnter={() => setHighlightedIndex(index)}
+                  onMouseEnter={() => search.setHighlightedIndex(index)}
                   data-index={index}
                 />
               );
@@ -335,9 +194,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   );
 });
 
-Menu.displayName = "Menu";
-
-// Custom hook for accessing menu context
-export const useMenu = () => useContext(MenuContext);
+Menu.displayName = 'Menu';
 
 export default Menu;
