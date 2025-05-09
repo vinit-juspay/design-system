@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 import { MenuContextValue } from './types';
 
 // Create context for menu state
