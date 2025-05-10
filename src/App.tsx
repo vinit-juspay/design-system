@@ -13,6 +13,7 @@ import {
   User as UserIcon,
   ChevronDown,
   Info,
+  MessageSquare,
 } from 'lucide-react';
 
 // Import demo components
@@ -32,10 +33,11 @@ import DatePickerDemo from './Demos/DatePickerDemo/DatePickerDemo';
 import MenuDemo from './Demos/MenuDemo/MenuDemo';
 import DropdownDemo from './Demos/DropdownDemo/DropdownDemo';
 import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
+import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard'
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'snackbar'
   >('buttons');
 
   const navigationItems = [
@@ -45,6 +47,7 @@ const App = () => {
     { id: 'tags', label: 'Tags', icon: TagIcon },
     { id: 'tabs', label: 'Tabs', icon: Settings },
     { id: 'alerts', label: 'Alerts', icon: Bell },
+    { id: 'snackbar', label: 'Snackbar', icon: MessageSquare },
     { id: 'charts', label: 'Charts', icon: BarChart2 },
     { id: 'chartsV2', label: 'Charts V2', icon: BarChart2 },
     { id: 'fonts', label: 'Fonts', icon: Type },
@@ -115,6 +118,8 @@ const App = () => {
             return <TabsDemo />;
           case 'alerts':
             return <AlertDemo />;
+          case 'snackbar':
+            return <SnackbarDemo />;
           case 'charts':
             return <ChartDemo />;
           case 'chartsV2':
