@@ -24,7 +24,6 @@ import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
 import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 import TooltipDemoV2 from './Demos/TooltipV2Demo/TooltipDemoV2';
 import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
-import StatCardDemo from './Demos/StatCardDemo';
 import ButtonDemo from './Demos/ButtonDemo/ButtonDemo';
 import TagDemo from './Demos/TagDemo/TagDemo';
 import TabsDemo from './Demos/TabsDemo/TabsDemo';
@@ -32,6 +31,7 @@ import ButtonGroupDemo from './Demos/ButtonGroupDemo/ButtonGroupDemo';
 import DatePickerDemo from './Demos/DatePickerDemo/DatePickerDemo';
 import MenuDemo from './Demos/MenuDemo/MenuDemo';
 import DropdownDemo from './Demos/DropdownDemo/DropdownDemo';
+import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<

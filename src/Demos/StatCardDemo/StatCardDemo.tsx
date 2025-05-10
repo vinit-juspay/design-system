@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Activity, ArrowUpRight, BarChart2, PieChart, User } from 'lucide-react';
-import { ChangeType, StatCardVariant } from '../../lib/components/StatCard/types';
-import StatCard from '../../lib/components/StatCard/StatCard';
+import { ChangeType, StatCardVariant } from '../../../lib/components/StatCard/types';
+import StatCard from '../../../lib/components/StatCard/StatCard';
 
 const StatCardDemo = () => {
   const [variant, setVariant] = useState<StatCardVariant>(StatCardVariant.NUMBER);
