@@ -14,6 +14,7 @@ import {
   ChevronDown,
   Info,
   MessageSquare,
+  Check,
 } from 'lucide-react';
 
 // Import demo components
@@ -34,10 +35,13 @@ import MenuDemo from './Demos/MenuDemo/MenuDemo';
 import DropdownDemo from './Demos/DropdownDemo/DropdownDemo';
 import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
+import ModalDemo from './Demos/ModalDemo/ModalDemo';
+import InputDemo from './Demos/InputDemo/InputDemo';
+
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'snackbar'
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar'
   >('buttons');
 
   const navigationItems = [
@@ -58,6 +62,8 @@ const App = () => {
     { id: 'dropdown', label: 'Dropdown', icon: ChevronDown },
     { id: 'accordion', label: 'Accordion', icon: ChevronDown },
     { id: 'statCard', label: 'Stat Card', icon: BarChart2 },
+    { id: 'modal', label: 'Modal', icon: Layers },
+    { id: 'input', label: 'Input', icon: Check },
   ];
 
   const renderSidebar = () => (
@@ -107,42 +113,46 @@ const App = () => {
       {(() => {
         switch (activeComponent) {
           case 'buttons':
-            return <ButtonDemo />;
-          case 'buttonGroups':
-            return <ButtonGroupDemo />;
-          case 'tooltipsV2':
-            return <TooltipDemoV2 />;
-          case 'tags':
-            return <TagDemo />;
-          case 'tabs':
-            return <TabsDemo />;
-          case 'alerts':
-            return <AlertDemo />;
+                return <ButtonDemo />;
+              case 'buttonGroups':
+                return <ButtonGroupDemo />;
+              case 'tooltipsV2':
+                return <TooltipDemoV2 />;
+              case 'tags':
+                return <TagDemo />;
+              case 'tabs':
+                return <TabsDemo />;
+              case 'alerts':
+                return <AlertDemo />;
           case 'snackbar':
             return <SnackbarDemo />;
-          case 'charts':
-            return <ChartDemo />;
-          case 'chartsV2':
-            return <ChartDemo2 />;
-          case 'fonts':
-            return <FontDemo />;
-          case 'datePicker':
-            return <DatePickerDemo />;
-          case 'selectors':
-            return <SelectorsDemo />;
-          case 'avatars':
-            return <AvatarDemo />;
-          case 'accordion':
-            return <AccordionDemo />;
-          case 'statCard':
-            return <StatCardDemo />;
+              case 'charts':
+                return <ChartDemo />;
+              case 'chartsV2':
+                return <ChartDemo2 />;
+              case 'fonts':
+                return <FontDemo />;
+              case 'datePicker':
+                return <DatePickerDemo />;
+              case 'selectors':
+                return <SelectorsDemo />;
+              case 'avatars':
+                return <AvatarDemo />;
+              case 'accordion':
+              return <AccordionDemo />;
+              case 'statCard':
+              return <StatCardDemo />;
           case 'menu':
             return <MenuDemo />;
           case 'dropdown':
             return <DropdownDemo />;
-          default:
-            return null;
-        }
+              case 'modal':
+            return <ModalDemo />;
+          case 'input':
+        return <InputDemo />;
+      default:
+                return null;
+            }
       })()}
     </div>
   );

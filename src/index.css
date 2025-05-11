@@ -127,6 +127,10 @@
   src: url('/font/InterDisplay-BlackItalic.ttf') format('truetype');
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
