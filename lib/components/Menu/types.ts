@@ -1,168 +1,194 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { LucideIcon } from 'lucide-react';
+import { ReactNode } from "react";
 
-// Menu positioning options
-export enum MenuAlignment {
-  START = 'start',
-  CENTER = 'center',
-  END = 'end',
+// Menu Item Types
+export enum MenuItemType {
+  DEFAULT = "DEFAULT",
+  MULTI_SELECT = "MULTI_SELECT",
+  ACTION = "ACTION",
+  LABEL = "LABEL",
+  SEPARATOR = "SEPARATOR",
+  SUBMENU = "SUBMENU"
 }
 
-export enum MenuSide {
-  TOP = 'top',
-  RIGHT = 'right',
-  BOTTOM = 'bottom',
-  LEFT = 'left',
+// Menu Item States
+export enum MenuItemState {
+  DEFAULT = "DEFAULT",
+  HOVER = "HOVER",
+  SELECTED = "SELECTED",
+  NA = "NA"
 }
 
-export enum SlotDirection {
-  LEFT = 'left',
-  RIGHT = 'right',
+// Menu Item Action Types
+export enum MenuItemAction {
+  NA = "NA",
+  DANGER = "DANGER",
+  PRIMARY = "PRIMARY"
 }
 
-// Slot for menu items
-export interface MenuItemSlot {
-  content: ReactNode;
+// Menu Types
+export enum MenuType {
+  DEFAULT = "DEFAULT",
+  MULTI_SELECT = "MULTI_SELECT",
+  CONTEXT_MENU = "CONTEXT_MENU"
 }
 
-// Base menu item interface
-export interface BaseMenuItemProps {
-  content: ReactNode;
+// ========== Dropdown Types ==========
+// Dropdown Types
+export enum DropdownType {
+  ICON_ONLY = "iconOnly",
+  SINGLE_SELECT = "singleSelect",
+  MULTI_SELECT = "multiSelect"
+}
+
+// Dropdown States
+export enum DropdownState {
+  DEFAULT = "default",
+  HOVER = "hover",
+  OPEN = "open",
+  SELECTED = "selected"
+}
+
+// Dropdown SubTypes
+export enum DropdownSubType {
+  /**
+   * HAS_CONTAINER: Displays a full dropdown with label, sublabel, and hint text if provided.
+   * Used for form elements that need additional context.
+   */
+  HAS_CONTAINER = "hasContainer",
+  
+  /**
+   * NO_CONTAINER: Displays only the dropdown trigger without label, sublabel, or hint text.
+   * Used for standalone dropdowns that don't need additional context.
+   */
+  NO_CONTAINER = "noContainer"
+}
+
+// Dropdown Selection Types
+export enum DropdownSelectionType {
+  TEXT = "text",
+  COUNT = "count"
+}
+
+// Dropdown Sizes
+export enum DropdownSize {
+  SMALL = "sm",
+  MEDIUM = "md",
+  LARGE = "lg"
+}
+
+// Props for the slot components
+export interface SlotProps {
+  className?: string;
+}
+
+// Base MenuItem props
+export interface MenuItemBaseProps {
+  id?: string;
+  text: string;
+  className?: string;
   disabled?: boolean;
-  leftSlot?: MenuItemSlot;
-  /** @deprecated Use leftSlot instead */
-  icon?: LucideIcon;
+  type?: MenuItemType;
+  state?: MenuItemState;
+  action?: MenuItemAction;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-// Base interface for menu items that support right slots
-export interface WithRightSlotsProps {
-  rightSlots?: MenuItemSlot[];
+// Props for MenuItem with slots
+export interface MenuItemWithSlotsProps extends MenuItemBaseProps {
+  hasSlotL?: boolean;
+  hasSlotR1?: boolean;
+  hasSlotR2?: boolean;
+  slotL?: ReactNode;
+  slotR1?: ReactNode;
+  slotR2?: ReactNode;
 }
 
-export interface MenuCheckboxProps extends BaseMenuItemProps, WithRightSlotsProps {
-  isCheckbox: true;
-  checked?: boolean;
-  onSelect?: (checked: boolean) => void;
-  isCheckboxListItem?: boolean;
-  value?: string;
+// Props for MenuItem with shortcut
+export interface MenuItemWithShortcutProps extends MenuItemWithSlotsProps {
+  hasShortcut?: boolean;
+  shortcutValue?: string;
 }
 
-export interface MenuRadioProps extends BaseMenuItemProps {
-  isRadio: true;
-  value: string;
-  checked?: boolean;
-}
-
-export interface MenuLabelProps {
-  content: ReactNode;
-  isLabel: true;
-}
-
-export interface MenuStandardProps extends BaseMenuItemProps, WithRightSlotsProps {
-  subtext?: ReactNode;
-  onSelect?: () => void;
+// Combined MenuItem props
+export interface MenuItemProps extends MenuItemWithShortcutProps {
+  isMultiSelect?: boolean;
+  isSelected?: boolean;
   hasSubmenu?: boolean;
-  submenuItems?: MenuItemWithSeparatorProps[];
-  color?: 'danger' | 'success' | 'warning' | string;
-  /** @deprecated Use rightSlots instead */
-  shortcut?: string;
+  submenuItems?: MenuItemProps[];
+  parentId?: string;
 }
 
-export interface MenuSeparatorProps {
-  isSeparator: true;
-}
-
-// Type unions
-export type MenuItemProps = MenuStandardProps | MenuCheckboxProps | MenuRadioProps | MenuLabelProps;
-export type MenuItemWithSeparatorProps = MenuItemProps | MenuSeparatorProps;
-
-/**
- * Configuration options for the menu search functionality
- */
-export interface MenuSearchProps {
-  /**
-   * Enable or disable search functionality
-   */
-  enabled: boolean;
-
-  /**
-   * Placeholder text for the search input
-   */
+// ========== Dropdown Props ==========
+export interface DropdownProps {
+  id?: string;
+  className?: string;
+  type?: DropdownType;
+  subType?: DropdownSubType;
+  size?: DropdownSize;
+  state?: DropdownState;
+  selectionType?: DropdownSelectionType;
+  hasLabel?: boolean;
+  hasSubLabel?: boolean;
+  mandatory?: boolean;
+  hasHelp?: boolean;
+  hasHint?: boolean;
+  hasClearButton?: boolean;
+  hasLeftIcon?: boolean;
+  leftIcon?: ReactNode;
+  label?: string;
+  subLabel?: string;
+  hint?: string;
   placeholder?: string;
+  selectedOption?: string | string[];
+  selectedCount?: number;
+  selectedText?: string;
+  children?: ReactNode;
+  menuItems: MenuItemProps[];
+  onSelect?: (item: MenuItemProps | MenuItemProps[]) => void;
+  onClear?: () => void;
+  onOpen?: () => void;
+  onClose?: () => void;
+  isOpen?: boolean;
+  disabled?: boolean;
+  width?: string | number;
+  position?: "bottom-start" | "bottom-end" | "top-start" | "top-end" | "left" | "right";
+  offset?: number;
+  "aria-label"?: string;
+  searchTerm?: string;
+  onSearchTermChange?: (searchTerm: string) => void;
+  onSelectedItemsChange?: (selectedItems: string[]) => void;
 }
 
-/**
- * Configuration options for multi-select functionality in the menu
- */
-export interface MenuMultiSelectProps {
-  /**
-   * Enable or disable multi-select functionality
-   */
-  enabled: boolean;
-
-  /**
-   * Array of values that are currently selected
-   */
-  selectedValues?: string[];
-
-  /**
-   * Callback function triggered when selection changes
-   * @param values Array of currently selected values
-   */
-  onSelectionChange?: (values: string[]) => void;
-}
-
-export enum CheckboxPosition {
-  LEFT = 'left',
-  RIGHT = 'right',
-}
-
+// Menu props
 export interface MenuProps {
-  /**
-   * The trigger element that opens the menu (typically a button)
-   */
-  children: ReactNode;
+  children?: ReactNode;
+  className?: string;
+  type?: MenuType;
+  hasSearch?: boolean;
+  items: MenuItemProps[];
+  searchPlaceholder?: string;
+  onItemClick?: (item: MenuItemProps) => void;
+  onSearch?: (searchTerm: string) => void;
+  selectedItems?: string[];
+  onSelectionChange?: (selectedItems: string[]) => void;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+  searchTerm?: string;
+  onSearchTermChange?: (searchTerm: string) => void;
+  onContextChange?: (context: MenuContextValue) => void;
+}
 
-  /**
-   * Array of menu items with properties like content, leftSlot, rightSlots, color, and optional separators
-   */
-  items: MenuItemWithSeparatorProps[];
-
-  /**
-   * Controls the horizontal alignment of the menu relative to the trigger element
-   * @default MenuAlignment.START
-   */
-  align?: MenuAlignment;
-
-  /**
-   * Determines which side the menu appears on relative to the trigger
-   * @default MenuSide.BOTTOM
-   */
-  side?: MenuSide;
-
-  /**
-   * Configuration for enabling search functionality within the menu, includes options like placeholder text
-   */
-  search?: MenuSearchProps;
-
-  /**
-   * Configuration for multi-select functionality, allows selecting multiple menu items with checkboxes
-   */
-  multiSelect?: MenuMultiSelectProps;
-
-  /**
-   * Controls the position of checkboxes within menu items
-   */
-  checkboxPosition?: CheckboxPosition;
-
-  /**
-   * Additional props to pass to the root element of the menu component
-   */
-  rootProps?: Omit<DropdownMenu.DropdownMenuProps, 'children'>;
-
-  /**
-   * Additional props to pass to the content container of the menu component
-   */
-  contentProps?: Omit<ComponentPropsWithoutRef<typeof DropdownMenu.Content>, 'children'>;
+// Menu context value type
+export interface MenuContextValue {
+  selectedItems: string[];
+  toggleSelection: (itemId?: string) => void;
+  setSelectedItems: (items: string[]) => void;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  filteredItems: MenuItemProps[];
+  highlightedIndex: number;
+  setHighlightedIndex: (index: number) => void;
+  closeMenu: () => void;
 }

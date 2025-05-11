@@ -21,42 +21,47 @@ const meta: Meta<typeof AvatarGroup> = {
   argTypes: {
     avatars: {
       control: 'object',
-      description: 'An array of avatar data objects (`AvatarData[]`). Each object should contain at least an `id`, and optionally `src`, `alt`, and `fallback` properties, similar to the `Avatar` component.',
-      table: { 
-        type: { summary: 'AvatarData[]' } 
+      description:
+        'An array of avatar data objects (`AvatarData[]`). Each object should contain at least an `id`, and optionally `src`, `alt`, and `fallback` properties, similar to the `Avatar` component.',
+      table: {
+        type: { summary: 'AvatarData[]' },
       },
     },
     maxCount: {
       control: 'number',
-      description: 'The maximum number of avatars to display inline before collapsing the rest into an overflow count indicator. Must be at least 1.',
-      table: { 
+      description:
+        'The maximum number of avatars to display inline before collapsing the rest into an overflow count indicator. Must be at least 1.',
+      table: {
         defaultValue: { summary: '5' },
         type: { summary: 'number' },
-       },
+      },
     },
     size: {
       control: 'select',
       options: ['sm', 'regular', 'md', 'lg', 'xl'],
-      description: 'Controls the size of the individual avatars *and* the overflow indicator within the group.',
-      table: { 
-        defaultValue: { summary: '\'regular\'' }, // Updated default
-        type: { summary: "'sm' | 'regular' | 'md' | 'lg' | 'xl'" }
-       },
+      description:
+        'Controls the size of the individual avatars *and* the overflow indicator within the group.',
+      table: {
+        defaultValue: { summary: "'regular'" }, // Updated default
+        type: { summary: "'sm' | 'regular' | 'md' | 'lg' | 'xl'" },
+      },
     },
     className: {
       control: 'text',
-      description: 'Optional additional CSS classes to apply to the root `div` container of the group. Useful for adding spacing or custom styles. Example: `mt-4`',
-      table: { 
+      description:
+        'Optional additional CSS classes to apply to the root `div` container of the group. Useful for adding spacing or custom styles. Example: `mt-4`',
+      table: {
         defaultValue: { summary: 'undefined' },
         type: { summary: 'string' },
-       },
+      },
     },
   },
-  args: { // Default args for controls
+  args: {
+    // Default args for controls
     avatars: avatarGroupData.slice(0, 5), // Show first 5 by default in controls
     maxCount: 5, // Match component default
     size: AvatarSize.REGULAR, // Match component default
-  }
+  },
 };
 
 export default meta;
@@ -81,13 +86,12 @@ export const WithFewerAvatarsThanMax: Story = {
 };
 
 export const WithExactAvatarsAsMax: Story = {
-    args: {
-      avatars: avatarGroupData.slice(0, 4), // Only 4 avatars
-      maxCount: 4, // Max is 4
-      size: 'md',
-    },
-  };
-
+  args: {
+    avatars: avatarGroupData.slice(0, 4), // Only 4 avatars
+    maxCount: 4, // Max is 4
+    size: 'md',
+  },
+};
 
 // --- Size Variations ---
 
@@ -108,13 +112,12 @@ export const Regular: Story = {
 };
 
 export const Medium: Story = {
-    args: {
-      avatars: avatarGroupData,
-      maxCount: 4,
-      size: 'md', // Already default, but explicit here
-    },
-  };
-
+  args: {
+    avatars: avatarGroupData,
+    maxCount: 4,
+    size: 'md', // Already default, but explicit here
+  },
+};
 
 export const Large: Story = {
   args: {
@@ -143,29 +146,28 @@ export const MaxCountThree: Story = {
 };
 
 export const MaxCountOne: Story = {
-    args: {
-      avatars: avatarGroupData,
-      maxCount: 1,
-      size: 'md',
-    },
-  };
-
+  args: {
+    avatars: avatarGroupData,
+    maxCount: 1,
+    size: 'md',
+  },
+};
 
 export const MaxCountMoreThanAvailable: Story = {
-    args: {
-      avatars: avatarGroupData,
-      maxCount: 10, // More than the 8 avatars provided
-      size: 'md',
-    },
-  };
+  args: {
+    avatars: avatarGroupData,
+    maxCount: 10, // More than the 8 avatars provided
+    size: 'md',
+  },
+};
 
 // --- Other Variations ---
 
 export const WithCustomClass: Story = {
-    args: {
-      avatars: avatarGroupData.slice(0, 4),
-      maxCount: 3,
-      size: 'lg',
-      className: 'ring-2 ring-offset-2 ring-blue-500 p-1 rounded-full' // Example custom styling
-    },
-  }; 
+  args: {
+    avatars: avatarGroupData.slice(0, 4),
+    maxCount: 3,
+    size: 'lg',
+    className: 'ring-2 ring-offset-2 ring-blue-500 p-1 rounded-full', // Example custom styling
+  },
+};

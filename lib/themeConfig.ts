@@ -212,6 +212,131 @@ export const themeConfig = {
         base: 'inline-flex w-fit items-center justify-center gap-2 transition-all duration-200',
       },
     },
+    input: {
+      container: 'flex flex-col space-y-2',
+      label: {
+        container: 'flex items-center gap-2',
+        labelwSublabel: 'flex items-center gap-1',
+        base: 'text-body-md font-medium tracking-normal',
+        color: 'text-gray-700',
+        mandatory: 'text-red-500 text-body-md font-normal -top-0.5',
+      },
+      sublabel: {
+        base: 'text-body-md font-normal tracking-normal',
+        color: 'text-gray-400',
+      },
+      hint: {
+        base: 'text-body-md font-normal tracking-normal',
+        color: 'text-gray-500',
+        error: 'text-red-500',
+        success: 'text-green-600',
+      },
+      inputBase: {
+        base: 'w-full overflow-hidden flex flex-row justify-between items-center relative border transition-all rounded-xl',
+        sizes: {
+          md: 'h-9',
+          lg: 'h-10',
+        },
+        states: {
+          default: 'border-gray-300 bg-white',
+          hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
+          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
+        },
+      },
+      input: {
+        base: 'w-full h-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
+        padding: {
+          default: 'px-3',
+          withLeftSlot: 'pl-2 pr-3',
+          withRightSlot: 'pr-2 pl-3',
+          withBothSlots: 'px-2',
+        },
+        states: {
+          default: ' text-gray-800 placeholder:text-gray-400',
+          disabled: 'text-gray-400 placeholder:text-gray-300',
+        },
+      },
+      slot: {
+        base: '',
+        positions: {
+          left: 'pl-3',
+          right: 'pr-3',
+        },
+      },
+    },
+    dropdownInput: {
+      container: 'flex flex-col space-y-2',
+      dropdown: {
+        base: 'flex items-center cursor-pointer gap-1',
+        positions: {
+          left: 'pl-3',
+          right: 'pr-3'
+        },
+        withLeftSlot: 'ml-8',
+        option: {
+          container: 'flex items-center gap-1.5 truncate',
+          label: 'text-gray-800 font-medium truncate',
+          placeholder: 'text-gray-400',
+          icon: 'flex-shrink-0',
+          chevron: ' flex-shrink-0 text-gray-400'
+        }
+      },
+      input: {
+        base: 'flex-1 border-none focus:outline-none focus:ring-0',
+        withLeftPadding: 'pl-2'
+      },
+      menu: {
+        base: 'rounded-xl bg-white p-1 shadow-md border border-gray-200 min-w-[8rem] z-50',
+        item: {
+          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-body-md text-gray-800 outline-none transition-colors data-[highlighted]:bg-gray-50 focus:bg-gray-50',
+          active: 'bg-gray-50 font-medium',
+          content: 'flex items-center gap-2 w-full',
+          icon: 'flex-shrink-0',
+          text: 'flex-1',
+          checkIcon: 'h-4 w-4 text-primary-500 flex-shrink-0'
+        }
+      }
+    },
+    textInput: {
+      // TextInput specific styles (if any)
+    },
+    numberInput: {
+      stepper: {
+        base: 'flex flex-col border-l border-gray-200',
+        button: {
+          base: 'flex items-center justify-center w-8 h-[18px] disabled:bg-gray-50 disabled:cursor-not-allowed',
+          states: {
+            default: 'text-gray-500',
+            hover: 'hover:bg-gray-50',
+            active: 'active:bg-gray-100',
+          },
+          sizes: {
+            md: 'h-[18px]',
+            lg: 'h-[20px]',
+          },
+          divider: 'border-t border-gray-200',
+          icon: 'w-2.5 h-2.5 fill-gray-800',
+        },
+      },
+      input: {
+        base: '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+      },
+    },
+    unitInput: {
+      container: 'flex items-center h-full',
+      unit: {
+        base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
+        positions: {
+          prefix: 'border-r border-gray-300 px-3',
+          suffix: 'border-l border-gray-300 px-3',
+        },
+        states: {
+          disabled: 'text-gray-300',
+        },
+      },
+    },
     tooltip: {
       baseStyles:
         'flex z-50 items-center overflow-hidden bg-gray-900 text-gray-0 font-500 shadow-md animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
@@ -275,6 +400,42 @@ export const themeConfig = {
       },
       content:
         'mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=active]:animate-in data-[state=active]:fade-in-0',
+    },
+    otpInput: {
+      container: {
+        base: 'flex flex-col space-y-2',
+      },
+      inputsContainer: {
+        base: 'flex justify-between',
+        digits: {
+          '4': 'w-[204px]',
+          '6': 'w-[312px]',
+        },
+      },
+      digit: {
+        base: 'w-10 h-12 text-center text-body-lg font-medium rounded-xl border-[1px] transition-all focus:outline-none',
+        states: {
+          default: 'border-gray-300 bg-white',
+          hover: 'hover:border-gray-400',
+          focused: 'border-primary-500 ring-2 ring-primary-100',
+          filled: 'border-gray-300 bg-white',
+          error: 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed',
+        },
+      },
+    },
+    textArea: {
+      container: 'flex flex-col space-y-2',
+      textarea: {
+        base: 'w-full overflow-hidden text-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border transition-all placeholder:text-gray-400',
+        states: {
+          default: 'border-gray-300 bg-white',
+          hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
+          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
+        },
+      },
     },
     snackbar: {
       base: {
@@ -501,67 +662,216 @@ export const themeConfig = {
         },
       },
     },
-    menu: {
-      baseStyles:
-        'z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md',
 
-      layout: {
-        container: 'flex items-start w-full justify-between',
-        content: 'flex items-start',
-        checkboxRight: 'ml-0',
-        checkboxLeft: 'mr-2',
-        threeColumn: 'flex items-start w-full',
-        columnContent: 'flex-1 min-w-0',
-        flexColumn: 'flex flex-col',
-        leftSlot: 'mr-2 flex-shrink-0',
-        rightSlotsContainer: 'flex items-center justify-end ml-2 space-x-2 flex-shrink-0',
-        menuItemRightContainer: 'flex items-center ml-auto space-x-2',
+    menuv2: {
+      baseStyles: "rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1",
+      animation: `
+        .submenu-portal > div {
+          @apply animate-fade-in animate-zoom-in;
+          transform-origin: top left;
+        }
+      `,
+      shadows: {
+        xs: "shadow-xs",
       },
-      positioning: {
-        sideOffset: {
-          top: 8,
-          right: 0,
-          bottom: 8,
-          left: 0,
-        },
-        alignOffset: {
-          top: 0,
-          right: -8,
-          bottom: 0,
-          left: -8,
-        },
+      types: {
+        DEFAULT: "w-52",
+        MULTI_SELECT: "w-52",
+        CONTEXT_MENU: "w-52"
       },
-      menuItem: {
-        baseStyles:
-          'relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed',
-        icon: 'h-4 w-4 mr-2',
-        subtext: 'text-body-sm font-500 text-gray-400 mt-0.5',
-        shortcut: 'ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right',
-        colors: {
-          primary: 'text-primary-600 data-[highlighted]:text-primary-700',
-          danger: 'text-red-500 data-[highlighted]:text-red-600',
-          success: 'text-green-500 data-[highlighted]:text-green-600',
-          warning: 'text-amber-500 data-[highlighted]:text-amber-600',
-        },
-      },
-      checkboxMenuItem: {
-        useCheckboxSize: 'md',
-        indicator: 'absolute right-2 items-center justify-center',
-        icon: 'text-primary-500',
-      },
-      label: {
-        baseStyles: 'text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded',
-      },
-      separator: {
-        baseStyles: 'h-px my-1 bg-gray-200',
+      dimensions: {
+        minWidth: "min-w-[180px]",
+        maxWidth: "max-w-[320px]",
+        width: "w-auto"
       },
       search: {
-        baseStyles: 'px-2 py-0 border-b border-gray-200',
-        container: 'flex items-center bg-white',
-        icon: 'h-4 w-4 text-gray-400',
-        input:
-          'w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0',
+        container: "p-0 border-b border-gray-100",
+        input: "w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]",
+        icon: "absolute left-2 flex items-center justify-center text-gray-400",
+        noResults: "p-3 text-sm text-gray-500 text-center",
+        wrapper: "relative p-2 flex items-center"
       },
+      menuItemContainer: {
+        base: "max-h-60 overflow-auto px-1",
+        withSearch: "mt-1"
+      },
+      dropdown: {
+        container: {
+          base: "relative",
+          withLabel: "mb-2",
+          wrapper: "relative flex items-center"
+        },
+        menu: {
+          container: "absolute z-50",
+          base: "rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap"
+        },
+        trigger: {
+          base: "focus:outline-none",
+          clearButtonRight: "rounded-r-none",
+          noBorderClearButtonRight: "rounded-r-none",
+          withBorderClearButtonRight: "rounded-r-none border-r-0",
+          widthFit: "w-fit"
+        },
+        label: {
+          container: "flex items-center gap-1.5",
+          mandatory: "text-red-600",
+          helpIcon: "text-gray-400",
+          base: "font-medium text-gray-700",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        sublabel: {
+          base: "font-normal text-gray-500",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        hint: {
+          base: "font-normal text-gray-500 mt-2",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        leftIcon: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "mr-2",
+          sizes: {
+            SMALL: "w-3 h-3",
+            MEDIUM: "w-3.5 h-3.5",
+            LARGE: "w-3.5 h-3.5"
+          }
+        },
+        chevron: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "ml-2",
+          sizes: {
+            SMALL: "w-3.5 h-3.5",
+            MEDIUM: "w-4 h-4",
+            LARGE: "w-4 h-4"
+          }
+        },
+        displayText: "flex-grow font-normal text-gray-700",
+        clearButton: {
+          base: "rounded-l-none",
+          withContainer: "border-[1px]",
+          noContainer: "border-[1px] border-gray-200",
+          icon: "text-gray-600"
+        },
+        multiSelectTag: {
+          base: "ml-1.5 flex items-center justify-center",
+          sizeSm: "h-4 w-4 min-w-4",
+          sizeDefault: "h-[18px] w-[18px] min-w-[18px]"
+        },
+        selectedText: "text-gray-400 ml-1.5",
+        baseClasses: "relative flex items-center transition-colors",
+        typeClasses: {
+          ICON_ONLY: "justify-center",
+          SINGLE_SELECT: "",
+          MULTI_SELECT: ""
+        },
+        states: {
+          noBorder: {
+            DEFAULT: "bg-white text-gray-700",
+            HOVER: "bg-gray-50 text-gray-700",
+            OPEN: "bg-gray-25 text-gray-700",
+            SELECTED: "bg-white text-gray-700"
+          },
+          withBorder: {
+            DEFAULT: "bg-white text-gray-700 border border-gray-200",
+            HOVER: "bg-gray-50 text-gray-700 border border-gray-200",
+            OPEN: "bg-gray-25 text-gray-700 border border-gray-200",
+            SELECTED: "bg-white text-gray-700 border border-gray-200"
+          }
+        },
+        sizes: {
+          SMALL: "h-8 px-3.5 py-1.5 text-[14px]",
+          MEDIUM: "h-9 px-3.5 py-2 text-[14px]",
+          LARGE: "h-10 px-3.5 py-2.5 text-[14px]"
+        },
+        subtypes: {
+          HAS_CONTAINER: "rounded-[10px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
+          NO_CONTAINER: "rounded-[10px]"
+        },
+        disabled: {
+          true: "opacity-50 cursor-not-allowed bg-gray-100",
+          false: "cursor-pointer hover:bg-gray-50"
+        },
+        positioning: {
+          offset: 4,
+          rightPadding: 10,
+          menuWidth: 200,
+          menuHeight: 200,
+          maxHeightOffset: 20
+        }
+      },
+      separator: "h-px my-1 bg-gray-200",
+      iconSize: "w-4 h-4",
+      chevronColor: "text-gray-400", 
+      textContent: "flex-grow truncate font-feature-settings-normal",
+      menuItem: {
+        baseStyles: "flex items-center px-3 py-1.5 text-[#525866] font-['Inter_Display'] text-[14px] font-medium leading-[20px]",
+        types: {
+          DEFAULT: "cursor-pointer font-[500] text-[#525866]",
+          MULTI_SELECT: "cursor-pointer",
+          ACTION: "cursor-pointer font-medium",
+          LABEL: "font-semibold text-xs text-gray-500 uppercase tracking-wider py-1",
+          SEPARATOR: "py-0 my-1 border-b border-gray-200",
+          SUBMENU: "cursor-pointer font-[500] text-[#525866] relative"
+        },
+        states: {
+          DEFAULT: "bg-[#FFFFFF]",
+          HOVER: "!bg-[#F3F4F6]",
+          SELECTED: "bg-blue-50 text-blue-700",
+          NA: "pointer-events-none"
+        },
+        actions: {
+          NA: "",
+          DANGER: "text-red-600",
+          PRIMARY: "text-blue-600"
+        },
+        actionHover: {
+          NA: "!bg-[#F3F4F6]",
+          PRIMARY: "!bg-blue-50",
+          DANGER: "!bg-red-50"
+        },
+        hover: {
+          PRIMARY: "hover:bg-blue-50",
+          DANGER: "hover:bg-red-50",
+          DEFAULT: "hover:bg-[#F3F4F6]"
+        },
+        disabled: "opacity-50 pointer-events-none",
+        shortcut: "ml-auto text-xs text-gray-300",
+        slots: {
+          slotL: "mr-2 flex-shrink-0",
+          slotR1: "ml-auto flex-shrink-0",
+          slotR2: "ml-2 flex-shrink-0"
+        },
+        submenu: {
+          container: "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem] origin-top-left",
+          animation: "animation: menuAnimation 150ms ease-out",
+          animationClass: "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          portal: {
+            base: "submenu-portal absolute z-[9999]",
+            container: "relative",
+            collisionZone: {
+              base: "absolute top-0 h-full w-6",
+              left: "left-0 -translate-x-full",
+              right: "right-0 translate-x-full"
+            }
+          }
+        },
+        checkbox: {
+          wrapper: "pointer-events-none !m-0 !p-0"
+        },
+        rounded: "rounded-md"
+      }
     },
     checkbox: {
       baseStyles:
@@ -693,10 +1003,12 @@ export const themeConfig = {
       },
     },
     switch: {
-      baseStyles: 'relative rounded-full transition-colors duration-300 cursor-pointer disabled:cursor-not-allowed',
+      baseStyles:
+        'relative rounded-full transition-colors duration-300 cursor-pointer disabled:cursor-not-allowed',
       container: 'relative flex flex-col',
       thumb: {
-        baseStyles: 'absolute rounded-full bg-gray-25 border border-gray-300 transition-transform duration-300 border-[0.5px]',
+        baseStyles:
+          'absolute rounded-full bg-gray-25 border border-gray-300 transition-transform duration-300 border-[0.5px]',
       },
       label: {
         baseStyles: 'ml-2 font-medium text-gray-700',
@@ -718,7 +1030,7 @@ export const themeConfig = {
           thumbOn: 'translate-x-3',
           thumbOff: 'translate-x-0.5',
           label: 'text-body-sm',
-          subtext: 'text-body-sm ml-5 mt-1',
+          subtext: 'text-body-sm ml-8 mt-1',
         },
         md: {
           root: 'w-7 h-3.5',
@@ -726,10 +1038,10 @@ export const themeConfig = {
           thumbOn: 'translate-x-3.5',
           thumbOff: 'translate-x-0.5',
           label: 'text-body-md',
-          subtext: 'text-body-md ml-6 mt-1',
+          subtext: 'text-body-md ml-9 mt-1',
         },
       },
-      disabledSubtext: 'text-gray-200'
+      disabledSubtext: 'text-gray-200',
     },
     radio: {
       baseStyles: 'relative flex flex-col',
@@ -737,11 +1049,11 @@ export const themeConfig = {
       groupLabel: 'text-sm font-medium text-gray-700',
       input: {
         base: 'text-primary-600 border-gray-300 hover:cursor-pointer ',
-        disabled: 'text-primary-300 cursor-not-allowed'
+        disabled: 'text-primary-300 cursor-not-allowed',
       },
       label: {
         base: 'ml-2 font-medium text-gray-700',
-        disabled: 'text-gray-300'
+        disabled: 'text-gray-300',
       },
       subtext: 'text-gray-400 font-normal',
       rightSlot: 'ml-1.5',
@@ -758,7 +1070,7 @@ export const themeConfig = {
           subtext: 'text-body-md ml-6 mt-1',
         },
       },
-      disabledSubtext: 'text-gray-200'
+      disabledSubtext: 'text-gray-200',
     },
     avatar: {
       base: {
@@ -796,7 +1108,8 @@ export const themeConfig = {
       base: {
         container: 'flex flex-row items-center -space-x-2',
         avatarWrapper: 'relative cursor-pointer inline-flex items-center justify-center',
-        overflowCounter: 'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
+        overflowCounter:
+          'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-gray-900 text-gray-50 font-medium transition-colors',
       },
       selected: 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400',
       sizes: {
@@ -806,6 +1119,81 @@ export const themeConfig = {
         lg: 'h-12 w-12 text-body-lg',
         xl: 'h-16 w-16 text-sm',
       },
+    },
+    accordion: {
+      base: {
+        container: 'w-full',
+        item: 'border-b border-gray-200',
+        trigger:
+          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 disabled:cursor-not-allowed hover:bg-gray-50',
+        content:
+          'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+        title: 'text-body-lg font-medium',
+        titleEnabled: 'text-gray-800',
+        titleDisabled: 'text-gray-500',
+        subtext: 'text-body-md mt-1',
+        subtextEnabled: 'text-gray-600',
+        subtextDisabled: 'text-gray-300',
+        contentWrapper: 'py-5 px-3',
+      },
+      variant: {
+        bordered: {
+          container: '',
+          item: '',
+          trigger: 'hover:bg-gray-50',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+        filled: {
+          container: '',
+          item: 'bg-gray-50 overflow-hidden',
+          trigger: 'px-4 hover:bg-gray-100',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+      },
+      type: {
+        border: {
+          container: 'space-y-6',
+          item: 'border border-gray-200 rounded-lg overflow-hidden',
+          trigger: 'px-4 data-[state=open]:bg-gray-50',
+          content: 'px-4',
+          contentWrapper: '',
+        },
+        noborder: {
+          container: 'space-y-5',
+          item: 'border-b border-gray-200 last:border-b-0',
+          trigger: '',
+          content: 'px-0',
+          contentWrapper: 'border-t border-gray-200',
+        },
+      },
+      layout: {
+        leftSlot: 'mr-2 flex-shrink-0',
+        rightSlot: 'ml-2 flex-shrink-0',
+        headerRow: 'flex items-center',
+        chevronRight: 'absolute right-0 top-0 flex items-center justify-center',
+        chevronLeft: 'flex items-center justify-center mr-1.5 flex-shrink-0',
+        chevronIcon: {
+          default:
+            'h-4 w-4 transition-transform duration-300 ease-in-out data-[state=open]:rotate-180 h-6 w-6',
+          enabled: 'text-gray-500',
+          disabled: 'text-gray-300',
+        },
+      },
+      states: {
+        disabled: 'bg-gray-50',
+      },
+    },
+    modal: {
+      base: {
+        container: 'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+        header: 'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
+        content: 'p-4 overflow-y-auto flex-grow',
+        footer: 'px-6 py-4 rounded-b-lg flex justify-end space-x-3 flex-shrink-0 border-t border-gray-200',
+        backdrop: 'flex items-center justify-center fixed inset-0 bg-gray-1100 pointer-events-auto',
+        wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto'
+      }
     },
   },
 };

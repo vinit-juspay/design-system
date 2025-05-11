@@ -1,0 +1,49 @@
+# Juspay Design System Rules
+
+## Component Structure
+- All components MUST use React forwardRef pattern
+- Component props MUST be defined in a separate types.ts file
+- Enums MUST be used for component variants and other options
+- All components MUST have displayName assigned
+- Utility functions for class name generation MUST be in a separate utils.ts file
+- All components MUST follow accessibility best practices
+
+## Naming Conventions
+- Component names MUST use PascalCase
+- Enum types MUST use PascalCase
+- Enum values MUST use UPPER_SNAKE_CASE
+- Props, functions, and variables MUST use camelCase
+- Boolean props SHOULD be prefixed with "is", "has", or "show"
+
+## Styling Patterns
+- TailwindCSS MUST be used for styling
+- The cn utility function MUST be used for conditional class names
+- All components MUST reference themeConfig values for styling
+- Class names SHOULD follow the layout → sizing → spacing → typography → visual order
+
+## Documentation Standards
+- All components MUST have Storybook documentation
+- Documentation SHOULD include usage examples
+- Props MUST be documented with descriptions
+- Variants and options MUST be demonstrated
+
+## Export Patterns
+- Components MUST be exported from an index.ts file
+- TypeScript types MUST be exported for component props
+- Enums MUST be exported for public use
+
+## Testing Requirements
+- Components SHOULD have unit tests
+- Components SHOULD have accessibility tests
+- Tests SHOULD cover all major functionality and edge cases
+
+## Performance Guidelines
+- Components SHOULD use memoization where appropriate
+- Side effects MUST be contained in useEffect hooks
+- Complex components SHOULD support lazy loading
+
+## Versioning Practice
+- Package follows semantic versioning
+- Breaking changes MUST result in major version bumps
+- New features with backward compatibility MUST result in minor version bumps
+- Bug fixes and non-breaking patches MUST result in patch version bumps 
