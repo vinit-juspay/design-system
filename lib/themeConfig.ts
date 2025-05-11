@@ -1036,5 +1036,15 @@ export const themeConfig = {
         disabled: 'bg-gray-50',
       },
     },
+    modal: {
+      base: {
+        container: 'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+        header: 'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
+        content: 'p-4 overflow-y-auto flex-grow',
+        footer: 'px-6 py-4 rounded-b-lg flex justify-end space-x-3 flex-shrink-0 border-t border-gray-200',
+        backdrop: 'flex items-center justify-center fixed inset-0 bg-gray-1100 pointer-events-auto',
+        wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto'
+      }
+    },
   },
 };

@@ -37,6 +37,8 @@ module.exports = {
           900: '#181B25',
           950: '#0E121B',
           1000: '#050506',
+          1100: '#5F5F5FB2',
+
         },
         // Primary blue colors
         primary: {
@@ -303,7 +305,19 @@ module.exports = {
         'zoom-in': 'zoom-in 150ms cubic-bezier(0.16, 1, 0.3, 1)',
         'zoom-out': 'zoom-out 150ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
+      wordBreak: {
+        "word-break": "word-break",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.word-break': {
+          'word-break': 'break-word',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 };
