@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { HelpCircle } from 'lucide-react';
-import { Tooltip } from "../../main";
+import { TooltipV2 } from "../../main";
 import { TooltipSize } from '../Tooltip/types';
 import { useInputState } from '../../hooks';
 
@@ -70,11 +70,11 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
               </small>
             )}
           </div>
-          {infoTooltip && <Tooltip size={TooltipSize.LARGE} content={infoTooltip}>
+          {infoTooltip && <TooltipV2 size={TooltipSize.LARGE} content={infoTooltip}>
             <button type="button" aria-label="More information" className="focus:outline-none">
               <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
             </button>
-          </Tooltip>}
+          </TooltipV2>}
         </div>
       )}
 
