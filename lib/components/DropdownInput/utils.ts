@@ -25,8 +25,8 @@ export const getInputBaseClasses = (
   const baseClasses = [
     inputTheme.inputBase.base,
     inputTheme.inputBase.sizes[size],
-    hasLeftSlot && inputTheme.inputBase.slots.left,
-    hasRightSlot && inputTheme.inputBase.slots.right,
+    hasLeftSlot && 'pl-10',
+    hasRightSlot && 'pr-10',
   ];
   
   // Apply state-specific classes
@@ -70,7 +70,9 @@ export const getInputClasses = (
   const baseClasses = [
     inputTheme.input.base,
     paddingClass,
-    dropdownInputTheme.input.base
+    dropdownInputTheme.input.base,
+    hasLeftSlot && 'pl-10',
+    hasRightSlot && 'pr-10',
   ];
   
   // State-specific classes

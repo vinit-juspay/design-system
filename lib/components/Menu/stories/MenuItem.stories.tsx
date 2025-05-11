@@ -1,17 +1,13 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MenuItem, MenuItemType, MenuItemState, MenuItemAction } from '..';
 import { 
   Edit, 
-  Copy, 
   Trash2, 
   Archive, 
   Check, 
-  ChevronRight, 
-  Search, 
-  FileEdit,
+  ChevronRight,
   Bell,
-  Settings
+  Settings,
 } from 'lucide-react';
 
 const meta: Meta<typeof MenuItem> = {

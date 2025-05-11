@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+  import type { Meta, StoryObj } from '@storybook/react';
 import { 
   MenuDropdown, 
   DropdownType, 
@@ -9,18 +8,7 @@ import {
   DropdownSelectionType, 
   MenuItemType 
 } from '..';
-import { 
-  User, 
-  Settings, 
-  Search, 
-  HelpCircle, 
-  FileText, 
-  Mail, 
-  Bell,
-  Calendar,
-  Home,
-  ChevronDown
-} from 'lucide-react';
+import { User, Inbox, Settings } from 'lucide-react';
 
 const meta: Meta<typeof MenuDropdown> = {
   title: 'Components/Menu and Dropdown/MenuDropdown',
@@ -128,7 +116,7 @@ const defaultMenuItems = [
 const defaultMenuItemsWithIcons = [
   { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
   { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
-  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <HelpCircle size={16} /> },
+  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <Inbox size={16} /> },
 ];
 
 const multiSelectMenuItems = [
@@ -262,7 +250,7 @@ export const LargeSize: Story = {
 export const WithLeftIcon: Story = {
   args: {
     hasLeftIcon: true,
-    leftIcon: <Search size={16} />,
+    leftIcon: <Inbox size={16} />,
     hasLabel: true,
     label: 'Dropdown with Left Icon',
     placeholder: 'Search options',

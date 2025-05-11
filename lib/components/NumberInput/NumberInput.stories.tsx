@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { DollarSign, Mail } from 'lucide-react';
 import { NumberInput } from '../../main';
+import { TextInputSize, TextInputState } from '../TextInput/types';
 
 const meta = {
   title: 'Components/Input/NumberInput',
@@ -30,9 +31,6 @@ const meta = {
       control: 'text',
     },
     mandatory: {
-      control: 'boolean',
-    },
-    showStepper: {
       control: 'boolean',
     },
     min: {
@@ -85,14 +83,13 @@ export const WithLeftIcon: Story = {
 export const Large: Story = {
   args: {
     ...Default.args,
-    size: 'lg',
+    size: TextInputSize.LARGE,
   },
 };
 
 export const WithoutStepper: Story = {
   args: {
     ...Default.args,
-    showStepper: false,
   },
 };
 
@@ -118,7 +115,7 @@ export const WithStep: Story = {
 export const Error: Story = {
   args: {
     ...Default.args,
-    state: 'error',
+    state: TextInputState.ERROR,
     hintText: 'Please enter a valid number',
   },
 };
@@ -126,14 +123,14 @@ export const Error: Story = {
 export const Disabled: Story = {
   args: {
     ...Default.args,
-    state: 'disabled',
+    state: TextInputState.DISABLED,
   },
 };
 
 export const Filled: Story = {
   args: {
     ...Default.args,
-    state: 'filled',
+    state: TextInputState.DEFAULT,
     value: 42,
   },
 }; 
