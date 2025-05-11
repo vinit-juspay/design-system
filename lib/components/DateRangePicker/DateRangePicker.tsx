@@ -310,7 +310,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             statesClassNames,
             'border border-gray-300',
             showPresets ? 'rounded-r-lg' : 'rounded-lg',
-            'p-2 flex justify-between items-center cursor-pointer w-full h-10'
+            'py-2.5 px-3 flex justify-between items-center cursor-pointer w-full h-10'
           )}
           onClick={e => {
             e.stopPropagation();
@@ -322,15 +322,15 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           role="button"
           tabIndex={isDisabled ? -1 : 0}
         >
-          <div className="text-gray-600 font-sm font-medium flex-1 flex items-center justify-between">
+          <div className="text-gray-600 flex-1 flex items-center justify-between">
             <div className="flex items-center">
-              <Calendar className="w-5 h-5 mr-2" />
-              <span>{formatDateDisplay()}</span>
+              <Calendar className="w-3.5 h-3.5 mr-1.5" />
+              <span className="text-gray-600 font-body-sm text-body-md">{formatDateDisplay()}</span>
             </div>
             {isOpen ? (
-              <ChevronUp className="w-5 h-5 ml-2" />
+              <ChevronUp className="w-3.5 h-3.5 ml-2" />
             ) : (
-              <ChevronDown className="w-5 h-5 ml-2" />
+              <ChevronDown className="w-3.5 h-3.5 ml-2" />
             )}
           </div>
         </div>
