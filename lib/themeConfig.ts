@@ -662,67 +662,216 @@ export const themeConfig = {
         },
       },
     },
-    menu: {
-      baseStyles:
-        'z-50 min-w-[200px] py-1 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md',
 
-      layout: {
-        container: 'flex items-start w-full justify-between',
-        content: 'flex items-start',
-        checkboxRight: 'ml-0',
-        checkboxLeft: 'mr-2',
-        threeColumn: 'flex items-start w-full',
-        columnContent: 'flex-1 min-w-0',
-        flexColumn: 'flex flex-col',
-        leftSlot: 'mr-2 flex-shrink-0',
-        rightSlotsContainer: 'flex items-center justify-end ml-2 space-x-2 flex-shrink-0',
-        menuItemRightContainer: 'flex items-center ml-auto space-x-2',
+    menuv2: {
+      baseStyles: "rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1",
+      animation: `
+        .submenu-portal > div {
+          @apply animate-fade-in animate-zoom-in;
+          transform-origin: top left;
+        }
+      `,
+      shadows: {
+        xs: "shadow-xs",
       },
-      positioning: {
-        sideOffset: {
-          top: 8,
-          right: 0,
-          bottom: 8,
-          left: 0,
-        },
-        alignOffset: {
-          top: 0,
-          right: -8,
-          bottom: 0,
-          left: -8,
-        },
+      types: {
+        DEFAULT: "w-52",
+        MULTI_SELECT: "w-52",
+        CONTEXT_MENU: "w-52"
       },
-      menuItem: {
-        baseStyles:
-          'relative text-body-md font-500 flex cursor-default select-none items-center rounded-sm mx-1 px-2 py-1.5 text-gray-600 outline-none focus:bg-gray-100 focus:text-gray-900 data-[highlighted]:before:absolute data-[highlighted]:before:inset-y-0 data-[highlighted]:before:left-1 data-[highlighted]:before:right-1 data-[highlighted]:before:bg-gray-100 data-[highlighted]:before:-z-10 data-[highlighted]:before:rounded-sm data-[highlighted]:text-gray-900 data-[disabled]:text-gray-400 data-[disabled]:cursor-not-allowed',
-        icon: 'h-4 w-4 mr-2',
-        subtext: 'text-body-sm font-500 text-gray-400 mt-0.5',
-        shortcut: 'ml-auto pl-4 text-body-sm text-gray-300 font-500 text-right',
-        colors: {
-          primary: 'text-primary-600 data-[highlighted]:text-primary-700',
-          danger: 'text-red-500 data-[highlighted]:text-red-600',
-          success: 'text-green-500 data-[highlighted]:text-green-600',
-          warning: 'text-amber-500 data-[highlighted]:text-amber-600',
-        },
-      },
-      checkboxMenuItem: {
-        useCheckboxSize: 'md',
-        indicator: 'absolute right-2 items-center justify-center',
-        icon: 'text-primary-500',
-      },
-      label: {
-        baseStyles: 'text-body-xs font-600 text-gray-400 px-2 py-1.5 uppercase tracking-expanded',
-      },
-      separator: {
-        baseStyles: 'h-px my-1 bg-gray-200',
+      dimensions: {
+        minWidth: "min-w-[180px]",
+        maxWidth: "max-w-[320px]",
+        width: "w-auto"
       },
       search: {
-        baseStyles: 'px-2 py-0 border-b border-gray-200',
-        container: 'flex items-center bg-white',
-        icon: 'h-4 w-4 text-gray-400',
-        input:
-          'w-full px-2 py-1.5 text-body-md font-500 bg-transparent border-0 focus:outline-none focus:ring-0',
+        container: "p-0 border-b border-gray-100",
+        input: "w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]",
+        icon: "absolute left-2 flex items-center justify-center text-gray-400",
+        noResults: "p-3 text-sm text-gray-500 text-center",
+        wrapper: "relative p-2 flex items-center"
       },
+      menuItemContainer: {
+        base: "max-h-60 overflow-auto px-1",
+        withSearch: "mt-1"
+      },
+      dropdown: {
+        container: {
+          base: "relative",
+          withLabel: "mb-2",
+          wrapper: "relative flex items-center"
+        },
+        menu: {
+          container: "absolute z-50",
+          base: "rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap"
+        },
+        trigger: {
+          base: "focus:outline-none",
+          clearButtonRight: "rounded-r-none",
+          noBorderClearButtonRight: "rounded-r-none",
+          withBorderClearButtonRight: "rounded-r-none border-r-0",
+          widthFit: "w-fit"
+        },
+        label: {
+          container: "flex items-center gap-1.5",
+          mandatory: "text-red-600",
+          helpIcon: "text-gray-400",
+          base: "font-medium text-gray-700",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        sublabel: {
+          base: "font-normal text-gray-500",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        hint: {
+          base: "font-normal text-gray-500 mt-2",
+          sizes: {
+            SMALL: "text-[12px]",
+            MEDIUM: "text-[14px]",
+            LARGE: "text-[14px]"
+          }
+        },
+        leftIcon: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "mr-2",
+          sizes: {
+            SMALL: "w-3 h-3",
+            MEDIUM: "w-3.5 h-3.5",
+            LARGE: "w-3.5 h-3.5"
+          }
+        },
+        chevron: {
+          wrapper: "text-gray-400 flex items-center justify-center",
+          base: "ml-2",
+          sizes: {
+            SMALL: "w-3.5 h-3.5",
+            MEDIUM: "w-4 h-4",
+            LARGE: "w-4 h-4"
+          }
+        },
+        displayText: "flex-grow font-normal text-gray-700",
+        clearButton: {
+          base: "rounded-l-none",
+          withContainer: "border-[1px]",
+          noContainer: "border-[1px] border-gray-200",
+          icon: "text-gray-600"
+        },
+        multiSelectTag: {
+          base: "ml-1.5 flex items-center justify-center",
+          sizeSm: "h-4 w-4 min-w-4",
+          sizeDefault: "h-[18px] w-[18px] min-w-[18px]"
+        },
+        selectedText: "text-gray-400 ml-1.5",
+        baseClasses: "relative flex items-center transition-colors",
+        typeClasses: {
+          ICON_ONLY: "justify-center",
+          SINGLE_SELECT: "",
+          MULTI_SELECT: ""
+        },
+        states: {
+          noBorder: {
+            DEFAULT: "bg-white text-gray-700",
+            HOVER: "bg-gray-50 text-gray-700",
+            OPEN: "bg-gray-25 text-gray-700",
+            SELECTED: "bg-white text-gray-700"
+          },
+          withBorder: {
+            DEFAULT: "bg-white text-gray-700 border border-gray-200",
+            HOVER: "bg-gray-50 text-gray-700 border border-gray-200",
+            OPEN: "bg-gray-25 text-gray-700 border border-gray-200",
+            SELECTED: "bg-white text-gray-700 border border-gray-200"
+          }
+        },
+        sizes: {
+          SMALL: "h-8 px-3.5 py-1.5 text-[14px]",
+          MEDIUM: "h-9 px-3.5 py-2 text-[14px]",
+          LARGE: "h-10 px-3.5 py-2.5 text-[14px]"
+        },
+        subtypes: {
+          HAS_CONTAINER: "rounded-[10px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
+          NO_CONTAINER: "rounded-[10px]"
+        },
+        disabled: {
+          true: "opacity-50 cursor-not-allowed bg-gray-100",
+          false: "cursor-pointer hover:bg-gray-50"
+        },
+        positioning: {
+          offset: 4,
+          rightPadding: 10,
+          menuWidth: 200,
+          menuHeight: 200,
+          maxHeightOffset: 20
+        }
+      },
+      separator: "h-px my-1 bg-gray-200",
+      iconSize: "w-4 h-4",
+      chevronColor: "text-gray-400", 
+      textContent: "flex-grow truncate font-feature-settings-normal",
+      menuItem: {
+        baseStyles: "flex items-center px-3 py-1.5 text-[#525866] font-['Inter_Display'] text-[14px] font-medium leading-[20px]",
+        types: {
+          DEFAULT: "cursor-pointer font-[500] text-[#525866]",
+          MULTI_SELECT: "cursor-pointer",
+          ACTION: "cursor-pointer font-medium",
+          LABEL: "font-semibold text-xs text-gray-500 uppercase tracking-wider py-1",
+          SEPARATOR: "py-0 my-1 border-b border-gray-200",
+          SUBMENU: "cursor-pointer font-[500] text-[#525866] relative"
+        },
+        states: {
+          DEFAULT: "bg-[#FFFFFF]",
+          HOVER: "!bg-[#F3F4F6]",
+          SELECTED: "bg-blue-50 text-blue-700",
+          NA: "pointer-events-none"
+        },
+        actions: {
+          NA: "",
+          DANGER: "text-red-600",
+          PRIMARY: "text-blue-600"
+        },
+        actionHover: {
+          NA: "!bg-[#F3F4F6]",
+          PRIMARY: "!bg-blue-50",
+          DANGER: "!bg-red-50"
+        },
+        hover: {
+          PRIMARY: "hover:bg-blue-50",
+          DANGER: "hover:bg-red-50",
+          DEFAULT: "hover:bg-[#F3F4F6]"
+        },
+        disabled: "opacity-50 pointer-events-none",
+        shortcut: "ml-auto text-xs text-gray-300",
+        slots: {
+          slotL: "mr-2 flex-shrink-0",
+          slotR1: "ml-auto flex-shrink-0",
+          slotR2: "ml-2 flex-shrink-0"
+        },
+        submenu: {
+          container: "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem] origin-top-left",
+          animation: "animation: menuAnimation 150ms ease-out",
+          animationClass: "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          portal: {
+            base: "submenu-portal absolute z-[9999]",
+            container: "relative",
+            collisionZone: {
+              base: "absolute top-0 h-full w-6",
+              left: "left-0 -translate-x-full",
+              right: "right-0 translate-x-full"
+            }
+          }
+        },
+        checkbox: {
+          wrapper: "pointer-events-none !m-0 !p-0"
+        },
+        rounded: "rounded-md"
+      }
     },
     checkbox: {
       baseStyles:

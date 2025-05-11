@@ -14,7 +14,7 @@ import { cn } from "../../utils"
 import { ChangeType, StatCardVariant, type StatCardProps } from "./types"
 import { useMemo } from "react"
 import { ArrowDown, ArrowUp, CircleHelp } from "lucide-react"
-import { Tooltip as TooltipPrimitive } from "../Tooltip"
+import { TooltipV2 } from "../Tooltip"
 
 const StatCard = ({
   title,
@@ -98,9 +98,9 @@ const StatCard = ({
           <div className="w-full flex items-center flex-1 space-x-2">
             <h4 className="text-body-md font-medium text-gray-400 whitespace-nowrap text-ellipsis">{title}</h4>
             {helpIconText && <div className="text-body-sm text-gray-400">
-              <TooltipPrimitive content={helpIconText}>
+              <TooltipV2 content={helpIconText}>
                 <CircleHelp className="w-4 h-4" />
-              </TooltipPrimitive>
+              </TooltipV2>
             </div>}
           </div>
           {actionIcon && <div className="w-5 h-5 flex items-center justify-center">{actionIcon}</div>}
@@ -129,9 +129,9 @@ const StatCard = ({
             <div className="w-full flex items-center flex-1 space-x-2">
               <h4 className="text-body-md font-medium text-gray-400 whitespace-nowrap text-ellipsis">{title}</h4>
               {helpIconText && <div className="text-body-sm text-gray-400">
-                <TooltipPrimitive content={helpIconText}>
+                <TooltipV2 content={helpIconText}>
                   <CircleHelp className="w-4 h-4" />
-                </TooltipPrimitive>
+                </TooltipV2>
               </div>}
             </div>
           </div>
