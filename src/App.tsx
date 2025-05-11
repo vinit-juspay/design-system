@@ -27,7 +27,7 @@ import {
   Button,
   Tag,
   SplitTag,
-  TextInput, Tabs,
+  Tabs,
   TabsList,
   TabsTrigger,
   TabsContent,
@@ -728,17 +728,6 @@ const App = () => {
         }
       })()}
     </div>
-  );
-
-  const renderTextInput = () => (
-    <>
-      <h2 className="text-2xl font-semibold">Input Field Examples</h2>
-
-
-      <div className="flex flex-col gap-12 mt-12">
-        <TextInput label='Search everywhere' infoTooltip='Additional Info'/>
-      </div>
-    </>
   );
 
   return (
