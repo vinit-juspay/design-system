@@ -27,7 +27,7 @@ import {
   Button,
   Tag,
   SplitTag,
-  Tabs,
+  TextInput, Tabs,
   TabsList,
   TabsTrigger,
   TabsContent,
@@ -47,10 +47,12 @@ import AvatarDemo from './Demos/AvatarDemo/AvatarDemo';
 import TooltipDemoV2 from './Demos/TooltipV2Demo/TooltipDemoV2';
 import AccordionDemo from './Demos/AccordionDemo/AccordionDemo';
 import StatCardDemo from './Demos/StatCardDemo';
+import InputDemo from './Demos/InputDemo/InputDemo';
+
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion' | 'statCard'
+    'buttons' | 'tooltips' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'accordion' | 'statCard' | 'input'
   >('selectors');
 
   const [selectedDateRange, setSelectedDateRange] = useState({
@@ -79,6 +81,7 @@ const App = () => {
     { id: 'avatars', label: 'Avatars', icon: UserIcon },
     { id: 'accordion', label: 'Accordion', icon: ChevronDown },
     { id: 'statCard', label: 'Stat Card', icon: BarChart2 },
+    { id: 'input', label: 'Input', icon: Check },
   ];
 
   const renderSidebar = () => (
@@ -714,11 +717,24 @@ const App = () => {
           return <AccordionDemo />;
       case 'statCard':
           return <StatCardDemo />;
+      case 'input':
+        return <InputDemo />;
       default:
         return null;
     }
       })()}
     </div>
+  );
+
+  const renderTextInput = () => (
+    <>
+      <h2 className="text-2xl font-semibold">Input Field Examples</h2>
+
+
+      <div className="flex flex-col gap-12 mt-12">
+        <TextInput label='Search everywhere' infoTooltip='Additional Info'/>
+      </div>
+    </>
   );
 
   return (
