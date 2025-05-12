@@ -643,7 +643,7 @@ export const themeConfig = {
           container:
             'flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]',
           metrics: 'flex items-center gap-2',
-          selectedMetric: 'text-base font-semibold text-[#525866]',
+          selectedMetric: 'text-base font-semibold text-gray-600',
           slotContainer: 'flex items-center gap-2',
         },
         chartLegend: {
@@ -816,14 +816,14 @@ export const themeConfig = {
       chevronColor: "text-gray-400", 
       textContent: "flex-grow truncate font-feature-settings-normal",
       menuItem: {
-        baseStyles: "flex items-center px-3 py-1.5 text-[#525866] font-['Inter_Display'] text-[14px] font-medium leading-[20px]",
+        baseStyles: "flex items-center px-3 py-1.5 text-gray-600 text-body-md font-medium ",
         types: {
-          DEFAULT: "cursor-pointer font-[500] text-[#525866]",
+          DEFAULT: "cursor-pointer font-medium text-gray-600",
           MULTI_SELECT: "cursor-pointer",
           ACTION: "cursor-pointer font-medium",
           LABEL: "font-semibold text-xs text-gray-500 uppercase tracking-wider py-1",
           SEPARATOR: "py-0 my-1 border-b border-gray-200",
-          SUBMENU: "cursor-pointer font-[500] text-[#525866] relative"
+          SUBMENU: "cursor-pointer font-[500] text-gray-600 relative"
         },
         states: {
           DEFAULT: "bg-[#FFFFFF]",
