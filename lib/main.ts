@@ -33,3 +33,4 @@ export {Accordion, AccordionItem} from './components/Accordion';
 export { default as TooltipV2 } from './components/Tooltip/TooltipV2';
 export { default as StatCard } from './components/StatCard/StatCard';
 export { default as Modal } from './components/Modal/Modal';
+export { default as Sidebar } from './components/Sidebar/Sidebar';
