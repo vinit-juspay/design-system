@@ -283,8 +283,6 @@ const ModalDemo = () => {
           showCloseButton={playgroundConfig.showCloseButton}
           showHeader={playgroundConfig.showHeader}
           showFooter={playgroundConfig.showFooter}
-          showPrimaryButton={playgroundConfig.showPrimaryButton}
-          showSecondaryButton={playgroundConfig.showSecondaryButton}
           closeOnBackdropClick={playgroundConfig.closeOnBackdropClick}
           primaryButtonDisabled={playgroundConfig.primaryButtonDisabled}
           secondaryButtonDisabled={playgroundConfig.secondaryButtonDisabled}
