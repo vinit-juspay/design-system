@@ -1195,5 +1195,28 @@ export const themeConfig = {
         wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto'
       }
     },
+    popover: {
+      base: {
+        container: 'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
+        trigger: 'inline-block',
+        content: 'word-break',
+        header: 'flex flex-col gap-2',
+        headerRow: 'flex items-center justify-between gap-3',
+        heading: 'text-base font-semibold text-gray-900 word-break',
+        description: 'text-body-md font-medium text-gray-500 word-break',
+        closeButton: 'h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0',
+        footer: 'flex justify-start gap-3',
+      },
+      animation: {
+        open: 'data-[state=open]:animate-fade-in',
+        closed: 'data-[state=closed]:animate-fade-out',
+      },
+      placement: {
+        top: 'data-[side=top]',
+        bottom: 'data-[side=bottom]',
+        left: 'data-[side=left]',
+        right: 'data-[side=right]',
+      }
+    },
   },
 };

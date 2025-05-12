@@ -28,8 +28,6 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   showCloseButton = true,
   showHeader = true,
   showFooter = true,
-  showPrimaryButton = true,
-  showSecondaryButton = true,
   closeOnBackdropClick = true,
   primaryButtonType = ButtonType.PRIMARY,
   secondaryButtonType = ButtonType.SECONDARY,
@@ -96,11 +94,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({
       );
     }
 
-    if (!showPrimaryButton && !showSecondaryButton) return null;
+    if (!primaryButtonText && !secondaryButtonText) return null;
 
     return (
       <div className={getFooterClasses()}>
-        {showSecondaryButton && (
+        {secondaryButtonText && (
           <Button
             buttonType={secondaryButtonType}
             onClick={onSecondaryButtonClick}
@@ -109,7 +107,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({
             {secondaryButtonText}
           </Button>
         )}
-        {showPrimaryButton && (
+        {primaryButtonText && (
           <Button
             buttonType={primaryButtonType}
             onClick={onPrimaryButtonClick}
