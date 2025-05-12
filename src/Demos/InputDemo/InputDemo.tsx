@@ -4,6 +4,7 @@ import {
   NumberInput, 
   OTPInput, 
   TextArea, 
+  TextInput, 
   UnitInput,
 } from '../../../lib/main';
 import { TextInputState, TextInputSize } from '../../../lib/components/TextInput/types';
@@ -232,6 +233,23 @@ const InputDemo = () => {
             value={textAreaValue}
             onChange={(e) => setTextAreaValue(e.target.value)}
             state={inputState}
+            mandatory={showMandatory}
+            infoTooltip="This is an information tooltip"
+            errorMessage={inputState === TextInputState.ERROR ? 'This is an error message' : undefined}
+            successMessage={inputState === TextInputState.SUCCESS ? 'This is a success message' : undefined}
+          />
+        </div>
+        <div className="space-y-4">
+          <h3 className="text-xl font-semibold">TextInput</h3>
+          <TextInput
+            label={showLabel ? "TextInput Label" : undefined}
+            sublabel={showSubLabel ? "Enter your text here" : undefined}
+            hintText={showHintText ? "This is a hint text for the text input" : undefined}
+            placeholder="Enter text"
+            value={textAreaValue}
+            onChange={(e) => setTextAreaValue(e.target.value)}
+            state={inputState}
+            size={inputSize}
             mandatory={showMandatory}
             infoTooltip="This is an information tooltip"
             errorMessage={inputState === TextInputState.ERROR ? 'This is an error message' : undefined}

@@ -66,7 +66,7 @@ export const getInputClasses = (
     inputTheme.input.base,
     paddingClass,
   ];
-  
+
   // State-specific classes
   const stateClasses = [];
   
@@ -74,9 +74,9 @@ export const getInputClasses = (
     stateClasses.push(states.default);
   } else if (state === TextInputState.DISABLED) {
     stateClasses.push(states.disabled);
-  }
+  } 
   
-  return cn(...baseClasses, ...stateClasses);
+  return [...baseClasses, ...stateClasses].join(' ');
 };
 
 export const getLabelClasses = (mandatory: boolean = false) => {
