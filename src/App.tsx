@@ -15,6 +15,7 @@ import {
   Info,
   MessageSquare,
   Check,
+  Layout,
 } from 'lucide-react';
 
 // Import demo components
@@ -37,12 +38,12 @@ import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
-
+import SidebarDemo from './Demos/SidebarDemo/SidebarDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar'
-  >('buttons');
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'sidebar'
+  >('sidebar');
 
   const navigationItems = [
     { id: 'buttons', label: 'Buttons', icon: Layers },
@@ -64,11 +65,12 @@ const App = () => {
     { id: 'statCard', label: 'Stat Card', icon: BarChart2 },
     { id: 'modal', label: 'Modal', icon: Layers },
     { id: 'input', label: 'Input', icon: Check },
+    { id: 'sidebar', label: 'Sidebar', icon: Layout },
   ];
 
   const renderSidebar = () => (
     <div className="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-sm">
-      <div className="flex flex-col h-full">      
+      <div className="flex flex-col h-full">
         <div className="flex items-center justify-center h-16 border-b border-gray-200">
           <span className="text-lg font-bold text-gray-900">Design System</span>
         </div>
@@ -80,18 +82,16 @@ const App = () => {
               <button
                 key={item.id}
                 onClick={() => setActiveComponent(item.id as any)}
-                className={`${
-                  activeComponent === item.id
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                } group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full`}
+                className={`${activeComponent === item.id
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  } group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full`}
               >
                 <Icon
-                  className={`${
-                    activeComponent === item.id
-                      ? 'text-blue-700'
-                      : 'text-gray-400 group-hover:text-gray-500'
-                  } mr-3 h-5 w-5`}
+                  className={`${activeComponent === item.id
+                    ? 'text-blue-700'
+                    : 'text-gray-400 group-hover:text-gray-500'
+                    } mr-3 h-5 w-5`}
                 />
                 {item.label}
               </button>
@@ -113,46 +113,48 @@ const App = () => {
       {(() => {
         switch (activeComponent) {
           case 'buttons':
-                return <ButtonDemo />;
-              case 'buttonGroups':
-                return <ButtonGroupDemo />;
-              case 'tooltipsV2':
-                return <TooltipDemoV2 />;
-              case 'tags':
-                return <TagDemo />;
-              case 'tabs':
-                return <TabsDemo />;
-              case 'alerts':
-                return <AlertDemo />;
+            return <ButtonDemo />;
+          case 'buttonGroups':
+            return <ButtonGroupDemo />;
+          case 'tooltipsV2':
+            return <TooltipDemoV2 />;
+          case 'tags':
+            return <TagDemo />;
+          case 'tabs':
+            return <TabsDemo />;
+          case 'alerts':
+            return <AlertDemo />;
           case 'snackbar':
             return <SnackbarDemo />;
-              case 'charts':
-                return <ChartDemo />;
-              case 'chartsV2':
-                return <ChartDemo2 />;
-              case 'fonts':
-                return <FontDemo />;
-              case 'datePicker':
-                return <DatePickerDemo />;
-              case 'selectors':
-                return <SelectorsDemo />;
-              case 'avatars':
-                return <AvatarDemo />;
-              case 'accordion':
-              return <AccordionDemo />;
-              case 'statCard':
-              return <StatCardDemo />;
+          case 'charts':
+            return <ChartDemo />;
+          case 'chartsV2':
+            return <ChartDemo2 />;
+          case 'fonts':
+            return <FontDemo />;
+          case 'datePicker':
+            return <DatePickerDemo />;
+          case 'selectors':
+            return <SelectorsDemo />;
+          case 'avatars':
+            return <AvatarDemo />;
+          case 'accordion':
+            return <AccordionDemo />;
+          case 'statCard':
+            return <StatCardDemo />;
           case 'menu':
             return <MenuDemo />;
           case 'dropdown':
             return <DropdownDemo />;
-              case 'modal':
+          case 'modal':
             return <ModalDemo />;
           case 'input':
-        return <InputDemo />;
-      default:
-                return null;
-            }
+            return <InputDemo />;
+          case 'sidebar':
+            return <SidebarDemo />;
+          default:
+            return null;
+        }
       })()}
     </div>
   );

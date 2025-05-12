@@ -1,158 +1,97 @@
-import React from 'react';
+
+import { Calculator, Code, FileInput } from 'lucide-react';
 import { Sidebar } from '../../../lib/components/Sidebar/Sidebar';
-import { SidebarItems } from '../../../lib/components/Sidebar/types';
-import { Code, FileText, FolderArchive, FolderOpen, Settings, Users } from 'lucide-react';
+
 
 const SidebarDemo = () => {
-  // Example data for the sidebar
-  const basicSidebarData: SidebarItems[] = [
+  const sections = [
     {
-      name: 'Navigation',
-      items: [
-        {
-          label: 'Dashboard',
-          items: [
-            { label: 'Overview' },
-            { label: 'Analytics' },
-            { label: 'Reports' }
-          ]
-        },
-        {
-          label: 'Projects',
-          items: [
-            { label: 'Active Projects' },
-            { label: 'Archived Projects' }
-          ]
-        },
-        { label: 'Tasks' },
-        { label: 'Calendar' }
-      ],
-      isCollapsible: true
-    },
-    {
-      name: 'Team',
-      items: [
-        { label: 'Members' },
-        { label: 'Roles' }
-      ],
+      name: "Getting Started",
       isCollapsible: true,
+      items: [
+        {
+          label: "Introduction",
+          items: [
+            {
+              label: "Overview", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Installation", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Quick Start", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, }
+          ]
+        },
+        {
+          label: "Components",
+          items: [
+            { label: "Buttons", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Inputs", leftSlot: <FileInput className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Cards", leftSlot: <Calculator className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, }
+          ]
+        }
+      ],
       showSeperator: true
     },
     {
-      name: 'Settings',
-      items: [
-        { label: 'Preferences' },
-        { label: 'Account' },
-        { label: 'Security' }
-      ],
-      isCollapsible: true
-    }
-  ];
-
-  // Project explorer example data
-  const fileExplorerData: SidebarItems[] = [
-    {
-      name: 'src',
+      name: "Components",
+      isCollapsible: true,
       items: [
         {
-          label: 'components',
+          label: "Layout",
           items: [
-            {
-              label: 'Button',
-              items: [
-                { label: 'Button.tsx' },
-                { label: 'types.ts' },
-                { label: 'utils.ts' }
-              ]
-            },
-            {
-              label: 'Modal',
-              items: [
-                { label: 'Modal.tsx' },
-                { label: 'types.ts' }
-              ]
-            }
+            { label: "Grid", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Container", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Spacing", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, }
           ]
         },
         {
-          label: 'hooks',
+          label: "Navigation",
           items: [
-            { label: 'useToggle.ts' },
-            { label: 'useForm.ts' }
+            { label: "Menu", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Tabs", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, },
+            { label: "Breadcrumbs", leftSlot: <Code className="h-4 w-4" />,
+              rightSlot: <Calculator className="h-4 w-4" />, }
           ]
-        },
-        { label: 'App.tsx' },
-        { label: 'index.ts' }
+        }
       ],
-      isCollapsible: true
+      showSeperator: true
     },
     {
-      name: 'public',
+      name: "Utilities",
+      isCollapsible: false,
       items: [
-        { label: 'index.html' },
-        { label: 'favicon.ico' }
-      ],
-      isCollapsible: true
-    }
-  ];
-
-  // Settings sidebar example
-  const settingsSidebarData: SidebarItems[] = [
-    {
-      items: [
-        { label: 'General' },
-        { label: 'Account' },
-        { label: 'Security' },
-        { label: 'Notifications' },
-        { label: 'Billing' },
-        { label: 'Integrations' },
-        { label: 'Appearance' }
+        { label: "Colors", leftSlot: <Code className="h-4 w-4" />,
+          rightSlot: <Calculator className="h-4 w-4" />, },
+        { label: "Typography", leftSlot: <Code className="h-4 w-4" />,
+          rightSlot: <Calculator className="h-4 w-4" />, },
+        { label: "Spacing", leftSlot: <Code className="h-4 w-4" />,
+          rightSlot: <Calculator className="h-4 w-4" />, },
+        { label: "Shadows", leftSlot: <Code className="h-4 w-4" />,
+          rightSlot: <Calculator className="h-4 w-4" />, }
       ]
     }
   ];
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6">Sidebar Examples</h2>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Sidebar Component</h2>
+        <p className="text-gray-600 mb-4">
+          A flexible sidebar component that supports nested navigation items and collapsible sections.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Basic Sidebar */}
-        <div className="border rounded-lg shadow-sm">
-          <h3 className="text-lg font-medium p-4 border-b">Basic Sidebar</h3>
-          <div className="h-[400px] relative overflow-hidden">
-            <Sidebar sections={basicSidebarData} className="absolute top-0 left-0 z-10" />
-          </div>
-          <div className="p-4 border-t bg-gray-50">
-            <p className="text-sm text-gray-600">
-              A standard sidebar with collapsible sections and items.
-            </p>
-          </div>
-        </div>
-
-        {/* File Explorer Sidebar */}
-        <div className="border rounded-lg shadow-sm">
-          <h3 className="text-lg font-medium p-4 border-b">File Explorer Sidebar</h3>
-          <div className="h-[400px] relative overflow-hidden">
-            <Sidebar sections={fileExplorerData} className="absolute top-0 left-0 z-10" />
-          </div>
-          <div className="p-4 border-t bg-gray-50">
-            <p className="text-sm text-gray-600">
-              A sidebar representing a file structure or project explorer.
-            </p>
-          </div>
-        </div>
-
-        {/* Settings Sidebar */}
-        <div className="border rounded-lg shadow-sm">
-          <h3 className="text-lg font-medium p-4 border-b">Settings Sidebar</h3>
-          <div className="h-[400px] relative overflow-hidden">
-            <Sidebar sections={settingsSidebarData} className="absolute top-0 left-0 z-10" />
-          </div>
-          <div className="p-4 border-t bg-gray-50">
-            <p className="text-sm text-gray-600">
-              A simple sidebar with a flat structure, ideal for settings or navigation.
-            </p>
-          </div>
+      <div className="border rounded-lg p-4">
+        <div className="h-[600px] w-64">
+          <Sidebar sections={sections} />
         </div>
       </div>
     </div>

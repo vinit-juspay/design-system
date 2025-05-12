@@ -5,11 +5,9 @@ import { ChevronDown, ChevronRight, Folder, File } from "lucide-react"
 import { SidebarItem, SidebarProps, SidebarSectionProps } from "./types"
 
 
-
-
 export function Sidebar({ sections, className = "" }: SidebarProps) {
   return (
-    <div className={`w-full h-full border-r overflow-y-auto space-y-8 py-2 ${className}`}>
+    <div className={`w-full h-full border-r overflow-y-auto debug space-y-8 py-2 px-1 ${className}`} style={{scrollbarWidth: "none"}}>
       {sections.map((section, index) => (
         <SidebarSection key={index} section={section} />
       ))}
@@ -29,22 +27,23 @@ function SidebarSection({ section }: SidebarSectionProps) {
 
   return (
     <div className="">
+      {/* Section Header */}
       {section.name && (
         <div
-          className={`px-4 py-2 text-body-md font-medium text-gray-400 flex items-center gap-2 ${section.isCollapsible ? "cursor-pointer hover:bg-gray-150" : ""}`}
+          className={`px-4 py-2 text-body-md font-medium rounded-sm text-gray-1000 flex items-center gap-2 ${section.isCollapsible ? "cursor-pointer hover:bg-gray-150" : ""}`}
           onClick={toggleSection}
         >
           <span className="">{section.name}</span>
           {section.isCollapsible && (
             <span className="text-gray-400">
-              {isOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+              <ChevronRight className="h-4 w-4 transition-transform duration-200 touch-none" style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }} />
             </span>
           )}
         </div>
       )}
 
       {(!section.isCollapsible || isOpen) && (
-        <div className="mt-1">
+        <div className="mt-1 debug">
           {section.items.map((item, index) => (
             <SidebarItemComponent key={index} item={item} level={0} />
           ))}
@@ -74,21 +73,18 @@ function SidebarItemComponent({ item, level }: SidebarItemComponentProps) {
   return (
     <div>
       <div
-        className={`flex items-center px-4 py-1.5 text-body-md text-gray-900 font-medium hover:bg-gray-100 cursor-pointer`}
+        className={`flex gap-2 items-center justify-between px-3 py-1.5 text-body-md text-gray-600 font-medium cursor-pointer`}
         style={{ paddingLeft: `${level * 12 + 16}px` }}
         onClick={toggleItem}
       >
-        {/* {hasChildren ? (
-          <span className="mr-1 text-gray-400">
-            {isOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-          </span>
-        ) : (
-          <span className="mr-1 text-gray-400">
-            <File className="h-4 w-4" />
-          </span>
-        )} */}
-
-        <span className="truncate">{item.label}</span>
+        <div className="flex flex-1 shrink-0 items-center gap-2 overflow-hidden whitespace-nowrap">
+          {item.leftSlot && <div className="flex items-center justify-center w-5 h-5">{item.leftSlot}</div>}
+          <span className="truncate">{item.label}</span>
+          {item.rightSlot && <div className="flex items-center justify-center w-5 h-5">{item.rightSlot}</div>}
+        </div>
+        {hasChildren && <div className="flex items-center justify-center w-5 h-5">
+          <ChevronDown className="h-4 w-4 transition-transform duration-200 touch-none" style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
+        </div>}
       </div>
 
       {hasChildren && isOpen && (
