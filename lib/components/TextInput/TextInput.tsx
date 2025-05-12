@@ -15,6 +15,7 @@ import {
   SlotPosition
 } from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 const inputTheme = themeConfig.euler.input;
 
@@ -35,6 +36,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
   onChange,
   onBlur,
   onFocus,
+  className,
   ...props
 }, ref) => {
   // Use the custom hook for state management
@@ -93,7 +95,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({
         <input
           ref={ref}
           type="text"
-          className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
+          className={cn(getInputClasses(inputState.visualState, leftSlot, rightSlot), className)}
           placeholder={placeholder}
           disabled={state === TextInputState.DISABLED}
           defaultValue={value}

@@ -76,7 +76,7 @@ export const getInputClasses = (
     stateClasses.push(states.disabled);
   } 
   
-  return [...baseClasses, ...stateClasses].join(' ');
+  return cn(...baseClasses, ...stateClasses);
 };
 
 export const getLabelClasses = (mandatory: boolean = false) => {
