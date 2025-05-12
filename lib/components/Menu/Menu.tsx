@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useEffect } from 'react';
+import React, { forwardRef, useRef, useEffect, useCallback } from 'react';
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 import {
@@ -55,9 +55,31 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
   );
 
   // Close the menu
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     onOpenChange?.(false);
-  };
+  }, [onOpenChange]);
+  
+  // Handle item click with proper multi-select behavior
+  const handleItemClick = useCallback((item: any) => {
+    // For multi-select menus, toggle selection but don't close the menu
+    if (type === MenuType.MULTI_SELECT) {
+      if (item.id) {
+        selection.toggleSelection(item.id);
+        
+        // Also call the item click handler if provided
+        // This allows the parent component to know about the click
+        if (onItemClick) {
+          onItemClick(item);
+        }
+      }
+    } else {
+      // For regular menus, call the click handler and close the menu
+      if (onItemClick) {
+        onItemClick(item);
+      }
+      closeMenu();
+    }
+  }, [type, selection, onItemClick, closeMenu]);
   
   // Combine context value
   const contextValue: MenuContextValue = {
@@ -109,7 +131,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
     search.highlightedIndex, 
     search.filteredItems,
     onContextChange, 
-    onSearchTermChange
+    onSearchTermChange,
+    closeMenu
   ]);
 
   // If menu is closed, don't render anything
@@ -161,15 +184,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                 item.id !== undefined && 
                 selection.selectedItems.includes(item.id);
                 
-              const handleItemClick = () => {
-                if (type === MenuType.MULTI_SELECT) {
-                  selection.toggleSelection(item.id);
-                } else {
-                  onItemClick?.(item);
-                  closeMenu();
-                }
-              };
-              
               return (
                 <MenuItem
                   key={`${item.id || index}`}
@@ -177,7 +191,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(({
                   state={search.highlightedIndex === index ? MenuItemState.HOVER : item.state}
                   isMultiSelect={type === MenuType.MULTI_SELECT && modifiedItem.type !== MenuItemType.LABEL}
                   isSelected={isSelected}
-                  onClick={handleItemClick}
+                  onClick={() => handleItemClick(item)}
                   onMouseEnter={() => search.setHighlightedIndex(index)}
                   data-index={index}
                 />

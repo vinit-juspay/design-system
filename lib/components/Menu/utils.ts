@@ -458,13 +458,22 @@ export const toggleItemSelection = (
 ): void => {
   if (!itemId) return;
   
-  let newSelectedItems;
+  // Create a new array to avoid mutation issues
+  let newSelectedItems: string[];
+  
   if (selectedItems.includes(itemId)) {
+    // Remove if already selected
     newSelectedItems = selectedItems.filter(id => id !== itemId);
   } else {
+    // Add if not selected
     newSelectedItems = [...selectedItems, itemId];
   }
   
+  // Update local state
   setSelectedItems(newSelectedItems);
-  onSelectionChange?.(newSelectedItems);
+  
+  // Notify parent if callback is provided
+  if (onSelectionChange) {
+    onSelectionChange(newSelectedItems);
+  }
 }; 

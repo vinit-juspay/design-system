@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef, RefObject, useCallback } from 'react';
 import { 
   MenuType, 
   MenuItemProps, 
@@ -11,6 +11,14 @@ import {
 } from '../components/Menu/utils';
 import { useContext } from 'react';
 import { MenuContext } from '../components/Menu/context';
+
+/**
+ * Helper to compare arrays for equality
+ */
+const areArraysEqual = (a: string[], b: string[]): boolean => {
+  if (a.length !== b.length) return false;
+  return a.every(item => b.includes(item)) && b.every(item => a.includes(item));
+};
 
 /**
  * Hook for accessing menu context
@@ -123,25 +131,70 @@ export const useMenuSelection = (
   controlledSelectedItems: string[] | undefined,
   onSelectionChange?: (selectedItems: string[]) => void
 ) => {
+  // Track selected items internally
   const [selectedItems, setSelectedItems] = useState<string[]>(
     controlledSelectedItems !== undefined ? controlledSelectedItems : []
   );
   
-  // Update selectedItems when controlledSelectedItems changes
+  // Use a ref to track previous selection to prevent unnecessary updates
+  const prevSelectionRef = useRef<string[]>(selectedItems);
+  
+  // When controlledSelectedItems changes, update internal state
   useEffect(() => {
     if (controlledSelectedItems !== undefined) {
-      setSelectedItems(controlledSelectedItems);
+      // Sort arrays to ensure consistent comparison
+      const sortedControlled = [...controlledSelectedItems].sort();
+      const sortedCurrent = [...prevSelectionRef.current].sort();
+      
+      // Compare stringified versions to check equality
+      if (JSON.stringify(sortedControlled) !== JSON.stringify(sortedCurrent)) {
+        setSelectedItems(controlledSelectedItems);
+        prevSelectionRef.current = controlledSelectedItems;
+      }
     }
   }, [controlledSelectedItems]);
   
-  // Handle item selection
-  const handleToggleSelection = (itemId?: string) => {
-    toggleItemSelection(itemId, selectedItems, setSelectedItems, onSelectionChange);
-  };
+  // Handle item selection - memoized to prevent unnecessary re-renders
+  const handleToggleSelection = useCallback((itemId?: string) => {
+    if (!itemId) return;
+    
+    setSelectedItems(prev => {
+      let newSelectedItems: string[];
+      
+      if (prev.includes(itemId)) {
+        newSelectedItems = prev.filter(id => id !== itemId);
+      } else {
+        newSelectedItems = [...prev, itemId];
+      }
+      
+      // Only trigger the callback if there was a real change
+      const sortedNew = [...newSelectedItems].sort();
+      const sortedPrev = [...prevSelectionRef.current].sort();
+      
+      if (JSON.stringify(sortedNew) !== JSON.stringify(sortedPrev)) {
+        prevSelectionRef.current = newSelectedItems;
+        onSelectionChange?.(newSelectedItems);
+      }
+      
+      return newSelectedItems;
+    });
+  }, [onSelectionChange]);
+  
+  // Memoized function to set selected items directly
+  const setSelectedItemsMemoized = useCallback((items: string[]) => {
+    const sortedItems = [...items].sort();
+    const sortedPrev = [...prevSelectionRef.current].sort();
+    
+    if (JSON.stringify(sortedItems) !== JSON.stringify(sortedPrev)) {
+      setSelectedItems(items);
+      prevSelectionRef.current = items;
+      onSelectionChange?.(items);
+    }
+  }, [onSelectionChange]);
   
   return {
     selectedItems,
-    setSelectedItems,
+    setSelectedItems: setSelectedItemsMemoized,
     toggleSelection: handleToggleSelection
   };
 }; 

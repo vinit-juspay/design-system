@@ -159,6 +159,7 @@ export interface DropdownProps {
   searchTerm?: string;
   onSearchTermChange?: (searchTerm: string) => void;
   onSelectedItemsChange?: (selectedItems: string[]) => void;
+  closeOnSelect?: boolean;
 }
 
 // Menu props

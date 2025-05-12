@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, forwardRef } from "react";
+import React, { useState, useRef, useEffect, forwardRef, useCallback } from "react";
 import { ChevronDown, ChevronUp, X, HelpCircle } from "lucide-react";
 import { 
   DropdownProps, 
@@ -7,7 +7,8 @@ import {
   DropdownSubType, 
   DropdownSize, 
   DropdownSelectionType,
-  MenuType
+  MenuType,
+  MenuItemProps
 } from "./types";
 import { 
   getDropdownBaseClasses, 
@@ -24,6 +25,12 @@ import Button from "../Button/Button";
 import { ButtonType, ButtonSize, ButtonSubType } from "../Button/types";
 import Tag from "../Tag/Tag";
 import { themeConfig } from "../../themeConfig";
+
+// Helper function to check if arrays are equal
+const areArraysEqual = (a: string[], b: string[]): boolean => {
+  if (a.length !== b.length) return false;
+  return a.every(item => b.includes(item)) && b.every(item => a.includes(item));
+};
 
 /**
  * MenuDropdown component - a dropdown trigger that opens a Menu component
@@ -75,11 +82,13 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   searchTerm: controlledSearchTerm,
   onSearchTermChange,
   onSelectedItemsChange,
+  closeOnSelect,
 }, ref) => {
   // State management
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
   const [uncontrolledSelectedOption, setUncontrolledSelectedOption] = useState<string | string[] | undefined>(undefined);
   const [uncontrolledSearchTerm, setUncontrolledSearchTerm] = useState<string>('');
+  const [lastSelectedItems, setLastSelectedItems] = useState<string[]>([]);
   
   // Determine if component is controlled or uncontrolled
   const isControlled = controlledIsOpen !== undefined;
@@ -90,6 +99,12 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   const isOpen = isControlled ? controlledIsOpen : uncontrolledIsOpen;
   const selectedOption = isSelectionControlled ? controlledSelectedOption : uncontrolledSelectedOption;
   const searchTerm = isSearchTermControlled ? controlledSearchTerm : uncontrolledSearchTerm;
+
+  // Determine closeOnSelect behavior based on type
+  // Default: close on select for single-select, stay open for multi-select
+  const shouldCloseOnSelect = closeOnSelect !== undefined 
+    ? closeOnSelect 
+    : (type !== DropdownType.MULTI_SELECT);
 
   // Default hasClearButton to true for multi-select if not explicitly provided
   // Hide clear button for NO_CONTAINER multiselect dropdowns
@@ -188,12 +203,14 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
   
   // Handle item selection
   const handleSelect = (item: any) => {
+    // Get the item ID
+    const itemId = item.id || '';
+    
     // Update internal state for uncontrolled components
     if (!isSelectionControlled) {
       if (type === DropdownType.MULTI_SELECT) {
         // Handle multi-select logic
         const currentSelected = Array.isArray(uncontrolledSelectedOption) ? uncontrolledSelectedOption : [];
-        const itemId = item.id || '';
         
         if (currentSelected.includes(itemId)) {
           // Remove if already selected
@@ -210,11 +227,27 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     
     // Call external handler if provided
     if (onSelect) {
-      onSelect(item);
+      // For multi-select, pass the updated selection array
+      if (type === DropdownType.MULTI_SELECT) {
+        const currentItems = Array.isArray(selectedOption) ? selectedOption : [];
+        const updatedItems = currentItems.includes(itemId)
+          ? currentItems.filter(id => id !== itemId)
+          : [...currentItems, itemId];
+        
+        // Find the selected menu items by ID
+        const selectedMenuItems = updatedItems.map(id => 
+          menuItems.find(item => item.id === id)
+        ).filter(Boolean) as MenuItemProps[];
+        
+        onSelect(selectedMenuItems);
+      } else {
+        // For single select, just pass the item
+        onSelect(item);
+      }
     }
     
-    // Close dropdown for single select
-    if (type !== DropdownType.MULTI_SELECT) {
+    // Close dropdown based on type and closeOnSelect prop
+    if (shouldCloseOnSelect) {
       handleClose();
     }
   };
@@ -234,11 +267,46 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     }
   };
   
+  // Handle selection changes from Menu component
+  const handleSelectionChange = useCallback((selectedItems: string[]) => {
+    // Skip if there's no actual change to prevent loops
+    if (areArraysEqual(lastSelectedItems, selectedItems)) {
+      return;
+    }
+    
+    // Update last selected items
+    setLastSelectedItems(selectedItems);
+  
+    // Update internal state for uncontrolled components
+    if (!isSelectionControlled && type === DropdownType.MULTI_SELECT) {
+      setUncontrolledSelectedOption(selectedItems);
+    }
+    
+    // Update controlled components through callback
+    if (onSelectedItemsChange) {
+      onSelectedItemsChange(selectedItems);
+    }
+    
+    // Also call onSelect with the full menu items if available
+    if (onSelect && type === DropdownType.MULTI_SELECT) {
+      const selectedMenuItems = selectedItems.map(id => 
+        menuItems.find(item => item.id === id)
+      ).filter(Boolean) as MenuItemProps[];
+      
+      if (selectedMenuItems.length > 0) {
+        onSelect(selectedMenuItems);
+      }
+    }
+  }, [lastSelectedItems, onSelectedItemsChange, isSelectionControlled, type, onSelect, menuItems]);
+  
   // Handle context changes from the Menu component
-  const handleContextChange = (context: any) => {
+  const handleContextChange = useCallback((context: any) => {
     // Update selected items if provided
-    if (context.selectedItems && onSelectedItemsChange) {
-      onSelectedItemsChange(context.selectedItems);
+    if (context.selectedItems) {
+      // Only call handleSelectionChange if the selected items have actually changed
+      if (!areArraysEqual(lastSelectedItems, context.selectedItems)) {
+        handleSelectionChange(context.selectedItems);
+      }
     }
     
     // Update search term if provided
@@ -251,7 +319,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
         onSearchTermChange(context.searchTerm);
       }
     }
-  };
+  }, [handleSelectionChange, lastSelectedItems, isSearchTermControlled, onSearchTermChange]);
   
   // Determine the text to display in the dropdown
   const getDisplayText = () => {
@@ -262,9 +330,12 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
     
     // If using multi-select type
     if (type === DropdownType.MULTI_SELECT) {
-      const count = Array.isArray(selectedOption) 
-        ? selectedOption.length 
-        : (selectedCount || 0);
+      // Get the actual selected items array
+      const selectedArray = Array.isArray(selectedOption) 
+        ? selectedOption 
+        : [];
+        
+      const count = selectedArray.length || (selectedCount || 0);
       
       if (count > 0) {
         // Count display mode
@@ -291,25 +362,28 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
         // Text display mode
         else {
           // Get the text of the first selected item
-          const firstItem = Array.isArray(selectedOption) && selectedOption.length > 0 
-            ? menuItems.find(item => item.id === selectedOption[0])
+          const firstSelectedId = selectedArray[0];
+          const firstItem = firstSelectedId 
+            ? menuItems.find(item => item.id === firstSelectedId)
             : null;
             
           // Single item selected
-          if (Array.isArray(selectedOption) && selectedOption.length === 1) {
+          if (count === 1 && firstItem) {
             return (
               <>
-                {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem?.text}</span>
+                {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem.text}</span>
               </>
             );
           }
           
           // Multiple items selected
-          return (
-            <>
-              {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem?.text}, +{count - 1} more</span>
-            </>
-          );
+          if (firstItem) {
+            return (
+              <>
+                {placeholder} <span className={themeConfig.euler.menuv2.dropdown.selectedText}>{firstItem.text}, +{count - 1} more</span>
+              </>
+            );
+          }
         }
       }
     }
@@ -408,6 +482,11 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
       ? themeConfig.euler.menuv2.dropdown.clearButton.withContainer
       : themeConfig.euler.menuv2.dropdown.clearButton.noContainer
   );
+
+  // Prepare selected items in the correct format for the Menu
+  const selectedItems = Array.isArray(selectedOption) 
+    ? selectedOption 
+    : (selectedOption ? [selectedOption] : []);
   
   return (
     <div className={themeConfig.euler.menuv2.dropdown.container.base}>
@@ -527,22 +606,8 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(({
               )}
               type={type === DropdownType.MULTI_SELECT ? MenuType.MULTI_SELECT : MenuType.DEFAULT}
               hasSearch={type === DropdownType.MULTI_SELECT}
-              selectedItems={
-                Array.isArray(selectedOption) 
-                  ? selectedOption 
-                  : (selectedOption ? [selectedOption] : [])
-              }
-              onSelectionChange={(selected: string[]) => {
-                if (onSelect) {
-                  const selectedItems = menuItems.filter(item => selected.includes(item.id || ''));
-                  onSelect(selectedItems);
-                }
-                
-                // Update internal state for uncontrolled components
-                if (!isSelectionControlled && type === DropdownType.MULTI_SELECT) {
-                  setUncontrolledSelectedOption(selected);
-                }
-              }}
+              selectedItems={selectedItems}
+              onSelectionChange={handleSelectionChange}
               searchTerm={searchTerm}
               onSearchTermChange={(term: string) => {
                 if (!isSearchTermControlled) {
