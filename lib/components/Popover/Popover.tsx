@@ -15,7 +15,7 @@ import {
 } from "./utils"
 import { usePopoverState, usePopoverPosition, useFocusManagement } from "./hooks"
 
-export const Popover = ({
+ const Popover = ({
     children,
     trigger,
     placement = Placement.BOTTOM,
@@ -184,5 +184,6 @@ export const Popover = ({
         </>
     );
 };
+export default Popover;
 
 Popover.displayName = "Popover";
