@@ -1195,5 +1195,91 @@ export const themeConfig = {
         wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto'
       }
     },
+    dataTable: {
+      container: "w-full",
+      header: {
+        container: "flex justify-between items-start mb-4 flex-col md:flex-row gap-4",
+        title: "text-lg font-semibold",
+        description: "text-sm text-gray-500",
+      },
+      filters: {
+        container: "flex flex-wrap gap-2 items-center",
+      },
+      table: {
+        base: "w-full table-auto border-collapse",
+        variant: {
+          default: "border-separate border-spacing-0",
+          compact: "border-separate border-spacing-0",
+          bordered: "border border-gray-200",
+        },
+        size: {
+          sm: "text-sm",
+          md: "text-base",
+          lg: "text-lg",
+        },
+        striped: "stripe-rows",
+        hoverable: "hover-rows",
+      },
+      thead: {
+        base: "bg-gray-50",
+        variant: {
+          default: "",
+          compact: "",
+          bordered: "border-b border-gray-200",
+        },
+      },
+      th: {
+        base: "px-4 py-3 text-left font-medium text-gray-600",
+        variant: {
+          default: "",
+          compact: "px-2 py-1",
+          bordered: "border-r last:border-r-0 border-gray-200",
+        },
+        size: {
+          sm: "text-xs",
+          md: "text-sm",
+          lg: "text-base",
+        },
+        sortable: "cursor-pointer select-none",
+      },
+      tbody: "divide-y divide-gray-200",
+      tr: {
+        base: "",
+        variant: {
+          default: "",
+          compact: "",
+          bordered: "",
+        },
+        striped: "bg-gray-50",
+      },
+      td: {
+        base: "px-4 py-3",
+        variant: {
+          default: "",
+          compact: "px-2 py-1",
+          bordered: "border-r last:border-r-0 border-gray-200",
+        },
+        size: {
+          sm: "text-xs",
+          md: "text-sm",
+          lg: "text-base",
+        },
+      },
+      pagination: {
+        container: "flex justify-between items-center mt-4 py-2",
+        text: "text-sm text-gray-600 flex items-center gap-2",
+        button: {
+          base: "p-1 rounded-md flex items-center justify-center",
+          enabled: "hover:bg-gray-100 text-gray-700",
+          disabled: "opacity-50 cursor-not-allowed text-gray-400",
+        },
+      },
+      sortIcon: {
+        base: "ml-1 h-4 w-4 text-gray-400",
+        active: "text-gray-800",
+        asc: "transform rotate-0",
+        desc: "transform rotate-180",
+      },
+    },
   },
 };
