@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Popover } from './Popover';
+import  Popover  from './Popover';
 import { Button, ButtonType } from '../Button';
 import { Placement, Alignment } from './types';
 
