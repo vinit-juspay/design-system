@@ -1197,7 +1197,7 @@ export const themeConfig = {
     },
     popover: {
       base: {
-        container: 'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150',
+        container: 'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
         trigger: 'inline-block',
         content: 'word-break',
         header: 'flex flex-col gap-2',

@@ -10,8 +10,8 @@ const PopoverDemo = () => {
     showCloseButton: true,
     closeOnEscape: true,
     closeOnOutsideClick: true,
-    heading: "Popover Title",
-    description: "This is a description for the popover component.",
+    heading: "Heading",
+    description: "This is a popover. It displays additional content or actions when triggered by the user.",
     primaryButtonText: "Confirm",
     secondaryButtonText: "Cancel",
     primaryButtonType: ButtonType.PRIMARY,
@@ -192,10 +192,11 @@ const PopoverDemo = () => {
             <Popover
               trigger={<Button>Open Popover</Button>}
               {...playgroundProps}
+              className='max-w-[480px]'
               onPrimaryButtonClick={() => console.log('Primary button clicked')}
               onSecondaryButtonClick={() => console.log('Secondary button clicked')}
             >
-              <div className="p-4">
+              <div className="">
                 <p>This is the popover content. You can customize the appearance and behavior using the controls on the left.</p>
               </div>
             </Popover>

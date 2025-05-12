@@ -1,5 +1,5 @@
 import { ReactNode, RefObject } from "react"
-import { ButtonType } from "../Button"
+import { ButtonSubType, ButtonType } from "../Button"
 
 export enum Placement {
   TOP = "top",
@@ -46,4 +46,6 @@ export interface PopoverProps {
   secondaryButtonDisabled?: boolean
   onPrimaryButtonClick?: () => void
   onSecondaryButtonClick?: () => void
+  primaryButtonSubType?: ButtonSubType
+  secondaryButtonSubType?: ButtonSubType
 }

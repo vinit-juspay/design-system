@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { Placement, Alignment, PopoverProps } from "./types"
-import { Button, ButtonType } from "../Button"
+import { Button, ButtonSubType, ButtonType } from "../Button"
 import { X } from "lucide-react"
 import {
     getPopoverClasses,
@@ -39,6 +39,8 @@ export const Popover = ({
     secondaryButtonText,
     onPrimaryButtonClick,
     onSecondaryButtonClick,
+    primaryButtonSubType = ButtonSubType.LINK,
+    secondaryButtonSubType = ButtonSubType.LINK,
 }: PopoverProps) => {
     const { open, setOpen } = usePopoverState(controlledOpen, onOpenChange);
     const { triggerRef, contentRef } = usePopoverPosition(
@@ -118,8 +120,10 @@ export const Popover = ({
                 {primaryButtonText && (
                     <Button
                         buttonType={primaryButtonType}
-                        onClick={onPrimaryButtonClick}
+                        onClick={() => { onPrimaryButtonClick?.(); setOpen(false) }}
                         disabled={primaryButtonDisabled}
+                        subType={primaryButtonSubType}
+
                     >
                         {primaryButtonText}
                     </Button>
@@ -127,8 +131,10 @@ export const Popover = ({
                 {secondaryButtonText && (
                     <Button
                         buttonType={secondaryButtonType}
-                        onClick={onSecondaryButtonClick}
+                        onClick={() => { onSecondaryButtonClick?.(); setOpen(false) }}
                         disabled={secondaryButtonDisabled}
+                        subType={secondaryButtonSubType}
+
                     >
                         {secondaryButtonText}
                     </Button>
