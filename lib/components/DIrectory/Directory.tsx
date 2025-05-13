@@ -6,7 +6,7 @@ import { DirectoryProps } from "./types"
 import { sampleData } from "./sampleData"
 import SidebarSection from "./SidebarSection"
 
-const Directory = ({ directoryData = sampleData }: DirectoryProps) => {
+const Directory = ({ directoryData = sampleData, className }: DirectoryProps) => {
   const sectionRefs = useRef<Array<React.RefObject<HTMLDivElement | null>>>([])
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Directory = ({ directoryData = sampleData }: DirectoryProps) => {
 
   return (
     <nav
-      className="w-full h-full flex-1 flex flex-col gap-4 items-center overflow-y-auto py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      className={`w-full h-full flex-1 flex flex-col gap-4 items-center overflow-y-auto py-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${className}`}
       aria-label="Directory navigation"
     >
       {directoryData.map((section, sectionIndex) => (
@@ -43,5 +43,7 @@ const Directory = ({ directoryData = sampleData }: DirectoryProps) => {
     </nav>
   )
 }
+
+Directory.displayName = "Directory"
 
 export default Directory

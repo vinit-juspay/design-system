@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import {
-  Layers,
   Tag as TagIcon,
-  Settings,
-  Bell,
   Menu as MenuIcon,
   BarChart2,
   Type,
@@ -12,26 +9,21 @@ import {
   User as UserIcon,
   ChevronDown,
   Info,
-  MessageSquare,
-  Check,
   FormInput,
   AlertCircle,
   Bell as BellIcon,
   Square,
   Users,
   Layout,
-  ToggleLeft,
   FileText,
-  Table,
-  MessageSquare as MessageSquareIcon,
-  AlertTriangle,
-  Sliders,
   List,
   Grid,
   Box,
   Search,
   EyeClosed,
   IndianRupee,
+  Icon,
+  AxeIcon,
 } from 'lucide-react';
 import Sidebar from '../lib/components/Sidebar/Sidebar';
 
@@ -55,10 +47,7 @@ import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
-import { DirectoryData } from '../lib/components/DIrectory/Directory';
-
-
-
+import { DirectoryData } from '../lib/components/DIrectory/types';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
@@ -437,8 +426,8 @@ const App = () => {
     label: "Design System 2",
     icon: <UserIcon className="w-4 h-4" />,
     id: "design-system-2"
-    }]
-  
+  }]
+
   const sampleData: DirectoryData[] = [
     {
       label: "Basic Components",
@@ -576,7 +565,7 @@ const App = () => {
           label: "Date Picker",
           leftSlot: <CalendarIcon className="w-4 h-4" />,
           onClick: () => setActiveComponent("datePicker")
-            },
+        },
         {
           label: "Selectors",
           leftSlot: <ListFilter className="w-4 h-4" />,
@@ -596,6 +585,12 @@ const App = () => {
     }
   ];
 
+  const footer = <div className="w-full bg-gray-25 flex items-center justify-between gap-3 px-2">
+    <div className='flex items-center gap-2'>
+      Lorem ipsum dolor sit.
+    </div>
+  </div>
+
   return (
     <div className="h-screen ">
       <Sidebar
@@ -607,7 +602,7 @@ const App = () => {
         setActiveTenant={setActiveTenant}
         activeMerchant={activeMerchant}
         setActiveMerchant={setActiveMerchant}
-
+        footer={footer}
       >
         <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {renderContent()}

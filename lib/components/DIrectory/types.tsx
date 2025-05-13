@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 
 export interface DirectoryProps {
+  className?: string
   directoryData?: DirectoryData[]
 }
 

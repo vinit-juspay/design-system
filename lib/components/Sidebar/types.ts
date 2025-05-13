@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
-import { DirectoryData } from "../DIrectory/Directory";
+import { ReactElement, ReactNode } from "react";
+import { DirectoryData } from "../DIrectory/types";
+
 
 export interface SidebarNavItem {
   label: string;
@@ -46,4 +47,5 @@ export interface SidebarProps {
   setActiveTenant?: (tenant: string) => void;
   activeMerchant?: string;
   setActiveMerchant?: (merchant: string) => void;
+  footer?: ReactNode;
 }
