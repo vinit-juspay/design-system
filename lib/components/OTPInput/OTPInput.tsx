@@ -22,6 +22,7 @@ import {
   getHintClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 const { input: inputTheme } = themeConfig.euler;
 
@@ -39,6 +40,7 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(
       infoTooltip,
       successMessage,
       errorMessage,
+      className,
       ...props
     },
     ref
@@ -250,6 +252,59 @@ const OTPInput = forwardRef<HTMLDivElement, OTPInputProps>(
         {state !== TextInputState.ERROR && state !== TextInputState.SUCCESS && hintText && (
           <span className={getHintClasses(state)}>{hintText}</span>
         )}
+        {/* OTP Input Fields */}
+        <div className={getInputsContainerClasses(digits)}>
+          {[...Array(parseInt(digits))].map((_, index) => {
+            // Determine the appropriate state for this input
+            let digitState = state;
+
+            // If the base state is ERROR, maintain the error state
+            // but also apply focused styling via the utility function if focused
+            if (state === TextInputState.ERROR) {
+              digitState = TextInputState.ERROR;
+              // The focused styling will be applied by the getDigitInputClasses
+            } else if (index === focusedIndex) {
+              digitState = TextInputState.FOCUSED;
+            } else if (otp[index]) {
+              digitState = TextInputState.FILLED;
+            }
+
+            return (
+              <input
+                key={index}
+                ref={el => {
+                  inputRefs.current[index] = el;
+                }}
+                type="tel"
+                pattern="[0-9]*"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                maxLength={1}
+                className={cn(getDigitInputClasses(digitState), className)}
+                value={otp[index]}
+                onChange={e => handleChange(e, index)}
+                onKeyDown={e => handleKeyDown(e, index)}
+                onPaste={handlePaste}
+                onClick={e => {
+                  // Stop propagation to prevent container's onClick from interfering
+                  e.stopPropagation();
+                }}
+                onFocus={() => {
+                  setFocusedIndex(index);
+                  inputState.handleFocus();
+                }}
+                onBlur={() => {
+                  if (focusedIndex === index) {
+                    setFocusedIndex(-1);
+                    inputState.handleBlur();
+                  }
+                }}
+                disabled={state === TextInputState.DISABLED}
+                aria-label={`Digit ${index + 1}`}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

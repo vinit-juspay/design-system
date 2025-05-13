@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef, RefObject, useCallback } from 'react';
 import { MenuType, MenuItemProps, MenuContextValue } from '../components/Menu/types';
-import {
-  filterMenuItems,
-  handleKeyboardNavigation,
-} from '../components/Menu/utils';
+import { filterMenuItems, handleKeyboardNavigation } from '../components/Menu/utils';
 import { useContext } from 'react';
 import { MenuContext } from '../components/Menu/context';
 

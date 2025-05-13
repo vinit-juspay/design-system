@@ -17,6 +17,7 @@ import {
 } from '../TextInput/utils';
 import { getUnitClasses } from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 const { input: inputTheme } = themeConfig.euler;
 const { unitInput: unitInputTheme } = themeConfig.euler;
@@ -42,6 +43,7 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
       onChange,
       onBlur,
       onFocus,
+      className,
       ...props
     },
     ref
@@ -99,7 +101,10 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
             <input
               ref={ref}
               type="text"
-              className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
+              className={cn(
+                getInputClasses(inputState.visualState, leftSlot, rightSlot),
+                className
+              )}
               placeholder={placeholder}
               disabled={state === TextInputState.DISABLED}
               defaultValue={value}

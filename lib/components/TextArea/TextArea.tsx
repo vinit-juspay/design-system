@@ -14,6 +14,7 @@ import {
   getHintClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 const { input: inputTheme } = themeConfig.euler;
 
@@ -34,6 +35,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       infoTooltip,
       successMessage,
       errorMessage,
+      className,
       ...props
     },
     ref
@@ -85,7 +87,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onFocus={handleFocus}
           onBlur={handleBlur}
           rows={rows}
-          className={getTextAreaClasses(inputState.visualState)}
+          className={cn(getTextAreaClasses(inputState.visualState), className)}
           {...props}
         />
 

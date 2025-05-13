@@ -36,6 +36,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       customHeader,
       customFooter,
       headerRightSlot,
+      showDivider = true,
     },
     ref
   ) => {
@@ -64,7 +65,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       }
 
       return (
-        <div className={getHeaderClasses()}>
+        <div className={getHeaderClasses(showDivider)}>
           <div className="flex-1 min-w-0 pr-4">
             <div className="flex items-center gap-2">
               {title && (
@@ -95,7 +96,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       if (!primaryButtonText && !secondaryButtonText) return null;
 
       return (
-        <div className={getFooterClasses()}>
+        <div className={getFooterClasses(showDivider)}>
           {secondaryButtonText && (
             <Button
               buttonType={secondaryButtonType}

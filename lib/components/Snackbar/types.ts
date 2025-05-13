@@ -6,7 +6,7 @@ export interface SnackbarProps {
   type: SnackbarType;
   heading?: string;
   message?: string;
-  alertMessage?: string;
+  actionMessage?: string;
   showIcon?: boolean;
   autoClose?: boolean;
   position?: SnackbarPosition;
