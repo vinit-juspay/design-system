@@ -17,7 +17,8 @@ import {
   getLabelClassNames,
   getSubLabelClassNames,
   getHintTextClassNames,
-  getSizeKey
+  getSizeKey,
+  areArraysEqual
 } from "./utils";
 import { cn } from "../../utils";
 import Menu from "./Menu";
@@ -25,12 +26,6 @@ import Button from "../Button/Button";
 import { ButtonType, ButtonSize, ButtonSubType } from "../Button/types";
 import Tag from "../Tag/Tag";
 import { themeConfig } from "../../themeConfig";
-
-// Helper function to check if arrays are equal
-const areArraysEqual = (a: string[], b: string[]): boolean => {
-  if (a.length !== b.length) return false;
-  return a.every(item => b.includes(item)) && b.every(item => a.includes(item));
-};
 
 /**
  * MenuDropdown component - a dropdown trigger that opens a Menu component

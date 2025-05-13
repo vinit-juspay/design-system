@@ -477,3 +477,9 @@ export const toggleItemSelection = (
     onSelectionChange(newSelectedItems);
   }
 }; 
+
+// Helper function to check if arrays are equal
+export const areArraysEqual = (a: string[], b: string[]): boolean => {
+  if (a.length !== b.length) return false;
+  return a.every(item => b.includes(item)) && b.every(item => a.includes(item));
+};

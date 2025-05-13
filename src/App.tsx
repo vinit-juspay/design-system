@@ -3,7 +3,6 @@ import {
   Layers,
   Tag as TagIcon,
   Settings,
-  User,
   Bell,
   Menu as MenuIcon,
   BarChart2,
