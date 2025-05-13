@@ -41,27 +41,27 @@ const AccordionItem = forwardRef<
   ) => {
     const [isOpen, setIsOpen] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
-    
+
     useEffect(() => {
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
           if (mutation.type === 'attributes' && mutation.attributeName === 'data-state') {
             const state = triggerRef.current?.getAttribute('data-state');
             setIsOpen(state === 'open');
           }
         });
       });
-      
+
       if (triggerRef.current) {
         const state = triggerRef.current.getAttribute('data-state');
         setIsOpen(state === 'open');
-        
+
         observer.observe(triggerRef.current, { attributes: true });
       }
-      
+
       return () => observer.disconnect();
     }, []);
-    
+
     const itemClassName = getAccordionItemClassNames(accordionType, isDisabled);
     const triggerClassName = getAccordionTriggerClassNames(accordionType, isDisabled);
     const contentClassName = getAccordionContentClassNames(accordionType);

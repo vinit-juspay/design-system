@@ -312,7 +312,9 @@ const ModalDemo = () => {
                     }
                     className="mr-2 h-4 w-4"
                   />
-                  <span className="text-sm font-medium text-gray-700">Secondary Button Disabled</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    Secondary Button Disabled
+                  </span>
                 </label>
               </div>
               <div>
@@ -376,8 +378,12 @@ const ModalDemo = () => {
           onClose={() => setIsOpenPlayground(false)}
           title={playgroundConfig.title}
           subtitle={playgroundConfig.subtitle}
-          primaryButtonText={playgroundConfig.showPrimaryButton ? playgroundConfig.primaryButtonText : undefined}
-          secondaryButtonText={playgroundConfig.showSecondaryButton ? playgroundConfig.secondaryButtonText : undefined}
+          primaryButtonText={
+            playgroundConfig.showPrimaryButton ? playgroundConfig.primaryButtonText : undefined
+          }
+          secondaryButtonText={
+            playgroundConfig.showSecondaryButton ? playgroundConfig.secondaryButtonText : undefined
+          }
           onPrimaryButtonClick={() => setIsOpenPlayground(false)}
           onSecondaryButtonClick={() => setIsOpenPlayground(false)}
           primaryButtonDisabled={playgroundConfig.primaryButtonDisabled}
