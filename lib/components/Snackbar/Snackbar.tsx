@@ -52,12 +52,12 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
             {showIcon && iconElement && (
               <div className={cn(baseStyles.icon, styles.iconColor)}>{iconElement}</div>
             )}
-            {heading && <h3 className={cn(layoutStyles.heading, styles.textColor)}>{heading}</h3>}
+            {heading && <h3 className={cn(layoutStyles.heading)}>{heading}</h3>}
           </div>
           {!autoClose && (
             <button
               onClick={handleClose}
-              className={cn(baseStyles.closeButton, styles.textColor)}
+              className={cn(baseStyles.closeButton)}
               aria-label="Close"
             >
               <X className="h-4 w-4" />
@@ -67,9 +67,9 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
 
         {(message || alertMessage) && (
           <div className={layoutStyles.messageContainer}>
-            {message && <p className={cn(layoutStyles.message, styles.textColor)}>{message}</p>}
+            {message && <p className={cn(layoutStyles.message)}>{message}</p>}
             {alertMessage && (
-              <p className={cn(layoutStyles.alertMessage, styles.textColor)}>{alertMessage}</p>
+              <p className={cn(layoutStyles.alertMessage)}>{alertMessage}</p>
             )}
           </div>
         )}

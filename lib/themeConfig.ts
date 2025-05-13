@@ -447,15 +447,15 @@ export const themeConfig = {
           'fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200',
         content: 'flex flex-col gap-1',
         icon: 'flex-shrink-0',
-        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80',
+        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80 text-gray-25',
       },
       layout: {
         headerContainer: 'flex w-full items-center justify-between',
         headerContent: 'flex items-center gap-2',
         messageContainer: 'mt-1 pl-7 flex flex-col gap-1',
-        heading: 'text-body-lg font-600',
-        message: 'text-body-md font-500 break-words',
-        alertMessage: 'text-body-md font-600',
+        heading: 'text-body-lg font-500 text-gray-25',
+        message: 'text-body-md font-400 break-words text-gray-300',
+        alertMessage: 'text-body-md font-600 text-gray-100',
       },
       type: {
         info: {
