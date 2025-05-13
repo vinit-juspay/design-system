@@ -1,26 +1,32 @@
 import { cn } from '../../utils';
 import { themeConfig } from '../../themeConfig';
 
-export const getModalClasses = (className?: string) => {
-  return cn(themeConfig.euler.modal.base.container, className);
+export const getModalClasses = (className?: string): string => {
+  const theme = themeConfig.euler.modal.base;
+  return cn(theme.container, className);
 };
 
-export const getHeaderClasses = () => {
-  return themeConfig.euler.modal.base.header;
+export const getHeaderClasses = (showDivider: boolean = true): string => {
+  const theme = themeConfig.euler.modal.base;
+  return cn(theme.header, !showDivider && 'border-b-0');
 };
 
-export const getContentClasses = () => {
-  return themeConfig.euler.modal.base.content;
+export const getContentClasses = (): string => {
+  const theme = themeConfig.euler.modal.base;
+  return theme.content;
 };
 
-export const getFooterClasses = () => {
-  return themeConfig.euler.modal.base.footer;
+export const getFooterClasses = (showDivider: boolean = true): string => {
+  const theme = themeConfig.euler.modal.base;
+  return cn(theme.footer, !showDivider && 'border-t-0');
 };
 
-export const getBackdropClasses = () => {
-  return themeConfig.euler.modal.base.backdrop;
+export const getBackdropClasses = (): string => {
+  const theme = themeConfig.euler.modal.base;
+  return theme.backdrop;
 };
 
-export const getContainerClasses = () => {
-  return themeConfig.euler.modal.base.wrapper;
+export const getContainerClasses = (): string => {
+  const theme = themeConfig.euler.modal.base;
+  return theme.wrapper;
 };
