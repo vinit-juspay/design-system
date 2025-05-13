@@ -3,18 +3,9 @@ import { MenuType, MenuItemProps, MenuContextValue } from '../components/Menu/ty
 import {
   filterMenuItems,
   handleKeyboardNavigation,
-  toggleItemSelection,
 } from '../components/Menu/utils';
 import { useContext } from 'react';
 import { MenuContext } from '../components/Menu/context';
-
-/**
- * Helper to compare arrays for equality
- */
-const areArraysEqual = (a: string[], b: string[]): boolean => {
-  if (a.length !== b.length) return false;
-  return a.every(item => b.includes(item)) && b.every(item => a.includes(item));
-};
 
 /**
  * Hook for accessing menu context
