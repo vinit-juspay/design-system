@@ -23,6 +23,7 @@ import {
   getNumberInputClasses,
 } from './utils';
 import { themeConfig } from '../../themeConfig';
+import { cn } from '../../utils';
 
 const { input: inputTheme } = themeConfig.euler;
 
@@ -48,6 +49,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       onChange,
       onBlur,
       onFocus,
+      className,
       ...props
     },
     ref
@@ -161,7 +163,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <input
             ref={setInputRef}
             type="number"
-            className={`${getInputClasses(inputState.visualState, leftSlot, showStepper || rightSlot ? <div /> : undefined)} ${getNumberInputClasses()}`}
+            className={cn(getInputClasses(inputState.visualState, leftSlot, showStepper || rightSlot ? <div /> : undefined), getNumberInputClasses(), className)}
             placeholder={placeholder}
             disabled={state === TextInputState.DISABLED}
             defaultValue={value}
