@@ -1,6 +1,5 @@
-import {  ButtonType } from "../Button";
-import { ReactElement, ReactNode } from "react";
-
+import { ButtonType } from '../Button';
+import { ReactElement, ReactNode } from 'react';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -18,8 +17,6 @@ export interface ModalProps {
   showCloseButton?: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
-  showPrimaryButton?: boolean;
-  showSecondaryButton?: boolean;
   closeOnBackdropClick?: boolean;
   primaryButtonType?: ButtonType;
   secondaryButtonType?: ButtonType;
@@ -27,4 +24,3 @@ export interface ModalProps {
   customFooter?: ReactNode;
   headerRightSlot?: ReactNode;
 }
-

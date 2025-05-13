@@ -21,24 +21,22 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     ref
   ) => {
     const [internalValue, setInternalValue] = useState<string | undefined>(defaultValue);
-    
+
     const isControlled = controlledValue !== undefined;
     const value = isControlled ? controlledValue : internalValue;
 
-    const isRadioElement = (
-      child: React.ReactElement
-    ): child is React.ReactElement<RadioProps> => {
+    const isRadioElement = (child: React.ReactElement): child is React.ReactElement<RadioProps> => {
       return child.type === Radio;
     };
 
     const enhancedChildren = React.Children.map(children, child => {
       if (!React.isValidElement(child)) return child;
-      
+
       if (isRadioElement(child)) {
         const childValue = child.props.value;
-        
+
         if (!childValue) return child;
-        
+
         return React.cloneElement(child, {
           isChecked: value === childValue,
           onChange: (checked: boolean) => {
@@ -62,7 +60,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
           isDisabled: isDisabled || child.props.isDisabled,
         });
       }
-      
+
       return child;
     });
 

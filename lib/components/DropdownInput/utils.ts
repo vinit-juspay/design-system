@@ -19,8 +19,8 @@ export const getInputBaseClasses = (
 ) => {
   const hasLeftSlot = !!leftSlot;
   const hasRightSlot = !!rightSlot;
-  const states = inputTheme.inputBase.states;  
-  
+  const states = inputTheme.inputBase.states;
+
   // Extract the base classes that apply to all states
   const baseClasses = [
     inputTheme.inputBase.base,
@@ -28,10 +28,10 @@ export const getInputBaseClasses = (
     hasLeftSlot && 'pl-10',
     hasRightSlot && 'pr-10',
   ];
-  
+
   // Apply state-specific classes
   const stateClasses = [];
-  
+
   // If state is ERROR, only apply error classes regardless of focus state
   if (state === DropdownInputState.ERROR) {
     stateClasses.push(states.error);
@@ -44,7 +44,7 @@ export const getInputBaseClasses = (
   } else if (state === DropdownInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }
-  
+
   return cn(...baseClasses, ...stateClasses);
 };
 
@@ -56,7 +56,7 @@ export const getInputClasses = (
   const hasLeftSlot = !!leftSlot;
   const hasRightSlot = !!rightSlot;
   const states = inputTheme.input.states;
-  
+
   let paddingClass = inputTheme.input.padding.default;
   if (hasLeftSlot && hasRightSlot) {
     paddingClass = inputTheme.input.padding.withBothSlots;
@@ -65,7 +65,7 @@ export const getInputClasses = (
   } else if (hasRightSlot) {
     paddingClass = inputTheme.input.padding.withRightSlot;
   }
-  
+
   // Base classes regardless of state
   const baseClasses = [
     inputTheme.input.base,
@@ -74,54 +74,47 @@ export const getInputClasses = (
     hasLeftSlot && 'pl-10',
     hasRightSlot && 'pr-10',
   ];
-  
+
   // State-specific classes
   const stateClasses = [];
-  
+
   if (state === DropdownInputState.DEFAULT || state === DropdownInputState.FILLED) {
     stateClasses.push(states.default);
   } else if (state === DropdownInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }
-  
+
   return cn(...baseClasses, ...stateClasses);
 };
 
 export const getLabelClasses = () => {
-  return cn(
-    inputTheme.label.base,
-    inputTheme.label.color
-  );
+  return cn(inputTheme.label.base, inputTheme.label.color);
 };
 
 export const getSublabelClasses = () => {
-  return cn(
-    inputTheme.sublabel.base,
-    inputTheme.sublabel.color
-  );
+  return cn(inputTheme.sublabel.base, inputTheme.sublabel.color);
 };
 
 export const getHintClasses = (state: DropdownInputState = DropdownInputState.DEFAULT) => {
   return cn(
     inputTheme.hint.base,
-    state === DropdownInputState.ERROR ? inputTheme.hint.error : 
-      state === DropdownInputState.SUCCESS ? inputTheme.hint.success : 
-      inputTheme.hint.color
+    state === DropdownInputState.ERROR
+      ? inputTheme.hint.error
+      : state === DropdownInputState.SUCCESS
+        ? inputTheme.hint.success
+        : inputTheme.hint.color
   );
 };
 
 export const getSlotClasses = (position: SlotPosition) => {
-  return cn(
-    inputTheme.slot.base,
-    inputTheme.slot.positions[position]
-  );
+  return cn(inputTheme.slot.base, inputTheme.slot.positions[position]);
 };
 
 export const getDropdownClasses = (position: DropdownPosition) => {
   return cn(
     dropdownInputTheme.dropdown.base,
-    position === DropdownPosition.LEFT 
-      ? dropdownInputTheme.dropdown.positions.left 
+    position === DropdownPosition.LEFT
+      ? dropdownInputTheme.dropdown.positions.left
       : dropdownInputTheme.dropdown.positions.right
   );
 };
@@ -155,10 +148,7 @@ export const getDropdownMenuClasses = () => {
 };
 
 export const getDropdownMenuItemClasses = (isActive: boolean = false) => {
-  return cn(
-    dropdownInputTheme.menu.item.base,
-    isActive && dropdownInputTheme.menu.item.active
-  );
+  return cn(dropdownInputTheme.menu.item.base, isActive && dropdownInputTheme.menu.item.active);
 };
 
 export const getDropdownMenuItemContentClasses = () => {
@@ -179,4 +169,4 @@ export const getDropdownMenuItemCheckIconClasses = () => {
 
 export const getDropdownWithLeftSlotClass = () => {
   return cn(dropdownInputTheme.dropdown.withLeftSlot);
-}; 
+};

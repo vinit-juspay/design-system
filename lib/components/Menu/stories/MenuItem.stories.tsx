@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { MenuItem, MenuItemType, MenuItemState, MenuItemAction } from '..';
-import { 
-  Edit, 
-  Trash2, 
-  Archive, 
-  Check, 
-  ChevronRight,
-  Bell,
-  Settings,
-} from 'lucide-react';
+import { Edit, Trash2, Archive, Check, ChevronRight, Bell, Settings } from 'lucide-react';
 
 const meta: Meta<typeof MenuItem> = {
   title: 'Components/Menu and Dropdown/MenuItem',
@@ -20,63 +12,63 @@ const meta: Meta<typeof MenuItem> = {
   argTypes: {
     text: {
       control: 'text',
-      description: 'Text to display in the menu item'
+      description: 'Text to display in the menu item',
     },
     type: {
       control: 'select',
       options: Object.values(MenuItemType),
-      description: 'Type of menu item'
+      description: 'Type of menu item',
     },
     action: {
       control: 'select',
       options: Object.values(MenuItemAction),
-      description: 'Action type for action menu items'
+      description: 'Action type for action menu items',
     },
     state: {
       control: 'select',
       options: Object.values(MenuItemState),
-      description: 'State of the menu item'
+      description: 'State of the menu item',
     },
     hasSlotL: {
       control: 'boolean',
-      description: 'Whether the menu item has a left slot'
+      description: 'Whether the menu item has a left slot',
     },
     slotL: {
       control: undefined,
-      description: 'Content for the left slot'
+      description: 'Content for the left slot',
     },
     hasSlotR1: {
       control: 'boolean',
-      description: 'Whether the menu item has a right slot 1'
+      description: 'Whether the menu item has a right slot 1',
     },
     slotR1: {
       control: undefined,
-      description: 'Content for the right slot 1'
+      description: 'Content for the right slot 1',
     },
     hasSlotR2: {
       control: 'boolean',
-      description: 'Whether the menu item has a right slot 2'
+      description: 'Whether the menu item has a right slot 2',
     },
     slotR2: {
       control: undefined,
-      description: 'Content for the right slot 2'
+      description: 'Content for the right slot 2',
     },
     hasShortcut: {
       control: 'boolean',
-      description: 'Whether the menu item has a shortcut'
+      description: 'Whether the menu item has a shortcut',
     },
     shortcutValue: {
       control: 'text',
-      description: 'Text for the shortcut'
+      description: 'Text for the shortcut',
     },
     disabled: {
       control: 'boolean',
-      description: 'Whether the menu item is disabled'
+      description: 'Whether the menu item is disabled',
     },
     onClick: {
       action: 'clicked',
-      description: 'Function to call when the menu item is clicked'
-    }
+      description: 'Function to call when the menu item is clicked',
+    },
   },
 };
 
@@ -216,7 +208,7 @@ export const InteractiveStates: Story = {
           slotL={<Settings size={16} />}
         />
       </div>
-      
+
       <div>
         <h3 className="text-sm font-semibold mb-2">Hover State</h3>
         <MenuItem
@@ -227,7 +219,7 @@ export const InteractiveStates: Story = {
           slotL={<Settings size={16} />}
         />
       </div>
-      
+
       <div>
         <h3 className="text-sm font-semibold mb-2">Selected State</h3>
         <MenuItem
@@ -240,4 +232,4 @@ export const InteractiveStates: Story = {
       </div>
     </div>
   ),
-}; 
+};

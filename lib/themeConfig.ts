@@ -240,8 +240,10 @@ export const themeConfig = {
         states: {
           default: 'border-gray-300 bg-white',
           hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
-          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
-          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          focused:
+            'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          error:
+            'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
           disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
         },
       },
@@ -272,7 +274,7 @@ export const themeConfig = {
         base: 'flex items-center cursor-pointer gap-1',
         positions: {
           left: 'pl-3',
-          right: 'pr-3'
+          right: 'pr-3',
         },
         withLeftSlot: 'ml-8',
         option: {
@@ -280,12 +282,12 @@ export const themeConfig = {
           label: 'text-gray-800 font-medium truncate',
           placeholder: 'text-gray-400',
           icon: 'flex-shrink-0',
-          chevron: ' flex-shrink-0 text-gray-400'
-        }
+          chevron: ' flex-shrink-0 text-gray-400',
+        },
       },
       input: {
         base: 'flex-1 border-none focus:outline-none focus:ring-0',
-        withLeftPadding: 'pl-2'
+        withLeftPadding: 'pl-2',
       },
       menu: {
         base: 'rounded-xl bg-white p-1 shadow-md border border-gray-200 min-w-[8rem] z-50',
@@ -295,9 +297,9 @@ export const themeConfig = {
           content: 'flex items-center gap-2 w-full',
           icon: 'flex-shrink-0',
           text: 'flex-1',
-          checkIcon: 'h-4 w-4 text-primary-500 flex-shrink-0'
-        }
-      }
+          checkIcon: 'h-4 w-4 text-primary-500 flex-shrink-0',
+        },
+      },
     },
     textInput: {
       // TextInput specific styles (if any)
@@ -431,8 +433,10 @@ export const themeConfig = {
         states: {
           default: 'border-gray-300 bg-white',
           hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
-          focused: 'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
-          error: 'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
+          focused:
+            'focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-100',
+          error:
+            'border-red-500 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100',
           disabled: 'border-gray-200 bg-gray-100 cursor-not-allowed',
         },
       },
@@ -643,7 +647,7 @@ export const themeConfig = {
           container:
             'flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]',
           metrics: 'flex items-center gap-2',
-          selectedMetric: 'text-base font-semibold text-[#525866]',
+          selectedMetric: 'text-base font-semibold text-gray-600',
           slotContainer: 'flex items-center gap-2',
         },
         chartLegend: {
@@ -664,7 +668,7 @@ export const themeConfig = {
     },
 
     menuv2: {
-      baseStyles: "rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1",
+      baseStyles: 'rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1',
       animation: `
         .submenu-portal > div {
           @apply animate-fade-in animate-zoom-in;
@@ -672,206 +676,209 @@ export const themeConfig = {
         }
       `,
       shadows: {
-        xs: "shadow-xs",
+        xs: 'shadow-xs',
       },
       types: {
-        DEFAULT: "w-52",
-        MULTI_SELECT: "w-52",
-        CONTEXT_MENU: "w-52"
+        DEFAULT: 'w-52',
+        MULTI_SELECT: 'w-52',
+        CONTEXT_MENU: 'w-52',
       },
       dimensions: {
-        minWidth: "min-w-[180px]",
-        maxWidth: "max-w-[320px]",
-        width: "w-auto"
+        minWidth: 'min-w-[180px]',
+        maxWidth: 'max-w-[320px]',
+        width: 'w-auto',
       },
       search: {
-        container: "p-0 border-b border-gray-100",
-        input: "w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]",
-        icon: "absolute left-2 flex items-center justify-center text-gray-400",
-        noResults: "p-3 text-sm text-gray-500 text-center",
-        wrapper: "relative p-2 flex items-center"
+        container: 'p-0 border-b border-gray-100',
+        input:
+          'w-full text-[14px] text-gray-600 bg-transparent border-none outline-none focus:ring-0 pl-[22px]',
+        icon: 'absolute left-2 flex items-center justify-center text-gray-400',
+        noResults: 'p-3 text-sm text-gray-500 text-center',
+        wrapper: 'relative p-2 flex items-center',
       },
       menuItemContainer: {
-        base: "max-h-60 overflow-auto px-1",
-        withSearch: "mt-1"
+        base: 'max-h-60 overflow-auto px-1',
+        withSearch: 'mt-1',
       },
       dropdown: {
         container: {
-          base: "relative",
-          withLabel: "mb-2",
-          wrapper: "relative flex items-center"
+          base: 'relative',
+          withLabel: 'mb-2',
+          wrapper: 'relative flex items-center',
         },
         menu: {
-          container: "absolute z-50",
-          base: "rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap"
+          container: 'absolute z-50',
+          base: 'rounded-[10px] border border-gray-200 overflow-hidden whitespace-nowrap',
         },
         trigger: {
-          base: "focus:outline-none",
-          clearButtonRight: "rounded-r-none",
-          noBorderClearButtonRight: "rounded-r-none",
-          withBorderClearButtonRight: "rounded-r-none border-r-0",
-          widthFit: "w-fit"
+          base: 'focus:outline-none',
+          clearButtonRight: 'rounded-r-none',
+          noBorderClearButtonRight: 'rounded-r-none',
+          withBorderClearButtonRight: 'rounded-r-none border-r-0',
+          widthFit: 'w-fit',
         },
         label: {
-          container: "flex items-center gap-1.5",
-          mandatory: "text-red-600",
-          helpIcon: "text-gray-400",
-          base: "font-medium text-gray-700",
+          container: 'flex items-center gap-1.5',
+          mandatory: 'text-red-600',
+          helpIcon: 'text-gray-400',
+          base: 'font-medium text-gray-700',
           sizes: {
-            SMALL: "text-[12px]",
-            MEDIUM: "text-[14px]",
-            LARGE: "text-[14px]"
-          }
+            SMALL: 'text-[12px]',
+            MEDIUM: 'text-[14px]',
+            LARGE: 'text-[14px]',
+          },
         },
         sublabel: {
-          base: "font-normal text-gray-500",
+          base: 'font-normal text-gray-500',
           sizes: {
-            SMALL: "text-[12px]",
-            MEDIUM: "text-[14px]",
-            LARGE: "text-[14px]"
-          }
+            SMALL: 'text-[12px]',
+            MEDIUM: 'text-[14px]',
+            LARGE: 'text-[14px]',
+          },
         },
         hint: {
-          base: "font-normal text-gray-500 mt-2",
+          base: 'font-normal text-gray-500 mt-2',
           sizes: {
-            SMALL: "text-[12px]",
-            MEDIUM: "text-[14px]",
-            LARGE: "text-[14px]"
-          }
+            SMALL: 'text-[12px]',
+            MEDIUM: 'text-[14px]',
+            LARGE: 'text-[14px]',
+          },
         },
         leftIcon: {
-          wrapper: "text-gray-400 flex items-center justify-center",
-          base: "mr-2",
+          wrapper: 'text-gray-400 flex items-center justify-center',
+          base: 'mr-2',
           sizes: {
-            SMALL: "w-3 h-3",
-            MEDIUM: "w-3.5 h-3.5",
-            LARGE: "w-3.5 h-3.5"
-          }
+            SMALL: 'w-3 h-3',
+            MEDIUM: 'w-3.5 h-3.5',
+            LARGE: 'w-3.5 h-3.5',
+          },
         },
         chevron: {
-          wrapper: "text-gray-400 flex items-center justify-center",
-          base: "ml-2",
+          wrapper: 'text-gray-400 flex items-center justify-center',
+          base: 'ml-2',
           sizes: {
-            SMALL: "w-3.5 h-3.5",
-            MEDIUM: "w-4 h-4",
-            LARGE: "w-4 h-4"
-          }
+            SMALL: 'w-3.5 h-3.5',
+            MEDIUM: 'w-4 h-4',
+            LARGE: 'w-4 h-4',
+          },
         },
-        displayText: "flex-grow font-normal text-gray-700",
+        displayText: 'flex-grow font-normal text-gray-700',
         clearButton: {
-          base: "rounded-l-none",
-          withContainer: "border-[1px]",
-          noContainer: "border-[1px] border-gray-200",
-          icon: "text-gray-600"
+          base: 'rounded-l-none',
+          withContainer: 'border-[1px]',
+          noContainer: 'border-[1px] border-gray-200',
+          icon: 'text-gray-600',
         },
         multiSelectTag: {
-          base: "ml-1.5 flex items-center justify-center",
-          sizeSm: "h-4 w-4 min-w-4",
-          sizeDefault: "h-[18px] w-[18px] min-w-[18px]"
+          base: 'ml-1.5 flex items-center justify-center',
+          sizeSm: 'h-4 w-4 min-w-4',
+          sizeDefault: 'h-[18px] w-[18px] min-w-[18px]',
         },
-        selectedText: "text-gray-400 ml-1.5",
-        baseClasses: "relative flex items-center transition-colors",
+        selectedText: 'text-gray-400 ml-1.5',
+        baseClasses: 'relative flex items-center transition-colors',
         typeClasses: {
-          ICON_ONLY: "justify-center",
-          SINGLE_SELECT: "",
-          MULTI_SELECT: ""
+          ICON_ONLY: 'justify-center',
+          SINGLE_SELECT: '',
+          MULTI_SELECT: '',
         },
         states: {
           noBorder: {
-            DEFAULT: "bg-white text-gray-700",
-            HOVER: "bg-gray-50 text-gray-700",
-            OPEN: "bg-gray-25 text-gray-700",
-            SELECTED: "bg-white text-gray-700"
+            DEFAULT: 'bg-white text-gray-700',
+            HOVER: 'bg-gray-50 text-gray-700',
+            OPEN: 'bg-gray-25 text-gray-700',
+            SELECTED: 'bg-white text-gray-700',
           },
           withBorder: {
-            DEFAULT: "bg-white text-gray-700 border border-gray-200",
-            HOVER: "bg-gray-50 text-gray-700 border border-gray-200",
-            OPEN: "bg-gray-25 text-gray-700 border border-gray-200",
-            SELECTED: "bg-white text-gray-700 border border-gray-200"
-          }
+            DEFAULT: 'bg-white text-gray-700 border border-gray-200',
+            HOVER: 'bg-gray-50 text-gray-700 border border-gray-200',
+            OPEN: 'bg-gray-25 text-gray-700 border border-gray-200',
+            SELECTED: 'bg-white text-gray-700 border border-gray-200',
+          },
         },
         sizes: {
-          SMALL: "h-8 px-3.5 py-1.5 text-[14px]",
-          MEDIUM: "h-9 px-3.5 py-2 text-[14px]",
-          LARGE: "h-10 px-3.5 py-2.5 text-[14px]"
+          SMALL: 'h-8 px-3.5 py-1.5 text-[14px]',
+          MEDIUM: 'h-9 px-3.5 py-2 text-[14px]',
+          LARGE: 'h-10 px-3.5 py-2.5 text-[14px]',
         },
         subtypes: {
-          HAS_CONTAINER: "rounded-[10px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]",
-          NO_CONTAINER: "rounded-[10px]"
+          HAS_CONTAINER: 'rounded-[10px] shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)]',
+          NO_CONTAINER: 'rounded-[10px]',
         },
         disabled: {
-          true: "opacity-50 cursor-not-allowed bg-gray-100",
-          false: "cursor-pointer hover:bg-gray-50"
+          true: 'opacity-50 cursor-not-allowed bg-gray-100',
+          false: 'cursor-pointer hover:bg-gray-50',
         },
         positioning: {
           offset: 4,
           rightPadding: 10,
           menuWidth: 200,
           menuHeight: 200,
-          maxHeightOffset: 20
-        }
+          maxHeightOffset: 20,
+        },
       },
-      separator: "h-px my-1 bg-gray-200",
-      iconSize: "w-4 h-4",
-      chevronColor: "text-gray-400", 
-      textContent: "flex-grow truncate font-feature-settings-normal",
+      separator: 'h-px my-1 bg-gray-200',
+      iconSize: 'w-4 h-4',
+      chevronColor: 'text-gray-400',
+      textContent: 'flex-grow truncate font-feature-settings-normal',
       menuItem: {
-        baseStyles: "flex items-center px-3 py-1.5 text-[#525866] font-['Inter_Display'] text-[14px] font-medium leading-[20px]",
+        baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-body-md font-medium ',
         types: {
-          DEFAULT: "cursor-pointer font-[500] text-[#525866]",
-          MULTI_SELECT: "cursor-pointer",
-          ACTION: "cursor-pointer font-medium",
-          LABEL: "font-semibold text-xs text-gray-500 uppercase tracking-wider py-1",
-          SEPARATOR: "py-0 my-1 border-b border-gray-200",
-          SUBMENU: "cursor-pointer font-[500] text-[#525866] relative"
+          DEFAULT: 'cursor-pointer font-medium text-gray-600',
+          MULTI_SELECT: 'cursor-pointer',
+          ACTION: 'cursor-pointer font-medium',
+          LABEL: 'font-semibold text-xs text-gray-500 uppercase tracking-wider py-1',
+          SEPARATOR: 'py-0 my-1 border-b border-gray-200',
+          SUBMENU: 'cursor-pointer font-[500] text-gray-600 relative',
         },
         states: {
-          DEFAULT: "bg-[#FFFFFF]",
-          HOVER: "!bg-[#F3F4F6]",
-          SELECTED: "bg-blue-50 text-blue-700",
-          NA: "pointer-events-none"
+          DEFAULT: 'bg-[#FFFFFF]',
+          HOVER: '!bg-[#F3F4F6]',
+          SELECTED: 'bg-blue-50 text-blue-700',
+          NA: 'pointer-events-none',
         },
         actions: {
-          NA: "",
-          DANGER: "text-red-600",
-          PRIMARY: "text-blue-600"
+          NA: '',
+          DANGER: 'text-red-600',
+          PRIMARY: 'text-blue-600',
         },
         actionHover: {
-          NA: "!bg-[#F3F4F6]",
-          PRIMARY: "!bg-blue-50",
-          DANGER: "!bg-red-50"
+          NA: '!bg-[#F3F4F6]',
+          PRIMARY: '!bg-blue-50',
+          DANGER: '!bg-red-50',
         },
         hover: {
-          PRIMARY: "hover:bg-blue-50",
-          DANGER: "hover:bg-red-50",
-          DEFAULT: "hover:bg-[#F3F4F6]"
+          PRIMARY: 'hover:bg-blue-50',
+          DANGER: 'hover:bg-red-50',
+          DEFAULT: 'hover:bg-[#F3F4F6]',
         },
-        disabled: "opacity-50 pointer-events-none",
-        shortcut: "ml-auto text-xs text-gray-300",
+        disabled: 'opacity-50 pointer-events-none',
+        shortcut: 'ml-auto text-xs text-gray-300',
         slots: {
-          slotL: "mr-2 flex-shrink-0",
-          slotR1: "ml-auto flex-shrink-0",
-          slotR2: "ml-2 flex-shrink-0"
+          slotL: 'mr-2 flex-shrink-0',
+          slotR1: 'ml-auto flex-shrink-0',
+          slotR2: 'ml-2 flex-shrink-0',
         },
         submenu: {
-          container: "bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem] origin-top-left",
-          animation: "animation: menuAnimation 150ms ease-out",
-          animationClass: "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          container:
+            'bg-white border border-gray-200 rounded-md shadow-lg py-1 min-w-[10rem] origin-top-left',
+          animation: 'animation: menuAnimation 150ms ease-out',
+          animationClass:
+            'animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
           portal: {
-            base: "submenu-portal absolute z-[9999]",
-            container: "relative",
+            base: 'submenu-portal absolute z-[9999]',
+            container: 'relative',
             collisionZone: {
-              base: "absolute top-0 h-full w-6",
-              left: "left-0 -translate-x-full",
-              right: "right-0 translate-x-full"
-            }
-          }
+              base: 'absolute top-0 h-full w-6',
+              left: 'left-0 -translate-x-full',
+              right: 'right-0 translate-x-full',
+            },
+          },
         },
         checkbox: {
-          wrapper: "pointer-events-none !m-0 !p-0"
+          wrapper: 'pointer-events-none !m-0 !p-0',
         },
-        rounded: "rounded-md"
-      }
+        rounded: 'rounded-md',
+      },
     },
     checkbox: {
       baseStyles:
@@ -1187,13 +1194,40 @@ export const themeConfig = {
     },
     modal: {
       base: {
-        container: 'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
-        header: 'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
+        container:
+          'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+        header:
+          'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
         content: 'p-4 overflow-y-auto flex-grow',
-        footer: 'px-6 py-4 rounded-b-lg flex justify-end space-x-3 flex-shrink-0 border-t border-gray-200',
+        footer:
+          'px-6 py-4 rounded-b-lg flex justify-end space-x-3 flex-shrink-0 border-t border-gray-200',
         backdrop: 'flex items-center justify-center fixed inset-0 bg-gray-1100 pointer-events-auto',
-        wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto'
-      }
+        wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto',
+      },
+    },
+    popover: {
+      base: {
+        container:
+          'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
+        trigger: 'inline-block',
+        content: 'word-break',
+        header: 'flex flex-col gap-2',
+        headerRow: 'flex items-center justify-between gap-3',
+        heading: 'text-base font-semibold text-gray-900 word-break',
+        description: 'text-body-md font-medium text-gray-500 word-break',
+        closeButton: 'h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0',
+        footer: 'flex justify-start gap-3',
+      },
+      animation: {
+        open: 'data-[state=open]:animate-fade-in',
+        closed: 'data-[state=closed]:animate-fade-out',
+      },
+      placement: {
+        top: 'data-[side=top]',
+        bottom: 'data-[side=bottom]',
+        left: 'data-[side=left]',
+        right: 'data-[side=right]',
+      },
     },
     dataTable: {
       container: "w-full",

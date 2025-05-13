@@ -1,10 +1,10 @@
 import Menu, { useMenu } from './Menu';
 import MenuItem from './MenuItem';
 import MenuDropdown from './MenuDropdown';
-import { 
-  MenuType, 
-  MenuItemType, 
-  MenuItemState, 
+import {
+  MenuType,
+  MenuItemType,
+  MenuItemState,
   MenuItemAction,
   MenuProps,
   MenuItemProps,
@@ -32,14 +32,10 @@ export {
   DropdownSelectionType,
 };
 
-export type {
-  MenuProps,
-  MenuItemProps,
-  DropdownProps,
-};
+export type { MenuProps, MenuItemProps, DropdownProps };
 
 export default {
   Menu,
   MenuItem,
-  MenuDropdown
-}; 
+  MenuDropdown,
+};

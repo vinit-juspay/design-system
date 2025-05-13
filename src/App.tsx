@@ -14,6 +14,7 @@ import {
   Info,
   MessageSquare,
   Check,
+  HelpCircle,
   Table,
 } from 'lucide-react';
 
@@ -37,11 +38,31 @@ import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
-import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
+import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable'
+    | 'buttons'
+    | 'tooltipsV2'
+    | 'tags'
+    | 'tabs'
+    | 'textInput'
+    | 'alerts'
+    | 'charts'
+    | 'chartsV2'
+    | 'fonts'
+    | 'datePicker'
+    | 'selectors'
+    | 'buttonGroups'
+    | 'avatars'
+    | 'menu'
+    | 'dropdown'
+    | 'accordion'
+    | 'statCard'
+    | 'modal'
+    | 'input'
+    | 'snackbar' | 'dataTable'
+    | 'popover'
   >('dataTable');
 
   const navigationItems = [
@@ -52,6 +73,7 @@ const App = () => {
     { id: 'tabs', label: 'Tabs', icon: Settings },
     { id: 'alerts', label: 'Alerts', icon: Bell },
     { id: 'snackbar', label: 'Snackbar', icon: MessageSquare },
+    { id: 'popover', label: 'Popover', icon: HelpCircle },
     { id: 'charts', label: 'Charts', icon: BarChart2 },
     { id: 'chartsV2', label: 'Charts V2', icon: BarChart2 },
     { id: 'fonts', label: 'Fonts', icon: Type },
@@ -125,6 +147,8 @@ const App = () => {
             return <AlertDemo />;
           case 'snackbar':
             return <SnackbarDemo />;
+          case 'popover':
+            return <PopoverDemo />;
           case 'charts':
             return <ChartDemo />;
           case 'chartsV2':

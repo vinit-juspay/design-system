@@ -31,7 +31,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   ) => {
     // Use internal state for uncontrolled component
     const [checkedState, setCheckedState] = React.useState(defaultChecked);
-    
+
     // Determine if component is controlled
     const isControlled = isChecked !== undefined;
     const checked = isControlled ? isChecked : checkedState;

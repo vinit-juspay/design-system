@@ -2,11 +2,7 @@ import * as RadixAccordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import { forwardRef } from 'react';
 import { cn } from '../../utils';
-import {
-  AccordionItemProps,
-  AccordionType,
-  AccordionChevronPosition,
-} from './types';
+import { AccordionItemProps, AccordionType, AccordionChevronPosition } from './types';
 import {
   getAccordionItemClassNames,
   getAccordionTriggerClassNames,
@@ -110,4 +106,4 @@ const AccordionItem = forwardRef<
 
 AccordionItem.displayName = 'AccordionItem';
 
-export default AccordionItem; 
+export default AccordionItem;

@@ -102,7 +102,11 @@ const AccordionDemo = () => {
 
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">left acccordion</h3>
-        <Accordion isMultiple defaultValue={['multi-1', 'multi-3']} accordionType={AccordionType.BORDER}>
+        <Accordion
+          isMultiple
+          defaultValue={['multi-1', 'multi-3']}
+          accordionType={AccordionType.BORDER}
+        >
           <AccordionItem
             value="multi-1"
             title="Product Features"

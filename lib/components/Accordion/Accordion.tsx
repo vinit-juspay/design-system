@@ -1,13 +1,8 @@
 import * as React from 'react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { forwardRef } from 'react';
-import {
-  AccordionProps,
-  AccordionType,
-} from './types';
-import {
-  getAccordionRootClassNames,
-} from './utils';
+import { AccordionProps, AccordionType } from './types';
+import { getAccordionRootClassNames } from './utils';
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (

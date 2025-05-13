@@ -68,7 +68,6 @@ export const Mandatory: Story = {
     ...Default.args,
     mandatory: true,
     sublabel: undefined,
-
   },
 };
 
@@ -76,7 +75,6 @@ export const WithLeftIcon: Story = {
   args: {
     ...Default.args,
     leftSlot: <Mail className="text-gray-400 w-4 h-4" />,
-
   },
 };
 
@@ -133,4 +131,4 @@ export const Filled: Story = {
     state: TextInputState.DEFAULT,
     value: 42,
   },
-}; 
+};

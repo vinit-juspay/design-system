@@ -111,7 +111,7 @@ const SnackbarDemo = () => {
     <div className="p-6">
       <h2 className="text-2xl font-semibold mb-6">Snackbar Demo</h2>
       {renderControls()}
-      
+
       <div className="mt-6">
         <button
           onClick={handleShowSnackbar}
@@ -133,7 +133,7 @@ const SnackbarDemo = () => {
           onClose={handleCloseSnackbar}
         />
       )}
-      
+
       <div className="mt-12 space-y-4">
         <h3 className="text-lg font-medium text-gray-900">Preset Examples</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -147,7 +147,7 @@ const SnackbarDemo = () => {
               position="topRight"
             />
           </div>
-          
+
           <div className="border p-4 rounded-md">
             <p className="mb-2 text-sm font-medium text-gray-500">Success Snackbar</p>
             <Snackbar
@@ -158,7 +158,7 @@ const SnackbarDemo = () => {
               position="topRight"
             />
           </div>
-          
+
           <div className="border p-4 rounded-md">
             <p className="mb-2 text-sm font-medium text-gray-500">Warning Snackbar</p>
             <Snackbar
@@ -169,7 +169,7 @@ const SnackbarDemo = () => {
               position="topRight"
             />
           </div>
-          
+
           <div className="border p-4 rounded-md">
             <p className="mb-2 text-sm font-medium text-gray-500">Error Snackbar</p>
             <Snackbar
@@ -187,4 +187,4 @@ const SnackbarDemo = () => {
   );
 };
 
-export default SnackbarDemo; 
+export default SnackbarDemo;

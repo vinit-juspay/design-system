@@ -21,7 +21,7 @@ const SelectorsDemo = () => {
           <div className="flex flex-col space-y-4">
             <Checkbox
               isChecked={isChecked1}
-              onCheckedChange={(checked) => setIsChecked1(checked)}
+              onCheckedChange={checked => setIsChecked1(checked)}
               rightSlot={<Info className="w-3.5 h-3.5 text-gray-500" />}
               subtext="This is a helpful description"
             >
@@ -67,9 +67,24 @@ const SelectorsDemo = () => {
             <div className="space-y-2">
               <h4 className="text-lg font-medium">Switch Group</h4>
               <SwitchGroup name="features" onChange={values => console.log(values)}>
-                <Switch value="notifications" isChecked={isToggled1} onChange={setIsToggled1} label="Enable notifications" />
-                <Switch value="marketing" isChecked={isToggled2} onChange={setIsToggled2} label="Marketing emails" />
-                <Switch value="updates" isChecked={isToggled3} onChange={setIsToggled3} label="Product updates" />
+                <Switch
+                  value="notifications"
+                  isChecked={isToggled1}
+                  onChange={setIsToggled1}
+                  label="Enable notifications"
+                />
+                <Switch
+                  value="marketing"
+                  isChecked={isToggled2}
+                  onChange={setIsToggled2}
+                  label="Marketing emails"
+                />
+                <Switch
+                  value="updates"
+                  isChecked={isToggled3}
+                  onChange={setIsToggled3}
+                  label="Product updates"
+                />
               </SwitchGroup>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { TextInputState } from '../TextInput/types';
 
 export enum TextAreaSize {
-  DEFAULT = 'default'
+  DEFAULT = 'default',
 }
 
 export interface TextAreaProps {
@@ -19,4 +19,4 @@ export interface TextAreaProps {
   rows?: number;
   successMessage?: string;
   errorMessage?: string;
-} 
+}

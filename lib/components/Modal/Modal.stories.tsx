@@ -88,8 +88,8 @@ const ModalWithLongContent = () => {
         <div className="space-y-4">
           {Array.from({ length: 20 }).map((_, index) => (
             <p key={index}>
-              This is paragraph {index + 1} of a long content modal. The content should
-              scroll when it exceeds the maximum height.
+              This is paragraph {index + 1} of a long content modal. The content should scroll when
+              it exceeds the maximum height.
             </p>
           ))}
         </div>

@@ -12,21 +12,16 @@ export enum SlotPosition {
 
 export const getInputBaseClasses = (
   size: TextInputSize = TextInputSize.MEDIUM,
-  state: TextInputState = TextInputState.DEFAULT,
-
+  state: TextInputState = TextInputState.DEFAULT
 ) => {
+  const states = inputTheme.inputBase.states;
 
-  const states = inputTheme.inputBase.states;  
-  
   // Extract the base classes that apply to all states
-  const baseClasses = [
-    inputTheme.inputBase.base,
-    inputTheme.inputBase.sizes[size],
-  ];
-  
+  const baseClasses = [inputTheme.inputBase.base, inputTheme.inputBase.sizes[size]];
+
   // Apply state-specific classes
   const stateClasses = [];
-  
+
   // If state is ERROR, only apply error classes regardless of focus state
   if (state === TextInputState.ERROR) {
     stateClasses.push(states.default, states.error);
@@ -39,7 +34,7 @@ export const getInputBaseClasses = (
   } else if (state === TextInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }
-  
+
   return cn(...baseClasses, ...stateClasses);
 };
 
@@ -51,7 +46,7 @@ export const getInputClasses = (
   const hasLeftSlot = leftSlot;
   const hasRightSlot = rightSlot;
   const states = inputTheme.input.states;
-  
+
   let paddingClass = inputTheme.input.padding.default;
   if (hasLeftSlot && hasRightSlot) {
     paddingClass = inputTheme.input.padding.withBothSlots;
@@ -60,54 +55,43 @@ export const getInputClasses = (
   } else if (hasRightSlot) {
     paddingClass = inputTheme.input.padding.withRightSlot;
   }
-  
+
   // Base classes regardless of state
-  const baseClasses = [
-    inputTheme.input.base,
-    paddingClass,
-  ];
-  
+  const baseClasses = [inputTheme.input.base, paddingClass];
+
   // State-specific classes
   const stateClasses = [];
-  
+
   if (state === TextInputState.DEFAULT || state === TextInputState.FILLED) {
     stateClasses.push(states.default);
   } else if (state === TextInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }
-  
+
   return cn(...baseClasses, ...stateClasses);
 };
 
 export const getLabelClasses = (mandatory: boolean = false) => {
-  return cn(
-    inputTheme.label.base,
-    inputTheme.label.color,
-    {
-      'after:content-["*"] after:ml-0.5 after:text-red-500': mandatory,
-    }
-  );
+  return cn(inputTheme.label.base, inputTheme.label.color, {
+    'after:content-["*"] after:ml-0.5 after:text-red-500': mandatory,
+  });
 };
 
 export const getSublabelClasses = () => {
-  return cn(
-    inputTheme.sublabel.base,
-    inputTheme.sublabel.color
-  );
+  return cn(inputTheme.sublabel.base, inputTheme.sublabel.color);
 };
 
 export const getHintClasses = (state: TextInputState = TextInputState.DEFAULT) => {
   return cn(
     inputTheme.hint.base,
-    state === TextInputState.ERROR ? inputTheme.hint.error : 
-      state === TextInputState.SUCCESS ? inputTheme.hint.success : 
-      inputTheme.hint.color
+    state === TextInputState.ERROR
+      ? inputTheme.hint.error
+      : state === TextInputState.SUCCESS
+        ? inputTheme.hint.success
+        : inputTheme.hint.color
   );
 };
 
 export const getSlotClasses = (position: SlotPosition) => {
-  return cn(
-    inputTheme.slot.base,
-    inputTheme.slot.positions[position]
-  );
-}; 
+  return cn(inputTheme.slot.base, inputTheme.slot.positions[position]);
+};

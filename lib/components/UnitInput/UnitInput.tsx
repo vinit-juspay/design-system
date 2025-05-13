@@ -51,16 +51,16 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
       initialState: state,
     });
 
-      // Composite handlers
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    inputState.handleFocus();
-    onFocus?.(e);
-  };
+    // Composite handlers
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      inputState.handleFocus();
+      onFocus?.(e);
+    };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    inputState.handleBlur();
-    onBlur?.(e);
-  };
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      inputState.handleBlur();
+      onBlur?.(e);
+    };
 
     return (
       <div className={inputTheme.container}>
@@ -74,7 +74,7 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
               {sublabel && <small className={getSublabelClasses()}>{sublabel}</small>}
             </div>
             {infoTooltip && (
-              <TooltipV2   size={TooltipSize.LARGE} content={infoTooltip}>
+              <TooltipV2 size={TooltipSize.LARGE} content={infoTooltip}>
                 <button type="button" aria-label="More information" className="focus:outline-none">
                   <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
                 </button>
@@ -98,12 +98,8 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
             {/* Input */}
             <input
               ref={ref}
-              type='text'
-              className={getInputClasses(
-                inputState.visualState,
-                leftSlot,
-                rightSlot
-              )}
+              type="text"
+              className={getInputClasses(inputState.visualState, leftSlot, rightSlot)}
               placeholder={placeholder}
               disabled={state === TextInputState.DISABLED}
               defaultValue={value}

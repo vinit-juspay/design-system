@@ -26,7 +26,8 @@ export interface DropdownOption {
   icon?: ReactNode;
 }
 
-export interface DropdownInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'onChange'> {
+export interface DropdownInputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'value' | 'onChange'> {
   /** Hint text displayed below the input */
   hintText?: string;
   /** Label text displayed above the input */
@@ -69,4 +70,4 @@ export interface DropdownInputProps extends Omit<InputHTMLAttributes<HTMLInputEl
   dropdownPlaceholder?: string;
   /** Position of the dropdown (left or right) */
   dropdownPosition?: DropdownPosition;
-} 
+}

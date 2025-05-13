@@ -108,8 +108,12 @@ export const States: Story = {
       <Checkbox defaultChecked={true}>Checked</Checkbox>
       <Checkbox isChecked="indeterminate">Indeterminate</Checkbox>
       <Checkbox isDisabled>Disabled unchecked</Checkbox>
-      <Checkbox isDisabled isChecked={true}>Disabled checked</Checkbox>
-      <Checkbox isDisabled isChecked="indeterminate">Disabled indeterminate</Checkbox>
+      <Checkbox isDisabled isChecked={true}>
+        Disabled checked
+      </Checkbox>
+      <Checkbox isDisabled isChecked="indeterminate">
+        Disabled indeterminate
+      </Checkbox>
     </div>
   ),
 };
@@ -117,10 +121,7 @@ export const States: Story = {
 export const WithSubtext: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox
-        defaultChecked={true}
-        subtext="We'll send you occasional product updates"
-      >
+      <Checkbox defaultChecked={true} subtext="We'll send you occasional product updates">
         Subscribe to newsletter
       </Checkbox>
       <Checkbox
@@ -145,12 +146,10 @@ export const Positions: Story = {
 export const WithRightSlot: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Checkbox 
-        rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}
-      >
+      <Checkbox rightSlot={<HelpCircle className="w-3.5 h-3.5 text-gray-500" />}>
         With help icon
       </Checkbox>
-      <Checkbox 
+      <Checkbox
         rightSlot={<Settings className="w-3.5 h-3.5 text-blue-500" />}
         subtext="Configure advanced settings"
       >
@@ -162,7 +161,7 @@ export const WithRightSlot: Story = {
 
 const ControlledCheckboxDemo = () => {
   const [checked, setChecked] = React.useState<boolean | 'indeterminate'>(false);
-  
+
   const toggleState = () => {
     setChecked(current => {
       if (current === false) return true;
@@ -173,14 +172,14 @@ const ControlledCheckboxDemo = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <p>Current state: {checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}</p>
+      <p>
+        Current state:{' '}
+        {checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
+      </p>
       <button onClick={toggleState} className="px-3 py-1 bg-blue-500 text-white rounded mb-2">
         Toggle state
       </button>
-      <Checkbox 
-        isChecked={checked} 
-        onCheckedChange={setChecked}
-      >
+      <Checkbox isChecked={checked} onCheckedChange={setChecked}>
         Controlled checkbox
       </Checkbox>
     </div>
@@ -231,11 +230,11 @@ Shows how to use checkboxes in a form with validation.
     return (
       <form onSubmit={handleSubmit} className="w-96 p-4 border border-gray-200 rounded-md">
         <h3 className="text-lg font-medium mb-4">Sign-up preferences</h3>
-        
+
         <div className="space-y-3 mb-6">
           <Checkbox
             isChecked={formData.terms}
-            onCheckedChange={(checked) => 
+            onCheckedChange={checked =>
               setFormData(prev => ({ ...prev, terms: checked as boolean }))
             }
             required
@@ -243,19 +242,19 @@ Shows how to use checkboxes in a form with validation.
           >
             I agree to terms and conditions
           </Checkbox>
-          
+
           <Checkbox
             isChecked={formData.newsletter}
-            onCheckedChange={(checked) => 
+            onCheckedChange={checked =>
               setFormData(prev => ({ ...prev, newsletter: checked as boolean }))
             }
           >
             Subscribe to newsletter
           </Checkbox>
-          
+
           <Checkbox
             isChecked={formData.offers}
-            onCheckedChange={(checked) => 
+            onCheckedChange={checked =>
               setFormData(prev => ({ ...prev, offers: checked as boolean }))
             }
             subtext="Get notifications about discounts and special offers"
@@ -263,14 +262,14 @@ Shows how to use checkboxes in a form with validation.
             Receive special offers
           </Checkbox>
         </div>
-        
-        <button 
+
+        <button
           type="submit"
           className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Submit
         </button>
-        
+
         {submitted && (
           <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-md">
             <p>Form submitted successfully!</p>
@@ -282,4 +281,4 @@ Shows how to use checkboxes in a form with validation.
       </form>
     );
   },
-}; 
+};

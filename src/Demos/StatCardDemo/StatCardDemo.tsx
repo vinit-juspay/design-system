@@ -122,7 +122,9 @@ const StatCardDemo = () => {
 
   const renderStatCardPreview = () => {
     const titleIcon = showIcon ? <Activity size={18} className="text-purple-500" /> : undefined;
-    const actionIcon = showActionIcon ? <ArrowUpRight size={18} className="text-gray-400" /> : undefined;
+    const actionIcon = showActionIcon ? (
+      <ArrowUpRight size={18} className="text-gray-400" />
+    ) : undefined;
 
     return (
       <div className="space-y-4">
@@ -133,11 +135,21 @@ const StatCardDemo = () => {
             title="Active Users"
             value="2,573"
             subtitle="Last 7 days"
-            change={showChange ? {
-              type: changeType,
-              value: changeValue
-            } : undefined}
-            chartData={variant === StatCardVariant.LINE || variant === StatCardVariant.BAR ? variant === StatCardVariant.LINE ? lineChartData : barChartData : undefined}
+            change={
+              showChange
+                ? {
+                    type: changeType,
+                    value: changeValue,
+                  }
+                : undefined
+            }
+            chartData={
+              variant === StatCardVariant.LINE || variant === StatCardVariant.BAR
+                ? variant === StatCardVariant.LINE
+                  ? lineChartData
+                  : barChartData
+                : undefined
+            }
             progressValue={variant === StatCardVariant.PROGRESS_BAR ? progressValue : undefined}
             titleIcon={titleIcon}
             actionIcon={actionIcon}
@@ -227,4 +239,4 @@ const StatCardDemo = () => {
   );
 };
 
-export default StatCardDemo; 
+export default StatCardDemo;

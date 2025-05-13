@@ -30,4 +30,4 @@ export interface OTPInputProps {
   infoTooltip?: string;
   successMessage?: string;
   errorMessage?: string;
-} 
+}

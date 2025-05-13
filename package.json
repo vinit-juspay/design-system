@@ -1,6 +1,6 @@
 {
   "name": "@vinitjuspay/design-system",
-  "version": "0.1.29",
+  "version": "0.1.33",
   "type": "module",
   "main": "./dist/main.js",
   "module": "./dist/main.js",
@@ -25,6 +25,7 @@
     "lint:fix": "eslint . --fix",
     "format": "npx prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "npx prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "fix:all": "npm run format && npm run lint:fix",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",

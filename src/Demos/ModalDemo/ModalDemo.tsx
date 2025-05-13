@@ -4,17 +4,15 @@ import { Button, ButtonType, ButtonSubType } from '../../../lib/components/Butto
 import { X } from 'lucide-react';
 
 const ModalDemo = () => {
-
   const [isOpenButtonTypes, setIsOpenButtonTypes] = useState(false);
   const [isOpenPlayground, setIsOpenPlayground] = useState(false);
 
-  
   // Playground state
   const [playgroundConfig, setPlaygroundConfig] = useState({
-    title: "Modal Heading",
-    subtitle: "One line description of the modal ",
-    primaryButtonText: "Confirm",
-    secondaryButtonText: "Cancel",
+    title: 'Modal Heading',
+    subtitle: 'One line description of the modal ',
+    primaryButtonText: 'Confirm',
+    secondaryButtonText: 'Cancel',
     primaryButtonType: ButtonType.PRIMARY,
     secondaryButtonType: ButtonType.SECONDARY,
     showCloseButton: true,
@@ -37,7 +35,7 @@ const ModalDemo = () => {
           <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center">
             <span className="text-white font-semibold">!</span>
           </div>
-          <div className='flex flex-col gap-1 p-4' >
+          <div className="flex flex-col gap-1 p-4">
             <h3 className="text-sm font-semibold text-primary-900">Custom Header</h3>
             <p className="text-xs text-primary-600">With custom styling and layout</p>
           </div>
@@ -102,7 +100,7 @@ const ModalDemo = () => {
               <input
                 type="text"
                 value={playgroundConfig.title}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, title: e.target.value })}
+                onChange={e => setPlaygroundConfig({ ...playgroundConfig, title: e.target.value })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               />
             </div>
@@ -111,51 +109,79 @@ const ModalDemo = () => {
               <input
                 type="text"
                 value={playgroundConfig.subtitle}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, subtitle: e.target.value })}
+                onChange={e =>
+                  setPlaygroundConfig({ ...playgroundConfig, subtitle: e.target.value })
+                }
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Primary Button Text</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Primary Button Text
+              </label>
               <input
                 type="text"
                 value={playgroundConfig.primaryButtonText}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, primaryButtonText: e.target.value })}
+                onChange={e =>
+                  setPlaygroundConfig({ ...playgroundConfig, primaryButtonText: e.target.value })
+                }
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Secondary Button Text</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Secondary Button Text
+              </label>
               <input
                 type="text"
                 value={playgroundConfig.secondaryButtonText}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, secondaryButtonText: e.target.value })}
+                onChange={e =>
+                  setPlaygroundConfig({ ...playgroundConfig, secondaryButtonText: e.target.value })
+                }
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               />
             </div>
           </div>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Primary Button Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Primary Button Type
+              </label>
               <select
                 value={playgroundConfig.primaryButtonType}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, primaryButtonType: e.target.value as ButtonType })}
+                onChange={e =>
+                  setPlaygroundConfig({
+                    ...playgroundConfig,
+                    primaryButtonType: e.target.value as ButtonType,
+                  })
+                }
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               >
-                {Object.values(ButtonType).map((type) => (
-                  <option key={type} value={type}>{type}</option>
+                {Object.values(ButtonType).map(type => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Secondary Button Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Secondary Button Type
+              </label>
               <select
                 value={playgroundConfig.secondaryButtonType}
-                onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, secondaryButtonType: e.target.value as ButtonType })}
+                onChange={e =>
+                  setPlaygroundConfig({
+                    ...playgroundConfig,
+                    secondaryButtonType: e.target.value as ButtonType,
+                  })
+                }
                 className="w-full rounded-md border border-gray-300 px-3 py-2"
               >
-                {Object.values(ButtonType).map((type) => (
-                  <option key={type} value={type}>{type}</option>
+                {Object.values(ButtonType).map(type => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
                 ))}
               </select>
             </div>
@@ -166,7 +192,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.showCloseButton}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, showCloseButton: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showCloseButton: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Show Close Button</span>
@@ -175,7 +206,9 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.showHeader}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, showHeader: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({ ...playgroundConfig, showHeader: e.target.checked })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Show Header</span>
@@ -184,7 +217,9 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.showFooter}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, showFooter: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({ ...playgroundConfig, showFooter: e.target.checked })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Show Footer</span>
@@ -193,7 +228,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.showPrimaryButton}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, showPrimaryButton: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showPrimaryButton: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Show Primary Button</span>
@@ -202,7 +242,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.showSecondaryButton}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, showSecondaryButton: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showSecondaryButton: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Show Secondary Button</span>
@@ -211,7 +256,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.closeOnBackdropClick}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, closeOnBackdropClick: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        closeOnBackdropClick: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Close on Backdrop Click</span>
@@ -220,7 +270,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.primaryButtonDisabled}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, primaryButtonDisabled: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        primaryButtonDisabled: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Disable Primary Button</span>
@@ -229,7 +284,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.secondaryButtonDisabled}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, secondaryButtonDisabled: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        secondaryButtonDisabled: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Disable Secondary Button</span>
@@ -243,7 +303,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.useCustomHeader}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, useCustomHeader: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        useCustomHeader: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Use Custom Header</span>
@@ -252,7 +317,12 @@ const ModalDemo = () => {
                   <input
                     type="checkbox"
                     checked={playgroundConfig.useCustomFooter}
-                    onChange={(e) => setPlaygroundConfig({ ...playgroundConfig, useCustomFooter: e.target.checked })}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        useCustomFooter: e.target.checked,
+                      })
+                    }
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">Use Custom Footer</span>
@@ -262,10 +332,7 @@ const ModalDemo = () => {
           </div>
         </div>
 
-        <Button
-          buttonType={ButtonType.PRIMARY}
-          onClick={() => setIsOpenPlayground(true)}
-        >
+        <Button buttonType={ButtonType.PRIMARY} onClick={() => setIsOpenPlayground(true)}>
           Open Playground Modal
         </Button>
 
@@ -283,8 +350,6 @@ const ModalDemo = () => {
           showCloseButton={playgroundConfig.showCloseButton}
           showHeader={playgroundConfig.showHeader}
           showFooter={playgroundConfig.showFooter}
-          showPrimaryButton={playgroundConfig.showPrimaryButton}
-          showSecondaryButton={playgroundConfig.showSecondaryButton}
           closeOnBackdropClick={playgroundConfig.closeOnBackdropClick}
           primaryButtonDisabled={playgroundConfig.primaryButtonDisabled}
           secondaryButtonDisabled={playgroundConfig.secondaryButtonDisabled}
@@ -293,21 +358,18 @@ const ModalDemo = () => {
           headerRightSlot={<Button buttonType={ButtonType.SECONDARY}>Close</Button>}
         >
           <div className="text-gray-600">
-            <p className="mb-4">This is a playground modal where you can customize all properties in real-time.</p>
+            <p className="mb-4">
+              This is a playground modal where you can customize all properties in real-time.
+            </p>
             <p>Try different combinations of settings to see how the modal behaves.</p>
           </div>
         </Modal>
       </div>
 
-
-
       {/* Button Types Demo */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Button Types Demo</h3>
-        <Button
-          buttonType={ButtonType.PRIMARY}
-          onClick={() => setIsOpenButtonTypes(true)}
-        >
+        <Button buttonType={ButtonType.PRIMARY} onClick={() => setIsOpenButtonTypes(true)}>
           Open Button Types Demo
         </Button>
 
@@ -342,9 +404,8 @@ const ModalDemo = () => {
           </div>
         </Modal>
       </div>
-
     </>
   );
 };
 
-export default ModalDemo; 
+export default ModalDemo;

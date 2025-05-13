@@ -17,7 +17,6 @@ export { default as AvatarGroup } from './components/AvatarGroup/AvatarGroup';
 export { default as ChartsV2 } from './components/ChartsV2/ChartsV2';
 export { DateRangePicker } from './components/DateRangePicker';
 
-
 export { default as TextInput } from './components/TextInput/TextInput';
 export { default as NumberInput } from './components/NumberInput/NumberInput';
 export { default as UnitInput } from './components/UnitInput/UnitInput';
@@ -25,11 +24,13 @@ export { default as OTPInput } from './components/OTPInput/OTPInput';
 export { default as TextArea } from './components/TextArea/TextArea';
 export { default as DropdownInput } from './components/DropdownInput/DropdownInput';
 
-export * from './hooks';export { default as Switch } from './components/Switch/Switch';
+export * from './hooks';
+export { default as Switch } from './components/Switch/Switch';
 export { default as SwitchGroup } from './components/Switch/SwitchGroup';
 export { Radio, RadioGroup } from './components/Radio';
 export { default as ButtonGroup } from './components/ButtonGroup/ButtonGroup';
-export {Accordion, AccordionItem} from './components/Accordion';
+export { Accordion, AccordionItem } from './components/Accordion';
 export { default as TooltipV2 } from './components/Tooltip/TooltipV2';
 export { default as StatCard } from './components/StatCard/StatCard';
 export { default as Modal } from './components/Modal/Modal';
+export { default as Popover } from './components/Popover/Popover';

@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { 
-  Menu, 
-  MenuType, 
-  MenuItemType, 
-  MenuItemAction 
-} from '..';
-import { 
-  Edit, 
-  Copy, 
-  Trash2, 
-  Archive, 
-  Check, 
-  ChevronRight, 
+import { Menu, MenuType, MenuItemType, MenuItemAction } from '..';
+import {
+  Edit,
+  Copy,
+  Trash2,
+  Archive,
+  Check,
+  ChevronRight,
   FileEdit,
   FileText,
   FileSpreadsheet,
@@ -21,7 +16,7 @@ import {
   Mail,
   Share,
   Save,
-  Printer
+  Printer,
 } from 'lucide-react';
 
 const meta: Meta<typeof Menu> = {
@@ -35,19 +30,19 @@ const meta: Meta<typeof Menu> = {
     type: {
       control: 'select',
       options: Object.values(MenuType),
-      description: 'Type of menu'
+      description: 'Type of menu',
     },
     hasSearch: {
       control: 'boolean',
-      description: 'Whether the menu has search functionality'
+      description: 'Whether the menu has search functionality',
     },
     items: {
       control: 'object',
-      description: 'Menu items to display'
+      description: 'Menu items to display',
     },
     searchPlaceholder: {
       control: 'text',
-      description: 'Placeholder text for search input'
+      description: 'Placeholder text for search input',
     },
   },
 };
@@ -106,7 +101,7 @@ const defaultItems = [
     action: MenuItemAction.DANGER,
     hasSlotL: true,
     slotL: <Trash2 size={16} />,
-  }
+  },
 ];
 
 // Default Menu Example
@@ -120,7 +115,7 @@ export const Default: Story = {
     onSearchTermChange: fn(),
     onSelectionChange: fn(),
     onOpenChange: fn(),
-    onContextChange: fn()
+    onContextChange: fn(),
   },
 };
 
@@ -136,7 +131,7 @@ export const WithSearch: Story = {
     onSearchTermChange: fn(),
     onSelectionChange: fn(),
     onOpenChange: fn(),
-    onContextChange: fn()
+    onContextChange: fn(),
   },
 };
 
@@ -151,14 +146,14 @@ export const ContextMenu: Story = {
     onSearchTermChange: fn(),
     onSelectionChange: fn(),
     onOpenChange: fn(),
-    onContextChange: fn()
+    onContextChange: fn(),
   },
 };
 
 // Multi-Select Menu
 const MultiSelectMenuExample = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  
+
   const multiSelectItems = [
     {
       id: 'label1',
@@ -196,7 +191,7 @@ const MultiSelectMenuExample = () => {
       text: 'Apply Selection',
       type: MenuItemType.ACTION,
       action: MenuItemAction.PRIMARY,
-    }
+    },
   ];
 
   return (
@@ -206,8 +201,8 @@ const MultiSelectMenuExample = () => {
       searchPlaceholder="Search options..."
       items={multiSelectItems}
       selectedItems={selectedItems}
-      onSelectionChange={(items) => setSelectedItems(items)}
-      onItemClick={(item) => {
+      onSelectionChange={items => setSelectedItems(items)}
+      onItemClick={item => {
         if (item.id && item.type === MenuItemType.MULTI_SELECT) {
           const newSelectedItems = selectedItems.includes(item.id)
             ? selectedItems.filter(id => id !== item.id)
@@ -269,8 +264,8 @@ export const WithSubmenu: Story = {
             type: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <FileIcon size={16} />,
-          }
-        ]
+          },
+        ],
       },
       {
         id: 'separator1',
@@ -320,10 +315,10 @@ export const WithSubmenu: Story = {
                 type: MenuItemType.DEFAULT,
                 hasSlotL: true,
                 slotL: <Save size={16} />,
-              }
-            ]
-          }
-        ]
+              },
+            ],
+          },
+        ],
       },
       {
         id: 'delete',
@@ -350,5 +345,5 @@ export const WithSubmenu: Story = {
         />
       </div>
     );
-  }
-}; 
+  },
+};

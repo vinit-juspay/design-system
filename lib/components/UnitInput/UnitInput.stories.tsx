@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UnitInput } from '../../main';
 import { TextInputState, TextInputSize } from '../TextInput/types';
-import { Mail, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight } from 'lucide-react';
 import { UnitPosition } from './types';
-
 
 const meta = {
   title: 'Components/Input/UnitInput',
