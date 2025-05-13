@@ -19,4 +19,5 @@ export interface TextAreaProps {
   rows?: number;
   successMessage?: string;
   errorMessage?: string;
-}
+  className?: string;
+} 
