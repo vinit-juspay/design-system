@@ -1,5 +1,5 @@
-import { ReactElement, ReactNode } from "react";
-import { DirectoryData } from "../DIrectory/types";
+import { ReactNode } from "react";
+import { DirectoryData } from "../Directory/types";
 
 
 export interface SidebarNavItem {

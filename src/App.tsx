@@ -47,7 +47,7 @@ import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
-import { DirectoryData } from '../lib/components/DIrectory/types';
+import { DirectoryData } from '../lib/components/Directory/types';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<

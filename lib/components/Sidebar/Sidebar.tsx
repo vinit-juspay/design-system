@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import { SidebarProps } from "./types";
-import Directory from "../DIrectory/Directory";
+import Directory from "../Directory/Directory";
 import { DropdownType } from "../Menu/types";
 import { MenuDropdown } from "../Menu";
 import { DropdownSize } from "../Menu/types";
@@ -26,7 +26,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
   return <div ref={ref} className="w-full h-full flex bg-gray-25">
-    <aside className={`max-w-[300px] will-change-transform duration-100 animate-slide-in-from-left w-full border-r border-gray-200 flex ${isExpanded ? "max-w-[300px]" : "max-w-[0px] border-none"}`}>
+    <aside className={`max-w-[300px] will-change-transform duration-100 animate-slide-in-from-left w-full border-r border-gray-200 flex ${isExpanded ? "max-w-[300px]" : "w-[0px] border-none"}`}>
       {isExpanded &&
         <>
           {/* TENANTS SIDE BAR _ SECONDARY SIDE BAR */}
