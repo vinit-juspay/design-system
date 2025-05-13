@@ -65,7 +65,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
 
     <section className="w-full relative overflow-y-auto">
       {/* TOPBAR  */}
-      <div className="w-full h-16 border-b border-gray-200 bg-white sticky top-0 flex debug items-center gap-4">
+      <div className="w-full h-16 border-b border-gray-200 bg-white sticky top-0 flex debug items-center gap-3">
 
         <div className="w-fit shrink-0 flex items-center gap-2">
           {merchants.length > 1 ? <MenuDropdown

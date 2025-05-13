@@ -547,6 +547,8 @@ const App = () => {
     },
     {
       label: "Data Display",
+      isCollapsible: true,
+      defaultOpen: false,
       items: [
         {
           label: "Chart",
@@ -567,6 +569,8 @@ const App = () => {
     },
     {
       label: "Form Elements",
+      isCollapsible: true,
+      defaultOpen: false,
       items: [
         {
           label: "Date Picker",
