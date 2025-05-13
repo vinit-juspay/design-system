@@ -163,7 +163,15 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <input
             ref={setInputRef}
             type="number"
-            className={cn(getInputClasses(inputState.visualState, leftSlot, showStepper || rightSlot ? <div /> : undefined), getNumberInputClasses(), className)}
+            className={cn(
+              getInputClasses(
+                inputState.visualState,
+                leftSlot,
+                showStepper || rightSlot ? <div /> : undefined
+              ),
+              getNumberInputClasses(),
+              className
+            )}
             placeholder={placeholder}
             disabled={state === TextInputState.DISABLED}
             defaultValue={value}

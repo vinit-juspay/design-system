@@ -100,12 +100,11 @@ const UnitInput = forwardRef<HTMLInputElement, UnitInputProps>(
             {/* Input */}
             <input
               ref={ref}
-              type='text'
-              className={cn(getInputClasses(
-                inputState.visualState,
-                leftSlot,
-                rightSlot
-              ), className)}
+              type="text"
+              className={cn(
+                getInputClasses(inputState.visualState, leftSlot, rightSlot),
+                className
+              )}
               placeholder={placeholder}
               disabled={state === TextInputState.DISABLED}
               defaultValue={value}
