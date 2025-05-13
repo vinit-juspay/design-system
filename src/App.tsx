@@ -31,6 +31,7 @@ import {
   Box,
   Search,
   EyeClosed,
+  IndianRupee,
 } from 'lucide-react';
 import Sidebar from '../lib/components/Sidebar/Sidebar';
 
@@ -54,6 +55,7 @@ import StatCardDemo from './Demos/StatCardDemo/StatCardDemo';
 import SnackbarDemo from './Demos/SnackbarDemo/SnackbarDemo';
 import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
+import { DirectoryData } from '../lib/components/DIrectory/Directory';
 
 
 
@@ -358,6 +360,9 @@ const App = () => {
           <p>Search</p>
         </div>
       </div>
+      <p>{activeMerchant}</p>
+      <p>{activeTenant}</p>
+      <p>{activeComponent}</p>
 
       <EyeClosed className="w-4 h-4" />
     </div>
@@ -414,15 +419,191 @@ const App = () => {
     </div>
   );
 
+  const tenants = [{
+    label: "Juspay",
+    icon: <IndianRupee className="w-4 h-4" />,
+    id: "juspay"
+  }, {
+    label: "Razorpay",
+    icon: <UserIcon className="w-4 h-4" />,
+    id: "razorpay"
+  }]
+
+  const merchants = [{
+    label: "Design System",
+    icon: <UserIcon className="w-4 h-4" />,
+    id: "design-system"
+  }, {
+    label: "Design System 2",
+    icon: <UserIcon className="w-4 h-4" />,
+    id: "design-system-2"
+    }]
+  
+  const sampleData: DirectoryData[] = [
+    {
+      label: "Basic Components",
+      items: [
+        {
+          label: "Button",
+          leftSlot: <Square className="w-4 h-4" />,
+          onClick: () => setActiveComponent("buttons")
+        },
+        {
+          label: "Button Group",
+          leftSlot: <Grid className="w-4 h-4" />,
+          onClick: () => setActiveComponent("buttonGroups")
+        },
+        {
+          label: "Input",
+          leftSlot: <FormInput className="w-4 h-4" />,
+          onClick: () => setActiveComponent("input")
+        },
+        {
+          label: "Tag",
+          leftSlot: <TagIcon className="w-4 h-4" />,
+          onClick: () => setActiveComponent("tags")
+        },
+        {
+          label: "Avatar",
+          leftSlot: <Users className="w-4 h-4" />,
+          onClick: () => setActiveComponent("avatars")
+        }
+      ]
+    },
+    {
+      label: "Navigation",
+      items: [
+        {
+          label: "Menu",
+          leftSlot: <MenuIcon className="w-4 h-4" />,
+          items: [
+            {
+              label: "Item 1",
+              leftSlot: <Square className="w-4 h-4" />,
+              onClick: () => setActiveComponent("menu"),
+              items: [
+                {
+                  label: "Item 1.1",
+                  leftSlot: <Square className="w-4 h-4" />,
+                  onClick: () => setActiveComponent("menu"),
+                  items: [
+                    {
+                      label: "Item 1.1.1",
+                      leftSlot: <Square className="w-4 h-4" />,
+                      onClick: () => setActiveComponent("menu"),
+                    }
+                  ]
+                },
+
+              ]
+            },
+            {
+              label: "Item 2",
+              leftSlot: <Square className="w-4 h-4" />,
+            },
+          ]
+        },
+        {
+          label: "Dropdown",
+          leftSlot: <ChevronDown className="w-4 h-4" />,
+          onClick: () => setActiveComponent("dropdown")
+        },
+        {
+          label: "Tabs",
+          leftSlot: <Layout className="w-4 h-4" />,
+          onClick: () => setActiveComponent("tabs")
+        },
+        {
+          label: "Accordion",
+          leftSlot: <List className="w-4 h-4" />,
+          onClick: () => setActiveComponent("accordion")
+        }
+      ]
+    },
+    {
+      label: "Feedback",
+      items: [
+        {
+          label: "Alert",
+          leftSlot: <AlertCircle className="w-4 h-4" />,
+          onClick: () => setActiveComponent("alerts")
+        },
+        {
+          label: "Snackbar",
+          leftSlot: <BellIcon className="w-4 h-4" />,
+          onClick: () => setActiveComponent("snackbar")
+        },
+        {
+          label: "Tooltip",
+          leftSlot: <Info className="w-4 h-4" />,
+          onClick: () => setActiveComponent("tooltipsV2")
+        },
+        {
+          label: "Modal",
+          leftSlot: <Box className="w-4 h-4" />,
+          onClick: () => setActiveComponent("modal")
+        }
+      ]
+    },
+    {
+      label: "Data Display",
+      items: [
+        {
+          label: "Chart",
+          leftSlot: <BarChart2 className="w-4 h-4" />,
+          onClick: () => setActiveComponent("charts")
+        },
+        {
+          label: "Chart V2",
+          leftSlot: <BarChart2 className="w-4 h-4" />,
+          onClick: () => setActiveComponent("chartsV2")
+        },
+        {
+          label: "Stat Card",
+          leftSlot: <FileText className="w-4 h-4" />,
+          onClick: () => setActiveComponent("statCard")
+        }
+      ]
+    },
+    {
+      label: "Form Elements",
+      items: [
+        {
+          label: "Date Picker",
+          leftSlot: <CalendarIcon className="w-4 h-4" />,
+          onClick: () => setActiveComponent("datePicker")
+            },
+        {
+          label: "Selectors",
+          leftSlot: <ListFilter className="w-4 h-4" />,
+          onClick: () => setActiveComponent("selectors")
+        }
+      ]
+    },
+    {
+      label: "Typography",
+      items: [
+        {
+          label: "Fonts",
+          leftSlot: <Type className="w-4 h-4" />,
+          onClick: () => setActiveComponent("fonts")
+        }
+      ]
+    }
+  ];
+
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
       <Sidebar
-        data={sidebarData}
+        tenants={tenants}
+        merchants={merchants}
+        data={sampleData}
         topbar={topbar}
         activeTenant={activeTenant}
         setActiveTenant={setActiveTenant}
         activeMerchant={activeMerchant}
         setActiveMerchant={setActiveMerchant}
+
       >
         <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {renderContent()}

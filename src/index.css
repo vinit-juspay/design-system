@@ -143,3 +143,7 @@ body {
 .debug {
   outline: 1px solid red;
 }
+
+.debug-blue {
+  outline: 1px solid blue;
+}

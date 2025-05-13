@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { DirectoryData } from "../DIrectory/Directory";
 
 export interface SidebarNavItem {
   label: string;
@@ -23,9 +24,23 @@ export interface TenantData {
   merchantData: MerchantData[];
 }
 
+interface TenantInfo {
+  label: string;
+  icon: ReactNode;
+  id?: string;
+}
+
+interface MerchantInfo {
+  label: string;
+  icon: ReactNode;
+  id?: string;
+}
+
 export interface SidebarProps {
+  tenants: TenantInfo[];
+  merchants: MerchantInfo[];
   children: ReactNode;
-  data: TenantData[];
+  data: DirectoryData[];
   topbar: ReactNode;
   activeTenant?: string;
   setActiveTenant?: (tenant: string) => void;
