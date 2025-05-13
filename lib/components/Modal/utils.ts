@@ -1,11 +1,8 @@
-import { cn } from "../../utils";
-import { themeConfig } from "../../themeConfig";
+import { cn } from '../../utils';
+import { themeConfig } from '../../themeConfig';
 
 export const getModalClasses = (className?: string) => {
-  return cn(
-    themeConfig.euler.modal.base.container,
-    className
-  );
+  return cn(themeConfig.euler.modal.base.container, className);
 };
 
 export const getHeaderClasses = () => {

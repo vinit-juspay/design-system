@@ -5,13 +5,11 @@ import { TextInputSize } from '../TextInput/types';
 const { numberInput: numberInputTheme } = themeConfig.euler;
 
 export const getStepperClasses = () => {
-  return cn(
-    numberInputTheme.stepper.base
-  );
+  return cn(numberInputTheme.stepper.base);
 };
 
 export const getStepperButtonClasses = (
-  hasDivider: boolean, 
+  hasDivider: boolean,
   size: TextInputSize = TextInputSize.MEDIUM
 ) => {
   return cn(
@@ -25,13 +23,9 @@ export const getStepperButtonClasses = (
 };
 
 export const getStepperIconClasses = () => {
-  return cn(
-    numberInputTheme.stepper.button.icon
-  );
+  return cn(numberInputTheme.stepper.button.icon);
 };
 
 export const getNumberInputClasses = () => {
-  return cn(
-    numberInputTheme.input.base
-  );
+  return cn(numberInputTheme.input.base);
 };

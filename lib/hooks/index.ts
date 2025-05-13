@@ -1,1 +1,1 @@
-export { useInputState } from './useInputState'; 
+export { useInputState } from './useInputState';

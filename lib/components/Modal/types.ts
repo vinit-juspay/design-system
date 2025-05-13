@@ -1,6 +1,5 @@
-import {  ButtonType } from "../Button";
-import { ReactElement, ReactNode } from "react";
-
+import { ButtonType } from '../Button';
+import { ReactElement, ReactNode } from 'react';
 
 export interface ModalProps {
   isOpen: boolean;
@@ -25,4 +24,3 @@ export interface ModalProps {
   customFooter?: ReactNode;
   headerRightSlot?: ReactNode;
 }
-

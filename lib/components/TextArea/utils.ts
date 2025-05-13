@@ -9,17 +9,14 @@ export const getTextAreaContainerClasses = () => {
 };
 
 export const getTextAreaClasses = (state: TextInputState = TextInputState.DEFAULT) => {
-  
   const states = textAreaTheme.textarea.states;
 
   // base-specific classes
-  const baseClasses = [
-    textAreaTheme.textarea.base
-  ];
+  const baseClasses = [textAreaTheme.textarea.base];
 
   // Apply state-specific classes
   const stateClasses = [];
-  
+
   // If state is ERROR, only apply error classes regardless of focus state
   if (state === TextInputState.ERROR) {
     stateClasses.push(states.default, states.error);
@@ -32,22 +29,16 @@ export const getTextAreaClasses = (state: TextInputState = TextInputState.DEFAUL
   } else if (state === TextInputState.DISABLED) {
     stateClasses.push(states.disabled);
   }
-  
+
   return cn(...baseClasses, ...stateClasses);
 };
 
 export const getLabelClasses = () => {
-  return cn(
-    inputTheme.label.base,
-    inputTheme.label.color
-  );
+  return cn(inputTheme.label.base, inputTheme.label.color);
 };
 
 export const getSublabelClasses = () => {
-  return cn(
-    inputTheme.sublabel.base,
-    inputTheme.sublabel.color
-  );
+  return cn(inputTheme.sublabel.base, inputTheme.sublabel.color);
 };
 
 export const getHintClasses = (state: TextInputState = TextInputState.DEFAULT) => {
@@ -55,4 +46,4 @@ export const getHintClasses = (state: TextInputState = TextInputState.DEFAULT) =
     inputTheme.hint.base,
     state === TextInputState.ERROR ? inputTheme.hint.error : inputTheme.hint.color
   );
-}; 
+};

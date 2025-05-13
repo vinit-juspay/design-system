@@ -1,7 +1,18 @@
 import React from 'react';
 import { Menu } from '../../../lib/components/Menu';
 import { MenuItemType, MenuType, MenuItemAction } from '../../../lib/components/Menu';
-import { User, Settings, HelpCircle, Bell, AlertCircle, Home, Lock, Type, TagIcon, Layers } from 'lucide-react';
+import {
+  User,
+  Settings,
+  HelpCircle,
+  Bell,
+  AlertCircle,
+  Home,
+  Lock,
+  Type,
+  TagIcon,
+  Layers,
+} from 'lucide-react';
 
 const MenuDemo = () => {
   return (
@@ -334,4 +345,4 @@ const MenuDemo = () => {
   );
 };
 
-export default MenuDemo; 
+export default MenuDemo;

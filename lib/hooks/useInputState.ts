@@ -15,21 +15,22 @@ interface UseInputStateProps {
 export function useInputState({
   initialState = TextInputState.DEFAULT,
   initialValue = '',
-  isStepperInteraction = false
+  isStepperInteraction = false,
 }: UseInputStateProps = {}) {
   const [isFocused, setIsFocused] = useState(false);
   const [isInteracting, setIsInteracting] = useState(isStepperInteraction);
   const [value, setValue] = useState<string>(initialValue.toString());
 
   // Compute the visual state based on current conditions
-  const visualState = initialState === TextInputState.ERROR
-    ? TextInputState.ERROR // Always keep ERROR state regardless of focus
-    : (isFocused || isInteracting)
-      ? TextInputState.FOCUSED
-      // If we have a value and the base state is DEFAULT, show as FILLED
-      : (value && initialState === TextInputState.DEFAULT)
-        ? TextInputState.FILLED
-        : initialState;
+  const visualState =
+    initialState === TextInputState.ERROR
+      ? TextInputState.ERROR // Always keep ERROR state regardless of focus
+      : isFocused || isInteracting
+        ? TextInputState.FOCUSED
+        : // If we have a value and the base state is DEFAULT, show as FILLED
+          value && initialState === TextInputState.DEFAULT
+          ? TextInputState.FILLED
+          : initialState;
 
   // Handle input focus
   const handleFocus = () => {
@@ -67,6 +68,6 @@ export function useInputState({
     startInteraction,
     endInteraction,
     updateValue,
-    value
+    value,
   };
-} 
+}

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import  Popover  from './Popover';
+import Popover from './Popover';
 import { Button, ButtonType } from '../Button';
 import { Placement, Alignment } from './types';
 
@@ -85,7 +85,7 @@ export const Basic: Story = {
 export const WithHeader: Story = {
   args: {
     trigger: <Button>With Header</Button>,
-    heading: "Popover Title",
+    heading: 'Popover Title',
     children: <div className="p-4">This popover has a header.</div>,
   },
 };
@@ -93,8 +93,8 @@ export const WithHeader: Story = {
 export const WithDescription: Story = {
   args: {
     trigger: <Button>With Description</Button>,
-    heading: "Popover Title",
-    description: "This is a description for the popover content.",
+    heading: 'Popover Title',
+    description: 'This is a description for the popover content.',
     children: <div className="p-4">This popover has both a header and description.</div>,
   },
 };
@@ -102,10 +102,10 @@ export const WithDescription: Story = {
 export const WithActions: Story = {
   args: {
     trigger: <Button>With Actions</Button>,
-    heading: "Confirm Action",
-    description: "Are you sure you want to proceed?",
-    primaryButtonText: "Confirm",
-    secondaryButtonText: "Cancel",
+    heading: 'Confirm Action',
+    description: 'Are you sure you want to proceed?',
+    primaryButtonText: 'Confirm',
+    secondaryButtonText: 'Cancel',
     onPrimaryButtonClick: () => console.log('Confirmed'),
     onSecondaryButtonClick: () => console.log('Cancelled'),
     children: <div className="p-4">This popover includes action buttons.</div>,
@@ -115,7 +115,7 @@ export const WithActions: Story = {
 export const DifferentPlacements: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      {Object.values(Placement).map((placement) => (
+      {Object.values(Placement).map(placement => (
         <Popover
           key={placement}
           trigger={<Button>{placement}</Button>}
@@ -142,7 +142,7 @@ export const DifferentPlacements: Story = {
 export const DifferentAlignments: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      {Object.values(Alignment).map((alignment) => (
+      {Object.values(Alignment).map(alignment => (
         <Popover
           key={alignment}
           trigger={<Button>{alignment}</Button>}
@@ -171,11 +171,11 @@ export const ComplexExample: Story = {
     trigger: <Button>Complex Example</Button>,
     placement: Placement.BOTTOM,
     alignment: Alignment.CENTER,
-    heading: "Complex Popover",
-    description: "This is a complex example with multiple features.",
+    heading: 'Complex Popover',
+    description: 'This is a complex example with multiple features.',
     showCloseButton: true,
-    primaryButtonText: "Save Changes",
-    secondaryButtonText: "Discard",
+    primaryButtonText: 'Save Changes',
+    secondaryButtonText: 'Discard',
     primaryButtonType: ButtonType.PRIMARY,
     secondaryButtonType: ButtonType.SECONDARY,
     onPrimaryButtonClick: () => console.log('Saved'),
@@ -206,14 +206,19 @@ export const WithoutCloseButton: Story = {
   args: {
     trigger: <Button>No Close Button</Button>,
     showCloseButton: false,
-    heading: "No Close Button",
+    heading: 'No Close Button',
     description: "This popover doesn't have a close button.",
-    children: <div className="p-4">You can only close this popover by clicking outside or pressing escape.</div>,
+    children: (
+      <div className="p-4">
+        You can only close this popover by clicking outside or pressing escape.
+      </div>
+    ),
   },
   parameters: {
     docs: {
       description: {
-        story: 'Example of a Popover without a close button, demonstrating alternative closing methods.',
+        story:
+          'Example of a Popover without a close button, demonstrating alternative closing methods.',
       },
     },
   },
@@ -222,10 +227,10 @@ export const WithoutCloseButton: Story = {
 export const DisabledButtons: Story = {
   args: {
     trigger: <Button>Disabled Buttons</Button>,
-    heading: "Disabled Actions",
-    description: "The buttons in this popover are disabled.",
-    primaryButtonText: "Confirm",
-    secondaryButtonText: "Cancel",
+    heading: 'Disabled Actions',
+    description: 'The buttons in this popover are disabled.',
+    primaryButtonText: 'Confirm',
+    secondaryButtonText: 'Cancel',
     primaryButtonDisabled: true,
     secondaryButtonDisabled: true,
     children: <div className="p-4">This popover has disabled action buttons.</div>,

@@ -128,4 +128,4 @@ export const Disabled: Story = {
     state: TextInputState.DISABLED,
     hintText: 'You cannot edit this field',
   },
-}; 
+};

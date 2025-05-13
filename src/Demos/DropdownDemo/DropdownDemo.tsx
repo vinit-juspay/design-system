@@ -1,11 +1,11 @@
 import React from 'react';
 import { MenuDropdown } from '../../../lib/components/Menu';
-import { 
-  DropdownType, 
-  DropdownSize, 
-  DropdownSubType, 
+import {
+  DropdownType,
+  DropdownSize,
+  DropdownSubType,
   DropdownSelectionType,
-  MenuItemType 
+  MenuItemType,
 } from '../../../lib/components/Menu';
 import { User, Settings, HelpCircle } from 'lucide-react';
 
@@ -17,14 +17,14 @@ const DropdownDemo = () => {
       {/* Dropdown Types */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Dropdown Types</h3>
-        
+
         {/* Single Select */}
         <div className="mt-6 pb-6 border-b border-gray-200">
           <h4 className="text-lg font-medium mb-4">1. Single Select Dropdown</h4>
           <div className="flex flex-wrap gap-8">
             <div>
               <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.SINGLE_SELECT}
                 menuItems={[
                   { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
@@ -38,10 +38,10 @@ const DropdownDemo = () => {
                 placeholder="Select an option"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.SINGLE_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
@@ -54,19 +54,34 @@ const DropdownDemo = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Icon Only */}
         <div className="mt-6 pb-6 border-b border-gray-200">
           <h4 className="text-lg font-medium mb-4">2. Icon Only Dropdown</h4>
           <div className="flex flex-wrap gap-8">
             <div>
               <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 menuItems={[
-                  { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
-                  { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
-                  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <HelpCircle size={16} /> },
+                  {
+                    id: '1',
+                    text: 'Profile',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <User size={16} />,
+                  },
+                  {
+                    id: '2',
+                    text: 'Settings',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <Settings size={16} />,
+                  },
+                  {
+                    id: '3',
+                    text: 'Help',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <HelpCircle size={16} />,
+                  },
                 ]}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
@@ -76,16 +91,31 @@ const DropdownDemo = () => {
                 hint="Click icon to open"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
-                  { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
-                  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <HelpCircle size={16} /> },
+                  {
+                    id: '1',
+                    text: 'Profile',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <User size={16} />,
+                  },
+                  {
+                    id: '2',
+                    text: 'Settings',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <Settings size={16} />,
+                  },
+                  {
+                    id: '3',
+                    text: 'Help',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <HelpCircle size={16} />,
+                  },
                 ]}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
@@ -93,14 +123,14 @@ const DropdownDemo = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Multi Select */}
         <div className="mt-6 pb-6 border-b border-gray-200">
           <h4 className="text-lg font-medium mb-4">3. Multi Select Dropdown</h4>
           <div className="flex flex-wrap gap-8">
             <div>
               <p className="text-sm text-gray-600 mb-2">Count Display (HAS_CONTAINER)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.MULTI_SELECT}
                 selectionType={DropdownSelectionType.COUNT}
                 menuItems={[
@@ -115,10 +145,10 @@ const DropdownDemo = () => {
                 placeholder="Select options"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">Text Display (HAS_CONTAINER)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.MULTI_SELECT}
                 selectionType={DropdownSelectionType.TEXT}
                 menuItems={[
@@ -133,10 +163,10 @@ const DropdownDemo = () => {
                 placeholder="Select options"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
@@ -147,10 +177,10 @@ const DropdownDemo = () => {
                 placeholder="Select options"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER with Text Display</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 selectionType={DropdownSelectionType.TEXT}
@@ -169,14 +199,14 @@ const DropdownDemo = () => {
       {/* Dropdown Subtypes */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">Dropdown Subtypes</h3>
-        
+
         {/* HAS_CONTAINER */}
         <div className="mt-6 pb-6 border-b border-gray-200">
           <h4 className="text-lg font-medium mb-4">1. HAS_CONTAINER Subtype</h4>
           <p className="text-gray-600 mb-4">Shows label, sublabel, and hint text</p>
-          
+
           <div className="flex flex-col space-y-4">
-            <MenuDropdown 
+            <MenuDropdown
               subType={DropdownSubType.HAS_CONTAINER}
               hasLabel={true}
               label="Regular Label"
@@ -186,8 +216,8 @@ const DropdownDemo = () => {
               ]}
               placeholder="Basic label"
             />
-            
-            <MenuDropdown 
+
+            <MenuDropdown
               subType={DropdownSubType.HAS_CONTAINER}
               hasLabel={true}
               label="With Sublabel"
@@ -199,8 +229,8 @@ const DropdownDemo = () => {
               ]}
               placeholder="Label and sublabel"
             />
-            
-            <MenuDropdown 
+
+            <MenuDropdown
               subType={DropdownSubType.HAS_CONTAINER}
               hasLabel={true}
               label="With Hint"
@@ -212,8 +242,8 @@ const DropdownDemo = () => {
               ]}
               placeholder="Label and hint"
             />
-            
-            <MenuDropdown 
+
+            <MenuDropdown
               subType={DropdownSubType.HAS_CONTAINER}
               hasLabel={true}
               label="Required Field"
@@ -226,16 +256,18 @@ const DropdownDemo = () => {
             />
           </div>
         </div>
-        
+
         {/* NO_CONTAINER */}
         <div className="mt-6">
           <h4 className="text-lg font-medium mb-4">2. NO_CONTAINER Subtype</h4>
-          <p className="text-gray-600 mb-4">Standalone dropdown with no labels, hints, or borders</p>
-          
+          <p className="text-gray-600 mb-4">
+            Standalone dropdown with no labels, hints, or borders
+          </p>
+
           <div className="flex flex-wrap gap-8">
             <div>
               <p className="text-sm text-gray-600 mb-2">Single Select</p>
-              <MenuDropdown 
+              <MenuDropdown
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
                   { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
@@ -244,10 +276,10 @@ const DropdownDemo = () => {
                 placeholder="No container dropdown"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">Multi Select</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
@@ -257,15 +289,25 @@ const DropdownDemo = () => {
                 placeholder="No container multiselect"
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">Icon Only</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
+                  {
+                    id: '1',
+                    text: 'Option 1',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <User size={16} />,
+                  },
+                  {
+                    id: '2',
+                    text: 'Option 2',
+                    type: MenuItemType.DEFAULT,
+                    slotL: <Settings size={16} />,
+                  },
                 ]}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
@@ -281,7 +323,7 @@ const DropdownDemo = () => {
         <div className="flex flex-wrap gap-6 items-end">
           <div>
             <p className="text-sm text-gray-600 mb-2">Small (sm)</p>
-            <MenuDropdown 
+            <MenuDropdown
               size={DropdownSize.SMALL}
               hasLabel={true}
               label="Small Dropdown"
@@ -292,10 +334,10 @@ const DropdownDemo = () => {
               placeholder="Small"
             />
           </div>
-          
+
           <div>
             <p className="text-sm text-gray-600 mb-2">Medium (md)</p>
-            <MenuDropdown 
+            <MenuDropdown
               size={DropdownSize.MEDIUM}
               hasLabel={true}
               label="Medium Dropdown"
@@ -306,10 +348,10 @@ const DropdownDemo = () => {
               placeholder="Medium"
             />
           </div>
-          
+
           <div>
             <p className="text-sm text-gray-600 mb-2">Large (lg)</p>
-            <MenuDropdown 
+            <MenuDropdown
               size={DropdownSize.LARGE}
               hasLabel={true}
               label="Large Dropdown"
@@ -321,13 +363,13 @@ const DropdownDemo = () => {
             />
           </div>
         </div>
-        
+
         <div className="mt-8">
           <h4 className="text-lg font-medium mb-4">Icon Size Comparison</h4>
           <div className="flex flex-wrap gap-6 items-end">
             <div>
               <p className="text-sm text-gray-600 mb-2">Small (sm)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 size={DropdownSize.SMALL}
                 hasLeftIcon={true}
@@ -338,10 +380,10 @@ const DropdownDemo = () => {
                 ]}
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">Medium (md)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 size={DropdownSize.MEDIUM}
                 hasLeftIcon={true}
@@ -352,10 +394,10 @@ const DropdownDemo = () => {
                 ]}
               />
             </div>
-            
+
             <div>
               <p className="text-sm text-gray-600 mb-2">Large (lg)</p>
-              <MenuDropdown 
+              <MenuDropdown
                 type={DropdownType.ICON_ONLY}
                 size={DropdownSize.LARGE}
                 hasLeftIcon={true}
@@ -373,4 +415,4 @@ const DropdownDemo = () => {
   );
 };
 
-export default DropdownDemo; 
+export default DropdownDemo;

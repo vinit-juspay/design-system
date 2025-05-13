@@ -21,7 +21,6 @@ export const getArrowClassNames = (): string => {
   return cn(tooltipTheme.arrow.baseStyles);
 };
 
-
 export const getArrowPosition = (
   side: TooltipSide,
   position: { top: number; left: number },
@@ -33,12 +32,10 @@ export const getArrowPosition = (
   const tooltipHeight = tooltipRef.current?.offsetHeight || 0;
   const tooltipWidth = tooltipRef.current?.offsetWidth || 0;
 
-  const adjustedArrowHeight = side === TooltipSide.TOP || side === TooltipSide.BOTTOM 
-    ? arrowHeight * 0.75  
-    : arrowHeight;
-  const adjustedArrowWidth = side === TooltipSide.TOP || side === TooltipSide.BOTTOM 
-    ? arrowWidth * 1.5   
-    : arrowWidth;
+  const adjustedArrowHeight =
+    side === TooltipSide.TOP || side === TooltipSide.BOTTOM ? arrowHeight * 0.75 : arrowHeight;
+  const adjustedArrowWidth =
+    side === TooltipSide.TOP || side === TooltipSide.BOTTOM ? arrowWidth * 1.5 : arrowWidth;
 
   const baseStyles = {
     position: 'fixed' as const,
@@ -65,7 +62,7 @@ export const getArrowPosition = (
     },
     [TooltipSide.LEFT]: {
       top: position.top + tooltipHeight / 2,
-      left: (position.left -0.5) + tooltipWidth,
+      left: position.left - 0.5 + tooltipWidth,
       transform: 'translateY(-50%)',
       borderWidth: `${arrowHeight / 2}px 0 ${arrowHeight / 2}px ${arrowWidth}px`,
       borderColor: `transparent transparent transparent ${tooltipBgColor}`,
@@ -84,7 +81,6 @@ export const getArrowPosition = (
     ...positions[side],
   };
 };
-
 
 export const getSlotClassNames = (direction: TooltipSlotDirection, size: TooltipSize): string => {
   const tooltipTheme = themeConfig.euler.tooltip;

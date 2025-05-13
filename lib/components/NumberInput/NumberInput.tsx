@@ -63,14 +63,17 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     const showStepper = step !== undefined && step > 0;
 
     // Connect the forwarded ref with our local ref
-    const setInputRef = useCallback((el: HTMLInputElement | null) => {
-      inputRef.current = el;
-      if (typeof ref === 'function') {
-        ref(el);
-      } else if (ref) {
-        ref.current = el;
-      }
-    }, [ref]);
+    const setInputRef = useCallback(
+      (el: HTMLInputElement | null) => {
+        inputRef.current = el;
+        if (typeof ref === 'function') {
+          ref(el);
+        } else if (ref) {
+          ref.current = el;
+        }
+      },
+      [ref]
+    );
 
     // Handle input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
