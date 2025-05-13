@@ -27,4 +27,4 @@ export interface NumberInputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   className?: string;
-} 
+}

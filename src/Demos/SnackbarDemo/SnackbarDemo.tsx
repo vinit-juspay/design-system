@@ -7,7 +7,7 @@ const SnackbarDemo = () => {
   const [position, setPosition] = useState<SnackbarPosition>('topRight');
   const [heading, setHeading] = useState('Notification');
   const [message, setMessage] = useState('This is a sample notification message.');
-  const [alertMessage, setAlertMessage] = useState('');
+  const [actionMessage, setactionMessage] = useState('');
   const [showIcon, setShowIcon] = useState(true);
   const [autoClose, setAutoClose] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -71,13 +71,13 @@ const SnackbarDemo = () => {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Alert Message (Optional)</label>
+        <label className="block text-sm font-medium text-gray-700">Action Message (Optional)</label>
         <input
           type="text"
-          value={alertMessage}
-          onChange={e => setAlertMessage(e.target.value)}
+          value={actionMessage}
+          onChange={e => setactionMessage(e.target.value)}
           className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-          placeholder="Additional alert message"
+          placeholder="Additional action message"
         />
       </div>
 
@@ -126,7 +126,7 @@ const SnackbarDemo = () => {
           type={type}
           heading={heading}
           message={message}
-          alertMessage={alertMessage || undefined}
+          actionMessage={actionMessage || undefined}
           showIcon={showIcon}
           autoClose={autoClose}
           position={position}
@@ -176,7 +176,7 @@ const SnackbarDemo = () => {
               type="error"
               heading="Error"
               message="An error occurred while processing your request"
-              alertMessage="Please try again or contact support"
+              actionMessage="Please try again or contact support"
               autoClose={false}
               position="topRight"
             />

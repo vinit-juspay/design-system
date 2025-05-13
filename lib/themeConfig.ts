@@ -368,26 +368,26 @@ export const themeConfig = {
     tabs: {
       base: {
         root: 'w-full',
-        list: 'flex w-full items-center',
+        list: 'flex w-full items-center gap-3',
         trigger:
-          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-600 ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
       },
       expanded: 'justify-between [&>*]:flex-1 [&>*]:text-center',
       variant: {
         boxed: {
           list: 'bg-gray-50 p-1 rounded-lg',
           trigger:
-            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm',
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
         },
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700',
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700 font-500 hover:text-gray-700 data-[state=active]:font-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10',
+            'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
         },
       },
       sizes: {
@@ -447,15 +447,16 @@ export const themeConfig = {
           'fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200',
         content: 'flex flex-col gap-1',
         icon: 'flex-shrink-0',
-        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80',
+        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80 text-gray-25',
       },
       layout: {
         headerContainer: 'flex w-full items-center justify-between',
         headerContent: 'flex items-center gap-2',
-        messageContainer: 'mt-1 pl-7 flex flex-col gap-1',
-        heading: 'text-body-lg font-600',
-        message: 'text-body-md font-500 break-words',
-        alertMessage: 'text-body-md font-600',
+        messageContainer: 'mt-1.5 pl-7 flex flex-col gap-4',
+        heading: 'text-body-lg font-500 text-gray-25',
+        message: 'text-body-md font-400 break-words text-gray-300',
+        actionMessage:
+          'text-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
       },
       type: {
         info: {

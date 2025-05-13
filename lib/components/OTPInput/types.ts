@@ -31,4 +31,4 @@ export interface OTPInputProps {
   successMessage?: string;
   errorMessage?: string;
   className?: string;
-} 
+}
