@@ -1,6 +1,6 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
-import { ChevronDown } from 'lucide-react';
-import { forwardRef } from 'react';
+import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import { cn } from '../../utils';
 import { AccordionItemProps, AccordionType, AccordionChevronPosition } from './types';
 import {
@@ -39,6 +39,29 @@ const AccordionItem = forwardRef<
     },
     ref
   ) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    
+    useEffect(() => {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-state') {
+            const state = triggerRef.current?.getAttribute('data-state');
+            setIsOpen(state === 'open');
+          }
+        });
+      });
+      
+      if (triggerRef.current) {
+        const state = triggerRef.current.getAttribute('data-state');
+        setIsOpen(state === 'open');
+        
+        observer.observe(triggerRef.current, { attributes: true });
+      }
+      
+      return () => observer.disconnect();
+    }, []);
+    
     const itemClassName = getAccordionItemClassNames(accordionType, isDisabled);
     const triggerClassName = getAccordionTriggerClassNames(accordionType, isDisabled);
     const contentClassName = getAccordionContentClassNames(accordionType);
@@ -48,12 +71,6 @@ const AccordionItem = forwardRef<
     const chevronClassName = getAccordionChevronClassNames(chevronPosition);
     const chevronIconClassName = getAccordionChevronIconClassNames(isDisabled);
     const contentWrapperClassName = getAccordionContentWrapperClassNames(accordionType);
-
-    const ChevronComponent = (
-      <div className={chevronClassName} aria-hidden="true">
-        <ChevronDown className={chevronIconClassName} />
-      </div>
-    );
 
     return (
       <RadixAccordion.Item
@@ -65,6 +82,7 @@ const AccordionItem = forwardRef<
       >
         <RadixAccordion.Header className="flex">
           <RadixAccordion.Trigger
+            ref={triggerRef}
             className={cn(
               triggerClassName,
               accordionType === AccordionType.BORDER && 'data-[state=open]:border-b border-gray-200'
@@ -75,11 +93,27 @@ const AccordionItem = forwardRef<
           >
             <div className="w-full relative">
               <div className={headerRowClassName}>
-                {chevronPosition === AccordionChevronPosition.LEFT && ChevronComponent}
+                {chevronPosition === AccordionChevronPosition.LEFT && (
+                  <div className={chevronClassName} aria-hidden="true">
+                    {isOpen ? (
+                      <ChevronDown className={chevronIconClassName} />
+                    ) : (
+                      <ChevronRight className={chevronIconClassName} />
+                    )}
+                  </div>
+                )}
                 {leftSlot && <div className={getAccordionSlotClassNames(true)}>{leftSlot}</div>}
                 <div className={titleClassName}>{title}</div>
                 {rightSlot && <div className={getAccordionSlotClassNames(false)}>{rightSlot}</div>}
-                {chevronPosition === AccordionChevronPosition.RIGHT && ChevronComponent}
+                {chevronPosition === AccordionChevronPosition.RIGHT && (
+                  <div className={chevronClassName} aria-hidden="true">
+                    {isOpen ? (
+                      <ChevronUp className={chevronIconClassName} />
+                    ) : (
+                      <ChevronDown className={chevronIconClassName} />
+                    )}
+                  </div>
+                )}
               </div>
 
               {(subtext || subtextSlot) && (
