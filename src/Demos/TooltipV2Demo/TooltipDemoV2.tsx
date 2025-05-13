@@ -1,9 +1,14 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../../../lib/main';
 import { Info, AlertCircle, HelpCircle, Settings } from 'lucide-react';
 import { ButtonType } from '../../../lib/components/Button/types';
 import TooltipV2 from '../../../lib/components/Tooltip/TooltipV2';
-import { TooltipAlign, TooltipSide, TooltipSize, TooltipSlotDirection } from '../../../lib/components/Tooltip/types';
+import {
+  TooltipAlign,
+  TooltipSide,
+  TooltipSize,
+  TooltipSlotDirection,
+} from '../../../lib/components/Tooltip/types';
 
 const TooltipDemoV2 = () => {
   const [config, setConfig] = useState({
@@ -41,7 +46,7 @@ const TooltipDemoV2 = () => {
               <input
                 type="checkbox"
                 checked={config.showTooltip}
-                onChange={(e) => setConfig({ ...config, showTooltip: e.target.checked })}
+                onChange={e => setConfig({ ...config, showTooltip: e.target.checked })}
               />
               <span className="text-sm">Always show tooltip</span>
             </div>
@@ -53,7 +58,7 @@ const TooltipDemoV2 = () => {
               <input
                 type="checkbox"
                 checked={config.showArrow}
-              onChange={(e) => setConfig({ ...config, showArrow: e.target.checked })}
+                onChange={e => setConfig({ ...config, showArrow: e.target.checked })}
               />
               <span className="text-sm">Show Arrow</span>
             </div>
@@ -64,10 +69,12 @@ const TooltipDemoV2 = () => {
             <select
               className="w-full p-2 border rounded"
               value={config.side}
-              onChange={(e) => setConfig({ ...config, side: e.target.value as TooltipSide })}
+              onChange={e => setConfig({ ...config, side: e.target.value as TooltipSide })}
             >
-              {Object.values(TooltipSide).map((side) => ( 
-                <option key={side} value={side}>{side.toLowerCase()}</option>
+              {Object.values(TooltipSide).map(side => (
+                <option key={side} value={side}>
+                  {side.toLowerCase()}
+                </option>
               ))}
             </select>
           </div>
@@ -77,10 +84,12 @@ const TooltipDemoV2 = () => {
             <select
               className="w-full p-2 border rounded"
               value={config.align}
-              onChange={(e) => setConfig({ ...config, align: e.target.value as TooltipAlign })}
+              onChange={e => setConfig({ ...config, align: e.target.value as TooltipAlign })}
             >
-              {Object.values(TooltipAlign).map((align) => (
-                <option key={align} value={align}>{align}</option>
+              {Object.values(TooltipAlign).map(align => (
+                <option key={align} value={align}>
+                  {align}
+                </option>
               ))}
             </select>
           </div>
@@ -90,10 +99,12 @@ const TooltipDemoV2 = () => {
             <select
               className="w-full p-2 border rounded"
               value={config.size}
-              onChange={(e) => setConfig({ ...config, size: e.target.value as TooltipSize })}
+              onChange={e => setConfig({ ...config, size: e.target.value as TooltipSize })}
             >
-              {Object.values(TooltipSize).map((size) => (
-                <option key={size} value={size}>{size}</option>
+              {Object.values(TooltipSize).map(size => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
               ))}
             </select>
           </div>
@@ -103,10 +114,14 @@ const TooltipDemoV2 = () => {
             <select
               className="w-full p-2 border rounded"
               value={config.slotDirection}
-              onChange={(e) => setConfig({ ...config, slotDirection: e.target.value as TooltipSlotDirection })}
+              onChange={e =>
+                setConfig({ ...config, slotDirection: e.target.value as TooltipSlotDirection })
+              }
             >
-              {Object.values(TooltipSlotDirection).map((direction) => (
-                <option key={direction} value={direction}>{direction}</option>
+              {Object.values(TooltipSlotDirection).map(direction => (
+                <option key={direction} value={direction}>
+                  {direction}
+                </option>
               ))}
             </select>
           </div>
@@ -117,7 +132,7 @@ const TooltipDemoV2 = () => {
               type="number"
               className="w-full p-2 border rounded"
               value={config.delayDuration}
-              onChange={(e) => {
+              onChange={e => {
                 const value = e.target.value;
                 setConfig({
                   ...config,
@@ -133,7 +148,7 @@ const TooltipDemoV2 = () => {
               type="number"
               className="w-full p-2 border rounded"
               value={config.offset}
-              onChange={(e) => setConfig({ ...config, offset: Number(e.target.value) })}
+              onChange={e => setConfig({ ...config, offset: Number(e.target.value) })}
             />
           </div>
 
@@ -143,7 +158,7 @@ const TooltipDemoV2 = () => {
               type="text"
               className="w-full p-2 border rounded"
               value={config.content}
-              onChange={(e) => setConfig({ ...config, content: e.target.value })}
+              onChange={e => setConfig({ ...config, content: e.target.value })}
             />
           </div>
 
@@ -153,16 +168,18 @@ const TooltipDemoV2 = () => {
               <input
                 type="checkbox"
                 checked={config.hasIcon}
-                onChange={(e) => setConfig({ ...config, hasIcon: e.target.checked })}
+                onChange={e => setConfig({ ...config, hasIcon: e.target.checked })}
               />
               {config.hasIcon && (
                 <select
                   className="p-2 border rounded"
                   value={config.icon}
-                  onChange={(e) => setConfig({ ...config, icon: e.target.value })}
+                  onChange={e => setConfig({ ...config, icon: e.target.value })}
                 >
-                  {Object.keys(icons).map((icon) => (
-                    <option key={icon} value={icon}>{icon}</option>
+                  {Object.keys(icons).map(icon => (
+                    <option key={icon} value={icon}>
+                      {icon}
+                    </option>
                   ))}
                 </select>
               )}
@@ -223,8 +240,8 @@ const TooltipDemoV2 = () => {
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tooltips with Icons</h3>
         <div className="flex flex-wrap gap-4">
-          <TooltipV2 
-            content="Information tooltip" 
+          <TooltipV2
+            content="Information tooltip"
             side={TooltipSide.TOP}
             slot={<Info size={16} />}
             slotDirection={TooltipSlotDirection.LEFT}
@@ -234,8 +251,8 @@ const TooltipDemoV2 = () => {
             </Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Alert tooltip" 
+          <TooltipV2
+            content="Alert tooltip"
             side={TooltipSide.TOP}
             slot={<AlertCircle size={16} />}
             slotDirection={TooltipSlotDirection.LEFT}
@@ -245,8 +262,8 @@ const TooltipDemoV2 = () => {
             </Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Help tooltip" 
+          <TooltipV2
+            content="Help tooltip"
             side={TooltipSide.TOP}
             slot={<HelpCircle size={16} />}
             slotDirection={TooltipSlotDirection.LEFT}
@@ -256,8 +273,8 @@ const TooltipDemoV2 = () => {
             </Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Settings tooltip" 
+          <TooltipV2
+            content="Settings tooltip"
             side={TooltipSide.TOP}
             slot={<Settings size={16} />}
             slotDirection={TooltipSlotDirection.LEFT}
@@ -273,27 +290,15 @@ const TooltipDemoV2 = () => {
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tooltips with Different Sizes</h3>
         <div className="flex flex-wrap gap-4">
-          <TooltipV2 
-            content="Small tooltip" 
-            side={TooltipSide.TOP}
-            size={TooltipSize.SMALL}
-          >
+          <TooltipV2 content="Small tooltip" side={TooltipSide.TOP} size={TooltipSize.SMALL}>
             <Button buttonType={ButtonType.PRIMARY}>Small</Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Medium tooltip" 
-            side={TooltipSide.TOP}
-            size={TooltipSize.LARGE}
-          >
+          <TooltipV2 content="Medium tooltip" side={TooltipSide.TOP} size={TooltipSize.LARGE}>
             <Button buttonType={ButtonType.PRIMARY}>Medium</Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Large tooltip" 
-            side={TooltipSide.TOP}
-            size={TooltipSize.LARGE}
-          >
+          <TooltipV2 content="Large tooltip" side={TooltipSide.TOP} size={TooltipSize.LARGE}>
             <Button buttonType={ButtonType.PRIMARY}>Large</Button>
           </TooltipV2>
         </div>
@@ -303,7 +308,7 @@ const TooltipDemoV2 = () => {
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tooltips with Custom Content</h3>
         <div className="flex flex-wrap gap-4">
-          <TooltipV2 
+          <TooltipV2
             content={
               <div className="p-2">
                 <h4 className="font-bold mb-1">Custom Tooltip</h4>
@@ -316,7 +321,7 @@ const TooltipDemoV2 = () => {
             <Button buttonType={ButtonType.PRIMARY}>Custom Content</Button>
           </TooltipV2>
 
-          <TooltipV2 
+          <TooltipV2
             content={
               <div className="p-2">
                 <div className="flex items-center gap-2">
@@ -337,27 +342,23 @@ const TooltipDemoV2 = () => {
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tooltips with Different Alignments</h3>
         <div className="flex flex-wrap gap-4">
-          <TooltipV2 
-            content="Start aligned tooltip" 
+          <TooltipV2
+            content="Start aligned tooltip"
             side={TooltipSide.TOP}
             align={TooltipAlign.START}
           >
             <Button buttonType={ButtonType.PRIMARY}>Start Aligned</Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="Center aligned tooltip" 
+          <TooltipV2
+            content="Center aligned tooltip"
             side={TooltipSide.TOP}
             align={TooltipAlign.CENTER}
           >
             <Button buttonType={ButtonType.PRIMARY}>Center Aligned</Button>
           </TooltipV2>
 
-          <TooltipV2 
-            content="End aligned tooltip" 
-            side={TooltipSide.TOP}
-            align={TooltipAlign.END}
-          >
+          <TooltipV2 content="End aligned tooltip" side={TooltipSide.TOP} align={TooltipAlign.END}>
             <Button buttonType={ButtonType.PRIMARY}>End Aligned</Button>
           </TooltipV2>
         </div>

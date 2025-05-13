@@ -1,5 +1,5 @@
-import { themeConfig } from "../../themeConfig";
-import { Placement } from "./types";
+import { themeConfig } from '../../themeConfig';
+import { Placement } from './types';
 
 const { popover } = themeConfig.euler;
 

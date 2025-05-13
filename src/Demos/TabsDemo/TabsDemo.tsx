@@ -120,4 +120,4 @@ const TabsDemo = () => {
   );
 };
 
-export default TabsDemo; 
+export default TabsDemo;

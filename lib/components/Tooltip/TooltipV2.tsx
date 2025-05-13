@@ -1,6 +1,11 @@
 import { forwardRef, useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { TooltipProps, TooltipSide, TooltipSize, TooltipSlotDirection } from './types';
-import { getArrowClassNames, getArrowPosition, getSlotClassNames, getTooltipClassNames } from './utils';
+import {
+  getArrowClassNames,
+  getArrowPosition,
+  getSlotClassNames,
+  getTooltipClassNames,
+} from './utils';
 
 const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
   (
@@ -49,8 +54,8 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - tooltipRect.width
-              : triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
+                ? triggerRect.right - tooltipRect.width
+                : triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
           break;
         case TooltipSide.BOTTOM:
           top = triggerRect.bottom + arrowHeight + offset;
@@ -58,16 +63,16 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - tooltipRect.width
-              : triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
+                ? triggerRect.right - tooltipRect.width
+                : triggerRect.left + (triggerRect.width - tooltipRect.width) / 2;
           break;
         case TooltipSide.LEFT:
           top =
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - tooltipRect.height
-              : triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
+                ? triggerRect.bottom - tooltipRect.height
+                : triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
           left = triggerRect.left - tooltipRect.width - arrowWidth - offset;
           break;
         case TooltipSide.RIGHT:
@@ -75,8 +80,8 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - tooltipRect.height
-              : triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
+                ? triggerRect.bottom - tooltipRect.height
+                : triggerRect.top + (triggerRect.height - tooltipRect.height) / 2;
           left = triggerRect.right + arrowWidth + offset;
           break;
       }
@@ -129,8 +134,6 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
       };
     }, []);
 
-
-
     return (
       <div
         ref={triggerRef}
@@ -139,43 +142,52 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
         style={{ display: 'inline-block', position: 'relative' }}
       >
         {children}
-        {isVisible && (<>
-          <div
-            ref={(node) => {
-              tooltipRef.current = node;
-              if (ref) {
-                if (typeof ref === 'function') {
-                  ref(node);
-                } else {
-                  ref.current = node;
-                }
-              }
-            }}
-            className={tooltipClassName}
-            style={{
-              position: 'fixed',
-              top: position.top,
-              left: position.left,
-              zIndex: 1000,
-            }}
-          >
-            {slot && slotDirection === TooltipSlotDirection.LEFT && (
-              <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
-            )}
-
-            {content}
-
-            {slot && slotDirection === TooltipSlotDirection.RIGHT && (
-              <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
-            )}
-          </div>
-          {showArrow && (
+        {isVisible && (
+          <>
             <div
-              className={getArrowClassNames()}
-              style={getArrowPosition(side, position, tooltipRef, arrowWidth, arrowHeight, tooltipBgColor)}
-            />
-          )}
-        </>)}
+              ref={node => {
+                tooltipRef.current = node;
+                if (ref) {
+                  if (typeof ref === 'function') {
+                    ref(node);
+                  } else {
+                    ref.current = node;
+                  }
+                }
+              }}
+              className={tooltipClassName}
+              style={{
+                position: 'fixed',
+                top: position.top,
+                left: position.left,
+                zIndex: 1000,
+              }}
+            >
+              {slot && slotDirection === TooltipSlotDirection.LEFT && (
+                <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
+              )}
+
+              {content}
+
+              {slot && slotDirection === TooltipSlotDirection.RIGHT && (
+                <div className={getSlotClassNames(slotDirection, size)}>{slot}</div>
+              )}
+            </div>
+            {showArrow && (
+              <div
+                className={getArrowClassNames()}
+                style={getArrowPosition(
+                  side,
+                  position,
+                  tooltipRef,
+                  arrowWidth,
+                  arrowHeight,
+                  tooltipBgColor
+                )}
+              />
+            )}
+          </>
+        )}
       </div>
     );
   }

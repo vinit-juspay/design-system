@@ -1,3 +1,3 @@
-import { default as StatCard } from "./StatCard";
+import { default as StatCard } from './StatCard';
 
 export default StatCard;

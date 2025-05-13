@@ -88,8 +88,12 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Radio size={RadioSize.SMALL} value="small">Small radio</Radio>
-      <Radio size={RadioSize.MEDIUM} value="medium">Medium radio</Radio>
+      <Radio size={RadioSize.SMALL} value="small">
+        Small radio
+      </Radio>
+      <Radio size={RadioSize.MEDIUM} value="medium">
+        Medium radio
+      </Radio>
     </div>
   ),
 };
@@ -132,16 +136,10 @@ export const Disabled: Story = {
 export const WithRightSlot: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <Radio 
-        value="settings"
-        rightSlot={<Settings className="w-4 h-4 text-gray-500" />}
-      >
+      <Radio value="settings" rightSlot={<Settings className="w-4 h-4 text-gray-500" />}>
         Configure settings
       </Radio>
-      <Radio 
-        value="help"
-        rightSlot={<span className="text-xs text-gray-500">Learn more</span>}
-      >
+      <Radio value="help" rightSlot={<span className="text-xs text-gray-500">Learn more</span>}>
         Help options
       </Radio>
     </div>
@@ -157,14 +155,14 @@ const ControlledRadioDemo = () => {
       <Radio
         value="option1"
         isChecked={selected === 'option1'}
-        onChange={(checked) => checked && setSelected('option1')}
+        onChange={checked => checked && setSelected('option1')}
       >
         Option 1
       </Radio>
       <Radio
         value="option2"
         isChecked={selected === 'option2'}
-        onChange={(checked) => checked && setSelected('option2')}
+        onChange={checked => checked && setSelected('option2')}
       >
         Option 2
       </Radio>
@@ -190,17 +188,14 @@ const RadioGroupDemo = () => {
           value={paymentMethod}
           onChange={setPaymentMethod}
         >
-          <Radio 
-            value="card" 
+          <Radio
+            value="card"
             subtext="Pay securely with credit or debit card"
             rightSlot={<HelpCircle className="w-4 h-4 text-gray-500" />}
           >
             Card Payment
           </Radio>
-          <Radio 
-            value="upi" 
-            subtext="Pay instantly using UPI"
-          >
+          <Radio value="upi" subtext="Pay instantly using UPI">
             UPI
           </Radio>
           <Radio value="netbanking">Net Banking</Radio>
@@ -215,27 +210,16 @@ const RadioGroupDemo = () => {
           value={shippingMethod}
           onChange={setShippingMethod}
         >
-          <Radio
-            value="express"
-            subtext="Delivery in 1-2 business days"
-          >
+          <Radio value="express" subtext="Delivery in 1-2 business days">
             Express Shipping
           </Radio>
-          <Radio
-            value="standard"
-            subtext="Delivery in 3-5 business days"
-          >
+          <Radio value="standard" subtext="Delivery in 3-5 business days">
             Standard Shipping
           </Radio>
         </RadioGroup>
       </div>
 
-      <RadioGroup
-        label="Disabled Group"
-        name="disabled-group"
-        defaultValue="option1"
-        isDisabled
-      >
+      <RadioGroup label="Disabled Group" name="disabled-group" defaultValue="option1" isDisabled>
         <Radio value="option1">Option 1</Radio>
         <Radio value="option2">Option 2</Radio>
       </RadioGroup>
@@ -274,4 +258,4 @@ const [selected, setSelected] = useState('card');
     },
   },
   render: () => <RadioGroupDemo />,
-}; 
+};

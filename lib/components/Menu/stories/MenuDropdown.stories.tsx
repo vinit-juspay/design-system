@@ -1,12 +1,12 @@
-  import type { Meta, StoryObj } from '@storybook/react';
-import { 
-  MenuDropdown, 
-  DropdownType, 
-  DropdownSubType, 
-  DropdownSize, 
+import type { Meta, StoryObj } from '@storybook/react';
+import {
+  MenuDropdown,
+  DropdownType,
+  DropdownSubType,
+  DropdownSize,
   DropdownState,
-  DropdownSelectionType, 
-  MenuItemType 
+  DropdownSelectionType,
+  MenuItemType,
 } from '..';
 import { User, Inbox, Settings } from 'lucide-react';
 
@@ -17,88 +17,88 @@ const meta: Meta<typeof MenuDropdown> = {
     layout: 'centered',
     docs: {
       description: {
-        component: false
-      }
-    }
+        component: false,
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
       options: Object.values(DropdownType),
-      description: 'Type of dropdown'
+      description: 'Type of dropdown',
     },
     subType: {
       control: 'select',
       options: Object.values(DropdownSubType),
-      description: 'Subtype of dropdown (container/no container)'
+      description: 'Subtype of dropdown (container/no container)',
     },
     size: {
       control: 'select',
       options: Object.values(DropdownSize),
-      description: 'Size of dropdown'
+      description: 'Size of dropdown',
     },
     state: {
       control: 'select',
       options: Object.values(DropdownState),
-      description: 'State of dropdown'
+      description: 'State of dropdown',
     },
     selectionType: {
       control: 'select',
       options: Object.values(DropdownSelectionType),
-      description: 'Display style for multi-select dropdowns'
+      description: 'Display style for multi-select dropdowns',
     },
     hasLabel: {
       control: 'boolean',
-      description: 'Whether to show a label'
+      description: 'Whether to show a label',
     },
     hasSubLabel: {
       control: 'boolean',
-      description: 'Whether to show a sublabel'
+      description: 'Whether to show a sublabel',
     },
     mandatory: {
       control: 'boolean',
-      description: 'Whether the field is required'
+      description: 'Whether the field is required',
     },
     hasHint: {
       control: 'boolean',
-      description: 'Whether to show hint text'
+      description: 'Whether to show hint text',
     },
     hasClearButton: {
       control: 'boolean',
-      description: 'Whether to show a clear button'
+      description: 'Whether to show a clear button',
     },
     hasLeftIcon: {
       control: 'boolean',
-      description: 'Whether to show a left icon'
+      description: 'Whether to show a left icon',
     },
     leftIcon: {
       control: undefined,
-      description: 'Icon to display on the left'
+      description: 'Icon to display on the left',
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text'
+      description: 'Placeholder text',
     },
     label: {
       control: 'text',
-      description: 'Label text'
+      description: 'Label text',
     },
     subLabel: {
       control: 'text',
-      description: 'Sublabel text'
+      description: 'Sublabel text',
     },
     hint: {
       control: 'text',
-      description: 'Hint text'
+      description: 'Hint text',
     },
     disabled: {
       control: 'boolean',
-      description: 'Whether the dropdown is disabled'
+      description: 'Whether the dropdown is disabled',
     },
     width: {
       control: 'text',
-      description: 'Width of the dropdown'
+      description: 'Width of the dropdown',
     },
   },
 };
@@ -290,4 +290,4 @@ export const RequiredField: Story = {
     placeholder: 'Must select an option',
     menuItems: defaultMenuItems,
   },
-}; 
+};

@@ -26,4 +26,4 @@ export interface NumberInputProps {
   onChange?: (value: number | undefined) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-} 
+}

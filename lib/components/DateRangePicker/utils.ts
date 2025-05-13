@@ -1,5 +1,9 @@
 import { cn } from '../../utils';
-import { DateRange, DateRangePickerVariant, DateRangePreset } from './types';
+import {
+  DateRange,
+  DateRangePickerVariant,
+  DateRangePreset,
+} from './types';
 import { themeConfig } from '../../themeConfig';
 
 interface CalendarDayClassNamesProps {
@@ -17,48 +21,76 @@ export const getCalendarDayClassNames = ({
   isRangeDay,
   isTodayDay,
   isSingleDate,
-  isDisabled,
+  isDisabled
 }: CalendarDayClassNamesProps): { dayClasses: string; textColorClass: string } => {
   const theme = themeConfig.euler.dateRangePicker;
-
+  
   let dayClasses = theme.calendar.dayCell;
   let textColorClass = 'text-gray-600';
-
+  
   if (isSingleDate) {
-    dayClasses = cn(dayClasses, theme.calendar.singleDate);
+    dayClasses = cn(
+      dayClasses,
+      theme.calendar.singleDate
+    );
     textColorClass = theme.text.selectedDay;
   } else if (isStart) {
-    dayClasses = cn(dayClasses, theme.calendar.startDate);
+    dayClasses = cn(
+      dayClasses,
+      theme.calendar.startDate
+    );
     textColorClass = theme.text.selectedDay;
   } else if (isEnd) {
-    dayClasses = cn(dayClasses, theme.calendar.endDate);
+    dayClasses = cn(
+      dayClasses,
+      theme.calendar.endDate
+    );
     textColorClass = theme.text.selectedDay;
   } else if (isRangeDay) {
-    dayClasses = cn(dayClasses, theme.calendar.rangeDay);
+    dayClasses = cn(
+      dayClasses,
+      theme.calendar.rangeDay
+    );
   }
 
   if (isTodayDay && !isStart && !isEnd) {
-    dayClasses = cn(dayClasses, theme.calendar.todayDay);
+    dayClasses = cn(
+      dayClasses,
+      theme.calendar.todayDay
+    );
   }
 
-  dayClasses = cn(dayClasses, theme.calendar.hoverState);
+  dayClasses = cn(
+    dayClasses,
+    theme.calendar.hoverState
+  );
 
   if (isDisabled) {
-    dayClasses = cn(dayClasses, theme.states.disabledDay);
+    dayClasses = cn(
+      dayClasses,
+      theme.states.disabledDay
+    );
   }
 
   return { dayClasses, textColorClass };
 };
 
-export const getDateRangePickerClassNames = (isDisabled: boolean): string => {
+export const getDateRangePickerClassNames = (
+  isDisabled: boolean
+): string => {
   const theme = themeConfig.euler.dateRangePicker;
 
-  return cn(theme.base.container, isDisabled && theme.states.disabled);
+  return cn(
+    theme.base.container,
+    isDisabled && theme.states.disabled
+  );
 };
 
-export const getInputClassNames = (variant: DateRangePickerVariant): string => {
+export const getInputClassNames = (
+  variant: DateRangePickerVariant,
+): string => {
   const theme = themeConfig.euler.dateRangePicker;
-
+  
   return cn(
     theme.base.input,
     variant === DateRangePickerVariant.PRIMARY ? theme.input.primary : theme.input.secondary
@@ -71,7 +103,10 @@ export const getCalendarClassNames = (): string => {
 
 export const getPresetButtonClassNames = (isActive: boolean): string => {
   const theme = themeConfig.euler.dateRangePicker.presets;
-  return cn(theme.button, isActive && theme.activeButton);
+  return cn(
+    theme.button,
+    isActive && theme.activeButton
+  );
 };
 
 export const getTimePickerClassNames = (): string => {
@@ -175,18 +210,18 @@ export const formatDateRange = (range: DateRange, showTime: boolean = false): st
  */
 export const parseDate = (dateStr: string): Date | null => {
   if (!dateStr) return null;
-
+  
   try {
     // For now, we'll just support dd/MM/yyyy format regardless of the format parameter
     const parts = dateStr.split('/');
     if (parts.length !== 3) return null;
-
+    
     const day = parseInt(parts[0], 10);
     const month = parseInt(parts[1], 10) - 1;
     const year = parseInt(parts[2], 10);
-
+    
     if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
-
+    
     const date = new Date(year, month, day);
     return isValidDate(date) ? date : null;
   } catch (e) {
@@ -433,13 +468,13 @@ export const handleEndTimeChange = (
 export const getPresetDateRange = (preset: DateRangePreset): DateRange => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
+  
   let startDate = new Date(today);
   let endDate = new Date();
   endDate.setHours(23, 59, 59, 999);
-
+  
   const now = new Date();
-
+  
   switch (preset) {
     case DateRangePreset.LAST_1_HOUR:
       startDate = new Date(now.getTime() - 1 * 60 * 60 * 1000);
@@ -467,7 +502,7 @@ export const getPresetDateRange = (preset: DateRangePreset): DateRange => {
       startDate = today;
       break;
   }
-
+  
   return { startDate, endDate };
 };
 

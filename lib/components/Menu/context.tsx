@@ -11,5 +11,5 @@ export const MenuContext = createContext<MenuContextValue>({
   filteredItems: [],
   highlightedIndex: -1,
   setHighlightedIndex: () => {},
-  closeMenu: () => {}
-}); 
+  closeMenu: () => {},
+});

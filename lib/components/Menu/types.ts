@@ -1,51 +1,51 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 // Menu Item Types
 export enum MenuItemType {
-  DEFAULT = "DEFAULT",
-  MULTI_SELECT = "MULTI_SELECT",
-  ACTION = "ACTION",
-  LABEL = "LABEL",
-  SEPARATOR = "SEPARATOR",
-  SUBMENU = "SUBMENU"
+  DEFAULT = 'DEFAULT',
+  MULTI_SELECT = 'MULTI_SELECT',
+  ACTION = 'ACTION',
+  LABEL = 'LABEL',
+  SEPARATOR = 'SEPARATOR',
+  SUBMENU = 'SUBMENU',
 }
 
 // Menu Item States
 export enum MenuItemState {
-  DEFAULT = "DEFAULT",
-  HOVER = "HOVER",
-  SELECTED = "SELECTED",
-  NA = "NA"
+  DEFAULT = 'DEFAULT',
+  HOVER = 'HOVER',
+  SELECTED = 'SELECTED',
+  NA = 'NA',
 }
 
 // Menu Item Action Types
 export enum MenuItemAction {
-  NA = "NA",
-  DANGER = "DANGER",
-  PRIMARY = "PRIMARY"
+  NA = 'NA',
+  DANGER = 'DANGER',
+  PRIMARY = 'PRIMARY',
 }
 
 // Menu Types
 export enum MenuType {
-  DEFAULT = "DEFAULT",
-  MULTI_SELECT = "MULTI_SELECT",
-  CONTEXT_MENU = "CONTEXT_MENU"
+  DEFAULT = 'DEFAULT',
+  MULTI_SELECT = 'MULTI_SELECT',
+  CONTEXT_MENU = 'CONTEXT_MENU',
 }
 
 // ========== Dropdown Types ==========
 // Dropdown Types
 export enum DropdownType {
-  ICON_ONLY = "iconOnly",
-  SINGLE_SELECT = "singleSelect",
-  MULTI_SELECT = "multiSelect"
+  ICON_ONLY = 'iconOnly',
+  SINGLE_SELECT = 'singleSelect',
+  MULTI_SELECT = 'multiSelect',
 }
 
 // Dropdown States
 export enum DropdownState {
-  DEFAULT = "default",
-  HOVER = "hover",
-  OPEN = "open",
-  SELECTED = "selected"
+  DEFAULT = 'default',
+  HOVER = 'hover',
+  OPEN = 'open',
+  SELECTED = 'selected',
 }
 
 // Dropdown SubTypes
@@ -54,26 +54,26 @@ export enum DropdownSubType {
    * HAS_CONTAINER: Displays a full dropdown with label, sublabel, and hint text if provided.
    * Used for form elements that need additional context.
    */
-  HAS_CONTAINER = "hasContainer",
-  
+  HAS_CONTAINER = 'hasContainer',
+
   /**
    * NO_CONTAINER: Displays only the dropdown trigger without label, sublabel, or hint text.
    * Used for standalone dropdowns that don't need additional context.
    */
-  NO_CONTAINER = "noContainer"
+  NO_CONTAINER = 'noContainer',
 }
 
 // Dropdown Selection Types
 export enum DropdownSelectionType {
-  TEXT = "text",
-  COUNT = "count"
+  TEXT = 'text',
+  COUNT = 'count',
 }
 
 // Dropdown Sizes
 export enum DropdownSize {
-  SMALL = "sm",
-  MEDIUM = "md",
-  LARGE = "lg"
+  SMALL = 'sm',
+  MEDIUM = 'md',
+  LARGE = 'lg',
 }
 
 // Props for the slot components
@@ -153,9 +153,9 @@ export interface DropdownProps {
   isOpen?: boolean;
   disabled?: boolean;
   width?: string | number;
-  position?: "bottom-start" | "bottom-end" | "top-start" | "top-end" | "left" | "right";
+  position?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' | 'left' | 'right';
   offset?: number;
-  "aria-label"?: string;
+  'aria-label'?: string;
   searchTerm?: string;
   onSearchTermChange?: (searchTerm: string) => void;
   onSelectedItemsChange?: (selectedItems: string[]) => void;

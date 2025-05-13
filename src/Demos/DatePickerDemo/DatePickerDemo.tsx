@@ -8,7 +8,7 @@ const DatePickerDemo = () => {
     startDate: new Date(),
     endDate: new Date(),
   });
-  
+
   const handleDateRangeChange = (newRange: any) => {
     console.log('Selected Date Range:', newRange);
     setSelectedDateRange(newRange);
@@ -89,4 +89,4 @@ const DatePickerDemo = () => {
   );
 };
 
-export default DatePickerDemo; 
+export default DatePickerDemo;

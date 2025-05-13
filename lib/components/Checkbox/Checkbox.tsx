@@ -49,8 +49,10 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
     ref
   ) => {
     // Use internal state for uncontrolled component
-    const [checkedState, setCheckedState] = React.useState<boolean | 'indeterminate'>(defaultChecked);
-    
+    const [checkedState, setCheckedState] = React.useState<boolean | 'indeterminate'>(
+      defaultChecked
+    );
+
     // Determine if component is controlled
     const isControlled = isChecked !== undefined;
     const checked = isControlled ? isChecked : checkedState;
@@ -94,7 +96,9 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
         required={required}
         value={value}
         className={getCheckboxClassNames(size, isDisabled, checked, className)}
-        data-state={checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
+        data-state={
+          checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'
+        }
       >
         <CheckboxPrimitive.Indicator
           className={getIndicatorClassNames(size, indicatorClassName)}
@@ -107,8 +111,8 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
 
     // Label element if children exist
     const labelElement = children && (
-      <label 
-        htmlFor={uniqueId} 
+      <label
+        htmlFor={uniqueId}
         className={getLabelClassNames(size, isDisabled)}
         id={`${uniqueId}-label`}
       >
@@ -139,7 +143,7 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
         </div>
 
         {subtext && (
-          <div 
+          <div
             id={`${uniqueId}-description`}
             className={getCheckboxSubtextClassNames(size, isDisabled)}
           >

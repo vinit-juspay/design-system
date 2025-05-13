@@ -41,7 +41,27 @@ import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'popover'
+    | 'buttons'
+    | 'tooltipsV2'
+    | 'tags'
+    | 'tabs'
+    | 'textInput'
+    | 'alerts'
+    | 'charts'
+    | 'chartsV2'
+    | 'fonts'
+    | 'datePicker'
+    | 'selectors'
+    | 'buttonGroups'
+    | 'avatars'
+    | 'menu'
+    | 'dropdown'
+    | 'accordion'
+    | 'statCard'
+    | 'modal'
+    | 'input'
+    | 'snackbar'
+    | 'popover'
   >('buttons');
 
   const navigationItems = [
@@ -69,7 +89,7 @@ const App = () => {
 
   const renderSidebar = () => (
     <div className="fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 shadow-sm">
-      <div className="flex flex-col h-full">      
+      <div className="flex flex-col h-full">
         <div className="flex items-center justify-center h-16 border-b border-gray-200">
           <span className="text-lg font-bold text-gray-900">Design System</span>
         </div>
