@@ -25,6 +25,7 @@ const ModalDemo = () => {
     secondaryButtonDisabled: false,
     useCustomHeader: false,
     useCustomFooter: false,
+    showDivider: true,
   });
 
   // Custom header component
@@ -185,9 +186,40 @@ const ModalDemo = () => {
                 ))}
               </select>
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Options</label>
-              <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={playgroundConfig.showHeader}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showHeader: e.target.checked,
+                      })
+                    }
+                    className="mr-2 h-4 w-4"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Show Header</span>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={playgroundConfig.showFooter}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showFooter: e.target.checked,
+                      })
+                    }
+                    className="mr-2 h-4 w-4"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Show Footer</span>
+                </label>
+              </div>
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -198,60 +230,12 @@ const ModalDemo = () => {
                         showCloseButton: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Show Close Button</span>
+                  <span className="text-sm font-medium text-gray-700">Show Close Button</span>
                 </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={playgroundConfig.showHeader}
-                    onChange={e =>
-                      setPlaygroundConfig({ ...playgroundConfig, showHeader: e.target.checked })
-                    }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Show Header</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={playgroundConfig.showFooter}
-                    onChange={e =>
-                      setPlaygroundConfig({ ...playgroundConfig, showFooter: e.target.checked })
-                    }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Show Footer</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={playgroundConfig.showPrimaryButton}
-                    onChange={e =>
-                      setPlaygroundConfig({
-                        ...playgroundConfig,
-                        showPrimaryButton: e.target.checked,
-                      })
-                    }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Show Primary Button</span>
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={playgroundConfig.showSecondaryButton}
-                    onChange={e =>
-                      setPlaygroundConfig({
-                        ...playgroundConfig,
-                        showSecondaryButton: e.target.checked,
-                      })
-                    }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  />
-                  <span className="ml-2 text-sm text-gray-700">Show Secondary Button</span>
-                </label>
+              </div>
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -262,10 +246,44 @@ const ModalDemo = () => {
                         closeOnBackdropClick: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Close on Backdrop Click</span>
+                  <span className="text-sm font-medium text-gray-700">Close on Backdrop Click</span>
                 </label>
+              </div>
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={playgroundConfig.showPrimaryButton}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showPrimaryButton: e.target.checked,
+                      })
+                    }
+                    className="mr-2 h-4 w-4"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Show Primary Button</span>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={playgroundConfig.showSecondaryButton}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showSecondaryButton: e.target.checked,
+                      })
+                    }
+                    className="mr-2 h-4 w-4"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Show Secondary Button</span>
+                </label>
+              </div>
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -276,10 +294,12 @@ const ModalDemo = () => {
                         primaryButtonDisabled: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Disable Primary Button</span>
+                  <span className="text-sm font-medium text-gray-700">Primary Button Disabled</span>
                 </label>
+              </div>
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -290,15 +310,12 @@ const ModalDemo = () => {
                         secondaryButtonDisabled: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Disable Secondary Button</span>
+                  <span className="text-sm font-medium text-gray-700">Secondary Button Disabled</span>
                 </label>
               </div>
-            </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700">Custom Components</label>
-              <div className="space-y-2">
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -309,10 +326,12 @@ const ModalDemo = () => {
                         useCustomHeader: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Use Custom Header</span>
+                  <span className="text-sm font-medium text-gray-700">Use Custom Header</span>
                 </label>
+              </div>
+              <div>
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -323,45 +342,59 @@ const ModalDemo = () => {
                         useCustomFooter: e.target.checked,
                       })
                     }
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="mr-2 h-4 w-4"
                   />
-                  <span className="ml-2 text-sm text-gray-700">Use Custom Footer</span>
+                  <span className="text-sm font-medium text-gray-700">Use Custom Footer</span>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={playgroundConfig.showDivider}
+                    onChange={e =>
+                      setPlaygroundConfig({
+                        ...playgroundConfig,
+                        showDivider: e.target.checked,
+                      })
+                    }
+                    className="mr-2 h-4 w-4"
+                  />
+                  <span className="text-sm font-medium text-gray-700">Show Dividers</span>
                 </label>
               </div>
             </div>
           </div>
         </div>
 
-        <Button buttonType={ButtonType.PRIMARY} onClick={() => setIsOpenPlayground(true)}>
-          Open Playground Modal
-        </Button>
+        <div className="flex justify-center mt-6">
+          <Button onClick={() => setIsOpenPlayground(true)}>Open Modal</Button>
+        </div>
 
         <Modal
           isOpen={isOpenPlayground}
           onClose={() => setIsOpenPlayground(false)}
           title={playgroundConfig.title}
           subtitle={playgroundConfig.subtitle}
-          primaryButtonText={playgroundConfig.primaryButtonText}
-          secondaryButtonText={playgroundConfig.secondaryButtonText}
+          primaryButtonText={playgroundConfig.showPrimaryButton ? playgroundConfig.primaryButtonText : undefined}
+          secondaryButtonText={playgroundConfig.showSecondaryButton ? playgroundConfig.secondaryButtonText : undefined}
           onPrimaryButtonClick={() => setIsOpenPlayground(false)}
           onSecondaryButtonClick={() => setIsOpenPlayground(false)}
-          primaryButtonType={playgroundConfig.primaryButtonType}
-          secondaryButtonType={playgroundConfig.secondaryButtonType}
+          primaryButtonDisabled={playgroundConfig.primaryButtonDisabled}
+          secondaryButtonDisabled={playgroundConfig.secondaryButtonDisabled}
           showCloseButton={playgroundConfig.showCloseButton}
           showHeader={playgroundConfig.showHeader}
           showFooter={playgroundConfig.showFooter}
           closeOnBackdropClick={playgroundConfig.closeOnBackdropClick}
-          primaryButtonDisabled={playgroundConfig.primaryButtonDisabled}
-          secondaryButtonDisabled={playgroundConfig.secondaryButtonDisabled}
+          primaryButtonType={playgroundConfig.primaryButtonType}
+          secondaryButtonType={playgroundConfig.secondaryButtonType}
           customHeader={playgroundConfig.useCustomHeader ? <CustomHeader /> : undefined}
           customFooter={playgroundConfig.useCustomFooter ? <CustomFooter /> : undefined}
-          headerRightSlot={<Button buttonType={ButtonType.SECONDARY}>Close</Button>}
+          showDivider={playgroundConfig.showDivider}
         >
-          <div className="text-gray-600">
-            <p className="mb-4">
-              This is a playground modal where you can customize all properties in real-time.
-            </p>
-            <p>Try different combinations of settings to see how the modal behaves.</p>
+          <div className="space-y-4">
+            <p>This is a configurable modal for demonstration purposes.</p>
+            <p>You can adjust various settings using the controls above.</p>
           </div>
         </Modal>
       </div>
