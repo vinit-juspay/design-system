@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '../../../lib/main';
 import { ButtonType, ButtonSize, ButtonSubType } from '../../../lib/components/Button/types';
 import { Search, Plus, ArrowRight, Trash2, Check, MenuIcon, Settings } from 'lucide-react';

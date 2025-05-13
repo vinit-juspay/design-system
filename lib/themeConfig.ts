@@ -452,10 +452,10 @@ export const themeConfig = {
       layout: {
         headerContainer: 'flex w-full items-center justify-between',
         headerContent: 'flex items-center gap-2',
-        messageContainer: 'mt-1 pl-7 flex flex-col gap-1',
+        messageContainer: 'mt-1.5 pl-7 flex flex-col gap-4',
         heading: 'text-body-lg font-500 text-gray-25',
         message: 'text-body-md font-400 break-words text-gray-300',
-        alertMessage: 'text-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
+        actionMessage: 'text-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
       },
       type: {
         info: {

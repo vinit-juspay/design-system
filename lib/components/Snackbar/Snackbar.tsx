@@ -18,7 +18,7 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       type = 'info',
       heading,
       message,
-      alertMessage,
+      actionMessage,
       showIcon = true,
       autoClose = true,
       position = 'topRight',
@@ -66,14 +66,14 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
           )}
         </div>
 
-        {(message || alertMessage) && (
+        {(message || actionMessage) && (
           <div className={layoutStyles.messageContainer}>
             {message && <p className={cn(layoutStyles.message)}>{message}</p>}
-            {alertMessage && (
+            {actionMessage && (
               // <p className={cn(layoutStyles.alertMessage)}>{alertMessage}</p>
               <div className='flex justify-start'> 
-              <Button buttonType={ButtonType.PRIMARY} subType={ButtonSubType.LINK} className={cn(layoutStyles.alertMessage)}>
-                {alertMessage}
+              <Button buttonType={ButtonType.PRIMARY} subType={ButtonSubType.LINK} className={cn(layoutStyles.actionMessage)}>
+                {actionMessage}
               </Button>
               </div>
             )}

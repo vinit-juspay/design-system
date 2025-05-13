@@ -120,7 +120,7 @@ const AccordionItem = forwardRef<
                 <div
                   className={cn(
                     'flex items-center',
-                    chevronPosition === AccordionChevronPosition.LEFT ? 'pl-8' : ''
+                    chevronPosition === AccordionChevronPosition.LEFT ? 'pl-8' : 'pl-5'
                   )}
                 >
                   {subtext && <div className={subtextClassName}>{subtext}</div>}
