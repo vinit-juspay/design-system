@@ -10,6 +10,7 @@ import {
   useSnackbarLogic,
 } from './utils';
 import { X } from 'lucide-react';
+import { Button, ButtonSubType, ButtonType } from '../Button';
 
 const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
   (
@@ -69,7 +70,12 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
           <div className={layoutStyles.messageContainer}>
             {message && <p className={cn(layoutStyles.message)}>{message}</p>}
             {alertMessage && (
-              <p className={cn(layoutStyles.alertMessage)}>{alertMessage}</p>
+              // <p className={cn(layoutStyles.alertMessage)}>{alertMessage}</p>
+              <div className='flex justify-start'> 
+              <Button buttonType={ButtonType.PRIMARY} subType={ButtonSubType.LINK} className={cn(layoutStyles.alertMessage)}>
+                {alertMessage}
+              </Button>
+              </div>
             )}
           </div>
         )}
