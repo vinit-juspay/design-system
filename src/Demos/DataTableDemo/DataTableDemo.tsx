@@ -7,6 +7,7 @@ import {
   ColumnDefinition,
   Filter
 } from '../../../lib/components/DataTable/types';
+import { Avatar } from '../../../lib/main';
 
 const DataTableDemo = () => {
   // Sample data
@@ -65,11 +66,7 @@ const DataTableDemo = () => {
       header: 'Name', 
       accessor: (row) => (
         <div className="flex items-center">
-          <img 
-            src="/api/placeholder/40/40" 
-            alt="Profile" 
-            className="w-10 h-10 rounded-full mr-3" 
-          />
+            <Avatar src='https://randomuser.me/api/portraits/men/20.jpg'/>
           <div>
             <div className="font-medium text-sm">{row.name as string}</div>
             <div className="text-xs text-gray-500">Joined in {row.joinDate as string}</div>
