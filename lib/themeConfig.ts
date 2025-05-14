@@ -327,7 +327,7 @@ export const themeConfig = {
       },
     },
     unitInput: {
-      container: 'flex items-center h-full',
+      container: 'flex w-full items-center h-full',
       unit: {
         base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
         positions: {

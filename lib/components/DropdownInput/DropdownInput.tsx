@@ -73,7 +73,7 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(
       dropdownWidth = 'auto',
       dropdownPlaceholder = 'Select',
       dropdownPosition = DropdownPosition.LEFT,
-
+      className,
       // Rest of props (passed to input element)
       ...props
     },
@@ -248,7 +248,8 @@ const DropdownInput = forwardRef<HTMLInputElement, DropdownInputProps>(
               ),
               dropdownPosition === DropdownPosition.LEFT &&
                 showSelectedOptionInInput &&
-                getInputWithLeftPaddingClasses()
+                getInputWithLeftPaddingClasses(),
+              className
             )}
             placeholder={placeholder}
             value={inputTextValue}

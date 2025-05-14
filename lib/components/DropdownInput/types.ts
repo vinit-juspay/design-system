@@ -70,4 +70,5 @@ export interface DropdownInputProps
   dropdownPlaceholder?: string;
   /** Position of the dropdown (left or right) */
   dropdownPosition?: DropdownPosition;
+  className?: string;
 }
