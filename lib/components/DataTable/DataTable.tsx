@@ -1,5 +1,7 @@
-import { forwardRef, useState, useMemo } from 'react';
-import { ChevronDown, ChevronUp} from 'lucide-react';
+import { forwardRef, useState, useEffect, useMemo } from 'react';
+import { 
+  ChevronDown, ChevronUp, Settings, Download 
+} from 'lucide-react';
 import { DataTableProps, SortDirection, SortConfig, ColumnDefinition } from './types';
 import {
   getDataTableContainerClassNames,
@@ -10,15 +12,17 @@ import {
   getTableHeadClassNames,
   getTableHeaderCellClassNames,
   getTableBodyClassNames,
-  getTableRowClassNames,
   getTableCellClassNames,
   getSortIconClassNames,
   filterData,
   sortData,
 } from './utils';
-import { ColumnManager } from './ColumnManager';
 import { DataTableFilters } from './DataTableFilters';
 import { DataTablePagination } from './DataTablePagination';
+import Button from '../Button/Button';
+import { ButtonType } from '../Button/types';
+import { MenuDropdown } from '../Menu';
+import { DropdownType, DropdownSubType, MenuItemType } from '../Menu/types';
 
 function DataTableComponent<T extends Record<string, any>>(
   {
@@ -55,6 +59,10 @@ function DataTableComponent<T extends Record<string, any>>(
   const [currentPage, setCurrentPage] = useState<number>(pagination?.currentPage || 1);
   const [pageSize, setPageSize] = useState<number>(pagination?.pageSize || 10);
   
+  // Track selected rows
+  const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
+  const [selectAll, setSelectAll] = useState(false);
+  
   const totalRows = pagination?.totalRows || data.length;
   
   const processedData = useMemo(() => {
@@ -76,7 +84,73 @@ function DataTableComponent<T extends Record<string, any>>(
     return processedData.slice(startIndex, startIndex + pageSize);
   }, [processedData, currentPage, pageSize]);
   
-  // Handle sort toggle
+  // Reset selection when data changes
+  useEffect(() => {
+    setSelectedRows({});
+    setSelectAll(false);
+  }, [data]);
+  
+  // Handle select all
+  const handleSelectAll = () => {
+    const newSelectAll = !selectAll;
+    setSelectAll(newSelectAll);
+    
+    const newSelectedRows = { ...selectedRows };
+    currentData.forEach(row => {
+      newSelectedRows[row[idField]] = newSelectAll;
+    });
+    setSelectedRows(newSelectedRows);
+  };
+  
+  // Handle individual row selection
+  const handleRowSelect = (rowId: string) => {
+    const newSelectedRows = { 
+      ...selectedRows, 
+      [rowId]: !selectedRows[rowId] 
+    };
+    setSelectedRows(newSelectedRows);
+    
+    // Check if all rows are selected
+    const allSelected = currentData.every(row => newSelectedRows[row[idField]]);
+    setSelectAll(allSelected);
+  };
+  
+  // Export selected rows to CSV
+  const exportToCSV = () => {
+    const selectedData = processedData.filter(row => selectedRows[row[idField]]);
+    
+    if (selectedData.length === 0) {
+      alert('Please select at least one row to export');
+      return;
+    }
+    
+    // Create CSV headers
+    const headers = visibleColumns.map(col => col.header);
+    const fields = visibleColumns.map(col => col.field);
+    
+    // Create CSV content
+    let csvContent = headers.join(',') + '\n';
+    selectedData.forEach(row => {
+      const rowData = fields.map(field => {
+        const value = row[field];
+        // Handle comma in values by wrapping in quotes
+        return value != null ? `"${String(value).replace(/"/g, '""')}"` : '';
+      });
+      csvContent += rowData.join(',') + '\n';
+    });
+    
+    // Create and download blob
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `export-${new Date().toISOString()}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
   const handleSort = (field: keyof T) => {
     const direction = sortConfig?.field === field
       ? sortConfig.direction === SortDirection.ASCENDING
@@ -92,7 +166,6 @@ function DataTableComponent<T extends Record<string, any>>(
     }
   };
   
-  // Handle filter change
   const handleFilterChange = (filterValues: Record<string, any>) => {
     setFilters(filterValues);
     setCurrentPage(1);
@@ -110,7 +183,6 @@ function DataTableComponent<T extends Record<string, any>>(
     }
   };
   
-
   const handlePageSizeChange = (size: number) => {
     setPageSize(size);
     setCurrentPage(1);
@@ -124,6 +196,37 @@ function DataTableComponent<T extends Record<string, any>>(
     setVisibleColumns(updatedColumns);
   };
   
+  // Create column manager menu items
+  const getColumnMenuItems = () => {
+    return initialColumns.filter(col => col.canHide !== false).map(column => ({
+      id: String(column.field),
+      text: column.header,
+      type: MenuItemType.MULTI_SELECT,
+      isSelected: visibleColumns.some(col => col.field === column.field),
+      onClick: () => {
+        // Toggle column visibility
+        const isCurrentlyVisible = visibleColumns.some(col => col.field === column.field);
+        let updatedColumns;
+        
+        if (isCurrentlyVisible) {
+          updatedColumns = visibleColumns.filter(col => col.field !== column.field);
+        } else {
+          // Find the original column to add it back
+          const columnToAdd = initialColumns.find(col => col.field === column.field);
+          if (columnToAdd) {
+            updatedColumns = [...visibleColumns, columnToAdd];
+          } else {
+            return;
+          }
+        }
+        
+        handleColumnVisibilityChange(updatedColumns);
+      }
+    }));
+  };
+  
+  const hasSelectedRows = Object.values(selectedRows).some(selected => selected);
+  
   return (
     <div ref={ref} className={getDataTableContainerClassNames(className)}>
       {(title || description || showToolbar) && (
@@ -134,7 +237,7 @@ function DataTableComponent<T extends Record<string, any>>(
           </div>
           
           {showToolbar && (
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-4 gap-2">
               {enableFiltering && (
                 <DataTableFilters 
                   columns={initialColumns} 
@@ -143,12 +246,14 @@ function DataTableComponent<T extends Record<string, any>>(
                 />
               )}
               
-              {enableColumnManager && (
-                <ColumnManager
-                  columns={initialColumns}
-                  visibleColumns={visibleColumns}
-                  onColumnChange={handleColumnVisibilityChange}
-                />
+              {hasSelectedRows && (
+                <Button
+                  buttonType={ButtonType.SECONDARY}
+                  leadingIcon={Download}                  
+                  onClick={exportToCSV}
+                >
+                  Export
+                </Button>
               )}
             </div>
           )}
@@ -159,6 +264,17 @@ function DataTableComponent<T extends Record<string, any>>(
         <table className={getTableClassNames(isStriped, isHoverable)}>
           <thead className={getTableHeadClassNames()}>
             <tr>
+              <th className={getTableHeaderCellClassNames(false)}>
+                <div className="flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    checked={selectAll}
+                    onChange={handleSelectAll}
+                    className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  />
+                </div>
+              </th>
+              
               {visibleColumns.map((column) => (
                 <th 
                   key={String(column.field)} 
@@ -187,15 +303,40 @@ function DataTableComponent<T extends Record<string, any>>(
                   </div>
                 </th>
               ))}
+              
+              {enableColumnManager && (
+                <th className={getTableHeaderCellClassNames(false, "w-10")}>
+                  <div className="flex items-center justify-center">
+                    <MenuDropdown
+                      id="column-manager"
+                      type={DropdownType.ICON_ONLY}
+                      subType={DropdownSubType.NO_CONTAINER}
+                      menuItems={getColumnMenuItems()}
+                      leftIcon={<Settings size={16} />}
+                    />
+                  </div>
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className={getTableBodyClassNames()}>
             {currentData.length > 0 ? (
-              currentData.map((row, rowIndex) => (
+              currentData.map((row) => (
                 <tr 
                   key={String(row[idField])} 
-                  className={getTableRowClassNames(isStriped, rowIndex % 2 === 1)}
                 >
+                  <td className={getTableCellClassNames()}>
+                    <div className="flex items-center justify-center">
+                      <input
+                        type="checkbox"
+                        checked={!!selectedRows[row[idField]]}
+                        onChange={() => handleRowSelect(row[idField])}
+                        className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      />
+                    </div>
+                  </td>
+                  
+                  {/* Data cells */}
                   {visibleColumns.map((column) => (
                     <td 
                       key={`${row[idField]}-${String(column.field)}`} 
@@ -206,12 +347,14 @@ function DataTableComponent<T extends Record<string, any>>(
                         : row[column.field] != null ? String(row[column.field]) : ''}
                     </td>
                   ))}
+                  
+                  {enableColumnManager && <td className={getTableCellClassNames()}></td>}
                 </tr>
               ))
             ) : (
               <tr>
                 <td 
-                  colSpan={visibleColumns.length} 
+                  colSpan={visibleColumns.length + (enableColumnManager ? 2 : 1)} 
                   className="px-4 py-6 text-center text-gray-500"
                 >
                   No data available
@@ -239,5 +382,7 @@ function DataTableComponent<T extends Record<string, any>>(
 const DataTable = forwardRef(DataTableComponent) as <T extends Record<string, any>>(
   props: DataTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => React.ReactElement;
+
+DataTable.displayName = "DataTable";
 
 export default DataTable; 

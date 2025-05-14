@@ -101,22 +101,6 @@ const DataTableDemo = () => {
       ),
       isSortable: true
     },
-    {
-      id: 'actions',
-      field: 'actions',
-      header: 'Actions',
-      accessor: (row) => (
-        <MenuDropdown
-          type={DropdownType.SINGLE_SELECT}
-          menuItems={[
-            { id: 'edit', text: 'Edit User' },
-            { id: 'delete', text: 'Delete User' },
-            { id: 'message', text: 'Send Message' }
-          ]}
-          onSelect={(item) => console.log(`${item.id} action for ${row.name}`)}
-        />
-      )
-    }
   ];
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -147,11 +131,8 @@ const DataTableDemo = () => {
         }}
         defaultSort={sortConfig}
         onSortChange={(newSortConfig) => setSortConfig(newSortConfig)}
-        onFilterChange={(filterId, selectedValues) => {
-          setFilters(prev => ({
-            ...prev,
-            [filterId]: selectedValues
-          }));
+        onFilterChange={(filters) => {
+          setFilters(filters);
         }}
       />
     </div>

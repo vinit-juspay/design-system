@@ -56,6 +56,8 @@ export interface PaginationConfig {
   pageSize: number;
   totalRows: number;
   pageSizeOptions: number[];
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
 }
 
 export interface DataTableProps<T extends Record<string, any>> {
