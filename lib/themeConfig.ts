@@ -1277,7 +1277,7 @@ export const themeConfig = {
         hoverable: "hover-rows",
       },
       thead: {
-        base: "bg-gray-50",
+        base: "bg-gray-25 border-b border-gray-150 h-10",
         variant: {
           default: "",
           compact: "",
@@ -1285,7 +1285,7 @@ export const themeConfig = {
         },
       },
       th: {
-        base: "px-4 py-3 text-left font-medium text-gray-600",
+        base: "px-2 py-1 text-left font-medium text-gray-600",
         variant: {
           default: "",
           compact: "px-2 py-1",
@@ -1298,9 +1298,9 @@ export const themeConfig = {
         },
         sortable: "cursor-pointer select-none",
       },
-      tbody: "divide-y divide-gray-200",
+      tbody: "divide-y divide-gray-150",
       tr: {
-        base: "",
+        base: "h-14",
         variant: {
           default: "",
           compact: "",
@@ -1309,11 +1309,11 @@ export const themeConfig = {
         striped: "bg-gray-50",
       },
       td: {
-        base: "px-4 py-3",
+        base: "px-3 py-2",
         variant: {
           default: "",
           compact: "px-2 py-1",
-          bordered: "border-r last:border-r-0 border-gray-200",
+          bordered: "border-r last:border-r-0 border-gray-150",
         },
         size: {
           sm: "text-xs",
@@ -1322,7 +1322,7 @@ export const themeConfig = {
         },
       },
       pagination: {
-        container: "flex justify-between items-center mt-4 py-2",
+        container: "flex justify-between items-center py-2 px-4 border-t border-gray-150",
         text: "text-sm text-gray-600 flex items-center gap-2",
         button: {
           base: "p-1 rounded-md flex items-center justify-center",

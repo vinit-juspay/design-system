@@ -190,7 +190,9 @@ export function sortData<T extends Record<string, any>>(
         : bValue - aValue;
     }
     
-    if (aValue instanceof Date && bValue instanceof Date) {
+    // Handle dates
+    const isDate = (value: unknown): value is Date => value instanceof Date;
+    if (isDate(aValue) && isDate(bValue)) {
       return sortConfig.direction === SortDirection.ASCENDING
         ? aValue.getTime() - bValue.getTime()
         : bValue.getTime() - aValue.getTime();

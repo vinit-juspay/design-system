@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ChevronDown, ChevronUp, Settings, Download 
 } from 'lucide-react';
@@ -23,8 +23,10 @@ import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
 import { MenuDropdown } from '../Menu';
 import { DropdownType, DropdownSubType, MenuItemType } from '../Menu/types';
+import Checkbox from '../Checkbox';
+import { CheckboxSize } from '../Checkbox/types';
 
-function DataTableComponent<T extends Record<string, any>>(
+const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
   {
     data,
     columns: initialColumns,
@@ -48,11 +50,10 @@ function DataTableComponent<T extends Record<string, any>>(
     onSortChange,
     onFilterChange,
     className,
-  }: DataTableProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
+  }: DataTableProps<T>
+) => {
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(defaultSort || null);
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  const [filters, setFilters] = useState<Record<string, unknown>>({});
   const [visibleColumns, setVisibleColumns] = useState<ColumnDefinition<T>[]>(() => {
     return initialColumns.filter(col => col.isVisible !== false);
   });
@@ -91,33 +92,44 @@ function DataTableComponent<T extends Record<string, any>>(
   }, [data]);
   
   // Handle select all
-  const handleSelectAll = () => {
-    const newSelectAll = !selectAll;
+  const handleSelectAll = (checked: boolean | 'indeterminate') => {
+    // We only care about boolean values for selectAll
+    const newSelectAll = checked === true;
     setSelectAll(newSelectAll);
     
     const newSelectedRows = { ...selectedRows };
     currentData.forEach(row => {
-      newSelectedRows[row[idField]] = newSelectAll;
+      const rowId = row[idField] as string;
+      newSelectedRows[rowId] = newSelectAll;
     });
     setSelectedRows(newSelectedRows);
   };
   
   // Handle individual row selection
-  const handleRowSelect = (rowId: string) => {
+  const handleRowSelect = (rowId: unknown) => {
+    // Ensure rowId is a string for the Record key
+    const rowIdStr = String(rowId);
+    
     const newSelectedRows = { 
       ...selectedRows, 
-      [rowId]: !selectedRows[rowId] 
+      [rowIdStr]: !selectedRows[rowIdStr] 
     };
     setSelectedRows(newSelectedRows);
     
     // Check if all rows are selected
-    const allSelected = currentData.every(row => newSelectedRows[row[idField]]);
+    const allSelected = currentData.every(row => {
+      const currentRowId = String(row[idField]);
+      return newSelectedRows[currentRowId];
+    });
     setSelectAll(allSelected);
   };
   
   // Export selected rows to CSV
   const exportToCSV = () => {
-    const selectedData = processedData.filter(row => selectedRows[row[idField]]);
+    const selectedData = processedData.filter(row => {
+      const rowId = String(row[idField]);
+      return selectedRows[rowId];
+    });
     
     if (selectedData.length === 0) {
       alert('Please select at least one row to export');
@@ -166,7 +178,7 @@ function DataTableComponent<T extends Record<string, any>>(
     }
   };
   
-  const handleFilterChange = (filterValues: Record<string, any>) => {
+  const handleFilterChange = (filterValues: Record<string, unknown>) => {
     setFilters(filterValues);
     setCurrentPage(1);
     
@@ -228,7 +240,7 @@ function DataTableComponent<T extends Record<string, any>>(
   const hasSelectedRows = Object.values(selectedRows).some(selected => selected);
   
   return (
-    <div ref={ref} className={getDataTableContainerClassNames(className)}>
+    <div className={getDataTableContainerClassNames(className)}>
       {(title || description || showToolbar) && (
         <div className={getDataTableHeaderClassNames()}>
           <div className="flex flex-col">
@@ -260,17 +272,16 @@ function DataTableComponent<T extends Record<string, any>>(
         </div>
       )}
       
-      <div className="overflow-x-auto">
+      <div className='rounded-lg border border-gray-150 overflow-x-auto'>
         <table className={getTableClassNames(isStriped, isHoverable)}>
           <thead className={getTableHeadClassNames()}>
             <tr>
               <th className={getTableHeaderCellClassNames(false)}>
                 <div className="flex items-center justify-center">
-                  <input
-                    type="checkbox"
-                    checked={selectAll}
-                    onChange={handleSelectAll}
-                    className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  <Checkbox
+                    isChecked={selectAll}
+                    onCheckedChange={handleSelectAll}
+                    size={CheckboxSize.MEDIUM}
                   />
                 </div>
               </th>
@@ -324,22 +335,21 @@ function DataTableComponent<T extends Record<string, any>>(
               currentData.map((row) => (
                 <tr 
                   key={String(row[idField])} 
+                  className='h-14'
                 >
                   <td className={getTableCellClassNames()}>
                     <div className="flex items-center justify-center">
-                      <input
-                        type="checkbox"
-                        checked={!!selectedRows[row[idField]]}
-                        onChange={() => handleRowSelect(row[idField])}
-                        className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      <Checkbox
+                        isChecked={!!selectedRows[String(row[idField])]}
+                        onCheckedChange={() => handleRowSelect(row[idField])}
+                        size={CheckboxSize.MEDIUM}
                       />
                     </div>
                   </td>
                   
-                  {/* Data cells */}
                   {visibleColumns.map((column) => (
                     <td 
-                      key={`${row[idField]}-${String(column.field)}`} 
+                      key={`${String(row[idField])}-${String(column.field)}`} 
                       className={getTableCellClassNames(column.className)}
                     >
                       {column.renderCell 
@@ -352,10 +362,9 @@ function DataTableComponent<T extends Record<string, any>>(
                 </tr>
               ))
             ) : (
-              <tr>
+              <tr className='h-14'>
                 <td 
                   colSpan={visibleColumns.length + (enableColumnManager ? 2 : 1)} 
-                  className="px-4 py-6 text-center text-gray-500"
                 >
                   No data available
                 </td>
@@ -363,9 +372,7 @@ function DataTableComponent<T extends Record<string, any>>(
             )}
           </tbody>
         </table>
-      </div>
-      
-      {pagination && (
+        {pagination && (
         <DataTablePagination
           currentPage={currentPage}
           pageSize={pageSize}
@@ -375,13 +382,14 @@ function DataTableComponent<T extends Record<string, any>>(
           onPageSizeChange={handlePageSizeChange}
         />
       )}
+      </div>
+      
+
     </div>
   );
-}
-
-const DataTable = forwardRef(DataTableComponent) as <T extends Record<string, any>>(
-  props: DataTableProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
-) => React.ReactElement;
+}) as React.ForwardRefExoticComponent<
+  DataTableProps<Record<string, unknown>> & React.RefAttributes<HTMLDivElement>
+>;
 
 DataTable.displayName = "DataTable";
 

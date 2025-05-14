@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 import {
   getPaginationContainerClassNames,
   getPaginationButtonClassNames,
-  getPaginationTextClassNames,
 } from './utils';
 import { MenuDropdown } from '../Menu';
 import { DropdownType, DropdownSubType, MenuItemType } from '../Menu/types';
@@ -27,8 +26,6 @@ export function DataTablePagination({
   onPageSizeChange,
 }: DataTablePaginationProps) {
   const totalPages = Math.max(1, Math.ceil(totalRows / pageSize));
-  const startRow = Math.min(totalRows, (currentPage - 1) * pageSize + 1);
-  const endRow = Math.min(totalRows, currentPage * pageSize);
   
   const pageSizeMenuItems = useMemo(() => {
     return pageSizeOptions.map(size => ({
@@ -116,10 +113,6 @@ export function DataTablePagination({
           onSelect={handlePageSizeChange}
           leftIcon={pageSize.toString()}
         />
-      </div>
-      
-      <div className={getPaginationTextClassNames()}>
-        <span>{startRow}-{endRow} of {totalRows}</span>
       </div>
       
       <div className="flex items-center gap-2">
