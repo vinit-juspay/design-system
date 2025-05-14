@@ -87,7 +87,7 @@ export interface MenuItemBaseProps {
   text: string;
   className?: string;
   disabled?: boolean;
-  type?: MenuItemType;
+  menuType?: MenuItemType;
   state?: MenuItemState;
   action?: MenuItemAction;
   onClick?: () => void;
@@ -124,7 +124,7 @@ export interface MenuItemProps extends MenuItemWithShortcutProps {
 export interface DropdownProps {
   id?: string;
   className?: string;
-  type?: DropdownType;
+  dropdownType?: DropdownType;
   subType?: DropdownSubType;
   size?: DropdownSize;
   state?: DropdownState;
@@ -166,7 +166,7 @@ export interface DropdownProps {
 export interface MenuProps {
   children?: ReactNode;
   className?: string;
-  type?: MenuType;
+  menuType?: MenuType;
   hasSearch?: boolean;
   items: MenuItemProps[];
   searchPlaceholder?: string;

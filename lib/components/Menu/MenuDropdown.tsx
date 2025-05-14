@@ -47,7 +47,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
     {
       id,
       className,
-      type = DropdownType.SINGLE_SELECT,
+      dropdownType = DropdownType.SINGLE_SELECT,
       subType = DropdownSubType.HAS_CONTAINER,
       size = DropdownSize.MEDIUM,
       state: propState = DropdownState.DEFAULT,
@@ -86,7 +86,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
     console.log('MenuDropDownProps-->>', {
       id,
       className,
-      type,
+      dropdownType,
       subType,
       size,
       propState,
@@ -141,17 +141,17 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
       : uncontrolledSelectedOption;
     const searchTerm = isSearchTermControlled ? controlledSearchTerm : uncontrolledSearchTerm;
 
-    // Determine closeOnSelect behavior based on type
+    // Determine closeOnSelect behavior based on dropdownType
     // Default: close on select for single-select, stay open for multi-select
     const shouldCloseOnSelect =
-      closeOnSelect !== undefined ? closeOnSelect : type !== DropdownType.MULTI_SELECT;
+      closeOnSelect !== undefined ? closeOnSelect : dropdownType !== DropdownType.MULTI_SELECT;
 
     // Default hasClearButton to true for multi-select if not explicitly provided
     // Hide clear button for NO_CONTAINER multiselect dropdowns
     const showClearButton =
       hasClearButton !== undefined
         ? hasClearButton
-        : type === DropdownType.MULTI_SELECT && subType !== DropdownSubType.NO_CONTAINER;
+        : dropdownType === DropdownType.MULTI_SELECT && subType !== DropdownSubType.NO_CONTAINER;
 
     // Determine current state based on isOpen and propState
     const currentState = isOpen ? DropdownState.OPEN : disabled ? DropdownState.DEFAULT : propState;
@@ -246,7 +246,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
 
       // Update internal state for uncontrolled components
       if (!isSelectionControlled) {
-        if (type === DropdownType.MULTI_SELECT) {
+        if (dropdownType === DropdownType.MULTI_SELECT) {
           // Handle multi-select logic
           const currentSelected = Array.isArray(uncontrolledSelectedOption)
             ? uncontrolledSelectedOption
@@ -268,7 +268,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
       // Call external handler if provided
       if (onSelect) {
         // For multi-select, pass the updated selection array
-        if (type === DropdownType.MULTI_SELECT) {
+        if (dropdownType === DropdownType.MULTI_SELECT) {
           const currentItems = Array.isArray(selectedOption) ? selectedOption : [];
           const updatedItems = currentItems.includes(itemId)
             ? currentItems.filter(id => id !== itemId)
@@ -286,7 +286,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
         }
       }
 
-      // Close dropdown based on type and closeOnSelect prop
+      // Close dropdown based on dropdownType and closeOnSelect prop
       if (shouldCloseOnSelect) {
         handleClose();
       }
@@ -298,7 +298,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
 
       // Clear internal state for uncontrolled components
       if (!isSelectionControlled) {
-        setUncontrolledSelectedOption(type === DropdownType.MULTI_SELECT ? [] : undefined);
+        setUncontrolledSelectedOption(dropdownType === DropdownType.MULTI_SELECT ? [] : undefined);
       }
 
       // Call external handler if provided
@@ -319,7 +319,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
         setLastSelectedItems(selectedItems);
 
         // Update internal state for uncontrolled components
-        if (!isSelectionControlled && type === DropdownType.MULTI_SELECT) {
+        if (!isSelectionControlled && dropdownType === DropdownType.MULTI_SELECT) {
           setUncontrolledSelectedOption(selectedItems);
         }
 
@@ -329,7 +329,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
         }
 
         // Also call onSelect with the full menu items if available
-        if (onSelect && type === DropdownType.MULTI_SELECT) {
+        if (onSelect && dropdownType === DropdownType.MULTI_SELECT) {
           const selectedMenuItems = selectedItems
             .map(id => menuItems.find(item => item.id === id))
             .filter(Boolean) as MenuItemProps[];
@@ -339,7 +339,14 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
           }
         }
       },
-      [lastSelectedItems, onSelectedItemsChange, isSelectionControlled, type, onSelect, menuItems]
+      [
+        lastSelectedItems,
+        onSelectedItemsChange,
+        isSelectionControlled,
+        dropdownType,
+        onSelect,
+        menuItems,
+      ]
     );
 
     // Handle context changes from the Menu component
@@ -374,8 +381,8 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
         return selectedText;
       }
 
-      // If using multi-select type
-      if (type === DropdownType.MULTI_SELECT) {
+      // If using multi-select dropdownType
+      if (dropdownType === DropdownType.MULTI_SELECT) {
         // Get the actual selected items array
         const selectedArray = Array.isArray(selectedOption) ? selectedOption : [];
 
@@ -456,7 +463,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
 
     // Generate dropdown classes
     const dropdownClasses = getDropdownBaseClasses(
-      type,
+      dropdownType,
       subType,
       size,
       currentState,
@@ -484,8 +491,8 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
       const minWidth = Math.min(Math.max(dropdownWidth, 180), 320);
       menuContainerRef.current.style.minWidth = `${minWidth}px`;
 
-      // For icon-only type, always use sensible width rather than tiny icon width
-      if (type === DropdownType.ICON_ONLY) {
+      // For icon-only dropdownType, always use sensible width rather than tiny icon width
+      if (dropdownType === DropdownType.ICON_ONLY) {
         menuContainerRef.current.style.minWidth = '220px';
       }
 
@@ -496,7 +503,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
       // Estimate menu height (this will be approximate until rendered)
       // Using 56 as approx height per item + padding
       const estimatedMenuHeight = Math.min(
-        menuItems.length * 40 + 16 + (type === DropdownType.MULTI_SELECT ? 56 : 0),
+        menuItems.length * 40 + 16 + (dropdownType === DropdownType.MULTI_SELECT ? 56 : 0),
         320
       );
 
@@ -515,7 +522,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
         menuContainerRef.current.style.marginTop = '4px';
         menuContainerRef.current.style.marginBottom = '0';
       }
-    }, [isOpen, type, menuItems.length]);
+    }, [isOpen, dropdownType, menuItems.length]);
 
     // ARIA attributes for the dropdown trigger
     const ariaProps = {
@@ -588,7 +595,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
               themeConfig.euler.menuv2.dropdown.trigger.base,
               hasSelection &&
                 showClearButton &&
-                type !== DropdownType.ICON_ONLY &&
+                dropdownType !== DropdownType.ICON_ONLY &&
                 (subType === DropdownSubType.NO_CONTAINER
                   ? themeConfig.euler.menuv2.dropdown.trigger.noBorderClearButtonRight
                   : themeConfig.euler.menuv2.dropdown.trigger.withBorderClearButtonRight)
@@ -615,7 +622,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
             )}
 
             {/* Display text - only shown for non-icon-only dropdowns */}
-            {type !== DropdownType.ICON_ONLY && (
+            {dropdownType !== DropdownType.ICON_ONLY && (
               <span className={themeConfig.euler.menuv2.dropdown.displayText}>
                 {getDisplayText()}
               </span>
@@ -625,7 +632,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
             <span
               className={cn(
                 themeConfig.euler.menuv2.dropdown.chevron.wrapper,
-                type !== DropdownType.ICON_ONLY && getChevronIconClassNames(size)
+                dropdownType !== DropdownType.ICON_ONLY && getChevronIconClassNames(size)
               )}
             >
               {isOpen ? (
@@ -641,7 +648,7 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
           </div>
 
           {/* Clear button - placed outside the dropdown */}
-          {hasSelection && showClearButton && type !== DropdownType.ICON_ONLY && (
+          {hasSelection && showClearButton && dropdownType !== DropdownType.ICON_ONLY && (
             <Button
               buttonType={ButtonType.SECONDARY}
               size={
@@ -675,8 +682,12 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
                   themeConfig.euler.menuv2.dropdown.menu.base,
                   themeConfig.euler.menuv2.shadows.xs
                 )}
-                type={type === DropdownType.MULTI_SELECT ? MenuType.MULTI_SELECT : MenuType.DEFAULT}
-                hasSearch={type === DropdownType.MULTI_SELECT}
+                menuType={
+                  dropdownType === DropdownType.MULTI_SELECT
+                    ? MenuType.MULTI_SELECT
+                    : MenuType.DEFAULT
+                }
+                hasSearch={dropdownType === DropdownType.MULTI_SELECT}
                 selectedItems={selectedItems}
                 onSelectionChange={handleSelectionChange}
                 searchTerm={searchTerm}
