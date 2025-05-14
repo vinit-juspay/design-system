@@ -84,7 +84,7 @@ function DataTableComponent<T extends Record<string, any>>(
         : SortDirection.ASCENDING
       : SortDirection.ASCENDING;
       
-    const newSortConfig = { field, direction };
+    const newSortConfig = { field: field.toString(), direction };
     setSortConfig(newSortConfig);
     
     if (onSortChange) {
