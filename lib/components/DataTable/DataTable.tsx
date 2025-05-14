@@ -54,7 +54,7 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
   }: DataTableProps<T>
 ) => {
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(defaultSort || null);
-  const [filters, setFilters] = useState<Record<string, unknown>>({});
+  const [filters, _setFilters] = useState<Record<string, unknown>>({});
   const [visibleColumns, setVisibleColumns] = useState<ColumnDefinition<T>[]>(() => {
     return initialColumns.filter(col => col.isVisible !== false);
   });

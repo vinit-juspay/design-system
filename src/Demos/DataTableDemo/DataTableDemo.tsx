@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import DataTable from '../../../lib/components/DataTable/DataTable';
-import { MenuDropdown } from '../../../lib/components/Menu';
 import { 
   SortDirection,
   ColumnDefinition 
 } from '../../../lib/components/DataTable/types';
 import { Avatar } from '../../../lib/main';
-import { DropdownType } from '../../../lib/components/Menu/types';
 
 const DataTableDemo = () => {
   const data = Array.from({ length: 50 }, (_, index) => ({
@@ -109,7 +107,7 @@ const DataTableDemo = () => {
     field: '',
     direction: SortDirection.NONE
   });
-  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const [_filters, setFilters] = useState<Record<string, string[]>>({});
 
   return (
     <div className="p-4">
