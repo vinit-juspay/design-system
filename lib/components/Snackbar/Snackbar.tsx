@@ -10,6 +10,7 @@ import {
   useSnackbarLogic,
 } from './utils';
 import { X } from 'lucide-react';
+import { Button, ButtonSubType, ButtonType } from '../Button';
 
 const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
   (
@@ -17,7 +18,7 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
       type = 'info',
       heading,
       message,
-      alertMessage,
+      actionMessage,
       showIcon = true,
       autoClose = true,
       position = 'topRight',
@@ -52,24 +53,29 @@ const Snackbar = React.forwardRef<HTMLDivElement, SnackbarProps>(
             {showIcon && iconElement && (
               <div className={cn(baseStyles.icon, styles.iconColor)}>{iconElement}</div>
             )}
-            {heading && <h3 className={cn(layoutStyles.heading, styles.textColor)}>{heading}</h3>}
+            {heading && <h3 className={cn(layoutStyles.heading)}>{heading}</h3>}
           </div>
           {!autoClose && (
-            <button
-              onClick={handleClose}
-              className={cn(baseStyles.closeButton, styles.textColor)}
-              aria-label="Close"
-            >
+            <button onClick={handleClose} className={cn(baseStyles.closeButton)} aria-label="Close">
               <X className="h-4 w-4" />
             </button>
           )}
         </div>
 
-        {(message || alertMessage) && (
+        {(message || actionMessage) && (
           <div className={layoutStyles.messageContainer}>
-            {message && <p className={cn(layoutStyles.message, styles.textColor)}>{message}</p>}
-            {alertMessage && (
-              <p className={cn(layoutStyles.alertMessage, styles.textColor)}>{alertMessage}</p>
+            {message && <p className={cn(layoutStyles.message)}>{message}</p>}
+            {actionMessage && (
+              // <p className={cn(layoutStyles.alertMessage)}>{alertMessage}</p>
+              <div className="flex justify-start">
+                <Button
+                  buttonType={ButtonType.PRIMARY}
+                  subType={ButtonSubType.LINK}
+                  className={cn(layoutStyles.actionMessage)}
+                >
+                  {actionMessage}
+                </Button>
+              </div>
             )}
           </div>
         )}

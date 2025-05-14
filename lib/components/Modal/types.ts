@@ -23,4 +23,5 @@ export interface ModalProps {
   customHeader?: ReactNode;
   customFooter?: ReactNode;
   headerRightSlot?: ReactNode;
+  showDivider?: boolean;
 }

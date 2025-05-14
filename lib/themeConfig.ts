@@ -368,26 +368,26 @@ export const themeConfig = {
     tabs: {
       base: {
         root: 'w-full',
-        list: 'flex w-full items-center',
+        list: 'flex w-full items-center gap-3',
         trigger:
-          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md font-600 ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
       },
       expanded: 'justify-between [&>*]:flex-1 [&>*]:text-center',
       variant: {
         boxed: {
           list: 'bg-gray-50 p-1 rounded-lg',
           trigger:
-            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm',
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
         },
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700',
+            'rounded-lg text-gray-500 data-[state=active]:bg-gray-100 data-[state=active]:text-gray-700 font-500 hover:text-gray-700 data-[state=active]:font-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 data-[state=active]:z-10',
+            'border-b-2 border-transparent text-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
         },
       },
       sizes: {
@@ -447,15 +447,16 @@ export const themeConfig = {
           'fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200',
         content: 'flex flex-col gap-1',
         icon: 'flex-shrink-0',
-        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80',
+        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80 text-gray-25',
       },
       layout: {
         headerContainer: 'flex w-full items-center justify-between',
         headerContent: 'flex items-center gap-2',
-        messageContainer: 'mt-1 pl-7 flex flex-col gap-1',
-        heading: 'text-body-lg font-600',
-        message: 'text-body-md font-500 break-words',
-        alertMessage: 'text-body-md font-600',
+        messageContainer: 'mt-1.5 pl-7 flex flex-col gap-4',
+        heading: 'text-body-lg font-500 text-gray-25',
+        message: 'text-body-md font-400 break-words text-gray-300',
+        actionMessage:
+          'text-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
       },
       type: {
         info: {
@@ -1229,5 +1230,26 @@ export const themeConfig = {
         right: 'data-[side=right]',
       },
     },
+    sidebar: {
+      base: {
+        wrapper: "w-full h-full flex bg-gray-25",
+        sidebarContainer: "max-w-[300px] will-change-transform duration-150 animate-slide-in-from-left w-full border-r border-gray-200 flex",
+        secondarySidebar: {
+          tenantContainer: "w-fit h-full border-r border-gray-200 bg-gray-25 flex flex-col gap-4 items-center p-2.5",
+          tenantButton: "w-8 h-8 rounded-md flex items-center justify-center cursor-pointe outline outline-gray-150 data-[active=true]:outline-primary-500 duration-75"
+        },
+        primarySidebarContainer: "w-full h-full flex flex-col relative",
+        merchantSwitcherContainer: "w-full h-16 sticky top-0 z-10 bg-gray-25 flex items-center justify-between gap-3 px-2",
+        directoryContainer: "flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+        footer: {
+          container: "w-full bg-gray-25 h-16 sticky bottom-0 z-10 flex items-center justify-between gap-3 px-2 border-t border-gray-200",
+          gradientBlurContainer: "absolute left-0 -top-[65px] right-0 h-16 rotate-180 pointer-events-none z-10"
+        },
+        mainContentContainer: {
+          base: "w-full h-full relative overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+          topbar: { wrapper: "w-full h-16 sticky top-0 z-10 border-b border-gray-200 bg-white flex items-center gap-4 px-8", content: "flex-1" },
+        }
+      }
+    }
   },
 };
