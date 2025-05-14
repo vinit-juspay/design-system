@@ -120,6 +120,32 @@ const ModalWithoutHeader = () => {
   );
 };
 
+const ModalWithoutDividers = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Modal without Dividers</Button>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Modal without Dividers"
+        subtitle="This modal doesn't have divider borders between sections."
+        primaryButtonText="Confirm"
+        secondaryButtonText="Cancel"
+        onPrimaryButtonClick={() => setIsOpen(false)}
+        onSecondaryButtonClick={() => setIsOpen(false)}
+        showDivider={false}
+      >
+        <div className="space-y-4">
+          <p>This modal has no divider borders between the header, content, and footer.</p>
+          <p>Notice the cleaner look without the horizontal lines.</p>
+        </div>
+      </Modal>
+    </>
+  );
+};
+
 export const Default: Story = {
   render: () => <ModalWithContent />,
 };
@@ -134,4 +160,8 @@ export const WithLongContent: Story = {
 
 export const WithoutHeader: Story = {
   render: () => <ModalWithoutHeader />,
+};
+
+export const WithoutDividers: Story = {
+  render: () => <ModalWithoutDividers />,
 };
