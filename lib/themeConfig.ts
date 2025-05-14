@@ -1230,5 +1230,26 @@ export const themeConfig = {
         right: 'data-[side=right]',
       },
     },
+    sidebar: {
+      base: {
+        wrapper: "w-full h-full flex bg-gray-25",
+        sidebarContainer: "max-w-[300px] will-change-transform duration-150 animate-slide-in-from-left w-full border-r border-gray-200 flex",
+        secondarySidebar: {
+          tenantContainer: "w-fit h-full border-r border-gray-200 bg-gray-25 flex flex-col gap-4 items-center p-2.5",
+          tenantButton: "w-8 h-8 rounded-md flex items-center justify-center cursor-pointe outline outline-gray-150 data-[active=true]:outline-primary-500 duration-75"
+        },
+        primarySidebarContainer: "w-full h-full flex flex-col relative",
+        merchantSwitcherContainer: "w-full h-16 sticky top-0 z-10 bg-gray-25 flex items-center justify-between gap-3 px-2",
+        directoryContainer: "flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+        footer: {
+          container: "w-full bg-gray-25 h-16 sticky bottom-0 z-10 flex items-center justify-between gap-3 px-2 border-t border-gray-200",
+          gradientBlurContainer: "absolute left-0 -top-[65px] right-0 h-16 rotate-180 pointer-events-none z-10"
+        },
+        mainContentContainer: {
+          base: "w-full h-full relative overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+          topbar: { wrapper: "w-full h-16 sticky top-0 z-10 border-b border-gray-200 bg-white flex items-center gap-4 px-8", content: "flex-1" },
+        }
+      }
+    }
   },
 };
