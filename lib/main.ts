@@ -36,3 +36,4 @@ export { default as Modal } from './components/Modal/Modal';
 export { default as Popover } from './components/Popover/Popover';
 export { default as Sidebar } from './components/Sidebar/Sidebar';
 export { default as Directory } from './components/Directory/Directory';
+export { default as DataTable } from './components/DataTable/DataTable';
