@@ -1,17 +1,5 @@
 import { ReactNode } from "react";
 
-export enum DataTableVariant {
-  DEFAULT = "default",
-  COMPACT = "compact",
-  BORDERED = "bordered",
-}
-
-export enum DataTableSize {
-  SMALL = "sm",
-  MEDIUM = "md",
-  LARGE = "lg",
-}
-
 export enum SortDirection {
   ASCENDING = "asc",
   DESCENDING = "desc",
@@ -19,19 +7,20 @@ export enum SortDirection {
 }
 
 export interface ColumnDefinition<T> {
-  /** Unique identifier for the column */
-  id: string;
+  /** Field key in data object */
+  field: keyof T;
   /** Header text to display */
   header: string;
-  /** Function to access the cell value */
-  accessor: (row: T) => ReactNode;
+  renderCell?: (value: any, row: T) => ReactNode;
   /** Whether column is sortable */
   isSortable?: boolean;
-  /** Whether to render a checkbox for this column */
-  isCheckbox?: boolean;
+  /** Whether column is initially visible */
+  isVisible?: boolean;
+  /** Whether column can be hidden by user */
+  canHide?: boolean;
   /** Custom classes to apply to the column */
   className?: string;
-  /** Width of the column - can be px, %, or any CSS width value */
+  /** Width of the column */
   width?: string;
 }
 
@@ -57,53 +46,58 @@ export interface Filter {
   isMultiSelect?: boolean;
 }
 
-export interface PaginationOptions {
-  /** Current page number (1-indexed) */
-  currentPage: number;
-  /** Number of rows per page */
-  pageSize: number;
-  /** Total number of rows */
-  totalRows: number;
-  /** Available page size options */
-  pageSizeOptions?: number[];
-  /** Callback when page changes */
-  onPageChange: (page: number) => void;
-  /** Callback when page size changes */
-  onPageSizeChange: (pageSize: number) => void;
+export interface SortConfig {
+  field: string;
+  direction: SortDirection;
 }
 
-export interface DataTableProps<T> {
-  /** Data to display in the table */
+export interface PaginationConfig {
+  currentPage: number;
+  pageSize: number;
+  totalRows: number;
+  pageSizeOptions: number[];
+}
+
+export interface DataTableProps<T extends Record<string, any>> {
+  /** Data array from backend */
   data: T[];
+  /** Data summary information */
+  summary?: {
+    count: number;
+    sum?: number;
+    totalCount: number;
+    [key: string]: any;
+  };
   /** Column definitions */
   columns: ColumnDefinition<T>[];
-  /** Unique key field in the data */
-  keyField: keyof T;
+  /** Unique identifier field */
+  idField: keyof T;
   /** Optional table title */
   title?: string;
-  /** Optional description text */
+  /** Optional description */
   description?: string;
-  /** Table size variant */
-  size?: DataTableSize;
-  /** Table display variant */
-  variant?: DataTableVariant;
-  /** Whether to show striped rows */
+  /** Whether table rows should be striped */
   isStriped?: boolean;
-  /** Whether to highlight rows on hover */
+  /** Whether rows should highlight on hover */
   isHoverable?: boolean;
-  /** Optional pagination configuration */
-  pagination?: PaginationOptions;
-  /** Optional filter configuration */
-  filters?: Filter[];
-  /** Current sort configuration */
-  sortConfig?: {
-    columnId: string;
-    direction: SortDirection;
-  };
-  /** Callback when sort changes */
-  onSortChange?: (columnId: string, direction: SortDirection) => void;
+  /** Initial sort configuration */
+  defaultSort?: SortConfig;
+  /** Whether to use client-side filtering */
+  enableFiltering?: boolean;
+  /** Whether to enable column management */
+  enableColumnManager?: boolean;
+  /** Whether to show the table toolbar */
+  showToolbar?: boolean;
+  /** Pagination configuration */
+  pagination?: PaginationConfig;
+  /** Callback when page changes */
+  onPageChange?: (page: number) => void;
+  /** Callback when page size changes */
+  onPageSizeChange?: (pageSize: number) => void;
+  /** Callback when sorting changes */
+  onSortChange?: (sortConfig: SortConfig) => void;
   /** Callback when filters change */
-  onFilterChange?: (filterId: string, selectedValues: string[]) => void;
+  onFilterChange?: (filters: Record<string, any>) => void;
   /** Optional additional class name */
   className?: string;
 } 
