@@ -245,15 +245,15 @@ module.exports = {
        * rounded-{t|r|b|l}-{size} for individual corners
        * rounded-{tl|tr|br|bl}-{size} for specific corners
        */
-      borderRadius: {
-        xs: '2px', // rounded-xs
-        sm: '4px', // rounded-sm
-        md: '6px', // rounded-md
-        lg: '8px', // rounded-lg
-        xl: '10px', // rounded-xl
-        '2xl': '12px', // rounded-2xl
-        full: '9999px', // rounded-full
-      },
+      // borderRadius: {
+      //   xs: '2px', // rounded-xs
+      //   sm: '4px', // rounded-sm
+      //   md: '6px', // rounded-md
+      //   lg: '8px', // rounded-lg
+      //   xl: '10px', // rounded-xl
+      //   '2xl': '12px', // rounded-2xl
+      //   full: '9999px', // rounded-full
+      // },
 
       /**
        * Animations for UI components

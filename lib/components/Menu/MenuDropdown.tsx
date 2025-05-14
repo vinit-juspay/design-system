@@ -83,6 +83,44 @@ const MenuDropdown = forwardRef<HTMLDivElement, DropdownProps>(
     },
     ref
   ) => {
+    console.log('MenuDropDownProps-->>', {
+      id,
+      className,
+      type,
+      subType,
+      size,
+      propState,
+      selectionType,
+      hasLabel,
+      hasSubLabel,
+      mandatory,
+      hasHelp,
+      hasHint,
+      hasClearButton,
+      hasLeftIcon,
+      leftIcon,
+      label,
+      subLabel,
+      hint,
+      placeholder,
+      selectedOption: controlledSelectedOption,
+      selectedCount,
+      selectedText,
+      menuItems,
+      onSelect,
+      onClear,
+      onOpen,
+      onClose,
+      isOpen: controlledIsOpen,
+      disabled,
+      width,
+      'aria-label': ariaLabel,
+      searchTerm: controlledSearchTerm,
+      onSearchTermChange,
+      onSelectedItemsChange,
+      closeOnSelect,
+    });
+
     // State management
     const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
     const [uncontrolledSelectedOption, setUncontrolledSelectedOption] = useState<
