@@ -604,7 +604,7 @@ const App = () => {
         setActiveMerchant={setActiveMerchant}
         footer={footer}
       >
-        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-white">
           {renderContent()}
         </div>
       </Sidebar>
