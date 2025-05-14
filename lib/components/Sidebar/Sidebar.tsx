@@ -49,7 +49,6 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
                   size={DropdownSize.SMALL}
                   subType={DropdownSubType.NO_CONTAINER}
                   placeholder="Select Merchant"
-                  selectedOption={activeMerchant}
                   menuItems={merchants.map(merchant => ({
                     ...merchant,
                     text: merchant.label
@@ -108,7 +107,9 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
         }
         <div className="flex-1">{topbar}</div>
       </div>
-      {children}
+      <div className="p-6">
+        {children}
+      </div>
     </section>
   </div>
 });
