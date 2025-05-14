@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { cn } from '../../utils';
 import {
   getPaginationContainerClassNames,
@@ -102,7 +102,7 @@ export function DataTablePagination({
   return (
     <div className={getPaginationContainerClassNames()}>
       <div className="flex items-center">
-        <span className="text-sm text-gray-600 mr-2">Rows per page:</span>
+        <span className="text-body-md font-500 text-gray-600">Rows per page:</span>
         <MenuDropdown
           id="page-size-dropdown"
           type={DropdownType.SINGLE_SELECT}
@@ -123,7 +123,7 @@ export function DataTablePagination({
           disabled={currentPage === 1}
           aria-label="Previous page"
         >
-          <ChevronLeft size={16} />
+          <ArrowLeft size={16} />
         </button>
 
         <div className="flex items-center gap-1">
@@ -133,7 +133,7 @@ export function DataTablePagination({
                 key={index}
                 onClick={() => onPageChange(page)}
                 className={cn(
-                  "min-w-[32px] h-8 px-2 rounded-lg flex items-center justify-center text-sm",
+                  "min-w-[32px] h-8 px-2 rounded-lg flex items-center justify-center text-body-sm",
                   currentPage === page ? "bg-gray-100 text-gray-700 font-medium" : "text-gray-500 hover:bg-gray-50"
                 )}
               >
@@ -154,7 +154,7 @@ export function DataTablePagination({
           disabled={currentPage === totalPages}
           aria-label="Next page"
         >
-          <ChevronRight size={16} />
+          <ArrowRight size={16} />
         </button>
       </div>
     </div>

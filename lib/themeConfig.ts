@@ -1285,7 +1285,7 @@ export const themeConfig = {
         },
       },
       th: {
-        base: "px-2 py-1 text-left font-medium text-gray-600",
+        base: "px-2 py-1 text-left font-600 text-gray-400 text-body-sm",
         variant: {
           default: "",
           compact: "px-2 py-1",
@@ -1309,7 +1309,7 @@ export const themeConfig = {
         striped: "bg-gray-50",
       },
       td: {
-        base: "px-3 py-2",
+        base: "px-3 py-2 text-body-md text-gray-800 font-medium",
         variant: {
           default: "",
           compact: "px-2 py-1",
@@ -1322,7 +1322,7 @@ export const themeConfig = {
         },
       },
       pagination: {
-        container: "flex justify-between items-center py-2 px-4 border-t border-gray-150",
+        container: "flex justify-between items-center py-1 px-4 border-t border-gray-150 h-12",
         text: "text-sm text-gray-600 flex items-center gap-2",
         button: {
           base: "p-1 rounded-md flex items-center justify-center",
