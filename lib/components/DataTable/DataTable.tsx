@@ -17,7 +17,7 @@ import {
   filterData,
   sortData,
 } from './utils';
-import { DataTableFilters } from './DataTableFilters';
+// import { DataTableFilters } from './DataTableFilters';
 import { DataTablePagination } from './DataTablePagination';
 import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
@@ -49,7 +49,7 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
     onPageChange,
     onPageSizeChange,
     onSortChange,
-    onFilterChange,
+    // onFilterChange,
     className,
   }: DataTableProps<T>
 ) => {
@@ -181,14 +181,14 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
     }
   };
 
-  const handleFilterChange = (filterValues: Record<string, unknown>) => {
-    setFilters(filterValues);
-    setCurrentPage(1);
+  // const handleFilterChange = (filterValues: Record<string, unknown>) => {
+  //   setFilters(filterValues);
+  //   setCurrentPage(1);
 
-    if (onFilterChange) {
-      onFilterChange(filterValues);
-    }
-  };
+  //   if (onFilterChange) {
+  //     onFilterChange(filterValues);
+  //   }
+  // };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -248,13 +248,13 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
 
           {showToolbar && (
             <div className="flex justify-between items-center mt-4 gap-2">
-              {enableFiltering && (
+              {/* {enableFiltering && (
                 <DataTableFilters
                   columns={initialColumns}
                   filters={filters}
                   onFilterChange={handleFilterChange}
                 />
-              )}
+              )} */}
 
               {hasSelectedRows && (
                 <Button
