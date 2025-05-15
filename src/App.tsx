@@ -94,8 +94,6 @@ const App = () => {
           case 'snackbar':
             return <SnackbarDemo />;
           case 'charts':
-            return <ChartDemo />;
-          case 'chartsV2':
             return <ChartDemo2 />;
           case 'fonts':
             return <FontDemo />;
@@ -255,17 +253,12 @@ const App = () => {
     {
       label: "Data Display",
       isCollapsible: true,
-      defaultOpen: false,
+      defaultOpen: true,
       items: [
         {
           label: "Chart",
           leftSlot: <BarChart2 className="w-4 h-4" />,
           onClick: () => setActiveComponent("charts")
-        },
-        {
-          label: "Chart V2",
-          leftSlot: <BarChart2 className="w-4 h-4" />,
-          onClick: () => setActiveComponent("chartsV2")
         },
         {
           label: "Stat Card",
