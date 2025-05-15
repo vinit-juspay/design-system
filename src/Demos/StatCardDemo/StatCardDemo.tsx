@@ -170,7 +170,7 @@ const StatCardDemo = () => {
             title="Total Revenue"
             value="45,231"
             change={{ type: ChangeType.INCREASE, value: 12.5 }}
-            titleIcon={<PieChart className="text-blue-500 w-full h-full" />}
+            titleIcon={<PieChart className="text-primary-500 w-full h-full" />}
             actionIcon={<ArrowUpRight size={16} />}
             helpIconText="This is a help icon text"
           />
