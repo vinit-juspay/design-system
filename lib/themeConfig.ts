@@ -456,7 +456,7 @@ export const themeConfig = {
         heading: 'text-jp-body-lg font-500 text-jp-gray-25',
         message: 'text-jp-body-md font-400 break-words text-gray-300',
         actionMessage:
-          'text-jp-body-md font-jp-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
+          'text-jp-body-md font-jp-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0 hover:underline',
       },
       type: {
         info: {
