@@ -11,7 +11,7 @@ module.exports = {
         sans: ['Inter Display', 'sans-serif'],
       },
       colors: {
-        gray: {
+        jpGray: {
           0: '#FFFFFF',
           25: '#FCFCFD',
           50: '#F5F7FA',
@@ -29,7 +29,7 @@ module.exports = {
           1000: '#050506',
           1100: '#5F5F5FB2',
         },
-        primary: {
+        jpPrimary: {
           50: '#EFF6FF',
           100: '#DBEAFE',
           200: '#BEDBFF',
@@ -42,7 +42,7 @@ module.exports = {
           900: '#1C398E',
           950: '#162456',
         },
-        purple: {
+        jpPurple: {
           50: '#FAF5FF',
           100: '#F3E8FF',
           200: '#E9D4FF',
@@ -55,7 +55,7 @@ module.exports = {
           900: '#59168B',
           950: '#3C0366',
         },
-        orange: {
+        jpOrange: {
           50: '#FFF7ED',
           100: '#FFEDD4',
           200: '#FFD6A8',
@@ -68,7 +68,7 @@ module.exports = {
           900: '#7E2A0C',
           950: '#441306',
         },
-        red: {
+        jpRed: {
           50: '#FEF2F2',
           100: '#FFE2E2',
           200: '#FFC9C9',
@@ -81,7 +81,7 @@ module.exports = {
           900: '#82181A',
           950: '#460809',
         },
-        green: {
+        jpGreen: {
           50: '#F0FDF4',
           100: '#DCFCE7',
           200: '#B9F8CF',
@@ -94,7 +94,7 @@ module.exports = {
           900: '#0D542B',
           950: '#052E16',
         },
-        yellow: {
+        jpYellow: {
           50: '#FEFCE8',
           100: '#FEF9C2',
           200: '#FFF085',
@@ -109,16 +109,16 @@ module.exports = {
         },
       },
       fontSize: {
-        'display-xl': ['72px', { lineHeight: '88px' }],
-        'display-lg': ['64px', { lineHeight: '80px' }],
-        'display-md': ['56px', { lineHeight: '72px' }],
-        'display-sm': ['48px', { lineHeight: '64px' }],
+        'display-xl': ['72px', { lineHeight: '72px' }],
+        'display-lg': ['64px', { lineHeight: '64px' }],
+        'display-md': ['56px', { lineHeight: '56px' }],
+        'display-sm': ['48px', { lineHeight: '48px' }],
         // Heading sizes
-        '2xl': ['40px', { lineHeight: '56px' }],
-        xl: ['32px', { lineHeight: '48px' }],
-        lg: ['24px', { lineHeight: '40px' }], 
-        md: ['20px', { lineHeight: '32px' }],
-        sm: ['18px', { lineHeight: '28px' }],
+        'heading-xl': ['40px', { lineHeight: '56px' }],
+        'heading-lg': ['32px', { lineHeight: '48px' }],
+        'heading-md': ['24px', { lineHeight: '40px' }], 
+        'heading-sm': ['20px', { lineHeight: '32px' }],
+        'heading-sm': ['18px', { lineHeight: '28px' }],
         // Body sizes
         'body-lg': ['16px', { lineHeight: '24px' }],
         'body-md': ['14px', { lineHeight: '20px' }],
@@ -140,25 +140,6 @@ module.exports = {
         700: '700',
         800: '800',
         900: '900',
-      },
-
-      lineHeight: {
-        0: '0', // leading-0
-        14: '14px', // leading-14
-        16: '16px', // leading-16
-        18: '18px', // leading-18
-        20: '20px', // leading-20
-        22: '22px', // leading-22
-        24: '24px', // leading-24
-        26: '26px', // leading-26
-        32: '32px', // leading-32
-        38: '38px', // leading-38
-        42: '42px', // leading-42
-        46: '46px', // leading-46
-        48: '48px', // leading-48
-        56: '56px', // leading-56
-        64: '64px', // leading-64
-        70: '70px', // leading-70
       },
 
       letterSpacing: {
