@@ -88,7 +88,7 @@ const Section = ({
       {section.label && (
         <div
           ref={headerRef}
-          className={`px-3 h-8 text-body-sm font-medium text-gray-400 uppercase flex items-center gap-2 mb-2 focus:bg-jp-gray-100 focus:outline-none focus:ring-0 user-select-none ${isCollapsible ? "cursor-pointer" : ""}`}
+          className={`px-3 h-8 text-jp-body-sm font-jp-500 text-jp-gray-400 uppercase flex items-center gap-2 mb-2 focus:bg-jp-gray-100 focus:outline-none focus:ring-0 user-select-none ${isCollapsible ? "cursor-pointer" : ""}`}
           onClick={isCollapsible ? toggleSection : undefined}
           onKeyDown={isCollapsible ? handleKeyDown : undefined}
           role={isCollapsible ? "button" : undefined}

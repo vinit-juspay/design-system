@@ -63,8 +63,8 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
       <div className={cn('relative w-full', className)} ref={ref}>
         <div
           className={cn(
-            'h-10 border border-gray-300 rounded-l-lg py-2.5 px-3 flex justify-between items-center cursor-pointer w-full',
-            'hover:border-gray-400 transition-colors duration-200'
+            'h-10 border border-jp-gray-300 rounded-l-jp-lg py-2.5 px-3 flex justify-between items-center cursor-pointer w-full',
+            'hover:border-jp-gray-400 transition-colors duration-200'
           )}
           onClick={onToggle}
           role="button"
@@ -72,14 +72,14 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
           aria-expanded={isOpen}
           aria-haspopup="listbox"
         >
-          <div className="flex items-center justify-between w-full text-gray-600">
+          <div className="flex items-center justify-between w-full text-jp-gray-600">
             <span className={cn(themeConfig.euler.dateRangePicker.text.value)}>
               {activePresetLabel}
             </span>
             {isOpen ? (
-              <ChevronUp className="w-3.5 h-3.5 ml-2 text-gray-600" />
+              <ChevronUp className="w-3.5 h-3.5 ml-2 text-jp-gray-600" />
             ) : (
-              <ChevronDown className="w-3.5 h-3.5 ml-2 text-gray-600" />
+              <ChevronDown className="w-3.5 h-3.5 ml-2 text-jp-gray-600" />
             )}
           </div>
         </div>
@@ -87,7 +87,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
         {isOpen && (
           <div
             className={cn(
-              'absolute z-20 mt-1 bg-jp-gray-0 rounded-md shadow-lg border border-gray-200 w-full',
+              'absolute z-20 mt-1 bg-jp-gray-0 rounded-md shadow-lg border border-jp-gray-200 w-full',
               'max-h-60 overflow-y-auto'
             )}
             role="listbox"
@@ -105,7 +105,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
                     'w-full text-left px-3 py-2 hover:bg-jp-gray-50 rounded-md transition-colors duration-150',
                     'focus:outline-none focus:bg-jp-gray-50',
                     themeConfig.euler.dateRangePicker.text.value,
-                    activePreset === preset && 'bg-jp-primary-50 text-primary-700 font-medium'
+                    activePreset === preset && 'bg-jp-primary-50 text-jp-primary-700 font-jp-500'
                   )}
                   role="option"
                   aria-selected={activePreset === preset}

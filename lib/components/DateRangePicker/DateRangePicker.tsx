@@ -309,7 +309,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
             baseClassNames,
             statesClassNames,
             'border border-jp-gray-300',
-            showPresets ? 'rounded-r-lg' : 'rounded-lg',
+            showPresets ? 'rounded-r-jp-lg' : 'rounded-jp-lg',
             'py-2.5 px-3 flex justify-between items-center cursor-pointer w-full h-10'
           )}
           onClick={e => {
@@ -325,7 +325,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           <div className="text-jp-gray-600 flex-1 flex items-center justify-between">
             <div className="flex items-center">
               <Calendar className="w-3.5 h-3.5 mr-1.5" />
-              <span className="text-jp-gray-600 font-body-sm text-jp-body-md">{formatDateDisplay()}</span>
+              <span className="text-jp-gray-600 font-jp-body-sm text-jp-body-md">{formatDateDisplay()}</span>
             </div>
             {isOpen ? (
               <ChevronUp className="w-3.5 h-3.5 ml-2" />
@@ -422,12 +422,12 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                       >
                         <div
                           className={cn(
-                            'absolute left-0.5 top-0.5 bg-jp-gray-0 w-4 h-4 rounded-full transition-transform duration-200 ease-in-out',
+                            'absolute left-0.5 top-0.5 bg-jp-gray-0 w-4 h-4 rounded-jp-full transition-transform duration-200 ease-in-out',
                             showTimePickerState && 'transform translate-x-5'
                           )}
                         ></div>
                       </div>
-                      <span className="ml-2 text-jp-gray-600 text-md">Time Ranges</span>
+                      <span className="ml-2 text-jp-gray-600 text-jp-body-md">Time Ranges</span>
                     </div>
 
                     <div className="flex space-x-2">

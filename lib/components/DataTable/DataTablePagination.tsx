@@ -102,7 +102,7 @@ export function DataTablePagination({
   return (
     <div className={getPaginationContainerClassNames()}>
       <div className="flex items-center">
-        <span className="text-jp-body-md font-500 text-jp-gray-600">Rows per page:</span>
+        <span className="text-jp-body-md font-jp-500 text-jp-gray-600">Rows per page:</span>
         <MenuDropdown
           id="page-size-dropdown"
           type={DropdownType.SINGLE_SELECT}
@@ -133,7 +133,7 @@ export function DataTablePagination({
                 key={index}
                 onClick={() => onPageChange(page)}
                 className={cn(
-                  "min-w-[32px] h-8 px-2 rounded-lg flex items-center justify-center text-jp-body-sm",
+                  "min-w-[32px] h-8 px-2 rounded-jp-lg flex items-center justify-center text-jp-body-sm",
                   currentPage === page ? "bg-jp-gray-100 text-jp-gray-700 font-jp-500" : "text-jp-gray-500 hover:bg-jp-gray-50"
                 )}
               >

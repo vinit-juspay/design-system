@@ -218,7 +218,7 @@ export const themeConfig = {
         container: 'flex items-center gap-2',
         labelwSublabel: 'flex items-center gap-1',
         base: 'text-jp-body-md font-500 tracking-normal',
-        color: 'text-gray-700',
+        color: 'text-jp-gray-700',
         mandatory: 'text-jp-red-500 text-jp-body-md font-normal -top-0.5',
       },
       sublabel: {
@@ -377,17 +377,17 @@ export const themeConfig = {
         boxed: {
           list: 'bg-jp-gray-50 p-1 rounded-jp-lg',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-jp-gray-700 data-[state=active]:shadow-jp-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-jp-gray-600 font-jp-500 data-[state=active]:font-jp-600',
         },
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-gray-700 font-500 hover:text-gray-700 data-[state=active]:font-600',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
+            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-jp-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
         },
       },
       sizes: {
@@ -462,7 +462,7 @@ export const themeConfig = {
         info: {
           backgroundColor: 'bg-jp-gray-800',
           textColor: 'text-jp-gray-100',
-          iconColor: 'text-jp-blue-400',
+          iconColor: 'text-jp-primary-400',
         },
         warning: {
           backgroundColor: 'bg-jp-gray-800',
@@ -490,7 +490,7 @@ export const themeConfig = {
     alert: {
       base: {
         alertContainer: 'rounded-jp-lg p-4 relative space-y-2',
-        header: 'flex items-center gap-2 text-jp-blue-800 font-jp-600 text-jp-body-md',
+        header: 'flex items-center gap-2 text-jp-primary-800 font-jp-600 text-jp-body-md',
         closeButton: 'text-jp-gray-400 hover:text-jp-gray-600 h-5 w-5 flex items-center justify-center',
         headerContainer: 'flex items-center justify-between gap-2',
         divider: 'relative w-[1px] h-5 bg-jp-gray-300',
@@ -733,7 +733,7 @@ export const themeConfig = {
           container: 'flex items-center gap-1.5',
           mandatory: 'text-red-600',
           helpIcon: 'text-jp-gray-400',
-          base: 'font-500 text-gray-700',
+          base: 'font-500 text-jp-gray-700',
           sizes: {
             SMALL: 'text-[12px]',
             MEDIUM: 'text-[14px]',
@@ -845,21 +845,21 @@ export const themeConfig = {
         states: {
           DEFAULT: 'bg-jp-gray-0',
           HOVER: '!bg-jp-gray-50',
-          SELECTED: 'bg-jp-blue-600 text-jp-blue-700',
+          SELECTED: 'bg-jp-primary-600 text-jp-primary-700',
           NA: 'pointer-events-none',
         },
         actions: {
           NA: '',
           DANGER: 'text-jp-red-600',
-          PRIMARY: 'text-jp-blue-600',
+          PRIMARY: 'text-jp-primary-600',
         },
         actionHover: {
           NA: '!bg-jp-gray-50',
-          PRIMARY: '!bg-jp-blue-600',
+          PRIMARY: '!bg-jp-primary-600',
           DANGER: '!bg-jp-red-50',
         },
         hover: {
-          PRIMARY: 'hover:bg-jp-blue-600',
+          PRIMARY: 'hover:bg-jp-primary-600',
           DANGER: 'hover:bg-red-50',
           DEFAULT: 'hover:bg-[#F3F4F6]',
         },
@@ -966,7 +966,7 @@ export const themeConfig = {
       base: {
         container: 'relative inline-flex w-full',
         input:
-          'flex items-center justify-between w-full px-3 py-2 border border-jp-gray-300 rounded-jp-md shadow-sm bg-jp-gray-0 text-jp-body-md text-jp-gray-700 hover:border-jp-gray-400 focus:outline-none focus:ring-2 focus:ring-jp-blue-500 focus:border-jp-blue-500 cursor-pointer',
+          'flex items-center justify-between w-full px-3 py-2 border border-jp-gray-300 rounded-jp-md shadow-sm bg-jp-gray-0 text-jp-body-md text-jp-gray-700 hover:border-jp-gray-400 focus:outline-none focus:ring-2 focus:ring-jp-primary-500 focus:border-jp-primary-500 cursor-pointer',
       },
       input: {
         primary: 'border-jp-gray-300',
@@ -992,24 +992,24 @@ export const themeConfig = {
         weekRow: 'grid grid-cols-7 py-1',
         emptyCell: 'p-2',
         dayCell: 'cursor-pointer text-center p-2 relative font-500 box-border',
-        startDate: 'bg-jp-blue-500 rounded-l-lg',
-        endDate: 'bg-jp-blue-500 rounded-r-lg',
-        singleDate: 'bg-jp-blue-500 rounded-jp-lg',
-        rangeDay: 'bg-jp-blue-50',
+        startDate: 'bg-jp-primary-500 rounded-l-lg',
+        endDate: 'bg-jp-primary-500 rounded-r-lg',
+        singleDate: 'bg-jp-primary-500 rounded-jp-lg',
+        rangeDay: 'bg-jp-primary-50',
         todayDay: 'font-500',
         todayIndicator:
-          'absolute w-1 h-1 bg-jp-blue-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2',
-        hoverState: 'hover:ring-1 hover:ring-inset hover:ring-jp-blue-500 hover:rounded-jp-lg',
+          'absolute w-1 h-1 bg-jp-primary-500 rounded-full bottom-1 left-1/2 transform -translate-x-1/2',
+        hoverState: 'hover:ring-1 hover:ring-inset hover:ring-jp-primary-500 hover:rounded-jp-lg',
       },
       presets: {
         button:
-          'px-3 py-1 text-sm rounded-jp-md border border-jp-gray-200 hover:bg-jp-gray-50 focus:outline-none focus:ring-2 focus:ring-jp-blue-500 focus:border-jp-blue-500',
-        activeButton: 'bg-jp-blue-50 border-jp-blue-500 text-jp-blue-700',
+          'px-3 py-1 text-sm rounded-jp-md border border-jp-gray-200 hover:bg-jp-gray-50 focus:outline-none focus:ring-2 focus:ring-jp-primary-500 focus:border-jp-primary-500',
+        activeButton: 'bg-jp-primary-50 border-jp-primary-500 text-jp-primary-700',
       },
       timePicker: {
         container: 'p-4 border-t border-jp-gray-200',
         input:
-          'w-full px-3 py-2 border border-jp-gray-300 rounded-jp-lg shadow-sm focus:outline-none focus:ring-jp-blue-500 focus:border-jp-blue-500 text-jp-gray-700',
+          'w-full px-3 py-2 border border-jp-gray-300 rounded-jp-lg shadow-sm focus:outline-none focus:ring-jp-primary-500 focus:border-jp-primary-500 text-jp-gray-700',
       },
       text: {
         label: 'text-jp-gray-400',
@@ -1018,7 +1018,7 @@ export const themeConfig = {
         dayNumber: 'text-jp-gray-600',
         selectedDay: 'text-jp-gray-0',
         rangeDay: 'text-jp-gray-600',
-        todayDay: 'text-jp-blue-500',
+        todayDay: 'text-jp-primary-500',
       },
     },
     switch: {
@@ -1030,18 +1030,18 @@ export const themeConfig = {
           'absolute rounded-full bg-jp-gray-25 border border-jp-gray-300 transition-transform duration-300 border-[0.5px]',
       },
       label: {
-        baseStyles: 'ml-2 font-500 text-jp-gray-700',
+        baseStyles: 'ml-2 font-jp-500 text-jp-gray-700',
         disabled: 'text-jp-gray-300',
       },
       subtext: 'text-jp-gray-400 font-normal',
       rightSlot: 'ml-2',
       wrapper: 'flex items-center',
       states: {
-        enabled: 'bg-jp-blue-500',
-        disabled: 'bg-jp-blue-300',
+        enabled: 'bg-jp-primary-500',
+        disabled: 'bg-jp-primary-300',
         inactive: 'bg-jp-gray-150',
       },
-      groupLabel: 'text-sm font-500 text-jp-gray-700 mb-2',
+      groupLabel: 'text-sm font-jp-500 text-jp-gray-700 mb-2',
       sizes: {
         sm: {
           root: 'w-6 h-3',
@@ -1067,8 +1067,8 @@ export const themeConfig = {
       container: 'flex flex-col space-y-4',
       groupLabel: 'text-sm font-500 text-jp-gray-700',
       input: {
-        base: 'text-jp-blue-600 border-jp-gray-300 hover:cursor-pointer ',
-        disabled: 'text-jp-blue-300 cursor-not-allowed',
+        base: 'text-jp-primary-600 border-jp-gray-300 hover:cursor-pointer ',
+        disabled: 'text-jp-primary-300 cursor-not-allowed',
       },
       label: {
         base: 'ml-2 font-500 text-jp-gray-700',
@@ -1130,7 +1130,7 @@ export const themeConfig = {
         overflowCounter:
           'relative inline-flex cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-jp-gray-900 text-jp-gray-50 font-500 transition-colors',
       },
-      selected: 'ring-2 ring-offset-2 ring-jp-blue-500 dark:ring-jp-blue-400',
+      selected: 'ring-2 ring-offset-2 ring-jp-primary-500 dark:ring-jp-primary-400',
       sizes: {
         sm: 'h-6 w-6 text-jp-body-xs',
         regular: 'h-8 w-8 text-jp-body-sm',
@@ -1144,7 +1144,7 @@ export const themeConfig = {
         container: 'w-full',
         item: 'border-b border-jp-gray-200',
         trigger:
-          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jp-blue-500 disabled:cursor-not-allowed hover:bg-jp-gray-50',
+          'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jp-primary-500 disabled:cursor-not-allowed hover:bg-jp-gray-50',
         content:
           'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
         title: 'text-jp-body-lg font-500',
@@ -1215,7 +1215,7 @@ export const themeConfig = {
           'px-6 py-4 rounded-b-jp-lg flex justify-end space-x-3 flex-shrink-0 border-t border-jp-gray-200',
         backdrop: 'flex items-center justify-center fixed inset-0 bg-jp-gray-700/60  pointer-events-auto',
         wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto',
-        modalTitle: 'text-sm font-semibold text-gray-700 word-break',
+        modalTitle: 'text-sm font-semibold text-jp-gray-700 word-break',
         modalSubtitle: 'text-jp-body-md text-gray-500 font-normal word-break mt-1',
       },
     },

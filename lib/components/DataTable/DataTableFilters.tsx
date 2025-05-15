@@ -45,7 +45,7 @@ export function DataTableFilters<T>({
       <button
         type="button"
         className={cn(
-          "flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md border-jp-gray-200 hover:bg-jp-gray-50",
+          "flex items-center gap-1 px-3 py-1.5 text-jp-body-sm border rounded-jp-md border-jp-gray-200 hover:bg-jp-gray-50",
           activeFilterCount > 0 && "border-jp-primary-300 bg-jp-primary-50 text-jp-primary-700"
         )}
         onClick={() => setIsOpen(!isOpen)}
@@ -54,7 +54,7 @@ export function DataTableFilters<T>({
         <Filter size={16} />
         <span>Filters</span>
         {activeFilterCount > 0 && (
-          <span className="ml-1 bg-jp-primary-100 text-jp-primary-800 text-xs font-medium px-2 py-0.5 rounded-full">
+          <span className="ml-1 bg-jp-primary-100 text-jp-primary-800 text-xs font-jp-500 px-2 py-0.5 rounded-jp-full">
             {activeFilterCount}
           </span>
         )}

@@ -85,7 +85,7 @@ const AccordionItem = forwardRef<
             ref={triggerRef}
             className={cn(
               triggerClassName,
-              accordionType === AccordionType.BORDER && 'data-[state=open]:border-b border-gray-200'
+              accordionType === AccordionType.BORDER && 'data-[state=open]:border-b border-jp-gray-200'
             )}
             disabled={isDisabled}
             data-type={accordionType}

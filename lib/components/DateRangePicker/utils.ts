@@ -22,7 +22,7 @@ export const getCalendarDayClassNames = ({
   const theme = themeConfig.euler.dateRangePicker;
 
   let dayClasses = theme.calendar.dayCell;
-  let textColorClass = 'text-gray-600';
+  let textColorClass = 'text-jp-gray-600';
 
   if (isSingleDate) {
     dayClasses = cn(dayClasses, theme.calendar.singleDate);

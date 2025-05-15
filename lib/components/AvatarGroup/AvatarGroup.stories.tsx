@@ -168,6 +168,6 @@ export const WithCustomClass: Story = {
     avatars: avatarGroupData.slice(0, 4),
     maxCount: 3,
     size: 'lg',
-    className: 'ring-2 ring-offset-2 ring-blue-500 p-1 rounded-full', // Example custom styling
+    className: 'ring-2 ring-offset-2 ring-primary-500 p-1 rounded-full', // Example custom styling
   },
 };
