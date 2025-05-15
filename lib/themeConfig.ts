@@ -3,7 +3,7 @@ export const themeConfig = {
     button: {
       base: {
         container:
-          'inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-600 font-sans',
+          'inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-jp-600 font-sans',
         focus: 'focus-visible:outline-2 focus:outline-2',
         icon: 'flex-shrink-0',
         text: 'truncate',
@@ -85,7 +85,7 @@ export const themeConfig = {
         },
       },
       borderRadius: 'rounded-jp-lg',
-      fontWeight: 'font-600',
+      fontWeight: 'font-jp-600',
       fontFamily: 'font-sans',
       linkColors: {
         primary: {
@@ -128,9 +128,9 @@ export const themeConfig = {
       },
       buttonStyles: {
         stacked: {
-          first: 'rounded-r-none border-r-0',
+          first: 'rounded-r-jp-none border-r-0',
           middle: 'rounded-jp-none border-r-0',
-          last: 'rounded-l-none',
+          last: 'rounded-l-jp-none',
         },
         nonStacked: '',
       },
@@ -382,12 +382,12 @@ export const themeConfig = {
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-600',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-jp-600 font-jp-500 data-[state=active]:font-jp-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-jp-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
+            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-jp-gray-700 data-[state=active]:text-jp-gray-700 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-jp-600 font-jp-500',
         },
       },
       sizes: {
@@ -456,7 +456,7 @@ export const themeConfig = {
         heading: 'text-jp-body-lg font-500 text-jp-gray-25',
         message: 'text-jp-body-md font-400 break-words text-gray-300',
         actionMessage:
-          'text-jp-body-md font-jp-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
+          'text-jp-body-md font-jp-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0 hover:underline',
       },
       type: {
         info: {
@@ -1147,7 +1147,7 @@ export const themeConfig = {
           'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jp-primary-500 disabled:cursor-not-allowed hover:bg-jp-gray-50',
         content:
           'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-        title: 'text-jp-body-lg font-500',
+        title: 'text-jp-body-lg font-jp-600 ',
         titleEnabled: 'text-jp-gray-800',
         titleDisabled: 'text-jp-gray-500',
         subtext: 'text-jp-body-md mt-1',

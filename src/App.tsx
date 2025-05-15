@@ -24,6 +24,7 @@ import {
   IndianRupee,
   Table,
   Palette,
+  MessageCircle,
 } from 'lucide-react';
 
 
@@ -51,10 +52,11 @@ import { DirectoryData } from '../lib/components/Directory/types';
 import Sidebar from '../lib/components/Sidebar';
 import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
 import ColorPaletteDemo from './Demos/ColorPaletteDemo';
+import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable' | 'colorPalette'
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable' | 'colorPalette' | 'popover'
   >('dataTable');
 
   const [activeTenant, setActiveTenant] = useState<string>("Juspay");
@@ -121,6 +123,8 @@ const App = () => {
             return <DataTableDemo />;
           case 'colorPalette':
             return <ColorPaletteDemo />;
+          case 'popover':
+            return <PopoverDemo />;
           default:
             return null;
         }
@@ -251,6 +255,11 @@ const App = () => {
           label: "Modal",
           leftSlot: <Box className="w-4 h-4" />,
           onClick: () => setActiveComponent("modal")
+        },
+        {
+          label: "Popover",
+          leftSlot: <MessageCircle className="w-4 h-4" />,
+          onClick: () => setActiveComponent("popover")
         }
       ]
     },

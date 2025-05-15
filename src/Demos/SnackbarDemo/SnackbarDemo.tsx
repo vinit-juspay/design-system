@@ -7,16 +7,23 @@ const SnackbarDemo = () => {
   const [position, setPosition] = useState<SnackbarPosition>('topRight');
   const [heading, setHeading] = useState('Notification');
   const [message, setMessage] = useState('This is a sample notification message.');
-  const [actionMessage, setactionMessage] = useState('');
+  const [actionMessage, setActionMessage] = useState('');
   const [showIcon, setShowIcon] = useState(true);
   const [autoClose, setAutoClose] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [customAction, setCustomAction] = useState(false);
 
   const handleShowSnackbar = () => {
     setIsVisible(true);
   };
 
   const handleCloseSnackbar = () => {
+    setIsVisible(false);
+  };
+
+  const handleActionClick = () => {
+    alert('Custom action clicked!');
+    setActionMessage(''); // Reset action message after click
     setIsVisible(false);
   };
 
@@ -75,7 +82,7 @@ const SnackbarDemo = () => {
         <input
           type="text"
           value={actionMessage}
-          onChange={e => setactionMessage(e.target.value)}
+          onChange={e => setActionMessage(e.target.value)}
           className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
           placeholder="Additional action message"
         />
@@ -102,6 +109,15 @@ const SnackbarDemo = () => {
             />
             <span className="ml-2 text-sm text-gray-700">Auto Close (5s)</span>
           </label>
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={customAction}
+              onChange={e => setCustomAction(e.target.checked)}
+              className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="ml-2 text-sm text-gray-700">Use Custom Action</span>
+          </label>
         </div>
       </div>
     </div>
@@ -115,7 +131,7 @@ const SnackbarDemo = () => {
       <div className="mt-6">
         <button
           onClick={handleShowSnackbar}
-          className="px-4 py-2 bg-primary-500 text-jp-gray-0 rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-primary-500 text-jp-gray-0 bg-jp-primary-500 rounded-md hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         >
           Show Snackbar
         </button>
@@ -131,6 +147,7 @@ const SnackbarDemo = () => {
           autoClose={autoClose}
           position={position}
           onClose={handleCloseSnackbar}
+          onActionClick={customAction ? handleActionClick : undefined}
         />
       )}
 
@@ -176,9 +193,10 @@ const SnackbarDemo = () => {
               type="error"
               heading="Error"
               message="An error occurred while processing your request"
-              actionMessage="Please try again or contact support"
+              actionMessage="Please try again"
               autoClose={false}
               position="topRight"
+              onActionClick={() => alert("Error action clicked")}
             />
           </div>
         </div>
