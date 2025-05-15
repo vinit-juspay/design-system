@@ -774,7 +774,7 @@ export const themeConfig = {
             LARGE: 'w-4 h-4',
           },
         },
-        displayText: 'flex flex-grow font-normal text-gray-700',
+        displayText: 'flex flex-grow font-normal text-jp-gray-700',
         clearButton: {
           base: '!rounded-l-none ',
           withContainer: 'border-[1px]',
