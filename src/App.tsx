@@ -22,8 +22,7 @@ import {
   Search,
   EyeClosed,
   IndianRupee,
-  Icon,
-  AxeIcon,
+  Table,
 } from 'lucide-react';
 
 
@@ -49,11 +48,12 @@ import ModalDemo from './Demos/ModalDemo/ModalDemo';
 import InputDemo from './Demos/InputDemo/InputDemo';
 import { DirectoryData } from '../lib/components/Directory/types';
 import Sidebar from '../lib/components/Sidebar';
+import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar'
-  >('buttons');
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable'
+  >('dataTable');
 
   const [activeTenant, setActiveTenant] = useState<string>("Juspay");
   const [activeMerchant, setActiveMerchant] = useState<string | undefined>("");
@@ -94,8 +94,6 @@ const App = () => {
           case 'snackbar':
             return <SnackbarDemo />;
           case 'charts':
-            return <ChartDemo />;
-          case 'chartsV2':
             return <ChartDemo2 />;
           case 'fonts':
             return <FontDemo />;
@@ -117,6 +115,8 @@ const App = () => {
             return <ModalDemo />;
           case 'input':
             return <InputDemo />;
+          case 'dataTable':
+            return <DataTableDemo />;
           default:
             return null;
         }
@@ -253,7 +253,7 @@ const App = () => {
     {
       label: "Data Display",
       isCollapsible: true,
-      defaultOpen: false,
+      defaultOpen: true,
       items: [
         {
           label: "Chart",
@@ -261,14 +261,14 @@ const App = () => {
           onClick: () => setActiveComponent("charts")
         },
         {
-          label: "Chart V2",
-          leftSlot: <BarChart2 className="w-4 h-4" />,
-          onClick: () => setActiveComponent("chartsV2")
-        },
-        {
           label: "Stat Card",
           leftSlot: <FileText className="w-4 h-4" />,
           onClick: () => setActiveComponent("statCard")
+        },
+        {
+          label: "Data Table",
+          leftSlot: <Table className="w-4 h-4" />,
+          onClick: () => setActiveComponent("dataTable")
         }
       ]
     },

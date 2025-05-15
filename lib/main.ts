@@ -13,8 +13,7 @@ export { default as Dropdown } from './components/Menu/MenuDropdown';
 export { default as Checkbox } from './components/Checkbox';
 export { default as Avatar } from './components/Avatar/Avatar';
 export { default as AvatarGroup } from './components/AvatarGroup/AvatarGroup';
-// export { default as Chart } from './components/Charts/Charts';
-export { default as ChartsV2 } from './components/ChartsV2/ChartsV2';
+export { default as Charts } from './components/Charts/Charts';
 export { DateRangePicker } from './components/DateRangePicker';
 
 export { default as TextInput } from './components/TextInput/TextInput';
@@ -36,3 +35,4 @@ export { default as Modal } from './components/Modal/Modal';
 export { default as Popover } from './components/Popover/Popover';
 export { default as Sidebar } from './components/Sidebar/Sidebar';
 export { default as Directory } from './components/Directory/Directory';
+export { default as DataTable } from './components/DataTable/DataTable';

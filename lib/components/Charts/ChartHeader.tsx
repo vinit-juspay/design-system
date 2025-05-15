@@ -1,5 +1,5 @@
+import { getChartHeaderContainer, getChartSlotContainer } from './utils';
 import { ChartHeaderProps } from './types';
-import { getChartHeaderContainer, getChartSlotContainer } from './themeUtils';
 
 export const ChartHeader: React.FC<ChartHeaderProps> = ({
   slot1,

@@ -1,4 +1,22 @@
 import { ReactNode } from 'react';
+import { TooltipProps } from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
+
+export type DataPoint = {
+  primary: {
+    label: string;
+    val: number;
+  };
+  aux?: {
+    label: string;
+    val: number;
+  }[];
+};
+
+export enum ChartLegendPosition {
+  TOP = 'top',
+  RIGHT = 'right',
+}
 
 export enum ChartType {
   LINE = 'line',
@@ -6,24 +24,32 @@ export enum ChartType {
   PIE = 'pie',
 }
 
-export enum ChartLegendPosition {
-  TOP = 'top',
-  RIGHT = 'right',
-}
-
-export interface NestedDataPoint {
+export type NewNestedDataPoint = {
   name: string;
-  [key: string]: any;
-}
+  data: {
+    [key: string]: DataPoint;
+  };
+};
 
-export interface ChartProps {
-  type: ChartType;
-  data: NestedDataPoint[];
-  width?: string | number;
-  height?: string | number;
-  colors?: string[];
+export interface RenderChartProps {
+  flattenedData: FlattenedDataPoint[];
+  chartType: ChartType;
+  hoveredKey: string | null;
+  lineKeys: string[];
+  colors: string[];
+  setHoveredKey: (key: string | null) => void;
   xAxisLabel?: string;
   yAxisLabel?: string;
+  data: NewNestedDataPoint[];
+  selectedKeys: string[];
+}
+
+export interface ChartsProps {
+  chartType?: ChartType;
+  data: NewNestedDataPoint[];
+  xAxisLabel?: string;
+  yAxisLabel?: string;
+  colors?: string[];
   metrics?: string[];
   slot1?: ReactNode;
   slot2?: ReactNode;
@@ -32,18 +58,9 @@ export interface ChartProps {
   chartHeaderSlot: ReactNode;
 }
 
-export type ChartLegendsProps = {
-  chartContainerRef: React.RefObject<HTMLDivElement>;
-  keys: string[];
-  activeKeys: string[] | null;
-  handleLegendClick: (dataKey: string) => void;
-  colors: string[];
-  setSelectedKeys: (keys: string[]) => void;
-  stacked?: boolean;
-  onReset: () => void;
-  handleLegendEnter: (dataKey: string) => void;
-  handleLegendLeave: () => void;
-  hoveredKey: string | null;
+export type FlattenedDataPoint = {
+  name: string;
+  [key: string]: number | string;
 };
 
 export type ChartHeaderProps = {
@@ -52,3 +69,25 @@ export type ChartHeaderProps = {
   slot3: React.ReactNode;
   chartHeaderSlot: ReactNode;
 };
+
+export type ChartLegendsProps = {
+  chartContainerRef: React.RefObject<HTMLDivElement>;
+  keys: string[];
+  colors: string[];
+  handleLegendClick: (key: string) => void;
+  handleLegendEnter: (key: string) => void;
+  handleLegendLeave: () => void;
+  selectedKeys: string[];
+  setSelectedKeys: (keys: string[]) => void;
+  hoveredKey: string | null;
+  activeKeys: string[] | null;
+  stacked?: boolean;
+};
+
+export interface CustomTooltipProps extends TooltipProps<ValueType, NameType> {
+  hoveredKey: string | null;
+  originalData: NewNestedDataPoint[];
+  setHoveredKey: (key: string) => void;
+  chartType: ChartType;
+  selectedKeys: string[];
+}

@@ -1,2 +1,2 @@
-export { default as Chart } from './Charts';
+export { default as Charts } from './Charts';
 export * from './types';

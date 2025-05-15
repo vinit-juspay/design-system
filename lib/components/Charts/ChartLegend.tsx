@@ -1,53 +1,49 @@
 import { RotateCcw } from 'lucide-react';
-import { capitaliseCamelCase } from './utils';
-import { ChartLegendsProps } from './types';
+import { capitaliseCamelCase } from './chartUtils';
 import { useResizeObserver } from '../../hooks/useResizeObserver';
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { DropdownMenu } from 'radix-ui';
 import { useDebounce } from '../../hooks/useDebounce';
 import {
   getChartLegendContainer,
   getChartLegendItem,
   getChartLegendItemsContainer,
+  getChartLegendItemText,
   getChartLegendMarker,
   getChartLegendResetButton,
-} from './themeUtils';
+  getChartStackedLegendContainer,
+} from './utils';
+import { ChartLegendsProps } from './types';
+
 const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
   keys,
-  activeKeys,
   handleLegendClick,
-  colors,
-  chartContainerRef,
-  stacked = false,
-  onReset,
   handleLegendEnter,
   handleLegendLeave,
+  colors,
+  chartContainerRef,
+  selectedKeys,
+  setSelectedKeys,
   hoveredKey,
+  stacked = false,
 }) => {
-  const legendColors = useMemo(() => keys.map((_, i) => colors[i % colors.length]), [keys, colors]);
-
   if (stacked)
     return (
       <StackedLegends
         keys={keys}
-        activeKeys={activeKeys}
+        activeKeys={selectedKeys}
         handleLegendClick={handleLegendClick}
-        colors={legendColors}
+        colors={colors}
         handleLegendEnter={handleLegendEnter}
         handleLegendLeave={handleLegendLeave}
+        hoveredKey={hoveredKey}
+        selectedKeys={selectedKeys}
       />
     );
 
   const lastWidth = useRef<number>(0);
   const legendItemsContainerRef = useRef<HTMLDivElement>(null!);
   const [cuttOffIndex, setCuttOffIndex] = useState<number>(keys.length);
-
-  const highlight = useCallback((element: HTMLElement, className: string) => {
-    element.classList.add(className);
-    setTimeout(() => {
-      element.classList.remove(className);
-    }, 200);
-  }, []);
 
   const handleResize = useCallback(() => {
     if (!legendItemsContainerRef.current) return;
@@ -76,7 +72,6 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
   useResizeObserver(chartContainerRef, ({ width }) => {
     if (width && width !== lastWidth.current) {
       lastWidth.current = width;
-      highlight(chartContainerRef.current, 'bg-red-500/20');
       debouncedResize();
     }
   });
@@ -90,35 +85,30 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
             className={getChartLegendItem()}
             onClick={() => handleLegendClick(dataKey)}
             onMouseEnter={() => handleLegendEnter(dataKey)}
-            onMouseLeave={() => handleLegendLeave()}
+            onMouseLeave={handleLegendLeave}
+            style={{
+              opacity: hoveredKey
+                ? hoveredKey === dataKey
+                  ? 1
+                  : 0.4
+                : selectedKeys && selectedKeys.length > 0
+                  ? selectedKeys.includes(dataKey)
+                    ? 1
+                    : 0.4
+                  : 1,
+            }}
           >
             <div
               className={getChartLegendMarker()}
               style={{
                 backgroundColor: colors[index],
-                opacity: hoveredKey
-                  ? hoveredKey === dataKey
-                    ? 1
-                    : 0.4
-                  : activeKeys && activeKeys.length > 0
-                    ? activeKeys.includes(dataKey)
-                      ? 1
-                      : 0.4
-                    : 1,
+                opacity: 1,
               }}
             />
             <span
-              className="text-[14px] font-medium"
+              className={getChartLegendItemText()}
               style={{
-                color: hoveredKey
-                  ? hoveredKey === dataKey
-                    ? '#333'
-                    : '#99A0AE'
-                  : activeKeys && activeKeys.length > 0
-                    ? activeKeys.includes(dataKey)
-                      ? '#333'
-                      : '#D1D5DB'
-                    : '#333',
+                color: '#717784',
               }}
             >
               {capitaliseCamelCase(dataKey)}
@@ -127,7 +117,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         ))}
         {cuttOffIndex < keys.length && (
           <DropdownMenu.Root>
-            <DropdownMenu.Trigger className="flex items-center gap-2 text-body-md font-medium h-full text-gray-600 hover:text-[#333]">
+            <DropdownMenu.Trigger className="flex items-center gap-2 text-body-md font-medium h-full text-[#525866] hover:text-[#333]">
               + {keys.length - cuttOffIndex} more
             </DropdownMenu.Trigger>
             <DropdownMenu.Content className="bg-white z-50 rounded-md shadow-lg border border-gray-200 min-w-[180px]">
@@ -136,9 +126,19 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
                   key={dataKey}
                   className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
                   onClick={() => handleLegendClick(dataKey)}
-                  // onMouseOver={() => setHoveredKey(dataKey)}
                   onMouseEnter={() => handleLegendEnter(dataKey)}
                   onMouseLeave={handleLegendLeave}
+                  style={{
+                    opacity: hoveredKey
+                      ? hoveredKey === dataKey
+                        ? 1
+                        : 0.4
+                      : selectedKeys && selectedKeys.length > 0
+                        ? selectedKeys.includes(dataKey)
+                          ? 1
+                          : 0.4
+                        : 1,
+                  }}
                 >
                   {capitaliseCamelCase(dataKey)}
                 </DropdownMenu.Item>
@@ -147,8 +147,8 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
           </DropdownMenu.Root>
         )}
       </div>
-      {activeKeys && activeKeys.length > 0 && activeKeys.length !== keys.length && (
-        <button className={getChartLegendResetButton()} onClick={onReset}>
+      {selectedKeys && selectedKeys.length > 0 && selectedKeys.length !== keys.length && (
+        <button className={getChartLegendResetButton()} onClick={() => setSelectedKeys([])}>
           <RotateCcw className="w-3 h-3" />
         </button>
       )}
@@ -163,9 +163,20 @@ const StackedLegends: React.FC<{
   colors: string[];
   handleLegendEnter: (dataKey: string) => void;
   handleLegendLeave: () => void;
-}> = ({ keys, activeKeys, handleLegendClick, colors, handleLegendEnter, handleLegendLeave }) => {
+  hoveredKey: string | null;
+  selectedKeys: string[];
+}> = ({
+  keys,
+  activeKeys,
+  handleLegendClick,
+  colors,
+  handleLegendEnter,
+  handleLegendLeave,
+  hoveredKey,
+  selectedKeys,
+}) => {
   return (
-    <div className="h-full w-full flex flex-col justify-center gap-2">
+    <div className={getChartStackedLegendContainer()}>
       {keys.map((key, index) => (
         <div
           key={key}
@@ -173,13 +184,25 @@ const StackedLegends: React.FC<{
           onClick={() => handleLegendClick(key)}
           onMouseEnter={() => handleLegendEnter(key)}
           onMouseLeave={handleLegendLeave}
+          style={{
+            opacity: hoveredKey
+              ? hoveredKey === key
+                ? 1
+                : 0.4
+              : selectedKeys && selectedKeys.length > 0
+                ? selectedKeys.includes(key)
+                  ? 1
+                  : 0.4
+                : 1,
+          }}
         >
           <div className={getChartLegendMarker()} style={{ backgroundColor: colors[index] }} />
           <span
-            className="text-[14px] font-medium"
+            className={getChartLegendItemText()}
             style={{
               color: activeKeys && activeKeys.includes(key) ? '#333' : '#717784',
             }}
+            title={capitaliseCamelCase(key)}
           >
             {capitaliseCamelCase(key)}
           </span>
