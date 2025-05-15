@@ -9,6 +9,8 @@ import {
   getFooterClasses,
   getBackdropClasses,
   getContainerClasses,
+  getSubtitleClasses,
+  getTitleClasses,
 } from './utils';
 import { useScrollLock } from '../../hooks/useScrollLock';
 
@@ -69,15 +71,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           <div className="flex-1 min-w-0 pr-4">
             <div className="flex items-center gap-2">
               {title && (
-                <p id="modal-title" className="text-sm font-semibold text-gray-700 word-break">
+                <p id="modal-title" className={getTitleClasses()}>
                   {title}
                 </p>
               )}
               {headerRightSlot}
             </div>
-            {subtitle && (
-              <p className="text-jp-body-md text-gray-500 font-normal word-break mt-1">{subtitle}</p>
-            )}
+            {subtitle && <p className={getSubtitleClasses()}>{subtitle}</p>}
           </div>
           {showCloseButton && (
             <X onClick={onClose} className="h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0" />
