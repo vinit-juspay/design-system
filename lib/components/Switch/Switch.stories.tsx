@@ -96,12 +96,12 @@ export const WithSubtext: Story = {
       <Switch
         label="Remember Me"
         subtext="Save my login details for next time"
-        rightSlot={<HelpCircle className="w-5 h-5 text-purple-400" />}
+        rightSlot={<HelpCircle className="w-5 h-5 text-jp-purple-400" />}
       />
       <Switch
         label="Notifications"
         subtext="Receive email notifications for important updates"
-        rightSlot={<Bell className="w-4 h-4 text-gray-500" />}
+        rightSlot={<Bell className="w-4 h-4 text-jp-gray-500" />}
         defaultChecked={true}
       />
     </div>
@@ -122,12 +122,12 @@ export const WithRightSlot: Story = {
     <div className="flex flex-col gap-4">
       <Switch
         label="Light mode"
-        rightSlot={<Moon className="w-4 h-4 text-gray-500" />}
+        rightSlot={<Moon className="w-4 h-4 text-jp-gray-500" />}
         subtext="Toggle between light and dark mode"
       />
       <Switch
         label="Settings"
-        rightSlot={<span className="text-xs text-gray-500">Configure</span>}
+        rightSlot={<span className="text-xs text-jp-gray-500">Configure</span>}
         defaultChecked
       />
     </div>
@@ -157,7 +157,7 @@ const SwitchGroupDemo = () => {
     <div className="flex flex-col gap-8">
       <div>
         <h4 className="font-medium mb-2">Selected notification types:</h4>
-        <code className="bg-gray-100 p-2 rounded block mb-4">{JSON.stringify(notifications)}</code>
+        <code className="bg-jp-gray-100 p-2 rounded block mb-4">{JSON.stringify(notifications)}</code>
 
         <SwitchGroup
           label="Notification settings"
@@ -173,7 +173,7 @@ const SwitchGroupDemo = () => {
 
       <div>
         <h4 className="font-medium mb-2">Selected privacy settings:</h4>
-        <code className="bg-gray-100 p-2 rounded block mb-4">{JSON.stringify(privacy)}</code>
+        <code className="bg-jp-gray-100 p-2 rounded block mb-4">{JSON.stringify(privacy)}</code>
 
         <SwitchGroup label="Privacy settings" name="privacy" value={privacy} onChange={setPrivacy}>
           <Switch
@@ -185,7 +185,7 @@ const SwitchGroupDemo = () => {
             value="analytics"
             label="Usage analytics"
             subtext="Help us improve by sending anonymous usage data"
-            rightSlot={<HelpCircle className="w-4 h-4 text-blue-500" />}
+            rightSlot={<HelpCircle className="w-4 h-4 text-jp-primary-500" />}
           />
           <Switch value="cookies" label="Accept cookies" />
         </SwitchGroup>

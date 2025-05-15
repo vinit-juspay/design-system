@@ -90,7 +90,7 @@ const StatCard = ({
   return (
     <div
       className={cn(
-        'rounded-lg h-[190px] border border-gray-200 overflow-hidden bg-white shadow-xs p-4 space-y-6',
+        'rounded-lg h-[190px] border border-jp-gray-200 overflow-hidden bg-white shadow-xs p-4 space-y-6',
         className
       )}
     >
@@ -101,11 +101,11 @@ const StatCard = ({
               <div className="w-5 h-5 flex items-center justify-center">{titleIcon}</div>
             )}
             <div className="w-full flex items-center flex-1 space-x-2">
-              <h4 className="text-body-md font-medium text-gray-400 whitespace-nowrap text-ellipsis">
+              <h4 className="text-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
                 {title}
               </h4>
               {helpIconText && (
-                <div className="text-body-sm text-gray-400">
+                <div className="text-body-sm text-jp-gray-400">
                   <TooltipV2 content={helpIconText}>
                     <CircleHelp className="w-4 h-4" />
                   </TooltipV2>
@@ -119,12 +119,12 @@ const StatCard = ({
 
           <div className={`flex items-start flex-col ${titleIcon ? 'pl-7' : ''}`}>
             <div className="w-full flex items-center gap-1">
-              <h3 className="text-lg font-bold text-gray-800">{value}</h3>
+              <h3 className="text-lg font-bold text-jp-gray-800">{value}</h3>
               {formattedChange && (
                 <span
                   className={cn(
                     'ml-2 text-xs',
-                    change?.type === ChangeType.INCREASE ? 'text-green-600' : 'text-red-600'
+                    change?.type === ChangeType.INCREASE ? 'text-jp-green-600' : 'text-jp-red-600'
                   )}
                 >
                   {formattedChange}
@@ -143,11 +143,11 @@ const StatCard = ({
               <div className="w-5 h-5 flex items-center justify-center">{titleIcon}</div>
             )}
             <div className="w-full flex items-center flex-1 space-x-2">
-              <h4 className="text-body-md font-medium text-gray-400 whitespace-nowrap text-ellipsis">
+              <h4 className="text-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
                 {title}
               </h4>
               {helpIconText && (
-                <div className="text-body-sm text-gray-400">
+                <div className="text-body-sm text-jp-gray-400">
                   <TooltipV2 content={helpIconText}>
                     <CircleHelp className="w-4 h-4" />
                   </TooltipV2>
@@ -158,12 +158,12 @@ const StatCard = ({
 
           <div className={'flex items-center flex-col'}>
             <div className="w-full flex items-center gap-1">
-              <h3 className="text-lg font-bold text-gray-800">{value}</h3>
+              <h3 className="text-lg font-bold text-jp-gray-800">{value}</h3>
               {formattedChange && (
                 <span
                   className={cn(
                     'ml-2 text-xs',
-                    change?.type === ChangeType.INCREASE ? 'text-green-600' : 'text-red-600'
+                    change?.type === ChangeType.INCREASE ? 'text-jp-green-600' : 'text-jp-red-600'
                   )}
                 >
                   {formattedChange}
@@ -236,7 +236,7 @@ const StatCard = ({
           {effectiveVariant === StatCardVariant.PROGRESS_BAR && progressValue && (
             <div className="w-full h-5 flex items-center gap-4">
               <div className="w-full h-full flex flex-1 rounded-xs overflow-hidden">
-                <div className="bg-primary-500 h-full" style={{ width: `${progressValue}%` }}></div>
+                <div className="bg-jp-primary-500 h-full" style={{ width: `${progressValue}%` }}></div>
                 <div
                   className="bg-white h-full [background-image:repeating-linear-gradient(to_right,_#e1e4ea,_#e1e4ea_5px,_transparent_1px,_transparent)] [background-size:10px_10px]"
                   style={{ width: `${100 - progressValue}%` }}

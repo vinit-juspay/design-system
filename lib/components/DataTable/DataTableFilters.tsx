@@ -45,8 +45,8 @@ export function DataTableFilters<T>({
       <button
         type="button"
         className={cn(
-          "flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md border-gray-200 hover:bg-gray-50",
-          activeFilterCount > 0 && "border-primary-300 bg-primary-50 text-primary-700"
+          "flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md border-jp-gray-200 hover:bg-jp-gray-50",
+          activeFilterCount > 0 && "border-jp-primary-300 bg-jp-primary-50 text-jp-primary-700"
         )}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Filters"
@@ -54,7 +54,7 @@ export function DataTableFilters<T>({
         <Filter size={16} />
         <span>Filters</span>
         {activeFilterCount > 0 && (
-          <span className="ml-1 bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded-full">
+          <span className="ml-1 bg-jp-primary-100 text-jp-primary-800 text-xs font-medium px-2 py-0.5 rounded-full">
             {activeFilterCount}
           </span>
         )}
@@ -62,25 +62,25 @@ export function DataTableFilters<T>({
       
       {isOpen && (
         <div className="absolute left-0 z-10 mt-2 w-80 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1 divide-y divide-gray-100">
-            <div className="px-3 py-2 font-medium text-sm text-gray-700">
+          <div className="py-1 divide-y divide-jp-gray-100">
+            <div className="px-3 py-2 font-medium text-sm text-jp-gray-700">
               Filters
             </div>
             
             <div className="p-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-jp-gray-700 mb-1">
                 Search across all columns
               </label>
               <div className="flex gap-2">
                 <div className="relative flex-grow">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search size={16} className="text-gray-400" />
+                    <Search size={16} className="text-jp-gray-400" />
                   </div>
                   <input
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                    className="block w-full pl-10 pr-3 py-2 border border-jp-gray-300 rounded-md text-sm focus:outline-none focus:ring-jp-primary-500 focus:border-jp-primary-500"
                     placeholder="Search..."
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') handleSearch();
@@ -90,7 +90,7 @@ export function DataTableFilters<T>({
                 <button
                   type="button"
                   onClick={handleSearch}
-                  className="px-3 py-2 bg-primary-600 text-white rounded-md text-sm hover:bg-primary-700"
+                  className="px-3 py-2 bg-jp-primary-600 text-white rounded-md text-sm hover:bg-jp-primary-700"
                 >
                   Apply
                 </button>
@@ -102,14 +102,14 @@ export function DataTableFilters<T>({
               <button
                 type="button"
                 onClick={clearFilters}
-                className="text-sm text-gray-600 hover:text-gray-800"
+                className="text-sm text-jp-gray-600 hover:text-jp-gray-800"
               >
                 Clear filters
               </button>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="text-sm text-primary-600 hover:text-primary-800"
+                className="text-sm text-jp-primary-600 hover:text-jp-primary-800"
               >
                 Done
               </button>

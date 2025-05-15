@@ -15,10 +15,10 @@ export const getCheckboxClassNames = (
   if (disabled) {
     if (checked) {
       // Checked and disabled: primary-200 bg and no border
-      stateClasses = 'bg-primary-200 border-0';
+      stateClasses = 'bg-jp-primary-200 border-0';
     } else {
       // Unchecked and disabled: gray-150 border and gray-50 bg
-      stateClasses = 'border-gray-150 bg-gray-50';
+      stateClasses = 'border-jp-gray-150 bg-jp-gray-50';
     }
   } else {
     stateClasses = disabled ? states.disabled : states.enabled;
@@ -73,9 +73,9 @@ export const getCheckboxSubtextClassNames = (size: CheckboxSize, disabled: boole
   const theme = themeConfig.euler.checkbox;
 
   return cn(
-    theme.subtext || 'text-gray-400 font-normal',
+    theme.subtext || 'text-jp-gray-400 font-normal',
     theme.sizes[size].subtext ||
       (size === CheckboxSize.SMALL ? 'text-body-sm ml-5 mt-1' : 'text-body-md ml-4 mt-1'),
-    disabled && (theme.disabledSubtext || 'text-gray-200')
+    disabled && (theme.disabledSubtext || 'text-jp-gray-200')
   );
 };

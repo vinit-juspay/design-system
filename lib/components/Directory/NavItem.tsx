@@ -49,7 +49,7 @@ const NavItem = ({
         ref={itemRef as any}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        className="w-full flex items-center justify-start gap-3 text-body-md px-3 py-1.5 text-left text-gray-600 font-500 hover:bg-gray-100 rounded-sm transition-colors focus:bg-gray-100 focus:outline-none focus:ring-0 user-select-none"
+        className="w-full flex items-center justify-start gap-3 text-body-md px-3 py-1.5 text-left text-jp-gray-600 font-500 hover:bg-jp-gray-100 rounded-sm transition-colors focus:bg-jp-gray-100 focus:outline-none focus:ring-0 user-select-none"
         aria-expanded={hasChildren ? isExpanded : undefined}
         role={!item.href ? "button" : undefined}
         tabIndex={0}
@@ -69,7 +69,7 @@ const NavItem = ({
       {/* Render nested items if expanded */}
       {hasChildren && isExpanded && (
         <ul className="w-full space-y-2 pl-6 mt-2 relative" role="group" aria-label={`${item.label} submenu`}>
-          <div className="absolute left-4 top-0 h-full w-[1px] bg-gray-200" aria-hidden="true"></div>
+          <div className="absolute left-4 top-0 h-full w-[1px] bg-jp-gray-200" aria-hidden="true"></div>
           {item.items &&
             item.items.map((childItem, childIdx) => (
               <NavItem

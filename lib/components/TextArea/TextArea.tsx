@@ -70,7 +70,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {infoTooltip && (
               <TooltipV2 size={TooltipSize.LARGE} content={infoTooltip}>
                 <button type="button" aria-label="More information" className="focus:outline-none">
-                  <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+                  <HelpCircle className="w-3.5 h-3.5 text-jp-gray-400" />
                 </button>
               </TooltipV2>
             )}

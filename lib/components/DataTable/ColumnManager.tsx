@@ -46,7 +46,7 @@ export function ColumnManager<T>({ columns, visibleColumns, onColumnChange }: Co
     <div className="relative" ref={menuRef}>
       <button
         type="button"
-        className="flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md border-gray-200 hover:bg-gray-50"
+        className="flex items-center gap-1 px-3 py-1.5 text-sm border rounded-md border-jp-gray-200 hover:bg-jp-gray-50"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Manage columns"
       >
@@ -56,8 +56,8 @@ export function ColumnManager<T>({ columns, visibleColumns, onColumnChange }: Co
       
       {isOpen && (
         <div className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1 divide-y divide-gray-100">
-            <div className="px-3 py-2 font-medium text-sm text-gray-700">
+          <div className="py-1 divide-y divide-jp-gray-100">
+            <div className="px-3 py-2 font-medium text-sm text-jp-gray-700">
               Manage Columns
             </div>
             <div className="max-h-60 overflow-y-auto py-1">
@@ -67,13 +67,13 @@ export function ColumnManager<T>({ columns, visibleColumns, onColumnChange }: Co
                   <div
                     key={String(column.field)}
                     className={cn(
-                      "px-3 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50",
-                      isVisible ? "text-gray-700" : "text-gray-500"
+                      "px-3 py-2 flex items-center justify-between cursor-pointer hover:bg-jp-gray-50",
+                      isVisible ? "text-jp-gray-700" : "text-jp-gray-500"
                     )}
                     onClick={() => toggleColumnVisibility(column.field)}
                   >
                     <span className="text-sm">{column.header}</span>
-                    {isVisible && <Check size={16} className="text-primary-600" />}
+                    {isVisible && <Check size={16} className="text-jp-primary-600" />}
                   </div>
                 );
               })}
