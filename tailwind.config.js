@@ -180,6 +180,18 @@ module.exports = {
       wordBreak: {
         'jp-word-break': 'word-break',
       },
+      borderRadius: {
+        'jp-none': '0',
+        'jp-xs': '2px',
+        'jp-sm': '4px',
+        'jp-md': '6px',
+        'jp-lg': '8px',
+        'jp-xl': '10px',
+        'jp-2xl': '12px',
+        'jp-4xl': '16px',
+        'jp-6xl': '20px',
+        'jp-full': '9999px',
+      },
     },
   },
   plugins: [
