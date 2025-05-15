@@ -382,12 +382,12 @@ export const themeConfig = {
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-600',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-jp-600 font-jp-500 data-[state=active]:font-jp-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-jp-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
+            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-jp-gray-700 data-[state=active]:text-jp-gray-700 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-jp-600 font-jp-500',
         },
       },
       sizes: {
@@ -1147,7 +1147,7 @@ export const themeConfig = {
           'flex w-full py-4 px-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jp-primary-500 disabled:cursor-not-allowed hover:bg-jp-gray-50',
         content:
           'overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
-        title: 'text-jp-body-lg font-500',
+        title: 'text-jp-body-lg font-jp-600 ',
         titleEnabled: 'text-jp-gray-800',
         titleDisabled: 'text-jp-gray-500',
         subtext: 'text-jp-body-md mt-1',
