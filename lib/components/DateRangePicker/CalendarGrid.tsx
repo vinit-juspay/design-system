@@ -228,9 +228,9 @@ const CalendarGrid = forwardRef<HTMLDivElement, CalendarGridProps>(
                       dayClasses,
                       textColorClass,
                       !isStart && !isEnd && !isRangeDay && isTodayDay
-                        ? 'text-primary-500'
+                        ? 'text-jp-primary-500'
                         : !isStart && !isEnd
-                          ? 'text-gray-600'
+                          ? 'text-jp-gray-600'
                           : ''
                     )}
                   >

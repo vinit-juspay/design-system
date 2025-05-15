@@ -75,7 +75,7 @@ export const getCheckboxSubtextClassNames = (size: CheckboxSize, disabled: boole
   return cn(
     theme.subtext || 'text-jp-gray-400 font-normal',
     theme.sizes[size].subtext ||
-      (size === CheckboxSize.SMALL ? 'text-body-sm ml-5 mt-1' : 'text-jp-body-md ml-4 mt-1'),
+      (size === CheckboxSize.SMALL ? 'text-jp-body-sm ml-5 mt-1' : 'text-jp-body-md ml-4 mt-1'),
     disabled && (theme.disabledSubtext || 'text-jp-gray-200')
   );
 };

@@ -68,7 +68,7 @@ const BarChartTooltip = ({
     <>
       <div className="relative">
         <div className="flex flex-col">
-          <h3 className="text-jp-body-md font-500 text-gray-400">{capitaliseCamelCase(label)}</h3>
+          <h3 className="text-jp-body-md font-jp-500 text-jp-gray-400">{capitaliseCamelCase(label)}</h3>
         </div>
 
         <div className="mt-3 space-y-3">
@@ -79,14 +79,14 @@ const BarChartTooltip = ({
                 <div key={`bar-${index}`} className="flex flex-col items-start">
                   <div className="flex items-center gap-2 ">
                     <div
-                      className="w-1 h-4 rounded-full"
+                      className="w-1 h-4 rounded-jp-full"
                       style={{ backgroundColor: getColor(key) }}
                     ></div>
-                    <h3 className="text-body-sm font-400 text-gray-400">
+                    <h3 className="text-jp-body-sm font-jp-400 text-jp-gray-400">
                       {capitaliseCamelCase(key)}
                     </h3>
                   </div>
-                  <h3 className="w-full text-body-lg font-600 text-gray-900 pl-2.5 overflow-clip overflow-ellipsis whitespace-nowrap">
+                  <h3 className="w-full text-jp-body-lg font-jp-600 text-jp-gray-900 pl-2.5 overflow-clip overflow-ellipsis whitespace-nowrap">
                     {relevantData[key].primary.val}
                   </h3>
                 </div>
@@ -146,33 +146,33 @@ const LineChartTooltip = ({
     <>
       <div className="pl-2 relative">
         <div
-          className="absolute top-0.5 left-0 w-1 h-4 rounded-full transition-all duration-75"
+          className="absolute top-0.5 left-0 w-1 h-4 rounded-jp-full transition-all duration-75"
           style={{ backgroundColor: getColor(hoveredKey) }}
         ></div>
         <div className="flex flex-col">
-          <h3 className="text-jp-body-md font-600 text-gray-900">{capitaliseCamelCase(hoveredKey)}</h3>
-          <label className="font-500 text-body-sm text-gray-400">
+          <h3 className="text-jp-body-md font-jp-600 text-jp-gray-900">{capitaliseCamelCase(hoveredKey)}</h3>
+          <label className="font-jp-500 text-jp-body-sm text-jp-gray-400">
             {capitaliseCamelCase(label)}
           </label>
         </div>
       </div>
 
       <div className="pl-2 flex flex-col">
-        <label className="text-body-sm font-500 text-gray-400">{relevantData.primary.label}</label>
-        <h3 className="text-sm font-600 text-gray-900 overflow-clip whitespace-nowrap overflow-ellipsis">
+        <label className="text-jp-body-sm font-jp-500 text-jp-gray-400">{relevantData.primary.label}</label>
+        <h3 className="text-jp-body-sm font-jp-600 text-jp-gray-900 overflow-clip whitespace-nowrap overflow-ellipsis">
           {relevantData.primary.val}
         </h3>
       </div>
 
       <>
         {relevantData.aux && relevantData.aux.length > 0 && (
-          <div className="flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150">
+          <div className="flex flex-col gap-1 pt-3 pl-2 border-t border-jp-gray-150">
             {relevantData.aux.map((auxItem: any, index: number) => (
               <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
-                <span className="text-body-sm text-gray-500 truncate overflow-clip overflow-ellipsis">
+                <span className="text-jp-body-sm text-jp-gray-500 truncate overflow-clip overflow-ellipsis">
                   {auxItem.label}
                 </span>
-                <span className="text-body-sm font-500 text-gray-700">
+                <span className="text-jp-body-sm font-jp-500 text-jp-gray-700">
                   {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
                 </span>
               </div>
@@ -220,30 +220,30 @@ const PieChartTooltip = ({
     <>
       <div className="pl-2 relative">
         <div
-          className="absolute top-0.5 left-0 w-1 h-4 rounded-full"
+          className="absolute top-0.5 left-0 w-1 h-4 rounded-jp-full"
           style={{ backgroundColor: payload[0].payload.fill }}
         ></div>
         <div className="flex flex-col">
-          <h3 className="text-jp-body-md font-600 text-gray-900">{capitaliseCamelCase(name)}</h3>
-          <label className="font-500 text-body-xs text-gray-400">
+          <h3 className="text-jp-body-md font-jp-600 text-jp-gray-900">{capitaliseCamelCase(name)}</h3>
+          <label className="font-jp-500 text-jp-body-xs text-jp-gray-400">
             {capitaliseCamelCase(originalData[0].name)}
           </label>
         </div>
       </div>
 
       <div className="pl-2 flex flex-col">
-        <label className="text-body-sm font-500 text-gray-400">
+        <label className="text-jp-body-sm font-jp-500 text-jp-gray-400">
           {capitaliseCamelCase(data.primary.label)}
         </label>
-        <h3 className="text-sm font-600 text-gray-900">{data.primary.val}</h3>
+        <h3 className="text-jp-body-sm font-jp-600 text-jp-gray-900">{data.primary.val}</h3>
       </div>
 
       {data.aux && data.aux.length > 0 && (
-        <div className="flex flex-col gap-1 pt-3 pl-2 border-t border-gray-150">
+        <div className="flex flex-col gap-1 pt-3 pl-2 border-t border-jp-gray-150">
           {data.aux.map((auxItem: any, index: number) => (
             <div key={`aux-${index}`} className="flex items-center justify-between gap-2">
-              <span className="text-body-xs text-gray-400 truncate">{auxItem.label}</span>
-              <span className="text-body-sm font-600 text-gray-700">
+              <span className="text-jp-body-xs text-jp-gray-400 truncate">{auxItem.label}</span>
+              <span className="text-jp-body-sm font-jp-600 text-jp-gray-700">
                 {typeof auxItem.val === 'number' ? formatNumber(auxItem.val) : auxItem.val}
               </span>
             </div>

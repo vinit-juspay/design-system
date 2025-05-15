@@ -32,9 +32,9 @@ const TimeSelector = forwardRef<HTMLDivElement, TimeSelectorProps>(({ value, onC
           <DropdownMenu.Item
             key={timeValue}
             className={cn(
-              'px-3 py-2 text-sm outline-none cursor-pointer rounded-md',
+              'px-3 py-2 text-jp-body-sm outline-none cursor-pointer rounded-jp-md',
               'hover:bg-jp-gray-100 focus:bg-jp-gray-100',
-              value === timeValue && 'bg-jp-primary-50 text-jp-primary-700 font-medium'
+              value === timeValue && 'bg-jp-primary-50 text-jp-primary-700 font-jp-500'
             )}
             onClick={() => onChange(timeValue)}
           >
@@ -51,16 +51,16 @@ const TimeSelector = forwardRef<HTMLDivElement, TimeSelectorProps>(({ value, onC
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
-            className="border border-gray-300 rounded-lg px-3 py-2 flex items-center gap-2 hover:border-gray-400 focus:outline-none whitespace-nowrap"
+            className="border border-jp-gray-300 rounded-jp-lg px-3 py-2 flex items-center gap-2 hover:border-jp-gray-400 focus:outline-none whitespace-nowrap"
             aria-label="Select time"
           >
-            <span className="text-gray-700">{displayTime}</span>
+            <span className="text-jp-gray-700">{displayTime}</span>
           </button>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="bg-jp-gray-0 rounded-md shadow-lg border border-gray-200 p-1 max-h-60 overflow-y-auto z-50"
+            className="bg-jp-gray-0 rounded-md shadow-lg border border-jp-gray-200 p-1 max-h-60 overflow-y-auto z-50"
             sideOffset={5}
           >
             {generateTimeOptions()}
