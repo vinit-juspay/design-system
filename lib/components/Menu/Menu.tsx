@@ -26,7 +26,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
   (
     {
       className,
-      type = MenuType.DEFAULT,
+      menuType = MenuType.DEFAULT,
       hasSearch = false,
       items = [],
       searchPlaceholder = 'Search',
@@ -60,7 +60,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
     const handleItemClick = useCallback(
       (item: any) => {
         // For multi-select menus, toggle selection but don't close the menu
-        if (type === MenuType.MULTI_SELECT) {
+        if (menuType === MenuType.MULTI_SELECT) {
           if (item.id) {
             selection.toggleSelection(item.id);
 
@@ -78,7 +78,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
           closeMenu();
         }
       },
-      [type, selection, onItemClick, closeMenu]
+      [menuType, selection, onItemClick, closeMenu]
     );
 
     // Combine context value
@@ -103,7 +103,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
       onItemClick,
       selection.toggleSelection,
       closeMenu,
-      type,
+      menuType,
       menuRef as React.RefObject<HTMLDivElement>,
       hasSearch,
       search.searchInputRef as React.RefObject<HTMLInputElement>
@@ -142,7 +142,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
       <MenuContext.Provider value={contextValue}>
         <div
           ref={ref}
-          className={cn(getMenuClassNames(type), className)}
+          className={cn(getMenuClassNames(menuType), className)}
           role="menu"
           tabIndex={-1}
           aria-orientation="vertical"
@@ -182,9 +182,9 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
           >
             {search.filteredItems.length > 0 ? (
               search.filteredItems.map((item, index) => {
-                const modifiedItem = prepareItemForMultiSelect(item, type);
+                const modifiedItem = prepareItemForMultiSelect(item, menuType);
                 const isSelected =
-                  type === MenuType.MULTI_SELECT &&
+                  menuType === MenuType.MULTI_SELECT &&
                   item.id !== undefined &&
                   selection.selectedItems.includes(item.id);
 
@@ -194,7 +194,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
                     {...modifiedItem}
                     state={search.highlightedIndex === index ? MenuItemState.HOVER : item.state}
                     isMultiSelect={
-                      type === MenuType.MULTI_SELECT && modifiedItem.type !== MenuItemType.LABEL
+                      menuType === MenuType.MULTI_SELECT &&
+                      modifiedItem.menuType !== MenuItemType.LABEL
                     }
                     isSelected={isSelected}
                     onClick={() => handleItemClick(item)}
