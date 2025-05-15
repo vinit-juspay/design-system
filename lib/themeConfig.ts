@@ -218,7 +218,7 @@ export const themeConfig = {
         container: 'flex items-center gap-2',
         labelwSublabel: 'flex items-center gap-1',
         base: 'text-jp-body-md font-500 tracking-normal',
-        color: 'text-gray-700',
+        color: 'text-jp-gray-700',
         mandatory: 'text-jp-red-500 text-jp-body-md font-normal -top-0.5',
       },
       sublabel: {
@@ -377,17 +377,17 @@ export const themeConfig = {
         boxed: {
           list: 'bg-jp-gray-50 p-1 rounded-jp-lg',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-jp-gray-700 data-[state=active]:shadow-jp-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-jp-gray-600 font-jp-500 data-[state=active]:font-jp-600',
         },
         floating: {
           list: 'gap-2',
           trigger:
-            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-gray-700 font-500 hover:text-gray-700 data-[state=active]:font-600',
+            'rounded-jp-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-100 data-[state=active]:text-jp-gray-700 font-500 hover:text-jp-gray-700 data-[state=active]:font-600',
         },
         underline: {
           list: 'border-b border-gray-200',
           trigger:
-            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
+            'border-b-2 border-transparent text-jp-gray-500 relative data-[state=active]:border-gray-700 data-[state=active]:text-jp-gray-700 font-500 hover:text-gray-600  data-[state=active]:z-10 data-[state=active]:font-600',
         },
       },
       sizes: {
@@ -733,7 +733,7 @@ export const themeConfig = {
           container: 'flex items-center gap-1.5',
           mandatory: 'text-red-600',
           helpIcon: 'text-jp-gray-400',
-          base: 'font-500 text-gray-700',
+          base: 'font-500 text-jp-gray-700',
           sizes: {
             SMALL: 'text-[12px]',
             MEDIUM: 'text-[14px]',
@@ -1215,7 +1215,7 @@ export const themeConfig = {
           'px-6 py-4 rounded-b-jp-lg flex justify-end space-x-3 flex-shrink-0 border-t border-jp-gray-200',
         backdrop: 'flex items-center justify-center fixed inset-0 bg-jp-gray-700/60  pointer-events-auto',
         wrapper: 'fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto',
-        modalTitle: 'text-sm font-semibold text-gray-700 word-break',
+        modalTitle: 'text-sm font-semibold text-jp-gray-700 word-break',
         modalSubtitle: 'text-jp-body-md text-gray-500 font-normal word-break mt-1',
       },
     },
