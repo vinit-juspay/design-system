@@ -3,7 +3,7 @@ export const themeConfig = {
     button: {
       base: {
         container:
-          'inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-600 font-sans',
+          'inline-flex items-center justify-center transition-all duration-200 disabled:pointer-events-none font-jp-600 font-sans',
         focus: 'focus-visible:outline-2 focus:outline-2',
         icon: 'flex-shrink-0',
         text: 'truncate',
@@ -85,7 +85,7 @@ export const themeConfig = {
         },
       },
       borderRadius: 'rounded-jp-lg',
-      fontWeight: 'font-600',
+      fontWeight: 'font-jp-600',
       fontFamily: 'font-sans',
       linkColors: {
         primary: {
@@ -128,9 +128,9 @@ export const themeConfig = {
       },
       buttonStyles: {
         stacked: {
-          first: 'rounded-r-none border-r-0',
+          first: 'rounded-r-jp-none border-r-0',
           middle: 'rounded-jp-none border-r-0',
-          last: 'rounded-l-none',
+          last: 'rounded-l-jp-none',
         },
         nonStacked: '',
       },
