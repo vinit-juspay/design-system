@@ -41,6 +41,7 @@ const Popover = ({
   onSecondaryButtonClick,
   primaryButtonSubType = ButtonSubType.LINK,
   secondaryButtonSubType = ButtonSubType.LINK,
+  closeOnScroll = true,
 }: PopoverProps) => {
   const { open, setOpen } = usePopoverState(controlledOpen, onOpenChange);
   const { triggerRef, contentRef } = usePopoverPosition(
@@ -49,7 +50,9 @@ const Popover = ({
     alignment,
     offset,
     collisionBoundaryRef,
-    collisionPadding
+    collisionPadding,
+    closeOnScroll,
+    onOpenChange
   );
   useFocusManagement(open);
 

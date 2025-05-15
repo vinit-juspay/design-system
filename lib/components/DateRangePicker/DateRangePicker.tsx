@@ -308,8 +308,8 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           className={cn(
             baseClassNames,
             statesClassNames,
-            'border border-gray-300',
-            showPresets ? 'rounded-r-lg' : 'rounded-lg',
+            'border border-jp-gray-300',
+            showPresets ? 'rounded-r-jp-lg' : 'rounded-jp-lg',
             'py-2.5 px-3 flex justify-between items-center cursor-pointer w-full h-10'
           )}
           onClick={e => {
@@ -322,10 +322,10 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
           role="button"
           tabIndex={isDisabled ? -1 : 0}
         >
-          <div className="text-gray-600 flex-1 flex items-center justify-between">
+          <div className="text-jp-gray-600 flex-1 flex items-center justify-between">
             <div className="flex items-center">
               <Calendar className="w-3.5 h-3.5 mr-1.5" />
-              <span className="text-gray-600 font-body-sm text-body-md">{formatDateDisplay()}</span>
+              <span className="text-jp-gray-600 font-jp-body-sm text-jp-body-md">{formatDateDisplay()}</span>
             </div>
             {isOpen ? (
               <ChevronUp className="w-3.5 h-3.5 ml-2" />
@@ -362,7 +362,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                 <div className="p-4">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-24 text-gray-500">Start</div>
+                      <div className="w-24 text-jp-gray-500">Start</div>
                       <input
                         type="text"
                         className={cn(timeInputClassNames)}
@@ -381,7 +381,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                         selectedRange.endDate &&
                         selectedRange.startDate.getTime() !== selectedRange.endDate.getTime())) && (
                       <div className="flex items-center gap-2">
-                        <div className="w-24 text-gray-500">End</div>
+                        <div className="w-24 text-jp-gray-500">End</div>
                         <input
                           type="text"
                           className={cn(timeInputClassNames)}
@@ -408,12 +408,12 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                     />
                   </div>
 
-                  <div className="flex items-center justify-between py-4 border-t border-gray-200 mt-4">
+                  <div className="flex items-center justify-between py-4 border-t border-jp-gray-200 mt-4">
                     <div className="flex items-center">
                       <div
                         className={cn(
                           'w-10 h-5 relative rounded-full transition-colors duration-200 ease-in-out cursor-pointer',
-                          showTimePickerState ? 'bg-primary-500' : 'bg-gray-200'
+                          showTimePickerState ? 'bg-jp-primary-500' : 'bg-jp-gray-200'
                         )}
                         onClick={() => {
                           const newShowTimePickerState = !showTimePickerState;
@@ -422,12 +422,12 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                       >
                         <div
                           className={cn(
-                            'absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out',
+                            'absolute left-0.5 top-0.5 bg-jp-gray-0 w-4 h-4 rounded-jp-full transition-transform duration-200 ease-in-out',
                             showTimePickerState && 'transform translate-x-5'
                           )}
                         ></div>
                       </div>
-                      <span className="ml-2 text-gray-600 text-md">Time Ranges</span>
+                      <span className="ml-2 text-jp-gray-600 text-jp-body-md">Time Ranges</span>
                     </div>
 
                     <div className="flex space-x-2">

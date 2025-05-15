@@ -23,6 +23,8 @@ import {
   EyeClosed,
   IndianRupee,
   Table,
+  Palette,
+  MessageCircle,
 } from 'lucide-react';
 
 
@@ -49,10 +51,12 @@ import InputDemo from './Demos/InputDemo/InputDemo';
 import { DirectoryData } from '../lib/components/Directory/types';
 import Sidebar from '../lib/components/Sidebar';
 import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
+import ColorPaletteDemo from './Demos/ColorPaletteDemo';
+import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
 
 const App = () => {
   const [activeComponent, setActiveComponent] = useState<
-    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable'
+    'buttons' | 'tooltipsV2' | 'tags' | 'tabs' | 'textInput' | 'alerts' | 'charts' | 'chartsV2' | 'fonts' | 'datePicker' | 'selectors' | 'buttonGroups' | 'avatars' | 'menu' | 'dropdown' | 'accordion' | 'statCard' | 'modal' | 'input' | 'snackbar' | 'dataTable' | 'colorPalette' | 'popover'
   >('dataTable');
 
   const [activeTenant, setActiveTenant] = useState<string>("Juspay");
@@ -61,8 +65,8 @@ const App = () => {
 
   const topbar = (
     <div className="flex items-center justify-between w-full flex-1">
-      <div className=" font-bold text-gray-900">
-        <div className='flex w-40 h-full outline font-400 text-body-sm outline-gray-200 rounded-md px-2 items-center gap-2'>
+      <div className=" font-bold text-jp-gray-900">
+        <div className='flex w-40 h-full outline font-400 text-body-sm outline-jp-gray-200 rounded-md px-2 items-center gap-2'>
           <Search className="w-4 h-4" />
           <p>Search</p>
         </div>
@@ -117,6 +121,10 @@ const App = () => {
             return <InputDemo />;
           case 'dataTable':
             return <DataTableDemo />;
+          case 'colorPalette':
+            return <ColorPaletteDemo />;
+          case 'popover':
+            return <PopoverDemo />;
           default:
             return null;
         }
@@ -247,6 +255,11 @@ const App = () => {
           label: "Modal",
           leftSlot: <Box className="w-4 h-4" />,
           onClick: () => setActiveComponent("modal")
+        },
+        {
+          label: "Popover",
+          leftSlot: <MessageCircle className="w-4 h-4" />,
+          onClick: () => setActiveComponent("popover")
         }
       ]
     },
@@ -298,10 +311,20 @@ const App = () => {
           onClick: () => setActiveComponent("fonts")
         }
       ]
+    },
+    {
+      label: "Design System",
+      items: [
+        {
+          label: "Color Palette",
+          leftSlot: <Palette className="w-4 h-4" />,
+          onClick: () => setActiveComponent("colorPalette")
+        }
+      ]
     }
   ];
 
-  const footer = <div className="w-full bg-gray-25 flex items-center justify-between gap-3 px-2">
+  const footer = <div className="w-full bg-jp-gray-25 flex items-center justify-between gap-3 px-2">
     <div className='flex items-center gap-2'>
       Lorem ipsum dolor sit.
     </div>
@@ -320,7 +343,7 @@ const App = () => {
         setActiveMerchant={setActiveMerchant}
         footer={footer}
       >
-        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-white">
+        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-jp-gray-0">
           {renderContent()}
         </div>
       </Sidebar>

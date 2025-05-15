@@ -368,7 +368,7 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
             <tr className='h-14'>
               <td
                 colSpan={visibleColumns.length + 1}
-                className="text-center py-4 text-gray-500"
+                className="text-center py-4 text-jp-gray-500"
               >
                 No data available
               </td>

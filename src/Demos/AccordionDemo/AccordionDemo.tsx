@@ -14,7 +14,7 @@ const AccordionDemo = () => {
             value="item-1"
             title="Basic Information"
             subtext="Personal and account details"
-            leftSlot={<Info className="text-blue-600 h-3.5 w-3.5" />}
+            leftSlot={<Info className="text-primary-600 h-3.5 w-3.5" />}
           >
             <div className="space-y-4">
               <p className="text-gray-600">

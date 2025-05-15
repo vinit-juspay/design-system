@@ -48,4 +48,5 @@ export interface PopoverProps {
   onSecondaryButtonClick?: () => void;
   primaryButtonSubType?: ButtonSubType;
   secondaryButtonSubType?: ButtonSubType;
+  closeOnScroll?: boolean;
 }

@@ -29,10 +29,13 @@ export const usePopoverPosition = (
   alignment: Alignment,
   offset: number,
   collisionBoundaryRef?: React.RefObject<HTMLElement>,
-  collisionPadding: number = 16
+  collisionPadding: number = 16,
+  closeOnScroll: boolean = true,
+  onOpenChange?: (open: boolean) => void
 ) => {
   const triggerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const updatePosition = useCallback(() => {
     if (!open || !triggerRef.current || !contentRef.current) return;
@@ -100,7 +103,6 @@ export const usePopoverPosition = (
       top = calculateVerticalPosition(triggerRect, contentRect, alignment);
     }
 
-    // Apply collision detection
     const finalPosition = applyCollisionDetection(
       { top, left },
       contentRect,
@@ -109,24 +111,55 @@ export const usePopoverPosition = (
     );
 
     if (contentRef.current) {
+      contentRef.current.style.position = 'fixed';
       contentRef.current.style.top = `${finalPosition.top}px`;
       contentRef.current.style.left = `${finalPosition.left}px`;
     }
   }, [open, placement, alignment, offset, collisionBoundaryRef, collisionPadding]);
 
+  const setOpenState = useCallback(
+    (value: boolean) => {
+      if (onOpenChange) {
+        onOpenChange(value);
+      }
+    },
+    [onOpenChange]
+  );
+
   useEffect(() => {
     if (!open) return;
 
     updatePosition();
-    const handleResize = () => updatePosition();
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleResize);
+    
+    const handlePositionUpdate = (event: Event) => {
+      requestAnimationFrame(updatePosition);
+      
+      if (closeOnScroll && contentRef.current) {
+        if (contentRef.current === event.target || contentRef.current.contains(event.target as Node)) {
+          return;
+        }
+        
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+        
+        scrollTimeoutRef.current = setTimeout(() => {
+          setOpenState(false);
+        }, 10);
+      }
+    };
+    
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', handlePositionUpdate, true);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleResize);
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', handlePositionUpdate, true);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
     };
-  }, [open, updatePosition]);
+  }, [open, updatePosition, closeOnScroll, setOpenState]);
 
   return { triggerRef, contentRef };
 };

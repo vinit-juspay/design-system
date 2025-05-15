@@ -11,5 +11,6 @@ export interface SnackbarProps {
   autoClose?: boolean;
   position?: SnackbarPosition;
   onClose?: () => void;
+  onActionClick?: () => void;
   className?: string;
 }

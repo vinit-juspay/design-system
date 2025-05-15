@@ -126,7 +126,7 @@ export const WithSubtext: Story = {
       </Checkbox>
       <Checkbox
         subtext="Required for account creation"
-        rightSlot={<Info className="w-3.5 h-3.5 text-blue-500" />}
+        rightSlot={<Info className="w-3.5 h-3.5 text-primary-500" />}
       >
         Accept terms and privacy policy
       </Checkbox>
@@ -150,7 +150,7 @@ export const WithRightSlot: Story = {
         With help icon
       </Checkbox>
       <Checkbox
-        rightSlot={<Settings className="w-3.5 h-3.5 text-blue-500" />}
+        rightSlot={<Settings className="w-3.5 h-3.5 text-primary-500" />}
         subtext="Configure advanced settings"
       >
         Advanced options
@@ -176,7 +176,7 @@ const ControlledCheckboxDemo = () => {
         Current state:{' '}
         {checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
       </p>
-      <button onClick={toggleState} className="px-3 py-1 bg-blue-500 text-white rounded mb-2">
+      <button onClick={toggleState} className="px-3 py-1 bg-primary-500 text-jp-gray-0 rounded mb-2">
         Toggle state
       </button>
       <Checkbox isChecked={checked} onCheckedChange={setChecked}>
@@ -265,7 +265,7 @@ Shows how to use checkboxes in a form with validation.
 
         <button
           type="submit"
-          className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="w-full py-2 bg-primary-500 text-jp-gray-0 rounded-md hover:bg-primary-600"
         >
           Submit
         </button>

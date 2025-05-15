@@ -42,6 +42,8 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
     const menuRef = useRef<HTMLDivElement>(null);
     // Container ref
     const containerRef = useRef<HTMLDivElement>(null);
+    // Track scroll timeout to prevent excessive closures
+    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Use layout effect to position menu before paint
     useLayoutEffect(() => {
@@ -53,13 +55,42 @@ const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
       if (!isMenuOpen) return;
 
       // Add scroll and resize listeners
-      window.addEventListener('scroll', positionMenu);
-      window.addEventListener('resize', positionMenu);
+      const handlePositionUpdate = () => {
+        requestAnimationFrame(positionMenu);
+      };
+
+      const handleScroll = (event: Event) => {
+        handlePositionUpdate();
+
+        // Check if the scroll event happened inside the menu
+        if (
+          menuRef.current &&
+          (menuRef.current === event.target || menuRef.current.contains(event.target as Node))
+        ) {
+          // Don't close the menu if scrolling within it
+          return;
+        }
+
+        // Close menu after a short delay when scrolling outside the menu
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+
+        scrollTimeoutRef.current = setTimeout(() => {
+          setIsMenuOpen(false);
+        }, 10);
+      };
+
+      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handlePositionUpdate);
 
       // Clean up
       return () => {
-        window.removeEventListener('scroll', positionMenu);
-        window.removeEventListener('resize', positionMenu);
+        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handlePositionUpdate);
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
       };
     }, [isMenuOpen]);
 
