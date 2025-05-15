@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-type DataPoint = {
+export type DataPoint = {
   primary: {
     label: string;
     val: number;
