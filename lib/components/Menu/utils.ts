@@ -18,7 +18,7 @@ export function mapEnumToThemeKey<T extends string | number, R extends string>(
   value: T,
   mapping: Record<T, R>
 ): R {
-  return mapping[value] || (Object.values(mapping)[0] as R); // Cast to R to fix type error
+  return mapping[value] || (Object.values(mapping)[0] as R); // Cast to R to fix menuType error
 }
 
 // Size enum mapping
@@ -59,9 +59,9 @@ export function getStateKey(state: DropdownState) {
   return STATE_KEY_MAP[state] || 'DEFAULT';
 }
 
-// Maps dropdown type to theme key
-export function getTypeKey(type: DropdownType) {
-  return TYPE_KEY_MAP[type] || 'SINGLE_SELECT';
+// Maps dropdown menuType to theme key
+export function getTypeKey(menuType: DropdownType) {
+  return TYPE_KEY_MAP[menuType] || 'SINGLE_SELECT';
 }
 
 // Maps dropdown subtype to theme key
@@ -70,10 +70,10 @@ export function getSubTypeKey(subType: DropdownSubType) {
 }
 
 // ===== Menu Helpers =====
-export function getMenuClassNames(type: MenuType = MenuType.DEFAULT): string {
+export function getMenuClassNames(menuType: MenuType = MenuType.DEFAULT): string {
   return cn(
     themeConfig.euler.menuv2.baseStyles,
-    themeConfig.euler.menuv2.types[type],
+    themeConfig.euler.menuv2.types[menuType],
     themeConfig.euler.menuv2.dimensions.width,
     themeConfig.euler.menuv2.dimensions.minWidth,
     themeConfig.euler.menuv2.dimensions.maxWidth
@@ -81,12 +81,12 @@ export function getMenuClassNames(type: MenuType = MenuType.DEFAULT): string {
 }
 
 export function getMenuItemClassNames({
-  type = MenuItemType.DEFAULT,
+  menuType = MenuItemType.DEFAULT,
   state = MenuItemState.DEFAULT,
   action = MenuItemAction.NA,
   disabled = false,
 }: {
-  type?: MenuItemType;
+  menuType?: MenuItemType;
   state?: MenuItemState;
   action?: MenuItemAction;
   disabled?: boolean;
@@ -98,7 +98,7 @@ export function getMenuItemClassNames({
 
   return cn(
     themeConfig.euler.menuv2.menuItem.baseStyles,
-    themeConfig.euler.menuv2.menuItem.types[type],
+    themeConfig.euler.menuv2.menuItem.types[menuType],
     themeConfig.euler.menuv2.menuItem.actions[action],
     stateClass,
     disabled && themeConfig.euler.menuv2.menuItem.disabled
@@ -141,7 +141,7 @@ export function filterMenuItems(items: MenuItemProps[], searchTerm: string): Men
 
   return items.filter(item => {
     // Don't filter separators, they should remain visible
-    if (item.type === MenuItemType.SEPARATOR) return true;
+    if (item.menuType === MenuItemType.SEPARATOR) return true;
 
     // Filter by text content
     return item.text.toLowerCase().includes(lowerCaseSearchTerm);
@@ -183,10 +183,10 @@ export const handleHighlightOption = (
 };
 
 /**
- * Generates the base class names for a dropdown based on its type, state, size, and other properties
+ * Generates the base class names for a dropdown based on its menuType, state, size, and other properties
  */
 export const getDropdownBaseClasses = (
-  type: DropdownType,
+  menuType: DropdownType,
   subType: DropdownSubType,
   size: DropdownSize,
   state: DropdownState,
@@ -195,7 +195,7 @@ export const getDropdownBaseClasses = (
 ): string => {
   // Map enum values to themeConfig keys
   const stateKey = getStateKey(state);
-  const typeKey = getTypeKey(type);
+  const typeKey = getTypeKey(menuType);
   const sizeKey = getSizeKey(size);
   const subTypeKey = getSubTypeKey(subType);
 
@@ -328,7 +328,7 @@ export const getHintTextClassNames = (size: DropdownSize = DropdownSize.MEDIUM):
 
 // Helper function to check if item is interactive
 export const isInteractiveItem = (item: MenuItemProps): boolean => {
-  return item.type !== MenuItemType.SEPARATOR && item.type !== MenuItemType.LABEL;
+  return item.menuType !== MenuItemType.SEPARATOR && item.menuType !== MenuItemType.LABEL;
 };
 
 // Helper function to find next valid item index
@@ -364,17 +364,17 @@ export const findNextValidItemIndex = (
 };
 
 // Helper function to modify item for multi-select
-export const prepareItemForMultiSelect = (item: MenuItemProps, type: MenuType): MenuItemProps => {
-  if (type !== MenuType.MULTI_SELECT) return item;
+export const prepareItemForMultiSelect = (item: MenuItemProps, menuType: MenuType): MenuItemProps => {
+  if (menuType !== MenuType.MULTI_SELECT) return item;
 
   // Create a copy of the item to modify
   const modifiedItem = { ...item };
 
   // For label items, don't display checkbox or any other elements
-  if (modifiedItem.type === MenuItemType.LABEL) {
+  if (modifiedItem.menuType === MenuItemType.LABEL) {
     modifiedItem.hasSlotR1 = false;
     modifiedItem.slotR1 = null;
-  } else if (modifiedItem.type !== MenuItemType.SEPARATOR) {
+  } else if (modifiedItem.menuType !== MenuItemType.SEPARATOR) {
     // Remove any icons that might appear as checks
     modifiedItem.slotR1 = null;
 
@@ -398,7 +398,7 @@ export const handleKeyboardNavigation = (
   onItemClick?: (item: MenuItemProps) => void,
   toggleSelection?: (itemId?: string) => void,
   closeMenu?: () => void,
-  type?: MenuType,
+  menuType?: MenuType,
   menuRef?: React.RefObject<HTMLDivElement> | undefined
 ): void => {
   switch (e.key) {
@@ -427,7 +427,7 @@ export const handleKeyboardNavigation = (
       if (highlightedIndex >= 0 && highlightedIndex < filteredItems.length) {
         const item = filteredItems[highlightedIndex];
         if (isInteractiveItem(item)) {
-          if (type === MenuType.MULTI_SELECT) {
+          if (menuType === MenuType.MULTI_SELECT) {
             toggleSelection?.(item.id);
           } else {
             onItemClick?.(item);

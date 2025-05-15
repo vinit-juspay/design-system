@@ -25,11 +25,11 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
               <MenuDropdown
-                type={DropdownType.SINGLE_SELECT}
+                dropdownType={DropdownType.SINGLE_SELECT}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.DEFAULT },
                 ]}
                 hasLabel={true}
                 label="Single Select"
@@ -42,12 +42,12 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
               <MenuDropdown
-                type={DropdownType.SINGLE_SELECT}
+                dropdownType={DropdownType.SINGLE_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.DEFAULT },
                 ]}
                 placeholder="Select an option"
               />
@@ -62,24 +62,24 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Default (HAS_CONTAINER)</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 menuItems={[
                   {
                     id: '1',
                     text: 'Profile',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <User size={16} />,
                   },
                   {
                     id: '2',
                     text: 'Settings',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <Settings size={16} />,
                   },
                   {
                     id: '3',
                     text: 'Help',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <HelpCircle size={16} />,
                   },
                 ]}
@@ -95,25 +95,25 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
                   {
                     id: '1',
                     text: 'Profile',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <User size={16} />,
                   },
                   {
                     id: '2',
                     text: 'Settings',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <Settings size={16} />,
                   },
                   {
                     id: '3',
                     text: 'Help',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <HelpCircle size={16} />,
                   },
                 ]}
@@ -131,12 +131,12 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Count Display (HAS_CONTAINER)</p>
               <MenuDropdown
-                type={DropdownType.MULTI_SELECT}
+                dropdownType={DropdownType.MULTI_SELECT}
                 selectionType={DropdownSelectionType.COUNT}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.MULTI_SELECT },
                 ]}
                 hasLabel={true}
                 label="Multi Select (Count)"
@@ -149,12 +149,12 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Text Display (HAS_CONTAINER)</p>
               <MenuDropdown
-                type={DropdownType.MULTI_SELECT}
+                dropdownType={DropdownType.MULTI_SELECT}
                 selectionType={DropdownSelectionType.TEXT}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.MULTI_SELECT },
                 ]}
                 hasLabel={true}
                 label="Multi Select (Text)"
@@ -167,12 +167,12 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER Variant</p>
               <MenuDropdown
-                type={DropdownType.MULTI_SELECT}
+                dropdownType={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.MULTI_SELECT },
                 ]}
                 placeholder="Select options"
               />
@@ -181,13 +181,13 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">NO_CONTAINER with Text Display</p>
               <MenuDropdown
-                type={DropdownType.MULTI_SELECT}
+                dropdownType={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 selectionType={DropdownSelectionType.TEXT}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
-                  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '3', text: 'Option 3', menuType: MenuItemType.MULTI_SELECT },
                 ]}
                 placeholder="Text display"
               />
@@ -211,8 +211,8 @@ const DropdownDemo = () => {
               hasLabel={true}
               label="Regular Label"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Basic label"
             />
@@ -224,8 +224,8 @@ const DropdownDemo = () => {
               hasSubLabel={true}
               subLabel="(optional)"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Label and sublabel"
             />
@@ -237,8 +237,8 @@ const DropdownDemo = () => {
               hasHint={true}
               hint="This is a helpful hint text"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Label and hint"
             />
@@ -249,8 +249,8 @@ const DropdownDemo = () => {
               label="Required Field"
               mandatory={true}
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="With required indicator"
             />
@@ -270,8 +270,8 @@ const DropdownDemo = () => {
               <MenuDropdown
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
                 ]}
                 placeholder="No container dropdown"
               />
@@ -280,11 +280,11 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Multi Select</p>
               <MenuDropdown
-                type={DropdownType.MULTI_SELECT}
+                dropdownType={DropdownType.MULTI_SELECT}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
                 ]}
                 placeholder="No container multiselect"
               />
@@ -293,19 +293,19 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Icon Only</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 subType={DropdownSubType.NO_CONTAINER}
                 menuItems={[
                   {
                     id: '1',
                     text: 'Option 1',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <User size={16} />,
                   },
                   {
                     id: '2',
                     text: 'Option 2',
-                    type: MenuItemType.DEFAULT,
+                    menuType: MenuItemType.DEFAULT,
                     slotL: <Settings size={16} />,
                   },
                 ]}
@@ -328,8 +328,8 @@ const DropdownDemo = () => {
               hasLabel={true}
               label="Small Dropdown"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Small"
             />
@@ -342,8 +342,8 @@ const DropdownDemo = () => {
               hasLabel={true}
               label="Medium Dropdown"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Medium"
             />
@@ -356,8 +356,8 @@ const DropdownDemo = () => {
               hasLabel={true}
               label="Large Dropdown"
               menuItems={[
-                { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
               ]}
               placeholder="Large"
             />
@@ -370,13 +370,13 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Small (sm)</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 size={DropdownSize.SMALL}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
                 ]}
               />
             </div>
@@ -384,13 +384,13 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Medium (md)</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 size={DropdownSize.MEDIUM}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
                 ]}
               />
             </div>
@@ -398,13 +398,13 @@ const DropdownDemo = () => {
             <div>
               <p className="text-sm text-gray-600 mb-2">Large (lg)</p>
               <MenuDropdown
-                type={DropdownType.ICON_ONLY}
+                dropdownType={DropdownType.ICON_ONLY}
                 size={DropdownSize.LARGE}
                 hasLeftIcon={true}
                 leftIcon={<User size={16} />}
                 menuItems={[
-                  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-                  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
+                  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+                  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
                 ]}
               />
             </div>

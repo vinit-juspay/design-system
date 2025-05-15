@@ -23,7 +23,7 @@ const meta: Meta<typeof MenuDropdown> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    type: {
+    dropdownType: {
       control: 'select',
       options: Object.values(DropdownType),
       description: 'Type of dropdown',
@@ -108,22 +108,22 @@ type Story = StoryObj<typeof MenuDropdown>;
 
 // Sample menu items
 const defaultMenuItems = [
-  { id: '1', text: 'Option 1', type: MenuItemType.DEFAULT },
-  { id: '2', text: 'Option 2', type: MenuItemType.DEFAULT },
-  { id: '3', text: 'Option 3', type: MenuItemType.DEFAULT },
+  { id: '1', text: 'Option 1', menuType: MenuItemType.DEFAULT },
+  { id: '2', text: 'Option 2', menuType: MenuItemType.DEFAULT },
+  { id: '3', text: 'Option 3', menuType: MenuItemType.DEFAULT },
 ];
 
 const defaultMenuItemsWithIcons = [
-  { id: '1', text: 'Profile', type: MenuItemType.DEFAULT, slotL: <User size={16} /> },
-  { id: '2', text: 'Settings', type: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
-  { id: '3', text: 'Help', type: MenuItemType.DEFAULT, slotL: <Inbox size={16} /> },
+  { id: '1', text: 'Profile', menuType: MenuItemType.DEFAULT, slotL: <User size={16} /> },
+  { id: '2', text: 'Settings', menuType: MenuItemType.DEFAULT, slotL: <Settings size={16} /> },
+  { id: '3', text: 'Help', menuType: MenuItemType.DEFAULT, slotL: <Inbox size={16} /> },
 ];
 
 const multiSelectMenuItems = [
-  { id: '1', text: 'Option 1', type: MenuItemType.MULTI_SELECT },
-  { id: '2', text: 'Option 2', type: MenuItemType.MULTI_SELECT },
-  { id: '3', text: 'Option 3', type: MenuItemType.MULTI_SELECT },
-  { id: '4', text: 'Option 4', type: MenuItemType.MULTI_SELECT },
+  { id: '1', text: 'Option 1', menuType: MenuItemType.MULTI_SELECT },
+  { id: '2', text: 'Option 2', menuType: MenuItemType.MULTI_SELECT },
+  { id: '3', text: 'Option 3', menuType: MenuItemType.MULTI_SELECT },
+  { id: '4', text: 'Option 4', menuType: MenuItemType.MULTI_SELECT },
 ];
 
 // DROPDOWN TYPES
@@ -131,7 +131,7 @@ const multiSelectMenuItems = [
 // Single Select Dropdown (Default)
 export const SingleSelect: Story = {
   args: {
-    type: DropdownType.SINGLE_SELECT,
+    dropdownType: DropdownType.SINGLE_SELECT,
     hasLabel: true,
     label: 'Single Select Dropdown',
     hasHint: true,
@@ -144,7 +144,7 @@ export const SingleSelect: Story = {
 // Icon Only Dropdown
 export const IconOnly: Story = {
   args: {
-    type: DropdownType.ICON_ONLY,
+    dropdownType: DropdownType.ICON_ONLY,
     hasLeftIcon: true,
     leftIcon: <User size={16} />,
     hasLabel: true,
@@ -158,7 +158,7 @@ export const IconOnly: Story = {
 // Multi-Select with Count Display
 export const MultiSelectWithCount: Story = {
   args: {
-    type: DropdownType.MULTI_SELECT,
+    dropdownType: DropdownType.MULTI_SELECT,
     selectionType: DropdownSelectionType.COUNT,
     hasLabel: true,
     label: 'Multi Select Dropdown (Count)',
@@ -172,7 +172,7 @@ export const MultiSelectWithCount: Story = {
 // Multi-Select with Text Display
 export const MultiSelectWithText: Story = {
   args: {
-    type: DropdownType.MULTI_SELECT,
+    dropdownType: DropdownType.MULTI_SELECT,
     selectionType: DropdownSelectionType.TEXT,
     hasLabel: true,
     label: 'Multi Select Dropdown (Text)',

@@ -27,7 +27,7 @@ const meta: Meta<typeof Menu> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    type: {
+    menuType: {
       control: 'select',
       options: Object.values(MenuType),
       description: 'Type of menu',
@@ -55,7 +55,7 @@ const defaultItems = [
   {
     id: 'item1',
     text: 'Edit',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Edit size={16} />,
     hasShortcut: true,
@@ -64,7 +64,7 @@ const defaultItems = [
   {
     id: 'item2',
     text: 'Duplicate',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <FileEdit size={16} />,
     hasShortcut: true,
@@ -73,7 +73,7 @@ const defaultItems = [
   {
     id: 'item3',
     text: 'Copy',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Copy size={16} />,
     hasShortcut: true,
@@ -82,12 +82,12 @@ const defaultItems = [
   {
     id: 'separator1',
     text: '',
-    type: MenuItemType.SEPARATOR,
+    menuType: MenuItemType.SEPARATOR,
   },
   {
     id: 'item4',
     text: 'Archive',
-    type: MenuItemType.ACTION,
+    menuType: MenuItemType.ACTION,
     action: MenuItemAction.PRIMARY,
     hasSlotL: true,
     slotL: <Archive size={16} />,
@@ -97,7 +97,7 @@ const defaultItems = [
   {
     id: 'item5',
     text: 'Delete',
-    type: MenuItemType.ACTION,
+    menuType: MenuItemType.ACTION,
     action: MenuItemAction.DANGER,
     hasSlotL: true,
     slotL: <Trash2 size={16} />,
@@ -107,7 +107,7 @@ const defaultItems = [
 // Default Menu Example
 export const Default: Story = {
   args: {
-    type: MenuType.DEFAULT,
+    menuType: MenuType.DEFAULT,
     hasSearch: false,
     items: defaultItems,
     onItemClick: fn(),
@@ -122,7 +122,7 @@ export const Default: Story = {
 // Menu with Search
 export const WithSearch: Story = {
   args: {
-    type: MenuType.DEFAULT,
+    menuType: MenuType.DEFAULT,
     hasSearch: true,
     searchPlaceholder: 'Search...',
     items: defaultItems,
@@ -138,7 +138,7 @@ export const WithSearch: Story = {
 // Context Menu
 export const ContextMenu: Story = {
   args: {
-    type: MenuType.CONTEXT_MENU,
+    menuType: MenuType.CONTEXT_MENU,
     hasSearch: false,
     items: defaultItems,
     onItemClick: fn(),
@@ -158,52 +158,52 @@ const MultiSelectMenuExample = () => {
     {
       id: 'label1',
       text: 'Select Options',
-      type: MenuItemType.LABEL,
+      menuType: MenuItemType.LABEL,
     },
     {
       id: 'option1',
       text: 'Option 1',
-      type: MenuItemType.MULTI_SELECT,
+      menuType: MenuItemType.MULTI_SELECT,
       hasSlotR2: selectedItems.includes('option1'),
       slotR2: selectedItems.includes('option1') ? <Check size={16} /> : null,
     },
     {
       id: 'option2',
       text: 'Option 2',
-      type: MenuItemType.MULTI_SELECT,
+      menuType: MenuItemType.MULTI_SELECT,
       hasSlotR2: selectedItems.includes('option2'),
       slotR2: selectedItems.includes('option2') ? <Check size={16} /> : null,
     },
     {
       id: 'option3',
       text: 'Option 3',
-      type: MenuItemType.MULTI_SELECT,
+      menuType: MenuItemType.MULTI_SELECT,
       hasSlotR2: selectedItems.includes('option3'),
       slotR2: selectedItems.includes('option3') ? <Check size={16} /> : null,
     },
     {
       id: 'separator2',
       text: '',
-      type: MenuItemType.SEPARATOR,
+      menuType: MenuItemType.SEPARATOR,
     },
     {
       id: 'option4',
       text: 'Apply Selection',
-      type: MenuItemType.ACTION,
+      menuType: MenuItemType.ACTION,
       action: MenuItemAction.PRIMARY,
     },
   ];
 
   return (
     <Menu
-      type={MenuType.MULTI_SELECT}
+      menuType={MenuType.MULTI_SELECT}
       hasSearch={true}
       searchPlaceholder="Search options..."
       items={multiSelectItems}
       selectedItems={selectedItems}
       onSelectionChange={items => setSelectedItems(items)}
       onItemClick={item => {
-        if (item.id && item.type === MenuItemType.MULTI_SELECT) {
+        if (item.id && item.menuType === MenuItemType.MULTI_SELECT) {
           const newSelectedItems = selectedItems.includes(item.id)
             ? selectedItems.filter(id => id !== item.id)
             : [...selectedItems, item.id];
@@ -230,7 +230,7 @@ export const WithSubmenu: Story = {
       {
         id: 'edit',
         text: 'Edit',
-        type: MenuItemType.DEFAULT,
+        menuType: MenuItemType.DEFAULT,
         hasSlotL: true,
         slotL: <Edit size={16} />,
         hasShortcut: true,
@@ -239,7 +239,7 @@ export const WithSubmenu: Story = {
       {
         id: 'export',
         text: 'Export',
-        type: MenuItemType.DEFAULT,
+        menuType: MenuItemType.DEFAULT,
         hasSlotL: true,
         slotL: <FileText size={16} />,
         hasSubmenu: true,
@@ -247,21 +247,21 @@ export const WithSubmenu: Story = {
           {
             id: 'export-pdf',
             text: 'Export as PDF',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <FileText size={16} />,
           },
           {
             id: 'export-excel',
             text: 'Export as Excel',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <FileSpreadsheet size={16} />,
           },
           {
             id: 'export-csv',
             text: 'Export as CSV',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <FileIcon size={16} />,
           },
@@ -270,12 +270,12 @@ export const WithSubmenu: Story = {
       {
         id: 'separator1',
         text: '',
-        type: MenuItemType.SEPARATOR,
+        menuType: MenuItemType.SEPARATOR,
       },
       {
         id: 'share',
         text: 'Share',
-        type: MenuItemType.DEFAULT,
+        menuType: MenuItemType.DEFAULT,
         hasSlotL: true,
         slotL: <Share size={16} />,
         hasSubmenu: true,
@@ -283,21 +283,21 @@ export const WithSubmenu: Story = {
           {
             id: 'share-email',
             text: 'Email',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <Mail size={16} />,
           },
           {
             id: 'share-link',
             text: 'Copy Link',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <Copy size={16} />,
           },
           {
             id: 'more-options',
             text: 'More Options',
-            type: MenuItemType.DEFAULT,
+            menuType: MenuItemType.DEFAULT,
             hasSlotL: true,
             slotL: <Share size={16} />,
             hasSubmenu: true,
@@ -305,14 +305,14 @@ export const WithSubmenu: Story = {
               {
                 id: 'print',
                 text: 'Print',
-                type: MenuItemType.DEFAULT,
+                menuType: MenuItemType.DEFAULT,
                 hasSlotL: true,
                 slotL: <Printer size={16} />,
               },
               {
                 id: 'save',
                 text: 'Save',
-                type: MenuItemType.DEFAULT,
+                menuType: MenuItemType.DEFAULT,
                 hasSlotL: true,
                 slotL: <Save size={16} />,
               },
@@ -323,7 +323,7 @@ export const WithSubmenu: Story = {
       {
         id: 'delete',
         text: 'Delete',
-        type: MenuItemType.ACTION,
+        menuType: MenuItemType.ACTION,
         action: MenuItemAction.DANGER,
         hasSlotL: true,
         slotL: <Trash2 size={16} />,
@@ -333,7 +333,7 @@ export const WithSubmenu: Story = {
     return (
       <div>
         <Menu
-          type={MenuType.DEFAULT}
+          menuType={MenuType.DEFAULT}
           hasSearch={false}
           items={itemsWithSubmenu}
           onItemClick={fn()}

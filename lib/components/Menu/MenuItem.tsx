@@ -97,7 +97,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       text,
       className,
       disabled = false,
-      type = MenuItemType.DEFAULT,
+      menuType = MenuItemType.DEFAULT,
       state = MenuItemState.DEFAULT,
       action = MenuItemAction.NA,
       hasSlotL = false,
@@ -121,7 +121,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
     ref
   ) => {
     // Labels should not have hover effects
-    const isLabel = type === MenuItemType.LABEL;
+    const isLabel = menuType === MenuItemType.LABEL;
     // Define a flag for interactive items to avoid repeating the condition
     const isInteractive = !disabled && state !== MenuItemState.NA && !isLabel;
 
@@ -238,14 +238,14 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
 
     // Get class names
     const itemClassName = getMenuItemClassNames({
-      type,
+      menuType,
       // Labels always use default state, regardless of hover
       state: isLabel ? MenuItemState.DEFAULT : currentState,
       action,
       disabled,
     });
 
-    // ARIA attributes based on type
+    // ARIA attributes based on menuType
     const ariaProps: Record<string, string> = {};
 
     if (isLabel) {
@@ -264,7 +264,7 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       }
     }
 
-    // Custom hover class based on action type
+    // Custom hover class based on action menuType
     let hoverClass = '';
     if (isInteractive) {
       if (action === MenuItemAction.PRIMARY) {
@@ -346,8 +346,8 @@ const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
       return createPortal(submenuPortalContent, document.body);
     };
 
-    // If type is separator, render a simple divider
-    if (type === MenuItemType.SEPARATOR) {
+    // If menuType is separator, render a simple divider
+    if (menuType === MenuItemType.SEPARATOR) {
       return <div className={themeConfig.euler.menuv2.separator} role="separator" />;
     }
 
