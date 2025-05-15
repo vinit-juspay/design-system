@@ -1248,9 +1248,9 @@ export const themeConfig = {
           'max-w-[300px] will-change-transform duration-150 animate-slide-in-from-left w-full border-r border-jp-gray-200 flex',
         secondarySidebar: {
           tenantContainer:
-            'w-fit h-full border-r border-gray-200 bg-jp-gray-25 flex flex-col gap-4 items-center p-2.5',
+            'w-fit h-full border-r border-jp-gray-200 bg-jp-gray-25 flex flex-col gap-4 items-center p-2.5',
           tenantButton:
-            'w-8 h-8 rounded-jp-md flex items-center justify-center cursor-pointe outline outline-gray-150 data-[active=true]:outline-primary-500 duration-75',
+            'w-8 h-8 rounded-jp-md flex items-center justify-center cursor-pointe outline outline-jp-gray-150 data-[active=true]:outline-jp-primary-500 duration-75',
         },
         primarySidebarContainer: 'w-full h-full flex flex-col relative',
         merchantSwitcherContainer:
