@@ -30,3 +30,13 @@ export const getContainerClasses = (): string => {
   const theme = themeConfig.euler.modal.base;
   return theme.wrapper;
 };
+
+export const getTitleClasses = (): string => {
+  const theme = themeConfig.euler.modal.base;
+  return theme.modalTitle;
+};
+
+export const getSubtitleClasses = (): string => {
+  const theme = themeConfig.euler.modal.base;
+  return theme.modalSubtitle;
+};
