@@ -345,14 +345,14 @@ export const themeConfig = {
       sizes: {
         sm: {
           padding: 'px-1.5 py-0.5',
-          fontSize: 'text-body-xs',
+          fontSize: 'text-jp-code-sm',
           borderRadius: 'rounded-jp-md',
           maxWidth: 'max-w-xs',
           slotSize: 'h-3.5 w-3.5',
         },
         lg: {
           padding: 'px-2 py-1.5',
-          fontSize: 'text-jp-body-sm',
+          fontSize: 'text-jp-code-md',
           borderRadius: 'rounded-jp-lg',
           maxWidth: 'max-w-sm',
           slotSize: 'h-[18px] w-[18px]',
