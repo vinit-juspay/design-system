@@ -1276,7 +1276,7 @@ export const themeConfig = {
     dataTable: {
       container: 'w-full',
       header: {
-        container: 'flex justify-between items-start mb-4 flex-col md:flex-row gap-4',
+        container: 'flex justify-between items-start mb-4 md:flex-row gap-4',
         title: 'text-lg font-semibold',
         description: 'text-sm text-gray-500',
       },
