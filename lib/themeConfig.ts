@@ -638,28 +638,40 @@ export const themeConfig = {
       },
     },
     chart: {
+      config: {
+        tickFill: '#99A0AE',
+        tickFontSize: 14,
+        tickFontWeight: 500,
+        axisLine: false,
+        tickLine: false,
+        labelFill: '#99A0AE',
+        labelFontSize: 14,
+        labelFontWeight: 500,
+        gridStroke: '#ECEFF3',
+      },
       base: {
         chartContainer: 'w-full h-full outline outline-1 outline-gray-300 rounded-lg bg-white',
         chartContentContainer: {
           top: 'py-5 px-4 flex flex-col gap-6',
-          right: 'py-5 px-4 flex flex-row-reverse gap-6',
+          right: 'py-5 px-4 flex gap-6',
         },
         chartHeader: {
           container:
             'flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]',
           metrics: 'flex items-center gap-2',
-          selectedMetric: 'text-base font-semibold text-gray-600',
-          slotContainer: 'flex items-center gap-2',
+          selectedMetric: 'text-base font-semibold text-[#525866]',
+          slotContainer: 'flex items-center gap-2 shrink-0',
         },
         chartLegend: {
           container: 'flex items-center gap-8 justify-between',
           legendItemsContainer:
             'flex h-7 items-center overflow-x-hidden overflow-visible whitespace-nowrap flex-1',
           legendItem: 'h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300',
-          legendMarker: 'w-3 h-3 rounded-sm',
+          legendMarker: 'w-3 h-3 rounded-sm shrink-0',
           resetButton:
             'text-sm flex items-center justify-center text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-sm h-4 w-4 shrink-0',
-          stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2',
+          stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2 ',
+          legendItemText: 'text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis',
         },
         tooltip: {
           container:
@@ -667,7 +679,6 @@ export const themeConfig = {
         },
       },
     },
-
     menuv2: {
       baseStyles: 'rounded-md shadow-md overflow-hidden bg-white border border-gray-200 py-1',
       animation: `
@@ -1232,109 +1243,120 @@ export const themeConfig = {
     },
     sidebar: {
       base: {
-        wrapper: "w-full h-full flex bg-gray-25",
-        sidebarContainer: "max-w-[300px] will-change-transform duration-150 animate-slide-in-from-left w-full border-r border-gray-200 flex",
+        wrapper: 'w-full h-full flex bg-gray-25',
+        sidebarContainer:
+          'max-w-[300px] will-change-transform duration-150 animate-slide-in-from-left w-full border-r border-gray-200 flex',
         secondarySidebar: {
-          tenantContainer: "w-fit h-full border-r border-gray-200 bg-gray-25 flex flex-col gap-4 items-center p-2.5",
-          tenantButton: "w-8 h-8 rounded-md flex items-center justify-center cursor-pointe outline outline-gray-150 data-[active=true]:outline-primary-500 duration-75"
+          tenantContainer:
+            'w-fit h-full border-r border-gray-200 bg-gray-25 flex flex-col gap-4 items-center p-2.5',
+          tenantButton:
+            'w-8 h-8 rounded-md flex items-center justify-center cursor-pointe outline outline-gray-150 data-[active=true]:outline-primary-500 duration-75',
         },
-        primarySidebarContainer: "w-full h-full flex flex-col relative",
-        merchantSwitcherContainer: "w-full h-16 sticky top-0 z-10 bg-gray-25 flex items-center justify-between gap-3 px-2",
-        directoryContainer: "flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
+        primarySidebarContainer: 'w-full h-full flex flex-col relative',
+        merchantSwitcherContainer:
+          'w-full h-16 sticky top-0 z-10 bg-gray-25 flex items-center justify-between gap-3 px-2',
+        directoryContainer:
+          'flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]',
         footer: {
-          container: "w-full bg-gray-25 h-16 sticky bottom-0 z-10 flex items-center justify-between gap-3 px-2 border-t border-gray-200",
-          gradientBlurContainer: "absolute left-0 -top-[65px] right-0 h-16 rotate-180 pointer-events-none z-10"
+          container:
+            'w-full bg-gray-25 h-16 sticky bottom-0 z-10 flex items-center justify-between gap-3 px-2 border-t border-gray-200',
+          gradientBlurContainer:
+            'absolute left-0 -top-[65px] right-0 h-16 rotate-180 pointer-events-none z-10',
         },
         mainContentContainer: {
-          base: "w-full h-full relative overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]",
-          topbar: { wrapper: "w-full h-16 sticky top-0 z-10 border-b border-gray-200 bg-white flex items-center gap-4 px-8", content: "flex-1" },
-        }
-      }
+          base: 'w-full h-full bg-white relative overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]',
+          topbar: {
+            wrapper:
+              'w-full h-16 sticky top-0 z-10 border-b border-gray-200 bg-white flex items-center gap-4 px-8',
+            content: 'flex-1',
+          },
+        },
+      },
     },
     dataTable: {
-      container: "w-full",
+      container: 'w-full',
       header: {
-        container: "flex justify-between items-start mb-4 flex-col md:flex-row gap-4",
-        title: "text-lg font-semibold",
-        description: "text-sm text-gray-500",
+        container: 'flex justify-between items-start mb-4 flex-col md:flex-row gap-4',
+        title: 'text-lg font-semibold',
+        description: 'text-sm text-gray-500',
       },
       filters: {
-        container: "flex flex-wrap gap-2 items-center",
+        container: 'flex flex-wrap gap-2 items-center',
       },
       table: {
-        base: "w-full table-auto border-collapse",
+        base: 'w-full table-auto border-collapse',
         variant: {
-          default: "border-separate border-spacing-0",
-          compact: "border-separate border-spacing-0",
-          bordered: "border border-gray-200",
+          default: 'border-separate border-spacing-0',
+          compact: 'border-separate border-spacing-0',
+          bordered: 'border border-gray-200',
         },
         size: {
-          sm: "text-sm",
-          md: "text-base",
-          lg: "text-lg",
+          sm: 'text-sm',
+          md: 'text-base',
+          lg: 'text-lg',
         },
-        striped: "stripe-rows",
-        hoverable: "hover-rows",
+        striped: 'stripe-rows',
+        hoverable: 'hover-rows',
       },
       thead: {
-        base: "bg-gray-25 border-b border-gray-150 h-10",
+        base: 'bg-gray-25 border-b border-gray-150 h-10',
         variant: {
-          default: "",
-          compact: "",
-          bordered: "border-b border-gray-200",
+          default: '',
+          compact: '',
+          bordered: 'border-b border-gray-200',
         },
       },
       th: {
-        base: "px-2 py-1 text-left font-600 text-gray-400 text-body-sm",
+        base: 'px-2 py-1 text-left font-600 text-gray-400 text-body-sm',
         variant: {
-          default: "",
-          compact: "px-2 py-1",
-          bordered: "border-r last:border-r-0 border-gray-200",
+          default: '',
+          compact: 'px-2 py-1',
+          bordered: 'border-r last:border-r-0 border-gray-200',
         },
         size: {
-          sm: "text-xs",
-          md: "text-sm",
-          lg: "text-base",
+          sm: 'text-xs',
+          md: 'text-sm',
+          lg: 'text-base',
         },
-        sortable: "cursor-pointer select-none",
+        sortable: 'cursor-pointer select-none',
       },
-      tbody: "divide-y divide-gray-150",
+      tbody: 'divide-y divide-gray-150',
       tr: {
-        base: "h-14",
+        base: 'h-14',
         variant: {
-          default: "",
-          compact: "",
-          bordered: "",
+          default: '',
+          compact: '',
+          bordered: '',
         },
-        striped: "bg-gray-50",
+        striped: 'bg-gray-50',
       },
       td: {
-        base: "px-3 py-2 text-body-md text-gray-800 font-medium",
+        base: 'px-3 py-2 text-body-md text-gray-800 font-medium',
         variant: {
-          default: "",
-          compact: "px-2 py-1",
-          bordered: "border-r last:border-r-0 border-gray-150",
+          default: '',
+          compact: 'px-2 py-1',
+          bordered: 'border-r last:border-r-0 border-gray-150',
         },
         size: {
-          sm: "text-xs",
-          md: "text-sm",
-          lg: "text-base",
+          sm: 'text-xs',
+          md: 'text-sm',
+          lg: 'text-base',
         },
       },
       pagination: {
-        container: "flex justify-between items-center py-1 px-4 border-t border-gray-150 h-12",
-        text: "text-sm text-gray-600 flex items-center gap-2",
+        container: 'flex justify-between items-center py-1 px-4 border-t border-gray-150 h-12',
+        text: 'text-sm text-gray-600 flex items-center gap-2',
         button: {
-          base: "p-1 rounded-md flex items-center justify-center",
-          enabled: "hover:bg-gray-100 text-gray-700",
-          disabled: "opacity-50 cursor-not-allowed text-gray-400",
+          base: 'p-1 rounded-md flex items-center justify-center',
+          enabled: 'hover:bg-gray-100 text-gray-700',
+          disabled: 'opacity-50 cursor-not-allowed text-gray-400',
         },
       },
       sortIcon: {
-        base: "ml-1 h-4 w-4 text-gray-400",
-        active: "text-gray-800",
-        asc: "transform rotate-0",
-        desc: "transform rotate-180",
+        base: 'ml-1 h-4 w-4 text-gray-400',
+        active: 'text-gray-800',
+        asc: 'transform rotate-0',
+        desc: 'transform rotate-180',
       },
     },
   },
