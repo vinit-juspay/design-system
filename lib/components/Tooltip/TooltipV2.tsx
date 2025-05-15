@@ -122,17 +122,24 @@ const TooltipV2 = forwardRef<HTMLDivElement, TooltipProps>(
       if (readyToPosition) {
         calculatePosition();
       }
-    }, [readyToPosition]);
+    }, [readyToPosition, side, align, offset]);
 
     useEffect(() => {
-      window.addEventListener('scroll', calculatePosition);
-      window.addEventListener('resize', calculatePosition);
+      const handlePositionChange = () => {
+        if (isVisible) {
+          calculatePosition();
+        }
+      };
+
+      window.addEventListener('scroll', handlePositionChange, true);
+      window.addEventListener('resize', handlePositionChange);
+
       return () => {
-        window.removeEventListener('scroll', calculatePosition);
-        window.removeEventListener('resize', calculatePosition);
+        window.removeEventListener('scroll', handlePositionChange, true);
+        window.removeEventListener('resize', handlePositionChange);
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
       };
-    }, []);
+    }, [isVisible]);
 
     return (
       <div
