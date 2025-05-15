@@ -105,7 +105,7 @@ export function DataTablePagination({
         <span className="text-jp-body-md font-jp-500 text-jp-gray-600">Rows per page:</span>
         <MenuDropdown
           id="page-size-dropdown"
-          type={DropdownType.SINGLE_SELECT}
+          dropdownType={DropdownType.SINGLE_SELECT}
           subType={DropdownSubType.NO_CONTAINER}
           menuItems={pageSizeMenuItems}
           selectedOption={pageSize.toString()}
