@@ -650,16 +650,16 @@ export const themeConfig = {
         gridStroke: '#ECEFF3',
       },
       base: {
-        chartContainer: 'w-full h-full outline outline-1 outline-gray-300 rounded-jp-lg bg-jp-gray-0',
+        chartContainer: 'w-full h-full outline outline-1 outline-jp-gray-300 rounded-jp-lg bg-jp-gray-0',
         chartContentContainer: {
           top: 'py-5 px-4 flex flex-col gap-6',
           right: 'py-5 px-4 flex gap-6',
         },
         chartHeader: {
           container:
-            'flex items-center justify-between gap-2 py-4 px-[18px] bg-[#FCFCFD] border-b border-[#ECEFF3]',
+            'flex items-center justify-between gap-2 py-4 px-[18px] bg-jp-gray-25 border-b border-jp-gray-200',
           metrics: 'flex items-center gap-2',
-          selectedMetric: 'text-base font-semibold text-[#525866]',
+          selectedMetric: 'text-base font-jp-600 text-[#525866]',
           slotContainer: 'flex items-center gap-2 shrink-0',
         },
         chartLegend: {
@@ -669,13 +669,13 @@ export const themeConfig = {
           legendItem: 'h-4 flex items-center gap-2 cursor-pointer pr-4 transition-all duration-300',
           legendMarker: 'w-3 h-3 rounded-jp-sm shrink-0',
           resetButton:
-            'text-sm flex items-center justify-center text-jp-blue-600 hover:text-blue-700 hover:bg-jp-blue-600 rounded-jp-sm h-4 w-4 shrink-0',
+            'text-sm flex items-center justify-center text-jp-primary-600 hover:text-jp-primary-700 hover:bg-jp-primary-50 rounded-jp-sm h-5 w-5 shrink-0',
           stackedLegendContainer: 'h-full w-full flex flex-col justify-center gap-2 ',
-          legendItemText: 'text-[14px] font-500 whitespace-nowrap overflow-hidden text-ellipsis',
+          legendItemText: 'text-jp-body-md font-jp-500 whitespace-nowrap overflow-hidden text-ellipsis',
         },
         tooltip: {
           container:
-            'bg-jp-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-jp-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+            'bg-jp-gray-0 font-sans shadow-jp-lg flex flex-col gap-3 rounded-jp-lg p-3 pl-2.5 border border-jp-gray-150 min-w-[220px] !max-w-[200px]',
         },
       },
     },
