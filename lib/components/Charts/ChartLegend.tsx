@@ -120,11 +120,11 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
             <DropdownMenu.Trigger className="flex items-center gap-2 text-jp-body-md font-medium h-full text-[#525866] hover:text-[#333]">
               + {keys.length - cuttOffIndex} more
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content className="bg-white z-50 rounded-md shadow-lg border border-gray-200 min-w-[180px]">
+            <DropdownMenu.Content className="bg-jp-gray-0 z-50 rounded-md shadow-lg border border-gray-200 min-w-[180px]">
               {keys.slice(cuttOffIndex).map(dataKey => (
                 <DropdownMenu.Item
                   key={dataKey}
-                  className="px-4 py-2 text-[14px] hover:bg-gray-100 cursor-pointer"
+                  className="px-4 py-2 text-[14px] hover:bg-jp-gray-100 cursor-pointer"
                   onClick={() => handleLegendClick(dataKey)}
                   onMouseEnter={() => handleLegendEnter(dataKey)}
                   onMouseLeave={handleLegendLeave}

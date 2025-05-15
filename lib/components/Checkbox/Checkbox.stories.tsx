@@ -176,7 +176,7 @@ const ControlledCheckboxDemo = () => {
         Current state:{' '}
         {checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'}
       </p>
-      <button onClick={toggleState} className="px-3 py-1 bg-blue-500 text-white rounded mb-2">
+      <button onClick={toggleState} className="px-3 py-1 bg-blue-500 text-jp-gray-0 rounded mb-2">
         Toggle state
       </button>
       <Checkbox isChecked={checked} onCheckedChange={setChecked}>
@@ -265,7 +265,7 @@ Shows how to use checkboxes in a form with validation.
 
         <button
           type="submit"
-          className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          className="w-full py-2 bg-blue-500 text-jp-gray-0 rounded-md hover:bg-blue-600"
         >
           Submit
         </button>

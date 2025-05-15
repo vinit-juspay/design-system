@@ -70,7 +70,7 @@ const StatCard = ({
     const percentage = previousValue ? (diff / previousValue) * 100 : 0;
     const isUp = diff >= 0;
     return (
-      <div className="bg-black text-white text-xs px-2 py-1 rounded-md">
+      <div className="bg-black text-jp-gray-0 text-xs px-2 py-1 rounded-md">
         {/* TODO: What data to show */}
         {/* <div>{currentLabel}</div> */}
         <div>{`${Math.abs(percentage).toFixed(0)}% ${isUp ? 'Up' : 'Down'}`}</div>
@@ -90,7 +90,7 @@ const StatCard = ({
   return (
     <div
       className={cn(
-        'rounded-lg h-[190px] border border-jp-gray-200 overflow-hidden bg-white shadow-xs p-4 space-y-6',
+        'rounded-lg h-[190px] border border-jp-gray-200 overflow-hidden bg-jp-gray-0 shadow-xs p-4 space-y-6',
         className
       )}
     >
@@ -238,7 +238,7 @@ const StatCard = ({
               <div className="w-full h-full flex flex-1 rounded-xs overflow-hidden">
                 <div className="bg-jp-primary-500 h-full" style={{ width: `${progressValue}%` }}></div>
                 <div
-                  className="bg-white h-full [background-image:repeating-linear-gradient(to_right,_#e1e4ea,_#e1e4ea_5px,_transparent_1px,_transparent)] [background-size:10px_10px]"
+                  className="bg-jp-gray-0 h-full [background-image:repeating-linear-gradient(to_right,_#e1e4ea,_#e1e4ea_5px,_transparent_1px,_transparent)] [background-size:10px_10px]"
                   style={{ width: `${100 - progressValue}%` }}
                 ></div>
               </div>

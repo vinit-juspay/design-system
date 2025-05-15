@@ -61,7 +61,7 @@ export function DataTableFilters<T>({
       </button>
       
       {isOpen && (
-        <div className="absolute left-0 z-10 mt-2 w-80 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute left-0 z-10 mt-2 w-80 origin-top-left rounded-md bg-jp-gray-0 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1 divide-y divide-jp-gray-100">
             <div className="px-3 py-2 font-medium text-sm text-jp-gray-700">
               Filters
@@ -90,7 +90,7 @@ export function DataTableFilters<T>({
                 <button
                   type="button"
                   onClick={handleSearch}
-                  className="px-3 py-2 bg-jp-primary-600 text-white rounded-md text-sm hover:bg-jp-primary-700"
+                  className="px-3 py-2 bg-jp-primary-600 text-jp-gray-0 rounded-md text-sm hover:bg-jp-primary-700"
                 >
                   Apply
                 </button>

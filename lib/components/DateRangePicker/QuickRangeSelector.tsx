@@ -87,7 +87,7 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
         {isOpen && (
           <div
             className={cn(
-              'absolute z-20 mt-1 bg-white rounded-md shadow-lg border border-gray-200 w-full',
+              'absolute z-20 mt-1 bg-jp-gray-0 rounded-md shadow-lg border border-gray-200 w-full',
               'max-h-60 overflow-y-auto'
             )}
             role="listbox"
@@ -102,10 +102,10 @@ const QuickRangeSelector = forwardRef<HTMLDivElement, QuickRangeSelectorProps>(
                     onToggle();
                   }}
                   className={cn(
-                    'w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors duration-150',
-                    'focus:outline-none focus:bg-gray-50',
+                    'w-full text-left px-3 py-2 hover:bg-jp-gray-50 rounded-md transition-colors duration-150',
+                    'focus:outline-none focus:bg-jp-gray-50',
                     themeConfig.euler.dateRangePicker.text.value,
-                    activePreset === preset && 'bg-primary-50 text-primary-700 font-medium'
+                    activePreset === preset && 'bg-jp-primary-50 text-primary-700 font-medium'
                   )}
                   role="option"
                   aria-selected={activePreset === preset}

@@ -7,7 +7,7 @@ interface ColorSwatchProps {
 
 const ColorSwatch: React.FC<ColorSwatchProps> = ({ colorName, shade }) => {
   const bgClass = `bg-${colorName}-${shade}`;
-  const textColorClass = Number(shade) > 500 ? 'text-white' : 'text-jp-gray-900';
+  const textColorClass = Number(shade) > 500 ? 'text-jp-gray-0' : 'text-jp-gray-900';
   
   return (
     <div className="flex flex-col">

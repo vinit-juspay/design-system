@@ -69,7 +69,7 @@ const FontDemo = () => {
         {characters.map(char => (
           <div
             key={char}
-            className="flex items-center justify-center bg-gray-50 border border-gray-200 rounded-md aspect-square"
+            className="flex items-center justify-center bg-jp-gray-50 border border-gray-200 rounded-md aspect-square"
           >
             <span
               style={{

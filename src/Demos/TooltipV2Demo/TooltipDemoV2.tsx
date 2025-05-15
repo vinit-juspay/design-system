@@ -39,7 +39,7 @@ const TooltipDemoV2 = () => {
       {/* Playground Section */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold mb-4">Tooltip Playground</h3>
-        <div className="grid grid-cols-2 gap-4 mb-8 p-4 border rounded-lg bg-gray-50">
+        <div className="grid grid-cols-2 gap-4 mb-8 p-4 border rounded-lg bg-jp-gray-50">
           <div>
             <label className="block text-sm font-medium mb-2">Show Tooltip</label>
             <div className="flex items-center gap-2">
@@ -188,7 +188,7 @@ const TooltipDemoV2 = () => {
         </div>
 
         {/* Preview */}
-        <div className="flex justify-center items-center h-32 border rounded-lg bg-white mb-8">
+        <div className="flex justify-center items-center h-32 border rounded-lg bg-jp-gray-0 mb-8">
           <TooltipV2
             content={config.content}
             side={config.side}
@@ -206,9 +206,9 @@ const TooltipDemoV2 = () => {
         </div>
 
         {/* Current Config */}
-        <div className="p-4 border rounded-lg bg-gray-50 mb-8">
+        <div className="p-4 border rounded-lg bg-jp-gray-50 mb-8">
           <h3 className="text-lg font-medium mb-2">Current Configuration</h3>
-          <pre className="bg-gray-100 p-4 rounded overflow-auto">
+          <pre className="bg-jp-gray-100 p-4 rounded overflow-auto">
             {JSON.stringify(config, null, 2)}
           </pre>
         </div>

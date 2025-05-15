@@ -315,7 +315,7 @@ const App = () => {
     }
   ];
 
-  const footer = <div className="w-full bg-gray-25 flex items-center justify-between gap-3 px-2">
+  const footer = <div className="w-full bg-jp-gray-25 flex items-center justify-between gap-3 px-2">
     <div className='flex items-center gap-2'>
       Lorem ipsum dolor sit.
     </div>
@@ -334,7 +334,7 @@ const App = () => {
         setActiveMerchant={setActiveMerchant}
         footer={footer}
       >
-        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-white">
+        <div className="h-screen overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-jp-gray-0">
           {renderContent()}
         </div>
       </Sidebar>

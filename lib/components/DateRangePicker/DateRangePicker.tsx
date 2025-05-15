@@ -422,7 +422,7 @@ const DateRangePicker = forwardRef<HTMLDivElement, DateRangePickerProps>(
                       >
                         <div
                           className={cn(
-                            'absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out',
+                            'absolute left-0.5 top-0.5 bg-jp-gray-0 w-4 h-4 rounded-full transition-transform duration-200 ease-in-out',
                             showTimePickerState && 'transform translate-x-5'
                           )}
                         ></div>

@@ -55,7 +55,7 @@ export function ColumnManager<T>({ columns, visibleColumns, onColumnChange }: Co
       </button>
       
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-jp-gray-0 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1 divide-y divide-jp-gray-100">
             <div className="px-3 py-2 font-medium text-sm text-jp-gray-700">
               Manage Columns

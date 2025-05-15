@@ -33,8 +33,8 @@ const TimeSelector = forwardRef<HTMLDivElement, TimeSelectorProps>(({ value, onC
             key={timeValue}
             className={cn(
               'px-3 py-2 text-sm outline-none cursor-pointer rounded-md',
-              'hover:bg-gray-100 focus:bg-gray-100',
-              value === timeValue && 'bg-primary-50 text-primary-700 font-medium'
+              'hover:bg-jp-gray-100 focus:bg-jp-gray-100',
+              value === timeValue && 'bg-jp-primary-50 text-jp-primary-700 font-medium'
             )}
             onClick={() => onChange(timeValue)}
           >
@@ -60,7 +60,7 @@ const TimeSelector = forwardRef<HTMLDivElement, TimeSelectorProps>(({ value, onC
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="bg-white rounded-md shadow-lg border border-gray-200 p-1 max-h-60 overflow-y-auto z-50"
+            className="bg-jp-gray-0 rounded-md shadow-lg border border-gray-200 p-1 max-h-60 overflow-y-auto z-50"
             sideOffset={5}
           >
             {generateTimeOptions()}

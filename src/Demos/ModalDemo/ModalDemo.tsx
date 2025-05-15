@@ -30,11 +30,11 @@ const ModalDemo = () => {
 
   // Custom header component
   const CustomHeader = () => (
-    <div className="p-4 bg-primary-50 border-b border-primary-100">
+    <div className="p-4 bg-jp-primary-50 border-b border-primary-100">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className="h-8 w-8 rounded-full bg-primary-500 flex items-center justify-center">
-            <span className="text-white font-semibold">!</span>
+          <div className="h-8 w-8 rounded-full bg-jp-primary-500 flex items-center justify-center">
+            <span className="text-jp-gray-0 font-semibold">!</span>
           </div>
           <div className="flex flex-col gap-1 p-4">
             <h3 className="text-sm font-semibold text-primary-900">Custom Header</h3>
@@ -46,7 +46,7 @@ const ModalDemo = () => {
             buttonType={ButtonType.SECONDARY}
             subType={ButtonSubType.ICON_ONLY}
             onClick={() => setIsOpenPlayground(false)}
-            className="p-1 rounded-full hover:bg-primary-100 transition-colors duration-200"
+            className="p-1 rounded-full hover:bg-jp-primary-100 transition-colors duration-200"
             aria-label="Close modal"
           >
             <X className="h-5 w-5 text-primary-500" onClick={() => setIsOpenPlayground(false)} />
@@ -58,7 +58,7 @@ const ModalDemo = () => {
 
   // Custom footer component
   const CustomFooter = () => (
-    <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+    <div className="px-6 py-4 bg-jp-gray-50 border-t border-gray-200">
       <div className="flex items-center justify-between">
         <div className="text-sm text-gray-500">
           <span className="font-medium">Status:</span> Ready to proceed
