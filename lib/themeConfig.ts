@@ -72,14 +72,14 @@ export const themeConfig = {
         md: {
           height: 'h-9',
           padding: 'px-4',
-          fontSize: 'text-body-md',
+          fontSize: 'text-jp-body-md',
           iconSize: 'w-5 h-5',
           gap: 'gap-2',
         },
         lg: {
           height: 'h-10',
           padding: 'px-5',
-          fontSize: 'text-body-md',
+          fontSize: 'text-jp-body-md',
           iconSize: 'w-5 h-5',
           gap: 'gap-2',
         },
@@ -180,14 +180,14 @@ export const themeConfig = {
         md: {
           height: 'h-6',
           padding: 'px-2.5 py-1',
-          fontSize: 'text-body-md font-body font-semibold',
+          fontSize: 'text-jp-body-md font-body font-semibold',
           iconSize: 'h-3.5 w-3.5',
           gap: 'gap-1.5',
         },
         lg: {
           height: 'h-7',
           padding: 'px-3 py-1.5',
-          fontSize: 'text-body-md font-body font-semibold',
+          fontSize: 'text-jp-body-md font-body font-semibold',
           iconSize: 'h-4 w-4',
           gap: 'gap-2',
         },
@@ -217,16 +217,16 @@ export const themeConfig = {
       label: {
         container: 'flex items-center gap-2',
         labelwSublabel: 'flex items-center gap-1',
-        base: 'text-body-md font-medium tracking-normal',
+        base: 'text-jp-body-md font-medium tracking-normal',
         color: 'text-gray-700',
-        mandatory: 'text-red-500 text-body-md font-normal -top-0.5',
+        mandatory: 'text-red-500 text-jp-body-md font-normal -top-0.5',
       },
       sublabel: {
-        base: 'text-body-md font-normal tracking-normal',
+        base: 'text-jp-body-md font-normal tracking-normal',
         color: 'text-gray-400',
       },
       hint: {
-        base: 'text-body-md font-normal tracking-normal',
+        base: 'text-jp-body-md font-normal tracking-normal',
         color: 'text-gray-500',
         error: 'text-red-500',
         success: 'text-green-600',
@@ -248,7 +248,7 @@ export const themeConfig = {
         },
       },
       input: {
-        base: 'w-full h-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
+        base: 'w-full h-full text-jp-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-gray-400',
         padding: {
           default: 'px-3',
           withLeftSlot: 'pl-2 pr-3',
@@ -292,7 +292,7 @@ export const themeConfig = {
       menu: {
         base: 'rounded-xl bg-white p-1 shadow-md border border-gray-200 min-w-[8rem] z-50',
         item: {
-          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-body-md text-gray-800 outline-none transition-colors data-[highlighted]:bg-gray-50 focus:bg-gray-50',
+          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-jp-body-md text-gray-800 outline-none transition-colors data-[highlighted]:bg-gray-50 focus:bg-gray-50',
           active: 'bg-gray-50 font-medium',
           content: 'flex items-center gap-2 w-full',
           icon: 'flex-shrink-0',
@@ -329,7 +329,7 @@ export const themeConfig = {
     unitInput: {
       container: 'flex w-full items-center h-full',
       unit: {
-        base: 'flex items-center justify-center text-body-md font-medium text-gray-500 h-full bg-gray-100',
+        base: 'flex items-center justify-center text-jp-body-md font-medium text-gray-500 h-full bg-gray-100',
         positions: {
           prefix: 'border-r border-gray-300 px-3',
           suffix: 'border-l border-gray-300 px-3',
@@ -370,14 +370,14 @@ export const themeConfig = {
         root: 'w-full',
         list: 'flex w-full items-center gap-3',
         trigger:
-          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-body-md ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex items-center justify-center whitespace-nowrap px-3 py-2 text-jp-body-md ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
       },
       expanded: 'justify-between [&>*]:flex-1 [&>*]:text-center',
       variant: {
         boxed: {
           list: 'bg-gray-50 p-1 rounded-lg',
           trigger:
-            'rounded-lg text-gray-500 data-[state=active]:bg-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
+            'rounded-lg text-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-gray-700 data-[state=active]:shadow-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-gray-600 font-500',
         },
         floating: {
           list: 'gap-2',
@@ -429,7 +429,7 @@ export const themeConfig = {
     textArea: {
       container: 'flex flex-col space-y-2',
       textarea: {
-        base: 'w-full overflow-hidden text-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border transition-all placeholder:text-gray-400',
+        base: 'w-full overflow-hidden text-jp-body-md font-medium placeholder:font-normal outline-none resize-none px-3 py-2 rounded-xl border transition-all placeholder:text-gray-400',
         states: {
           default: 'border-gray-300 bg-white',
           hover: 'hover:border-gray-400 hover:focus-within:border-primary-500',
@@ -447,16 +447,16 @@ export const themeConfig = {
           'fixed z-50 flex flex-col p-4 rounded-xl shadow-lg max-w-md transition-all duration-200',
         content: 'flex flex-col gap-1',
         icon: 'flex-shrink-0',
-        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80 text-gray-25',
+        closeButton: 'ml-4 flex-shrink-0 hover:opacity-80 text-jp-gray-25',
       },
       layout: {
         headerContainer: 'flex w-full items-center justify-between',
         headerContent: 'flex items-center gap-2',
         messageContainer: 'mt-1.5 pl-7 flex flex-col gap-4',
-        heading: 'text-body-lg font-500 text-gray-25',
-        message: 'text-body-md font-400 break-words text-gray-300',
+        heading: 'text-body-lg font-500 text-jp-gray-25',
+        message: 'text-jp-body-md font-400 break-words text-gray-300',
         actionMessage:
-          'text-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
+          'text-jp-body-md font-600 text-gray-100 hover:text-gray-0 justify-start active:text-gray-0 focus:text-gray-0',
       },
       type: {
         info: {
@@ -490,7 +490,7 @@ export const themeConfig = {
     alert: {
       base: {
         alertContainer: 'rounded-lg p-4 relative space-y-2',
-        header: 'flex items-center gap-2 text-blue-800 font-600 text-body-md',
+        header: 'flex items-center gap-2 text-blue-800 font-600 text-jp-body-md',
         closeButton: 'text-gray-400 hover:text-gray-600 h-5 w-5 flex items-center justify-center',
         headerContainer: 'flex items-center justify-between gap-2',
         divider: 'relative w-[1px] h-5 bg-gray-300',
@@ -500,8 +500,8 @@ export const themeConfig = {
         actionsRight: 'flex items-start gap-7 pl-6',
       },
       typography: {
-        title: 'font-600 text-body-md text-gray-700 tracking-normal',
-        description: 'font-400 text-body-md text-gray-600 tracking-normal',
+        title: 'font-600 text-jp-body-md text-gray-700 tracking-normal',
+        description: 'font-400 text-jp-body-md text-gray-600 tracking-normal',
       },
       icon: {
         size: 'w-4 h-4',
@@ -509,7 +509,7 @@ export const themeConfig = {
       },
       actionButton: {
         container: 'flex items-center gap-5',
-        base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-body-md',
+        base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-jp-body-md',
         colors: {
           primary: 'text-primary-700 hover:text-primary-800',
           success: 'text-green-700 hover:text-green-800',
@@ -675,7 +675,7 @@ export const themeConfig = {
         },
         tooltip: {
           container:
-            'bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+            'bg-jp-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
         },
       },
     },
@@ -833,7 +833,7 @@ export const themeConfig = {
       chevronColor: 'text-gray-400',
       textContent: 'flex-grow truncate font-feature-settings-normal',
       menuItem: {
-        baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-body-md font-medium ',
+        baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-jp-body-md font-medium ',
         types: {
           DEFAULT: 'cursor-pointer font-medium text-gray-600',
           MULTI_SELECT: 'cursor-pointer',
@@ -894,7 +894,7 @@ export const themeConfig = {
     },
     checkbox: {
       baseStyles:
-        'flex items-center justify-center rounded border bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
+        'flex items-center justify-center rounded border bg-jp-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
       indicator: {
         baseStyles: 'flex items-center justify-center',
         icon: 'text-gray-0',
@@ -908,15 +908,15 @@ export const themeConfig = {
           root: 'h-3.5 w-3.5 rounded',
           indicator: 'h-3.5 w-3.5',
           checkIcon: 'h-2.5 w-2.5',
-          fontSize: 'text-body-md',
+          fontSize: 'text-jp-body-md',
           subtext: 'text-body-sm ml-5 mt-1',
         },
         md: {
           root: 'h-4 w-4 rounded',
           indicator: 'h-4 w-4',
           checkIcon: 'h-3 w-3',
-          fontSize: 'text-body-md',
-          subtext: 'text-body-md ml-6 mt-1',
+          fontSize: 'text-jp-body-md',
+          subtext: 'text-jp-body-md ml-6 mt-1',
         },
       },
       states: {
@@ -1013,7 +1013,7 @@ export const themeConfig = {
       },
       text: {
         label: 'text-gray-400',
-        value: 'text-gray-600 font-medium text-body-md',
+        value: 'text-gray-600 font-medium text-jp-body-md',
         dayName: 'text-gray-400',
         dayNumber: 'text-gray-600',
         selectedDay: 'text-gray-0',
@@ -1056,8 +1056,8 @@ export const themeConfig = {
           thumb: 'w-3 h-3 top-[1px]',
           thumbOn: 'translate-x-3.5',
           thumbOff: 'translate-x-0.5',
-          label: 'text-body-md',
-          subtext: 'text-body-md ml-9 mt-1',
+          label: 'text-jp-body-md',
+          subtext: 'text-jp-body-md ml-9 mt-1',
         },
       },
       disabledSubtext: 'text-gray-200',
@@ -1085,8 +1085,8 @@ export const themeConfig = {
         },
         md: {
           input: 'h-4 w-4',
-          label: 'text-body-md',
-          subtext: 'text-body-md ml-6 mt-1',
+          label: 'text-jp-body-md',
+          subtext: 'text-jp-body-md ml-6 mt-1',
         },
       },
       disabledSubtext: 'text-gray-200',
@@ -1100,7 +1100,7 @@ export const themeConfig = {
       sizes: {
         sm: 'h-6 w-6 text-body-xs text-500 text-gray-900',
         regular: 'h-8 w-8 text-body-sm text-500 text-gray-900',
-        md: 'h-10 w-10 text-body-md text-500 text-gray-900',
+        md: 'h-10 w-10 text-jp-body-md text-500 text-gray-900',
         lg: 'h-12 w-12 text-body-lg text-500 text-gray-900',
         xl: 'h-16 w-16 text-sm text-600 text-gray-900',
       },
@@ -1134,7 +1134,7 @@ export const themeConfig = {
       sizes: {
         sm: 'h-6 w-6 text-body-xs',
         regular: 'h-8 w-8 text-body-sm',
-        md: 'h-10 w-10 text-body-md',
+        md: 'h-10 w-10 text-jp-body-md',
         lg: 'h-12 w-12 text-body-lg',
         xl: 'h-16 w-16 text-sm',
       },
@@ -1150,7 +1150,7 @@ export const themeConfig = {
         title: 'text-body-lg font-medium',
         titleEnabled: 'text-gray-800',
         titleDisabled: 'text-gray-500',
-        subtext: 'text-body-md mt-1',
+        subtext: 'text-jp-body-md mt-1',
         subtextEnabled: 'text-gray-600',
         subtextDisabled: 'text-gray-300',
         contentWrapper: 'py-5 px-3',
@@ -1207,7 +1207,7 @@ export const themeConfig = {
     modal: {
       base: {
         container:
-          'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+          'flex flex-col bg-jp-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
         header:
           'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
         content: 'p-4 overflow-y-auto flex-grow',
@@ -1220,13 +1220,13 @@ export const themeConfig = {
     popover: {
       base: {
         container:
-          'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
+          'flex flex-col gap-3 bg-jp-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
         trigger: 'inline-block',
         content: 'word-break',
         header: 'flex flex-col gap-2',
         headerRow: 'flex items-center justify-between gap-3',
         heading: 'text-base font-semibold text-gray-900 word-break',
-        description: 'text-body-md font-medium text-gray-500 word-break',
+        description: 'text-jp-body-md font-medium text-gray-500 word-break',
         closeButton: 'h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0',
         footer: 'flex justify-start gap-3',
       },
@@ -1331,7 +1331,7 @@ export const themeConfig = {
         striped: 'bg-gray-50',
       },
       td: {
-        base: 'px-3 py-2 text-body-md text-gray-800 font-medium',
+        base: 'px-3 py-2 text-jp-body-md text-gray-800 font-medium',
         variant: {
           default: '',
           compact: 'px-2 py-1',
@@ -1379,8 +1379,8 @@ export const themeConfig = {
         error: 'border-jp-red-500 focus-within:border-jp-red-500 focus-within:ring-jp-red-100',
       },
       text: {
-        base: 'w-full h-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-jp-gray-400',
-        fieldLabel: 'text-body-md font-medium truncate',
+        base: 'w-full h-full text-jp-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-jp-gray-400',
+        fieldLabel: 'text-jp-body-md font-medium truncate',
         status: {
           default: ' text-jp-gray-800 placeholder:text-jp-gray-400',
           disabled: 'text-jp-gray-400 placeholder:text-jp-gray-300',
@@ -1394,13 +1394,13 @@ export const themeConfig = {
         selectionContainer: 'flex-1 justify-start overflow-hidden',
         label: 'text-jp-gray-800 font-medium truncate',
         placeholder: 'text-jp-gray-400',
-        fieldLabel: 'font-medium text-body-md',
+        fieldLabel: 'font-medium text-jp-body-md',
         chevron: ' flex-shrink-0 text-jp-gray-400',
       },
       dropdown: {
         base: 'rounded-xl bg-white p-1 shadow-md border border-jp-gray-200 min-w-[8rem] z-50',
         item: {
-          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-body-md text-jp-gray-800 outline-none transition-colors data-[highlighted]:bg-jp-gray-50 focus:bg-jp-gray-50',
+          base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-jp-body-md text-jp-gray-800 outline-none transition-colors data-[highlighted]:bg-jp-gray-50 focus:bg-jp-gray-50',
           active: 'bg-jp-gray-50 font-medium',
           disabled: 'opacity-50 cursor-not-allowed',
         },
@@ -1419,7 +1419,7 @@ export const themeConfig = {
         divider: 'border-t border-jp-gray-200',
       },
       unitSelection: {
-        base: 'flex items-center justify-center text-body-md font-medium text-jp-gray-500 h-full bg-jp-gray-100',
+        base: 'flex items-center justify-center text-jp-body-md font-medium text-jp-gray-500 h-full bg-jp-gray-100',
         container: 'h-full',
         prefix: 'border-r border-jp-gray-300 px-3',
         suffix: 'border-l border-jp-gray-300 px-3',
@@ -1448,7 +1448,7 @@ export const themeConfig = {
     //     horizontal: {
     //       list: 'bg-jp-gray-50 p-1 rounded-lg',
     //       item: {
-    //         base: 'inline-flex px-2.5 py-1.5 text-body-md focus:outline-none',
+    //         base: 'inline-flex px-2.5 py-1.5 text-jp-body-md focus:outline-none',
     //         boxed:
     //           'rounded-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-jp-gray-700 data-[state=active]:shadow-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-jp-gray-600 font-500',
     //         pill:
@@ -1468,7 +1468,7 @@ export const themeConfig = {
     //     vertical: {
     //       list: 'flex flex-col gap-y-1',
     //       item: {
-    //         base: 'block px-2.5 py-1.5 text-body-md focus:outline-none w-full text-left',
+    //         base: 'block px-2.5 py-1.5 text-jp-body-md focus:outline-none w-full text-left',
     //         boxed:
     //           'rounded-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-50 data-[state=active]:text-jp-gray-700 hover:bg-jp-gray-50 data-[state=active]:font-600 hover:text-jp-gray-600 font-500',
     //         pill:
@@ -1525,10 +1525,10 @@ export const themeConfig = {
       },
       positions: {
         heading: 'text-body-lg font-500 text-jp-gray-25',
-        message: 'text-body-md font-400 break-words text-jp-gray-300',
+        message: 'text-jp-body-md font-400 break-words text-jp-gray-300',
       },
       action: 
-        'text-body-md font-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
+        'text-jp-body-md font-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
       variant: {
         primary: {
           backgroundColor: 'bg-jp-gray-800',
@@ -1550,7 +1550,7 @@ export const themeConfig = {
     // alert: {
     //   base: {
     //     alertContainer: 'rounded-lg p-4 relative space-y-2',
-    //     header: 'flex items-center gap-2 text-jp-primary-800 font-600 text-body-md',
+    //     header: 'flex items-center gap-2 text-jp-primary-800 font-600 text-jp-body-md',
     //     closeButton: 'text-jp-gray-400 hover:text-jp-gray-600 h-5 w-5 flex items-center justify-center',
     //     headerContainer: 'flex items-center justify-between gap-2',
     //     divider: 'relative w-[1px] h-5 bg-jp-gray-300',
@@ -1560,8 +1560,8 @@ export const themeConfig = {
     //     actionsRight: 'flex items-start gap-7 pl-6',
     //   },
     //   typography: {
-    //     title: 'font-600 text-body-md text-jp-gray-700 tracking-normal',
-    //     description: 'font-400 text-body-md text-jp-gray-600 tracking-normal',
+    //     title: 'font-600 text-jp-body-md text-jp-gray-700 tracking-normal',
+    //     description: 'font-400 text-jp-body-md text-jp-gray-600 tracking-normal',
     //   },
     //   icon: {
     //     size: 'w-4 h-4',
@@ -1569,7 +1569,7 @@ export const themeConfig = {
     //   },
     //   actionButton: {
     //     container: 'flex items-center gap-5',
-    //     base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-body-md',
+    //     base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-jp-body-md',
     //     colors: {
     //       primary: 'text-jp-primary-700 hover:text-jp-primary-800',
     //       success: 'text-jp-green-700 hover:text-jp-green-800',
@@ -1735,7 +1735,7 @@ export const themeConfig = {
     //     },
     //     tooltip: {
     //       container:
-    //         'bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+    //         'bg-jp-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
     //     },
     //   },
     // },
@@ -1893,7 +1893,7 @@ export const themeConfig = {
     //   chevronColor: 'text-gray-400',
     //   textContent: 'flex-grow truncate font-feature-settings-normal',
     //   menuItem: {
-    //     baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-body-md font-medium ',
+    //     baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-jp-body-md font-medium ',
     //     types: {
     //       DEFAULT: 'cursor-pointer font-medium text-gray-600',
     //       MULTI_SELECT: 'cursor-pointer',
@@ -1954,7 +1954,7 @@ export const themeConfig = {
     // },
     // checkbox: {
     //   baseStyles:
-    //     'flex items-center justify-center rounded border bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
+    //     'flex items-center justify-center rounded border bg-jp-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
     //   indicator: {
     //     baseStyles: 'flex items-center justify-center',
     //     icon: 'text-gray-0',
@@ -1968,15 +1968,15 @@ export const themeConfig = {
     //       root: 'h-3.5 w-3.5 rounded',
     //       indicator: 'h-3.5 w-3.5',
     //       checkIcon: 'h-2.5 w-2.5',
-    //       fontSize: 'text-body-md',
+    //       fontSize: 'text-jp-body-md',
     //       subtext: 'text-body-sm ml-5 mt-1',
     //     },
     //     md: {
     //       root: 'h-4 w-4 rounded',
     //       indicator: 'h-4 w-4',
     //       checkIcon: 'h-3 w-3',
-    //       fontSize: 'text-body-md',
-    //       subtext: 'text-body-md ml-6 mt-1',
+    //       fontSize: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-6 mt-1',
     //     },
     //   },
     //   states: {
@@ -2073,7 +2073,7 @@ export const themeConfig = {
     //   },
     //   text: {
     //     label: 'text-gray-400',
-    //     value: 'text-gray-600 font-medium text-body-md',
+    //     value: 'text-gray-600 font-medium text-jp-body-md',
     //     dayName: 'text-gray-400',
     //     dayNumber: 'text-gray-600',
     //     selectedDay: 'text-gray-0',
@@ -2116,8 +2116,8 @@ export const themeConfig = {
     //       thumb: 'w-3 h-3 top-[1px]',
     //       thumbOn: 'translate-x-3.5',
     //       thumbOff: 'translate-x-0.5',
-    //       label: 'text-body-md',
-    //       subtext: 'text-body-md ml-9 mt-1',
+    //       label: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-9 mt-1',
     //     },
     //   },
     //   disabledSubtext: 'text-gray-200',
@@ -2145,8 +2145,8 @@ export const themeConfig = {
     //     },
     //     md: {
     //       input: 'h-4 w-4',
-    //       label: 'text-body-md',
-    //       subtext: 'text-body-md ml-6 mt-1',
+    //       label: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-6 mt-1',
     //     },
     //   },
     //   disabledSubtext: 'text-gray-200',
@@ -2160,7 +2160,7 @@ export const themeConfig = {
     //   sizes: {
     //     sm: 'h-6 w-6 text-body-xs text-500 text-gray-900',
     //     regular: 'h-8 w-8 text-body-sm text-500 text-gray-900',
-    //     md: 'h-10 w-10 text-body-md text-500 text-gray-900',
+    //     md: 'h-10 w-10 text-jp-body-md text-500 text-gray-900',
     //     lg: 'h-12 w-12 text-body-lg text-500 text-gray-900',
     //     xl: 'h-16 w-16 text-sm text-600 text-gray-900',
     //   },
@@ -2194,7 +2194,7 @@ export const themeConfig = {
     //   sizes: {
     //     sm: 'h-6 w-6 text-body-xs',
     //     regular: 'h-8 w-8 text-body-sm',
-    //     md: 'h-10 w-10 text-body-md',
+    //     md: 'h-10 w-10 text-jp-body-md',
     //     lg: 'h-12 w-12 text-body-lg',
     //     xl: 'h-16 w-16 text-sm',
     //   },
@@ -2210,7 +2210,7 @@ export const themeConfig = {
     //     title: 'text-body-lg font-medium',
     //     titleEnabled: 'text-gray-800',
     //     titleDisabled: 'text-gray-500',
-    //     subtext: 'text-body-md mt-1',
+    //     subtext: 'text-jp-body-md mt-1',
     //     subtextEnabled: 'text-gray-600',
     //     subtextDisabled: 'text-gray-300',
     //     contentWrapper: 'py-5 px-3',
@@ -2267,7 +2267,7 @@ export const themeConfig = {
     // modal: {
     //   base: {
     //     container:
-    //       'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+    //       'flex flex-col bg-jp-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
     //     header:
     //       'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
     //     content: 'p-4 overflow-y-auto flex-grow',
@@ -2280,13 +2280,13 @@ export const themeConfig = {
     // popover: {
     //   base: {
     //     container:
-    //       'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
+    //       'flex flex-col gap-3 bg-jp-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
     //     trigger: 'inline-block',
     //     content: 'word-break',
     //     header: 'flex flex-col gap-2',
     //     headerRow: 'flex items-center justify-between gap-3',
     //     heading: 'text-base font-semibold text-gray-900 word-break',
-    //     description: 'text-body-md font-medium text-gray-500 word-break',
+    //     description: 'text-jp-body-md font-medium text-gray-500 word-break',
     //     closeButton: 'h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0',
     //     footer: 'flex justify-start gap-3',
     //   },
@@ -2391,7 +2391,7 @@ export const themeConfig = {
     //     striped: 'bg-gray-50',
     //   },
     //   td: {
-    //     base: 'px-3 py-2 text-body-md text-gray-800 font-medium',
+    //     base: 'px-3 py-2 text-jp-body-md text-gray-800 font-medium',
     //     variant: {
     //       default: '',
     //       compact: 'px-2 py-1',
@@ -2439,8 +2439,8 @@ export const themeConfig = {
     //     error: 'border-jp-red-500 focus-within:border-jp-red-500 focus-within:ring-jp-red-100',
     //   },
     //   text: {
-    //     base: 'w-full h-full text-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-jp-gray-400',
-    //     fieldLabel: 'text-body-md font-medium truncate',
+    //     base: 'w-full h-full text-jp-body-md font-medium outline-none disabled:cursor-not-allowed placeholder:text-jp-gray-400',
+    //     fieldLabel: 'text-jp-body-md font-medium truncate',
     //     status: {
     //       default: ' text-jp-gray-800 placeholder:text-jp-gray-400',
     //       disabled: 'text-jp-gray-400 placeholder:text-jp-gray-300',
@@ -2454,13 +2454,13 @@ export const themeConfig = {
     //     selectionContainer: 'flex-1 justify-start overflow-hidden',
     //     label: 'text-jp-gray-800 font-medium truncate',
     //     placeholder: 'text-jp-gray-400',
-    //     fieldLabel: 'font-medium text-body-md',
+    //     fieldLabel: 'font-medium text-jp-body-md',
     //     chevron: ' flex-shrink-0 text-jp-gray-400',
     //   },
     //   dropdown: {
     //     base: 'rounded-xl bg-white p-1 shadow-md border border-jp-gray-200 min-w-[8rem] z-50',
     //     item: {
-    //       base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-body-md text-jp-gray-800 outline-none transition-colors data-[highlighted]:bg-jp-gray-50 focus:bg-jp-gray-50',
+    //       base: 'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-jp-body-md text-jp-gray-800 outline-none transition-colors data-[highlighted]:bg-jp-gray-50 focus:bg-jp-gray-50',
     //       active: 'bg-jp-gray-50 font-medium',
     //       disabled: 'opacity-50 cursor-not-allowed',
     //     },
@@ -2479,7 +2479,7 @@ export const themeConfig = {
     //     divider: 'border-t border-jp-gray-200',
     //   },
     //   unitSelection: {
-    //     base: 'flex items-center justify-center text-body-md font-medium text-jp-gray-500 h-full bg-jp-gray-100',
+    //     base: 'flex items-center justify-center text-jp-body-md font-medium text-jp-gray-500 h-full bg-jp-gray-100',
     //     container: 'h-full',
     //     prefix: 'border-r border-jp-gray-300 px-3',
     //     suffix: 'border-l border-jp-gray-300 px-3',
@@ -2508,7 +2508,7 @@ export const themeConfig = {
     //     horizontal: {
     //       list: 'bg-jp-gray-50 p-1 rounded-lg',
     //       item: {
-    //         base: 'inline-flex px-2.5 py-1.5 text-body-md focus:outline-none',
+    //         base: 'inline-flex px-2.5 py-1.5 text-jp-body-md focus:outline-none',
     //         boxed:
     //           'rounded-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-0 data-[state=active]:text-jp-gray-700 data-[state=active]:shadow-sm hover:bg-jp-gray-0 data-[state=active]:font-600 hover:text-jp-gray-600 font-500',
     //         pill:
@@ -2528,7 +2528,7 @@ export const themeConfig = {
     //     vertical: {
     //       list: 'flex flex-col gap-y-1',
     //       item: {
-    //         base: 'block px-2.5 py-1.5 text-body-md focus:outline-none w-full text-left',
+    //         base: 'block px-2.5 py-1.5 text-jp-body-md focus:outline-none w-full text-left',
     //         boxed:
     //           'rounded-lg text-jp-gray-500 data-[state=active]:bg-jp-gray-50 data-[state=active]:text-jp-gray-700 hover:bg-jp-gray-50 data-[state=active]:font-600 hover:text-jp-gray-600 font-500',
     //         pill:
@@ -2585,9 +2585,9 @@ export const themeConfig = {
     //   },
     //   positions: {
     //     heading: 'text-body-lg font-500 text-jp-gray-25',
-    //     message: 'text-body-md font-400 break-words text-jp-gray-300',
+    //     message: 'text-jp-body-md font-400 break-words text-jp-gray-300',
     //   },
-    //   action: 'text-body-md font-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
+    //   action: 'text-jp-body-md font-600 text-jp-gray-100 hover:text-jp-gray-0 justify-start active:text-jp-gray-0 focus:text-jp-gray-0',
     //   variant: {
     //     primary: {
     //       backgroundColor: 'bg-jp-gray-800',
@@ -2609,7 +2609,7 @@ export const themeConfig = {
     // alert: {
     //   base: {
     //     alertContainer: 'rounded-lg p-4 relative space-y-2',
-    //     header: 'flex items-center gap-2 text-jp-primary-800 font-600 text-body-md',
+    //     header: 'flex items-center gap-2 text-jp-primary-800 font-600 text-jp-body-md',
     //     closeButton: 'text-jp-gray-400 hover:text-jp-gray-600 h-5 w-5 flex items-center justify-center',
     //     headerContainer: 'flex items-center justify-between gap-2',
     //     divider: 'relative w-[1px] h-5 bg-jp-gray-300',
@@ -2619,8 +2619,8 @@ export const themeConfig = {
     //     actionsRight: 'flex items-start gap-7 pl-6',
     //   },
     //   typography: {
-    //     title: 'font-600 text-body-md text-jp-gray-700 tracking-normal',
-    //     description: 'font-400 text-body-md text-jp-gray-600 tracking-normal',
+    //     title: 'font-600 text-jp-body-md text-jp-gray-700 tracking-normal',
+    //     description: 'font-400 text-jp-body-md text-jp-gray-600 tracking-normal',
     //   },
     //   icon: {
     //     size: 'w-4 h-4',
@@ -2628,7 +2628,7 @@ export const themeConfig = {
     //   },
     //   actionButton: {
     //     container: 'flex items-center gap-5',
-    //     base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-body-md',
+    //     base: 'flex items-center justify-center whitespace-nowrap transition-all duration-200 disabled:pointer-events-none font-600 text-jp-body-md',
     //     colors: {
     //       primary: 'text-jp-primary-700 hover:text-jp-primary-800',
     //       success: 'text-jp-green-700 hover:text-jp-green-800',
@@ -2794,7 +2794,7 @@ export const themeConfig = {
     //     },
     //     tooltip: {
     //       container:
-    //         'bg-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
+    //         'bg-jp-gray-0 font-sans shadow-lg flex flex-col gap-3 rounded-lg p-3 pl-2.5 border border-gray-150 min-w-[220px] !max-w-[200px]',
     //     },
     //   },
     // },
@@ -2952,7 +2952,7 @@ export const themeConfig = {
     //   chevronColor: 'text-gray-400',
     //   textContent: 'flex-grow truncate font-feature-settings-normal',
     //   menuItem: {
-    //     baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-body-md font-medium ',
+    //     baseStyles: 'flex items-center px-3 py-1.5 text-gray-600 text-jp-body-md font-medium ',
     //     types: {
     //       DEFAULT: 'cursor-pointer font-medium text-gray-600',
     //       MULTI_SELECT: 'cursor-pointer',
@@ -3013,7 +3013,7 @@ export const themeConfig = {
     // },
     // checkbox: {
     //   baseStyles:
-    //     'flex items-center justify-center rounded border bg-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
+    //     'flex items-center justify-center rounded border bg-jp-gray-0 focus:ring-2 focus:ring-primary-200 focus:ring-offset-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-1 mr-2',
     //   indicator: {
     //     baseStyles: 'flex items-center justify-center',
     //     icon: 'text-gray-0',
@@ -3027,15 +3027,15 @@ export const themeConfig = {
     //       root: 'h-3.5 w-3.5 rounded',
     //       indicator: 'h-3.5 w-3.5',
     //       checkIcon: 'h-2.5 w-2.5',
-    //       fontSize: 'text-body-md',
+    //       fontSize: 'text-jp-body-md',
     //       subtext: 'text-body-sm ml-5 mt-1',
     //     },
     //     md: {
     //       root: 'h-4 w-4 rounded',
     //       indicator: 'h-4 w-4',
     //       checkIcon: 'h-3 w-3',
-    //       fontSize: 'text-body-md',
-    //       subtext: 'text-body-md ml-6 mt-1',
+    //       fontSize: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-6 mt-1',
     //     },
     //   },
     //   states: {
@@ -3132,7 +3132,7 @@ export const themeConfig = {
     //   },
     //   text: {
     //     label: 'text-gray-400',
-    //     value: 'text-gray-600 font-medium text-body-md',
+    //     value: 'text-gray-600 font-medium text-jp-body-md',
     //     dayName: 'text-gray-400',
     //     dayNumber: 'text-gray-600',
     //     selectedDay: 'text-gray-0',
@@ -3175,8 +3175,8 @@ export const themeConfig = {
     //       thumb: 'w-3 h-3 top-[1px]',
     //       thumbOn: 'translate-x-3.5',
     //       thumbOff: 'translate-x-0.5',
-    //       label: 'text-body-md',
-    //       subtext: 'text-body-md ml-9 mt-1',
+    //       label: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-9 mt-1',
     //     },
     //   },
     //   disabledSubtext: 'text-gray-200',
@@ -3204,8 +3204,8 @@ export const themeConfig = {
     //     },
     //     md: {
     //       input: 'h-4 w-4',
-    //       label: 'text-body-md',
-    //       subtext: 'text-body-md ml-6 mt-1',
+    //       label: 'text-jp-body-md',
+    //       subtext: 'text-jp-body-md ml-6 mt-1',
     //     },
     //   },
     //   disabledSubtext: 'text-gray-200',
@@ -3219,7 +3219,7 @@ export const themeConfig = {
     //   sizes: {
     //     sm: 'h-6 w-6 text-body-xs text-500 text-gray-900',
     //     regular: 'h-8 w-8 text-body-sm text-500 text-gray-900',
-    //     md: 'h-10 w-10 text-body-md text-500 text-gray-900',
+    //     md: 'h-10 w-10 text-jp-body-md text-500 text-gray-900',
     //     lg: 'h-12 w-12 text-body-lg text-500 text-gray-900',
     //     xl: 'h-16 w-16 text-sm text-600 text-gray-900',
     //   },
@@ -3253,7 +3253,7 @@ export const themeConfig = {
     //   sizes: {
     //     sm: 'h-6 w-6 text-body-xs',
     //     regular: 'h-8 w-8 text-body-sm',
-    //     md: 'h-10 w-10 text-body-md',
+    //     md: 'h-10 w-10 text-jp-body-md',
     //     lg: 'h-12 w-12 text-body-lg',
     //     xl: 'h-16 w-16 text-sm',
     //   },
@@ -3269,7 +3269,7 @@ export const themeConfig = {
     //     title: 'text-body-lg font-medium',
     //     titleEnabled: 'text-gray-800',
     //     titleDisabled: 'text-gray-500',
-    //     subtext: 'text-body-md mt-1',
+    //     subtext: 'text-jp-body-md mt-1',
     //     subtextEnabled: 'text-gray-600',
     //     subtextDisabled: 'text-gray-300',
     //     contentWrapper: 'py-5 px-3',
@@ -3326,7 +3326,7 @@ export const themeConfig = {
     // modal: {
     //   base: {
     //     container:
-    //       'flex flex-col bg-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
+    //       'flex flex-col bg-jp-gray-0 relative rounded-2xl shadow-xl max-w-[calc(100vw-2rem)] pointer-events-auto max-h-[calc(100vh-2rem)]',
     //     header:
     //       'p-4 flex gap-4 justify-between items-start flex-shrink-0 overflow-y-auto max-h-[20vh] border-b border-gray-200',
     //     content: 'p-4 overflow-y-auto flex-grow',
@@ -3339,13 +3339,13 @@ export const themeConfig = {
     // popover: {
     //   base: {
     //     container:
-    //       'flex flex-col gap-3 bg-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
+    //       'flex flex-col gap-3 bg-jp-gray-0 rounded-2xl p-4 pt-3 z-50 fixed shadow-md outline-none duration-150 max-w-[480px] min-w-[280px]',
     //     trigger: 'inline-block',
     //     content: 'word-break',
     //     header: 'flex flex-col gap-2',
     //     headerRow: 'flex items-center justify-between gap-3',
     //     heading: 'text-base font-semibold text-gray-900 word-break',
-    //     description: 'text-body-md font-medium text-gray-500 word-break',
+    //     description: 'text-jp-body-md font-medium text-gray-500 word-break',
     //     closeButton: 'h-5 w-5 text-gray-500 cursor-pointer flex-shrink-0',
     //     footer: 'flex justify-start gap-3',
     //   },
@@ -3450,7 +3450,7 @@ export const themeConfig = {
     //     striped: 'bg-gray-50',
     //   },
     //   td: {
-    //     base: 'px-3 py-2 text-body-md text-gray-800 font-medium',
+    //     base: 'px-3 py-2 text-jp-body-md text-gray-800 font-medium',
     //     variant: {
     //       default: '',
     //       compact: 'px-2 py-1',

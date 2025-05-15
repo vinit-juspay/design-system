@@ -68,7 +68,7 @@ const BarChartTooltip = ({
     <>
       <div className="relative">
         <div className="flex flex-col">
-          <h3 className="text-body-md font-500 text-gray-400">{capitaliseCamelCase(label)}</h3>
+          <h3 className="text-jp-body-md font-500 text-gray-400">{capitaliseCamelCase(label)}</h3>
         </div>
 
         <div className="mt-3 space-y-3">
@@ -150,7 +150,7 @@ const LineChartTooltip = ({
           style={{ backgroundColor: getColor(hoveredKey) }}
         ></div>
         <div className="flex flex-col">
-          <h3 className="text-body-md font-600 text-gray-900">{capitaliseCamelCase(hoveredKey)}</h3>
+          <h3 className="text-jp-body-md font-600 text-gray-900">{capitaliseCamelCase(hoveredKey)}</h3>
           <label className="font-500 text-body-sm text-gray-400">
             {capitaliseCamelCase(label)}
           </label>
@@ -224,7 +224,7 @@ const PieChartTooltip = ({
           style={{ backgroundColor: payload[0].payload.fill }}
         ></div>
         <div className="flex flex-col">
-          <h3 className="text-body-md font-600 text-gray-900">{capitaliseCamelCase(name)}</h3>
+          <h3 className="text-jp-body-md font-600 text-gray-900">{capitaliseCamelCase(name)}</h3>
           <label className="font-500 text-body-xs text-gray-400">
             {capitaliseCamelCase(originalData[0].name)}
           </label>

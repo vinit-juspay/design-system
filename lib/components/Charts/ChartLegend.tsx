@@ -117,7 +117,7 @@ const ChartLegendsComponent: React.FC<ChartLegendsProps> = ({
         ))}
         {cuttOffIndex < keys.length && (
           <DropdownMenu.Root>
-            <DropdownMenu.Trigger className="flex items-center gap-2 text-body-md font-medium h-full text-[#525866] hover:text-[#333]">
+            <DropdownMenu.Trigger className="flex items-center gap-2 text-jp-body-md font-medium h-full text-[#525866] hover:text-[#333]">
               + {keys.length - cuttOffIndex} more
             </DropdownMenu.Trigger>
             <DropdownMenu.Content className="bg-white z-50 rounded-md shadow-lg border border-gray-200 min-w-[180px]">

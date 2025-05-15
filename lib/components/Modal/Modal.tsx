@@ -76,7 +76,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               {headerRightSlot}
             </div>
             {subtitle && (
-              <p className="text-body-md text-gray-500 font-normal word-break mt-1">{subtitle}</p>
+              <p className="text-jp-body-md text-gray-500 font-normal word-break mt-1">{subtitle}</p>
             )}
           </div>
           {showCloseButton && (

@@ -102,7 +102,7 @@ export function DataTablePagination({
   return (
     <div className={getPaginationContainerClassNames()}>
       <div className="flex items-center">
-        <span className="text-body-md font-500 text-gray-600">Rows per page:</span>
+        <span className="text-jp-body-md font-500 text-gray-600">Rows per page:</span>
         <MenuDropdown
           id="page-size-dropdown"
           type={DropdownType.SINGLE_SELECT}

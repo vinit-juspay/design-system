@@ -101,7 +101,7 @@ const StatCard = ({
               <div className="w-5 h-5 flex items-center justify-center">{titleIcon}</div>
             )}
             <div className="w-full flex items-center flex-1 space-x-2">
-              <h4 className="text-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
+              <h4 className="text-jp-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
                 {title}
               </h4>
               {helpIconText && (
@@ -143,7 +143,7 @@ const StatCard = ({
               <div className="w-5 h-5 flex items-center justify-center">{titleIcon}</div>
             )}
             <div className="w-full flex items-center flex-1 space-x-2">
-              <h4 className="text-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
+              <h4 className="text-jp-body-md font-medium text-jp-gray-400 whitespace-nowrap text-ellipsis">
                 {title}
               </h4>
               {helpIconText && (
@@ -242,7 +242,7 @@ const StatCard = ({
                   style={{ width: `${100 - progressValue}%` }}
                 ></div>
               </div>
-              <div className="text-body-md font-600">{progressValue}%</div>
+              <div className="text-jp-body-md font-600">{progressValue}%</div>
             </div>
           )}
         </div>
