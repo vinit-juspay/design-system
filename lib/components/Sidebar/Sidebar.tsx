@@ -45,7 +45,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
             <div className={getSidebarMerchantSwitcherContainerStyles()}>
               {merchants.length > 1 ?
                 <MenuDropdown
-                  type={DropdownType.SINGLE_SELECT}
+                  dropdownType={DropdownType.SINGLE_SELECT}
                   size={DropdownSize.SMALL}
                   subType={DropdownSubType.NO_CONTAINER}
                   placeholder="Select Merchant"
@@ -85,7 +85,7 @@ const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(({
             <Button onClick={() => setIsExpanded(!isExpanded)} className="outline-none border-none hover:outline-none hover:border-none" buttonType={ButtonType.SECONDARY} subType={ButtonSubType.ICON_ONLY} size={ButtonSize.SMALL} leadingIcon={PanelsTopLeft} />
             {merchants.length > 1 ?
               <MenuDropdown
-                type={DropdownType.SINGLE_SELECT}
+                dropdownType={DropdownType.SINGLE_SELECT}
                 size={DropdownSize.SMALL}
                 subType={DropdownSubType.NO_CONTAINER}
                 placeholder="Select Merchant"

@@ -14,7 +14,7 @@ const meta: Meta<typeof MenuItem> = {
       control: 'text',
       description: 'Text to display in the menu item',
     },
-    type: {
+    menuType: {
       control: 'select',
       options: Object.values(MenuItemType),
       description: 'Type of menu item',
@@ -79,7 +79,7 @@ type Story = StoryObj<typeof MenuItem>;
 export const Default: Story = {
   args: {
     text: 'Default Menu Item',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
   },
 };
 
@@ -87,7 +87,7 @@ export const Default: Story = {
 export const WithLeftIcon: Story = {
   args: {
     text: 'Item with Icon',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Edit size={16} />,
   },
@@ -97,7 +97,7 @@ export const WithLeftIcon: Story = {
 export const WithShortcut: Story = {
   args: {
     text: 'Item with Shortcut',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasShortcut: true,
     shortcutValue: '⌘S',
   },
@@ -107,7 +107,7 @@ export const WithShortcut: Story = {
 export const WithIconAndShortcut: Story = {
   args: {
     text: 'Item with Icon and Shortcut',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Edit size={16} />,
     hasShortcut: true,
@@ -119,7 +119,7 @@ export const WithIconAndShortcut: Story = {
 export const PrimaryAction: Story = {
   args: {
     text: 'Primary Action',
-    type: MenuItemType.ACTION,
+    menuType: MenuItemType.ACTION,
     action: MenuItemAction.PRIMARY,
     hasSlotL: true,
     slotL: <Archive size={16} />,
@@ -130,7 +130,7 @@ export const PrimaryAction: Story = {
 export const DangerAction: Story = {
   args: {
     text: 'Delete Item',
-    type: MenuItemType.ACTION,
+    menuType: MenuItemType.ACTION,
     action: MenuItemAction.DANGER,
     hasSlotL: true,
     slotL: <Trash2 size={16} />,
@@ -141,7 +141,7 @@ export const DangerAction: Story = {
 export const Label: Story = {
   args: {
     text: 'Category Label',
-    type: MenuItemType.LABEL,
+    menuType: MenuItemType.LABEL,
   },
 };
 
@@ -149,7 +149,7 @@ export const Label: Story = {
 export const Separator: Story = {
   args: {
     text: '',
-    type: MenuItemType.SEPARATOR,
+    menuType: MenuItemType.SEPARATOR,
   },
 };
 
@@ -157,7 +157,7 @@ export const Separator: Story = {
 export const MultiSelectNotSelected: Story = {
   args: {
     text: 'Multi-select Item (Not Selected)',
-    type: MenuItemType.MULTI_SELECT,
+    menuType: MenuItemType.MULTI_SELECT,
   },
 };
 
@@ -165,7 +165,7 @@ export const MultiSelectNotSelected: Story = {
 export const MultiSelectSelected: Story = {
   args: {
     text: 'Multi-select Item (Selected)',
-    type: MenuItemType.MULTI_SELECT,
+    menuType: MenuItemType.MULTI_SELECT,
     hasSlotR2: true,
     slotR2: <Check size={16} />,
   },
@@ -175,7 +175,7 @@ export const MultiSelectSelected: Story = {
 export const SubmenuItem: Story = {
   args: {
     text: 'Submenu Item',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Settings size={16} />,
     hasSlotR2: true,
@@ -187,7 +187,7 @@ export const SubmenuItem: Story = {
 export const DisabledItem: Story = {
   args: {
     text: 'Disabled Item',
-    type: MenuItemType.DEFAULT,
+    menuType: MenuItemType.DEFAULT,
     hasSlotL: true,
     slotL: <Bell size={16} />,
     disabled: true,
@@ -202,7 +202,7 @@ export const InteractiveStates: Story = {
         <h3 className="text-sm font-semibold mb-2">Default State</h3>
         <MenuItem
           text="Default State"
-          type={MenuItemType.DEFAULT}
+          menuType={MenuItemType.DEFAULT}
           state={MenuItemState.DEFAULT}
           hasSlotL={true}
           slotL={<Settings size={16} />}
@@ -213,7 +213,7 @@ export const InteractiveStates: Story = {
         <h3 className="text-sm font-semibold mb-2">Hover State</h3>
         <MenuItem
           text="Hover State"
-          type={MenuItemType.DEFAULT}
+          menuType={MenuItemType.DEFAULT}
           state={MenuItemState.HOVER}
           hasSlotL={true}
           slotL={<Settings size={16} />}
@@ -224,7 +224,7 @@ export const InteractiveStates: Story = {
         <h3 className="text-sm font-semibold mb-2">Selected State</h3>
         <MenuItem
           text="Selected State"
-          type={MenuItemType.DEFAULT}
+          menuType={MenuItemType.DEFAULT}
           state={MenuItemState.SELECTED}
           hasSlotL={true}
           slotL={<Settings size={16} />}
