@@ -318,7 +318,7 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
                   <div className="relative">
                     <MenuDropdown
                       id="column-manager"
-                      type={DropdownType.MULTI_SELECT}
+                      dropdownType={DropdownType.MULTI_SELECT}
                       subType={DropdownSubType.NO_CONTAINER}
                       menuItems={getColumnMenuItems()}
                     selectedOption={getSelectedColumnIds()}
