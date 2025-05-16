@@ -9,8 +9,6 @@ import {
   getFooterClasses,
   getBackdropClasses,
   getContainerClasses,
-  getSubtitleClasses,
-  getTitleClasses,
 } from './utils';
 import { useScrollLock } from '../../hooks/useScrollLock';
 
