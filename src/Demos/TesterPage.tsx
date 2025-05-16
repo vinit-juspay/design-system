@@ -1,5 +1,5 @@
 import { Calendar, Filter, ListFilter } from 'lucide-react';
-import { Button, Dropdown, Tabs, TabsContent, TabsList, TabsTrigger, Tag } from '../../lib/main';
+import { Button, Tabs, TabsContent, TabsList, TabsTrigger, Tag } from '../../lib/main';
 import { ButtonSize, ButtonType } from '../../lib/components/Button';
 import { MenuItemType, DropdownType, MenuDropdown } from '../../lib/components/Menu';
 import { useState } from 'react';
@@ -16,7 +16,6 @@ import {
   TrendingUp,
   TrendingDown,
 } from 'lucide-react';
-import ChartDemo from './ChartDemo/ChartDemo';
 import ChartDemo2 from './ChartDemo2/ChartDemo2';
 
 const TesterPage = () => {
@@ -71,7 +70,7 @@ const TesterPage = () => {
       <div>
         <h2 className="text-jp-heading-md font-jp-600 text-jp-gray-800">Transaction Analytics</h2>
         <div className="flex items-center gap-2 mt-4 flex-wrap">
-          <Dropdown
+          <MenuDropdown
             selectedText={selectedDate}
             leftIcon={<Calendar className="w-4 h-4 text-jp-gray-600" />}
             hasLeftIcon={true}
@@ -82,7 +81,7 @@ const TesterPage = () => {
             }}
             menuItems={dateMenuItems}
           />
-          <Dropdown
+          <MenuDropdown
             selectedText={selectedCompare}
             onSelect={item => {
               if (!Array.isArray(item)) {
@@ -91,7 +90,7 @@ const TesterPage = () => {
             }}
             menuItems={compareMenuItems}
           />
-          <Dropdown
+          <MenuDropdown
             selectedText={selectedTransaction}
             onSelect={item => {
               if (!Array.isArray(item)) {

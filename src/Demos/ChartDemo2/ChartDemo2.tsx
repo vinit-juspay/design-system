@@ -1,13 +1,13 @@
 import { Calendar, Download, Filter } from 'lucide-react';
-import { ButtonSize, ButtonType } from '../../../lib/components/Button';
+import { Button, ButtonSize, ButtonType } from '../../../lib/main';
 import Charts from '../../../lib/components/Charts/Charts';
 import {
   ChartLegendPosition,
   ChartType,
   NewNestedDataPoint,
 } from '../../../lib/components/Charts/types';
-import { Button } from '../../../lib/main';
 import { cn } from '../../../lib/utils';
+
 
 const ChartDemo2 = ({className}: {className?: string}) => {
   const sampleNestedData: NewNestedDataPoint[] = [

@@ -30,7 +30,7 @@ import {
 
 // Import demo components
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
-import ChartDemo from './Demos/ChartDemo/ChartDemo';
+
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
@@ -53,9 +53,9 @@ import Sidebar from '../lib/components/Sidebar';
 import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
 import ColorPaletteDemo from './Demos/ColorPaletteDemo';
 import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
-import { Dropdown, Tag, TextInput } from '../lib/main';
+import { Tag, TextInput } from '../lib/main';
 import { TextInputSize } from '../lib/components/TextInput';
-import { DropdownType, MenuItemType } from '../lib/components/Menu';
+import { DropdownType, MenuDropdown, MenuItemType } from '../lib/components/Menu';
 import { Button, ButtonType } from '../lib/components/Button';
 import TesterPage from './Demos/TesterPage';
 
@@ -124,7 +124,7 @@ const App = () => {
         )}
       </div>
       <div className="flex items-center gap-2">
-        <Dropdown
+        <MenuDropdown
           selectedText={selectedTimezone}
           onSelect={item => {
             if (Array.isArray(item)) {
