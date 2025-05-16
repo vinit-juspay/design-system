@@ -7,8 +7,9 @@ import {
   NewNestedDataPoint,
 } from '../../../lib/components/Charts/types';
 import { Button } from '../../../lib/main';
+import { cn } from '../../../lib/utils';
 
-const ChartDemo2 = () => {
+const ChartDemo2 = ({className}: {className?: string}) => {
   const sampleNestedData: NewNestedDataPoint[] = [
     {
       name: 'Jan',
@@ -266,7 +267,7 @@ const ChartDemo2 = () => {
 
   
   return (
-    <div className="flex flex-col gap-8 max-w-[900px] mx-auto">
+    <div className={cn("flex flex-col gap-8 max-w-[900px] mx-auto", className)}>
       <Charts
         data={sampleNestedData}
         chartType={ChartType.LINE}

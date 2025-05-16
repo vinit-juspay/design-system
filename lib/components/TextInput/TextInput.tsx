@@ -89,7 +89,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <input
             ref={ref}
             type="text"
-            className={cn(getInputClasses(inputState.visualState, leftSlot, rightSlot), className)}
+            className={cn(getInputClasses(inputState.visualState, leftSlot, rightSlot), className, "placeholder:text-jp-gray-400 placeholder:font-jp-500 placeholder:text-jp-body-md")}
             placeholder={placeholder}
             disabled={state === TextInputState.DISABLED}
             defaultValue={value}
