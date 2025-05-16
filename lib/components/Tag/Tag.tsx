@@ -31,7 +31,7 @@ const Tag = React.forwardRef<HTMLDivElement, TagProps>(
     const trailingSlotProps = trailingSlot ? renderSlot(trailingSlot, size) : null;
 
     return (
-      <div ref={ref} className={cn(containerClassName, className)} {...props}>
+      <div ref={ref} className={cn(containerClassName, className, "overflow-hidden whitespace-nowrap truncate")} {...props}>
         {leadingSlot && leadingSlotProps && <span {...leadingSlotProps} />}
         {label && <span className={fontSizeClass}>{label}</span>}
         {trailingSlot && trailingSlotProps && <span {...trailingSlotProps} />}
