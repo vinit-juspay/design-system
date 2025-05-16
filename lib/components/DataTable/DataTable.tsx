@@ -23,7 +23,7 @@ import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
 import { MenuDropdown } from '../Menu';
 import { DropdownType, DropdownSubType, MenuItemType } from '../Menu/types';
-import Checkbox from '../Checkbox';
+import { Checkbox } from '../../main';
 import { CheckboxSize } from '../Checkbox/types';
 import { MenuItemProps } from '../Menu/types';
 
@@ -321,72 +321,72 @@ const DataTable = React.forwardRef(<T extends Record<string, unknown>>(
                       dropdownType={DropdownType.MULTI_SELECT}
                       subType={DropdownSubType.NO_CONTAINER}
                       menuItems={getColumnMenuItems()}
-                    selectedOption={getSelectedColumnIds()}
-                    onSelect={handleColumnSelection}
-                    leftIcon={<Settings size={16} />}
-                    placeholder=""
-                    closeOnSelect={false}
-                    isOpen={isColumnManagerOpen}
-                    onOpen={() => setIsColumnManagerOpen(true)}
-                    onClose={() => setIsColumnManagerOpen(false)}
-                  />
+                      selectedOption={getSelectedColumnIds()}
+                      onSelect={handleColumnSelection}
+                      leftIcon={<Settings size={16} />}
+                      placeholder=""
+                      closeOnSelect={false}
+                      isOpen={isColumnManagerOpen}
+                      onOpen={() => setIsColumnManagerOpen(true)}
+                      onClose={() => setIsColumnManagerOpen(false)}
+                    />
                   </div>
                 </th>
               )}
-          </tr>
-        </thead>
-        <tbody className={getTableBodyClassNames()}>
-          {currentData.length > 0 ? (
-            currentData.map((row) => (
-              <tr
-                key={String(row[idField])}
-                className='h-14'
-              >
-                <td className={getTableCellClassNames()}>
-                  <div className="flex items-center justify-center">
-                    <Checkbox
-                      isChecked={!!selectedRows[String(row[idField])]}
-                      onCheckedChange={() => handleRowSelect(row[idField])}
-                      size={CheckboxSize.MEDIUM}
-                    />
-                  </div>
-                </td>
-
-                {visibleColumns.map((column) => (
-                  <td
-                    key={`${String(row[idField])}-${String(column.field)}`}
-                    className={getTableCellClassNames(column.className)}
-                  >
-                    {column.renderCell
-                      ? column.renderCell(row[column.field], row)
-                      : row[column.field] != null ? String(row[column.field]) : ''}
-                  </td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr className='h-14'>
-              <td
-                colSpan={visibleColumns.length + 1}
-                className="text-center py-4 text-jp-gray-500"
-              >
-                No data available
-              </td>
             </tr>
-          )}
-        </tbody>
-      </table>
-      {pagination && (
-        <DataTablePagination
-          currentPage={currentPage}
-          pageSize={pageSize}
-          totalRows={totalRows}
-          pageSizeOptions={pagination.pageSizeOptions}
-          onPageChange={handlePageChange}
-          onPageSizeChange={handlePageSizeChange}
-        />
-      )}
-    </div>
+          </thead>
+          <tbody className={getTableBodyClassNames()}>
+            {currentData.length > 0 ? (
+              currentData.map((row) => (
+                <tr
+                  key={String(row[idField])}
+                  className='h-14'
+                >
+                  <td className={getTableCellClassNames()}>
+                    <div className="flex items-center justify-center">
+                      <Checkbox
+                        isChecked={!!selectedRows[String(row[idField])]}
+                        onCheckedChange={() => handleRowSelect(row[idField])}
+                        size={CheckboxSize.MEDIUM}
+                      />
+                    </div>
+                  </td>
+
+                  {visibleColumns.map((column) => (
+                    <td
+                      key={`${String(row[idField])}-${String(column.field)}`}
+                      className={getTableCellClassNames(column.className)}
+                    >
+                      {column.renderCell
+                        ? column.renderCell(row[column.field], row)
+                        : row[column.field] != null ? String(row[column.field]) : ''}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr className='h-14'>
+                <td
+                  colSpan={visibleColumns.length + 1}
+                  className="text-center py-4 text-jp-gray-500"
+                >
+                  No data available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        {pagination && (
+          <DataTablePagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalRows={totalRows}
+            pageSizeOptions={pagination.pageSizeOptions}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+          />
+        )}
+      </div>
     </div >
   );
 });

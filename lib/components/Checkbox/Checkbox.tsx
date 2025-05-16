@@ -13,20 +13,6 @@ import {
   getCheckboxSubtextClassNames,
 } from './utils';
 
-/**
- * Checkbox component built on top of Radix UI's checkbox primitive
- * Can be used standalone or within lists
- *
- * @component
- * @example
- * // Basic usage
- * <Checkbox
- *   checked={isChecked}
- *   onCheckedChange={setIsChecked}
- * >
- *   Accept terms and conditions
- * </Checkbox>
- */
 const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, CheckboxProps>(
   (
     {
