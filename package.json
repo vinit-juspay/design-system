@@ -1,6 +1,6 @@
 {
   "name": "@vinitjuspay/design-system",
-  "version": " 0.1.45",
+  "version": " 0.1.46",
   "type": "module",
   "main": "./dist/main.js",
   "module": "./dist/main.js",
@@ -36,6 +36,7 @@
     "react-dom": "^18.0.0"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-alpha.8",
     "clsx": "^2.1.1",
     "lucide-react": "^0.486.0",
     "radix-ui": "^1.1.3",

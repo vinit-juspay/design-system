@@ -30,7 +30,7 @@ import {
 
 // Import demo components
 import AlertDemo from './Demos/AlertDemo/AlertDemo';
-
+import BaseTooltipDemo from './Demos/BaseTooltipDemo/BaseTooltipDemo';
 import ChartDemo2 from './Demos/ChartDemo2/ChartDemo2';
 import FontDemo from './Demos/FontDemo/FontDemo';
 import SelectorsDemo from './Demos/SelectorsDemo/SelectorsDemo';
@@ -64,6 +64,7 @@ const App = () => {
     | 'tester-page'
     | 'buttons'
     | 'tooltipsV2'
+    | 'baseTooltip'
     | 'tags'
     | 'tabs'
     | 'textInput'
@@ -156,6 +157,8 @@ const App = () => {
             return <ButtonGroupDemo />;
           case 'tooltipsV2':
             return <TooltipDemoV2 />;
+          case 'baseTooltip':
+            return <BaseTooltipDemo />;
           case 'tags':
             return <TagDemo />;
           case 'tabs':
@@ -231,7 +234,9 @@ const App = () => {
         {
           label: 'Tester Page',
           leftSlot: <Globe className="w-4 h-4" />,
-          rightSlot: <Tag label="New" variant="subtle" color="primary" size="sm" tagStyle="rounded" />,
+          rightSlot: (
+            <Tag label="New" variant="subtle" color="primary" size="sm" tagStyle="rounded" />
+          ),
           onClick: () => setActiveComponent('tester-page'),
         },
       ],
@@ -335,9 +340,14 @@ const App = () => {
           onClick: () => setActiveComponent('snackbar'),
         },
         {
-          label: 'Tooltip',
+          label: 'Tooltip V2',
           leftSlot: <Info className="w-4 h-4" />,
           onClick: () => setActiveComponent('tooltipsV2'),
+        },
+        {
+          label: 'Base Tooltip',
+          leftSlot: <Info className="w-4 h-4" />,
+          onClick: () => setActiveComponent('baseTooltip'),
         },
         {
           label: 'Modal',
