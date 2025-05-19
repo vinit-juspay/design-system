@@ -26,6 +26,7 @@ import {
   Palette,
   MessageCircle,
   Globe,
+  ChevronRight,
 } from 'lucide-react';
 
 // Import demo components
@@ -53,6 +54,7 @@ import Sidebar from '../lib/components/Sidebar';
 import DataTableDemo from './Demos/DataTableDemo/DataTableDemo';
 import ColorPaletteDemo from './Demos/ColorPaletteDemo';
 import PopoverDemo from './Demos/PopoverDemo/PopoverDemo';
+import BreadcrumbDemo from './Demos/BreadcrumbDemo/BreadcrumbDemo';
 import { Tag, TextInput } from '../lib/main';
 import { TextInputSize } from '../lib/components/TextInput';
 import { DropdownType, MenuDropdown, MenuItemType } from '../lib/components/Menu';
@@ -85,6 +87,7 @@ const App = () => {
     | 'dataTable'
     | 'colorPalette'
     | 'popover'
+    | 'breadcrumb'
   >('tester-page');
 
   const [activeTenant, setActiveTenant] = useState<string>('Juspay');
@@ -192,6 +195,8 @@ const App = () => {
             return <ColorPaletteDemo />;
           case 'popover':
             return <PopoverDemo />;
+          case 'breadcrumb':
+            return <BreadcrumbDemo />;
           default:
             return null;
         }
@@ -263,6 +268,11 @@ const App = () => {
           label: 'Avatar',
           leftSlot: <Users className="w-4 h-4" />,
           onClick: () => setActiveComponent('avatars'),
+        },
+        {
+          label: 'Breadcrumb',
+          leftSlot: <ChevronRight className="w-4 h-4" />,
+          onClick: () => setActiveComponent('breadcrumb'),
         },
       ],
     },
